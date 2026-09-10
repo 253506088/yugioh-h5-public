@@ -4,7 +4,7 @@
 # ===== 构建产物（npm run build 自动生成，勿提交） =====
 # 单文件游戏本体：内嵌全部卡图后体积可达 60MB+，随时可重新构建
 # 发布用小体积版本：npm run build:no-art
-/index.html
+#/index.html
 # 构建报告、版本存档、测试截图等全部产物
 /output/
 
