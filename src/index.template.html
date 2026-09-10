@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#101e19">
+  <meta name="description" content="游戏王 · 决斗之境。向高桥和希致敬的单文件离线卡牌决斗游戏。">
+  <title>游戏王 · 决斗之境 | DUEL SANCTUARY</title>
+  <style>/*__STYLES__*/</style>
+</head>
+<body>
+  <canvas id="ambient" aria-hidden="true"></canvas>
+  <div class="ambient-glow" aria-hidden="true"></div>
+  <svg class="svg-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <symbol id="i-eye" viewBox="0 0 48 48"><path d="M24 3 46 42H2Z"/><path d="M10 28q14-15 28 0-14 14-28 0Z"/><circle cx="24" cy="28" r="5"/><path d="m14 32-3 6m23-6 3 6M24 9v6"/></symbol>
+      <symbol id="i-swords" viewBox="0 0 24 24"><path d="m4 3 3 1 13 13-3 3L4 7ZM3 17l4 4m-2-2 3-3M20 3l-3 1-5 5m-3 3-5 5 3 3 5-5m3-3 5-5ZM17 21l4-4m-2 2-3-3"/></symbol>
+      <symbol id="i-card" viewBox="0 0 24 24"><rect x="6" y="3" width="14" height="18" rx="2"/><path d="M3 6v13a2 2 0 0 0 2 2M10 8h6M10 12h6M10 16h3"/></symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 3 7 7 3-7 3-3 7-3-7-7-3 7-3ZM20 2v4m-2-2h4"/></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5c-4-3-8-2-10-1v15c4-2 7-1 10 1 3-2 6-3 10-1V4c-3-1-6-2-10 1ZM12 5v15"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24"><path d="m11 4-6 5H2v6h3l6 5ZM15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+      <symbol id="i-mute" viewBox="0 0 24 24"><path d="m11 4-6 5H2v6h3l6 5ZM16 9l6 6m0-6-6 6"/></symbol>
+      <symbol id="i-fullscreen" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5"/></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24"><path d="m10 3-.8 3-2.5 1-2.7-.8-2 3 2.2 2v3l-2.2 2 2 3 2.7-.8 2.5 1 .8 3h4l.8-3 2.5-1 2.7.8 2-3-2.2-2v-3l2.2-2-2-3-2.7.8-2.5-1L14 3Z"/><circle cx="12" cy="13" r="3"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 2 9 4-1 8c-1 4-5 7-8 9-3-2-7-5-8-9L3 6Z"/><path d="m8 12 3 3 5-6"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></symbol>
+      <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2 7M3 4v7h7M12 7v6l4 2"/></symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7a9 9 0 0 0-16 2M20 2v5h-5M4 17a9 9 0 0 0 16-2M4 22v-5h5"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L20 5"/></symbol>
+      <symbol id="i-grave" viewBox="0 0 24 24"><path d="M6 21V9a6 6 0 0 1 12 0v12M3 21h18M12 7v8m-3-5h6"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></symbol>
+      <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 0 1 6 0c0 2-3 2-3 5m0 3v.1"/></symbol>
+      <symbol id="i-crown" viewBox="0 0 24 24"><path d="m2 6 5 4 5-7 5 7 5-4-3 13H5ZM5 22h14"/></symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m14 2-11 12h8l-1 8L21 9h-8Z"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    </defs>
+  </svg>
+  <header class="site-header">
+    <button class="brand" data-action="duel" aria-label="返回决斗场">
+      <span class="brand-mark"><svg><use href="#i-eye"/></svg></span>
+      <span><strong>决斗之境<span class="brand-dot">.</span></strong><small>YU-GI-OH! <span>DUEL SANCTUARY</span></small></span>
+    </button>
+    <nav class="main-nav" aria-label="主导航">
+      <button class="nav-item active" data-action="duel"><svg><use href="#i-swords"/></svg><span>决斗场</span></button>
+      <button class="nav-item" data-action="library"><svg><use href="#i-card"/></svg><span>卡牌图鉴</span><em>1367</em></button>
+      <button class="nav-item" data-action="workshop"><svg><use href="#i-spark"/></svg><span>组卡工坊</span></button>
+      <button class="nav-item" data-action="help"><svg><use href="#i-book"/></svg><span>玩法指南</span></button>
+    </nav>
+    <div class="header-tools">
+      <button class="offline-status" data-action="retry-artwork" title="游戏与已内嵌卡图均可离线使用"><i></i><span id="art-status">本地卡图</span></button>
+      <span class="header-divider"></span>
+      <button class="icon-button" data-action="sound" id="sound-button" title="切换音效（M）" aria-label="切换音效"><svg><use href="#i-volume"/></svg></button>
+      <button class="icon-button fullscreen-button" data-action="fullscreen" title="全屏（F）" aria-label="全屏"><svg><use href="#i-fullscreen"/></svg></button>
+      <button class="icon-button" data-action="settings" title="设置" aria-label="设置"><svg><use href="#i-settings"/></svg></button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div class="page-heading">
+      <div><div class="eyebrow"><span class="small-diamond"></span> THE HEART OF THE CARDS</div><h1>以卡之名，改写命运<span>。</span></h1></div>
+      <div class="heading-right"><span class="mode-pill"><i></i>V4 · 初代编年</span><button class="outline-button" data-action="new-game"><svg><use href="#i-refresh"/></svg>新的决斗</button></div>
+    </div>
+    <div class="duel-layout">
+      <aside class="left-column">
+        <section class="panel inspector" aria-label="卡牌详情">
+          <div class="panel-heading"><span><svg><use href="#i-card"/></svg>卡牌详情</span><button class="tiny-button" data-action="inspect-full" aria-label="放大卡牌" title="放大卡牌">↗</button></div>
+          <div id="card-preview" class="card-preview"></div>
+          <div id="card-information" class="card-information"></div>
+          <div id="context-actions" class="context-actions"></div>
+        </section>
+        <button class="panel deck-summary" data-action="my-deck" id="deck-summary"></button>
+        <div class="quiet-tip"><svg><use href="#i-spark"/></svg><div><span>决斗小贴士</span><p id="duel-tip">点击手牌查看效果，再选择召唤或发动。每回合只能通常召唤一次。</p></div></div>
+      </aside>
+
+      <section class="arena-column" aria-label="决斗场">
+        <div class="arena-caption"><span><i class="live-dot"></i> DUEL IN PROGRESS</span><span id="match-label">青眼的觉醒 <b>VS</b> 黑魔术的传承</span><button class="tiny-button" data-action="help" title="查看规则" aria-label="查看规则"><svg><use href="#i-help"/></svg></button></div>
+        <div class="arena" id="arena">
+          <div id="opponent-bar" class="duelist-bar opponent-bar"></div>
+          <div id="chain-status" class="chain-status" aria-live="polite"></div>
+          <div class="game-field" id="duel-board">
+            <svg id="link-network-lines" class="link-network-lines" aria-hidden="true"></svg>
+            <div class="field-decoration" aria-hidden="true">
+              <div class="sigil-circle one"></div><div class="sigil-circle two"></div>
+              <svg class="field-eye"><use href="#i-eye"/></svg>
+              <span class="field-inscription top">THE BOND BEYOND TIME</span><span class="field-inscription bottom">BELIEVE IN THE HEART OF THE CARDS</span>
+            </div>
+            <div class="field-rail" id="left-rail"></div>
+            <div class="field-stack">
+              <div class="zone-row opponent-spells" id="opponent-spells" aria-label="对方魔法与陷阱区域"></div>
+              <div class="zone-row opponent-monsters" id="opponent-monsters" aria-label="对方怪兽区域"></div>
+              <div id="extra-lane" class="extra-lane" aria-label="额外怪兽区域"></div>
+              <div id="phase-track" class="phase-track" aria-label="回合阶段"></div>
+              <div class="zone-row player-monsters" id="player-monsters" aria-label="你的怪兽区域"></div>
+              <div class="zone-row player-spells" id="player-spells" aria-label="你的魔法与陷阱区域"></div>
+            </div>
+            <div class="field-rail" id="right-rail"></div>
+            <div class="turn-sweep" id="turn-sweep" aria-hidden="true"><span>YOUR TURN</span></div>
+          </div>
+          <div id="player-bar" class="duelist-bar player-bar"></div>
+        </div>
+        <div id="summon-toolbar" class="summon-toolbar" aria-label="特殊召唤控制"></div>
+        <div id="exodia-tracker" class="exodia-tracker" hidden></div>
+        <div id="target-instruction" class="target-instruction" hidden></div>
+        <div class="hand-zone" id="hand-zone">
+          <div class="hand-meta"><span><span id="hand-title">你的手牌</span> <b id="hand-count">5</b></span><span id="hand-hint">点击卡牌，开启你的战术</span></div>
+          <div id="hand-cards" class="hand-cards" aria-label="你的手牌"></div>
+        </div>
+      </section>
+
+      <aside class="right-column">
+        <section class="panel turn-panel" id="turn-panel" aria-label="回合控制"></section>
+        <section class="panel log-panel">
+          <div class="panel-heading"><span><svg><use href="#i-history"/></svg>决斗记录</span><button class="tiny-button" data-action="log" title="完整记录" aria-label="查看完整决斗记录">↗</button></div>
+          <div id="duel-log" class="duel-log" role="log" aria-live="polite" aria-relevant="additions"></div>
+          <div class="log-bottom"><span class="small-diamond"></span><span>每一次抉择，都改变未来</span><span class="small-diamond"></span></div>
+        </section>
+        <div class="duelist-quote"><span class="quote-symbol">“</span><p id="character-quote">真正的决斗者，<br>连抽卡都是必然。</p><span id="quote-author">— 海马濑人</span><svg><use href="#i-eye"/></svg></div>
+      </aside>
+    </div>
+  </main>
+  <footer class="site-footer"><span id="save-status"><i></i>进度自动保存</span><span>8000 LP <b>·</b> 13 PRESETS <b>·</b> ONE DESTINY</span><span>高桥和希 原作 <b>／</b> 非官方同人致敬</span></footer>
+  <div id="mobile-turn-control" class="mobile-turn-control" aria-label="便捷回合控制"></div>
+  <div id="toast-stack" class="toast-stack" role="status" aria-live="polite"></div>
+  <div id="card-popover" class="card-popover" hidden></div>
+  <div id="cinematic" class="cinematic" aria-hidden="true"></div>
+  <div id="fx-layer" class="fx-layer" aria-hidden="true"></div>
+  <dialog id="modal" class="modal" aria-labelledby="modal-title"></dialog>
+  <noscript><div class="noscript-message">请启用 JavaScript 以开始决斗。这个 HTML 文件可以直接离线运行。</div></noscript>
+  <script>/*__ASSETS__*/</script>
+  <script>/*__SCRIPTS__*/</script>
+</body>
+</html>

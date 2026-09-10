@@ -1,0 +1,830 @@
+{
+  "schemaVersion": 1,
+  "cards": {
+    "alexandrite": {
+      "providerId": 43096270,
+      "imageId": 43096270,
+      "name": "Alexandrite Dragon"
+    },
+    "luster-dragon": {
+      "providerId": 11091375,
+      "imageId": 11091375,
+      "name": "Luster Dragon"
+    },
+    "kaibaman": {
+      "providerId": 34627841,
+      "imageId": 34627841,
+      "name": "Kaibaman"
+    },
+    "skilled-magician": {
+      "providerId": 73752131,
+      "imageId": 73752131,
+      "name": "Skilled Dark Magician"
+    },
+    "breaker": {
+      "providerId": 71413901,
+      "imageId": 71413901,
+      "name": "Breaker the Magical Warrior"
+    },
+    "ancient-rules": {
+      "providerId": 10667321,
+      "imageId": 10667321,
+      "name": "Ancient Rules"
+    },
+    "hero-stratos": {
+      "providerId": 40044918,
+      "imageId": 40044918,
+      "name": "Elemental HERO Stratos"
+    },
+    "hero-shadow-mist": {
+      "providerId": 50720316,
+      "imageId": 50720316,
+      "name": "Elemental HERO Shadow Mist"
+    },
+    "hero-solid-soldier": {
+      "providerId": 45195443,
+      "imageId": 45195443,
+      "name": "Elemental HERO Solid Soldier"
+    },
+    "hero-liquid-soldier": {
+      "providerId": 59392529,
+      "imageId": 59392529,
+      "name": "Elemental HERO Liquid Soldier"
+    },
+    "hero-blazeman": {
+      "providerId": 63060238,
+      "imageId": 63060238,
+      "name": "Elemental HERO Blazeman"
+    },
+    "hero-honest-neos": {
+      "providerId": 14124483,
+      "imageId": 14124483,
+      "name": "Elemental HERO Honest Neos"
+    },
+    "hero-neos": {
+      "providerId": 89943723,
+      "imageId": 89943723,
+      "name": "Elemental HERO Neos"
+    },
+    "hero-avian": {
+      "providerId": 21844576,
+      "imageId": 21844576,
+      "name": "Elemental HERO Avian"
+    },
+    "hero-burstinatrix": {
+      "providerId": 58932615,
+      "imageId": 58932615,
+      "name": "Elemental HERO Burstinatrix"
+    },
+    "hero-sparkman": {
+      "providerId": 20721928,
+      "imageId": 20721928,
+      "name": "Elemental HERO Sparkman"
+    },
+    "hero-clayman": {
+      "providerId": 84327329,
+      "imageId": 84327329,
+      "name": "Elemental HERO Clayman"
+    },
+    "hero-bubbleman": {
+      "providerId": 79979666,
+      "imageId": 79979666,
+      "name": "Elemental HERO Bubbleman"
+    },
+    "e-emergency-call": {
+      "providerId": 213326,
+      "imageId": 213326,
+      "name": "E - Emergency Call"
+    },
+    "miracle-fusion": {
+      "providerId": 45906428,
+      "imageId": 45906428,
+      "name": "Miracle Fusion"
+    },
+    "mask-change": {
+      "providerId": 21143940,
+      "imageId": 21143940,
+      "name": "Mask Change"
+    },
+    "a-hero-lives": {
+      "providerId": 8949584,
+      "imageId": 8949584,
+      "name": "A Hero Lives"
+    },
+    "hero-flame-wingman": {
+      "providerId": 35809262,
+      "imageId": 35809262,
+      "name": "Elemental HERO Flame Wingman"
+    },
+    "hero-sunrise": {
+      "providerId": 22908820,
+      "imageId": 22908820,
+      "name": "Elemental HERO Sunrise"
+    },
+    "hero-absolute-zero": {
+      "providerId": 40854197,
+      "imageId": 40854197,
+      "name": "Elemental HERO Absolute Zero"
+    },
+    "hero-the-shining": {
+      "providerId": 22061412,
+      "imageId": 22061412,
+      "name": "Elemental HERO The Shining"
+    },
+    "hero-great-tornado": {
+      "providerId": 3642509,
+      "imageId": 3642509,
+      "name": "Elemental HERO Great Tornado"
+    },
+    "masked-dark-law": {
+      "providerId": 58481572,
+      "imageId": 58481572,
+      "name": "Masked HERO Dark Law"
+    },
+    "masked-acid": {
+      "providerId": 29095552,
+      "imageId": 29095552,
+      "name": "Masked HERO Acid"
+    },
+    "bw-bora": {
+      "providerId": 49003716,
+      "imageId": 49003716,
+      "name": "Blackwing - Bora the Spear"
+    },
+    "bw-gale": {
+      "providerId": 2009101,
+      "imageId": 2009101,
+      "name": "Blackwing - Gale the Whirlwind"
+    },
+    "bw-shura": {
+      "providerId": 58820853,
+      "imageId": 58820853,
+      "name": "Blackwing - Shura the Blue Flame"
+    },
+    "bw-blizzard": {
+      "providerId": 22835145,
+      "imageId": 22835145,
+      "name": "Blackwing - Blizzard the Far North"
+    },
+    "bw-kalut": {
+      "providerId": 85215458,
+      "imageId": 85215458,
+      "name": "Blackwing - Kalut the Moon Shadow"
+    },
+    "bw-zephyros": {
+      "providerId": 14785765,
+      "imageId": 14785765,
+      "name": "Blackwing - Zephyros the Elite"
+    },
+    "bw-kris": {
+      "providerId": 81105204,
+      "imageId": 81105204,
+      "name": "Blackwing - Kris the Crack of Dawn"
+    },
+    "black-whirlwind": {
+      "providerId": 91351370,
+      "imageId": 91351370,
+      "name": "Black Whirlwind"
+    },
+    "icarus-attack": {
+      "providerId": 53567095,
+      "imageId": 53567095,
+      "name": "Icarus Attack"
+    },
+    "bw-armor-master": {
+      "providerId": 69031175,
+      "imageId": 69031175,
+      "name": "Blackwing Armor Master"
+    },
+    "bw-armed-wing": {
+      "providerId": 76913983,
+      "imageId": 76913983,
+      "name": "Blackwing Armed Wing"
+    },
+    "bw-nothung": {
+      "providerId": 95040215,
+      "imageId": 95040215,
+      "name": "Blackwing - Nothung the Starlight"
+    },
+    "bw-raikiri": {
+      "providerId": 16051717,
+      "imageId": 16051717,
+      "name": "Assault Blackwing - Raikiri the Rain Shower"
+    },
+    "junk-synchron": {
+      "providerId": 63977008,
+      "imageId": 63977008,
+      "name": "Junk Synchron"
+    },
+    "junk-converter": {
+      "providerId": 11069680,
+      "imageId": 11069680,
+      "name": "Junk Converter"
+    },
+    "doppelwarrior": {
+      "providerId": 53855409,
+      "imageId": 53855409,
+      "name": "Doppelwarrior"
+    },
+    "quillbolt": {
+      "providerId": 23571046,
+      "imageId": 23571046,
+      "name": "Quillbolt Hedgehog"
+    },
+    "jet-synchron": {
+      "providerId": 9742784,
+      "imageId": 9742784,
+      "name": "Jet Synchron"
+    },
+    "quickdraw-synchron": {
+      "providerId": 20932152,
+      "imageId": 20932152,
+      "name": "Quickdraw Synchron"
+    },
+    "fleur-synchron": {
+      "providerId": 19642774,
+      "imageId": 19642774,
+      "name": "Fleur Synchron"
+    },
+    "tuning": {
+      "providerId": 96363153,
+      "imageId": 96363153,
+      "name": "Tuning"
+    },
+    "junk-warrior": {
+      "providerId": 60800381,
+      "imageId": 60800381,
+      "name": "Junk Warrior"
+    },
+    "junk-speeder": {
+      "providerId": 77075360,
+      "imageId": 77075360,
+      "name": "Junk Speeder"
+    },
+    "stardust-dragon": {
+      "providerId": 44508094,
+      "imageId": 44508094,
+      "name": "Stardust Dragon"
+    },
+    "formula-synchron": {
+      "providerId": 50091196,
+      "imageId": 50091196,
+      "name": "Formula Synchron"
+    },
+    "shooting-star": {
+      "providerId": 24696097,
+      "imageId": 24696097,
+      "name": "Shooting Star Dragon"
+    },
+    "junk-archer": {
+      "providerId": 42810973,
+      "imageId": 42810973,
+      "name": "Junk Archer"
+    },
+    "junk-destroyer": {
+      "providerId": 74860293,
+      "imageId": 74860293,
+      "name": "Junk Destroyer"
+    },
+    "gagaga-magician": {
+      "providerId": 26082117,
+      "imageId": 26082117,
+      "name": "Gagaga Magician"
+    },
+    "gagaga-girl": {
+      "providerId": 3606728,
+      "imageId": 3606728,
+      "name": "Gagaga Girl"
+    },
+    "goblindbergh": {
+      "providerId": 25259669,
+      "imageId": 25259669,
+      "name": "Goblindbergh"
+    },
+    "kagetokage": {
+      "providerId": 94656263,
+      "imageId": 94656263,
+      "name": "Kagetokage"
+    },
+    "utopic-onomatopoeia": {
+      "providerId": 8512558,
+      "imageId": 8512558,
+      "name": "Utopic Onomatopoeia"
+    },
+    "zubaba-gagagacoat": {
+      "providerId": 23720856,
+      "imageId": 23720856,
+      "name": "Zubababancho Gagagacoat"
+    },
+    "dododo-gogogoglove": {
+      "providerId": 59724555,
+      "imageId": 59724555,
+      "name": "Dodododwarf Gogogoglove"
+    },
+    "zs-ascended-sage": {
+      "providerId": 4647954,
+      "imageId": 4647954,
+      "name": "ZS - Ascended Sage"
+    },
+    "onomatopaira": {
+      "providerId": 6595475,
+      "imageId": 6595475,
+      "name": "Onomatopaira"
+    },
+    "xyz-change-tactics": {
+      "providerId": 11705261,
+      "imageId": 11705261,
+      "name": "Xyz Change Tactics"
+    },
+    "double-or-nothing": {
+      "providerId": 94770493,
+      "imageId": 94770493,
+      "name": "Double or Nothing!"
+    },
+    "limited-barians-force": {
+      "providerId": 92365601,
+      "imageId": 92365601,
+      "name": "Rank-Up-Magic Limited Barian's Force"
+    },
+    "utopia": {
+      "providerId": 84013237,
+      "imageId": 84013237,
+      "name": "Number 39: Utopia"
+    },
+    "utopia-ray": {
+      "providerId": 56840427,
+      "imageId": 56840427,
+      "name": "Number C39: Utopia Ray"
+    },
+    "utopia-double": {
+      "providerId": 62517849,
+      "imageId": 62517849,
+      "name": "Number 39: Utopia Double"
+    },
+    "utopia-lightning": {
+      "providerId": 56832966,
+      "imageId": 56832966,
+      "name": "Number S39: Utopia the Lightning"
+    },
+    "gagaga-cowboy": {
+      "providerId": 12014404,
+      "imageId": 12014404,
+      "name": "Gagaga Cowboy"
+    },
+    "castel": {
+      "providerId": 82633039,
+      "imageId": 82633039,
+      "name": "Castel, the Skyblaster Musketeer"
+    },
+    "utopia-ray-v": {
+      "providerId": 66970002,
+      "imageId": 66970002,
+      "name": "Number C39: Utopia Ray V"
+    },
+    "qli-scout": {
+      "providerId": 65518099,
+      "imageId": 65518099,
+      "name": "Qliphort Scout"
+    },
+    "qli-monolith": {
+      "providerId": 51194046,
+      "imageId": 51194046,
+      "name": "Qliphort Monolith"
+    },
+    "qli-carrier": {
+      "providerId": 91907707,
+      "imageId": 91907707,
+      "name": "Qliphort Carrier"
+    },
+    "qli-helix": {
+      "providerId": 37991342,
+      "imageId": 37991342,
+      "name": "Qliphort Helix"
+    },
+    "qli-disk": {
+      "providerId": 64496451,
+      "imageId": 64496451,
+      "name": "Qliphort Disk"
+    },
+    "qli-stealth": {
+      "providerId": 13073850,
+      "imageId": 13073850,
+      "name": "Qliphort Stealth"
+    },
+    "qli-towers": {
+      "providerId": 27279764,
+      "imageId": 27279764,
+      "name": "Apoqliphort Towers"
+    },
+    "saqlifice": {
+      "providerId": 17639150,
+      "imageId": 17639150,
+      "name": "Saqlifice"
+    },
+    "summoners-art": {
+      "providerId": 79816536,
+      "imageId": 79816536,
+      "name": "Summoner's Art"
+    },
+    "wavering-eyes": {
+      "providerId": 31222701,
+      "imageId": 31222701,
+      "name": "Wavering Eyes"
+    },
+    "skill-drain": {
+      "providerId": 82732705,
+      "imageId": 82732705,
+      "name": "Skill Drain"
+    },
+    "pendulum-reborn": {
+      "providerId": 77826734,
+      "imageId": 77826734,
+      "name": "Pendulum Reborn"
+    },
+    "royal-library": {
+      "providerId": 70791313,
+      "imageId": 70791313,
+      "name": "Royal Magical Library"
+    },
+    "battle-fader": {
+      "providerId": 19665973,
+      "imageId": 19665973,
+      "name": "Battle Fader"
+    },
+    "cardcar-d": {
+      "providerId": 45812361,
+      "imageId": 45812361,
+      "name": "Cardcar D"
+    },
+    "dark-factory": {
+      "providerId": 90928333,
+      "imageId": 90928333,
+      "name": "Dark Factory of Mass Production"
+    },
+    "one-day-peace": {
+      "providerId": 33782437,
+      "imageId": 33782437,
+      "name": "One Day of Peace"
+    },
+    "broken-bamboo": {
+      "providerId": 41587307,
+      "imageId": 41587307,
+      "name": "Broken Bamboo Sword"
+    },
+    "cursed-bamboo": {
+      "providerId": 42199039,
+      "imageId": 42199039,
+      "name": "Cursed Bamboo Sword"
+    },
+    "golden-bamboo": {
+      "providerId": 74029853,
+      "imageId": 74029853,
+      "name": "Golden Bamboo Sword"
+    },
+    "wonder-wand": {
+      "providerId": 67775894,
+      "imageId": 67775894,
+      "name": "Wonder Wand"
+    },
+    "reckless-greed": {
+      "providerId": 37576645,
+      "imageId": 37576645,
+      "name": "Reckless Greed"
+    },
+    "cyber-dragon": {
+      "providerId": 70095154,
+      "imageId": 70095154,
+      "name": "Cyber Dragon"
+    },
+    "cyber-core": {
+      "providerId": 23893227,
+      "imageId": 23893227,
+      "name": "Cyber Dragon Core"
+    },
+    "cyber-herz": {
+      "providerId": 56364287,
+      "imageId": 56364287,
+      "name": "Cyber Dragon Herz"
+    },
+    "cyber-nachster": {
+      "providerId": 1142880,
+      "imageId": 1142880,
+      "name": "Cyber Dragon Nachster"
+    },
+    "cyber-drei": {
+      "providerId": 59281922,
+      "imageId": 59281922,
+      "name": "Cyber Dragon Drei"
+    },
+    "cyber-vier": {
+      "providerId": 29975188,
+      "imageId": 29975188,
+      "name": "Cyber Dragon Vier"
+    },
+    "galaxy-soldier": {
+      "providerId": 46659709,
+      "imageId": 46659709,
+      "name": "Galaxy Soldier"
+    },
+    "power-bond": {
+      "providerId": 37630732,
+      "imageId": 37630732,
+      "name": "Power Bond"
+    },
+    "overload-fusion": {
+      "providerId": 3659803,
+      "imageId": 3659803,
+      "name": "Overload Fusion"
+    },
+    "cyber-emergency": {
+      "providerId": 60600126,
+      "imageId": 60600126,
+      "name": "Cyber Emergency"
+    },
+    "cyber-revsystem": {
+      "providerId": 33041277,
+      "imageId": 33041277,
+      "name": "Cyber Revsystem"
+    },
+    "machine-duplication": {
+      "providerId": 63995093,
+      "imageId": 63995093,
+      "name": "Machine Duplication"
+    },
+    "cyberload-fusion": {
+      "providerId": 55704856,
+      "imageId": 55704856,
+      "name": "Cyberload Fusion"
+    },
+    "cyber-twin": {
+      "providerId": 74157028,
+      "imageId": 74157028,
+      "name": "Cyber Twin Dragon"
+    },
+    "cyber-end": {
+      "providerId": 1546123,
+      "imageId": 1546123,
+      "name": "Cyber End Dragon"
+    },
+    "chimeratech-rampage": {
+      "providerId": 84058253,
+      "imageId": 84058253,
+      "name": "Chimeratech Rampage Dragon"
+    },
+    "chimeratech-overdragon": {
+      "providerId": 64599569,
+      "imageId": 64599569,
+      "name": "Chimeratech Overdragon"
+    },
+    "cyber-nova": {
+      "providerId": 58069384,
+      "imageId": 58069384,
+      "name": "Cyber Dragon Nova"
+    },
+    "cyber-infinity": {
+      "providerId": 10443957,
+      "imageId": 10443957,
+      "name": "Cyber Dragon Infinity"
+    },
+    "cry-sulfefnir": {
+      "providerId": 3422200,
+      "imageId": 3422200,
+      "name": "Crystron Sulfefnir"
+    },
+    "cry-thystvern": {
+      "providerId": 29838323,
+      "imageId": 29838323,
+      "name": "Crystron Thystvern"
+    },
+    "cry-smiger": {
+      "providerId": 83443619,
+      "imageId": 83443619,
+      "name": "Crystron Smiger"
+    },
+    "cry-rosenix": {
+      "providerId": 55326322,
+      "imageId": 55326322,
+      "name": "Crystron Rosenix"
+    },
+    "cry-prasiortle": {
+      "providerId": 56049970,
+      "imageId": 56049970,
+      "name": "Crystron Prasiortle"
+    },
+    "cry-citree": {
+      "providerId": 20050865,
+      "imageId": 20050865,
+      "name": "Crystron Citree"
+    },
+    "cry-quan": {
+      "providerId": 93665266,
+      "imageId": 93665266,
+      "name": "Crystron Quan"
+    },
+    "cry-rion": {
+      "providerId": 66938505,
+      "imageId": 66938505,
+      "name": "Crystron Rion"
+    },
+    "scrap-recycler": {
+      "providerId": 4334811,
+      "imageId": 4334811,
+      "name": "Scrap Recycler"
+    },
+    "crystolic-potential": {
+      "providerId": 3576031,
+      "imageId": 3576031,
+      "name": "Crystolic Potential"
+    },
+    "cry-impact": {
+      "providerId": 99274184,
+      "imageId": 99274184,
+      "name": "Crystron Impact"
+    },
+    "cry-entry": {
+      "providerId": 52176579,
+      "imageId": 52176579,
+      "name": "Crystron Entry"
+    },
+    "cry-ametrix": {
+      "providerId": 76359406,
+      "imageId": 76359406,
+      "name": "Crystron Ametrix"
+    },
+    "cry-quandax": {
+      "providerId": 39964797,
+      "imageId": 39964797,
+      "name": "Crystron Quandax"
+    },
+    "cry-phoenix": {
+      "providerId": 2743001,
+      "imageId": 2743001,
+      "name": "Crystron Phoenix"
+    },
+    "cry-quariongandrax": {
+      "providerId": 13455674,
+      "imageId": 13455674,
+      "name": "Crystron Quariongandrax"
+    },
+    "samurai-destroyer": {
+      "providerId": 40509732,
+      "imageId": 40509732,
+      "name": "Samurai Destroyer"
+    },
+    "powered-inzektron": {
+      "providerId": 46132282,
+      "imageId": 46132282,
+      "name": "Powered Inzektron"
+    },
+    "foolish-burial": {
+      "providerId": 81439173,
+      "imageId": 81439173,
+      "name": "Foolish Burial"
+    },
+    "one-for-one": {
+      "providerId": 2295440,
+      "imageId": 2295440,
+      "name": "One for One"
+    },
+    "tear-reinoheart": {
+      "providerId": 73956664,
+      "imageId": 73956664,
+      "name": "Tearlaments Reinoheart"
+    },
+    "tear-scheiren": {
+      "providerId": 572850,
+      "imageId": 572850,
+      "name": "Tearlaments Scheiren"
+    },
+    "tear-havnis": {
+      "providerId": 37961969,
+      "imageId": 37961969,
+      "name": "Tearlaments Havnis"
+    },
+    "tear-merrli": {
+      "providerId": 74078255,
+      "imageId": 74078255,
+      "name": "Tearlaments Merrli"
+    },
+    "tear-kashtira": {
+      "providerId": 4928565,
+      "imageId": 4928565,
+      "name": "Tearlaments Kashtira"
+    },
+    "tear-kitkallos": {
+      "providerId": 92731385,
+      "imageId": 92731385,
+      "name": "Tearlaments Kitkallos"
+    },
+    "tear-rulkallos": {
+      "providerId": 84330567,
+      "imageId": 84330567,
+      "name": "Tearlaments Rulkallos"
+    },
+    "tear-kaleido-heart": {
+      "providerId": 28226490,
+      "imageId": 28226490,
+      "name": "Tearlaments Kaleido-Heart"
+    },
+    "perlereino": {
+      "providerId": 77103950,
+      "imageId": 77103950,
+      "name": "Primeval Planet Perlereino"
+    },
+    "tear-scream": {
+      "providerId": 6767771,
+      "imageId": 6767771,
+      "name": "Tearlaments Scream"
+    },
+    "tear-heartbeat": {
+      "providerId": 60362066,
+      "imageId": 60362066,
+      "name": "Tearlaments Heartbeat"
+    },
+    "tear-grief": {
+      "providerId": 33878367,
+      "imageId": 33878367,
+      "name": "Tearlaments Grief"
+    },
+    "tear-sulliek": {
+      "providerId": 74920585,
+      "imageId": 74920585,
+      "name": "Tearlaments Sulliek"
+    },
+    "tear-metanoise": {
+      "providerId": 38436986,
+      "imageId": 38436986,
+      "name": "Tearlaments Metanoise"
+    },
+    "tear-cryme": {
+      "providerId": 1329620,
+      "imageId": 1329620,
+      "name": "Tearlaments Cryme"
+    },
+    "supreme-sea-mare": {
+      "providerId": 31259606,
+      "imageId": 31259606,
+      "name": "Supreme Sea Mare"
+    },
+    "dd-crow": {
+      "providerId": 24508238,
+      "imageId": 24508238,
+      "name": "D.D. Crow"
+    },
+    "terraforming": {
+      "providerId": 73628505,
+      "imageId": 73628505,
+      "name": "Terraforming"
+    },
+    "abyss-dweller": {
+      "providerId": 21044178,
+      "imageId": 21044178,
+      "name": "Abyss Dweller"
+    },
+    "linkuriboh": {
+      "providerId": 41999284,
+      "imageId": 41999284,
+      "name": "Linkuriboh"
+    },
+    "ip-masquerena": {
+      "providerId": 65741786,
+      "imageId": 65741786,
+      "name": "I:P Masquerena"
+    },
+    "knightmare-phoenix": {
+      "providerId": 2857636,
+      "imageId": 2857636,
+      "name": "Knightmare Phoenix"
+    },
+    "knightmare-unicorn": {
+      "providerId": 38342335,
+      "imageId": 38342335,
+      "name": "Knightmare Unicorn"
+    },
+    "dharc-charmer": {
+      "providerId": 8264361,
+      "imageId": 8264361,
+      "name": "Dharc the Dark Charmer, Gloomy"
+    },
+    "eria-charmer": {
+      "providerId": 73309655,
+      "imageId": 73309655,
+      "name": "Eria the Water Charmer, Gentle"
+    },
+    "cross-sheep": {
+      "providerId": 50277355,
+      "imageId": 50277355,
+      "name": "Cross-Sheep"
+    },
+    "apollousa": {
+      "providerId": 4280258,
+      "imageId": 4280258,
+      "name": "Apollousa, Bow of the Goddess"
+    },
+    "accesscode-talker": {
+      "providerId": 86066372,
+      "imageId": 86066372,
+      "name": "Accesscode Talker"
+    }
+  }
+}

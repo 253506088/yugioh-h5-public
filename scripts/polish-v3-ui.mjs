@@ -1,0 +1,11 @@
+import {readFile,writeFile} from 'node:fs/promises';
+const gameURL=new URL('../src/game-v2.js',import.meta.url),workshopURL=new URL('../src/workshop.js',import.meta.url);
+let game=await readFile(gameURL,'utf8'),workshop=await readFile(workshopURL,'utf8');
+game=game.replace('查看当前可用的同调与超量；融合由魔法或效果发动。','查看当前可用的同调、超量和连接；融合由魔法或效果发动。');
+game=game.replace('查看当前可用的同调与超量','查看当前可用的同调、超量与连接');
+game=game.replace("'ELEVEN PATHS · ONE DESTINY'","'ALL GENERATIONS · ONE DESTINY'");
+game=game.replace('11套预设，或一副亲手构筑的卡组。',"'+Object.values(DECKS).filter(d=>d.preset).length+'套预设，或一副亲手构筑的卡组。");
+game=game.replace('围绕所收录的204张卡实现',"围绕所收录的'+CARD_LIST.filter(c=>!c.notCollectible).length+'张卡实现");
+workshop=workshop.replaceAll('十套预设','预设卡组');
+workshop=workshop.replace("(CARDS[id].rank?'RANK '+CARDS[id].rank:'LV '+CARDS[id].level)","(CARDS[id].type==='link'?'LINK '+CARDS[id].linkRating:CARDS[id].rank?'RANK '+CARDS[id].rank:'LV '+CARDS[id].level)");
+await writeFile(gameURL,game);await writeFile(workshopURL,workshop);console.log('V3 UI wording and Link metadata updated.');

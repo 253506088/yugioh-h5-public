@@ -1,0 +1,33 @@
+# ===== 依赖 =====
+/node_modules/
+
+# ===== 构建产物（npm run build 自动生成，勿提交） =====
+# 单文件游戏本体：内嵌全部卡图后体积可达 60MB+，随时可重新构建
+# 发布用小体积版本：npm run build:no-art
+/index.html
+# 构建报告、版本存档、测试截图等全部产物
+/output/
+
+# ===== 爬取的卡图（体积巨大，永不入库） =====
+# 官方卡图原始归档
+/assets/official-archive/
+# 构建时的卡图压缩缓存（构建时自动重新生成）
+/assets/build-art/
+# official/ 目录今后只保留说明文件，新放入的图片一律忽略
+/assets/official/*
+!/assets/official/README.md
+
+# ===== SQLite 运行时文件（打开 .cdb 时自动产生，无保留价值） =====
+*.cdb-shm
+*.cdb-wal
+
+# ===== 编辑器 / 操作系统 =====
+/.idea/
+/.vscode/
+*.code-workspace
+Thumbs.db
+.DS_Store
+
+# ===== 本地个人文件 =====
+/.claude/settings.local.json
+/github pages发布.md

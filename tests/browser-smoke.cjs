@@ -1,0 +1,45 @@
+const fs = require('node:fs/promises');
+const path = require('node:path');
+const { pathToFileURL } = require('node:url');
+const assert = require('node:assert/strict');
+let chromium;
+try { ({ chromium } = require('playwright')); } catch { ({ chromium } = require(path.resolve(path.dirname(process.execPath), '../node_modules/playwright'))); }
+const root = path.resolve(__dirname, '..');
+const screenshots = path.join(root, 'output/screenshots', 'smoke-' + new Date().toISOString().replace(/[:.]/g, '-'));
+
+(async () => {
+  await fs.mkdir(screenshots, { recursive: true });
+  const executablePath = process.env.DUEL_BROWSER || 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
+  const browser = await chromium.launch({ headless: true, executablePath, args: ['--no-first-run', '--disable-background-networking', '--disable-features=msEdgeSidebarV2'] });
+  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 1 });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto(pathToFileURL(path.join(root, 'index.html')).href);
+  await page.waitForFunction(() => document.documentElement.dataset.ready === 'true');
+  await page.screenshot({ path: path.join(screenshots, '01-desktop-duel.png'), fullPage: true });
+  const state = await page.evaluate(() => ({ turn: duelApp.engine.state.turn, hand: duelApp.engine.state.players[0].hand.length, monsters: document.querySelectorAll('.zone').length, overflow: document.documentElement.scrollWidth > innerWidth }));
+  assert.equal(state.turn, 2); assert.equal(state.hand, 6); assert.equal(state.monsters, 20); assert.equal(state.overflow, false);
+  await page.click('[data-action="library"]');
+  await page.locator('#library-grid .library-card').first().waitFor();
+  assert.equal(await page.locator('#library-grid .library-card').count(), 35);
+  await page.screenshot({ path: path.join(screenshots, '02-card-library.png'), fullPage: true });
+  await page.fill('#library-search', '青眼');
+  assert.equal(await page.locator('#library-grid .library-card').count(), 3);
+  await page.click('#modal [data-action="close-modal"]');
+  await page.click('[data-action="new-game"]');
+  await page.screenshot({ path: path.join(screenshots, '03-new-duel.png'), fullPage: true });
+  await page.click('#modal [data-action="close-modal"]');
+  const mobile = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
+  const mobilePage = await mobile.newPage();
+  mobilePage.on('pageerror', error => errors.push('mobile: ' + error.message));
+  await mobilePage.goto(pathToFileURL(path.join(root, 'index.html')).href);
+  await mobilePage.waitForFunction(() => document.documentElement.dataset.ready === 'true');
+  await mobilePage.screenshot({ path: path.join(screenshots, '04-mobile-duel.png'), fullPage: true });
+  assert.equal(await mobilePage.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+  assert.deepEqual(errors, []);
+  const report = { ok: true, screenshots: path.relative(root, screenshots), checks: ['standalone file load', 'initial duel', '20 field zones', 'desktop layout', '35-card archive', 'search', 'new-game dialog', 'mobile layout', 'no JavaScript errors'], state };
+  await fs.writeFile(path.join(root, 'output/browser-smoke-report.json'), JSON.stringify(report, null, 2));
+  console.log(JSON.stringify(report, null, 2));
+  await browser.close();
+})().catch(error => { console.error(error); process.exitCode = 1; });

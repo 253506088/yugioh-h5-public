@@ -1,0 +1,33 @@
+(function(root){
+ 'use strict';
+ const table=rows=>'<table class="rules-table"><tbody>'+rows.map(([title,body])=>'<tr><td>'+title+'</td><td>'+body+'</td></tr>').join('')+'</tbody></table>';
+ const section=(title,body)=>'<div class="help-section"><h3>'+title+'</h3><p>'+body+'</p></div>';
+ root.DuelUITranslations.help={
+ en:{title:'From your first Summon to endless possibilities.',body:'<p class="modal-lead">Reduce your opponent’s LP to 0, or make them unable to draw when required. Each player starts with 8000 LP and five cards. Draw and Standby Phases are processed automatically.</p>'+table([
+ ['Normal Summon','You normally have one Normal Summon or Set per turn. Level 5–6 monsters require one Tribute, and Level 7 or higher require two, unless a card specifies otherwise.'],
+ ['Ritual Summon','Ritual Monsters belong in the Main Deck. Activate the matching Ritual Spell, then choose the Ritual Monster in your hand and Tribute monsters from your hand or field. Meet the Spell’s Level requirement without unnecessary extra Tributes, and choose an available Main Monster Zone.'],
+ ['Fusion Summon','Use Polymerization or another Fusion effect. Select a Fusion Monster and the required materials. Different effects use different locations for materials; follow the card text.'],
+ ['Synchro Summon','Choose a monster from Extra Summon. Use the required Tuner and non-Tuner monsters with Levels totaling exactly the Synchro Monster’s Level. Specific material requirements also apply.'],
+ ['Xyz Summon','Overlay the required monsters of matching Levels. Materials remain attached to the Xyz Monster. Detach the chosen materials when an effect requires it; Rank-Up effects can inherit materials.'],
+ ['Pendulum Summon','Place Pendulum Cards in the far-left and far-right Spell/Trap Zones. Once per turn, simultaneously summon eligible monsters whose Levels are strictly between the two Scales. Face-up Pendulum Monsters in the Extra Deck need an Extra Monster Zone or a Main Monster Zone pointed to by a Link arrow.'],
+ ['Link Summon','A non-Link material counts as 1; a Link Monster counts as 1 or its full Link Rating. The total, minimum number of monsters and all other requirements must match. Link Monsters have no Level, Rank or DEF and can only be in face-up Attack Position.'],
+ ['Extra Monster Zones','The two Extra Monster Zones are shared. Check the arrows that remain after materials leave the field. Co-linked paths can form an Extra Link.'],
+ ['Chains and triggers','Legal response windows offer Quick Effects, Traps and Counter Traps. Chains resolve last-in, first-out. Destroying a source does not automatically negate its effect. You may order simultaneous Trigger Effects.'],
+ ['Costs and Graveyard effects','Discarding for a cost, sending Link/Synchro materials, detaching Xyz Materials and discarding for the hand limit are different from being sent by an effect. Tearlaments Fusion effects require effect-based movement and their own Graveyard card as material.'],
+ ['Exodia','Hold all five different Exodia pieces in your hand to win. Pieces on the field, in the Graveyard or banished do not count.']
+ ])+section('Battle and positions','In Attack vs. Attack, the weaker monster is destroyed and its controller takes the difference. In Attack vs. Defense, a higher ATK destroys the defender without normal battle damage; lower ATK damages the attacker’s controller. Piercing and other exceptions follow card effects. The first player cannot enter the first Battle Phase. A monster cannot manually change position during its Summon turn or after attacking. Set Traps and Quick-Play Spells normally wait until a later turn. The End Phase hand limit is six.')+section('Build your own deck','Copy a preset or start an empty deck in Deck Builder. Use 40–60 Main Deck cards, up to 15 Extra Deck cards and up to three of the same name across both. No tournament banlist is enforced. Tokens cannot be included. Drafts save automatically; legal decks can be saved, copied, exported or imported as JSON.')+section('Languages, artwork and scope','Choose Chinese, English or Japanese from the language selector. Card text is embedded locally. Artwork uses embedded images first; turn on Online original artwork to load missing images. Switching language or artwork settings does not reset the Duel. This is an independent fan rules engine. The 1999–2002 archive uses provider release-date snapshots, and some detailed rulings have documented simulator adaptations.')+section('Shortcuts','Space: next phase · E: end turn · 1–9: select hand cards · Esc: close or cancel an uncommitted choice · M: sound · F: fullscreen.')},
+ ja:{title:'最初の召喚から、無限の可能性へ。',body:'<p class="modal-lead">相手のLPを0にするか、必要なドローができなくなると勝利です。初期LPは8000、初手は5枚。ドロー・スタンバイフェイズは自動で処理されます。</p>'+table([
+ ['通常召喚','通常召喚またはセットは、原則1ターンに合計1回です。レベル5～6は1体、レベル7以上は2体のリリースが必要です。カード固有の条件がある場合はそれに従います。'],
+ ['儀式召喚','儀式モンスターはメインデッキに入れます。対応する儀式魔法を発動し、手札の儀式モンスターと、手札・フィールドからリリースする素材を選択します。儀式魔法のレベル条件を満たし、余分なリリースを加えず、空いているメインモンスターゾーンを選びます。'],
+ ['融合召喚','「融合」などの効果を発動し、融合モンスターと必要な素材を選びます。素材として使える場所は効果ごとに異なります。カードテキストを確認してください。'],
+ ['シンクロ召喚','EX召喚からモンスターを選択します。指定されたチューナーとチューナー以外のモンスターを使い、レベル合計をシンクロモンスターのレベルと一致させます。固有の素材条件も必要です。'],
+ ['エクシーズ召喚','指定された同じレベルのモンスターを重ねます。素材はXモンスターの下に保持され、効果で必要な時に取り除きます。ランクアップでは素材を引き継ぐ場合があります。'],
+ ['ペンデュラム召喚','魔法＆罠ゾーンの両端にPカードを置きます。1ターンに1度、2つのスケールの間のレベルを持つモンスターを同時に特殊召喚できます。表側EXデッキのPモンスターは、EXモンスターゾーンまたはリンク先のメインモンスターゾーンに出します。'],
+ ['リンク召喚','通常の素材は1、リンクモンスターは1または自身のリンク数として数えます。合計リンク数、必要な体数、その他の素材条件を満たしてください。リンクモンスターにはレベル・ランク・守備力がなく、表側攻撃表示のみです。'],
+ ['EXモンスターゾーン','2つのEXモンスターゾーンは共有です。素材がフィールドを離れた後のリンクマーカーを確認します。相互リンクの経路でエクストラリンクを成立させることもできます。'],
+ ['チェーンと誘発効果','発動可能なタイミングでクイック効果・罠・カウンター罠を選べます。後から発動した効果から逆順に処理します。発動元を破壊しても、効果が自動で無効になるわけではありません。同時に誘発した効果は順序を選べます。'],
+ ['コストと墓地効果','コストで捨てる、リンク・シンクロ素材にする、X素材を取り除く、手札上限で捨てる行為は、効果で墓地へ送る行為とは異なります。ティアラメンツの融合効果には、効果で墓地へ送られることと、墓地の自身を素材に含めることが必要です。'],
+ ['エクゾディア','異なる5種類のパーツを手札に揃えると勝利です。フィールド・墓地・除外にあるパーツは数えません。']
+ ])+section('戦闘と表示形式','攻撃表示同士では攻撃力が低いモンスターが破壊され、そのコントローラーが差分のダメージを受けます。守備表示への攻撃では、攻撃力が上回れば相手を破壊し、通常はダメージを与えません。下回ると攻撃側が差分を受けます。貫通などはカード効果に従います。先攻1ターン目は攻撃できません。召喚したターンや攻撃後は、手動で表示形式を変更できません。セットした罠・速攻魔法は通常そのターンに発動できません。終了時の手札上限は6枚です。')+section('自分のデッキを作る','プリセットをコピーするか、空のデッキから始められます。メイン40～60枚、EX15枚以下、合計で同名3枚まで。大会の禁止・制限リストは適用しません。トークンはデッキに入れられません。下書きは自動保存され、有効なデッキは保存・複製・JSON形式の入出力ができます。')+section('言語・画像・ルールの範囲','言語メニューから中文・English・日本語を選べます。カードテキストはHTMLに内蔵されています。画像は内蔵データを優先し、足りない場合は「オンラインのカードイラスト」で補完できます。言語や画像設定の変更で対戦はリセットされません。本作は独立したファン製ルールエンジンです。1999～2002年は提供元の発売日データに基づき、一部の詳細処理には明記した独自の適用方法があります。')+section('ショートカット','Space：次のフェイズ・E：ターン終了・1～9：手札を選択・Esc：閉じる／未確定の選択をキャンセル・M：音声・F：全画面')}
+ };
+})(globalThis);

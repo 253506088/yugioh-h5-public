@@ -1,0 +1,11 @@
+import {spawnSync} from 'node:child_process';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {resolve,dirname,join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),at=new Date().toISOString(),out=join(root,'output/v3-tests','rules-'+at.replace(/[:.]/g,'-'));
+const files=['tests/engine.test.cjs','tests/v2-core.test.cjs','tests/v2-regression.test.cjs','tests/v3-rules.test.cjs'];
+const result=spawnSync(process.execPath,['--test','--test-reporter=tap',...files],{cwd:root,encoding:'utf8',maxBuffer:12*1024*1024});
+await mkdir(out,{recursive:true});await writeFile(join(out,'tap.txt'),result.stdout||'');await writeFile(join(out,'stderr.txt'),result.stderr||'');
+const number=key=>Number(result.stdout.match(new RegExp('# '+key+' (\\d+)'))?.[1]||0);
+const report={at,ok:result.status===0&&number('tests')>0&&number('fail')===0,tests:number('tests'),passed:number('pass'),failed:number('fail'),files,archive:out};
+await writeFile(join(root,'output/v3-rules-report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));if(!report.ok)process.exitCode=1;

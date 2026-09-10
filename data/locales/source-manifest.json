@@ -1,0 +1,22 @@
+{
+  "repository": "https://github.com/mycard/ygopro-database",
+  "commit": "ac5d8fb80465e74b33f3b4a294e3b22c02d743f2",
+  "obtainedAt": "2026-09-09T11:01:57.097Z",
+  "files": {
+    "zh-CN": {
+      "path": "data/locales/sources/ac5d8fb80465e74b33f3b4a294e3b22c02d743f2/zh-CN.cdb",
+      "sha256": "5f13245de4e665450858f66ef2f736a3d2f48cc7f0036961373a96a650cb6797",
+      "bytes": 8050688
+    },
+    "en": {
+      "path": "data/locales/sources/ac5d8fb80465e74b33f3b4a294e3b22c02d743f2/en-US.cdb",
+      "sha256": "41f9f496d6df9c762b084f20f6d18560adb41c81c0ac4ac3aa1fa8714c137824",
+      "bytes": 8057856
+    },
+    "ja": {
+      "path": "data/locales/sources/ac5d8fb80465e74b33f3b4a294e3b22c02d743f2/ja-JP.cdb",
+      "sha256": "ef751442241749dbd12196378767cf3e235fb86e04ca1b7077db115be7c98c06",
+      "bytes": 11808768
+    }
+  }
+}
