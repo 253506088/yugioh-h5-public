@@ -19,8 +19,9 @@
   class ModernDuelEngine extends Base {
     constructor(options={}) {
       if(!root.DuelEffects&&typeof require==='function')require('./advanced-effects.js');
-      for(const id of [options.deck||'blue',options.opponentDeck||((options.deck||'blue')==='blue'?'dark':'blue')]) {
-        req(!!DECKS[id],'找不到这套卡组。');const check=DT.analyze(DECKS[id]);req(check.valid,check.errors.join(' '));
+      for(const [index,id] of [options.deck||'blue',options.opponentDeck||((options.deck||'blue')==='blue'?'dark':'blue')].entries()) {
+        const spec=options.deckSpecs?.[index]||DECKS[id];
+        req(!!spec&&(!options.deckSpecs||spec.id===id),'找不到这套卡组。');const check=DT.analyze(spec);req(check.valid,check.errors.join(' '));
       }
       super({...options,openingGuarantee:options.openingGuarantee===true});
       this.initModern();

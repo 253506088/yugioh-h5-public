@@ -14,7 +14,7 @@
       const playerDeck = options.deck || 'blue';
       this.state = { version: 1, turn: 1, active: options.first === 0 ? 0 : 1, phase: 'main1', normalUsed: false, winner: null, resultReason: '', pending: null, nextUid: 1, nextLog: 1, log: [], damage: [0, 0], summons: [0, 0], startedAt: Date.now(), difficulty: options.difficulty || 'standard', players: [] };
       for (const deckId of [playerDeck, options.opponentDeck || (playerDeck === 'blue' ? 'dark' : 'blue')]) {
-        const deck = DECKS[deckId];
+        const deck = options.deckSpecs?.[this.state.players.length] || DECKS[deckId];
         requireRule(!!deck, '找不到这套卡组。');
         const instances = deck.cards.map(id => this.makeCard(id));
         this.shuffle(instances);
@@ -23,7 +23,7 @@
           const at = instances.findIndex(c => CARDS[c.id].type === 'monster' && CARDS[c.id].level <= 4);
           if (at >= 0) [instances[0], instances[at]] = [instances[at], instances[0]];
         }
-        this.state.players.push({ deckId, lp: 8000, deck: instances, hand: [], monsters: Array(5).fill(null), spells: Array(5).fill(null), grave: [], extra: deck.extra.map(id => this.makeCard(id)) });
+        this.state.players.push({ deckId, ...(options.deckSpecs ? {deckSpec:clone(deck)} : {}), lp: 8000, deck: instances, hand: [], monsters: Array(5).fill(null), spells: Array(5).fill(null), grave: [], extra: deck.extra.map(id => this.makeCard(id)) });
       }
       for (let owner = 0; owner < 2; owner++) this.draw(owner, 5, true);
       this.log('system', '命运的牌组已经就绪，决斗开始。');
@@ -519,7 +519,7 @@
       if (!s || s.version !== 1 || !Array.isArray(s.players) || s.players.length !== 2 || ![0, 1].includes(s.active) || !['main1', 'battle', 'main2'].includes(s.phase) || ![null, 0, 1].includes(s.winner) || !Number.isInteger(s.turn) || s.turn < 1) throw new Error('Invalid duel state');
       const uids = new Set();
       for (const p of s.players) {
-        if (!DECKS[p.deckId] || !Number.isFinite(p.lp) || p.lp < 0 || p.monsters.length !== 5 || p.spells.length !== 5) throw new Error('Invalid player state');
+        if (!(DECKS[p.deckId] || p.deckSpec?.id === p.deckId) || !Number.isFinite(p.lp) || p.lp < 0 || p.monsters.length !== 5 || p.spells.length !== 5) throw new Error('Invalid player state');
         for (const zone of ['deck', 'hand', 'monsters', 'spells', 'grave', 'extra']) {
           if (!Array.isArray(p[zone]) || p[zone].length > 100) throw new Error('Invalid zone');
           for (const c of occupied(p[zone])) {

@@ -20,12 +20,13 @@
   const sound = new window.DuelAudio(prefs);
   const modal = $('#modal');
   let engine, selectedUid = null, previewId = 'blue-eyes', previewHidden = false, intent = null;
+  let tournament = null, tournamentView = null, parkedDuel = null;
   let aiTimer = null, aiEpoch = 0, modalKind = '', pendingKey = '', libraryQuery = '', libraryFilter = 'all';
   let setupOptions = { deck: 'early-ritual', opponentDeck: 'early-fusion', first: 0, difficulty: 'standard', mode: 'duel' }, selectionState = null, responseUid = null;
   let libraryFamily = 'all',libraryYear='all',libraryPage=0,libraryStatus='all',detailReturn = null,detailCardId=null,pileContext = null,deckOwner=0,overlayHostUid=null;
   const spectate = { paused: false };
   const spectating = () => engine?.state.mode === 'spectate';
-  const robotName = owner => owner === 0 ? '机器人 A' : '机器人 B';
+  const robotName = owner => tournamentView?.names[owner] || (owner === 0 ? '机器人 A' : '机器人 B');
   const workshop = window.DuelWorkshop.create({ open:(...args)=>openModal(...args),toast:(...args)=>showToast(...args),getPageSize:()=>prefs.workshopPageSize,setPageSize:value=>{prefs.workshopPageSize=Experience.pageSize(value);updatePrefs();},play:id=>{setupOptions={deck:id,opponentDeck:engine?.state.players[1].deckId||'blackwing',first:0,difficulty:'standard',mode:'duel'};renderNewGame();} });
   let positionCache = new Map(), animationTimers = [], resultShown = false, cinematicTimer = null;
   let hoverId = null, savedAvailable = true;
@@ -47,18 +48,53 @@
   function setScreen(screen){
     currentScreen=screen;document.body.dataset.screen=screen;
     $('#home-screen').hidden=screen!=='home';$('.app-main').hidden=screen!=='duel';
+    $('#tournament-screen').hidden=screen!=='tournament';
+    if(screen!=='tournament')tournament?.hide();
     $('#duel-turn-hud').hidden=screen!=='duel';
     audioScene=screen==='duel'?'battle':'lobby';sound.setScene(audioScene);
-    if(screen==='home')clearTimeout(aiTimer);
+    if(screen!=='duel')clearTimeout(aiTimer);
     renderChrome();
   }
   function showHome(){
+    leaveTournamentView();
     if(modalKind==='pending'&&engine.state.pending)peekPending();else dismissModal();
     chainDirector.skip();hidePopover();setScreen('home');renderHome();
   }
   function enterDuel(){
+    leaveTournamentView();
     if(modal.open&&modalKind==='pending'){peekPending();return;}
     dismissModal();setScreen('duel');render();scheduleAI();
+  }
+  function leaveTournamentView(){
+    tournament?.closeViewer();
+    if(!parkedDuel)return;
+    aiEpoch++;clearTimeout(aiTimer);chainDirector.reset();
+    engine=parkedDuel.engine;selectedUid=parkedDuel.selectedUid;previewId=parkedDuel.previewId;
+    previewHidden=parkedDuel.previewHidden;intent=parkedDuel.intent;peekState=parkedDuel.peekState;
+    resultShown=parkedDuel.resultShown;spectate.paused=parkedDuel.paused;
+    parkedDuel=null;tournamentView=null;document.body.classList.remove('tournament-viewing');
+    $('#turn-panel').removeAttribute('data-i18n-skip');$('#mobile-turn-control').removeAttribute('data-i18n-skip');
+  }
+  function showTournament(){
+    if(modalKind==='pending'&&engine.state.pending)peekPending();else dismissModal();
+    leaveTournamentView();chainDirector.reset();hidePopover();setScreen('tournament');
+    tournament?.show().catch(error=>showToast(error.message,true));
+  }
+  function showTournamentFrame(watched,meta){
+    const first=!parkedDuel;
+    if(first){
+      parkedDuel={engine,selectedUid,previewId,previewHidden,intent,peekState,resultShown,paused:spectate.paused};
+      aiEpoch++;clearTimeout(aiTimer);clearTimeout(cinematicTimer);chainDirector.reset();dismissModal();hidePopover();
+      for(const timer of animationTimers)clearTimeout(timer);animationTimers=[];
+      $('#cinematic').classList.remove('visible');$('#fx-layer').innerHTML='';
+      intent=null;peekState=null;selectedUid=null;previewHidden=false;resultShown=true;
+    }
+    engine=watched;tournamentView=meta;engine.state.mode='spectate';
+    if(first)previewId=engine.deckInfo(0).ace;
+    if(selectedUid&&!engine.find(selectedUid))selectedUid=null;
+    document.body.classList.add('tournament-viewing');
+    $('#turn-panel').setAttribute('data-i18n-skip','');$('#mobile-turn-control').setAttribute('data-i18n-skip','');
+    setScreen('duel');render();
   }
   function renderHome(){
     const count=CARD_LIST.filter(c=>!c.notCollectible).length,decks=Object.values(DECKS).filter(d=>d.preset).length;
@@ -71,8 +107,8 @@
   function renderChrome(){
     if(!engine)return;
     const s=engine.state;
-    $('#screen-breadcrumb').textContent=currentScreen==='home'?'DUEL SANCTUARY':spectating()?'SPECTATOR':'DUEL FIELD';
-    $('#duel-turn-hud').innerHTML='<span class="turn-hud-number"><small>TURN</small><b>'+String(s.turn).padStart(2,'0')+'</b></span><span><strong>第 '+s.turn+' 回合</strong><small>'+(s.winner!==null?'决斗已结束':(spectating()?robotName(s.active):s.active===0?'我方':'对方')+' · '+(phaseNames[s.phase]||s.phase))+'</small></span>';
+    $('#screen-breadcrumb').textContent=currentScreen==='tournament'?'BOT ARENA':currentScreen==='home'?'DUEL SANCTUARY':tournamentView?(tournamentView.live?'TOURNAMENT / LIVE':'TOURNAMENT / REPLAY'):spectating()?'SPECTATOR':'DUEL FIELD';
+    $('#duel-turn-hud').innerHTML='<span class="turn-hud-number"><small>TURN</small><b>'+String(s.turn).padStart(2,'0')+'</b></span><span><strong>第 '+s.turn+' 回合</strong><small>'+(s.winner!==null?'决斗已结束':(spectating()?escape(robotName(s.active)):s.active===0?'我方':'对方')+' · '+(phaseNames[s.phase]||s.phase))+'</small></span>';
     $('#duel-turn-hud').classList.toggle('opponent-turn',s.active===1);
     $('#response-mode-switch').innerHTML=[['auto','AUTO','自动'],['on','ON','全部'],['off','OFF','关闭']].map(([id,name,label])=>'<button data-action="response-mode" data-value="'+id+'" class="'+(prefs.responseMode===id?'active':'')+'" aria-pressed="'+(prefs.responseMode===id)+'"><b>'+name+'</b><span>'+label+'</span></button>').join('');
     $('#response-mode-note').textContent=prefs.responseMode==='auto'?'关注对方发动、召唤和攻击。':prefs.responseMode==='on'?'每个合法响应时机都询问。':'自动放弃可选响应，强制处理保留。';
@@ -154,15 +190,15 @@
     const p=engine.state.players[owner],deck=I.deck(engine.deckInfo(owner)),s=engine.state,spec=spectating();
     const publicHand=owner===1&&(spec||engine.handRevealed?.(1,0)),top=engine.publicDeckTop?.(owner);
     const end=(owner===1?'<div class="enemy-hand'+(spec?' spectate-hand':'')+'" aria-label="对方有'+p.hand.length+'张手牌">'+(publicHand?p.hand.map(m=>'<button class="public-hand-card" data-action="card-detail" data-card-id="'+m.id+'" title="'+(spec?'机器人 B 的手牌：':'公开手牌：')+escape(CARDS[m.id].name)+'">'+Art.html(m.id)+'</button>').join(''):Array.from({length:Math.min(p.hand.length,8)},(_,i)=>'<span class="enemy-card" style="--angle:'+((i-Math.min(p.hand.length,8)/2)*5)+'deg"></span>').join(''))+'<small>'+p.hand.length+'</small></div>':'<div class="normal-counter'+(s.active!==0||s.normalUsed?' used':'')+'"><span class="counter-gem"></span>通常召唤 '+(s.active===0&&!s.normalUsed?'1 / 1':'0 / 1')+'</div>')+(top?'<small class="revealed-deck-top" title="天变地异：公开卡组顶">卡组顶 · '+escape(CARDS[top.id].name)+'</small>':'');
-    const tag=spec?'<span class="you-tag robot-tag">'+robotName(owner)+'</span><span>AI · '+difficultyNames[s.difficulty]+'</span>':owner===0?'<span class="you-tag">YOU</span>':'<span>AI · '+difficultyNames[s.difficulty]+'</span>';
-    return '<div class="avatar-frame">'+Art.html(deck.ace,'avatar-art')+'</div><div class="duelist-info"><div class="duelist-name">'+escape(deck.player)+'</div><div class="duelist-sub">'+tag+'<span>'+escape(deck.mechanic||'决斗者')+'</span></div></div><div class="lp-section'+(p.lp<=2000?' critical':'')+'" id="lp-'+owner+'"><div class="lp-heading"><span>LIFE POINTS</span><b>'+p.lp.toLocaleString('en-US')+'</b></div><div class="lp-track"><div class="lp-fill" style="width:'+Math.min(100,p.lp/80)+'%"></div></div></div>'+end;
+    const tag=spec?'<span class="you-tag robot-tag">'+(tournamentView?'BOT '+(owner===0?'A':'B'):escape(robotName(owner)))+'</span><span>AI · '+difficultyNames[s.difficulty]+'</span>':owner===0?'<span class="you-tag">YOU</span>':'<span>AI · '+difficultyNames[s.difficulty]+'</span>';
+    return '<div class="avatar-frame">'+Art.html(deck.ace,'avatar-art')+'</div><div class="duelist-info"><div class="duelist-name"'+(tournamentView?' data-user-content':'')+'>'+escape(tournamentView?robotName(owner):deck.player)+'</div><div class="duelist-sub">'+tag+'<span>'+escape(deck.mechanic||'决斗者')+'</span></div></div><div class="lp-section'+(p.lp<=2000?' critical':'')+'" id="lp-'+owner+'"><div class="lp-heading"><span>LIFE POINTS</span><b>'+p.lp.toLocaleString('en-US')+'</b></div><div class="lp-track"><div class="lp-fill" style="width:'+Math.min(100,p.lp/80)+'%"></div></div></div>'+end;
   }
   function fieldCard(card,owner,zone,index) {
     const c=CARDS[card.id],monster=['monsters','extraMonster'].includes(zone),spec=spectating(),hidden=!card.faceUp&&owner===1&&!spec,shown=!hidden;
     const attacking=monster&&owner===0&&!spec&&engine.state.active===0&&engine.state.phase==='battle'&&!engine.state.pending&&engine.actionsFor(card.uid,0).some(a=>a.type==='attack');
     const face=!card.faceUp?(spec?'<span class="set-reveal">'+cardHTML(card.id,card)+'<span class="set-badge">盖放</span></span>':'<div class="card-back"></div>'):cardHTML(card.id,card);
     const value=card.position==='defense'?engine.defenseValue(card):engine.attackValue(card);
-    return '<button class="zone has-card'+(selectedUid===card.uid?' selected':'')+(attacking?' attack-ready':'')+(isTargetable(owner,zone,card)?' targetable':'')+(c.type==='pendulum'&&zone==='spells'?' pendulum-zone':'')+'" data-action="select-card" data-card-uid="'+card.uid+'" data-owner="'+owner+'" data-zone="'+zone+'" data-slot="'+index+'" aria-label="'+(spec?robotName(owner)+' 的':owner===0?'你的':'对方的')+(hidden?'里侧卡牌':escape(c.name)+(monster?'，'+(card.position==='attack'?'攻击力':'守备力')+value:''))+'"><span class="field-card'+(monster&&card.position==='defense'?' defense':'')+'">'+face+(monster&&shown?'<span class="field-stats'+(card.position==='defense'?' defense':'')+'"><em>'+(card.position==='defense'?'DEF':'ATK')+'</em><span class="'+(value>(card.position==='defense'?c.def:c.atk)?'boost':'')+'">'+value+'</span></span>':'')+(monster&&shown&&card.overlays?.length?'<span class="overlay-badge" title="'+card.overlays.length+'张超量素材">✦ '+card.overlays.length+'</span>':'')+(card.faceUp&&c.type==='pendulum'&&zone==='spells'?'<span class="scale-badge '+(index===0?'blue':'red')+'">◈ '+c.scale+'</span>':'')+(monster&&shown&&card.counters>0?'<span class="field-status">✧'+card.counters+'</span>':monster&&card.attacksMade>0?'<span class="field-status attacked">✓</span>':'')+(card.faceUp&&engine.negated(card)?'<span class="negated-badge">无效</span>':'')+'</span></button>';
+    return '<button class="zone has-card'+(selectedUid===card.uid?' selected':'')+(attacking?' attack-ready':'')+(isTargetable(owner,zone,card)?' targetable':'')+(c.type==='pendulum'&&zone==='spells'?' pendulum-zone':'')+'" data-action="select-card" data-card-uid="'+card.uid+'" data-owner="'+owner+'" data-zone="'+zone+'" data-slot="'+index+'" aria-label="'+(spec?escape(robotName(owner))+' 的':owner===0?'你的':'对方的')+(hidden?'里侧卡牌':escape(c.name)+(monster?'，'+(card.position==='attack'?'攻击力':'守备力')+value:''))+'"><span class="field-card'+(monster&&card.position==='defense'?' defense':'')+'">'+face+(monster&&shown?'<span class="field-stats'+(card.position==='defense'?' defense':'')+'"><em>'+(card.position==='defense'?'DEF':'ATK')+'</em><span class="'+(value>(card.position==='defense'?c.def:c.atk)?'boost':'')+'">'+value+'</span></span>':'')+(monster&&shown&&card.overlays?.length?'<span class="overlay-badge" title="'+card.overlays.length+'张超量素材">✦ '+card.overlays.length+'</span>':'')+(card.faceUp&&c.type==='pendulum'&&zone==='spells'?'<span class="scale-badge '+(index===0?'blue':'red')+'">◈ '+c.scale+'</span>':'')+(monster&&shown&&card.counters>0?'<span class="field-status">✧'+card.counters+'</span>':monster&&card.attacksMade>0?'<span class="field-status attacked">✓</span>':'')+(card.faceUp&&engine.negated(card)?'<span class="negated-badge">无效</span>':'')+'</span></button>';
   }
   function renderZone(owner,zone) {
     const entries=engine.state.players[owner][zone].map((card,index)=>({card,index}));if(owner===1)entries.reverse();
@@ -222,6 +258,7 @@
     return { label: '结束我的回合', action: 'end', phase: null };
   }
   function renderSpectateControls() {
+    if(tournamentView){tournament?.renderBoardTools();return;}
     const s = engine.state, over = s.winner !== null, paused = spectate.paused, who = robotName(s.active);
     const description = over ? '决斗已经结束，可以查看记录或开始新的对战。' : paused ? '已暂停。可以逐步观察每一次结算，或继续自动播放。' : s.pending ? robotName(s.pending.responder) + ' 正在决定是否响应。' : who + ' 正在行动，双方手牌与盖牌全部可见。';
     const status = over ? 'DUEL COMPLETE' : paused ? 'PAUSED · ' + (s.active === 0 ? 'ROBOT A' : 'ROBOT B') : s.active === 0 ? 'ROBOT A TURN' : 'ROBOT B TURN';
@@ -323,7 +360,7 @@
   function hidePopover() { $('#card-popover').hidden = true; }
   function clearIntent() { intent = null; hidePopover(); render(); }
   function dispatch(action) {
-    if(chainDirector.busy)return false;
+    if(chainDirector.busy||tournamentView)return false;
     capturePositions(); hidePopover();
     const result = engine.act(action);
     if (!result.ok) { showToast(result.error, true); render(); scheduleAI(); return false; }
@@ -377,6 +414,7 @@
     dispatch({...action});
   }
   function saveGame() {
+    if(tournamentView)return;
     savedAvailable=writeStorage('duel-sanctuary-save-v2',{...engine.snapshot(),savedAt:Date.now()});
     $('#save-status').innerHTML='<i></i>'+(savedAvailable?'对局已自动保存':'当前浏览器未开放本地存档');
   }
@@ -388,7 +426,7 @@
     return ok;
   }
   function scheduleAI() {
-    clearTimeout(aiTimer);if(!engine||engine.state.winner!==null||intent||currentScreen!=='duel'||chainDirector.busy)return;
+    clearTimeout(aiTimer);if(!engine||tournamentView||engine.state.winner!==null||intent||currentScreen!=='duel'||chainDirector.busy)return;
     const s=engine.state;
     if(spectating()){
       if(modal.open||document.hidden||spectate.paused)return;
@@ -411,10 +449,12 @@
     aiTimer=setTimeout(()=>{if(token!==aiEpoch||modal.open||engine.state.winner!==null)return;runAIStep();},prefs.speed==='fast'?220:s.pending?650:720);
   }
   function spectateStep() {
+    if(tournamentView){tournament.seek(tournament.viewer.cursor.index+1);return;}
     if(!spectating()||engine.state.winner!==null||modal.open||chainDirector.busy)return;
     clearTimeout(aiTimer);spectate.paused=true;runAIStep();render();
   }
   function spectateToggle() {
+    if(tournamentView){tournament.viewerToggle();return;}
     if(!spectating())return;
     spectate.paused=!spectate.paused;render();
     if(spectate.paused){clearTimeout(aiTimer);showToast('已暂停观战。');}else{showToast('继续观战。');scheduleAI();}
@@ -432,6 +472,7 @@
     };
   }
   function startGame(options = {}, instantOpening = false) {
+    leaveTournamentView();
     chainDirector.reset();peekState=null;setScreen('duel');
     aiEpoch++; clearTimeout(aiTimer); clearTimeout(cinematicTimer);
     for (const timer of animationTimers) clearTimeout(timer); animationTimers = [];
@@ -461,7 +502,7 @@
     void el.offsetWidth; el.classList.add('visible'); sound.play('phase');
     cinematicTimer = setTimeout(() => { el.classList.remove('visible'); callback(winner); }, prefs.reducedMotion ? 700 : 1900);
   }
-  function beginSpectate(options) { if (modal.open) modal.close(); playRps(first => startGame({ ...options, mode: 'spectate', first, seed: Date.now() })); }
+  function beginSpectate(options) { leaveTournamentView();if (modal.open) modal.close(); playRps(first => startGame({ ...options, mode: 'spectate', first, seed: Date.now() })); }
 
   function openModal(kind, title, kicker, body, footer = '', className = '') {
     clearTimeout(aiTimer); hidePopover();
@@ -480,7 +521,7 @@
     if(modalKind==='pending'&&engine.state.pending){
       peekPending();return;
     }
-    dismissModal();sound.setScene(currentScreen==='home'?'lobby':'battle');scheduleAI();if(engine.state.winner!==null&&!resultShown&&currentScreen==='duel')showResult();
+    dismissModal();sound.setScene(currentScreen==='duel'?'battle':'lobby');scheduleAI();if(engine.state.winner!==null&&!resultShown&&currentScreen==='duel')showResult();
   }
   function showLibrary() {
     const count=CARD_LIST.filter(c=>!c.notCollectible).length;
@@ -520,7 +561,7 @@
       const hidden=owner===1&&kind==='extra'&&!c.faceUpExtra&&!spectating(),actions=hidden?[]:actionOptions(engine.find(c.uid)).actions;
       return '<article class="pile-entry">'+(hidden?'<div class="pile-hidden-card"><img src="'+ART['card-back']+'" alt="对方未公开的额外卡组卡片"></div><h3>未公开的额外怪兽</h3>':'<button class="pile-view" data-action="card-detail" data-card-id="'+c.id+'">'+cardHTML(c.id)+'<h3>'+escape(CARDS[c.id].name)+'</h3></button>')+(c.faceUpExtra?'<small class="face-up-extra-label">表侧 · 灵摆回归</small>':'')+actions.map(a=>'<button class="pile-action" data-action="pile-command" data-uid="'+c.uid+'" data-command="'+a.command+'">'+escape(a.label)+'</button>').join('')+'</article>';
     }).join(''):'<div class="empty-state">这里暂时没有卡片。</div>')+'</div>';
-    openModal('pile',(spectating()?robotName(owner)+' 的':owner===0?'你的':'对方的')+labels[kind],'BEYOND THE FIELD',body,'<button class="primary-button" data-action="close-modal">返回决斗</button>','library-modal');
+    openModal('pile',(spectating()?escape(robotName(owner))+' 的':owner===0?'你的':'对方的')+labels[kind],'BEYOND THE FIELD',body,'<button class="primary-button" data-action="close-modal">返回决斗</button>','library-modal');
   }
   function showOverlays(uid) {
     const f=engine.find(uid);if(!f)return;
@@ -534,7 +575,7 @@
   }
   function renderNewGame() {
     const list=DeckTools.list().map(d=>I.deck(d)),selected=DECKS[setupOptions.deck]||DECKS.hero,spec=setupOptions.mode==='spectate';
-    const modeControl='<div class="setup-mode"><label class="setting-label">对战模式</label><div class="segmented-control">'+[['duel','我 vs 机器人'],['spectate','机器人 vs 机器人']].map(([id,label])=>'<button class="'+(setupOptions.mode===id?'active':'')+'" data-action="choose-mode" data-value="'+id+'">'+label+'</button>').join('')+'</div>'+(spec?'<p class="setup-mode-note">为机器人 A 和机器人 B 各选一副卡组。观战时双方手牌与盖牌全部公开，先后手由猜拳决定。</p>':'')+'</div>';
+    const modeControl='<div class="setup-mode"><label class="setting-label">对战模式</label><div class="segmented-control">'+[['duel','我 vs 机器人'],['spectate','机器人 vs 机器人'],['tournament','机器人淘汰赛']].map(([id,label])=>'<button class="'+(setupOptions.mode===id?'active':'')+'" data-action="choose-mode" data-value="'+id+'">'+label+'</button>').join('')+'</div>'+(spec?'<p class="setup-mode-note">为机器人 A 和机器人 B 各选一副卡组。观战时双方手牌与盖牌全部公开，先后手由猜拳决定。</p>':'')+'</div>';
     const rosterTitle=spec?'<p class="roster-heading">机器人 A 的卡组</p>':'';
     openModal('new-game',spec?'让两位机器人一决高下。':'选择与你共鸣的力量。','ALL GENERATIONS · ONE DESTINY','<div class="deck-select-intro"><p>跨越世代的决斗，从这里开始。<br><span>'+Object.values(DECKS).filter(d=>d.preset).length+'套预设，或一副亲手构筑的卡组。</span></p><button class="outline-button" data-action="workshop">＋ 组卡工坊</button></div>'+modeControl+'<div class="deck-select-layout"><div class="deck-roster">'+rosterTitle+list.map((deck,i)=>'<button class="deck-roster-item'+(setupOptions.deck===deck.id?' active':'')+'" data-action="choose-deck" data-deck="'+deck.id+'">'+Art.html(deck.ace,'roster-art')+'<span class="roster-index">'+String(i+1).padStart(2,'0')+'</span><span class="roster-copy"><strong>'+deckNameHTML(deck)+'</strong><small>'+escape(deck.en)+'</small></span><span class="mechanic-chip">'+escape(deck.mechanic)+'</span><span class="roster-check">'+(setupOptions.deck===deck.id?'✓':'↗')+'</span></button>').join('')+'</div><aside class="selected-deck-showcase"><div class="showcase-glow"></div><div class="showcase-card">'+cardHTML(selected.ace)+'</div><span class="showcase-kicker">'+(spec?'机器人 A · ':'')+escape(selected.mechanic)+' / '+selected.cards.length+' + '+selected.extra.length+'</span><h3>'+deckNameHTML(selected)+'</h3><p>'+escape(selected.description)+'</p><div class="showcase-combo"><small>FIRST COMBO · 展开思路</small><p>'+escape(selected.combo?.[0]||'召唤海马侠，解放它呼唤青眼白龙；运用魔法与陷阱把握战机。')+'</p></div><button class="text-button" data-action="edit-setup-deck">编辑这副构筑 →</button></aside></div><div class="setup-options v2-setup"><div><label class="setting-label" for="opponent-deck">'+(spec?'机器人 B 的卡组':'对手卡组')+'</label><select id="opponent-deck">'+list.map(d=>'<option'+(d.custom?' data-user-content':'')+' value="'+d.id+'"'+(setupOptions.opponentDeck===d.id?' selected':'')+'>'+escape(d.name)+'</option>').join('')+'</select></div><div><label class="setting-label">'+(spec?'机器人难度':'对手难度')+'</label><div class="segmented-control">'+[['casual','休闲'],['standard','标准']].map(([id,label])=>'<button class="'+(setupOptions.difficulty===id?'active':'')+'" data-action="choose-difficulty" data-value="'+id+'">'+label+'</button>').join('')+'</div></div><div><label class="setting-label">出场顺序</label>'+(spec?'<p class="setup-order-note">✊ ✌️ 🖐️ 先后手由猜拳决定</p>':'<div class="segmented-control">'+[[0,'我先攻'],[1,'我后攻']].map(([id,label])=>'<button class="'+(setupOptions.first===id?'active':'')+'" data-action="choose-first" data-value="'+id+'">'+label+'</button>').join('')+'</div>')+'</div></div><p class="new-game-note">8000 LP · 随机起手 5 张 · 先攻首回合不抽卡、不攻击<br>开始新决斗会替换当前对局存档；保存的卡组与工坊草稿会保留。</p>','<button class="secondary-button" data-action="close-modal">继续当前对局</button><button class="primary-button" data-action="begin-game">'+(spec?'开始观战 ':'开始决斗 ')+icon('arrow')+'</button>','new-game-modal v2-new-game');
   }
@@ -620,6 +661,7 @@
     openModal('log', '属于你的决斗轨迹。', 'EVERY CHOICE MATTERS', '<div class="log-modal-list">' + engine.state.log.map(item => logHTML(item, true)).join('') + '</div>', '<button class="secondary-button" data-action="export-log">' + icon('download') + '导出记录</button><button class="primary-button" data-action="close-modal">返回决斗</button>');
   }
   function finishGame() {
+    if(tournamentView)return;
     const id = String(engine.state.startedAt) + '-' + engine.state.players[0].deckId;
     if (!spectating() && stats.lastGame !== id) {
       stats.games++; stats.wins += engine.state.winner === 0 ? 1 : 0; stats.bestDamage = Math.max(stats.bestDamage, engine.state.damage[0]); stats.lastGame = id;
@@ -636,6 +678,7 @@
     if (!modal.open) modal.showModal();
   }
   function showResult() {
+    if(tournamentView)return;
     if (engine.state.winner === null) return;
     clearTimeout(aiTimer); hidePopover(); resultShown = true; modalKind = 'result';
     if (spectating()) { showSpectateResult(); return; }
@@ -768,6 +811,7 @@
     if(workshop.handle(action,b))return;
     switch(action){
       case 'home':showHome();break;
+      case 'tournament':showTournament();break;
       case 'duel':enterDuel();break;
       case 'library':showLibrary();break;
       case 'help':showHelp();break;
@@ -816,7 +860,7 @@
       case 'library-page':libraryPage+=Number(b.dataset.delta);renderLibraryResults();$('#modal .modal-body')?.scrollTo({top:0});break;
       case 'choose-deck':setupOptions.deck=b.dataset.deck;{const scroll=$('.deck-roster').scrollTop;renderNewGame();$('.deck-roster').scrollTop=scroll;}break;
       case 'choose-first':setupOptions.first=Number(b.dataset.value);renderNewGame();break;
-      case 'choose-mode':setupOptions.mode=b.dataset.value==='spectate'?'spectate':'duel';renderNewGame();break;
+      case 'choose-mode':if(b.dataset.value==='tournament'){showTournament();break;}setupOptions.mode=b.dataset.value==='spectate'?'spectate':'duel';renderNewGame();break;
       case 'choose-difficulty':setupOptions.difficulty=b.dataset.value;renderNewGame();break;
       case 'begin-game':if(setupOptions.mode==='spectate')beginSpectate(setupOptions);else startGame({...setupOptions,seed:Date.now()});break;
       case 'rematch':{const base={deck:engine.state.players[0].deckId,opponentDeck:engine.state.players[1].deckId,difficulty:engine.state.difficulty};if(spectating())beginSpectate(base);else startGame({...base,first:0,seed:Date.now()});break;}
@@ -879,6 +923,7 @@
     if (key === 'm') { prefs.sound = !prefs.sound; sound.unlock(); updatePrefs(); showToast(prefs.sound ? '决斗音效已开启。' : '决斗音效已关闭。'); return; }
     if (key === 'f') { fullscreen(); return; }
     if(currentScreen!=='duel'||chainDirector.busy)return;
+    if(tournamentView){tournament.handleKey(event);return;}
     if (spectating()) {
       if (key === ' ' && event.target.tagName !== 'BUTTON') { event.preventDefault(); spectateToggle(); }
       else if (key === 'n') { event.preventDefault(); spectateStep(); }
@@ -981,6 +1026,7 @@
     newGame: options => startGame(options),
     beginSpectate: options => beginSpectate(options),
     get spectate() { return { active: spectating(), paused: spectate.paused }; },
+    get tournament(){return tournament;},showTournament,
     spectateToggle, spectateStep,
     showWorkshop: id => workshop.show(id),
     showNewGame,
@@ -989,11 +1035,14 @@
     act: dispatch,
     render,
     restore: snapshot => {
+      leaveTournamentView();
       chainDirector.reset();peekState=null;setScreen('duel');
       aiEpoch++; clearTimeout(aiTimer); dismissModal(); intent = null; selectedUid = null; previewHidden = false; resultShown = false;
       clearTimeout(cinematicTimer); $('#cinematic').classList.remove('visible'); $('#fx-layer').innerHTML = ''; $('#toast-stack').innerHTML = '';
       engine = window.DuelEngine.restore(snapshot); previewId = engine.deckInfo(0).ace; bindEngine(); render(); saveGame(); scheduleAI();
     }
   });
+  tournament=window.DuelTournamentUI.create({frame:showTournamentFrame,returnToArena:showTournament,toast:showToast,modalOpen:()=>modal.open||chainDirector.busy});
   I.mount();document.documentElement.dataset.ready = 'true';
+  if(location.hash==='#arena')showTournament();
 })();
