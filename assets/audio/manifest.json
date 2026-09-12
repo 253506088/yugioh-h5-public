@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "tracks": [
+    {
+      "id": "passionate-duelists",
+      "title": "熱き決闘者たち",
+      "scene": "battle",
+      "path": "assets/audio/passionate-duelists.mp3",
+      "url": "https://archive.org/download/tvtunes_18145/Yu-Gi-Oh%20-%20Sound%20Duel%201%20-%20Passionate%20Duelist.mp3",
+      "source": "https://archive.org/details/tvtunes_18145",
+      "sourceTitle": "Yu-Gi-Oh - Sound Duel 1 - Passionate Duelist.mp3",
+      "bytes": 1624146,
+      "sha256": "6e87760462eb4ac92d1c35f39043b4c3bfa1d073d0e91cf056f80390729fc796",
+      "downloadedAt": "2026-09-10T14:58:16.428Z"
+    },
+    {
+      "id": "nameless-pharaoh",
+      "title": "名もなきファラオ",
+      "scene": "battle",
+      "path": "assets/audio/nameless-pharaoh.mp3",
+      "url": "https://archive.org/download/tvtunes_18171/Yu-Gi-Oh%20-%20Sound%20Duel%204%20-%20The%20Nameless%20Pharaoh.mp3",
+      "source": "https://archive.org/details/tvtunes_18171",
+      "sourceTitle": "Yu-Gi-Oh - Sound Duel 4 - The Nameless Pharaoh.mp3",
+      "bytes": 2111779,
+      "sha256": "425c23d732611f2c4a116e1a5452452c22e94aa08b949eb04248a39cdfc53884",
+      "downloadedAt": "2026-09-10T14:58:19.641Z"
+    },
+    {
+      "id": "orichalcos",
+      "title": "オレイカルコスの結界",
+      "scene": "battle",
+      "path": "assets/audio/orichalcos.mp3",
+      "url": "https://archive.org/download/tvtunes_18161/Yu-Gi-Oh%20-%20Sound%20Duel%203%20-%20Seal%20of%20Orichalcos.mp3",
+      "source": "https://archive.org/details/tvtunes_18161",
+      "sourceTitle": "Yu-Gi-Oh - Sound Duel 3 - Seal of Orichalcos.mp3",
+      "bytes": 1657374,
+      "sha256": "5a3da2138b58da585544e24a91e3807226d656b3caac1e76de876e91294895d8",
+      "downloadedAt": "2026-09-10T14:58:24.036Z"
+    },
+    {
+      "id": "yugi",
+      "title": "遊戯",
+      "scene": "battle",
+      "path": "assets/audio/yugi.mp3",
+      "url": "https://archive.org/download/tvtunes_18173/Yu-Gi-Oh%20-%20Sound%20Duel%204%20-%20Yugi.mp3",
+      "source": "https://archive.org/details/tvtunes_18173",
+      "sourceTitle": "Yu-Gi-Oh - Sound Duel 4 - Yugi.mp3",
+      "bytes": 1723495,
+      "sha256": "ca285d6bc834f68e0137f8cf24808ff7e024829a172c541b953de34855aa762e",
+      "downloadedAt": "2026-09-10T14:58:43.639Z"
+    },
+    {
+      "id": "fang-of-critias",
+      "title": "クリティウスの牙",
+      "scene": "battle",
+      "path": "assets/audio/fang-of-critias.mp3",
+      "url": "https://archive.org/download/tvtunes_18157/Yu-Gi-Oh%20-%20Sound%20Duel%203%20-%20Fang%20of%20Critias.mp3",
+      "source": "https://archive.org/details/tvtunes_18157",
+      "sourceTitle": "Yu-Gi-Oh - Sound Duel 3 - Fang of Critias.mp3",
+      "bytes": 1593426,
+      "sha256": "0e0cda75a5113f09bf79a91d655087edc708a23ca10c1a7dbfc4417c71a8cbae",
+      "downloadedAt": "2026-09-10T14:58:47.757Z"
+    },
+    {
+      "id": "bond-of-friendship",
+      "title": "友情の絆",
+      "scene": "help",
+      "path": "assets/audio/bond-of-friendship.mp3",
+      "url": "https://archive.org/download/tvtunes_18147/Yu-Gi-Oh%20-%20Sound%20Duel%202%20-%20Bond%20of%20Friendship.mp3",
+      "source": "https://archive.org/details/tvtunes_18147",
+      "sourceTitle": "Yu-Gi-Oh - Sound Duel 2 - Bond of Friendship.mp3",
+      "bytes": 2178987,
+      "sha256": "f43da214fa4f003d0c5d3ac7df2083dbe17b4c1b26d8a2fa22e725adb2e57787",
+      "downloadedAt": "2026-09-10T14:58:52.275Z"
+    },
+    {
+      "id": "yusei-battle",
+      "title": "遊星バトル",
+      "scene": "workshop",
+      "path": "assets/audio/yusei-battle.mp3",
+      "url": "https://archive.org/download/ygo5ds-sound-duel1/Yu-gi-oh!%205D's%20Sound%20Duel%2001%20%5BFLAC%5D/19%20Y%C5%ABsei%20Batoru%20.mp3",
+      "source": "https://archive.org/details/ygo5ds-sound-duel1",
+      "sourceTitle": "Yu-gi-oh! 5D's Sound Duel 01 [FLAC]/19 Yūsei Batoru .mp3",
+      "bytes": 6117061,
+      "sha256": "5bc52ee1d808af647a751b0deb4811ebbb30b8618e1654507fbd9faba688a075",
+      "downloadedAt": "2026-09-10T14:58:58.760Z"
+    },
+    {
+      "id": "psychological-battle",
+      "title": "心理戦(D1)",
+      "scene": "lobby",
+      "path": "assets/audio/psychological-battle.m4a",
+      "url": "https://archive.org/download/yu-gi-oh-ost-japanese-version/Yu%20Gi%20Oh%20OST%20(Japanese%20Version).zip/Yu%20Gi%20Oh%20OST%20(Japanese%20Version)%2F34%20Mind%20Games.m4a",
+      "source": "https://archive.org/details/yu-gi-oh-ost-japanese-version",
+      "sourceTitle": "34 Mind Games.m4a",
+      "bytes": 1857593,
+      "sha256": "3394fa98a520cec46da9101a61888f261d384b8f08792f98d68e21662da03b07",
+      "downloadedAt": "2026-09-10T14:59:02.372Z"
+    },
+    {
+      "id": "jounouchi",
+      "title": "城之内克也",
+      "scene": "library",
+      "path": "assets/audio/jounouchi.m4a",
+      "url": "https://archive.org/download/yu-gi-oh-ost-japanese-version/Yu%20Gi%20Oh%20OST%20(Japanese%20Version).zip/Yu%20Gi%20Oh%20OST%20(Japanese%20Version)%2F75%20Katsuya%20Jonouchi.m4a",
+      "source": "https://archive.org/details/yu-gi-oh-ost-japanese-version",
+      "sourceTitle": "75 Katsuya Jonouchi.m4a",
+      "bytes": 2409019,
+      "sha256": "bd90c3df5b32a2666bba47e96315ffbf8eed90a7144ccd330252cc4086b427cc",
+      "downloadedAt": "2026-09-10T14:59:06.398Z"
+    },
+    {
+      "id": "counterattack",
+      "title": "反撃開始",
+      "scene": "battle",
+      "path": "assets/audio/counterattack.m4a",
+      "url": "https://archive.org/download/yu-gi-oh-ost-japanese-version/Yu%20Gi%20Oh%20OST%20(Japanese%20Version).zip/Yu%20Gi%20Oh%20OST%20(Japanese%20Version)%2F121%20Start%20the%20Counterattack.m4a",
+      "source": "https://archive.org/details/yu-gi-oh-ost-japanese-version",
+      "sourceTitle": "121 Start the Counterattack.m4a",
+      "bytes": 2223136,
+      "sha256": "a7455acdd2903353d9c5c20eb7f9ed00dd961d5b0a013a68a6db083ae7b5abfd",
+      "downloadedAt": "2026-09-10T14:59:08.809Z"
+    }
+  ]
+}

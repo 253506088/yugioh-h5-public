@@ -3,14 +3,15 @@ const {chromium}=require('playwright'),sharp=require('sharp');
 const root=path.resolve(__dirname,'..'),out=path.join(root,'output/v4.1-browser',new Date().toISOString().replace(/[:.]/g,'-'));
 const report={ok:false,at:new Date().toISOString(),checks:[],screenshots:[],errors:[],network:'All HTTP requests intercepted; online artwork uses synthetic fixture pixels.',archive:out};
 let browser,fixture;
+async function menu(page,action){if(await page.locator('#modal').evaluate(el=>el.open))await page.locator('#modal [data-action="close-modal"]').first().click();await page.locator('.site-header .brand').click();await page.locator('#home-screen [data-action="'+action+'"]').first().click();}
 async function check(name,fn){await fn();report.checks.push(name);console.log('OK',name);}
-async function shot(page,name){const file=path.join(out,name+'.png');await page.screenshot({path:file,fullPage:true});report.screenshots.push(file);}
+async function shot(page,name){const file=path.join(out,name+'.png');await page.screenshot({path:file,fullPage:true,animations:'disabled'});report.screenshots.push(file);}
 async function open({file='output/no-art/index.html',online=false,route=null}={}){
  const context=await browser.newContext({viewport:{width:1440,height:1000},deviceScaleFactor:1}),requests=[];
  await context.addInitScript(options=>{
   if(!localStorage.getItem('qa-v41-initialized')){
    localStorage.setItem('qa-v41-initialized','true');localStorage.setItem('duel-sanctuary-welcomed-v3','true');
-   localStorage.setItem('duel-sanctuary-prefs-v1',JSON.stringify({sound:false,reducedMotion:true,speed:'fast'}));
+   localStorage.setItem('duel-sanctuary-prefs-v1',JSON.stringify({sound:false,reducedMotion:true,speed:'fast',responseMode:'on'}));
    if(options.online!==null)localStorage.setItem('duel-sanctuary-online-art-v2',String(options.online));
   }
  },{online});
@@ -21,7 +22,7 @@ async function open({file='output/no-art/index.html',online=false,route=null}={}
   return r.abort();
  });
  const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.stack));
- await page.goto(pathToFileURL(path.join(root,file)).href);await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');
+ await page.goto(pathToFileURL(path.join(root,file)).href);await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');await page.click('#home-continue');
  return {context,page,requests};
 }
 async function locale(page,language){await page.locator((await page.locator('#modal').evaluate(el=>el.open)?'#modal ':'.header-tools ')+'[data-locale-select]').first().selectOption(language);await page.waitForFunction(language=>document.documentElement.lang===language,language);}
@@ -52,13 +53,13 @@ async function detail(page,id){await page.evaluate(()=>duelApp.showLibrary());aw
 (async()=>{
  await fs.mkdir(out,{recursive:true});fixture=await sharp({create:{width:96,height:96,channels:3,background:'#597d70'}}).png().toBuffer();await fs.writeFile(path.join(out,'synthetic-online-fixture.png'),fixture);
  let executablePath=process.env.DUEL_BROWSER;const edge='C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';if(!executablePath)try{await fs.access(edge);executablePath=edge;}catch{}
- browser=await chromium.launch({headless:true,...(executablePath?{executablePath}:{}),args:['--no-first-run','--disable-background-networking']});
+ browser=await chromium.launch({headless:true,...(executablePath?{executablePath}:{}),args:['--no-first-run','--disable-background-networking','--mute-audio']});
  await check('three languages switch immediately, persist after reload, and preserve the current duel',async()=>{
   const {context,page,requests}=await open();try{
    const before=await savedState(page);
    for(const language of ['en','ja','zh-CN']){await locale(page,language);assert.equal(await savedState(page),before);assert.equal(await page.evaluate(()=>duelApp.language),language);}
    await locale(page,'ja');await page.reload();await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');assert.equal(await page.evaluate(()=>duelApp.language),'ja');assert.equal(await savedState(page),before);
-   await page.click('[data-action="library"]');await page.fill('#library-search','Skull Servant');assert.equal(await page.locator('#library-grid [data-card-id="early-32274490"]').count(),1);
+   await menu(page,'library');await page.fill('#library-search','Skull Servant');assert.equal(await page.locator('#library-grid [data-card-id="early-32274490"]').count(),1);
    for(const [language,name] of [['en','Skull Servant'],['ja','ワイト'],['zh-CN','白骨']]){await locale(page,language);assert.equal(await page.locator('#library-grid [data-card-id="early-32274490"] h3').textContent(),name);assert.equal(await page.locator('#library-search').inputValue(),'Skull Servant');}
    assert.deepEqual(requests,[]);await shot(page,'01-chinese-card-search');
   }finally{await context.close();}
@@ -92,7 +93,7 @@ async function detail(page,id){await page.evaluate(()=>duelApp.showLibrary());aw
  });
  await check('custom deck names, drafts and saved deck exports are independent of display language',async()=>{
   const {context,page}=await open();try{
-   await page.click('[data-action="workshop"]');await page.selectOption('#ws-source','hero');await page.fill('#ws-name','卡组名称');await page.fill('#ws-search','白骨');
+   await menu(page,'workshop');await page.selectOption('#ws-source','hero');await page.fill('#ws-name','卡组名称');await page.fill('#ws-search','白骨');
    const before=await page.evaluate(()=>duelApp.workshopDraft);await locale(page,'en');assert.deepEqual(await page.evaluate(()=>duelApp.workshopDraft),before);assert.equal(await page.locator('#ws-name').inputValue(),'卡组名称');assert.equal(await page.locator('#ws-search').inputValue(),'白骨');
    await page.click('#ws-save');const id=await page.evaluate(()=>duelApp.workshopDraft.id);await locale(page,'ja');assert.equal(await page.locator('#ws-source option[value="'+id+'"]').textContent(),'卡组名称');
    const event=page.waitForEvent('download');await page.click('[data-action="ws-export"]');const download=await event,payload=JSON.parse(await fs.readFile(await download.path(),'utf8'));assert.equal(payload.deck.name,'卡组名称');assert.deepEqual(payload.deck.cards,before.cards);
@@ -130,7 +131,7 @@ async function detail(page,id){await page.evaluate(()=>duelApp.showLibrary());aw
    await page.waitForFunction(()=>[...document.querySelectorAll('img[data-art-id]')].some(img=>img.naturalWidth>0));assert.ok(requests.length>0);assert.ok(requests.every(url=>url.startsWith('https://images.ygoprodeck.com/')));
    await detail(page,'tear-rulkallos');assert.equal(await page.locator('.card-art-link').getAttribute('href'),'https://images.ygoprodeck.com/images/cards/84330567.jpg');assert.equal(await page.locator('.card-art-link + .card-encyclopedia-link').count(),1);
    await close(page);await page.click('[data-action="settings"]');await page.click('[data-action="toggle-online-artwork"]');assert.equal(await page.locator('[data-action="toggle-online-artwork"]').getAttribute('aria-checked'),'false');await close(page);
-   const count=requests.length;await page.click('[data-action="library"]');await page.fill('#library-search','白骨');await page.reload();await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');assert.equal(await page.evaluate(()=>DuelArt.status().onlineEnabled),false);assert.equal(requests.length,count);
+   const count=requests.length;await menu(page,'library');await page.fill('#library-search','白骨');await page.reload();await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');assert.equal(await page.evaluate(()=>DuelArt.status().onlineEnabled),false);assert.equal(requests.length,count);
    await context.setOffline(true);const before=await savedState(page);await locale(page,'ja');assert.equal(await savedState(page),before);
   }finally{await context.close();}
  });
@@ -162,7 +163,7 @@ async function detail(page,id){await page.evaluate(()=>duelApp.showLibrary());aw
   const {context,page}=await open();try{
    await page.setViewportSize({width:390,height:844});
    for(const language of ['zh-CN','en','ja']){
-    await locale(page,language);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.click('[data-action="workshop"]');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await shot(page,'07-mobile-'+language);await close(page);
+    await locale(page,language);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await menu(page,'workshop');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await shot(page,'07-mobile-'+language);await close(page);
    }
   }finally{await context.close();}
  });

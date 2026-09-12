@@ -3,6 +3,7 @@
   const I=window.DuelI18n,{ isMonster, isExtra, isFamily } = window.DuelData;
   const CARDS=I.cards,CARD_LIST=window.DuelData.CARD_LIST.map(c=>I.card(c.id)),DECKS=I.decks;
   const ART = window.DUEL_ART, Art = window.DuelArt, View = window.DuelView, DeckTools = window.DuelDecks;
+  const Experience=window.DuelExperience;
   DeckTools.load();
   const $ = selector => document.querySelector(selector);
   const $$ = selector => [...document.querySelectorAll(selector)];
@@ -10,8 +11,11 @@
   const icon = name => '<svg class="icon" aria-hidden="true"><use href="#i-' + name + '"/></svg>';
   const readStorage = (key, fallback) => { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : fallback; } catch { return fallback; } };
   const writeStorage = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch { return false; } };
-  const prefs = Object.assign({ sound: true, music: false, volume: .35, reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches, speed: 'normal' }, readStorage('duel-sanctuary-prefs-v1', {}));
+  const prefs = Object.assign({ sound:true,music:true,volume:.35,musicVolume:.28,fontScale:110,libraryPageSize:24,workshopPageSize:24,responseMode:'auto',cardStyle:'classic',reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,speed:'normal' }, readStorage('duel-sanctuary-prefs-v1', {}));
   prefs.volume = Number.isFinite(Number(prefs.volume)) ? Math.max(0, Math.min(1, Number(prefs.volume))) : .35;
+  prefs.fontScale=Experience.clampFont(prefs.fontScale);prefs.libraryPageSize=Experience.pageSize(prefs.libraryPageSize);prefs.workshopPageSize=Experience.pageSize(prefs.workshopPageSize);
+  if(!['auto','on','off'].includes(prefs.responseMode))prefs.responseMode='auto';
+  prefs.musicVolume=Number.isFinite(Number(prefs.musicVolume))?Math.max(0,Math.min(1,Number(prefs.musicVolume))):.28;
   const stats = Object.assign({ games: 0, wins: 0, bestDamage: 0, lastGame: '' }, readStorage('duel-sanctuary-stats-v1', {}));
   const sound = new window.DuelAudio(prefs);
   const modal = $('#modal');
@@ -22,13 +26,113 @@
   const spectate = { paused: false };
   const spectating = () => engine?.state.mode === 'spectate';
   const robotName = owner => owner === 0 ? '机器人 A' : '机器人 B';
-  const workshop = window.DuelWorkshop.create({ open: (...args) => openModal(...args), toast: (...args) => showToast(...args), play: id => { setupOptions = { deck: id, opponentDeck: engine?.state.players[1].deckId || 'blackwing', first: 0, difficulty: 'standard', mode: 'duel' }; renderNewGame(); } });
+  const workshop = window.DuelWorkshop.create({ open:(...args)=>openModal(...args),toast:(...args)=>showToast(...args),getPageSize:()=>prefs.workshopPageSize,setPageSize:value=>{prefs.workshopPageSize=Experience.pageSize(value);updatePrefs();},play:id=>{setupOptions={deck:id,opponentDeck:engine?.state.players[1].deckId||'blackwing',first:0,difficulty:'standard',mode:'duel'};renderNewGame();} });
   let positionCache = new Map(), animationTimers = [], resultShown = false, cinematicTimer = null;
   let hoverId = null, savedAvailable = true;
+  let currentScreen='home',peekState=null,audioScene='lobby';
+  const chainDirector=new Experience.ChainDirector({node:$('#chain-theater'),prefs,onIdle:()=>{if(!engine)return;renderChainTimeline();if(engine.state.winner!==null)finishGame();else scheduleAI();}});
   const phaseNames = { main1: '主要阶段 1', battle: '战斗阶段', main2: '主要阶段 2' };
   const difficultyNames = { casual: '休闲', standard: '标准' };
   document.documentElement.style.setProperty('--back-image', 'url("' + ART['card-back'] + '")');
   document.body.classList.toggle('reduce-motion', !!prefs.reducedMotion);
+  applyDisplayPreferences();
+
+  function applyDisplayPreferences(){
+    document.documentElement.style.setProperty('--ui-scale',prefs.fontScale/100);
+    document.documentElement.dataset.fontScale=String(prefs.fontScale);
+    document.body.classList.toggle('full-art-cards',prefs.cardStyle==='full-art');
+    for(const [name,url] of Object.entries(window.DUEL_FRAMES||{}))document.documentElement.style.setProperty('--frame-'+name,'url("'+url+'")');
+    window.dispatchEvent(new Event('duel-display-change'));
+  }
+  function setScreen(screen){
+    currentScreen=screen;document.body.dataset.screen=screen;
+    $('#home-screen').hidden=screen!=='home';$('.app-main').hidden=screen!=='duel';
+    $('#duel-turn-hud').hidden=screen!=='duel';
+    audioScene=screen==='duel'?'battle':'lobby';sound.setScene(audioScene);
+    if(screen==='home')clearTimeout(aiTimer);
+    renderChrome();
+  }
+  function showHome(){
+    if(modalKind==='pending'&&engine.state.pending)peekPending();else dismissModal();
+    chainDirector.skip();hidePopover();setScreen('home');renderHome();
+  }
+  function enterDuel(){
+    if(modal.open&&modalKind==='pending'){peekPending();return;}
+    dismissModal();setScreen('duel');render();scheduleAI();
+  }
+  function renderHome(){
+    const count=CARD_LIST.filter(c=>!c.notCollectible).length,decks=Object.values(DECKS).filter(d=>d.preset).length;
+    $('#home-stats').innerHTML='<span><b>'+count.toLocaleString('en-US')+'</b> 张卡片</span><span><b>'+decks+'</b> 套预设</span><span><b>6</b> 种召唤方式</span>';
+    $('#home-card-count').textContent=count.toLocaleString('en-US')+' 张卡片';
+    $('#home-continue').textContent=engine?.state.winner===null?'继续决斗 · 第 '+engine.state.turn+' 回合 →':'返回战场 →';
+    if(!$('#home-art').children.length)$('#home-art').innerHTML='<div class="hero-card hero-card-left">'+cardHTML('dark-magician')+'</div><div class="hero-card hero-card-right">'+cardHTML('blue-eyes')+'</div><div class="hero-card hero-card-center">'+cardHTML('stardust-dragon')+'</div><span class="hero-art-caption">三千年的羁绊 · 此刻回应</span>';
+    Art.refresh($('#home-screen'));
+  }
+  function renderChrome(){
+    if(!engine)return;
+    const s=engine.state;
+    $('#screen-breadcrumb').textContent=currentScreen==='home'?'DUEL SANCTUARY':spectating()?'SPECTATOR':'DUEL FIELD';
+    $('#duel-turn-hud').innerHTML='<span class="turn-hud-number"><small>TURN</small><b>'+String(s.turn).padStart(2,'0')+'</b></span><span><strong>第 '+s.turn+' 回合</strong><small>'+(s.winner!==null?'决斗已结束':(spectating()?robotName(s.active):s.active===0?'我方':'对方')+' · '+(phaseNames[s.phase]||s.phase))+'</small></span>';
+    $('#duel-turn-hud').classList.toggle('opponent-turn',s.active===1);
+    $('#response-mode-switch').innerHTML=[['auto','AUTO','自动'],['on','ON','全部'],['off','OFF','关闭']].map(([id,name,label])=>'<button data-action="response-mode" data-value="'+id+'" class="'+(prefs.responseMode===id?'active':'')+'" aria-pressed="'+(prefs.responseMode===id)+'"><b>'+name+'</b><span>'+label+'</span></button>').join('');
+    $('#response-mode-note').textContent=prefs.responseMode==='auto'?'关注对方发动、召唤和攻击。':prefs.responseMode==='on'?'每个合法响应时机都询问。':'自动放弃可选响应，强制处理保留。';
+    renderPeekBar();renderChainTimeline();updateMusicStatus();
+  }
+  function chainLabel(link){
+    if(link.status==='unavailable')return (link.byNumber?'连锁 '+link.byNumber+' → ':'')+'来源离场，未能适用';
+    if(link.status==='negated')return link.byNumber?'被连锁 '+link.byNumber+' 无效':link.reason==='source-unavailable'?'来源失效':'效果无效';
+    if(link.status==='target-lost')return '目标丢失';
+    return {waiting:'等待结算',resolving:'正在处理',resolved:'处理完成'}[link.status]||'等待结算';
+  }
+  function renderChainTimeline(){
+    const history=engine?.state.chainHistory||[],id=history.at(-1)?.chainId,links=history.filter(l=>l.chainId===id).sort((a,b)=>b.number-a.number);
+    $('#chain-timeline').innerHTML=links.length?'<div class="chain-order-hint">'+links.map(l=>l.number).join(' → ')+' · 后发动先处理</div>'+links.slice(0,5).map(l=>'<button class="chain-timeline-link status-'+l.status+'" data-action="chain-log"><b>'+l.number+'</b><span><strong>'+escape(CARDS[l.cardId]?.name)+'</strong><small>'+(l.owner===0?'我方':'对方')+' · '+chainLabel(l)+'</small></span></button>').join(''):'<div class="chain-empty"><span>∞</span><p>连锁将在这里展开</p><small>双方编号 · 逆序结算</small></div>';
+    $$('.field-chain-number').forEach(el=>el.remove());
+    for(const link of engine?.state.chain||[]){const el=$('#duel-board [data-card-uid="'+link.uid+'"]');if(el)el.insertAdjacentHTML('beforeend','<span class="field-chain-number" aria-label="连锁 '+link.chainNumber+'">'+link.chainNumber+'</span>');}
+  }
+  function showChainLog(){
+    const history=engine.state.chainHistory||[],ids=[...new Set(history.map(l=>l.chainId))].reverse();
+    const body=ids.length?ids.map(id=>{const links=history.filter(l=>l.chainId===id).sort((a,b)=>b.number-a.number);return '<section class="chain-history-group"><header><h3>CHAIN '+id+' <small>'+links.map(l=>l.number).join(' → ')+'</small></h3><button data-action="replay-chain" data-chain-id="'+id+'">回放演出 ↗</button></header>'+links.map(l=>'<div class="chain-history-link status-'+l.status+'"><b>'+l.number+'</b>'+Art.html(l.cardId,'chain-history-art')+'<div><h4>'+escape(CARDS[l.cardId]?.name)+'</h4><p>'+(l.owner===0?'我方':'对方')+' · '+escape(I.effectLabel(window.DuelEffects.get(l.key)))+'</p><strong>'+chainLabel(l)+'</strong>'+(l.lostTargets?.length?'<small>'+l.lostTargets.map(target=>(target.byNumber?'连锁 '+target.byNumber+' → ':'')+(target.cardId?CARDS[target.cardId]?.name:'所选目标')+'离开原位置').map(escape).join('；')+'</small>':'')+'</div></div>').join('')+'</section>';}).join(''):'<div class="empty-state">还没有连锁记录。发动效果后，双方的连锁与处理结果会保存在这里。</div>';
+    openModal('chain-log','每一环，都清晰可见。','CHAIN HISTORY · 大号先处理，1 最后处理',body,'<button class="primary-button" data-action="close-modal">返回战场</button>','chain-history-modal');
+  }
+  function peekPending(){
+    const p=engine.state.pending;if(!p)return;
+    peekState={key:JSON.stringify(p),selection:selectionState?JSON.parse(JSON.stringify(selectionState)):null};
+    modalKind='';pendingKey='';hidePopover();if(modal.open)modal.close();renderPeekBar();
+  }
+  function renderPeekBar(){
+    const p=engine.state.pending,bar=$('#response-peek-bar');
+    if(peekState&&peekState.key!==JSON.stringify(p))peekState=null;
+    bar.hidden=!peekState||currentScreen!=='duel';
+    $$('.response-source-highlight,.response-target-highlight').forEach(el=>el.classList.remove('response-source-highlight','response-target-highlight'));
+    if(bar.hidden)return;
+    const summary=Experience.responseSummary(engine,p),canPass=['window','trigger'].includes(p.kind)&&!p.trigger?.mandatory;
+    bar.innerHTML='<div><small>决策已保留 · 战局暂停</small><strong>'+escape(summary.label)+' · '+escape(summary.text||'')+'</strong></div><button class="primary-button" data-action="pending-resume">返回选择 '+icon('arrow')+'</button>'+(canPass?'<button class="text-button" data-action="pending-pass">本次不连锁</button>':'');
+    if(summary.uid)$('[data-card-uid="'+summary.uid+'"]')?.classList.add('response-source-highlight');
+    for(const target of summary.targets||[])$('[data-card-uid="'+target.uid+'"]')?.classList.add('response-target-highlight');
+  }
+  function resumePending(){
+    const saved=peekState;peekState=null;dismissModal();setScreen('duel');showPending(true);
+    if(saved?.key===JSON.stringify(engine.state.pending)&&saved.selection){
+      selectionState=saved.selection;
+      if(!['window','trigger'].includes(engine.state.pending.kind))updatePicks();
+      else if(selectionState.response){
+        const options=engine.state.pending.options||[{uid:engine.state.pending.trigger?.uid,key:engine.state.pending.trigger?.key}];
+        $$('.response-option').forEach((el,i)=>el.classList.toggle('chosen',options[i]?.uid===selectionState.response.uid&&options[i]?.key===selectionState.response.key));
+        $('#pending-confirm').disabled=false;
+        $('#pick-feedback').textContent='已选择 · '+I.effectLabel(window.DuelEffects.get(selectionState.response.key));
+      }
+      $$('.summon-position-choice button').forEach(el=>el.classList.toggle('active',el.dataset.position===selectionState.position));
+    }
+    renderPeekBar();
+  }
+  function updateMusicStatus(){
+    const s=sound.status(),active=prefs.music;
+    $('#music-title').textContent=s.title||'配乐已就绪';
+    $('#music-scene').textContent=!active?'BGM · 已关闭':({lobby:'LOBBY',battle:'DUEL · SHUFFLE',library:'CARD ARCHIVE',workshop:'DECK ATELIER',help:'HANDBOOK'}[s.scene]||'SOUNDTRACK')+(s.state==='playing'?' · PLAYING':s.state==='error'?' · 音源不可用':' · 点击播放');
+    $('#music-toggle').setAttribute('aria-pressed',String(active));$('#music-dock').classList.toggle('is-playing',s.state==='playing');
+    $('#music-next').hidden=s.scene!=='battle';
+  }
 
   function cardHTML(id, instance = null) { return View.card(id, instance); }
   function deckNameHTML(deck) { return '<span'+(deck.custom?' data-user-content':'')+'>'+escape(deck.name)+'</span>'; }
@@ -73,11 +177,11 @@
     return '<button class="pile" data-action="pile" data-owner="'+owner+'" data-pile="deck" aria-label="'+label+'卡组，剩余'+p.deck.length+'张"><span class="pile-card"><span class="pile-count">'+p.deck.length+'</span></span><span>卡组</span></button>';
   }
   function renderPhases() {
-    const s = engine.state, phases = [['draw', 'DRAW', '抽卡阶段'], ['standby', 'STANDBY', '准备阶段'], ['main1', 'MAIN 1', '主要阶段 1'], ['battle', 'BATTLE', '战斗阶段'], ['main2', 'MAIN 2', '主要阶段 2'], ['end', 'END', '结束回合']];
+    const s = engine.state, phases = [['draw', '抽卡', '抽卡阶段'], ['standby', '准备', '准备阶段'], ['main1', '主要 1', '主要阶段 1'], ['battle', '战斗', '战斗阶段'], ['main2', '主要 2', '主要阶段 2'], ['end', '结束', '结束回合']];
     const at = phases.findIndex(p => p[0] === s.phase);
     $('#phase-track').innerHTML = phases.map(([key, label, title], i) => {
       const available = !spectating() && s.active === 0 && s.winner === null && !s.pending && !intent && ((s.phase === 'main1' && ['battle', 'main2', 'end'].includes(key) && (key !== 'battle' || s.turn > 1)) || (s.phase === 'battle' && ['main2', 'end'].includes(key)) || (s.phase === 'main2' && key === 'end'));
-      return (i ? '<span class="phase-dot">·</span>' : '') + '<button class="phase-step' + (key === s.phase ? ' active' : i < at ? ' done' : '') + '" data-action="phase" data-phase="' + key + '" title="' + title + '" aria-label="' + title + '"' + (!available ? ' disabled' : '') + '>' + label + '</button>';
+      return (i ? '<span class="phase-dot">·</span>' : '') + '<button class="phase-step' + (key === s.phase ? ' active' : i < at ? ' done' : '') + '" data-action="phase" data-phase="' + key + '" title="' + title + '" aria-label="' + title + '"' + (!available ? ' disabled' : '') + '><span class="phase-label-long" data-i18n-skip>' + I.term(label) + '</span><span class="phase-label-short" aria-hidden="true" data-i18n-skip>'+(I.language==='en'?['DP','SP','M1','BP','M2','EP'][i]:I.term(label))+'</span></button>';
     }).join('');
   }
   function canUseSpell(card,owner=0) { return engine.actionsFor(card.uid,owner).some(a=>a.type==='activate'); }
@@ -94,9 +198,11 @@
   }
   function renderHand() {
     const hand = engine.state.players[0].hand, s = engine.state, spec = spectating();
+    const crowded=hand.length>7||(matchMedia('(max-height:600px) and (orientation:landscape)').matches&&hand.length>5);
+    $('#hand-cards').classList.toggle('is-scrollable',crowded);
     $('#hand-count').textContent = hand.length;
     $('#hand-title').textContent = spec ? '机器人 A 的手牌' : '你的手牌';
-    $('#hand-hint').textContent = s.winner !== null ? '决斗结束 · 每一张卡都有它的故事' : spec ? '观战模式 · 点击可查看卡牌' : intent ? '按提示完成选择 · Esc 取消' : s.active === 0 ? '点击卡牌，开启你的战术' : '对方正在行动 · 你可以查看卡牌';
+    $('#hand-hint').textContent = crowded?'左右滑动查看手牌':s.winner !== null ? '决斗结束 · 每一张卡都有它的故事' : spec ? '观战模式 · 点击可查看卡牌' : intent ? '按提示完成选择 · Esc 取消' : s.active === 0 ? '点击卡牌，开启你的战术' : '对方正在行动 · 你可以查看卡牌';
     $('#hand-cards').innerHTML = hand.map((card, index) => {
       const mid = (hand.length - 1) / 2, angle = (index - mid) * Math.min(3.1, 16 / Math.max(1, mid * 2)), lift = Math.abs(index - mid) ** 1.55 * (hand.length > 7 ? .65 : 1.9);
       const options = actionOptions(engine.find(card.uid)), playable = options.actions.length > 0;
@@ -174,11 +280,13 @@
     if(!spectating())$('#duel-tip').textContent=(deck.combo||['点击卡牌查看当前合法行动；墓地与除外区也可能存在可以使用的效果。'])[s.turn%Math.max(1,deck.combo?.length||1)];
     document.body.classList.toggle('spectate-mode',spectating());
     updateSoundButton();Art.refresh();highlightLinkZones();
+    renderChrome();
   }
   function renderModernControls() {
     const s=engine.state,main=!spectating()&&s.active===0&&s.winner===null&&!s.pending&&['main1','main2'].includes(s.phase),extra=main?engine.extraOptions(0):[],links=extra.filter(o=>o.type==='link'),pend=main?engine.pendulumCandidates(0):[],scales=engine.scales(0);
     $('#summon-toolbar').innerHTML='<button data-action="extra-menu"'+(!main?' disabled':'')+' class="summon-shortcut'+(extra.length?' available':'')+'">✧ 额外召唤 <b>'+extra.length+'</b></button><button data-action="link-menu"'+(!main?' disabled':'')+' class="summon-shortcut link-shortcut'+(links.length?' available':'')+'">⬡ 连接召唤 <b>'+links.length+'</b></button><button data-action="pendulum-summon"'+(!pend.length?' disabled':'')+' class="summon-shortcut pendulum-shortcut'+(pend.length?' available':'')+'">◈ 灵摆召唤 <b>'+pend.length+'</b></button><span class="scales-readout"><i>'+(scales[0]?.scale??'—')+'</i><span>〈 刻度 〉</span><i>'+(scales[1]?.scale??'—')+'</i></span>';
-    $('#chain-status').innerHTML=s.chain.length?'<span>CHAIN '+s.chain.length+'</span>'+s.chain.map((l,i)=>'<b title="'+escape(I.effectLabel(window.DuelEffects.get(l.key)))+'">'+(i+1)+' · '+escape(CARDS[l.sourceId].name)+'</b>').join('<i>→</i>'):s.pending?'<span>决策时机</span><b>'+escape(I.pendingTitle(s.pending,engine))+'</b>':'<span>V4 · ORIGINS OF THE DUEL</span><b>仪式 · 融合 · 同调 · 超量 · 灵摆 · 连接</b>';
+    $('#summon-toolbar').insertAdjacentHTML('beforeend','<button class="response-mobile" data-action="cycle-response">响应 '+prefs.responseMode.toUpperCase()+'</button>');
+    $('#chain-status').innerHTML=s.chain.length?'<span>CHAIN '+s.chain.length+'</span>'+s.chain.map(l=>'<b title="'+escape(I.effectLabel(window.DuelEffects.get(l.key)))+'">'+l.chainNumber+' · '+(l.owner===0?'我方':'对方')+' · '+escape(CARDS[l.sourceId].name)+'</b>').join('<i>→</i>'):s.pending?'<span>决策时机</span><b>'+escape(I.pendingTitle(s.pending,engine))+'</b>':'<span>TURN '+String(s.turn).padStart(2,'0')+'</span><b>'+(s.active===0?'我方回合':'对方回合')+' · '+(phaseNames[s.phase]||s.phase)+'</b>';
     const pieces=['exodia-head','exodia-left-arm','exodia-right-arm','exodia-left-leg','exodia-right-leg'],hasExodia=engine.deckInfo(0).cards.some(id=>pieces.includes(id));$('#exodia-tracker').hidden=!hasExodia;
     if(hasExodia)$('#exodia-tracker').innerHTML='<span>封印的记忆</span>'+pieces.map((id,i)=>'<b class="'+(s.players[0].hand.some(c=>c.id===id)?'collected':'')+'" title="'+escape(CARDS[id].name)+'">'+['頭','左腕','右腕','左足','右足'][i]+'</b>').join('');
   }
@@ -215,6 +323,7 @@
   function hidePopover() { $('#card-popover').hidden = true; }
   function clearIntent() { intent = null; hidePopover(); render(); }
   function dispatch(action) {
+    if(chainDirector.busy)return false;
     capturePositions(); hidePopover();
     const result = engine.act(action);
     if (!result.ok) { showToast(result.error, true); render(); scheduleAI(); return false; }
@@ -279,7 +388,7 @@
     return ok;
   }
   function scheduleAI() {
-    clearTimeout(aiTimer);if(!engine||engine.state.winner!==null||intent)return;
+    clearTimeout(aiTimer);if(!engine||engine.state.winner!==null||intent||currentScreen!=='duel'||chainDirector.busy)return;
     const s=engine.state;
     if(spectating()){
       if(modal.open||document.hidden||spectate.paused)return;
@@ -287,14 +396,22 @@
       aiTimer=setTimeout(()=>{if(token!==aiEpoch||modal.open||spectate.paused||engine.state.winner!==null)return;runAIStep();},prefs.speed==='fast'?160:s.pending?600:680);
       return;
     }
-    if(s.pending?.responder===0){if(!modal.open||modalKind==='pending')showPending();return;}
+    if(s.pending?.responder===0){
+      if(peekState){renderPeekBar();return;}
+      if(modal.open&&modalKind!=='pending')return;
+      if(Experience.responseDecision(s.pending,prefs.responseMode)==='pass'){
+        const pending=s.pending,token=aiEpoch;
+        aiTimer=setTimeout(()=>{if(token===aiEpoch&&engine.state.pending===pending&&!modal.open&&!peekState&&currentScreen==='duel'&&!chainDirector.busy)dispatch({type:'pass'});},110);return;
+      }
+      showPending();return;
+    }
     if(modal.open||document.hidden)return;
     if(s.active!==1&&s.pending?.responder!==1)return;
     const token=aiEpoch;
     aiTimer=setTimeout(()=>{if(token!==aiEpoch||modal.open||engine.state.winner!==null)return;runAIStep();},prefs.speed==='fast'?220:s.pending?650:720);
   }
   function spectateStep() {
-    if(!spectating()||engine.state.winner!==null||modal.open)return;
+    if(!spectating()||engine.state.winner!==null||modal.open||chainDirector.busy)return;
     clearTimeout(aiTimer);spectate.paused=true;runAIStep();render();
   }
   function spectateToggle() {
@@ -306,6 +423,8 @@
     engine.onChange = events => {
       if (selectedUid && !engine.find(selectedUid)) selectedUid = null;
       for (const event of events) if (event.owner === 0 && ['special','synchro','xyz','link','pendulum','fusion'].includes(event.kind) && event.cardId) { selectedUid = event.uid; previewId = event.cardId; previewHidden = false; }
+      if(peekState&&peekState.key!==JSON.stringify(engine.state.pending))peekState=null;
+      chainDirector.receive(events,engine.state.chainHistory);
       render(); saveGame(); playEvents(events);
       if (engine.state.winner !== null) { finishGame(); return; }
       if (!engine.state.pending) pendingKey = '';
@@ -313,6 +432,7 @@
     };
   }
   function startGame(options = {}, instantOpening = false) {
+    chainDirector.reset();peekState=null;setScreen('duel');
     aiEpoch++; clearTimeout(aiTimer); clearTimeout(cinematicTimer);
     for (const timer of animationTimers) clearTimeout(timer); animationTimers = [];
     $('#cinematic').classList.remove('visible'); $('#fx-layer').innerHTML = '';
@@ -346,6 +466,8 @@
   function openModal(kind, title, kicker, body, footer = '', className = '') {
     clearTimeout(aiTimer); hidePopover();
     modalKind = kind;
+    const scene={library:'library',workshop:'workshop',help:'help','new-game':'lobby'}[kind];if(scene){audioScene=scene;sound.setScene(scene);}
+    if(currentScreen==='home')footer=footer.replace(/返回决斗/g,'返回主界面');
     modal.className = 'modal ' + className;
     modal.innerHTML = '<header class="modal-header"><div><div class="eyebrow">' + kicker + '</div><h2 id="modal-title">' + title + '</h2></div><div class="modal-tools">'+I.picker()+'<button class="modal-close" data-action="close-modal" aria-label="关闭窗口">' + icon('close') + '</button></div></header><div class="modal-body">' + body + '</div>' + (footer ? '<footer class="modal-footer">' + footer + '</footer>' : '');
     if (!modal.open) modal.showModal();
@@ -356,21 +478,19 @@
   }
   function closeModal() {
     if(modalKind==='pending'&&engine.state.pending){
-      const p=engine.state.pending;
-      if(['window','trigger'].includes(p.kind)&&!p.trigger?.mandatory){dismissModal();dispatch({type:'pass'});return;}
-      if(p.cancelable){dismissModal();dispatch({type:'choose',cancel:true});return;}
-      showToast('这个效果已经开始结算，请完成当前选择。');return;
+      peekPending();return;
     }
-    dismissModal();scheduleAI();if(engine.state.winner!==null&&!resultShown)showResult();
+    dismissModal();sound.setScene(currentScreen==='home'?'lobby':'battle');scheduleAI();if(engine.state.winner!==null&&!resultShown&&currentScreen==='duel')showResult();
   }
   function showLibrary() {
     const count=CARD_LIST.filter(c=>!c.notCollectible).length;
     openModal('library','每一张卡，都有它的灵魂。','THE CARD ARCHIVE · '+count+' CARDS','<div class="early-overview"><span><b>1999—2002</b>初代编年</span><span><b>1,495</b>年度快照卡片</span><span><b>'+count+'</b>总收录</span></div><div class="library-toolbar"><div class="library-filters">'+[['all','全部'],['monster','怪兽'],['spell','魔法'],['trap','陷阱'],['ritual','仪式'],['fusion','融合'],['synchro','同调'],['xyz','超量'],['link','连接'],['pendulum','灵摆']].map(([id,label])=>'<button class="filter-button'+(libraryFilter===id?' active':'')+'" data-action="library-filter" data-filter="'+id+'">'+label+'</button>').join('')+'</div><label class="search-box">'+icon('search')+'<input id="library-search" type="search" value="'+escape(libraryQuery)+'" placeholder="卡名、英文名、卡片编号或效果" aria-label="搜索卡牌"></label><select id="library-family" aria-label="筛选系列">'+Object.entries(window.DuelData.families).map(([id,label])=>'<option value="'+id+'"'+(libraryFamily===id?' selected':'')+'>'+label+'</option>').join('')+'</select></div><div class="archive-years"><label for="library-year">按首次发行年</label><select id="library-year" aria-label="筛选发行年份">'+View.yearOptions(libraryYear)+'</select><select id="library-status" aria-label="筛选实现状态">'+[['all','全部收录'],['ready','可用于决斗'],['pending','效果待落实']].map(([id,label])=>'<option value="'+id+'"'+(libraryStatus===id?' selected':'')+'>'+label+'</option>').join('')+'</select></div><div class="library-grid" id="library-grid"></div><div class="archive-pagination" id="library-pagination"></div><p class="library-count" id="library-count"></p>','<button class="secondary-button" data-action="close-modal">返回决斗</button><button class="primary-button" data-action="workshop">前往组卡工坊 '+icon('arrow')+'</button>','library-modal');renderLibraryResults();
   }
   function renderLibraryResults() {
-    const query=libraryQuery.trim().normalize('NFKC').toLowerCase(),cards=CARD_LIST.filter(c=>!c.notCollectible&&View.yearMatch(c,libraryYear)&&(libraryStatus==='all'||(libraryStatus==='pending')===(c.implementationStatus==='pending'))&&(libraryFilter==='all'||libraryFilter==='monster'&&isMonster(c)||c.type===libraryFilter)&&(libraryFamily==='all'||isFamily(c,libraryFamily))&&(!query||I.searchText(c.id).includes(query))),pages=Math.max(1,Math.ceil(cards.length/24));libraryPage=Math.max(0,Math.min(libraryPage,pages-1));
-    $('#library-grid').innerHTML=cards.length?cards.slice(libraryPage*24,libraryPage*24+24).map(c=>'<button class="library-card" data-action="card-detail" data-card-id="'+c.id+'" aria-label="查看'+escape(c.name)+'">'+cardHTML(c.id)+'<h3>'+escape(c.name)+'</h3><small>'+(c.releaseYear?c.releaseYear+' · ':'')+View.subtype(c)+(c.implementationStatus==='pending'?' · 效果待落实':'')+'</small></button>').join(''):'<div class="empty-state">没有找到这张卡，试试其他名称或年份。</div>';
-    $('#library-pagination').innerHTML='<button data-action="library-page" data-delta="-1"'+(!libraryPage?' disabled':'')+'>← 上一页</button><span>'+(libraryPage+1)+' / '+pages+'</span><button data-action="library-page" data-delta="1"'+(libraryPage>=pages-1?' disabled':'')+'>下一页 →</button>';
+    const size=prefs.libraryPageSize,query=libraryQuery.trim().normalize('NFKC').toLowerCase(),cards=CARD_LIST.filter(c=>!c.notCollectible&&View.yearMatch(c,libraryYear)&&(libraryStatus==='all'||(libraryStatus==='pending')===(c.implementationStatus==='pending'))&&(libraryFilter==='all'||libraryFilter==='monster'&&isMonster(c)||c.type===libraryFilter)&&(libraryFamily==='all'||isFamily(c,libraryFamily))&&(!query||I.searchText(c.id).includes(query))),pages=Math.max(1,Math.ceil(cards.length/size));libraryPage=Math.max(0,Math.min(libraryPage,pages-1));
+    $('#library-grid').innerHTML=cards.length?cards.slice(libraryPage*size,libraryPage*size+size).map(c=>'<button class="library-card" data-action="card-detail" data-card-id="'+c.id+'" aria-label="查看'+escape(c.name)+'">'+cardHTML(c.id)+'<h3>'+escape(c.name)+'</h3><small>'+(c.releaseYear?c.releaseYear+' · ':'')+View.subtype(c)+(c.implementationStatus==='pending'?' · 效果待落实':'')+'</small></button>').join(''):'<div class="empty-state">没有找到这张卡，试试其他名称或年份。</div>';
+    const pagination=$('#library-pagination');pagination.innerHTML='<label class="page-size-control">每页 <select id="library-page-size" aria-label="图鉴每页张数">'+Experience.PAGE_SIZES.map(n=>'<option value="'+n+'"'+(n===size?' selected':'')+'>'+n+' 张</option>').join('')+'</select></label><span class="page-range">'+(cards.length?libraryPage*size+1:0)+'—'+Math.min(cards.length,(libraryPage+1)*size)+' / '+cards.length+'</span><div class="page-navigation"><button data-action="library-page" data-delta="-1"'+(!libraryPage?' disabled':'')+' aria-label="上一页">←</button><label><input id="library-page-jump" type="number" min="1" max="'+pages+'" value="'+(libraryPage+1)+'" aria-label="跳转图鉴页码"> / '+pages+'</label><button data-action="library-page" data-delta="1"'+(libraryPage>=pages-1?' disabled':'')+' aria-label="下一页">→</button></div>';
+    if(pagination.parentElement!==$('#modal .modal-footer'))$('#modal .modal-footer').prepend(pagination);
     $('#library-count').textContent=cards.length+' / '+CARD_LIST.filter(c=>!c.notCollectible).length+' 张卡片 · 卡图使用本地构建缓存，缺图仍可游玩';
     $$('.library-filters .filter-button').forEach(el=>el.classList.toggle('active',el.dataset.filter===libraryFilter));
   }
@@ -426,10 +546,12 @@
   function showSettings() {
     const toggle = (key, title, description) => '<div class="setting-row"><div><h3>' + title + '</h3><p>' + description + '</p></div><button class="toggle-button' + (prefs[key] ? ' on' : '') + '" data-action="toggle-pref" data-pref="' + key + '" role="switch" aria-checked="' + !!prefs[key] + '" aria-label="' + title + '"></button></div>';
     openModal('settings', '你的决斗，随你设定。', 'PERSONAL SANCTUARY',
+      '<section class="reading-settings"><div><h3>阅读与显示</h3><p>字体独立缩放，战场保持一屏。</p></div><div class="font-setting"><label for="font-size-control">字体大小 <b id="font-size-label">'+prefs.fontScale+'%</b></label><input id="font-size-control" type="range" min="90" max="150" step="5" value="'+prefs.fontScale+'" aria-label="字体大小"><div class="font-presets">'+[[100,'标准'],[115,'舒适'],[130,'大字'],[150,'超大']].map(([n,label])=>'<button data-action="font-preset" data-value="'+n+'">'+label+'</button>').join('')+'</div></div><p class="font-preview">相信卡组，也相信每一次抉择。<small>调整后会自动保存，卡片效果与操作文字同步放大。</small></p></section><div class="setting-row"><div><h3>卡面样式</h3><p>经典卡框与全图展示，随时切换。</p></div><select id="card-style" aria-label="卡面样式"><option value="classic"'+(prefs.cardStyle!=='full-art'?' selected':'')+'>经典卡框</option><option value="full-art"'+(prefs.cardStyle==='full-art'?' selected':'')+'>全图卡面</option></select></div><div class="frame-samples">'+[['blue-eyes','通常'],['hero-stratos','效果'],['hero-sunrise','融合'],['stardust-dragon','同调'],['utopia','超量'],['qli-scout','灵摆'],['early-5405694','仪式'],['linkuriboh','Link'],['monster-reborn','魔法'],['mirror-force','陷阱']].filter(([id])=>CARDS[id]).map(([id,label])=>'<span>'+cardHTML(id)+'<small>'+label+'</small></span>').join('')+'</div>'+
       '<div class="setting-row"><div><h3>显示语言</h3><p>选择界面、卡名和卡片说明的语言。</p></div>'+I.picker()+'</div><div class="setting-row"><div><h3>显示卡图</h3><p>优先显示内嵌卡图，缺图时使用备用卡面。</p></div><button class="toggle-button' + (Art.status().enabled ? ' on' : '') + '" data-action="toggle-artwork" role="switch" aria-checked="' + Art.status().enabled + '" aria-label="显示卡图"></button></div><div class="setting-row"><div><h3>在线原版卡图</h3><p>缺少内嵌图片时联网加载原版卡图。关闭后仍可离线决斗。</p></div><button class="toggle-button'+(Art.status().onlineEnabled?' on':'')+'" data-action="toggle-online-artwork" role="switch" aria-checked="'+Art.status().onlineEnabled+'" aria-label="在线原版卡图"></button></div><div class="setting-row"><p>'+I.term('本地原版卡图')+' · '+Art.status().embedded+'</p><button class="text-button" data-action="retry-artwork">刷新卡图</button></div>' +
       toggle('sound', '决斗音效', '抽卡、召唤与战斗的声音。') +
       '<div class="setting-row"><div><h3>音量 <span id="volume-label" style="color:#839a76;font-size:10px">' + Math.round(prefs.volume * 100) + '%</span></h3><p>一点声音，让决斗更有温度。</p></div><input class="volume-control" id="volume-control" type="range" min="0" max="100" value="' + Math.round(prefs.volume * 100) + '" aria-label="音量"></div>' +
-      toggle('music', '氛围音乐', '缓慢的和弦，陪伴你的每次思考。') +
+      toggle('music', '动画原声配乐', '随场景切换；战斗曲目轮流随机，不连续重复。') +
+      '<div class="setting-row"><div><h3>配乐音量 <span id="music-volume-label">'+Math.round(prefs.musicVolume*100)+'%</span></h3><p>与召唤、攻击等音效分别调整。</p></div><input class="volume-control" id="music-volume-control" type="range" min="0" max="100" value="'+Math.round(prefs.musicVolume*100)+'" aria-label="配乐音量"></div><details class="music-library" id="music-library"><summary>原声曲目 · '+sound.tracks.length+' 首</summary><div>'+sound.tracks.map(track=>'<div><span><small>'+({lobby:'战斗前',battle:'决斗中',library:'卡牌图鉴',workshop:'卡组工坊',help:'玩法指南'}[track.scene])+'</small><b data-i18n-skip>'+escape(track.title)+'</b></span><em>'+(track.src?'已就绪':'音源缺失')+'</em></div>').join('')+'</div></details>'+
       toggle('reducedMotion', '减少动态效果', '关闭粒子、震动和过渡动画。') +
       '<div class="setting-row"><div><h3>对手行动速度</h3><p>选择适合自己的决斗节奏。</p></div><div class="segmented-control">' + [['normal', '沉浸'], ['fast', '快速']].map(([id, label]) => '<button class="' + (prefs.speed === id ? 'active' : '') + '" data-action="set-speed" data-value="' + id + '">' + label + '</button>').join('') + '</div></div>' +
       '<div class="settings-record"><div><b>' + stats.games + '</b><small>完成对局</small></div><div><b>' + stats.wins + '</b><small>取得胜利</small></div><div><b>' + (stats.games ? Math.round(stats.wins / stats.games * 100) : 0) + '%</b><small>决斗胜率</small></div></div>',
@@ -438,20 +560,21 @@
   function openTargetSelection() { showPending(); }
   function renderSelection() { showPending(true); }
   function showPending(force=false) {
-    const p=engine.state.pending;if(!p||p.responder!==0||engine.state.winner!==null||modal.open&&modalKind!=='pending')return;
+    const p=engine.state.pending;if(!p||p.responder!==0||engine.state.winner!==null||modal.open&&modalKind!=='pending'||chainDirector.busy)return;
+    if(peekState&&!force){renderPeekBar();return;}
     const key=JSON.stringify(p);if(!force&&pendingKey===key&&modal.open)return;
     pendingKey=key;selectionState={selected:[],response:null,position:p.action?.position||'attack',zone:null};
     const candidates=(p.candidates||p.group?.candidates||[]).map(c=>I.option(c,p,engine)),isResponse=['window','trigger'].includes(p.kind);
     if(candidates.length>80)for(const c of candidates){c.cardId=null;c.hidden=false;}
     const trigger=p.trigger,options=p.kind==='window'?p.options:p.kind==='trigger'?[{uid:trigger.uid,key:trigger.key,label:I.effectLabel(window.DuelEffects.get(trigger.key)),cardId:trigger.sourceId}]:[];
-    const chain=engine.state.chain,sourceId=p.ctx?.sourceId||trigger?.sourceId||engine.find(p.uid)?.card.id;
-    const chainHTML=chain.length?'<div class="pending-chain"><small>CHAIN · 后发动先结算</small>'+chain.map((l,i)=>'<span><b>'+String(i+1).padStart(2,'0')+'</b>'+escape(CARDS[l.sourceId].name)+'<em>'+escape(I.effectLabel(window.DuelEffects.get(l.key))||'')+'</em></span>').join('')+'</div>':'';
+    const situation=Experience.responseSummary(engine,p),chain=engine.state.chain,sourceId=p.ctx?.sourceId||trigger?.sourceId||engine.find(p.uid)?.card.id||situation.cardId;
+    const chainHTML=chain.length?'<div class="pending-chain"><small>CHAIN · '+chain.map(l=>l.chainNumber).reverse().join(' → ')+' · 后发动先结算</small>'+chain.map(l=>'<span class="chain-owner-'+l.owner+'"><b>'+String(l.chainNumber).padStart(2,'0')+'</b><strong>'+(l.owner===0?'我方':'对方')+'</strong>'+escape(CARDS[l.sourceId].name)+'<em>'+escape(I.effectLabel(window.DuelEffects.get(l.key))||'')+'</em></span>').join('')+'</div>':'';
     const min=p.min??p.group?.min??1,max=p.max??p.group?.max??1;
     const notice=p.kind==='order'?'依次点选想发动的效果，序号就是连锁顺序；后选择的效果先结算。必须包含标注为「强制」的效果。':p.purpose==='pendulum'?'手牌使用主怪兽区；表侧额外的灵摆需要共享额外区或Link箭头指向的主区，且等级位于两刻度之间。':['extra','link-effect'].includes(p.purpose)?'选择素材，再选择合法召唤区域。Link怪兽作为素材可计为1或自身Link值，合计须精确等于目标Link值。' :p.kind==='discard'?'手牌上限为6张。请选择需要送墓的卡片。':p.kind==='window'?'现在可以连锁发动效果，也可以保留卡片。':p.kind==='trigger'?'满足了诱发条件。可以发动这个效果，也可以保留。':p.cancelable?'先选择代价或目标，再确认发动。':'效果正在结算中，请完成这一步选择。';
-    const back=CARDS[sourceId]?'<div class="pending-source">'+Art.html(sourceId,'pending-source-art')+'<div><small>'+escape(engine.state.phase==='battle'?'BATTLE PHASE':'EFFECT PROCESS')+'</small><h3>'+escape(CARDS[sourceId].name)+'</h3><p>'+escape(I.effectLabel(window.DuelEffects.get(p.ctx?.key||trigger?.key)))+'</p></div></div>':'';
+    const back=(CARDS[sourceId]?'<div class="pending-source">'+Art.html(sourceId,'pending-source-art')+'<div><small>'+escape(isResponse?situation.label:'EFFECT PROCESS')+(situation.number?' · CHAIN '+situation.number:'')+'</small><h3>'+escape(CARDS[sourceId].name)+'</h3>'+(!isResponse?'<p>'+escape(I.effectLabel(window.DuelEffects.get(p.ctx?.key||trigger?.key)))+'</p>':'')+'</div></div>':'')+(isResponse?'<div class="response-context"><p>'+escape(situation.label)+' · '+escape(situation.text||'')+'</p>'+(situation.detail?'<p class="response-action-detail">'+escape(situation.detail)+'</p>':'')+(situation.targets.length?'<p class="response-target-list">目标：'+situation.targets.map(x=>escape(x.label)).join('、')+'</p>':'')+(sourceId?'<details><summary>查看发动卡片的效果</summary><p>'+escape(CARDS[sourceId]?.description||'')+'</p></details>':'')+'<small>战局已暂停，查看后再决定。</small></div>':'');
     const body=back+chainHTML+'<p class="modal-lead">'+notice+'</p>'+(isResponse?'<div class="response-options">'+options.map((o,i)=>{const id=o.cardId||engine.find(o.uid)?.card.id;return '<button class="response-option" data-action="pending-response" data-index="'+i+'">'+(id?Art.html(id,'response-art'):'')+'<span><strong>'+escape(I.effectLabel(window.DuelEffects.get(o.key))||o.label||I.effectLabel(window.DuelEffects.get(o.key))||CARDS[id]?.name)+'</strong><small>'+escape(CARDS[id]?.description||'')+'</small></span><b>↗</b></button>';}).join('')+'</div>':'<div class="pending-selection-layout"><div><div class="selection-grid">'+candidates.map((c,i)=>'<button class="selection-card'+(!c.cardId&&!c.hidden?' text-selection':'')+'" data-action="pending-pick" data-uid="'+escape(c.uid)+'" aria-pressed="false">'+(c.hidden?'<img class="selection-back" src="'+ART['card-back']+'" alt="未公开的卡片">':c.cardId?cardHTML(c.cardId,engine.find(c.uid)?.card):'<span class="text-option-symbol">'+(c.uid==='cancel'?'↶':c.uid==='direct'?'⚔':'◇')+'</span>')+'<b class="pick-number"></b><small>'+escape(c.label||CARDS[c.cardId]?.name||c.uid)+'</small><span>'+escape((c.zone?({hand:'手牌',deck:'卡组',grave:'墓地',extra:'额外卡组',monsters:'场上',extraMonster:'额外怪兽区',overlays:'超量素材',banished:'除外区',spells:'魔陷区'}[c.zone]||c.zone)+' · ':'')+(c.detail||''))+'</span>'+(c.mandatory?'<em class="mandatory-badge">'+(p.kind==='order'?'强制':'必选')+'</em>':'')+'</button>').join('')+'</div>'+(p.sets?.length?'<div class="material-presets"><small>合法组合 · 共 '+p.sets.length+' 种</small>'+p.sets.slice(0,16).map((set,i)=>'<button data-action="pending-combo" data-index="'+i+'">'+set.map(uid=>{const c=candidates.find(c=>c.uid===uid);return escape(c?.label||uid);}).join(' ＋ ')+'</button>').join('')+'</div>':'')+'</div><aside class="pick-inspector" id="pick-inspector"><span>点选卡牌，查看效果与选择顺序。</span></aside></div>')+'<p class="pick-feedback" id="pick-feedback" role="status">'+(isResponse?'请选择要发动的效果。':'需选 '+min+(min===max?'':'—'+max)+' 项 · 已选 0')+'</p>';
     const canPass=isResponse&&!trigger?.mandatory;
-    openModal('pending',escape(I.pendingTitle(p,engine)),isResponse?'YOUR RESPONSE · 把握这一刻':'YOUR CHOICE · 每次选择都算数',body,(canPass?'<button class="secondary-button" data-action="pending-pass">'+(p.kind==='window'?'不连锁':'不发动')+'</button>':p.cancelable?'<button class="secondary-button" data-action="pending-cancel">取消选择</button>':'')+'<button class="primary-button" id="pending-confirm" data-action="pending-confirm" disabled>'+(isResponse?'发动效果':p.kind==='order'?'确认连锁顺序':p.kind==='materials'?'确认素材并召唤':'确认选择')+' '+icon('spark')+'</button>','selection-modal modern-pending');
+    openModal('pending',escape(I.pendingTitle(p,engine)),isResponse?'YOUR RESPONSE · 把握这一刻':'YOUR CHOICE · 每次选择都算数',body,'<button class="peek-field-button" data-action="pending-peek">'+icon('eye')+'查看战局</button>'+(canPass?'<button class="secondary-button" data-action="pending-pass">'+(p.kind==='window'?'不连锁':'不发动')+'</button>':p.cancelable?'<button class="secondary-button" data-action="pending-cancel">取消选择</button>':'')+'<button class="primary-button" id="pending-confirm" data-action="pending-confirm" disabled>'+(isResponse?'发动效果':p.kind==='order'?'确认连锁顺序':p.kind==='materials'?'确认素材并召唤':'确认选择')+' '+icon('spark')+'</button>','selection-modal modern-pending');
     if(candidates.length>30)$('#modal .selection-grid')?.insertAdjacentHTML('beforebegin','<input type="search" id="pending-search" class="selection-search" placeholder="搜索候选卡名…" aria-label="搜索当前候选卡片">');
     if(p.kind==='materials'&&['extra','fusion','ritual','pendulum','link-effect'].includes(p.purpose)){
       const isLink=CARDS[engine.find(p.uid)?.card.id]?.type==='link';
@@ -503,7 +626,7 @@
       writeStorage('duel-sanctuary-stats-v1', stats);
     }
     const token = aiEpoch;
-    animationTimers.push(setTimeout(() => { if (token === aiEpoch && !modal.open && !resultShown) showResult(); }, prefs.reducedMotion ? 100 : engine.state.winKind === 'exodia' ? 3400 : 1400));
+    animationTimers.push(setTimeout(() => { if (token === aiEpoch && !modal.open && !resultShown&&!chainDirector.busy&&currentScreen==='duel') showResult(); }, prefs.reducedMotion ? 100 : engine.state.winKind === 'exodia' ? 3400 : 1400));
   }
   function showSpectateResult() {
     const s = engine.state, draw = s.winner === 'draw', winner = draw ? null : s.winner;
@@ -573,7 +696,7 @@
       }
       if (event.kind === 'set') sound.play('card');
       if (event.kind === 'spell') sound.play('spell');
-      if (event.kind === 'trap') { sound.play('trap'); announce(event.cardId, 'trap'); }
+      if (event.kind === 'trap') { sound.play('trap'); if(!chainDirector.busy)announce(event.cardId, 'trap'); }
       if (event.kind === 'draw') sound.play('draw');
       if (event.kind === 'phase') sound.play('phase');
       if (event.kind === 'turn' && event.owner === 0) {
@@ -610,6 +733,7 @@
   }
   function updatePrefs() {
     document.body.classList.toggle('reduce-motion', !!prefs.reducedMotion);
+    applyDisplayPreferences();
     writeStorage('duel-sanctuary-prefs-v1', prefs); sound.update(); updateSoundButton();
   }
 
@@ -643,10 +767,26 @@
     const action=b.dataset.action;if(!['select-card','none'].includes(action))sound.play('click');
     if(workshop.handle(action,b))return;
     switch(action){
-      case 'duel':if(modal.open)closeModal();else{hidePopover();window.scrollTo({top:0,behavior:prefs.reducedMotion?'instant':'smooth'});}break;
+      case 'home':showHome();break;
+      case 'duel':enterDuel();break;
       case 'library':showLibrary();break;
       case 'help':showHelp();break;
       case 'settings':showSettings();break;
+      case 'music-settings':showSettings();$('#music-library').open=true;$('#music-library').scrollIntoView({block:'center'});break;
+      case 'music-toggle':prefs.music=!prefs.music;updatePrefs();break;
+      case 'music-next':sound.nextTrack();break;
+      case 'font-smaller':case 'font-larger':case 'font-preset':{
+        prefs.fontScale=Experience.clampFont(action==='font-preset'?Number(b.dataset.value):prefs.fontScale+(action==='font-larger'?5:-5));updatePrefs();
+        if($('#font-size-control')){$('#font-size-control').value=prefs.fontScale;$('#font-size-label').textContent=prefs.fontScale+'%';}else showToast('字体大小 · '+prefs.fontScale+'%');break;
+      }
+      case 'response-mode':case 'cycle-response':{
+        prefs.responseMode=action==='cycle-response'?['auto','on','off'][(['auto','on','off'].indexOf(prefs.responseMode)+1)%3]:b.dataset.value;
+        updatePrefs();render();if(prefs.responseMode==='on'&&peekState)resumePending();else scheduleAI();break;
+      }
+      case 'response-help':openModal('response-help','在合适的时机，作出回应。','RESPONSE CONTROL','<div class="response-mode-guide"><h3>AUTO · 自动</h3><p>在对方发动效果、召唤怪兽和攻击时询问。普通盖放、开放时点和自己的连锁会自动略过，减少雷破等泛用陷阱的重复打断。</p><h3>ON · 全部</h3><p>每个合法时机都询问。需要精确控制准备阶段、自己的连锁或特殊战术时使用。</p><h3>OFF · 关闭</h3><p>自动放弃可选的快速响应。已经发动的效果、素材选择与强制处理仍然需要完成。</p><h3>查看战局</h3><p>收起选择面板，查看场上卡牌、墓地和记录。对局保持暂停，返回后保留原来的选择；关闭窗口或按 Esc 不会自动放弃机会。</p></div>','<button class="primary-button" data-action="close-modal">了解了</button>');break;
+      case 'chain-log':showChainLog();break;
+      case 'skip-chain':chainDirector.skip();break;
+      case 'replay-chain':{const links=engine.state.chainHistory.filter(l=>l.chainId===Number(b.dataset.chainId));dismissModal();setScreen('duel');clearTimeout(aiTimer);chainDirector.replay(links);break;}
       case 'new-game':showNewGame();break;
       case 'workshop':workshop.show();break;
       case 'edit-current-deck':workshop.show(engine.state.players[Number(b.dataset.owner)||0].deckId);break;
@@ -673,7 +813,7 @@
       case 'end':takePhase('end');break;
       case 'cancel-intent':clearIntent();break;
       case 'library-filter':libraryFilter=b.dataset.filter;libraryPage=0;renderLibraryResults();break;
-      case 'library-page':libraryPage+=Number(b.dataset.delta);renderLibraryResults();$('#library-grid')?.scrollIntoView({block:'start'});break;
+      case 'library-page':libraryPage+=Number(b.dataset.delta);renderLibraryResults();$('#modal .modal-body')?.scrollTo({top:0});break;
       case 'choose-deck':setupOptions.deck=b.dataset.deck;{const scroll=$('.deck-roster').scrollTop;renderNewGame();$('.deck-roster').scrollTop=scroll;}break;
       case 'choose-first':setupOptions.first=Number(b.dataset.value);renderNewGame();break;
       case 'choose-mode':setupOptions.mode=b.dataset.value==='spectate'?'spectate':'duel';renderNewGame();break;
@@ -689,13 +829,15 @@
       case 'toggle-online-artwork':Art.setOnlineEnabled(!Art.status().onlineEnabled);showSettings();break;
       case 'retry-artwork':Art.retry();showToast('已刷新本地卡图，缺失图片继续使用备用卡面。');break;
       case 'pending-pick':choosePending(b.dataset.uid);break;
+      case 'pending-peek':peekPending();break;
+      case 'pending-resume':resumePending();break;
       case 'pending-combo':{const set=engine.state.pending?.sets?.[Number(b.dataset.index)];if(set&&selectionState){selectionState.selected=[...set];updatePicks();}break;}
       case 'pending-response':{const p=engine.state.pending;if(!p||!selectionState)return;selectionState.response=p.kind==='trigger'?{uid:p.trigger.uid,key:p.trigger.key}:p.options[Number(b.dataset.index)];$$('.response-option').forEach(el=>el.classList.toggle('chosen',el===b));$('#pending-confirm').disabled=!selectionState.response;$('#pick-feedback').textContent='已选择 · '+(I.effectLabel(window.DuelEffects.get(selectionState.response?.key)));break;}
       case 'summon-zone':if(selectionState){selectionState.zone=/^[0-4]$/.test(b.dataset.zone)?Number(b.dataset.zone):b.dataset.zone;updatePicks();}break;
       case 'summon-position':if(selectionState){selectionState.position=b.dataset.position;$$('.summon-position-choice button').forEach(el=>el.classList.toggle('active',el===b));}break;
       case 'pending-confirm':{const p=engine.state.pending;if(!p||!selectionState)return;if(['trigger','window'].includes(p.kind)){const a=selectionState.response;if(!a)return;dismissModal();dispatch({type:'respond',uid:a.uid,key:a.key});}else{const uids=[...selectionState.selected],position=selectionState.position,zone=selectionState.zone;if(!engine.validatePick(p,uids).valid)return;dismissModal();dispatch({type:'choose',uids,position,...(zone!==null?{zone}:{})});}break;}
-      case 'pending-pass':dismissModal();dispatch({type:'pass'});break;
-      case 'pending-cancel':dismissModal();dispatch({type:'choose',cancel:true});break;
+      case 'pending-pass':peekState=null;dismissModal();dispatch({type:'pass'});break;
+      case 'pending-cancel':peekState=null;dismissModal();dispatch({type:'choose',cancel:true});break;
     }
   });
   document.addEventListener('input',event=>{
@@ -703,12 +845,17 @@
     if(event.target.id==='pending-search')filterPending(event.target.value);
     if(event.target.id==='library-search'){libraryQuery=event.target.value;libraryPage=0;renderLibraryResults();}
     if(event.target.id==='volume-control'){prefs.volume=Number(event.target.value)/100;updatePrefs();$('#volume-label').textContent=Math.round(prefs.volume*100)+'%';}
+    if(event.target.id==='music-volume-control'){prefs.musicVolume=Number(event.target.value)/100;updatePrefs();$('#music-volume-label').textContent=Math.round(prefs.musicVolume*100)+'%';}
+    if(event.target.id==='font-size-control'){prefs.fontScale=Experience.clampFont(event.target.value);updatePrefs();$('#font-size-label').textContent=prefs.fontScale+'%';}
   });
   document.addEventListener('change',event=>{
     workshop.change(event.target);
     if(event.target.id==='library-family'){libraryFamily=event.target.value;libraryPage=0;renderLibraryResults();}
     if(event.target.id==='library-year'){libraryYear=event.target.value;libraryPage=0;renderLibraryResults();}
     if(event.target.id==='library-status'){libraryStatus=event.target.value;libraryPage=0;renderLibraryResults();}
+    if(event.target.id==='library-page-size'){const old=prefs.libraryPageSize;prefs.libraryPageSize=Experience.pageSize(event.target.value);libraryPage=Math.floor(libraryPage*old/prefs.libraryPageSize);updatePrefs();renderLibraryResults();$('#modal .modal-body')?.scrollTo({top:0});}
+    if(event.target.id==='library-page-jump'){libraryPage=Math.max(0,Math.floor(Number(event.target.value)||1)-1);renderLibraryResults();$('#modal .modal-body')?.scrollTo({top:0});}
+    if(event.target.id==='card-style'){prefs.cardStyle=event.target.value==='full-art'?'full-art':'classic';updatePrefs();}
     if(event.target.id==='opponent-deck')setupOptions.opponentDeck=event.target.value;
   });
   document.addEventListener('pointerover', event => {
@@ -731,6 +878,7 @@
     const key = event.key.toLowerCase();
     if (key === 'm') { prefs.sound = !prefs.sound; sound.unlock(); updatePrefs(); showToast(prefs.sound ? '决斗音效已开启。' : '决斗音效已关闭。'); return; }
     if (key === 'f') { fullscreen(); return; }
+    if(currentScreen!=='duel'||chainDirector.busy)return;
     if (spectating()) {
       if (key === ' ' && event.target.tagName !== 'BUTTON') { event.preventDefault(); spectateToggle(); }
       else if (key === 'n') { event.preventDefault(); spectateStep(); }
@@ -750,11 +898,12 @@
     const r = modal.getBoundingClientRect();
     if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) closeModal();
   });
-  window.addEventListener('resize', () => {hidePopover();requestAnimationFrame(highlightLinkZones);}, { passive: true });
+  window.addEventListener('resize', () => {hidePopover();requestAnimationFrame(()=>{renderHand();highlightLinkZones();});}, { passive: true });
   window.addEventListener('scroll', event => { if (!event.target.closest?.('#modal')) positionPopover(); }, { passive: true });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) { clearTimeout(aiTimer); if (sound.context?.state === 'running') sound.context.suspend().catch(() => {}); }
     else { if (sound.context && prefs.sound) sound.context.resume().catch(() => {}); scheduleAI(); }
+    sound.update();
   });
 
   const stored = readStorage('duel-sanctuary-save-v2', null) || readStorage('duel-sanctuary-save-v1', null);
@@ -766,12 +915,11 @@
       if (engine.state.winner !== null) finishGame();
     } catch { restored = false; }
   }
-  if (!restored) startGame({ deck: 'early-ritual', opponentDeck: 'early-fusion', first: 0, difficulty: 'standard', seed: 48 });
+  if (!restored) startGame({ deck: 'early-ritual', opponentDeck: 'early-fusion', first: 0, difficulty: 'standard', seed: 48 },true);
   setupAmbient();
-  if (!readStorage('duel-sanctuary-welcomed-v3', false)) {
-    setTimeout(() => { if (!modal.open && !engine.state.pending) showNewGame(); }, 300);
-    writeStorage('duel-sanctuary-welcomed-v3', true);
-  }
+  showHome();
+  writeStorage('duel-sanctuary-welcomed-v3', true);
+  window.addEventListener('duel-music-status',updateMusicStatus);updateMusicStatus();
   const archiveCount = document.querySelector('[data-action="library"] em'); if (archiveCount) archiveCount.textContent = CARD_LIST.filter(c=>!c.notCollectible).length;
   function updateArtStatus() {
     const s=Art.status(),node=$('#art-status');if(!node)return;
@@ -787,6 +935,7 @@
     const scrolls=['#modal .modal-body','.ws-collection','.ws-build','.selection-grid','.deck-roster'].map(selector=>({selector,top:$(selector)?.scrollTop||0}));
     const focused=document.activeElement,focusId=focused?.id,wasLocale=focused?.matches('[data-locale-select]');
     hidePopover();render();
+    if(currentScreen==='home'){$('#home-art').innerHTML='';renderHome();}
     if(current==='library')showLibrary();
     else if(current==='workshop'){workshop.show();if(mobilePreview)$('#ws-inspector')?.classList.add('mobile-open');}
     else if(current==='detail'&&detailCardId)showCardDetail(detailCardId);
@@ -812,6 +961,7 @@
       if($('#pending-search')){$('#pending-search').value=search;filterPending(search);}
     }
     else if(current==='log')showLog();
+    else if(current==='chain-log')showChainLog();
     else if(current==='result')showResult();
     I.apply();
     for(const {selector,top} of scrolls)if($(selector))$(selector).scrollTop=top;
@@ -825,6 +975,8 @@
     get preferences() { return { ...prefs }; },
     get intent() { return intent ? { ...intent } : null; },
     get modalKind() { return modalKind; },
+    get screen(){return currentScreen;},get music(){return sound.status();},get chainPlaying(){return chainDirector.busy;},
+    showHome,enterDuel,showSettings,showChainLog,skipChain:()=>chainDirector.skip(),
     get language(){return I.language;},setLanguage:value=>I.setLanguage(value),
     newGame: options => startGame(options),
     beginSpectate: options => beginSpectate(options),
@@ -837,6 +989,7 @@
     act: dispatch,
     render,
     restore: snapshot => {
+      chainDirector.reset();peekState=null;setScreen('duel');
       aiEpoch++; clearTimeout(aiTimer); dismissModal(); intent = null; selectedUid = null; previewHidden = false; resultShown = false;
       clearTimeout(cinematicTimer); $('#cinematic').classList.remove('visible'); $('#fx-layer').innerHTML = ''; $('#toast-stack').innerHTML = '';
       engine = window.DuelEngine.restore(snapshot); previewId = engine.deckInfo(0).ace; bindEngine(); render(); saveGame(); scheduleAI();

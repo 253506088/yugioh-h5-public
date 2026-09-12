@@ -10,6 +10,7 @@
 
 ## 从这里开始
 
+- [决斗体验升级说明](docs/experience-upgrade.md)：主界面、一屏战斗、字号和分页设置、原声 BGM、卡背卡框、连锁演出及响应模式。
 - [完整操作手册](操作手册)：安装、构建、增量卡图、年度切片、测试与排错。
 - [开发交接文档](交接/1999~2001批次（首次）交接)：本轮成果、架构、已知适配与后续任务。
 - [年度推进方案](游戏王卡片按年切片推进方案)：从下一年继续推进的验收规则。
@@ -38,6 +39,9 @@ macOS / Linux 使用 `npm`。要求 Node.js 22.13 或以上，建议 24 LTS；�
 | `npm run test:v4-simulation` | 预设 / 年度混合牌组模拟 |
 | `npm run test:browser` | 离线规则、组卡、三语切换、移动布局及模拟在线卡图验证 |
 | `npm run art:plan` | 不联网检查当前卡池缺图情况 |
+| `npm run audio:collect` | 获取十首指定动画配乐，核验并复用本地文件 |
+| `npm run art:experience` | 获取预设和连锁示例使用的小型卡图 |
+| `npm run test:experience` | 字号、分页、小屏布局、连锁演出和配乐的专项验证 |
 | `npm run art:collect -- --years 2001` | 手动增量采集 2001 年缺图，实时显示进度 |
 
 原始图片与完整卡面保存在 `assets/official-archive/`；每次构建另存到 `output/v4-builds/`。图片采集之后重新构建即可，无需等待所有图片齐全。
@@ -48,4 +52,4 @@ macOS / Linux 使用 `npm`。要求 Node.js 22.13 或以上，建议 24 LTS；�
 
 文字来源为保留的 YGOPRODeck 资料和 [mycard/ygopro-database](https://github.com/mycard/ygopro-database) 三语快照；语言资料与规则实现相互独立，不在运行时翻译或解析卡片效果。
 
-旧版 README、两代图片层和历史报告保留用于追溯；当前操作以 V4.1 手册为
+旧版 README、两代图片层和历史报告保留用于追溯；当前操作以 V4.1 手册及决斗体验升级说明为准。

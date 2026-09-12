@@ -39,24 +39,32 @@
     </defs>
   </svg>
   <header class="site-header">
-    <button class="brand" data-action="duel" aria-label="返回决斗场">
+    <button class="brand" data-action="home" aria-label="返回主界面">
       <span class="brand-mark"><svg><use href="#i-eye"/></svg></span>
       <span><strong>决斗之境<span class="brand-dot">.</span></strong><small>YU-GI-OH! <span>DUEL SANCTUARY</span></small></span>
     </button>
-    <nav class="main-nav" aria-label="主导航">
-      <button class="nav-item active" data-action="duel"><svg><use href="#i-swords"/></svg><span>决斗场</span></button>
-      <button class="nav-item" data-action="library"><svg><use href="#i-card"/></svg><span>卡牌图鉴</span><em>1367</em></button>
-      <button class="nav-item" data-action="workshop"><svg><use href="#i-spark"/></svg><span>组卡工坊</span></button>
-      <button class="nav-item" data-action="help"><svg><use href="#i-book"/></svg><span>玩法指南</span></button>
-    </nav>
+    <div class="header-location"><button data-action="home"><svg class="icon"><use href="#i-eye"/></svg><span>主界面</span></button><span id="screen-breadcrumb">DUEL SANCTUARY</span></div>
+    <div id="duel-turn-hud" class="duel-turn-hud" aria-live="polite"></div>
     <div class="header-tools">
-      <button class="offline-status" data-action="retry-artwork" title="游戏与已内嵌卡图均可离线使用"><i></i><span id="art-status">本地卡图</span></button>
-      <span class="header-divider"></span>
+      <div class="quick-font" aria-label="字体大小"><button data-action="font-smaller" aria-label="缩小字体">A−</button><button data-action="font-larger" aria-label="放大字体">A＋</button></div>
       <button class="icon-button" data-action="sound" id="sound-button" title="切换音效（M）" aria-label="切换音效"><svg><use href="#i-volume"/></svg></button>
       <button class="icon-button fullscreen-button" data-action="fullscreen" title="全屏（F）" aria-label="全屏"><svg><use href="#i-fullscreen"/></svg></button>
       <button class="icon-button" data-action="settings" title="设置" aria-label="设置"><svg><use href="#i-settings"/></svg></button>
     </div>
   </header>
+
+  <section id="home-screen" class="home-screen" aria-label="主界面">
+    <div class="home-hero">
+      <div class="home-hero-copy"><span class="home-kicker"><i></i> DUEL SANCTUARY / 决斗之境</span><h1>下一场决斗，<br>由你<span>改写。</span></h1><p>相信卡组，也相信每一次抉择。<br>从最初的羁绊，走向属于你的决斗。</p><div class="home-hero-actions"><button class="primary-button" data-action="new-game">开始新的决斗 <svg class="icon"><use href="#i-swords"/></svg></button><button class="home-continue" data-action="duel" id="home-continue">继续决斗 →</button></div><div class="home-stats" id="home-stats"></div></div>
+      <div class="home-art" id="home-art" aria-hidden="true"></div><div class="home-orbit orbit-one" aria-hidden="true"></div><div class="home-orbit orbit-two" aria-hidden="true"></div><span class="home-hero-watermark" aria-hidden="true">THE HEART<br>OF THE CARDS</span>
+    </div>
+    <nav class="home-destinations" aria-label="主导航">
+      <button class="home-destination archive-destination" data-action="library"><span class="destination-index">01 / ARCHIVE</span><svg class="icon"><use href="#i-card"/></svg><h2>卡牌图鉴</h2><p>每一张卡，都有它的灵魂。</p><span class="destination-tail"><b id="home-card-count">1,653 张卡片</b><i>↗</i></span></button>
+      <button class="home-destination workshop-destination" data-action="workshop"><span class="destination-index">02 / ATELIER</span><svg class="icon"><use href="#i-spark"/></svg><h2>卡组工坊</h2><p>构筑你的下一场胜利。</p><span class="destination-tail"><b>自由构筑 · 预设卡组</b><i>↗</i></span></button>
+      <button class="home-destination guide-destination" data-action="help"><span class="destination-index">03 / HANDBOOK</span><svg class="icon"><use href="#i-book"/></svg><h2>玩法指南</h2><p>从第一次召唤，到无限可能。</p><span class="destination-tail"><b>召唤规则 · 连锁时机</b><i>↗</i></span></button>
+    </nav>
+    <div class="home-bottom"><span><i class="live-dot"></i> 进度自动保存 · 随时回来继续</span><button data-action="settings">个性化你的决斗 <svg class="icon"><use href="#i-settings"/></svg></button></div>
+  </section>
 
   <main class="app-main">
     <div class="page-heading">
@@ -76,8 +84,9 @@
       </aside>
 
       <section class="arena-column" aria-label="决斗场">
-        <div class="arena-caption"><span><i class="live-dot"></i> DUEL IN PROGRESS</span><span id="match-label">青眼的觉醒 <b>VS</b> 黑魔术的传承</span><button class="tiny-button" data-action="help" title="查看规则" aria-label="查看规则"><svg><use href="#i-help"/></svg></button></div>
+        <div class="arena-caption"><span><i class="live-dot"></i> DUEL IN PROGRESS</span><span id="match-label">青眼的觉醒 <b>VS</b> 黑魔术的传承</span><div class="arena-tools"><button class="tiny-button" data-action="chain-log" title="连锁记录" aria-label="连锁记录">∞</button><button class="tiny-button" data-action="log" title="决斗记录" aria-label="决斗记录"><svg><use href="#i-history"/></svg></button><button class="tiny-button" data-action="help" title="查看规则" aria-label="查看规则"><svg><use href="#i-help"/></svg></button></div></div>
         <div class="arena" id="arena">
+          <div id="chain-theater" class="chain-theater" hidden></div>
           <div id="opponent-bar" class="duelist-bar opponent-bar"></div>
           <div id="chain-status" class="chain-status" aria-live="polite"></div>
           <div class="game-field" id="duel-board">
@@ -112,6 +121,8 @@
 
       <aside class="right-column">
         <section class="panel turn-panel" id="turn-panel" aria-label="回合控制"></section>
+        <section class="panel response-control" aria-label="连锁响应设置"><div class="response-control-title"><span>连锁响应</span><button class="tiny-button" data-action="response-help" aria-label="响应模式说明">?</button></div><div class="response-mode-switch" id="response-mode-switch"></div><p id="response-mode-note"></p></section>
+        <section class="panel chain-panel"><div class="panel-heading"><span>连锁轨迹</span><button class="tiny-button" data-action="chain-log" title="查看连锁记录">↗</button></div><div id="chain-timeline" class="chain-timeline"></div></section>
         <section class="panel log-panel">
           <div class="panel-heading"><span><svg><use href="#i-history"/></svg>决斗记录</span><button class="tiny-button" data-action="log" title="完整记录" aria-label="查看完整决斗记录">↗</button></div>
           <div id="duel-log" class="duel-log" role="log" aria-live="polite" aria-relevant="additions"></div>
@@ -121,7 +132,9 @@
       </aside>
     </div>
   </main>
-  <footer class="site-footer"><span id="save-status"><i></i>进度自动保存</span><span>8000 LP <b>·</b> 13 PRESETS <b>·</b> ONE DESTINY</span><span>高桥和希 原作 <b>／</b> 非官方同人致敬</span></footer>
+  <footer class="site-footer"><span id="save-status"><i></i>进度自动保存</span><button class="offline-status" data-action="retry-artwork"><i></i><span id="art-status">本地卡图</span></button><span>高桥和希 原作 <b>／</b> 非官方同人致敬</span></footer>
+  <div class="music-dock" id="music-dock"><button data-action="music-toggle" id="music-toggle" aria-label="切换背景音乐">♫</button><button data-action="music-settings" class="music-track"><small id="music-scene">SOUNDTRACK</small><span id="music-title">配乐已就绪</span></button><button data-action="music-next" id="music-next" aria-label="下一首战斗配乐">↠</button></div>
+  <div id="response-peek-bar" class="response-peek-bar" hidden></div>
   <div id="mobile-turn-control" class="mobile-turn-control" aria-label="便捷回合控制"></div>
   <div id="toast-stack" class="toast-stack" role="status" aria-live="polite"></div>
   <div id="card-popover" class="card-popover" hidden></div>

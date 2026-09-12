@@ -110,8 +110,8 @@
   if(a.cardActivation&&d.type==='spell'&&this.rawEarly('Spell Canceller').length)return false;
   return true;
  });
- extend('earlyNegatesLink',function(prior,link){
-  if(prior.call(this,link))return true;
+ extend('earlyNegatesLink',function(prior,link,probe=false){
+  if(prior.call(this,link,probe))return true;
   const f=this.find(link.uid);
   if(link.source.effectType==='spell'&&f&&['spells','fieldSpell'].includes(f.zone)&&this.rawEarly('Spell Canceller').length)return true;
   return false;

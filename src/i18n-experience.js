@@ -1,0 +1,58 @@
+(function(root){
+  'use strict';
+  const entries=[
+    ['左右滑动查看手牌','Swipe to browse your hand','スワイプして手札を確認'],
+    ['筛选与搜索','Search & filters','検索と絞り込み'],
+    ['显示筛选结果','Show results','結果を表示'],
+    ['未能适用','Not applied','適用できず'],['来源离场，未能适用','Source left the field; not applied','発動元がフィールドを離れたため適用できず'],
+    ['抽卡','DRAW','ドロー'],['准备','STANDBY','準備'],['主要 1','MAIN 1','メイン 1'],['战斗','BATTLE','バトル'],['主要 2','MAIN 2','メイン 2'],['结束','END','終了'],
+    ['返回主界面','Back to home','ホームへ戻る'],['主界面','Home','ホーム'],['卡组工坊','Deck workshop','デッキ工房'],
+    ['下一场决斗，','Your next duel,','次のデュエル、'],['由你','make it','君が'],['改写。','your own.','切り拓く。'],
+    ['相信卡组，也相信每一次抉择。','Trust your deck. Trust your decisions.','デッキを信じ、一つひとつの選択を信じよう。'],
+    ['从最初的羁绊，走向属于你的决斗。','Let your first bond begin your next story.','最初の絆から、自分だけのデュエルへ。'],
+    ['开始新的决斗','Start a new duel','新しいデュエル'],['继续决斗','Continue duel','デュエルを続ける'],['返回战场','Back to the field','フィールドに戻る'],
+    ['自由构筑','Build freely','自由に構築'],['召唤规则','Summoning rules','召喚ルール'],['连锁时机','Chain timing','チェーンのタイミング'],
+    ['进度自动保存','Progress saved automatically','進行は自動保存'],['随时回来继续','Continue whenever you like','いつでも再開'],
+    ['个性化你的决斗','Make the duel yours','自分好みのデュエルに'],['三千年的羁绊 · 此刻回应','An ancient bond. A new beginning.','三千年の絆が、今応える'],
+    ['我方','You','自分'],['对方','Opponent','相手'],['我方回合','Your turn','自分のターン'],['对方回合','Opponent turn','相手のターン'],
+    ['连锁响应','Chain response','チェーン確認'],['响应模式说明','Response mode guide','確認モードの説明'],['自动','Auto','自動'],['全部','All','全て'],['关闭','Off','オフ'],
+    ['关注对方发动、召唤和攻击。','Ask on opponent effects, summons and attacks.','相手の発動・召喚・攻撃で確認します。'],
+    ['每个合法响应时机都询问。','Ask at every legal response window.','全ての合法なタイミングで確認します。'],
+    ['自动放弃可选响应，强制处理保留。','Pass optional responses; mandatory choices remain.','任意の応答を省略し、強制処理は行います。'],
+    ['连锁轨迹','Chain timeline','チェーン履歴'],['连锁记录','Chain history','チェーン記録'],['查看连锁记录','View chain history','チェーン記録を見る'],
+    ['后发动先处理','Last activated, first resolved','後から発動した効果から処理'],['后发动，先处理','Last activated, first resolved','後から発動した効果から処理'],
+    ['连锁将在这里展开','Chains unfold here','チェーンがここに表示されます'],['双方编号','Both players numbered','双方のチェーン番号'],['逆序结算','Reverse resolution','逆順で処理'],
+    ['等待结算','Waiting','処理待ち'],['正在处理','Resolving','処理中'],['处理完成','Resolved','処理済み'],['效果无效','Effect negated','効果無効'],['来源失效','Source unavailable','発動元が不在'],
+    ['目标丢失','Target lost','対象不在'],['目标已离场，相关部分无法处理','Target left its location; the affected part cannot apply','対象が元の場所を離れたため、該当部分を処理できません'],
+    ['来源已离场，效果未能适用','Source left the field; the effect cannot apply','発動元がフィールドを離れ、効果を適用できません'],
+    ['发动或效果被无效','Activation or effect negated','発動または効果が無効'],['来自连锁','Caused by Chain','チェーンによる'],
+    ['每一环，都清晰可见。','Every link, clearly understood.','一つひとつのチェーンを、明確に。'],['大号先处理，1 最后处理','Highest number first. Chain 1 resolves last.','大きい番号から処理し、1を最後に処理'],
+    ['回放演出','Replay','演出を再生'],['所选目标','Selected target','選んだ対象'],['离开原位置','left its original location','元の場所を離れた'],
+    ['还没有连锁记录。发动效果后，双方的连锁与处理结果会保存在这里。','No chains yet. Activated effects and both players’ results will appear here.','まだ記録がありません。発動した効果と双方の処理結果がここに残ります。'],
+    ['双方连锁','BOTH PLAYERS','双方のチェーン'],['连锁构筑','Building the chain','チェーン構築'],['连锁处理完毕','Chain complete','チェーン処理完了'],['连锁结算','Resolving chain','チェーン処理'],['跳过演出','Skip animation','演出をスキップ'],
+    ['查看战局','View field','フィールドを見る'],['决策已保留','Choice preserved','選択を保持'],['战局暂停','Duel paused','デュエル停止中'],['返回选择','Return to choice','選択に戻る'],['本次不连锁','Pass this response','今回は発動しない'],
+    ['战局已暂停，查看后再决定。','The duel is paused. Inspect the field before deciding.','デュエルは停止中です。状況を確認してから選べます。'],
+    ['查看发动卡片的效果','Read the activated card','発動したカードの効果を見る'],['对方发动效果','Opponent activated an effect','相手が効果を発動'],['我方发动效果','You activated an effect','自分が効果を発動'],
+    ['攻击目标','Attack target','攻撃対象'],['即将召唤','Summon attempt','召喚の直前'],['召唤成功','Summoned','召喚成功'],['可以在这个时点发动合法的快速效果。','Legal quick effects can be activated now.','このタイミングで合法なクイック効果を発動できます。'],
+    ['诱发效果','Trigger effect','誘発効果'],['响应时机','Response window','応答タイミング'],['可以发动快速效果。','A quick effect can be activated.','クイック効果を発動できます。'],
+    ['每页','Per page','表示件数'],['图鉴每页张数','Cards per archive page','図鑑の表示件数'],['工坊每页张数','Cards per workshop page','工房の表示件数'],['跳转图鉴页码','Go to archive page','図鑑のページ指定'],['跳转工坊页码','Go to workshop page','工房のページ指定'],
+    ['阅读与显示','Reading and display','文字と表示'],['字体大小','Text size','文字サイズ'],['字体独立缩放，战场保持一屏。','Scale the text while keeping the field in one screen.','文字サイズを変えてもフィールドは一画面に収まります。'],
+    ['舒适','Comfort','快適'],['大字','Large','大'],['超大','Extra large','特大'],['调整后会自动保存，卡片效果与操作文字同步放大。','Saved automatically. Card effects and controls scale together.','自動保存され、カード効果と操作の文字が拡大されます。'],
+    ['卡面样式','Card appearance','カード表示'],['经典卡框与全图展示，随时切换。','Switch between classic frames and full artwork.','通常の枠とフルアートを切り替えられます。'],['经典卡框','Classic frames','クラシック枠'],['全图卡面','Full artwork','フルアート'],
+    ['动画原声配乐','Anime soundtrack','アニメのサウンドトラック'],['随场景切换；战斗曲目轮流随机，不连续重复。','Music follows the scene. Duel tracks shuffle without consecutive repeats.','画面に合わせて切り替わり、デュエル曲は連続重複なしでシャッフルします。'],
+    ['配乐音量','Music volume','BGM音量'],['与召唤、攻击等音效分别调整。','Adjust separately from summon and attack sounds.','召喚や攻撃の効果音とは別に調節できます。'],['原声曲目','Soundtrack list','収録曲'],['战斗前','Before the duel','デュエル前'],['决斗中','During the duel','デュエル中'],['已就绪','Ready','準備完了'],['音源缺失','Missing audio','音源なし'],
+    ['配乐已就绪','Soundtrack ready','BGM準備完了'],['切换背景音乐','Toggle music','BGMを切り替え'],['下一首战斗配乐','Next duel track','次のデュエル曲'],['已关闭','Off','オフ'],['点击播放','Click to play','クリックで再生'],['音源不可用','Audio unavailable','音源を再生できません'],
+    ['在合适的时机，作出回应。','Respond at the right moment.','最適なタイミングで応答する。'],['了解了','Got it','了解'],
+    ['在对方发动效果、召唤怪兽和攻击时询问。普通盖放、开放时点和自己的连锁会自动略过，减少雷破等泛用陷阱的重复打断。','Ask when the opponent activates an effect, summons or attacks. Ordinary sets, open windows and your own chains are skipped to reduce interruptions from generic traps.','相手の発動・召喚・攻撃で確認します。通常のセット、開かれたタイミング、自分のチェーンは省略し、汎用罠による割り込みを減らします。'],
+    ['每个合法时机都询问。需要精确控制准备阶段、自己的连锁或特殊战术时使用。','Ask at every legal timing. Use this for precise control during standby, your own chains or special tactics.','全ての合法なタイミングで確認します。スタンバイフェイズや自分のチェーンを細かく操作する場合に使用します。'],
+    ['自动放弃可选的快速响应。已经发动的效果、素材选择与强制处理仍然需要完成。','Automatically pass optional quick responses. Activated effects, material selections and mandatory choices still need to be completed.','任意のクイック応答を自動で見送ります。発動済みの効果、素材選択、強制処理は引き続き行います。'],
+    ['收起选择面板，查看场上卡牌、墓地和记录。对局保持暂停，返回后保留原来的选择；关闭窗口或按 Esc 不会自动放弃机会。','Fold the panel to inspect cards, graveyards and logs. The duel stays paused and keeps your selections. Closing the panel or pressing Esc never passes your response.','選択画面を閉じてカード・墓地・記録を確認できます。デュエルは停止し、選択も保持されます。閉じる操作やEscキーで発動機会を失うことはありません。']
+  ];
+  for(const [zh,en,ja] of entries)root.DuelUITranslations.messages[zh]={en,ja};
+  root.DuelUITranslations.patterns.push(
+    ['^继续决斗 · 第 (\\d+) 回合 →$','Continue · Turn $1 →','再開 · ターン $1 →'],
+    ['^([\\d,]+) 张卡片$','$1 cards','$1 枚'],['^(\\d+) 张$','$1 cards','$1 枚'],['^(\\d+) 套预设$','$1 presets','$1 個のプリセット'],['^(\\d+) 种召唤方式$','$1 summon types','$1 種類の召喚'],
+    ['^被连锁 (\\d+) 无效$','Negated by Chain $1','チェーン $1 により無効'],['^响应 (AUTO|ON|OFF)$','Response $1','確認 $1'],
+    ['^原声曲目 · (\\d+) 首$','Soundtrack · $1 tracks','サウンドトラック · $1 曲']
+  );
+})(globalThis);

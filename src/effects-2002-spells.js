@@ -127,12 +127,12 @@
  });
  mark('Rod of the Mind\'s Eye','装备怪兽给予的战斗伤害固定为1000');
  X.equip('Rod of Silence - Kay\'est',{def:500});
- extend('earlyNegatesLink',function(prior,link){
-  if(prior.call(this,link))return true;
+ extend('earlyNegatesLink',function(prior,link,probe=false){
+  if(prior.call(this,link,probe))return true;
   if(link.source.effectType!=='spell'||CARDS[link.sourceId]?.type!=='spell')return false;
   const targets=Object.values(link.targetMeta||{}).flatMap(x=>Object.keys(x)).map(uid=>this.find(uid)).filter(f=>f&&H.fieldZone(f.zone));
   for(const t of targets)for(const eq of this.activeEquip(t.card)){
-   if(is(eq,'Rod of Silence - Kay\'est')){if(this.find(link.uid))this.destroy(link.uid,{id:eq.id,uid:eq.uid,owner:this.find(eq.uid).owner,effectType:'spell'});return true;}
+   if(is(eq,'Rod of Silence - Kay\'est')){if(!probe&&this.find(link.uid))this.destroy(link.uid,{id:eq.id,uid:eq.uid,owner:this.find(eq.uid).owner,effectType:'spell'});return true;}
   }
   return false;
  });

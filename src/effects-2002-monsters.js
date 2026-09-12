@@ -293,16 +293,16 @@
  E.on('end-phase',(e,v)=>{for(const f of e.refs(v.owner,['monsters','extraMonster']))if(is(f.card,'Berserk Dragon')&&f.card.faceUp)e.modify(f.card.uid,'atk','add',-500,null,{id:I('Berserk Dragon'),owner:v.owner,effectType:'monster'});});
  C('Fushioh Richie').specialOnly='dezard';rules('Fushioh Richie',{},'解放达成条件的大德法师特殊召唤；可每回合变回里侧；指定它的魔法陷阱无效并破坏');
  onFlip('Fushioh Richie',{summons:true,resolve:(e,c)=>choose(e,c,'可以特殊召唤墓地的不死族',H.specialable(e,c.owner,grave(e,c.owner,m=>monster(m)&&e.race(m)==='不死族'),'revive'),0,1,'early-special',{via:'revive',role:'special'})});
- extend('earlyNegatesLink',function(prior,link){
-  if(prior.call(this,link))return true;
+ extend('earlyNegatesLink',function(prior,link,probe=false){
+  if(prior.call(this,link,probe))return true;
   const targets=Object.values(link.targetMeta||{}).flatMap(x=>Object.keys(x)).map(uid=>this.find(uid)).filter(f=>f&&H.fieldZone(f.zone)&&f.card.faceUp&&!this.negated(f.card));
   for(const t of targets){
    if(is(t.card,'Great Dezard')&&(t.card.dezardKills||0)>=1&&['spell','trap'].includes(link.source.effectType)){
-    if(this.find(link.uid))this.destroy(link.uid,{id:t.card.id,uid:t.card.uid,owner:t.owner,effectType:'monster'});
+    if(!probe&&this.find(link.uid))this.destroy(link.uid,{id:t.card.id,uid:t.card.uid,owner:t.owner,effectType:'monster'});
     return true;
    }
    if(is(t.card,'Fushioh Richie')&&['spell','trap'].includes(link.source.effectType)){
-    if(this.find(link.uid))this.destroy(link.uid,{id:t.card.id,uid:t.card.uid,owner:t.owner,effectType:'monster'});
+    if(!probe&&this.find(link.uid))this.destroy(link.uid,{id:t.card.id,uid:t.card.uid,owner:t.owner,effectType:'monster'});
     return true;
    }
    if(is(t.card,'Chaos Command Magician')&&CARDS[link.sourceId]?.type==='monster')return true;

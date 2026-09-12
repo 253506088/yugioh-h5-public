@@ -1,0 +1,1720 @@
+{
+  "provider": "YGOPRODeck",
+  "cards": [
+    {
+      "id": "blue-eyes",
+      "imageId": 89631139,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/89631139.jpg",
+      "path": "assets/duel/art/blue-eyes.webp",
+      "sha256": "6cc8795ad8f085700309f28c973a9d2bf889071afc7a85fb44a7b40ce363ed18"
+    },
+    {
+      "id": "alexandrite",
+      "imageId": 43096270,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/43096270.jpg",
+      "path": "assets/duel/art/alexandrite.webp",
+      "sha256": "6625565bb3ba9a7ae545b385374165b7c1532d8084dc97788cc569d413ae2b20"
+    },
+    {
+      "id": "luster-dragon",
+      "imageId": 11091375,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/11091375.jpg",
+      "path": "assets/duel/art/luster-dragon.webp",
+      "sha256": "327cf961d0241be323e3b28fa74f399db2a42bcb0d1026c807ee150f4af364de"
+    },
+    {
+      "id": "battle-ox",
+      "imageId": 5053103,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/5053103.jpg",
+      "path": "assets/duel/art/battle-ox.webp",
+      "sha256": "5d385d3f17fe8b02fa7c346f2d3ffd80f360f9278d185266bc97e18db932365b"
+    },
+    {
+      "id": "la-jinn",
+      "imageId": 97590747,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/97590747.jpg",
+      "path": "assets/duel/art/la-jinn.webp",
+      "sha256": "7c03503454685d8d21116510b3110b2f50437212581a265a67e52bb18300a882"
+    },
+    {
+      "id": "kaibaman",
+      "imageId": 34627841,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/34627841.jpg",
+      "path": "assets/duel/art/kaibaman.webp",
+      "sha256": "3b5e743632d7afd9654f168857017c8ce473cbeaa5c43d411a6254975d10cafb"
+    },
+    {
+      "id": "spear-dragon",
+      "imageId": 31553716,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/31553716.jpg",
+      "path": "assets/duel/art/spear-dragon.webp",
+      "sha256": "202abe46227dd62917769251046ce145d71972b82bc0be4edf3e16442e52cf03"
+    },
+    {
+      "id": "thunder-dragon",
+      "imageId": 31786629,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/31786629.jpg",
+      "path": "assets/duel/art/thunder-dragon.webp",
+      "sha256": "b4e703e2074b56078008469e1b0009d28a68d2f8a94507dd38b7935a527c340d"
+    },
+    {
+      "id": "pot-of-greed",
+      "imageId": 55144522,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/55144522.jpg",
+      "path": "assets/duel/art/pot-of-greed.webp",
+      "sha256": "6f0c5dc1831ddaef545a8dd8488a7ec766f05a16c3ff313052128a9e150560da"
+    },
+    {
+      "id": "monster-reborn",
+      "imageId": 83764719,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/83764719.jpg",
+      "path": "assets/duel/art/monster-reborn.webp",
+      "sha256": "5d377a058a11baacdfba06b646b2452c3234a894ccff97223b729152dea90dc9"
+    },
+    {
+      "id": "raigeki",
+      "imageId": 12580477,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/12580477.jpg",
+      "path": "assets/duel/art/raigeki.webp",
+      "sha256": "4e968b13a55010cbc28a4a81b6eec61437e566564a14e87b81afddc183630ea2"
+    },
+    {
+      "id": "dark-hole",
+      "imageId": 53129443,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/53129443.jpg",
+      "path": "assets/duel/art/dark-hole.webp",
+      "sha256": "b3f7f9943d95a66fc459cc7470d5cf0bbf726d866858c1a894724db6288b88ce"
+    },
+    {
+      "id": "mst",
+      "imageId": 5318639,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/5318639.jpg",
+      "path": "assets/duel/art/mst.webp",
+      "sha256": "731b1bad90282edc1073c6aaa982478c36a11d8fbd379825eac4154fff81969d"
+    },
+    {
+      "id": "swords",
+      "imageId": 72302403,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/72302403.jpg",
+      "path": "assets/duel/art/swords.webp",
+      "sha256": "33cb6d71630c6fdd72ddd36fc7a53e035efb2c41a604d232ddfe1c44dfa877f4"
+    },
+    {
+      "id": "polymerization",
+      "imageId": 24094653,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/24094653.jpg",
+      "path": "assets/duel/art/polymerization.webp",
+      "sha256": "3012b300b3e6dabf6d06d47e73d8b8937e6434e659cf11fc4617186632812b80"
+    },
+    {
+      "id": "ancient-rules",
+      "imageId": 10667321,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/10667321.jpg",
+      "path": "assets/duel/art/ancient-rules.webp",
+      "sha256": "6a144990ee5f74d418d1f0c1115ad8b7e423d0892ff324d0bb7668a96080f202"
+    },
+    {
+      "id": "mirror-force",
+      "imageId": 44095762,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/44095762.jpg",
+      "path": "assets/duel/art/mirror-force.webp",
+      "sha256": "5430576fefa07328249e5b13788d14d839c4103054f5c3bbcf234de77c010c5d"
+    },
+    {
+      "id": "magic-cylinder",
+      "imageId": 62279055,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/62279055.jpg",
+      "path": "assets/duel/art/magic-cylinder.webp",
+      "sha256": "b21ccf5379d7df80b05c06737b814f736de96d3bbd8fe4a377a232fe36483c39"
+    },
+    {
+      "id": "trap-hole",
+      "imageId": 4206964,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/4206964.jpg",
+      "path": "assets/duel/art/trap-hole.webp",
+      "sha256": "fbda0d2f82440bfae099b2a8a07a635e308c4b8af92ab3626d17f0ad209487c9"
+    },
+    {
+      "id": "negate-attack",
+      "imageId": 14315573,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/14315573.jpg",
+      "path": "assets/duel/art/negate-attack.webp",
+      "sha256": "726be216ed81e0e9c5c5accfc32e1c2b282696622c49a251e43893051b6ad14e"
+    },
+    {
+      "id": "ultimate-dragon",
+      "imageId": 23995346,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/23995346.jpg",
+      "path": "assets/duel/art/ultimate-dragon.webp",
+      "sha256": "9a78843922766c0b467d0b467c113e415e54378784a821fe2c18c1e15045fbf1"
+    },
+    {
+      "id": "twin-thunder",
+      "imageId": 54752875,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/54752875.jpg",
+      "path": "assets/duel/art/twin-thunder.webp",
+      "sha256": "7c14176ce64b20dc4663b587e99bff0f7fa5ff6965ae13e7de4ae4db794ba718"
+    },
+    {
+      "id": "dark-magician",
+      "imageId": 46986414,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/46986414.jpg",
+      "path": "assets/duel/art/dark-magician.webp",
+      "sha256": "7fcbf79f79864e150f55ce4657a3718d8be51b988c8afc7cfa2daf304c824654"
+    },
+    {
+      "id": "dark-girl",
+      "imageId": 38033121,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/38033121.jpg",
+      "path": "assets/duel/art/dark-girl.webp",
+      "sha256": "fdc3f25caaeb31f53a5a1cd00670d4ef40a2f9bfa101712efe7c71ceb67076f8"
+    },
+    {
+      "id": "skilled-magician",
+      "imageId": 73752131,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/73752131.jpg",
+      "path": "assets/duel/art/skilled-magician.webp",
+      "sha256": "bcb1eccd0f65cdb398c18d54d36f851270a626167ed3da853263e91e986933d6"
+    },
+    {
+      "id": "breaker",
+      "imageId": 71413901,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/71413901.jpg",
+      "path": "assets/duel/art/breaker.webp",
+      "sha256": "3280b2d5ac7a3876bebfa78703af7bda448d51859dd7470e168b65c798ed91fd"
+    },
+    {
+      "id": "celtic-guardian",
+      "imageId": 91152256,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/91152256.jpg",
+      "path": "assets/duel/art/celtic-guardian.webp",
+      "sha256": "a9b537cca3e834d7a5f5c35eb1dd4a209150488de7b0f068eae3b9adfdbd5b4b"
+    },
+    {
+      "id": "stone-soldier",
+      "imageId": 13039848,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/13039848.jpg",
+      "path": "assets/duel/art/stone-soldier.webp",
+      "sha256": "a7e81a19afea96bb9e0bdb909ff0e83b437e2e17dd551899bbdb1b43327af11b"
+    },
+    {
+      "id": "summoned-skull",
+      "imageId": 70781052,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/70781052.jpg",
+      "path": "assets/duel/art/summoned-skull.webp",
+      "sha256": "5f08a2f492c571ecf5d72c8fb10eebf8c2a879bc200f41a9b24eccfb9d4cef17"
+    },
+    {
+      "id": "gaia",
+      "imageId": 6368038,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/6368038.jpg",
+      "path": "assets/duel/art/gaia.webp",
+      "sha256": "a901760cecaaabb72ebbfb45245cbc082a2f9efa641ecbb54bde980faf4e0235"
+    },
+    {
+      "id": "curse-dragon",
+      "imageId": 28279543,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/28279543.jpg",
+      "path": "assets/duel/art/curse-dragon.webp",
+      "sha256": "2199f5695da129a66ba734c36f73c2d6e3ffd8750ee444cdebda398401528bd6"
+    },
+    {
+      "id": "kuriboh",
+      "imageId": 40640057,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/40640057.jpg",
+      "path": "assets/duel/art/kuriboh.webp",
+      "sha256": "379fb4783a177a7cc703275f40962de780831913e80bf4adb6d2419bb364b0c7"
+    },
+    {
+      "id": "fissure",
+      "imageId": 66788016,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/66788016.jpg",
+      "path": "assets/duel/art/fissure.webp",
+      "sha256": "b486d197573704cd96855b4b95b659a722b6aa6f261da8b367a80d90b2ae5845"
+    },
+    {
+      "id": "dian-keto",
+      "imageId": 84257640,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/84257640.jpg",
+      "path": "assets/duel/art/dian-keto.webp",
+      "sha256": "74b7ed8479843efe238b32c3d55c453e455433ac1b076cd1f42614c2157fa3e9"
+    },
+    {
+      "id": "dragon-champion",
+      "imageId": 66889139,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/66889139.jpg",
+      "path": "assets/duel/art/dragon-champion.webp",
+      "sha256": "8d19a57ef3cf26ce76b919b8d76350aa84f6fb0ef057dde048896cf905f86575"
+    },
+    {
+      "id": "hero-sunrise",
+      "imageId": 22908820,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/22908820.jpg",
+      "path": "assets/duel/art/hero-sunrise.webp",
+      "sha256": "b9214007c16769ca54769746ab02748bd38f9bd7a97517ccf3b3da50a15468f6"
+    },
+    {
+      "id": "hero-stratos",
+      "imageId": 40044918,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/40044918.jpg",
+      "path": "assets/duel/art/hero-stratos.webp",
+      "sha256": "bc964c57d1e24827377d1e8909e6bb99509e34a88c957e95621ad1326ecf3eec"
+    },
+    {
+      "id": "hero-shadow-mist",
+      "imageId": 50720316,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/50720316.jpg",
+      "path": "assets/duel/art/hero-shadow-mist.webp",
+      "sha256": "e5d8c8a814323e21a774c7fc2a24aef1bdbb50bb94ea7a7d54591349bf184533"
+    },
+    {
+      "id": "hero-solid-soldier",
+      "imageId": 45195443,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/45195443.jpg",
+      "path": "assets/duel/art/hero-solid-soldier.webp",
+      "sha256": "fdd9992a9d1887d9c812edc8cf0b60e805d274eb4c7f4d0f7d42cb8c36df667d"
+    },
+    {
+      "id": "hero-liquid-soldier",
+      "imageId": 59392529,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/59392529.jpg",
+      "path": "assets/duel/art/hero-liquid-soldier.webp",
+      "sha256": "7e15bf6da6c71c62a4a2fd28a37840b746757912ecfec2f7c4d8a86817c795a2"
+    },
+    {
+      "id": "hero-blazeman",
+      "imageId": 63060238,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/63060238.jpg",
+      "path": "assets/duel/art/hero-blazeman.webp",
+      "sha256": "2535c860cc1002416f8c39b9dea0bc4c7e7e60b88466e14e4908bb94e145de70"
+    },
+    {
+      "id": "hero-honest-neos",
+      "imageId": 14124483,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/14124483.jpg",
+      "path": "assets/duel/art/hero-honest-neos.webp",
+      "sha256": "3a06ed4883da7b4c6673422fa4b939fb0396473b91ba902299632e04585c9cab"
+    },
+    {
+      "id": "hero-neos",
+      "imageId": 89943723,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/89943723.jpg",
+      "path": "assets/duel/art/hero-neos.webp",
+      "sha256": "c076d9ec98088dfe0b9a413743aa5381bcb6df2f5f9a839627689b727fce9ef1"
+    },
+    {
+      "id": "hero-avian",
+      "imageId": 21844576,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/21844576.jpg",
+      "path": "assets/duel/art/hero-avian.webp",
+      "sha256": "f90b56fecbd6825574382f3f5a7ed6d63e17b672ab75978a23f6879750219660"
+    },
+    {
+      "id": "hero-burstinatrix",
+      "imageId": 58932615,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/58932615.jpg",
+      "path": "assets/duel/art/hero-burstinatrix.webp",
+      "sha256": "afceaf6cc710aa9f2913a46e72594d9f795f4aec746b7300c486a97b22f6f5b1"
+    },
+    {
+      "id": "hero-sparkman",
+      "imageId": 20721928,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/20721928.jpg",
+      "path": "assets/duel/art/hero-sparkman.webp",
+      "sha256": "15952b797333d11ca8465e1502b861db0dfa14962c1c04478d7703a513c4626e"
+    },
+    {
+      "id": "hero-clayman",
+      "imageId": 84327329,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/84327329.jpg",
+      "path": "assets/duel/art/hero-clayman.webp",
+      "sha256": "9f7fc34cc49231d333af479ab74806772b0170cdf9b947fbf74bf5682d32195a"
+    },
+    {
+      "id": "hero-bubbleman",
+      "imageId": 79979666,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/79979666.jpg",
+      "path": "assets/duel/art/hero-bubbleman.webp",
+      "sha256": "60fbe7b70a370c32c92261771bba44c1df3a911874c6630adde73aa86adb3eed"
+    },
+    {
+      "id": "e-emergency-call",
+      "imageId": 213326,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/213326.jpg",
+      "path": "assets/duel/art/e-emergency-call.webp",
+      "sha256": "d2291d50b186a7c17bdbce295e05369ef9e2992425df2ba65e9263e7b854b0c2"
+    },
+    {
+      "id": "reinforcement-army",
+      "imageId": 32807846,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/32807846.jpg",
+      "path": "assets/duel/art/reinforcement-army.webp",
+      "sha256": "6e0a8614cb9c4a8713e4fda37ac4aa4bd0beb9e52c0887755c0e518eefdafd31"
+    },
+    {
+      "id": "miracle-fusion",
+      "imageId": 45906428,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/45906428.jpg",
+      "path": "assets/duel/art/miracle-fusion.webp",
+      "sha256": "cfb82f4f5fdbd4495b769a31f568ae8f541def800ec4228185660ba437bb7b4e"
+    },
+    {
+      "id": "mask-change",
+      "imageId": 21143940,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/21143940.jpg",
+      "path": "assets/duel/art/mask-change.webp",
+      "sha256": "1a0e0e02031de593a0d58e13e19683414d5aaa666acf29668e737e5c85c3036d"
+    },
+    {
+      "id": "a-hero-lives",
+      "imageId": 8949584,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/8949584.jpg",
+      "path": "assets/duel/art/a-hero-lives.webp",
+      "sha256": "fdf21425c188a789394b85d2d65c01c4af589eafaa538ba3f5faededcaf3043a"
+    },
+    {
+      "id": "waboku",
+      "imageId": 12607053,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/12607053.jpg",
+      "path": "assets/duel/art/waboku.webp",
+      "sha256": "c74b3818aa1f4c5165fe09b5e0f3e348eb8db8ee3348d4115b3d016c9fdd34ce"
+    },
+    {
+      "id": "hero-absolute-zero",
+      "imageId": 40854197,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/40854197.jpg",
+      "path": "assets/duel/art/hero-absolute-zero.webp",
+      "sha256": "663d074ecf6d2444df2e1ec831c5679d490ac9800dc2ec10ee6c15e249d47cb2"
+    },
+    {
+      "id": "hero-the-shining",
+      "imageId": 22061412,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/22061412.jpg",
+      "path": "assets/duel/art/hero-the-shining.webp",
+      "sha256": "2c39d5484c5d87a54d469e4ddf737563f39f7f47d652be60bb81b76bc756bc44"
+    },
+    {
+      "id": "hero-great-tornado",
+      "imageId": 3642509,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/3642509.jpg",
+      "path": "assets/duel/art/hero-great-tornado.webp",
+      "sha256": "276ccdedc1fdeab89654f0d571dc5a7c225cc9245294ba912c7942744573acae"
+    },
+    {
+      "id": "hero-flame-wingman",
+      "imageId": 35809262,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/35809262.jpg",
+      "path": "assets/duel/art/hero-flame-wingman.webp",
+      "sha256": "0dca4fed3d83cdbab937538132627e8a83e4c216f72f1f75bd81f6acab493e9b"
+    },
+    {
+      "id": "masked-dark-law",
+      "imageId": 58481572,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/58481572.jpg",
+      "path": "assets/duel/art/masked-dark-law.webp",
+      "sha256": "2e8aa79968a0a93b6dc62e00aa3a42571c8b434d2f02bf53bee8cfc0704ba2b2"
+    },
+    {
+      "id": "masked-acid",
+      "imageId": 29095552,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/29095552.jpg",
+      "path": "assets/duel/art/masked-acid.webp",
+      "sha256": "7adb9d1b2819fcbdab85fa2ee153f77c44a8082275b8f56eb39475078eac4c01"
+    },
+    {
+      "id": "bw-armor-master",
+      "imageId": 69031175,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/69031175.jpg",
+      "path": "assets/duel/art/bw-armor-master.webp",
+      "sha256": "57098f876b4ba98edaf6e97bb497d9b88c42d1e7826d1ad0c43cca7c7ca4bd7c"
+    },
+    {
+      "id": "bw-bora",
+      "imageId": 49003716,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/49003716.jpg",
+      "path": "assets/duel/art/bw-bora.webp",
+      "sha256": "e79daa8dee5b245a086d1d89c5280181c383a252e8be656a02af5480ed676e90"
+    },
+    {
+      "id": "bw-gale",
+      "imageId": 2009101,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/2009101.jpg",
+      "path": "assets/duel/art/bw-gale.webp",
+      "sha256": "fff63d1ca5a3695ce9829fb7ab71e2c6693dba30190039b761274f5c287f18dd"
+    },
+    {
+      "id": "bw-shura",
+      "imageId": 58820853,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/58820853.jpg",
+      "path": "assets/duel/art/bw-shura.webp",
+      "sha256": "c51a935b59289a455d28d21e49bb4a3037fc249183415a297374461da4ab5d8d"
+    },
+    {
+      "id": "bw-blizzard",
+      "imageId": 22835145,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/22835145.jpg",
+      "path": "assets/duel/art/bw-blizzard.webp",
+      "sha256": "0f58216820891ffad6e006666382d11081db4208ec439f06b09abc24de0199f6"
+    },
+    {
+      "id": "bw-kalut",
+      "imageId": 85215458,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/85215458.jpg",
+      "path": "assets/duel/art/bw-kalut.webp",
+      "sha256": "5712d3d3f858fd4fff3db4101374f474a6b0613237a8329786166b5228edbc91"
+    },
+    {
+      "id": "bw-zephyros",
+      "imageId": 14785765,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/14785765.jpg",
+      "path": "assets/duel/art/bw-zephyros.webp",
+      "sha256": "bee59dbdd78ce5274116655677d5740b23f95032d99073e554731632a23c951a"
+    },
+    {
+      "id": "bw-kris",
+      "imageId": 81105204,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/81105204.jpg",
+      "path": "assets/duel/art/bw-kris.webp",
+      "sha256": "2f3fc9e573e753d61557d20e14d1ba115101afdc489b33fdacd13a6a32bfdb09"
+    },
+    {
+      "id": "black-whirlwind",
+      "imageId": 91351370,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/91351370.jpg",
+      "path": "assets/duel/art/black-whirlwind.webp",
+      "sha256": "90bd3920ff3a2b361b16a8a530aee113af42ecf92fc84a8802217d000e35a989"
+    },
+    {
+      "id": "icarus-attack",
+      "imageId": 53567095,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/53567095.jpg",
+      "path": "assets/duel/art/icarus-attack.webp",
+      "sha256": "d5d93c0b3720638adc780db720675e361822567ff37bd749dddc8351ec5d5563"
+    },
+    {
+      "id": "foolish-burial",
+      "imageId": 81439173,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/81439173.jpg",
+      "path": "assets/duel/art/foolish-burial.webp",
+      "sha256": "7dcd34d6f5656d214ed0a3c86752eaef747ab32eefbc85339c05a26efa38e907"
+    },
+    {
+      "id": "bw-armed-wing",
+      "imageId": 76913983,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/76913983.jpg",
+      "path": "assets/duel/art/bw-armed-wing.webp",
+      "sha256": "9889c4f9cbf089e5d7b3f27a4cb4053ae5fa3f6d21e63378487630892e2d591e"
+    },
+    {
+      "id": "bw-raikiri",
+      "imageId": 16051717,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/16051717.jpg",
+      "path": "assets/duel/art/bw-raikiri.webp",
+      "sha256": "54fc0434fdab58fc7fe86db3763283ded63a293d84d52e0ef0ec2209a5ce0635"
+    },
+    {
+      "id": "bw-nothung",
+      "imageId": 95040215,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/95040215.jpg",
+      "path": "assets/duel/art/bw-nothung.webp",
+      "sha256": "a008979ba434b31c20f9ddcd2bec3af40336d59a467eaf56ebac3e6d658a26a1"
+    },
+    {
+      "id": "stardust-dragon",
+      "imageId": 44508094,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/44508094.jpg",
+      "path": "assets/duel/art/stardust-dragon.webp",
+      "sha256": "80ab3f1b5e3c04835d15caa09b837924c29856f0573041339bc6266f9e90f1c7"
+    },
+    {
+      "id": "castel",
+      "imageId": 82633039,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/82633039.jpg",
+      "path": "assets/duel/art/castel.webp",
+      "sha256": "11ec472bd5031ace47e7fc64c59bb3e81ad48898a1db3967aad5fcb5a5b48b27"
+    },
+    {
+      "id": "shooting-star",
+      "imageId": 24696097,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/24696097.jpg",
+      "path": "assets/duel/art/shooting-star.webp",
+      "sha256": "4b10cc9d2d136ec1aa80e24dc3ff51051c06fda2fca67101e251d3d071f44fd2"
+    },
+    {
+      "id": "junk-synchron",
+      "imageId": 63977008,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/63977008.jpg",
+      "path": "assets/duel/art/junk-synchron.webp",
+      "sha256": "90e8db956ee59a6c85d48bff20f644b416cc741ee2a02c9f58e30a150757b798"
+    },
+    {
+      "id": "junk-converter",
+      "imageId": 11069680,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/11069680.jpg",
+      "path": "assets/duel/art/junk-converter.webp",
+      "sha256": "45fd606a9a60e83db8028074629658eae2a38ecd20dfc1e9fe1cf91b8b7fbca6"
+    },
+    {
+      "id": "doppelwarrior",
+      "imageId": 53855409,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/53855409.jpg",
+      "path": "assets/duel/art/doppelwarrior.webp",
+      "sha256": "0c6f1bc9352e4500c84ff3a05d691ea0587b3ad0eb4d9b81e7a8ff0590e32396"
+    },
+    {
+      "id": "quillbolt",
+      "imageId": 23571046,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/23571046.jpg",
+      "path": "assets/duel/art/quillbolt.webp",
+      "sha256": "e9d57d955cee2794b467bc6d7f0e80a3f37ca9554d834c1c01c7c3b0051d5244"
+    },
+    {
+      "id": "jet-synchron",
+      "imageId": 9742784,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/9742784.jpg",
+      "path": "assets/duel/art/jet-synchron.webp",
+      "sha256": "db2e5e1bbfd591b3f9c697403ddc4c82543940eb0a2e4f05d6267e47ab414634"
+    },
+    {
+      "id": "quickdraw-synchron",
+      "imageId": 20932152,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/20932152.jpg",
+      "path": "assets/duel/art/quickdraw-synchron.webp",
+      "sha256": "40dbc7a95dde0d2fd1df88470dbdedbd9391a4711111865cf8cb9687231979e4"
+    },
+    {
+      "id": "fleur-synchron",
+      "imageId": 19642774,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/19642774.jpg",
+      "path": "assets/duel/art/fleur-synchron.webp",
+      "sha256": "ed6429c43101ab7b43f7f28b47613ce91e4b5de65d2fb10ef742ba222179071f"
+    },
+    {
+      "id": "tuning",
+      "imageId": 96363153,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/96363153.jpg",
+      "path": "assets/duel/art/tuning.webp",
+      "sha256": "ff097413a6122d5aa8a43ace07f9522b069a8d5eac80c19b4d8f058feaa9f6e2"
+    },
+    {
+      "id": "one-for-one",
+      "imageId": 2295440,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/2295440.jpg",
+      "path": "assets/duel/art/one-for-one.webp",
+      "sha256": "71681cea80f597e5dcaa10fa4eb126da5719d733b3f43a1238d300b4fb80cef3"
+    },
+    {
+      "id": "junk-warrior",
+      "imageId": 60800381,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/60800381.jpg",
+      "path": "assets/duel/art/junk-warrior.webp",
+      "sha256": "a00433e738244dd5f78e3463fd53ecfdfdbb96fc0226da692547f28b9f2985d7"
+    },
+    {
+      "id": "junk-speeder",
+      "imageId": 77075360,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/77075360.jpg",
+      "path": "assets/duel/art/junk-speeder.webp",
+      "sha256": "f6a31d996f92bdfd43921b3b8991ee6a0bd78e07b96d5b05a54a54b4a872a174"
+    },
+    {
+      "id": "formula-synchron",
+      "imageId": 50091196,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/50091196.jpg",
+      "path": "assets/duel/art/formula-synchron.webp",
+      "sha256": "2eb8bc205b99b1d7cff68874adadf24d906299571dc8317c457188d93fa3d757"
+    },
+    {
+      "id": "junk-archer",
+      "imageId": 42810973,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/42810973.jpg",
+      "path": "assets/duel/art/junk-archer.webp",
+      "sha256": "f907c6dfd70642e2d0b4c6801c30007c406977540424bd02caed06d292dd8019"
+    },
+    {
+      "id": "junk-destroyer",
+      "imageId": 74860293,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/74860293.jpg",
+      "path": "assets/duel/art/junk-destroyer.webp",
+      "sha256": "0e638e3f7931d1093313642257384a7d9ef33f4bb60d19045b39ed564370eaf1"
+    },
+    {
+      "id": "utopia-lightning",
+      "imageId": 56832966,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/56832966.jpg",
+      "path": "assets/duel/art/utopia-lightning.webp",
+      "sha256": "934228e2c905fc5a4262c9724be36b6b4dbaa66782689043eb0dbb20fa1c1cf8"
+    },
+    {
+      "id": "gagaga-magician",
+      "imageId": 26082117,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/26082117.jpg",
+      "path": "assets/duel/art/gagaga-magician.webp",
+      "sha256": "ae1c1855da59ffd1d45f8ccd686cdda46b5c5a77d14c57cbc6b8bd1b8d6fd53e"
+    },
+    {
+      "id": "gagaga-girl",
+      "imageId": 3606728,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/3606728.jpg",
+      "path": "assets/duel/art/gagaga-girl.webp",
+      "sha256": "3b641c45c9c9f4a796912748c4f1931ad1dcb189a573c9f8cf91c543a3968865"
+    },
+    {
+      "id": "goblindbergh",
+      "imageId": 25259669,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/25259669.jpg",
+      "path": "assets/duel/art/goblindbergh.webp",
+      "sha256": "51a7250259bf03da1a9b50512e405a1f4296a734af18b1b066dc6e6b3aacacd6"
+    },
+    {
+      "id": "kagetokage",
+      "imageId": 94656263,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/94656263.jpg",
+      "path": "assets/duel/art/kagetokage.webp",
+      "sha256": "4ce6d3eb955ba389751e6d2a6ca8edadaf4b6f26bd56a2f03047aec308034589"
+    },
+    {
+      "id": "utopic-onomatopoeia",
+      "imageId": 8512558,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/8512558.jpg",
+      "path": "assets/duel/art/utopic-onomatopoeia.webp",
+      "sha256": "3f6ed03b1b7a448513ea58cd63c53d94fbecec7f92d480b5e0dc0b0abe8f1ce4"
+    },
+    {
+      "id": "zs-ascended-sage",
+      "imageId": 4647954,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/4647954.jpg",
+      "path": "assets/duel/art/zs-ascended-sage.webp",
+      "sha256": "cd9410e72ae4ed29c649544b2e0a007900d5ded806f356ccdb6ae88c278402d0"
+    },
+    {
+      "id": "zubaba-gagagacoat",
+      "imageId": 23720856,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/23720856.jpg",
+      "path": "assets/duel/art/zubaba-gagagacoat.webp",
+      "sha256": "ef1033e9aeb034353cdf5c3bba5221ae0d2cbf25c531507f9180f349330beefb"
+    },
+    {
+      "id": "dododo-gogogoglove",
+      "imageId": 59724555,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/59724555.jpg",
+      "path": "assets/duel/art/dododo-gogogoglove.webp",
+      "sha256": "a4731307ad314e6fb45402f37ee2abd420af00218a6f8ea1cdfa0eafce072660"
+    },
+    {
+      "id": "onomatopaira",
+      "imageId": 6595475,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/6595475.jpg",
+      "path": "assets/duel/art/onomatopaira.webp",
+      "sha256": "a1233bf67fa8fc5fbc99abfa49281c4dc5a309d6ad9d92b878899a31425ee941"
+    },
+    {
+      "id": "xyz-change-tactics",
+      "imageId": 11705261,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/11705261.jpg",
+      "path": "assets/duel/art/xyz-change-tactics.webp",
+      "sha256": "cb5375385a68055937c55a1a189b61e30697006d1dff2cc56d62d18d62a16357"
+    },
+    {
+      "id": "double-or-nothing",
+      "imageId": 94770493,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/94770493.jpg",
+      "path": "assets/duel/art/double-or-nothing.webp",
+      "sha256": "27ac9729d0d801df2149e30a9f1cc95ffabf004775846c095162556e9ae8481e"
+    },
+    {
+      "id": "limited-barians-force",
+      "imageId": 92365601,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/92365601.jpg",
+      "path": "assets/duel/art/limited-barians-force.webp",
+      "sha256": "c40941283fd7bde195ad1c59c216babe33c6edde565b9163f82dcc8c38ea7e96"
+    },
+    {
+      "id": "utopia",
+      "imageId": 84013237,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/84013237.jpg",
+      "path": "assets/duel/art/utopia.webp",
+      "sha256": "9a2bd8dfd368d25b2a0ecf600aae52bb7d220356029036f316d2557bc49cbf1d"
+    },
+    {
+      "id": "utopia-ray",
+      "imageId": 56840427,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/56840427.jpg",
+      "path": "assets/duel/art/utopia-ray.webp",
+      "sha256": "5562b76053699b2f3cee8482c65516e3a76cd24f1737db8d0a89023f2c99ea2b"
+    },
+    {
+      "id": "utopia-double",
+      "imageId": 62517849,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/62517849.jpg",
+      "path": "assets/duel/art/utopia-double.webp",
+      "sha256": "03c92feaf2d6c970218497633f7637a3ecc43512a8ab556ffac4e92525769884"
+    },
+    {
+      "id": "gagaga-cowboy",
+      "imageId": 12014404,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/12014404.jpg",
+      "path": "assets/duel/art/gagaga-cowboy.webp",
+      "sha256": "5b8086adb6839441fb62f8f3dbc79af302f0b75ff1166d9d887de85803662c55"
+    },
+    {
+      "id": "utopia-ray-v",
+      "imageId": 66970002,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/66970002.jpg",
+      "path": "assets/duel/art/utopia-ray-v.webp",
+      "sha256": "e0fd53be9cbe4581961e2282b85d8775ef635787eb7d0c0c3d731a5cab9450ce"
+    },
+    {
+      "id": "qli-towers",
+      "imageId": 27279764,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/27279764.jpg",
+      "path": "assets/duel/art/qli-towers.webp",
+      "sha256": "6a9017a3e7598c0cc442d30835be27f1dcaf6ac0e4fae39ed7896c37a6e1b585"
+    },
+    {
+      "id": "qli-scout",
+      "imageId": 65518099,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/65518099.jpg",
+      "path": "assets/duel/art/qli-scout.webp",
+      "sha256": "dc27921d818715dd5dedf297142295de47ebd02723d86617d619aac17101a2ae"
+    },
+    {
+      "id": "qli-monolith",
+      "imageId": 51194046,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/51194046.jpg",
+      "path": "assets/duel/art/qli-monolith.webp",
+      "sha256": "b51d041eb3b406f2fe767b55161c6c47493e787cbc9ab674b340a681e0c4a016"
+    },
+    {
+      "id": "qli-carrier",
+      "imageId": 91907707,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/91907707.jpg",
+      "path": "assets/duel/art/qli-carrier.webp",
+      "sha256": "3ea3207a889ce6cb1556c23f5998801da9867094b4944cf534b2acb5a1a5b858"
+    },
+    {
+      "id": "qli-helix",
+      "imageId": 37991342,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/37991342.jpg",
+      "path": "assets/duel/art/qli-helix.webp",
+      "sha256": "b6f276e28864bac65060ccbbffc0dc8eb7e4ffc59552ff9b218a3699222ab6e5"
+    },
+    {
+      "id": "qli-disk",
+      "imageId": 64496451,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/64496451.jpg",
+      "path": "assets/duel/art/qli-disk.webp",
+      "sha256": "7e36c4b6faeee40830cc302483da01305d1c5bf97f8f1dd7c67c67142f15ebbb"
+    },
+    {
+      "id": "qli-stealth",
+      "imageId": 13073850,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/13073850.jpg",
+      "path": "assets/duel/art/qli-stealth.webp",
+      "sha256": "d41af8bde79d9ef8131461fec587b60ed7ae4e636c246d667cc56cc5c19add0c"
+    },
+    {
+      "id": "saqlifice",
+      "imageId": 17639150,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/17639150.jpg",
+      "path": "assets/duel/art/saqlifice.webp",
+      "sha256": "402b7f64378ac3f9ec306a38470c3501f110fbf92dc92a4f08e2b3478a9ca9ee"
+    },
+    {
+      "id": "summoners-art",
+      "imageId": 79816536,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/79816536.jpg",
+      "path": "assets/duel/art/summoners-art.webp",
+      "sha256": "0e5298c93234ea7f2435cd61cd1a299b566904073c806a50610b2dea08ad0473"
+    },
+    {
+      "id": "wavering-eyes",
+      "imageId": 31222701,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/31222701.jpg",
+      "path": "assets/duel/art/wavering-eyes.webp",
+      "sha256": "f5c6bdc52d84efd1d263d2a528c45f9c41f9a04be8edc4729836df613aecec3a"
+    },
+    {
+      "id": "skill-drain",
+      "imageId": 82732705,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/82732705.jpg",
+      "path": "assets/duel/art/skill-drain.webp",
+      "sha256": "17c7b4416c7859545baf0a547ebd764b9782505b26952bf9e3383f211f91b49e"
+    },
+    {
+      "id": "pendulum-reborn",
+      "imageId": 77826734,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/77826734.jpg",
+      "path": "assets/duel/art/pendulum-reborn.webp",
+      "sha256": "c250648fbd8d39af3038fb303eb455c22c64e8d9eada5ecac396fa23df5879a2"
+    },
+    {
+      "id": "exodia-head",
+      "imageId": 33396948,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/33396948.jpg",
+      "path": "assets/duel/art/exodia-head.webp",
+      "sha256": "f3df18b4e32488b0025fd0e4ba6428dd84e168561a319e828ac150547694c8dc"
+    },
+    {
+      "id": "exodia-left-arm",
+      "imageId": 7902349,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/7902349.jpg",
+      "path": "assets/duel/art/exodia-left-arm.webp",
+      "sha256": "044562939a9e2e85ab1089ee3afcb46d23686a46c1b64b12d4d675a69c2a41a2"
+    },
+    {
+      "id": "exodia-right-arm",
+      "imageId": 70903634,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/70903634.jpg",
+      "path": "assets/duel/art/exodia-right-arm.webp",
+      "sha256": "47bef9cbb1a2c9dd1cc1edf884ff04ff2cbeea422c6ecad190aab671f6cb1119"
+    },
+    {
+      "id": "exodia-left-leg",
+      "imageId": 44519536,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/44519536.jpg",
+      "path": "assets/duel/art/exodia-left-leg.webp",
+      "sha256": "3d0f0160b78e869c4b1e7a162f7ac6dd2d78a243065da67c5913056f670a2da7"
+    },
+    {
+      "id": "exodia-right-leg",
+      "imageId": 8124921,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/8124921.jpg",
+      "path": "assets/duel/art/exodia-right-leg.webp",
+      "sha256": "2249436d8a55e2045fdb6473fd64edd300d6e84e54c0b232885037e3f8c68aa3"
+    },
+    {
+      "id": "royal-library",
+      "imageId": 70791313,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/70791313.jpg",
+      "path": "assets/duel/art/royal-library.webp",
+      "sha256": "3088f22115f78057f796b15674de86fae05a9a9536dcde1f4614142f9203e9a8"
+    },
+    {
+      "id": "sangan",
+      "imageId": 26202165,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/26202165.jpg",
+      "path": "assets/duel/art/sangan.webp",
+      "sha256": "b9f23198d173044953f7271eb9f75830fd0692c10758bb251abe5b8046a873f4"
+    },
+    {
+      "id": "witch-forest",
+      "imageId": 78010363,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/78010363.jpg",
+      "path": "assets/duel/art/witch-forest.webp",
+      "sha256": "7a4b2db091fd41911c75853ba164976b6f41e8afd608d602f68f123e44c7505a"
+    },
+    {
+      "id": "battle-fader",
+      "imageId": 19665973,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/19665973.jpg",
+      "path": "assets/duel/art/battle-fader.webp",
+      "sha256": "560fcaca8481d0e80036722bab81a276a99487d00566d74e214634a2f1a3fadb"
+    },
+    {
+      "id": "cardcar-d",
+      "imageId": 45812361,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/45812361.jpg",
+      "path": "assets/duel/art/cardcar-d.webp",
+      "sha256": "eb253bfb66c41ff235160d0e02cc17382917be73316734baf00a3ffc4542145d"
+    },
+    {
+      "id": "upstart-goblin",
+      "imageId": 70368879,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/70368879.jpg",
+      "path": "assets/duel/art/upstart-goblin.webp",
+      "sha256": "f32d9113367bc7e4e0d670fab21b22f353adf03d2ae3161ec14367af85c72422"
+    },
+    {
+      "id": "dark-factory",
+      "imageId": 90928333,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/90928333.jpg",
+      "path": "assets/duel/art/dark-factory.webp",
+      "sha256": "3463326836f0d2c27bce89f342ccdc6c19656e1b7f70f029c1a8421b04cd5545"
+    },
+    {
+      "id": "one-day-peace",
+      "imageId": 33782437,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/33782437.jpg",
+      "path": "assets/duel/art/one-day-peace.webp",
+      "sha256": "914b84717fe20ed6192771735411f31985fe3430cb4d1dfba8ff3d788a36611e"
+    },
+    {
+      "id": "golden-bamboo",
+      "imageId": 74029853,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/74029853.jpg",
+      "path": "assets/duel/art/golden-bamboo.webp",
+      "sha256": "aec863d629f3b4af0fb7da94e88eb41a3747b4ab484eee1988bd294dd52f54b1"
+    },
+    {
+      "id": "cursed-bamboo",
+      "imageId": 42199039,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/42199039.jpg",
+      "path": "assets/duel/art/cursed-bamboo.webp",
+      "sha256": "e3d5771e1096e91284586234f93d82d6ca807ba8dc3c26a81168361bfd25c50e"
+    },
+    {
+      "id": "broken-bamboo",
+      "imageId": 41587307,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/41587307.jpg",
+      "path": "assets/duel/art/broken-bamboo.webp",
+      "sha256": "df97a12dd34eb6a143894d5b3a8f9f6a2109f8464df605b5b6fc2e53664e1ba5"
+    },
+    {
+      "id": "wonder-wand",
+      "imageId": 67775894,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/67775894.jpg",
+      "path": "assets/duel/art/wonder-wand.webp",
+      "sha256": "f283268d7c7382c56f5bb352093d6351dc632f0c6b1a41696073dee54d1460f8"
+    },
+    {
+      "id": "reckless-greed",
+      "imageId": 37576645,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/37576645.jpg",
+      "path": "assets/duel/art/reckless-greed.webp",
+      "sha256": "a8d4eeac0d8561e50650123de5b676a0f6d41c67bd364b70f664189eae94298a"
+    },
+    {
+      "id": "cyber-infinity",
+      "imageId": 10443957,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/10443957.jpg",
+      "path": "assets/duel/art/cyber-infinity.webp",
+      "sha256": "8352d0c155b9c8ae9a1953892d813aa2d4876fc60801ffb1fdd5b6e8177ce544"
+    },
+    {
+      "id": "cyber-dragon",
+      "imageId": 70095154,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/70095154.jpg",
+      "path": "assets/duel/art/cyber-dragon.webp",
+      "sha256": "10e7f6cca9b0d637fc2770c0ec6ec0e949d9f95cc0e9c7daa31193e25e9a8fa7"
+    },
+    {
+      "id": "cyber-core",
+      "imageId": 23893227,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/23893227.jpg",
+      "path": "assets/duel/art/cyber-core.webp",
+      "sha256": "ee0fe6e829851e65669bcc5bc87fd65760861d45527b218cae7724eeb457298f"
+    },
+    {
+      "id": "cyber-herz",
+      "imageId": 56364287,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/56364287.jpg",
+      "path": "assets/duel/art/cyber-herz.webp",
+      "sha256": "f96125cc889ce5ddb396d393dfe3852ae4ce39cfdb55b0949682aec04504e5b1"
+    },
+    {
+      "id": "cyber-nachster",
+      "imageId": 1142880,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/1142880.jpg",
+      "path": "assets/duel/art/cyber-nachster.webp",
+      "sha256": "185a2b0691334f43b2a25b2f2f37bc28a701f1f64e3b8981c5194231d2df7bf4"
+    },
+    {
+      "id": "cyber-drei",
+      "imageId": 59281922,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/59281922.jpg",
+      "path": "assets/duel/art/cyber-drei.webp",
+      "sha256": "80133abf48ede8c2286b0522cb0b91295470a0497abc92eb54587985e5fd85ac"
+    },
+    {
+      "id": "cyber-vier",
+      "imageId": 29975188,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/29975188.jpg",
+      "path": "assets/duel/art/cyber-vier.webp",
+      "sha256": "dc7ebcff7b8f6fe47a0f95b37752776315a343b3157ef52731df4bc411d95b79"
+    },
+    {
+      "id": "galaxy-soldier",
+      "imageId": 46659709,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/46659709.jpg",
+      "path": "assets/duel/art/galaxy-soldier.webp",
+      "sha256": "a13b9e0a6081b038631c2759ea8a3074aa927a2a7e0097624adfb547684421b2"
+    },
+    {
+      "id": "cyber-emergency",
+      "imageId": 60600126,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/60600126.jpg",
+      "path": "assets/duel/art/cyber-emergency.webp",
+      "sha256": "7e0d43eb71950f3900739e4ff398dd9600d2ff45b727e6cfe622b4e13af841b6"
+    },
+    {
+      "id": "machine-duplication",
+      "imageId": 63995093,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/63995093.jpg",
+      "path": "assets/duel/art/machine-duplication.webp",
+      "sha256": "3f87701176670f419e2ccbfdd3568bf8d423e43367eaa66ac3e9dbc244242fc1"
+    },
+    {
+      "id": "power-bond",
+      "imageId": 37630732,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/37630732.jpg",
+      "path": "assets/duel/art/power-bond.webp",
+      "sha256": "028680a139f7e67070b2dfda12fdc012370f88e721cf81e168253bf67e9a82e4"
+    },
+    {
+      "id": "overload-fusion",
+      "imageId": 3659803,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/3659803.jpg",
+      "path": "assets/duel/art/overload-fusion.webp",
+      "sha256": "aa7d929cc1f72cb07111134e84bbaafcc4f8c77c1034214613f06a4b72c01048"
+    },
+    {
+      "id": "cyber-revsystem",
+      "imageId": 33041277,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/33041277.jpg",
+      "path": "assets/duel/art/cyber-revsystem.webp",
+      "sha256": "214c78b3578f2039308271bab9a545746551ed5a8ccf4fe7dd84a40cf229e8e1"
+    },
+    {
+      "id": "cyberload-fusion",
+      "imageId": 55704856,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/55704856.jpg",
+      "path": "assets/duel/art/cyberload-fusion.webp",
+      "sha256": "e970f90cdc65347d867a74237f139ea7397db6f05636d4f9b9345decff9baed5"
+    },
+    {
+      "id": "cyber-twin",
+      "imageId": 74157028,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/74157028.jpg",
+      "path": "assets/duel/art/cyber-twin.webp",
+      "sha256": "08fe216743756c106a0a79e150a647d1ac9558e1e423b6adcc5325d277c0535d"
+    },
+    {
+      "id": "cyber-end",
+      "imageId": 1546123,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/1546123.jpg",
+      "path": "assets/duel/art/cyber-end.webp",
+      "sha256": "1f6def262fe81f1eba88e8775f34cb84446739c6d674550ff6f4cfc110755fff"
+    },
+    {
+      "id": "chimeratech-rampage",
+      "imageId": 84058253,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/84058253.jpg",
+      "path": "assets/duel/art/chimeratech-rampage.webp",
+      "sha256": "d4a8e07c6d29ec7016e57648bbbfdef79d61e5816f929fed36c6037cce961592"
+    },
+    {
+      "id": "chimeratech-overdragon",
+      "imageId": 64599569,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/64599569.jpg",
+      "path": "assets/duel/art/chimeratech-overdragon.webp",
+      "sha256": "240344c3f661bce5909105ab0667e9081cd05ab1312f1749c9b29fd3aab16f58"
+    },
+    {
+      "id": "cyber-nova",
+      "imageId": 58069384,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/58069384.jpg",
+      "path": "assets/duel/art/cyber-nova.webp",
+      "sha256": "faf0bff12d972748f0aa937b8add6eb9d0924b43fe601dfe59b9abe340d27ff4"
+    },
+    {
+      "id": "cry-quariongandrax",
+      "imageId": 13455674,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/13455674.jpg",
+      "path": "assets/duel/art/cry-quariongandrax.webp",
+      "sha256": "d4436cb2f9aa2dac5e5db6a51701abf8af344845ef6815e9cef960ce94564c7c"
+    },
+    {
+      "id": "cry-sulfefnir",
+      "imageId": 3422200,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/3422200.jpg",
+      "path": "assets/duel/art/cry-sulfefnir.webp",
+      "sha256": "572356698a6afc77ecaf53b401c73130144d222fadd0b98d9ce61762c8700072"
+    },
+    {
+      "id": "cry-thystvern",
+      "imageId": 29838323,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/29838323.jpg",
+      "path": "assets/duel/art/cry-thystvern.webp",
+      "sha256": "e85d6f9a63b27ddb3c66f40007ae7c96f7329a6cac61c94c49361fa519982249"
+    },
+    {
+      "id": "cry-smiger",
+      "imageId": 83443619,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/83443619.jpg",
+      "path": "assets/duel/art/cry-smiger.webp",
+      "sha256": "4100ca574b78f053a880f9f4091362255cfbb4673c65e9d1900276bf8f5ac751"
+    },
+    {
+      "id": "cry-rosenix",
+      "imageId": 55326322,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/55326322.jpg",
+      "path": "assets/duel/art/cry-rosenix.webp",
+      "sha256": "4a7405e8169b290426f833e370664c2a7a71281f3b1343fbabe5e0320947c0fe"
+    },
+    {
+      "id": "cry-prasiortle",
+      "imageId": 56049970,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/56049970.jpg",
+      "path": "assets/duel/art/cry-prasiortle.webp",
+      "sha256": "25a9111030d50bbbcaf064cfef2f223328af3e9f58f44b3a8c4e437eab64f45d"
+    },
+    {
+      "id": "cry-citree",
+      "imageId": 20050865,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/20050865.jpg",
+      "path": "assets/duel/art/cry-citree.webp",
+      "sha256": "8496dad84f5da2bdee742d9172c32b1183cf7be15d99fa3c9b228dbf440e1ccc"
+    },
+    {
+      "id": "cry-quan",
+      "imageId": 93665266,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/93665266.jpg",
+      "path": "assets/duel/art/cry-quan.webp",
+      "sha256": "c75a7a32b1943323156157aa4264f450a2272fc5c1686bb659e38ed1f6625ea6"
+    },
+    {
+      "id": "cry-rion",
+      "imageId": 66938505,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/66938505.jpg",
+      "path": "assets/duel/art/cry-rion.webp",
+      "sha256": "e42e5534f801bf8cd373a97244b55c4150c59c69d7639ecc3a3d7c9c6122701c"
+    },
+    {
+      "id": "scrap-recycler",
+      "imageId": 4334811,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/4334811.jpg",
+      "path": "assets/duel/art/scrap-recycler.webp",
+      "sha256": "ca4c32d6fb23033a2725ceb7690824a58733cb2a4365d9beda77853df23a8335"
+    },
+    {
+      "id": "crystolic-potential",
+      "imageId": 3576031,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/3576031.jpg",
+      "path": "assets/duel/art/crystolic-potential.webp",
+      "sha256": "8130e367fa2ec5b57a33d9bc821078c9e2f6f211d3eff065789f40d6bbc9890c"
+    },
+    {
+      "id": "cry-impact",
+      "imageId": 99274184,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/99274184.jpg",
+      "path": "assets/duel/art/cry-impact.webp",
+      "sha256": "877ec7c96f4c4002a520a78650770e73e680cecd4be4fc605c326df94c4c545f"
+    },
+    {
+      "id": "cry-entry",
+      "imageId": 52176579,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/52176579.jpg",
+      "path": "assets/duel/art/cry-entry.webp",
+      "sha256": "37c861213465e119223e2b37b1cd29d19c8e8c6c98999b6cce699499eeae54f9"
+    },
+    {
+      "id": "cry-ametrix",
+      "imageId": 76359406,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/76359406.jpg",
+      "path": "assets/duel/art/cry-ametrix.webp",
+      "sha256": "5fb0ff76ac30f8534179fa64108ee3cf316b4bf484f31889b8e0168dbbea821b"
+    },
+    {
+      "id": "cry-quandax",
+      "imageId": 39964797,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/39964797.jpg",
+      "path": "assets/duel/art/cry-quandax.webp",
+      "sha256": "b25bea95ca5bdd733fee17c4880735d0f60cead9392dc6c50982a22e24aa8012"
+    },
+    {
+      "id": "cry-phoenix",
+      "imageId": 2743001,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/2743001.jpg",
+      "path": "assets/duel/art/cry-phoenix.webp",
+      "sha256": "fb9f2f986d64e2c8ed9e25c38974ae3fd2e9827240437bc9ad6007723432454c"
+    },
+    {
+      "id": "samurai-destroyer",
+      "imageId": 40509732,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/40509732.jpg",
+      "path": "assets/duel/art/samurai-destroyer.webp",
+      "sha256": "0191a68452d4861a995e82bc34329b1426f7edd4d7583c2e81dfcaeb53b9f050"
+    },
+    {
+      "id": "powered-inzektron",
+      "imageId": 46132282,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/46132282.jpg",
+      "path": "assets/duel/art/powered-inzektron.webp",
+      "sha256": "be9f6086222c36c89b34b6eb44ae8b6630bde285731d35f5ff7b05a86eb3dc5f"
+    },
+    {
+      "id": "tear-rulkallos",
+      "imageId": 84330567,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/84330567.jpg",
+      "path": "assets/duel/art/tear-rulkallos.webp",
+      "sha256": "c2dcd93f56e63b89a6360e7ac7df0973cfb9c7be013a380b1557c037ff664ac8"
+    },
+    {
+      "id": "tear-reinoheart",
+      "imageId": 73956664,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/73956664.jpg",
+      "path": "assets/duel/art/tear-reinoheart.webp",
+      "sha256": "a3f66f41957288f334be901db7d5abfd01f74efb745c66cf358818fb71f32cf0"
+    },
+    {
+      "id": "tear-scheiren",
+      "imageId": 572850,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/572850.jpg",
+      "path": "assets/duel/art/tear-scheiren.webp",
+      "sha256": "3309ec0fd3758001afe249583305fc60b68b29de0ae161630dd1700dd9a47847"
+    },
+    {
+      "id": "tear-havnis",
+      "imageId": 37961969,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/37961969.jpg",
+      "path": "assets/duel/art/tear-havnis.webp",
+      "sha256": "89a582426092f86501f3af726fb49bffa036f5065cc149af18ae895115554fb1"
+    },
+    {
+      "id": "tear-merrli",
+      "imageId": 74078255,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/74078255.jpg",
+      "path": "assets/duel/art/tear-merrli.webp",
+      "sha256": "f89232e156b1dd507485c6dd3027520cdf9412ca2f03d7998b04a85f0f7adad4"
+    },
+    {
+      "id": "tear-kashtira",
+      "imageId": 4928565,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/4928565.jpg",
+      "path": "assets/duel/art/tear-kashtira.webp",
+      "sha256": "c88b9ce60195dbe06d236a7dfa0d5e31b7ede3ed47b7ccab2591674f4f2cb97e"
+    },
+    {
+      "id": "supreme-sea-mare",
+      "imageId": 31259606,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/31259606.jpg",
+      "path": "assets/duel/art/supreme-sea-mare.webp",
+      "sha256": "f3366fe8e192c920a9c6c72f4e39e3b3b51b03f18e1a0eba296ae227abafff73"
+    },
+    {
+      "id": "dd-crow",
+      "imageId": 24508238,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/24508238.jpg",
+      "path": "assets/duel/art/dd-crow.webp",
+      "sha256": "9d5f864869e6763aabe6c9ef1b3025b730ba504b97dcd22076b7f456c8e6747b"
+    },
+    {
+      "id": "perlereino",
+      "imageId": 77103950,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/77103950.jpg",
+      "path": "assets/duel/art/perlereino.webp",
+      "sha256": "82f143c2d752fbd4e3e72e9a0a32b035ff19583234efd254ce63271546c7118c"
+    },
+    {
+      "id": "tear-scream",
+      "imageId": 6767771,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/6767771.jpg",
+      "path": "assets/duel/art/tear-scream.webp",
+      "sha256": "08288ce8ab20e9f28e835585276a8c093f689998caf930ff3863722ae792ae6f"
+    },
+    {
+      "id": "tear-heartbeat",
+      "imageId": 60362066,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/60362066.jpg",
+      "path": "assets/duel/art/tear-heartbeat.webp",
+      "sha256": "582a34bae3a8d85f7b7381d3ec73c7562930bc0014ef4f30b743832d89389b51"
+    },
+    {
+      "id": "tear-grief",
+      "imageId": 33878367,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/33878367.jpg",
+      "path": "assets/duel/art/tear-grief.webp",
+      "sha256": "012813169d849a2f496a409c5329469abb4998fc40aa400022baf8fa56cfb766"
+    },
+    {
+      "id": "terraforming",
+      "imageId": 73628505,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/73628505.jpg",
+      "path": "assets/duel/art/terraforming.webp",
+      "sha256": "7e7611db7a8fae610d04c670a9905784410392d7ae91e5cf92a6078b9934f55c"
+    },
+    {
+      "id": "tear-sulliek",
+      "imageId": 74920585,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/74920585.jpg",
+      "path": "assets/duel/art/tear-sulliek.webp",
+      "sha256": "42d275b896384782933c4db923dfc71f063d30de59468127997b9e1ecf3c754c"
+    },
+    {
+      "id": "tear-cryme",
+      "imageId": 1329620,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/1329620.jpg",
+      "path": "assets/duel/art/tear-cryme.webp",
+      "sha256": "262ab6a91c38413d69d15f59d99efd45031c1d42187342de3322b7bac959bac6"
+    },
+    {
+      "id": "tear-metanoise",
+      "imageId": 38436986,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/38436986.jpg",
+      "path": "assets/duel/art/tear-metanoise.webp",
+      "sha256": "fec5a264ae3c3b5678d591e59134212f2f5269216acdaaccd95613093081729e"
+    },
+    {
+      "id": "tear-kitkallos",
+      "imageId": 92731385,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/92731385.jpg",
+      "path": "assets/duel/art/tear-kitkallos.webp",
+      "sha256": "2ff30f4c714e886f6624d86e795b33bc0dbbc376e9f7558d5d092bfd54f5f979"
+    },
+    {
+      "id": "tear-kaleido-heart",
+      "imageId": 28226490,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/28226490.jpg",
+      "path": "assets/duel/art/tear-kaleido-heart.webp",
+      "sha256": "3beee907a66cbf5beb8c5dbe6d6698cf4727bbeff11529da030edc4ce54a4cb6"
+    },
+    {
+      "id": "abyss-dweller",
+      "imageId": 21044178,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/21044178.jpg",
+      "path": "assets/duel/art/abyss-dweller.webp",
+      "sha256": "fdbf755b2ce8afe9bddfc8d07a4a4b6226c87d88cacee5e7fd2495842f4292d4"
+    },
+    {
+      "id": "ip-masquerena",
+      "imageId": 65741786,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/65741786.jpg",
+      "path": "assets/duel/art/ip-masquerena.webp",
+      "sha256": "9175c91136888a4bdd97cfd33efa50d8da4bf0ccddad24108e50a96214d049f0"
+    },
+    {
+      "id": "knightmare-phoenix",
+      "imageId": 2857636,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/2857636.jpg",
+      "path": "assets/duel/art/knightmare-phoenix.webp",
+      "sha256": "59f939611e1f96b5673a166bb30a1c63027959a60371a71029a9599e042624c9"
+    },
+    {
+      "id": "knightmare-unicorn",
+      "imageId": 38342335,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/38342335.jpg",
+      "path": "assets/duel/art/knightmare-unicorn.webp",
+      "sha256": "c45afe9fcae51a0bb128430c1d2d3628218d867333f0e41c5637383bcffb21e5"
+    },
+    {
+      "id": "dharc-charmer",
+      "imageId": 8264361,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/8264361.jpg",
+      "path": "assets/duel/art/dharc-charmer.webp",
+      "sha256": "6a91ee92a0ad1bfd496d1dc49a9a91618cff3808ae2a53e0b97b26f5c3b95107"
+    },
+    {
+      "id": "eria-charmer",
+      "imageId": 73309655,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/73309655.jpg",
+      "path": "assets/duel/art/eria-charmer.webp",
+      "sha256": "efdf1364c0a6e20340b55a638c97ed24db241f0137796d12b157c188bfa340be"
+    },
+    {
+      "id": "cross-sheep",
+      "imageId": 50277355,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/50277355.jpg",
+      "path": "assets/duel/art/cross-sheep.webp",
+      "sha256": "cdd3ba7dc11e717e0bb499b0f4099897e0fe0a07370633d20a9cc678fac76fcc"
+    },
+    {
+      "id": "apollousa",
+      "imageId": 4280258,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/4280258.jpg",
+      "path": "assets/duel/art/apollousa.webp",
+      "sha256": "34efe14394ac897929151900ef183d2b1d78369ed6e9a9a502ae85e9597a3bfe"
+    },
+    {
+      "id": "accesscode-talker",
+      "imageId": 86066372,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/86066372.jpg",
+      "path": "assets/duel/art/accesscode-talker.webp",
+      "sha256": "da6d3f9228a319fb65afbb5014940b2cda32633f48ae54e89c5cc208cecf3569"
+    },
+    {
+      "id": "early-5405694",
+      "imageId": 5405694,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/5405694.jpg",
+      "path": "assets/duel/art/early-5405694.webp",
+      "sha256": "e80f3167288edbd105325682c09fab774eb088e30b45cde16c8bfaf54f504571"
+    },
+    {
+      "id": "early-30208479",
+      "imageId": 30208479,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/30208479.jpg",
+      "path": "assets/duel/art/early-30208479.webp",
+      "sha256": "d958b6c8787aca715f1b1df9e2e4ecede733de93cd629a0c0091c5a26cf06a95"
+    },
+    {
+      "id": "early-64631466",
+      "imageId": 64631466,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/64631466.jpg",
+      "path": "assets/duel/art/early-64631466.webp",
+      "sha256": "e64ba5b241f13382b39fa604a3310931f0e9bfba973396d9d67e2ff737f7d4fd"
+    },
+    {
+      "id": "early-23401839",
+      "imageId": 23401839,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/23401839.jpg",
+      "path": "assets/duel/art/early-23401839.webp",
+      "sha256": "4a3027778844f5fefd365b1dcc6460b72bad961bcf6ec505bffd4db62c92cde1"
+    },
+    {
+      "id": "early-57617178",
+      "imageId": 57617178,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/57617178.jpg",
+      "path": "assets/duel/art/early-57617178.webp",
+      "sha256": "5b7649f8bd8b4a961ecd592831fee8106a6020ed36e0d45db5c69352140e4f4b"
+    },
+    {
+      "id": "early-54652250",
+      "imageId": 54652250,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/54652250.jpg",
+      "path": "assets/duel/art/early-54652250.webp",
+      "sha256": "65d7693b9ede93fb40b544562729d1f7f338fa97eb714a546bc37f8d005ff44a"
+    },
+    {
+      "id": "early-55761792",
+      "imageId": 55761792,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/55761792.jpg",
+      "path": "assets/duel/art/early-55761792.webp",
+      "sha256": "584cb2649ea3213c2fde31effe31b53444ea30cb2291e3a00da25a24d83f52cb"
+    },
+    {
+      "id": "early-76792184",
+      "imageId": 76792184,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/76792184.jpg",
+      "path": "assets/duel/art/early-76792184.webp",
+      "sha256": "71e1c30fba918b66b11555d0aee77df8cd0599852b7c1c149456e60002546e3e"
+    },
+    {
+      "id": "early-41426869",
+      "imageId": 41426869,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/41426869.jpg",
+      "path": "assets/duel/art/early-41426869.webp",
+      "sha256": "ba001801321d30d997a6d2bb6563d2d1ee5f806e2314d76444aa7ed4fa209bf5"
+    },
+    {
+      "id": "early-79571449",
+      "imageId": 79571449,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/79571449.jpg",
+      "path": "assets/duel/art/early-79571449.webp",
+      "sha256": "107412f60cbac83e9fe95796e35b848a272b2a88eb75c18bbb1cf8bbc2b93d59"
+    },
+    {
+      "id": "early-68516705",
+      "imageId": 68516705,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/68516705.jpg",
+      "path": "assets/duel/art/early-68516705.webp",
+      "sha256": "4ba8d752dedbfd6157a7b5227432c0ce2827a1af0c43b6971b18617c2ea11d5a"
+    },
+    {
+      "id": "early-26902560",
+      "imageId": 26902560,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/26902560.jpg",
+      "path": "assets/duel/art/early-26902560.webp",
+      "sha256": "c3e799882b10e8bab642283ea4586b29254f2431f2aa76bfc158d379d3c56995"
+    },
+    {
+      "id": "early-94905343",
+      "imageId": 94905343,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/94905343.jpg",
+      "path": "assets/duel/art/early-94905343.webp",
+      "sha256": "0e8bddd141f2e5143ee955f0b75a7cf404979d4e1fad5843d402617edd262577"
+    },
+    {
+      "id": "early-62473983",
+      "imageId": 62473983,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/62473983.jpg",
+      "path": "assets/duel/art/early-62473983.webp",
+      "sha256": "5c22a33003fde88212269bc59370dcf59b2cece732b3097626efc9474026d79b"
+    },
+    {
+      "id": "early-25262697",
+      "imageId": 25262697,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/25262697.jpg",
+      "path": "assets/duel/art/early-25262697.webp",
+      "sha256": "4fc076cecfdd7bfe0e5e9e814be6f8e4f848ed59b9045c1d729e3bfb6702b63e"
+    },
+    {
+      "id": "early-24317029",
+      "imageId": 24317029,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/24317029.jpg",
+      "path": "assets/duel/art/early-24317029.webp",
+      "sha256": "171685a81d900801627a7014ed5f082a0d0d543e2e1285bf9980757b1acc2007"
+    },
+    {
+      "id": "early-37101832",
+      "imageId": 37101832,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/37101832.jpg",
+      "path": "assets/duel/art/early-37101832.webp",
+      "sha256": "dae4c680520bb0be2b28ced4cd3567fa4777208acbe3e01c056b2afef4a33570"
+    },
+    {
+      "id": "early-63695531",
+      "imageId": 63695531,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/63695531.jpg",
+      "path": "assets/duel/art/early-63695531.webp",
+      "sha256": "9fdbf77c3918e8618bf6744bed7938bb68d75a761e7bc6e5e252d6fca0ddbe2b"
+    },
+    {
+      "id": "early-99877698",
+      "imageId": 99877698,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/99877698.jpg",
+      "path": "assets/duel/art/early-99877698.webp",
+      "sha256": "128350b2fdaaead2984292dad2262b460a3169eb6ca9392b71634333e5a43d3b"
+    },
+    {
+      "id": "early-50712728",
+      "imageId": 50712728,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/50712728.jpg",
+      "path": "assets/duel/art/early-50712728.webp",
+      "sha256": "09a3b0b0319fd2ff4192888ccdaa9129a8eadebb7002eb13d03755214764083e"
+    },
+    {
+      "id": "early-99690140",
+      "imageId": 99690140,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/99690140.jpg",
+      "path": "assets/duel/art/early-99690140.webp",
+      "sha256": "a91ed601ffff3af83cf85eb8c9002082fd8ceee5694a683f347cceabac210352"
+    },
+    {
+      "id": "early-47355498",
+      "imageId": 47355498,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/47355498.jpg",
+      "path": "assets/duel/art/early-47355498.webp",
+      "sha256": "b59c799fc811c7bc337ac31fe830f2c4293a8238ad6bc88a6ba6d8ad41f6303f"
+    },
+    {
+      "id": "early-72405967",
+      "imageId": 72405967,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/72405967.jpg",
+      "path": "assets/duel/art/early-72405967.webp",
+      "sha256": "6335b3738799f582044092c5e4e8e4f9ad551447c1983226e34fb5e23af87f1d"
+    },
+    {
+      "id": "early-14087893",
+      "imageId": 14087893,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/14087893.jpg",
+      "path": "assets/duel/art/early-14087893.webp",
+      "sha256": "f7e126339da9131d87ba4c582afd738cd8b74757aee2f30e97a220f9401b297a"
+    },
+    {
+      "id": "early-70231910",
+      "imageId": 70231910,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/70231910.jpg",
+      "path": "assets/duel/art/early-70231910.webp",
+      "sha256": "c543585e12e40b97850e4fa55ddfa2c52b8645750c8250d097536fe2cbd771c1"
+    },
+    {
+      "id": "early-73915051",
+      "imageId": 73915051,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/73915051.jpg",
+      "path": "assets/duel/art/early-73915051.webp",
+      "sha256": "78c889a08c4e00135f45baeab3d39678f1a9f8b8a72d8bc1b8f5ca535c429fe5"
+    },
+    {
+      "id": "early-30450531",
+      "imageId": 30450531,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/30450531.jpg",
+      "path": "assets/duel/art/early-30450531.webp",
+      "sha256": "c276281dfaa59736fba14b8029c0b1c41ff46c0775833005276075a2488b0ae9"
+    },
+    {
+      "id": "early-65830223",
+      "imageId": 65830223,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/65830223.jpg",
+      "path": "assets/duel/art/early-65830223.webp",
+      "sha256": "91949783cee6ee61141a32a15bb885c8c3746b4cf42b7defadf0ecc93df71e7f"
+    },
+    {
+      "id": "early-29401950",
+      "imageId": 29401950,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/29401950.jpg",
+      "path": "assets/duel/art/early-29401950.webp",
+      "sha256": "2b3db149cde9ec47a7954161cd969f914cc25758cfebe6f653a24ac8624e9fa4"
+    },
+    {
+      "id": "early-53582587",
+      "imageId": 53582587,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/53582587.jpg",
+      "path": "assets/duel/art/early-53582587.webp",
+      "sha256": "ef79cf4953ab0ec36e3d4e2983e8f9c4270f9452e16884b32c01e39fd58a3de6"
+    },
+    {
+      "id": "early-38299233",
+      "imageId": 38299233,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/38299233.jpg",
+      "path": "assets/duel/art/early-38299233.webp",
+      "sha256": "2d914c1de6d9c044a8b4b3abf92dce6c7cd93fa778cc6e3eff99a28262130840"
+    },
+    {
+      "id": "early-64697231",
+      "imageId": 64697231,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/64697231.jpg",
+      "path": "assets/duel/art/early-64697231.webp",
+      "sha256": "589ca3849f3cada04c7840a5bca503bf4d61bb88e804d4090a1ed2d0907bae28"
+    },
+    {
+      "id": "early-4178474",
+      "imageId": 4178474,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/4178474.jpg",
+      "path": "assets/duel/art/early-4178474.webp",
+      "sha256": "69d27a2ce4ce6a29dc6ef1b19f71ed536624e18b8939af274836d16ec0a94188"
+    },
+    {
+      "id": "early-77414722",
+      "imageId": 77414722,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/77414722.jpg",
+      "path": "assets/duel/art/early-77414722.webp",
+      "sha256": "2ced359e9bdecbf51958b30770bc355a455b5684e181fe42633a7dd71dd0d2db"
+    },
+    {
+      "id": "early-3819470",
+      "imageId": 3819470,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/3819470.jpg",
+      "path": "assets/duel/art/early-3819470.webp",
+      "sha256": "678c574fd1a6a2834cf8b57ebf2fcd85c1d607d6ac0cb7bdac04f0cf0b571ddb"
+    },
+    {
+      "id": "early-24623598",
+      "imageId": 24623598,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/24623598.jpg",
+      "path": "assets/duel/art/early-24623598.webp",
+      "sha256": "65e9e15c2c29ce26fa8060270bdeddc92cbab9d735baf0e8ff5207d2e212ffbb"
+    },
+    {
+      "id": "early-97077563",
+      "imageId": 97077563,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/97077563.jpg",
+      "path": "assets/duel/art/early-97077563.webp",
+      "sha256": "fe75b5e64148fe95d8483bfd9b947e65db630675ac7870f55f50e9becd4556b6"
+    },
+    {
+      "id": "early-61740673",
+      "imageId": 61740673,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/61740673.jpg",
+      "path": "assets/duel/art/early-61740673.webp",
+      "sha256": "97585ef2fd78fcad6f5fc366ea2ad3faf2067f158db3b4be676917f9012f517a"
+    },
+    {
+      "id": "early-53046408",
+      "imageId": 53046408,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/53046408.jpg",
+      "path": "assets/duel/art/early-53046408.webp",
+      "sha256": "d3df0a49568b2b4c2db5c28b329af40ba2895fae33567ebc9b2746e7926bdd36"
+    },
+    {
+      "id": "early-40619825",
+      "imageId": 40619825,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/40619825.jpg",
+      "path": "assets/duel/art/early-40619825.webp",
+      "sha256": "cbc009ff9f6eae17e7ba5d9d5307aaf396f8df479a8536064bdce86887093ae0"
+    },
+    {
+      "id": "early-49681811",
+      "imageId": 49681811,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/49681811.jpg",
+      "path": "assets/duel/art/early-49681811.webp",
+      "sha256": "f4c8d6fb5b3d46c52773ddcd58660c05f1b9118fccae14748801af608182f9ac"
+    },
+    {
+      "id": "linkuriboh",
+      "imageId": 41999284,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/41999284.jpg",
+      "path": "assets/duel/art/linkuriboh.webp",
+      "sha256": "e0d78e2c38eaba809a46782ce8900de2eb1b51a1c4c37a68948f961b19cd7fcf"
+    }
+  ]
+}

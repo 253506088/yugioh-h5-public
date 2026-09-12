@@ -1,14 +1,31 @@
 # ===== 依赖 =====
 /node_modules/
 
-# ===== 构建产物（npm run build 自动生成，勿提交） =====
-# 单文件游戏本体：内嵌全部卡图后体积可达 60MB+，随时可重新构建
-# 发布用小体积版本：npm run build:no-art
-#/index.html
+# ===== 构建与验证 =====
+# 根目录 index.html 是现有单文件发布入口，继续跟踪并随功能更新提交。
+# 它内嵌本地配乐与可用卡图；下载源文件不额外提交。
 # 构建报告、版本存档、测试截图等全部产物
 /output/
 
-# ===== 爬取的卡图（体积巨大，永不入库） =====
+# 本轮资源：提交卡背、11 张卡框、预设/连锁预览用的压缩 WebP 和来源清单。
+# 原始大图、源音频及试验封面属于本机下载缓存，保留在磁盘但不入库。
+/assets/audio/*.mp3
+/assets/audio/*.m4a
+/assets/audio/*.ogg
+/assets/audio/*.wav
+/assets/audio/*.flac
+/assets/duel/art/source/
+/assets/duel/frames/source/
+/assets/duel/cover.jpg
+/assets/duel/cover2.jpg
+
+# 本机临时诊断脚本，不作为项目测试套件提交
+/scripts/live-check.cjs
+*.log
+*.tmp
+*.part
+
+# ===== 批量卡图档案与压缩缓存（体积巨大，不入库） =====
 # 官方卡图原始归档
 /assets/official-archive/
 # 构建时的卡图压缩缓存（构建时自动重新生成）

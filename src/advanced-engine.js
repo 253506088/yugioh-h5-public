@@ -36,7 +36,8 @@
       s.building ||= null;s.frame ||= null;s.resolvingLink ||= null;s.delayed ||= [];s.nextLink ||= 1;s.nextTrigger ||= 1;
       s.duelFlags ||= {};s.lastNegatedAttack ||= null;s.version=3;s.damage ||= [0,0];s.summons ||= [0,0];s.nextChain ||= 1;s.chainId ??= null;
       if(s.chain.length&&s.chainId===null)s.chainId=s.nextChain++;
-      for(const link of s.chain)link.chainId??=s.chainId;
+      for(const [index,link] of s.chain.entries()){link.chainId??=s.chainId;link.chainNumber??=index+1;}
+      s.chainHistory ||= [];
       for(let i=0;i<2;i++){
         const p=s.players[i];p.banished ||= [];p.extraMonster ||= null;p.extraMonster2 ||= null;p.fieldSpell ||= null;p.usedTurn ||= {};p.duelUsed ||= {};
         if(p.extraMonster)p.extraMonster.extraSlot ??= i;
@@ -724,7 +725,7 @@
       ctx.inputRoles ||= {};ctx.inputRoles[group.key]=group.role||'target';
       if(group.key==='cost'||['cost','send-cost'].includes(group.role))return;
       ctx.targetMeta ||= {};ctx.targetMeta[group.key]={};
-      for(const uid of uids){const f=this.find(uid);if(f)ctx.targetMeta[group.key][uid]={generation:f.card.generation||0,zone:f.zone,owner:f.owner};}
+      for(const uid of uids){const f=this.find(uid);if(f)ctx.targetMeta[group.key][uid]={generation:f.card.generation||0,zone:f.zone,owner:f.owner,cardId:f.card.id,public:f.card.faceUp||f.zone==='grave'};}
     }
     prepare(ctx){
       req(this.fx.canUse(this,ctx),'现在不能发动这个效果，或没有合法的目标。');
@@ -783,10 +784,11 @@
         if(!a.pendulum&&!a.keepField&&!['continuous','equip','field'].includes(d.spellKind)&&d.trapKind!=='continuous')this.state.chainCleanup.push(ctx.uid);
       }
       if(!this.state.chain.length&&!this.state.chainResolving)this.state.chainId=this.state.nextChain++;
-      const link={...cp(ctx),id:'l'+this.state.nextLink++,chainId:this.state.chainId,speed:a.speed||1,cardActivation:activation,negatedActivation:false,effectNegated:false,sourceZone:ctx.source.zone,requiresField:!!a.requiresField,unanswerableByOpponent:!!a.unanswerableByOpponent};
+      const link={...cp(ctx),id:'l'+this.state.nextLink++,chainId:this.state.chainId,chainNumber:this.state.chain.length+1,speed:a.speed||1,cardActivation:activation,negatedActivation:false,effectNegated:false,sourceZone:ctx.source.zone,requiresField:!!a.requiresField,unanswerableByOpponent:!!a.unanswerableByOpponent};
       this.state.chain.push(link);
+      this.recordChain('add',link);
       const kind=ctx.source.effectType==='trap'?'trap':ctx.source.effectType==='spell'?'spell':'effect';
-      this.log(kind,this.name(ctx.owner)+'发动「'+CARDS[ctx.sourceId].name+'」'+(a.label?' · '+a.label:''),ctx.owner,{uid:ctx.uid,cardId:ctx.sourceId,key:ctx.key,chain:this.state.chain.length});
+      this.log(kind,this.name(ctx.owner)+'发动「'+CARDS[ctx.sourceId].name+'」'+(a.label?' · '+a.label:''),ctx.owner,{uid:ctx.uid,cardId:ctx.sourceId,key:ctx.key,chain:link.chainNumber,chainId:link.chainId,linkId:link.id});
       if(!this.state.building){
         if(this.state.frame)this.state.frame.windowOffered=true;
         this.openWindow(1-ctx.owner,0);
@@ -885,6 +887,46 @@
         const ctx=this.abilityContext(t.uid,t.key,'trigger',{...t.event,controller:t.owner,sourceId:t.sourceId,mandatory:t.mandatory});this.prepare(ctx);
       }else this.state.pending={kind:'trigger',owner:t.owner,responder:t.owner,trigger:cp(t),title:'可以发动诱发效果'};
     }
+    chainPrevention(link){
+      const origin=this.find(link.uid),same=origin&&(origin.card.generation||0)===link.source.generation;
+      return {
+        unavailable:!!(link.requiresField&&(!same||!['monsters','extraMonster','spells','fieldSpell'].includes(origin.zone)||!origin.card.faceUp)),
+        negated:!!(link.negatedActivation||link.effectNegated||this.earlyNegatesLink?.(link,true)||same&&fieldMonster(link.source.zone)&&fieldMonster(origin.zone)&&this.negated(origin.card))
+      };
+    }
+    traceChainImpact(link){
+      // Compare with the previous public state. An already-active continuous effect
+      // must never be attributed to an unrelated, higher-numbered chain link.
+      for(const waiting of this.state.chain){
+        const before=waiting.preventionState,after=this.chainPrevention(waiting);
+        if(before){
+          if(after.unavailable&&!before.unavailable)waiting.sourceUnavailableByNumber=link.chainNumber;
+          if(after.negated&&!before.negated)waiting.effectNegatedByNumber=link.chainNumber;
+          if(!after.unavailable)delete waiting.sourceUnavailableByNumber;
+          if(!after.negated)delete waiting.effectNegatedByNumber;
+        }
+        waiting.preventionState=after;
+        for(const group of Object.values(waiting.targetMeta||{}))for(const [uid,saved] of Object.entries(group)){
+          const now=this.find(uid);
+          if(!saved.lostByNumber&&(!now||now.zone!==saved.zone||now.owner!==saved.owner||(now.card.generation||0)!==saved.generation))saved.lostByNumber=link.chainNumber;
+        }
+      }
+    }
+    recordChain(stage,link,extra={}){
+      const data={id:link.id,chainId:link.chainId,number:link.chainNumber,owner:link.owner,cardId:link.sourceId,key:link.key,uid:link.uid};
+      let entry=this.state.chainHistory.find(item=>item.id===link.id);
+      if(!entry){
+        entry={...data,status:'waiting',targets:Object.values(link.targetMeta||{}).flatMap(group=>Object.entries(group).map(([uid,t])=>({uid,cardId:t.public||t.owner===0?t.cardId:null,owner:t.owner,zone:t.zone})))};
+        this.state.chainHistory.push(entry);
+        this.state.chainHistory=this.state.chainHistory.slice(-120);
+      }
+      if(stage==='resolve')entry.status='resolving';
+      if(stage==='negated'||stage==='unavailable'){entry.status=stage;entry.reason=extra.reason;entry.byNumber=extra.byNumber||null;}
+      if(stage==='target-lost'){entry.status='target-lost';entry.lostTargets=cp(extra.targets);}
+      if(stage==='resolved'){entry.status=extra.status;entry.finished=true;}
+      if(stage==='resolved'||stage==='add')this.traceChainImpact(link);
+      this.events.push({kind:'chain-'+stage,...data,...cp(extra),entry:cp(entry)});
+    }
     negateLink(id,source,activation=true,destroy=true){
       const link=this.state.chain.find(l=>l.id===id);if(!link||link.negatedActivation||link.effectNegated)return false;
       if(this.fx.get(link.key)?.cannotNegate)return false;
@@ -892,24 +934,40 @@
       if(origin&&fieldMonster(origin.zone)&&this.unaffected(origin.card,source))return false;
       if(activation)link.negatedActivation=true;else link.effectNegated=true;
       link.negatedBy=source.owner;
-      this.log('negate','「'+CARDS[link.sourceId].name+'」的'+(activation?'发动':'效果')+'被无效',source.owner,{uid:link.uid,cardId:link.sourceId});
+      link.negatedByLink=this.state.resolvingLink?.id||null;
+      link.negatedByNumber=this.state.resolvingLink?.chainNumber||null;
+      this.recordChain('negated',link,{byLink:link.negatedByLink,byNumber:link.negatedByNumber,reason:activation?'activation-negated':'effect-negated'});
+      this.log('negate','连锁 '+link.chainNumber+'「'+CARDS[link.sourceId].name+'」的'+(activation?'发动':'效果')+'被'+(link.negatedByNumber?'连锁 '+link.negatedByNumber:'效果')+'无效',source.owner,{uid:link.uid,cardId:link.sourceId,chain:link.chainNumber,chainId:link.chainId,byChain:link.negatedByNumber});
       if(destroy&&origin&&(fieldMonster(origin.zone)||['spells','fieldSpell','hand'].includes(origin.zone)))this.destroy(origin.card.uid,source,false,{negatedActivation:activation&&link.cardActivation});
       return true;
     }
     resolveLink(){
       const link=this.state.chain.pop();this.state.resolvingLink=link;
+      this.recordChain('resolve',link);
       const f=this.find(link.uid),ability=this.fx.get(link.key);
       let negated=link.negatedActivation||link.effectNegated;
       if(!negated&&this.earlyNegatesLink)negated=this.earlyNegatesLink(link);
       if(!negated&&fieldMonster(link.source.zone)&&f&&fieldMonster(f.zone)&&(f.card.generation||0)===link.source.generation&&this.negated(f.card))negated=true;
-      if(!negated&&link.requiresField&&(!f||!['monsters','extraMonster','spells','fieldSpell'].includes(f.zone)||!f.card.faceUp||(f.card.generation||0)!==link.source.generation))negated=true;
+      const unavailable=!negated&&link.requiresField&&(!f||!['monsters','extraMonster','spells','fieldSpell'].includes(f.zone)||!f.card.faceUp||(f.card.generation||0)!==link.source.generation);
+      const lostTargets=[];
       for(const [key,targets] of Object.entries(link.targetMeta||{})){
-        link.args[key]=(link.args[key]||[]).filter(uid=>{const saved=targets[uid];if(!saved)return true;const now=this.find(uid);return now&&(now.card.generation||0)===saved.generation&&now.zone===saved.zone&&now.owner===saved.owner;});
+        link.args[key]=(link.args[key]||[]).filter(uid=>{const saved=targets[uid];if(!saved)return true;const now=this.find(uid),valid=now&&(now.card.generation||0)===saved.generation&&now.zone===saved.zone&&now.owner===saved.owner;if(!valid)lostTargets.push({uid,cardId:saved.public||saved.owner===0?saved.cardId:null,owner:saved.owner,zone:saved.zone,byNumber:saved.lostByNumber||null});return valid;});
       }
-      const tasks=negated?[]:this.collectTasks(()=>this.fx.resolve(this,link));
-      if(this.state.winner!==null)return;
+      if(lostTargets.length&&!negated&&!unavailable){
+        link.lostTargets=lostTargets;
+        this.recordChain('target-lost',link,{targets:lostTargets});
+        this.log('chain-warning','连锁 '+link.chainNumber+'「'+CARDS[link.sourceId].name+'」的 '+lostTargets.length+' 个目标已离开原位置，相关部分无法处理',link.owner,{cardId:link.sourceId,chain:link.chainNumber,chainId:link.chainId,targets:lostTargets});
+      }
+      link.resolutionStatus=negated?'negated':unavailable?'unavailable':lostTargets.length?'target-lost':'resolved';
+      if(negated&&!link.negatedActivation&&!link.effectNegated)this.recordChain('negated',link,{reason:'effect-negated',byNumber:link.effectNegatedByNumber||null});
+      if(unavailable){
+        this.recordChain('unavailable',link,{reason:'source-unavailable',byNumber:link.sourceUnavailableByNumber||null});
+        this.log('chain-warning','连锁 '+link.chainNumber+'「'+CARDS[link.sourceId].name+'」需要保持在场，来源离场后效果未能适用',link.owner,{cardId:link.sourceId,chain:link.chainNumber,chainId:link.chainId,byChain:link.sourceUnavailableByNumber||null});
+      }
+      const tasks=negated||unavailable?[]:this.collectTasks(()=>this.fx.resolve(this,link));
+      if(this.state.winner!==null){this.recordChain('resolved',link,{status:link.resolutionStatus});return;}
       if(negated&&!link.negatedActivation)this.log('negate','「'+CARDS[link.sourceId].name+'」的效果未能适用',link.owner,{cardId:link.sourceId});
-      this.state.tasks.unshift(...tasks,{op:'finish-link',link:cp(link),applied:!negated});
+      this.state.tasks.unshift(...tasks,{op:'finish-link',link:cp(link),applied:!negated&&!unavailable});
     }
     runTask(task){
       if(task.op==='link-materials'){
@@ -935,6 +993,7 @@
           this.emit({type:'spell-resolved',owner:link.owner,uid:link.uid,id:link.sourceId});
         }
         if(link.negatedActivation)this.fx.onNegated(this,link);
+        this.recordChain('resolved',link,{status:link.resolutionStatus||'resolved'});
         this.state.resolvingLink=null;this.checkWin();return;
       }
       const tasks=this.collectTasks(()=>this.fx.operation(this,task));this.state.tasks.unshift(...tasks);
@@ -945,6 +1004,7 @@
         if(this.state.tasks.length){this.runTask(this.state.tasks.shift());continue;}
         if(this.state.chainResolving){
           if(this.state.chain.length){this.resolveLink();continue;}
+          this.events.push({kind:'chain-complete',chainId:this.state.chainId});
           this.state.chainResolving=false;this.state.chainId=null;
           for(const uid of [...new Set(this.state.chainCleanup.splice(0))]){const f=this.find(uid);if(f&&['spells','fieldSpell'].includes(f.zone))this.move(uid,'grave',{kind:'rule-resolved',reason:'连锁处理结束'});}
           if(this.state.earlyNeedsWindow&&this.state.frame){this.state.frame.windowOffered=false;this.state.earlyNeedsWindow=false;}

@@ -73,12 +73,12 @@
  };
  P.isProhibited=function(id,uid){return [0,1].some(p=>this.spells(p).some(m=>this.activeSpell(m)&&m.prohibitedId===id&&!(m.prohibitionExempt||[]).includes(uid)));};
  P.canTarget=function(card,source){return !(card.faceUp&&this.race(card)==='龙族'&&this.hasEarly('Lord of D.')&&!this.unaffected(card,source));};
- P.earlyNegatesLink=function(link){const f=this.find(link.uid),a=this.fx.get(link.key),type=link.source.effectType;if(a.cannotNegate)return false;
+ P.earlyNegatesLink=function(link,probe=false){const f=this.find(link.uid),a=this.fx.get(link.key),type=link.source.effectType;if(a.cannotNegate)return false;
   if(type==='trap'&&f&&['spells','fieldSpell'].includes(f.zone)&&this.trapsSuppressed())return true;
   if(type==='spell'&&f&&['spells','fieldSpell'].includes(f.zone)&&this.rawEarly('Imperial Order').length&&!this.trapsSuppressed())return true;
   if(CARDS[link.sourceId].flip&&(this.hasEarly('Royal Command')||this.hasEarly('Fiend Skull Dragon')))return true;
   const targets=Object.values(link.targetMeta||{}).flatMap(x=>Object.keys(x)).map(uid=>this.find(uid)).filter(f=>f&&fieldMonster(f.zone)&&f.card.faceUp&&!this.negated(f.card));
-  for(const t of targets){const d=CARDS[t.card.id],r=d.earlyRules||{};if(type==='spell'&&(r.negateTargetSpell||d.officialName==='Freed the Matchless General'||this.race(t.card)==='战士族'&&this.hasEarly('Frontier Wiseman',t.owner))||type==='trap'&&r.negateTargetTrap){if(f)this.destroy(f.card.uid,{id:t.card.id,uid:t.card.uid,owner:t.owner,effectType:'monster'});return true;}}
+  for(const t of targets){const d=CARDS[t.card.id],r=d.earlyRules||{};if(type==='spell'&&(r.negateTargetSpell||d.officialName==='Freed the Matchless General'||this.race(t.card)==='战士族'&&this.hasEarly('Frontier Wiseman',t.owner))||type==='trap'&&r.negateTargetTrap){if(f&&!probe)this.destroy(f.card.uid,{id:t.card.id,uid:t.card.uid,owner:t.owner,effectType:'monster'});return true;}}
   return false;
  };
  P.zoneBlocked=function(owner,index){return [0,1].some(p=>this.spells(p).some(m=>this.activeSpell(m)&&(m.blockedZones||[]).some(([o,i])=>o===owner&&i===index)))||(this.state.players[owner].reservedZones||[]).some(r=>r.index===index&&r.until>=this.state.turn);};
