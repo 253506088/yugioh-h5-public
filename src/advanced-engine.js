@@ -304,6 +304,7 @@
     addLock(owner,kind,value=null){this.state.players[owner].locks.push({kind,value,turn:this.state.turn});}
     canSpecial(owner,card,options={}){
       const c=CARDS[card.id],p=this.state.players[owner],where=this.find(card.uid)?.zone;
+      if(!isMonster(c)&&!card.asMonster)return false;
       if(c.type==='link'&&options.position&&options.position!=='attack')return false;
       if(c.noSpecial)return false;
       if(c.masked&&options.via!=='mask')return false;
@@ -419,7 +420,7 @@
     }
     setCard(action){
       this.mainCheck();const f=this.ownCard(action.uid,['hand']);req(['spell','trap'].includes(CARDS[f.card.id].type),'只有魔法和陷阱可以盖放在魔陷区。');
-      const p=this.state.players[f.owner],slot=p.spells.indexOf(null);req(slot>=0,'魔法／陷阱区域已满。');
+      const p=this.state.players[f.owner],slot=this.freeSpellZones?.(f.owner)[0]??p.spells.indexOf(null);req(slot>=0,'魔法／陷阱区域已满。');
       this.remove(f.card.uid);f.card.faceUp=false;f.card.setTurn=this.state.turn;f.card.pendingActivation=false;p.spells[slot]=f.card;
       this.log('set',this.name(f.owner)+'盖放了1张魔法／陷阱卡',f.owner,{uid:f.card.uid});this.state.frame={kind:'main-open',owner:f.owner,windowOffered:false};
     }
@@ -465,7 +466,7 @@
       return true;
     }
     fusionValid(owner,extra,materials,spellId='polymerization'){
-      if(!this.fusionAllowed(extra,spellId)||!this.canSpecial(owner,extra,{via:'fusion'}))return false;
+      if(!this.fusionAllowed(extra,spellId)||!this.canSpecial(owner,extra,{via:spellId?.contact?CARDS[extra.id].specialOnly:'fusion'}))return false;
       const profile=typeof spellId==='object'?spellId:null;
       if(profile?.requiredUid){const required=this.find(profile.requiredUid);if(!required||required.owner!==owner||required.zone!==(profile.requiredZone||'grave')||(required.card.generation||0)!==profile.requiredGeneration||!materials.some(m=>m.uid===profile.requiredUid))return false;}
       const c=CARDS[extra.id],specs=c.fusion||c.materials.map(id=>({id})),pool=new Set(this.fusionPool(owner,spellId).map(m=>m.uid));
@@ -480,7 +481,7 @@
       return this.freeZones(owner,extra,{materials:materials.map(m=>m.uid)}).length>0;
     }
     fusionCombos(owner,extra,spellId='polymerization'){
-      if(!this.fusionAllowed(extra,spellId)||!this.canSpecial(owner,extra,{via:'fusion'}))return [];
+      if(!this.fusionAllowed(extra,spellId)||!this.canSpecial(owner,extra,{via:spellId?.contact?CARDS[extra.id].specialOnly:'fusion'}))return [];
       const c=CARDS[extra.id],specs=c.fusion||c.materials.map(id=>({id})),pool=this.fusionPool(owner,spellId),out=[],seen=new Set();
       const walk=(at,chosen)=>{
         if(out.length>=80)return;
@@ -693,7 +694,7 @@
       const owner=event.controller??event.owner??found?.owner,sourceId=found?.card.id||event.sourceId;
       req([0,1].includes(owner)&&CARDS[sourceId],'效果来源不正确。');
       const card=found?.card||{id:sourceId,uid,originalOwner:owner,mods:[],used:{}};
-      return {uid,key,owner,sourceId,origin,event:cp(event),args:{},provided:cp(provided),source:{uid,id:sourceId,generation:card.generation||0,owner,originalLevel:CARDS[sourceId].rank||CARDS[sourceId].level||0,effectType:ability.effectType||(found&&['spells','fieldSpell'].includes(found.zone)?'spell':CARDS[sourceId].type==='pendulum'?'monster':CARDS[sourceId].type),zone:found?.zone,atk:this.attackValue(card)},window:null};
+      return {uid,key,owner,sourceId,origin,event:cp(event),args:{},provided:cp(provided),source:{uid,id:sourceId,generation:card.generation||0,owner,originalLevel:CARDS[sourceId].rank||CARDS[sourceId].level||0,effectType:ability.effectType||(found&&['spells','fieldSpell'].includes(found.zone)?'spell':isMonster(CARDS[sourceId])?'monster':CARDS[sourceId].type),zone:found?.zone,atk:this.attackValue(card)},window:null};
     }
     queue(task){if(this._collecting)this._collecting.push(cp(task));else this.state.tasks.push(cp(task));}
     queueChoice(owner,title,candidates,min,max,operation,context={},extra={}){
@@ -776,7 +777,7 @@
             if(p.fieldSpell)this.move(p.fieldSpell.uid,'grave',{kind:'rule-field',reason:'场地魔法替换'});
             this.remove(ctx.uid);p.fieldSpell=source.card;
           }else{
-            let slot=a.pendulum?Number(ctx.args.slot[0].split(':')[1]):p.spells.indexOf(null);
+            let slot=a.pendulum?Number(ctx.args.slot[0].split(':')[1]):(this.freeSpellZones?this.freeSpellZones(ctx.owner)[0]:p.spells.indexOf(null));
             req(Number.isInteger(slot)&&slot>=0&&slot<5&&!p.spells[slot],'没有可用的魔法／陷阱区域。');
             this.remove(ctx.uid);p.spells[slot]=source.card;
           }
@@ -1012,6 +1013,7 @@
         if(this.state.chainResolving){
           if(this.state.chain.length){this.resolveLink();continue;}
           this.events.push({kind:'chain-complete',chainId:this.state.chainId});
+          this.emit({type:'chain-complete',owner:this.state.active,chainId:this.state.chainId,links:this.state.chainHistory.filter(l=>l.chainId===this.state.chainId).map(l=>({...l}))});
           this.state.chainResolving=false;this.state.chainId=null;
           for(const uid of [...new Set(this.state.chainCleanup.splice(0))]){const f=this.find(uid);if(f&&['spells','fieldSpell'].includes(f.zone))this.move(uid,'grave',{kind:'rule-resolved',reason:'连锁处理结束'});}
           if(this.state.earlyNeedsWindow&&this.state.frame){this.state.frame.windowOffered=false;this.state.earlyNeedsWindow=false;}
@@ -1420,7 +1422,7 @@
           if(fieldMonster(f.zone)&&!isMonster(c)&&!card.asMonster)throw new Error('Non-monster in monster zone');
           if(fieldMonster(f.zone)&&c.type==='link'&&(!card.faceUp||card.position!=='attack'))throw new Error('Link monster must be face-up in attack position');
           if(f.zone==='extraMonster'){if(![0,1].includes(card.extraSlot)||extraOccupied.has(card.extraSlot))throw new Error('Invalid or shared extra monster zone collision');extraOccupied.add(card.extraSlot);}
-          if(f.zone==='spells'&&!['spell','trap','pendulum'].includes(c.type)&&!card.monsterEquip)throw new Error('Invalid back-row card');
+          if(f.zone==='spells'&&!['spell','trap','pendulum'].includes(c.type)&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell)throw new Error('Invalid back-row card');
           if(f.zone==='spells'&&c.type==='pendulum'&&![0,4].includes(f.index))throw new Error('Pendulum card outside pendulum zone');
           if(f.zone==='fieldSpell'&&(c.type!=='spell'||c.spellKind!=='field'))throw new Error('Invalid field spell');
           if(c.type==='token'&&!fieldMonster(f.zone))throw new Error('Token outside field');

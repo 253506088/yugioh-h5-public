@@ -45,7 +45,7 @@
   function cry(c){return !!CARDS[c.id].crystron;}
   function noBanishReplacement(e,owner){return !e.monsters(1-owner).some(c=>c.faceUp&&c.id==='masked-dark-law'&&!e.negated(c));}
   function canSendGY(e,card){
-    const f=e.find(card.uid);return !!f&&noBanishReplacement(e,card.originalOwner)&&CARDS[card.id].type!=='token'&&!(fieldZone(f.zone)&&card.banishOnLeave)&&!(CARDS[card.id].type==='pendulum'&&(fieldZone(f.zone)||['spells','fieldSpell'].includes(f.zone)));
+    const f=e.find(card.uid);if(e._advancedReady&&(e.hasEarly('Macro Cosmos')||e.hasEarly('Banisher of the Radiance')||isMonster(CARDS[card.id])&&e.hasEarly('Dimensional Fissure')||f?.zone==='deck'&&e.hasEarly('Dimension Fortress Weapon')))return false;return !!f&&noBanishReplacement(e,card.originalOwner)&&CARDS[card.id].type!=='token'&&!(fieldZone(f.zone)&&card.banishOnLeave)&&!(CARDS[card.id].type==='pendulum'&&(fieldZone(f.zone)||['spells','fieldSpell'].includes(f.zone)));
   }
   function discard(e,ctx,uids){for(const uid of uids){e.ownCard(uid,['hand'],ctx.owner);e.move(uid,'grave',{kind:'cost-discard',source:ctx.source,byOwner:ctx.owner});}}
   function sendCost(e,ctx,uids){for(const uid of uids){const f=e.find(uid);if(!f||!canSendGY(e,f.card))throw new root.DuelRuleError('这张卡不能实际送去墓地，因此不能支付这个代价。');}for(const uid of uids)e.move(uid,'grave',{kind:'cost-send',source:ctx.source,byOwner:ctx.owner});}
@@ -103,7 +103,7 @@
     if(a.cardActivation){
       if(d.type==='trap'){
         const temple=e.hasEarly?.('Temple of the Kings',ctx.owner)&&!e.wasUsed(ctx.owner,{id:D.cardByName('Temple of the Kings').id},'same-turn-trap','name');
-        if(!f||(!handTrap&&(f.zone!=='spells'||c.faceUp||c.setTurn>=e.state.turn&&!temple&&!ctx.event.forcedTrap)))return false;
+        if(!f||(!handTrap&&(f.zone!=='spells'||c.faceUp||c.setTurn>=e.state.turn&&!temple&&!(e.hasEarly?.('Night Wing Sorceress',ctx.owner)&&c.id===D.cardByName('Assault Mode Activate')?.id)&&!ctx.event.forcedTrap)))return false;
       }else if(f?.zone==='spells'){
         if(c.faceUp)return false;
         if((a.quickPlay||a.speed===2)&&c.setTurn>=e.state.turn)return false;
@@ -117,7 +117,7 @@
       // All currently known groups must be satisfiable before offering an
       // activation. Dependent groups are returned once their earlier choice is
       // present, so a cost prompt cannot strand a player with no legal target.
-      if(inputGroups(e,ctx).some(g=>!Object.prototype.hasOwnProperty.call(ctx.args,g.key)&&(g.candidates||[]).length<(g.min??1)))return false;
+      if(inputGroups(e,ctx).some(g=>(g.max??1)<(g.min??1)||!Object.prototype.hasOwnProperty.call(ctx.args,g.key)&&(g.candidates||[]).length<(g.min??1)))return false;
     }catch{return false;}
     return true;
   }
@@ -129,7 +129,7 @@
   function nextInput(e,ctx){return inputGroups(e,ctx).find(g=>!Object.prototype.hasOwnProperty.call(ctx.args,g.key))||null;}
   function available(e,owner,context={}){
     const out=[];
-    for(const f of e.refs(owner,['hand','monsters','extraMonster','spells','fieldSpell','grave','banished'])){
+    for(const f of e.refs(owner,['hand','monsters','extraMonster','spells','fieldSpell','grave','banished','extra'])){
       if(context.onlyUid&&context.onlyUid!==f.card.uid)continue;
       for(const a of byCard[f.card.id]||[]){
         if(a.trigger)continue;
@@ -232,6 +232,7 @@
     const target=Math.min(g.max??1,ranked.length),chosen=[];
     for(const c of ranked){
       if(chosen.length>=target)break;
+      if(chosen.length>=(g.min??1)&&['destroy','banish','bounce'].includes(g.role)&&candidateScore(e,ctx,c,g.role)<=0)continue;
       const trial=[...chosen,c.uid];
       if(g.distinct&&chosen.some(uid=>g.candidates.find(x=>x.uid===uid)[g.distinct]===c[g.distinct]))continue;
       if(g.validator&&validateInput(e,ctx,g,trial)!==true)continue;
@@ -259,12 +260,12 @@
     return root.DuelAITactics?root.DuelAITactics.response(e,action,owner,value):value;
   }
   const H={mainPhase,fieldZone,source,self,args,first,frame,cards,monsterCards,options,group,customGroup,deck,grave,hand,field,monsters,specialable,normal,cyber,cry,noBanishReplacement,canSendGY,discard,sendCost,tributeCost,detachInput,targetField,legalTarget,destroyTargets,banishTargets,bounceTargets,once,isDamageWindow};
-  const API={register,get,willDestroy,willSummon,passive,passives,trigger,quick,spell,trap,on,op,endHandlers,canUse,nextInput,available,payCost,resolve,onEvent,operation,endPhase,onNegated,validateInput,candidateScore,aiPick,aiChoice,aiTrigger,aiResponse,H,defs};
+  const API={register,get,willDestroy,willSummon,passive,passives,trigger,quick,spell,trap,on,op,ops,endHandlers,canUse,nextInput,available,payCost,resolve,onEvent,operation,endPhase,onNegated,validateInput,candidateScore,aiPick,aiChoice,aiTrigger,aiResponse,H,defs};
   root.DuelEffects=API;
   if(typeof module!=='undefined'&&module.exports){
     module.exports=API;
     require('./ai-marginal.js');
     require('./ai-tactics.js');
-    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005'])require('./'+file+'.js');
+    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005','effects-2006','effects-2007','effects-2008','effects-year-final'])require('./'+file+'.js');
   }
 })(typeof globalThis!=='undefined'?globalThis:this);

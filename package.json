@@ -25,7 +25,7 @@
     "test:journal": "node --test tests/journal.test.cjs && node tests/journal-browser.cjs",
     "start": "node scripts/serve.mjs",
     "test": "node scripts/run-checks.mjs",
-    "test:rules": "node --test tests/engine.test.cjs tests/v2-core.test.cjs tests/v2-regression.test.cjs tests/v3-rules.test.cjs tests/v4-rules.test.cjs tests/v4-2002.test.cjs tests/v4-2002-sweep.test.cjs tests/v4-2003.test.cjs tests/v4-2003-sweep.test.cjs tests/v4-2004.test.cjs tests/v4-2004-sweep.test.cjs tests/v4-2005.test.cjs tests/v4-2005-sweep.test.cjs",
+    "test:rules": "node --test tests/engine.test.cjs tests/v2-core.test.cjs tests/v2-regression.test.cjs tests/v3-rules.test.cjs tests/v4-rules.test.cjs tests/v4-2002.test.cjs tests/v4-2002-sweep.test.cjs tests/v4-2003.test.cjs tests/v4-2003-sweep.test.cjs tests/v4-2004.test.cjs tests/v4-2004-sweep.test.cjs tests/v4-2005.test.cjs tests/v4-2005-sweep.test.cjs tests/gx-rules.test.cjs tests/gx-sweep.test.cjs tests/card-materials.test.mjs",
     "test:2002-sweep": "node --test tests/v4-2002-sweep.test.cjs",
     "test:assets": "node --test tests/yearly-collector.test.mjs tests/game-art.test.mjs tests/collection-progress.test.mjs",
     "test:i18n": "node --test tests/i18n.test.cjs",
@@ -40,9 +40,12 @@
     "test:v3-simulation": "node tests/v3-simulation.cjs",
     "test:v3-browser": "node tests/v3-browser.cjs",
     "test:mixed": "node tests/v2-mixed-simulation.cjs",
-    "test:years": "node --test tests/v4-2003.test.cjs tests/v4-2003-sweep.test.cjs tests/v4-2004.test.cjs tests/v4-2004-sweep.test.cjs tests/v4-2005.test.cjs tests/v4-2005-sweep.test.cjs",
+    "test:years": "node --test tests/v4-2003.test.cjs tests/v4-2003-sweep.test.cjs tests/v4-2004.test.cjs tests/v4-2004-sweep.test.cjs tests/v4-2005.test.cjs tests/v4-2005-sweep.test.cjs tests/gx-rules.test.cjs tests/gx-sweep.test.cjs tests/card-materials.test.mjs",
     "test:years:browser": "node tests/yearly-browser.cjs",
-    "test:years:simulation": "node tests/yearly-simulation.cjs"
+    "test:years:simulation": "node tests/yearly-simulation.cjs",
+    "test:gx": "node --test tests/gx-rules.test.cjs tests/gx-sweep.test.cjs tests/card-materials.test.mjs",
+    "test:gx:browser": "node tests/gx-browser.cjs",
+    "test:gx:simulation": "node tests/gx-simulation.cjs"
   },
   "engines": {
     "node": ">=22.13.0"

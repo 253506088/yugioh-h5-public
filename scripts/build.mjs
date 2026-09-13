@@ -37,6 +37,9 @@ scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'effects-2002.js','effects-
 scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'effects-2003.js','effects-2003-monsters.js','effects-2003-spells.js','effects-2003-traps.js');
 scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'effects-2004.js','effects-2004-monsters.js','effects-2004-spells.js','effects-2004-traps.js');
 scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'effects-2005.js','effects-2005-monsters.js','effects-2005-monsters-extra.js','effects-2005-spells.js','effects-2005-traps.js');
+for(const y of [2006,2007,2008]){const files=y===2006?['','-monsters','-monsters-extra','-spells','-traps']:y===2007?['','-monsters','-extra','-spells','-traps']:['','-monsters','-extra','-spells','-traps'];scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,...files.map(s=>'effects-'+y+s+'.js'));}
+scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'effects-year-final.js');
+scriptFiles.splice(scriptFiles.indexOf('early-decks.js')+1,0,'year-decks.js');
 scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'log-engine.js');
 scriptFiles.splice(scriptFiles.indexOf('advanced-effects.js'),0,'early-engine-extra.js');
 scriptFiles.splice(scriptFiles.indexOf('advanced-effects.js'),0,'ai-marginal.js');
@@ -45,7 +48,7 @@ scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'card-locales.js','i18n-dat
 scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'tournament.js','tournament-storage.js','tournament-ui.js');
 scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'log-ui.js');
 scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-ai.js');
-scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-years.js');
+scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-years.js','i18n-years-gx.js');
 scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-polish.js');
 const styles = (await Promise.all(styleFiles.map(file => readFile(join(root, 'src', file), 'utf8')))).join('\n\n');
 const scripts = await Promise.all(scriptFiles.map(file => readFile(join(root, 'src', file), 'utf8')));
