@@ -25,6 +25,11 @@
     let renderedStatus = '', lastPaint = 0, lastViewPaint = 0, interactionUntil = 0, saveError = '', savedAt = 0, saving = false;
     let savedRevision = -1, saveQueue = Promise.resolve(), history = [], loading = true, navigationBusy = false;
     let draft = {count:16, seed:freshSeed(), name:'', deckIds:[], pool:'all', duplicates:true, concurrency:4, pace:'fast', difficulty:'standard'};
+    function fitViewerNotice(){
+      if(!view||dock.hidden||!dock.classList.contains('has-result'))document.body.style.removeProperty('--t-viewer-height');
+      else document.body.style.setProperty('--t-viewer-height',Math.ceil(dock.getBoundingClientRect().height)+'px');
+    }
+    new ResizeObserver(fitViewerNotice).observe(dock);
     try { const saved = JSON.parse(localStorage.getItem('duel-sanctuary-tournament-setup-v1') || 'null'); if (saved) draft = {...draft, ...saved}; } catch {}
     if (!Number.isInteger(draft.count) || draft.count < 2 || draft.count > 64) draft.count = 16;
 
@@ -313,6 +318,7 @@
     }
     function closeViewer() {
       seekToken++; clearTimeout(playTimer); view = null; dock.hidden = true; delete dock.dataset.viewerKey;
+      fitViewerNotice();
       for (const id of ['turn-panel', 'mobile-turn-control']) { const el = document.getElementById(id); if (el) delete el.dataset.viewerKey; }
     }
     async function seek(index) {
@@ -352,10 +358,12 @@
       if (game.error) return tr('该局异常，可保留录像重赛。', 'This attempt failed. Its recording is preserved.', 'エラーが発生しました。記録を残して再試合できます。');
       if (!game.verdict) return tr('完整记录每一次行动', 'Every action recorded', 'すべての行動を記録');
       const kind = game.verdict.kind;
+      const outcome=root.DuelOutcome?.read(game.final?.state);
+      if(outcome&&(kind==='normal'||kind==='draw'))return root.DuelOutcome.summary(outcome,{language:I.language,names:[tr('机器人 A','Robot A','ロボット A'),tr('机器人 B','Robot B','ロボット B')],cardName:I.name});
       return kind === 'normal' ? I.text(game.verdict.reason || '') : kind === 'draw' ? tr('平局 · 自动重赛', 'Draw · rematch', '引き分け・再試合') : tr('赛制裁定 · ', 'Adjudicated · ', '規定判定・') + I.text(game.verdict.reason);
     }
     function renderBoardTools() {
-      if (!view) { dock.hidden = true; return; }
+      if (!view) { dock.hidden = true; fitViewerNotice(); return; }
       dock.hidden = false;
       const match = currentMatch(), game = currentGame(), cursor = view.cursor, total = game.steps.length, state = cursor.engine.state;
       const recorded = cup.matches.filter(m => m.games.length), points = turnPoints(), currentTurn = points.filter(p => p.index <= cursor.index).at(-1);
@@ -380,6 +388,11 @@
       const mode = dock.querySelector('.t-viewer-mode');
       mode.className = 't-viewer-mode' + (view.live ? ' live' : '');
       mode.lastChild.textContent = view.live ? 'LIVE' : 'REPLAY';
+      let notice=dock.querySelector('.t-result-notice');
+      if(!notice){notice=document.createElement('div');notice.className='t-result-notice';notice.setAttribute('role','status');dock.append(notice);}
+      const outcome=root.DuelOutcome?.read(state);notice.hidden=!outcome;
+      if(outcome){notice.dataset.outcomeKind=outcome.kind;notice.textContent=root.DuelOutcome.summary(outcome,{language:I.language,names:match.entrants.map(id=>name(cup.participant(id))),cardName:I.name});}
+      dock.classList.toggle('has-result',!!outcome);fitViewerNotice();
       const options = (select, html, key, value) => {
         if (!select || document.activeElement === select) return;
         if (select.dataset.optionsKey !== key) { select.innerHTML = html; select.dataset.optionsKey = key; }

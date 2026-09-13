@@ -8,7 +8,14 @@
     'properlySummoned','faceUpExtra','summonKind','pendingActivation','attacksMade','used','overlays']);
   function cloneEngine(engine){
     const copy=Object.assign(Object.create(Object.getPrototypeOf(engine)),engine);
-    copy.state=cp(engine.state);copy.randomState=engine.randomState;copy.events=[];copy.onChange=()=>{};copy._collecting=null;
+    // Journal entries are observations, never input to a card rule or AI
+    // projection. Keep the complete journal only on the real duel.
+    copy.state=cp({...engine.state,log:[]});copy.randomState=engine.randomState;copy.events=[];copy.onChange=()=>{};copy._collecting=null;
+    delete copy._duelLogContext;delete copy._duelLogLP;
+    // A projection may itself be the starting point of a tactical search. Do
+    // not carry its instrumentation closures into the next simulated engine.
+    if(engine._aiProjectionMethods)Object.assign(copy,engine._aiProjectionMethods);
+    delete copy._aiMarginalCost;delete copy._aiProjectionMethods;
     copy._aiMarginalProbe=true;copy._aiMarginalPlans=new Map();return copy;
   }
   function priorCopy(engine,action,owner){
@@ -89,12 +96,22 @@
     }
     return result;
   }
-  function simulate(engine,action,owner,choices){
+  function simulate(engine,action,owner,choices,options={}){
     const e=cloneEngine(engine),costs=new Set(),lpCosts=[0,0],counterCosts=new Map(),plan={},alternatives=[];
-    let uncertain=false,paying=false,limitedAlternatives=false,steps=0;
-    const random=e.random,move=e.move,payLP=e.payLP,commit=e.commitPrepared;
-    e.random=function(){uncertain=true;return random.call(this);};
-    e.move=function(uid,to,reason={}){if(paying&&(String(reason.kind||'').startsWith('cost')||reason.kind==='rule-field'))costs.add(uid);return move.call(this,uid,to,reason);};
+    let uncertain=false,paying=false,limitedAlternatives=false,steps=0,shuffling=0,beforeDraw=null;
+    const requestedDraws=[0,0];
+    const random=e.random,move=e.move,payLP=e.payLP,commit=e.commitPrepared,shuffle=e.shuffle,draw=e.draw,mill=e.mill,reveal=e.revealCards;
+    e._aiProjectionMethods={random,move,payLP,commitPrepared:commit,shuffle,draw,mill,revealCards:reveal};
+    if(options.redactOpponent){
+      const known=new Set(e.state.chain.map(l=>l.uid)),p=e.state.players[1-owner];
+      for(const zone of ['hand','deck','extra','monsters','spells'])for(const card of p[zone])if(card&&!known.has(card.uid)&&(['hand','deck'].includes(zone)||zone==='extra'&&!card.faceUpExtra||['monsters','spells'].includes(zone)&&!card.faceUp))card.id=zone==='extra'?root.DuelData.cardByName('Blue-Eyes Ultimate Dragon').id:zone==='spells'?'mirror-force':'battle-ox';
+    }
+    e.random=function(){if(!options.allowShuffle||!shuffling)uncertain=true;return random.call(this);};
+    e.shuffle=function(items){shuffling++;try{return shuffle.call(this,items);}finally{shuffling--;}};
+    e.draw=function(...a){if(options.unknownDraws&&a[1]!==0&&this.state.winner===null){beforeDraw||=cloneEngine(this);requestedDraws[a[0]]+=a[1]??1;uncertain=true;}return draw.apply(this,a);};
+    if(mill)e.mill=function(...a){if(options.unknownDraws&&a[1]>0)uncertain=true;return mill.apply(this,a);};
+    if(reveal)e.revealCards=function(...a){if(options.unknownDraws)uncertain=true;return reveal.apply(this,a);};
+    e.move=function(uid,to,reason={}){if(paying&&(String(reason.kind||'').startsWith('cost')||reason.kind==='rule-field'))costs.add(uid);if(options.unknownDraws&&this.find(uid)?.zone==='deck'&&/excavat|mill|draw/.test(reason.kind||''))uncertain=true;return move.call(this,uid,to,reason);};
     e.payLP=function(p,n){if(paying)lpCosts[p]+=n;return payLP.call(this,p,n);};
     e._aiMarginalCost={
       before(ctx){return action&&ctx.uid===action.uid&&ctx.key===action.key?new Map(e.physicalCards().map(c=>[c.uid,c.counters||0])):null;},
@@ -116,7 +133,7 @@
       if(++steps>160)throw new Error('AI projection decision budget');
       const p=e.state.pending;
       if(p.kind==='replay'&&!e.state.chainResolving&&!e.state.chain.length&&!e.state.tasks.length)break;
-      if(p.kind==='window'||p.kind==='trigger'&&!p.trigger?.mandatory){act({type:'pass'});continue;}
+      if(p.kind==='window'||p.kind==='trigger'&&!p.trigger?.mandatory&&(!options.ownTriggers||p.responder!==owner)){act({type:'pass'});continue;}
       if(p.responder!==owner)throw new Error('Opponent decision is not known');
       if(p.kind==='input'&&action&&p.ctx.uid===action.uid&&p.ctx.key===action.key){
         const g=p.group,selected=choices?.[g.key]||e.fx.aiPick(e,p.ctx,g);
@@ -131,11 +148,17 @@
           if(remaining.length)limitedAlternatives=true;
         }
         act({type:'choose',uids:selected});
-      }else if(p.kind==='order')act({type:'choose',uids:p.candidates.filter(c=>c.mandatory).map(c=>c.uid)});
+      }else if(p.kind==='order'){
+        const events=e.state.building?.groups[0]?.events||[];
+        act({type:'choose',uids:p.candidates.filter(c=>{
+          if(c.mandatory)return true;if(!options.ownTriggers)return false;
+          const t=events.find(t=>t.id===c.uid);return t&&e.fx.aiTrigger(e,e.abilityContext(t.uid,t.key,'trigger',{...t.event,controller:t.owner,sourceId:t.sourceId,mandatory:t.mandatory}));
+        }).map(c=>c.uid)});
+      }
       else act(e.chooseAI(p));
     }
     if(e.state.chainResolving||e.state.tasks.length||e.state.chain.length&&e.state.winner===null)throw new Error('Unfinished projection');
-    return {engine:e,costs,lpCosts,counterCosts,plan,alternatives,limitedAlternatives,uncertain};
+    return {engine:e,costs,lpCosts,counterCosts,plan,alternatives,limitedAlternatives,uncertain,beforeDraw,requestedDraws};
   }
   function evaluate(engine,action,owner,options={}){
     if(engine._aiMarginalProbe||!options.force&&!priorCopy(engine,action,owner))return {useful:true,reason:'no-duplicate'};
@@ -194,13 +217,17 @@
     for(const candidate of pending.candidates.filter(c=>!c.mandatory)){
       const event=events.find(t=>t.id===candidate.uid);
       if(!event){selected.push(candidate.uid);continue;}
+      const ctx=engine.abilityContext(event.uid,event.key,'trigger',{...event.event,controller:event.owner,sourceId:event.sourceId,mandatory:event.mandatory});
+      const ability=engine.fx.get(event.key);if(ability.aiTrigger&&!ability.aiTrigger(engine,ctx))continue;
       const action={type:'choose',uids:[...selected,candidate.uid],uid:event.uid,key:event.key,choicesByEvent:cp(choicesByEvent)};
       const duplicate=selected.some(id=>{const t=events.find(t=>t.id===id);return t?.sourceId===event.sourceId&&t.key===event.key;});
-      const decision=evaluate(engine,action,pending.owner,{force:duplicate,baselineAction:{type:'choose',uids:[...selected],choicesByEvent:cp(choicesByEvent)}});
+      const baselineAction={type:'choose',uids:[...selected],choicesByEvent:cp(choicesByEvent)};
+      const decision=evaluate(engine,action,pending.owner,{force:duplicate,baselineAction});
+      if(decision.useful&&pending.owner===engine.state.active&&['main1','main2'].includes(engine.state.phase)&&root.DuelAITactics&&!root.DuelAITactics.evaluate(engine,action,pending.owner,{baselineAction}).useful)continue;
       if(decision.useful){selected.push(candidate.uid);if(decision.choices)choicesByEvent[candidate.uid]=decision.choices;}
     }
     return {type:'choose',uids:selected,...(Object.keys(choicesByEvent).length?{choicesByEvent}:{} )};
   }
-  const api={evaluate,score,action,order};root.DuelAIMarginal=api;
+  const api={evaluate,score,action,order,project:simulate,clone:cloneEngine};root.DuelAIMarginal=api;
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(globalThis);

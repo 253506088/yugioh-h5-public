@@ -1,6 +1,8 @@
 (function (root) {
   'use strict';
   const { CARDS, DECKS, isMonster } = root.DuelData || require('./cards.js');
+  const Outcome=root.DuelOutcome||(typeof require==='function'?require('./duel-outcome.js'):null);
+  const Journal=root.DuelLog||(typeof require==='function'?require('./duel-log.js'):null);
   const clone = value => JSON.parse(JSON.stringify(value));
   const occupied = slots => slots.filter(Boolean);
   class RuleError extends Error {}
@@ -12,7 +14,7 @@
       this.events = [];
       this.randomState = (Number(options.seed) || Date.now()) >>> 0;
       const playerDeck = options.deck || 'blue';
-      this.state = { version: 1, turn: 1, active: options.first === 0 ? 0 : 1, phase: 'main1', normalUsed: false, winner: null, resultReason: '', pending: null, nextUid: 1, nextLog: 1, log: [], damage: [0, 0], summons: [0, 0], startedAt: Date.now(), difficulty: options.difficulty || 'standard', players: [] };
+      this.state = { version: 1, logVersion:1, turn: 1, active: options.first === 0 ? 0 : 1, phase: 'main1', normalUsed: false, winner: null, resultReason: '', pending: null, nextUid: 1, nextLog: 1, log: [], damage: [0, 0], summons: [0, 0], startedAt: Date.now(), difficulty: options.difficulty || 'standard', players: [] };
       for (const deckId of [playerDeck, options.opponentDeck || (playerDeck === 'blue' ? 'dark' : 'blue')]) {
         const deck = options.deckSpecs?.[this.state.players.length] || DECKS[deckId];
         requireRule(!!deck, '找不到这套卡组。');
@@ -36,7 +38,12 @@
     random() { let x = this.randomState; x ^= x << 13; x ^= x >>> 17; x ^= x << 5; this.randomState = x >>> 0; return this.randomState / 4294967296; }
     shuffle(items) { for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(this.random() * (i + 1)); [items[i], items[j]] = [items[j], items[i]]; } }
     name(owner) { return owner === 0 ? '你' : DECKS[this.state.players[owner].deckId].player; }
-    log(kind, text, owner = null, extra = {}) { const item = { n: this.state.nextLog++, turn: this.state.turn, kind, text, owner, ...extra }; this.state.log.unshift(item); this.state.log.length = Math.min(this.state.log.length, 100); this.events.push(item); }
+    log(kind, text, owner = null, extra = {}) {
+      const item=Journal.capture(this,{n:this.state.nextLog++,turn:this.state.turn,kind,text,owner,...extra});
+      this.state.log.unshift(item);
+      if(this.state.logVersion!==1||this._aiMarginalProbe)this.state.log.length=Math.min(this.state.log.length,100);
+      this.events.push(item);
+    }
     get activePlayer() { return this.state.players[this.state.active]; }
     get opponent() { return this.state.players[1 - this.state.active]; }
     monsters(owner) { return occupied(this.state.players[owner].monsters); }
@@ -76,26 +83,30 @@
     mainCheck() { requireRule(['main1', 'main2'].includes(this.state.phase), '请在主要阶段进行这个操作。'); }
     ownCard(uid, zones) { const found = this.find(uid); requireRule(found && found.owner === this.state.active && zones.includes(found.zone), '无法在这个位置使用此卡。'); return found; }
     draw(owner, amount = 1, silent = false) {
+      if(this.state.winner!==null)return;
       const player = this.state.players[owner];
-      let actual = 0;
+      let actual = 0,failed=false;
       for (let i = 0; i < amount; i++) {
-        if (!player.deck.length) { this.finish(1 - owner, `${this.name(owner)}的卡组已空，无法抽卡。`); break; }
+        if (!player.deck.length) { failed=true; break; }
         player.hand.push(player.deck.shift()); actual++;
       }
       if (!silent && actual) this.log('draw', `${this.name(owner)}抽了${actual}张卡`, owner, { amount: actual });
+      if(failed)this.finish(1-owner,`${this.name(owner)}的卡组已空，无法抽卡。`,{kind:'deck-out'});
     }
     damage(owner, amount, source = '战斗') {
-      if (!amount) return;
+      if (!amount||this.state.winner!==null) return;
       const player = this.state.players[owner];
       player.lp = Math.max(0, player.lp - amount);
       this.state.damage[1 - owner] += amount;
       this.log('damage', `${this.name(owner)}受到 ${amount} 点${source}伤害`, owner, { amount });
-      if (player.lp <= 0) this.finish(1 - owner, `${this.name(owner)}的生命值归零。`);
+      if (player.lp <= 0) this.finish(1 - owner, `${this.name(owner)}的生命值归零。`,{kind:'lp-zero'});
     }
-    finish(winner, reason) {
+    finish(winner, reason, details={}) {
       if (this.state.winner !== null) return;
       this.state.winner = winner; this.state.resultReason = reason; this.state.pending = null;
-      this.log('victory', winner === 0 ? '决斗胜利！属于你的命运，在此刻闪耀。' : '决斗结束。整理牌组，再一次相信自己的卡。', winner);
+      const outcome=Outcome.create(this.state,winner,reason,details);this.state.outcome=outcome;
+      this.state.winKind=outcome.kind;
+      this.log('victory',Outcome.summary(outcome,{names:[this.name(0),this.name(1)],cardName:id=>CARDS[id]?.name||''}),winner==='draw'?null:winner,{outcome:clone(outcome)});
     }
     summonInto(owner, card, mode = 'attack', special = false) {
       const player = this.state.players[owner];
@@ -530,7 +541,7 @@
           }
         }
       }
-      if (!Array.isArray(s.log) || s.log.length > 100) throw new Error('Invalid log');
+      if (!Array.isArray(s.log) || s.logVersion!==1 && s.log.length > 100) throw new Error('Invalid log');
       if (s.pending && !['summon', 'attack', 'discard'].includes(s.pending.kind)) throw new Error('Invalid pending action');
     }
   }

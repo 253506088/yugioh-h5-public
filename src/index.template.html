@@ -46,6 +46,7 @@
     <div class="header-location"><button data-action="home"><svg class="icon"><use href="#i-eye"/></svg><span>主界面</span></button><span id="screen-breadcrumb">DUEL SANCTUARY</span></div>
     <div id="duel-turn-hud" class="duel-turn-hud" aria-live="polite"></div>
     <div class="header-tools">
+      <button class="icon-button journal-open" data-journal-action="open" title="决斗记录" aria-label="决斗记录"><svg class="icon"><use href="#i-history"/></svg></button>
       <div class="quick-font" aria-label="字体大小"><button data-action="font-smaller" aria-label="缩小字体">A−</button><button data-action="font-larger" aria-label="放大字体">A＋</button></div>
       <button class="icon-button" data-action="sound" id="sound-button" title="切换音效（M）" aria-label="切换音效"><svg><use href="#i-volume"/></svg></button>
       <button class="icon-button fullscreen-button" data-action="fullscreen" title="全屏（F）" aria-label="全屏"><svg><use href="#i-fullscreen"/></svg></button>
@@ -64,7 +65,7 @@
       <button class="home-destination tournament-destination" data-action="tournament"><span class="destination-index">03 / BOT ARENA</span><svg class="icon"><use href="#i-swords"/></svg><h2>死斗竞技场</h2><p>万千可能，只留一位冠军。</p><span class="destination-tail"><b id="home-tournament-status" data-i18n-skip>16 强死斗 · 自由配置</b><i>↗</i></span></button>
       <button class="home-destination guide-destination" data-action="help"><span class="destination-index">04 / HANDBOOK</span><svg class="icon"><use href="#i-book"/></svg><h2>玩法指南</h2><p>从第一次召唤，到无限可能。</p><span class="destination-tail"><b>召唤规则 · 连锁时机</b><i>↗</i></span></button>
     </nav>
-    <div class="home-bottom"><span><i class="live-dot"></i> 进度自动保存 · 随时回来继续</span><button data-action="settings">个性化你的决斗 <svg class="icon"><use href="#i-settings"/></svg></button></div>
+    <footer class="home-bottom"><span><i class="live-dot"></i> 进度自动保存 · 随时回来继续</span><a class="project-signature" href="https://github.com/253506088/yugioh-h5-public" target="_blank" rel="noopener noreferrer"><strong data-i18n-skip>不锈钢琴</strong><span>GitHub 仓库 ↗</span></a><button data-action="settings">个性化你的决斗 <svg class="icon"><use href="#i-settings"/></svg></button></footer>
   </section>
 
   <section id="tournament-screen" class="tournament-screen" aria-label="死斗竞技场" data-i18n-skip hidden></section>
@@ -135,7 +136,7 @@
       </aside>
     </div>
   </main>
-  <footer class="site-footer"><span id="save-status"><i></i>进度自动保存</span><button class="offline-status" data-action="retry-artwork"><i></i><span id="art-status">本地卡图</span></button><span>高桥和希 原作 <b>／</b> 非官方同人致敬</span></footer>
+  <footer class="site-footer"><span id="save-status"><i></i>进度自动保存</span><button class="offline-status" data-action="retry-artwork"><i></i><span id="art-status">本地卡图</span></button><a class="project-signature" href="https://github.com/253506088/yugioh-h5-public" target="_blank" rel="noopener noreferrer"><strong data-i18n-skip>不锈钢琴</strong><span>GitHub 仓库 ↗</span></a><span>高桥和希 原作 <b>／</b> 非官方同人致敬</span></footer>
   <div class="music-dock" id="music-dock"><button data-action="music-toggle" id="music-toggle" aria-label="切换背景音乐">♫</button><button data-action="music-settings" class="music-track"><small id="music-scene">SOUNDTRACK</small><span id="music-title">配乐已就绪</span></button><button data-action="music-next" id="music-next" aria-label="下一首战斗配乐">↠</button></div>
   <div id="response-peek-bar" class="response-peek-bar" hidden></div>
   <div id="mobile-turn-control" class="mobile-turn-control" aria-label="便捷回合控制"></div>

@@ -86,7 +86,7 @@
   if(is(dealer,'Toon Masked Sorcerer'))e.draw(owner,1);
   if(is(dealer,'Toon Gemini Elf'))randomDiscard(e,1-owner,1,src(e,dealer));
  });
- E.on('damage-end',(e,v)=>{const a=v.attack;if(!a)return;const df=a.target&&e.find(a.target),af=e.find(a.uid);if(af&&df&&is(af.card,'Shinato, King of a Higher Plane')&&df.card.position==='defense'){const victim=e.find(a.target);if(victim?.zone==='grave')e.damage(df.owner,e.originalAttack(victim.card),'效果');}});
+ E.on('damage-end',(e,v)=>{const a=v.attack;if(!a)return;const df=a.target&&e.find(a.target),af=e.find(a.uid);if(af&&df&&is(af.card,'Shinato, King of a Higher Plane')&&df.card.position==='defense'){const victim=e.find(a.target);if(victim?.zone==='grave')e.damage(df.owner,e.originalAttack(victim.card),'效果',{id:af.card.id,uid:af.card.uid,owner:af.owner});}});
  // ---- Destroyed-by-battle and hand/deck displacement triggers --------------------------
  onMove('Newdoria','destroy',{destroys:true,inputs:target('选择破坏的怪兽',e=>allM(e)),resolve:(e,c)=>destroy(e,c,args(c))},(e,v)=>GYbattle(v));
  onMove('Yomi Ship','destroy',{destroys:true,resolve:(e,c)=>{const uid=c.event.source?.uid;if(uid&&e.find(uid))destroy(e,c,[uid]);}},(e,v)=>GYbattle(v));
@@ -156,7 +156,7 @@
  onFlip('Gravekeeper\'s Spy',{summons:true,resolve:(e,c)=>choose(e,c,'选择攻击力1500以下的守墓',H.specialable(e,c.owner,deck(e,c.owner,m=>gk(m)&&CARDS[m.id].atk<=1500)),1,1,'early-special',{shuffle:true,role:'special'})});
  onFlip('Gravekeeper\'s Guard',{inputs:target('选择返回手牌的对方怪兽',foeM,'bounce'),resolve:(e,c)=>moved(e,c,args(c),'hand','effect-return')});
  onFlip('Cobra Jar',{summons:true,resolve:(e,c)=>{for(const m of e.createTokens(c.owner,'2002-snake-token',1))m.snakeToken=true;}});
- E.on('move',(e,v)=>{if(v.to==='vanished'&&['battle','destroy'].includes(v.kind||'')){if(v.previous.snakeToken)e.damage(1-v.owner,500,'效果');if(v.previous.ojamaToken)e.damage(v.owner,300,'效果');}});
+ E.on('move',(e,v)=>{if(v.to==='vanished'&&['battle','destroy'].includes(v.kind||'')){if(v.previous.snakeToken)e.damage(1-v.owner,500,'效果',{id:v.id,uid:v.uid,owner:v.owner});if(v.previous.ojamaToken)e.damage(v.owner,300,'效果',{id:v.id,uid:v.uid,owner:v.owner});}});
  onFlip('Dimension Jar',{resolve:(e,c)=>{for(const owner of [c.owner,1-c.owner]){const pool=grave(e,1-owner,monster);if(pool.length)e.queueChoice(owner,'可以除外对方墓地最多3只怪兽',H.options(e,{...c,owner},pool),0,Math.min(3,pool.length),'early-move',{source:c.source,to:'banished',kind:'effect-banish',role:'banish'});}}});
  onFlip('Magical Plant Mandragola',{resolve:(e,c)=>{for(const m of [...allM(e),...allS(e)])if(m.faceUp&&CARDS[m.id].counterable)m.counters=(m.counters||0)+1;}});
  onFlip('Dark Cat with White Tail',{inputs:(e,c)=>[g(e,c,'foe','选择返回手牌的2只对方怪兽',foeM(e,c),2,2,'bounce'),g(e,c,'own','选择返回手牌的自己怪兽',ownM(e,c),1,1,'cost')],resolve:(e,c)=>moved(e,c,[...args(c,'foe'),...args(c)],'hand','effect-return')});
@@ -285,7 +285,7 @@
  // ---- Special Summon monsters -------------------------------------------------------------------------------
  C('Lava Golem').specialOnly='lava-golem';mark('Lava Golem','解放对方2只怪兽在其场上特殊召唤；召唤回合自己不能通常召唤，自己准备阶段受1000伤害');
  A('Lava Golem','special',{zones:['hand'],inherent:true,summons:true,condition:(e,c)=>{const pool=foeM(e,c).filter(m=>e.canTribute(m,1-c.owner));return pool.length>=2&&e.freeMain(1-c.owner)>=2&&!e.state.normalUsed;},inputs:(e,c)=>[g(e,c,'target','选择解放的2只对方怪兽',foeM(e,c).filter(m=>e.canTribute(m,1-c.owner)),2,2,'cost')],cost:(e,c)=>{for(const uid of args(c)){const f=e.find(uid);if(!f||!e.canTribute(f.card,1-c.owner))throw new root.DuelRuleError('不能解放选择的卡片。');}for(const uid of args(c))e.move(uid,'grave',{kind:'cost-tribute',source:c.source,byOwner:1-c.owner});},resolve:(e,c)=>{const f=e.find(c.uid);if(f?.zone==='hand'&&e.freeMain(1-c.owner)>0){const m=e.special(1-c.owner,c.uid,{via:'lava-golem'});if(m){m.golemOwner=c.owner;e.state.players[c.owner].normalSummonLockedTurn=e.state.turn;}}},aiScore:(e,c)=>e.state.players[c.owner].lp>3000&&foeM(e,c).length>=2?800:-100});
- E.on('standby',(e,v)=>{for(const owner of [0,1])for(const f of e.refs(owner,['monsters','extraMonster']))if(is(f.card,'Lava Golem')&&f.card.golemOwner===v.owner)e.damage(v.owner,1000,'效果');});
+ E.on('standby',(e,v)=>{for(const owner of [0,1])for(const f of e.refs(owner,['monsters','extraMonster']))if(is(f.card,'Lava Golem')&&f.card.golemOwner===v.owner)e.damage(v.owner,1000,'效果',{id:f.card.id,uid:f.card.uid,owner:f.owner});});
  C('Exodia Necross').specialOnly='exodia-necross';mark('Exodia Necross','以与艾克佐迪亚的契约特殊召唤；不会被战斗和魔法陷阱效果破坏，准备阶段+500，墓地缺少部件时破坏');
  passive('Exodia Necross',{protect:(e,s,m,battle,source)=>{if(s.card.uid!==m.uid)return false;if(battle)return true;return ['spell','trap','pendulum-spell'].includes(source?.effectType||CARDS[source?.id]?.type);}});
  onStandby('Exodia Necross',{condition:(e,c)=>!!self(e,c),resolve:(e,c)=>{const m=self(e,c);if(m)e.modify(c.uid,'atk','add',500,null,c.source);const p=e.state.players[c.owner];const ok=['Exodia the Forbidden One','Right Arm of the Forbidden One','Left Arm of the Forbidden One','Right Leg of the Forbidden One','Left Leg of the Forbidden One'].every(n=>p.grave.some(x=>is(x,n)));if(!ok&&e.find(c.uid))e.destroy(c.uid,{id:c.sourceId,uid:c.uid,owner:c.owner,effectType:'monster'});}},{optional:false});

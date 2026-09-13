@@ -248,12 +248,15 @@
   function aiTrigger(e,ctx){
     if(ctx.event.mandatory)return true;
     const a=get(ctx.key),f=e.find(ctx.uid),wanted=a.aiTrigger?a.aiTrigger(e,ctx):!(f&&fieldZone(f.zone)&&e.negated(f.card)&&!a.leavesAsCost);
-    return wanted&&(!root.DuelAIMarginal||root.DuelAIMarginal.score(e,{type:'respond',uid:ctx.uid,key:ctx.key},ctx.owner,1)>0);
+    if(!wanted)return false;
+    const action={type:'respond',uid:ctx.uid,key:ctx.key},score=root.DuelAIMarginal?root.DuelAIMarginal.score(e,action,ctx.owner,1):1;
+    return (root.DuelAITactics?root.DuelAITactics.response(e,action,ctx.owner,score):score)>0;
   }
   function aiResponse(e,item,w,owner){
     const a=get(item.key),ctx=e.abilityContext(item.uid,item.key,'window',{owner,window:w});
     const score=a.aiResponse?a.aiResponse(e,ctx,w):a.aiScore?(typeof a.aiScore==='function'?a.aiScore(e,ctx):a.aiScore):w.chainLast&&w.chainLast.owner!==owner?200:0;
-    return root.DuelAIMarginal?root.DuelAIMarginal.score(e,{type:'respond',uid:item.uid,key:item.key},owner,score):score;
+    const action={type:'respond',uid:item.uid,key:item.key},value=root.DuelAIMarginal?root.DuelAIMarginal.score(e,action,owner,score):score;
+    return root.DuelAITactics?root.DuelAITactics.response(e,action,owner,value):value;
   }
   const H={mainPhase,fieldZone,source,self,args,first,frame,cards,monsterCards,options,group,customGroup,deck,grave,hand,field,monsters,specialable,normal,cyber,cry,noBanishReplacement,canSendGY,discard,sendCost,tributeCost,detachInput,targetField,legalTarget,destroyTargets,banishTargets,bounceTargets,once,isDamageWindow};
   const API={register,get,willDestroy,willSummon,passive,passives,trigger,quick,spell,trap,on,op,endHandlers,canUse,nextInput,available,payCost,resolve,onEvent,operation,endPhase,onNegated,validateInput,candidateScore,aiPick,aiChoice,aiTrigger,aiResponse,H,defs};
@@ -261,6 +264,7 @@
   if(typeof module!=='undefined'&&module.exports){
     module.exports=API;
     require('./ai-marginal.js');
+    require('./ai-tactics.js');
     for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005'])require('./'+file+'.js');
   }
 })(typeof globalThis!=='undefined'?globalThis:this);

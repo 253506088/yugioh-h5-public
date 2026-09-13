@@ -24,6 +24,7 @@
   let aiTimer = null, aiEpoch = 0, modalKind = '', pendingKey = '', libraryQuery = '', libraryFilter = 'all';
   let setupOptions = { deck: 'early-ritual', opponentDeck: 'early-fusion', first: 0, difficulty: 'standard', mode: 'duel' }, selectionState = null, responseUid = null;
   let libraryFamily = 'all',libraryYear='all',libraryPage=0,libraryStatus='all',detailReturn = null,detailCardId=null,pileContext = null,deckOwner=0,overlayHostUid=null;
+  const journal=window.DuelLogUI.create({engine:()=>engine,names:()=>tournamentView?.names||[I.player(0,engine),I.player(1,engine)],open:openModal,card:showCardDetail});
   const spectate = { paused: false };
   const spectating = () => engine?.state.mode === 'spectate';
   const robotName = owner => tournamentView?.names[owner] || (owner === 0 ? '机器人 A' : '机器人 B');
@@ -460,6 +461,7 @@
     if(spectate.paused){clearTimeout(aiTimer);showToast('已暂停观战。');}else{showToast('继续观战。');scheduleAI();}
   }
   function bindEngine() {
+    window.DuelLog.upgrade(engine.state);
     engine.onChange = events => {
       if (selectedUid && !engine.find(selectedUid)) selectedUid = null;
       for (const event of events) if (event.owner === 0 && ['special','synchro','xyz','link','pendulum','fusion'].includes(event.kind) && event.cardId) { selectedUid = event.uid; previewId = event.cardId; previewHidden = false; }
@@ -539,6 +541,7 @@
     if(!CARDS[id])return;
     detailCardId=id;
     if(modalKind==='library')detailReturn=()=>showLibrary();
+    else if(modalKind==='log')detailReturn=()=>showLog();
     else if(modalKind==='pile'&&pileContext){const ctx={...pileContext};detailReturn=()=>showPile(ctx.owner,ctx.kind,ctx.onlyType);}
     else if(modalKind==='deck'){const owner=deckOwner;detailReturn=()=>showDeck(owner);}
     else if(modalKind==='overlays'){const uid=overlayHostUid;detailReturn=()=>showOverlays(uid);}
@@ -595,7 +598,8 @@
       '<div class="setting-row"><div><h3>配乐音量 <span id="music-volume-label">'+Math.round(prefs.musicVolume*100)+'%</span></h3><p>与召唤、攻击等音效分别调整。</p></div><input class="volume-control" id="music-volume-control" type="range" min="0" max="100" value="'+Math.round(prefs.musicVolume*100)+'" aria-label="配乐音量"></div><details class="music-library" id="music-library"><summary>原声曲目 · '+sound.tracks.length+' 首</summary><div>'+sound.tracks.map(track=>'<div><span><small>'+({lobby:'战斗前',battle:'决斗中',library:'卡牌图鉴',workshop:'卡组工坊',help:'玩法指南'}[track.scene])+'</small><b data-i18n-skip>'+escape(track.title)+'</b></span><em>'+(track.src?'已就绪':'音源缺失')+'</em></div>').join('')+'</div></details>'+
       toggle('reducedMotion', '减少动态效果', '关闭粒子、震动和过渡动画。') +
       '<div class="setting-row"><div><h3>对手行动速度</h3><p>选择适合自己的决斗节奏。</p></div><div class="segmented-control">' + [['normal', '沉浸'], ['fast', '快速']].map(([id, label]) => '<button class="' + (prefs.speed === id ? 'active' : '') + '" data-action="set-speed" data-value="' + id + '">' + label + '</button>').join('') + '</div></div>' +
-      '<div class="settings-record"><div><b>' + stats.games + '</b><small>完成对局</small></div><div><b>' + stats.wins + '</b><small>取得胜利</small></div><div><b>' + (stats.games ? Math.round(stats.wins / stats.games * 100) : 0) + '%</b><small>决斗胜率</small></div></div>',
+      '<div class="settings-record"><div><b>' + stats.games + '</b><small>完成对局</small></div><div><b>' + stats.wins + '</b><small>取得胜利</small></div><div><b>' + (stats.games ? Math.round(stats.wins / stats.games * 100) : 0) + '%</b><small>决斗胜率</small></div></div>'+
+      '<section class="project-credit"><h3>项目与署名</h3><p><strong data-i18n-skip>不锈钢琴</strong></p><a href="https://github.com/253506088/yugioh-h5-public" target="_blank" rel="noopener noreferrer" data-i18n-skip>https://github.com/253506088/yugioh-h5-public</a></section>',
       '<button class="primary-button" data-action="close-modal">保存并返回</button>');
   }
   function openTargetSelection() { showPending(); }
@@ -658,7 +662,7 @@
     }
   }
   function showLog() {
-    openModal('log', '属于你的决斗轨迹。', 'EVERY CHOICE MATTERS', '<div class="log-modal-list">' + engine.state.log.map(item => logHTML(item, true)).join('') + '</div>', '<button class="secondary-button" data-action="export-log">' + icon('download') + '导出记录</button><button class="primary-button" data-action="close-modal">返回决斗</button>');
+    journal.show();
   }
   function finishGame() {
     if(tournamentView)return;
@@ -673,9 +677,14 @@
   function showSpectateResult() {
     const s = engine.state, draw = s.winner === 'draw', winner = draw ? null : s.winner;
     modal.className = 'modal';
-    modal.innerHTML = '<div class="duel-result result-spectate"><div class="result-emblem">' + icon('eye') + '</div><div class="result-en">' + (draw ? 'DRAW' : winner === 0 ? 'ROBOT A WINS' : 'ROBOT B WINS') + '</div><h2 id="modal-title">' + (draw ? '决斗平局' : robotName(winner) + ' 获胜') + '</h2><p class="result-sub">' + (draw ? '双方在同一时刻迎来结局。' : escape(I.deck(engine.deckInfo(winner)).name) + ' 赢下了这场机器人对决。') + '<br><span style="font-size:9px;color:#738f6b">' + escape(s.resultReason) + '</span></p><div class="result-stats"><div><b>' + s.turn + '</b><small>决斗回合</small></div><div><b>' + s.damage[0].toLocaleString('en-US') + '</b><small>A 造成伤害</small></div><div><b>' + s.damage[1].toLocaleString('en-US') + '</b><small>B 造成伤害</small></div></div><div class="result-actions"><button class="primary-button" data-action="rematch">' + icon('refresh') + '再来一场</button><button class="secondary-button" data-action="new-game">更换机器人</button></div><button class="result-close" data-action="close-modal">回到战场，查看记录</button></div>';
+    modal.innerHTML = '<div class="duel-result result-spectate"><div class="result-emblem">' + icon('eye') + '</div><div class="result-en">' + (draw ? 'DRAW' : winner === 0 ? 'ROBOT A WINS' : 'ROBOT B WINS') + '</div><h2 id="modal-title">' + (draw ? '决斗平局' : robotName(winner) + ' 获胜') + '</h2><p class="result-sub">' + (draw ? '双方在同一时刻迎来结局。' : escape(I.deck(engine.deckInfo(winner)).name) + ' 赢下了这场机器人对决。') + '</p>' + outcomePanel(s) + '<div class="result-stats"><div><b>' + s.turn + '</b><small>决斗回合</small></div><div><b>' + s.damage[0].toLocaleString('en-US') + '</b><small>A 造成伤害</small></div><div><b>' + s.damage[1].toLocaleString('en-US') + '</b><small>B 造成伤害</small></div></div><div class="result-actions"><button class="primary-button" data-action="rematch">' + icon('refresh') + '再来一场</button><button class="secondary-button" data-action="new-game">更换机器人</button></div><button class="result-close" data-action="close-modal">回到战场，查看记录</button></div>';
     modal.insertAdjacentHTML('afterbegin','<div class="result-tools">'+I.picker()+'</div>');
     if (!modal.open) modal.showModal();
+  }
+  function outcomePanel(state){
+    const outcome=window.DuelOutcome.read(state);if(!outcome)return '';
+    const options={language:I.language,names:[I.player(0,engine),I.player(1,engine)],cardName:I.name};
+    return '<div class="result-cause" role="status" data-outcome-kind="'+escape(outcome.kind)+'"><strong>'+escape(window.DuelOutcome.label(outcome,I.language))+'</strong><p>'+escape(window.DuelOutcome.describe(outcome,options))+'</p></div>';
   }
   function showResult() {
     if(tournamentView)return;
@@ -684,7 +693,7 @@
     if (spectating()) { showSpectateResult(); return; }
     const win = engine.state.winner === 0, draw = engine.state.winner === 'draw';
     modal.className = 'modal';
-    modal.innerHTML = '<div class="duel-result' + (win ? '' : ' result-defeat') + '"><div class="result-emblem">' + icon(win ? 'eye' : 'shield') + '</div><div class="result-en">' + (win ? 'VICTORY IS YOURS' : 'THE DUEL GOES ON') + '</div><h2 id="modal-title">' + (draw ? '决斗平局' : win ? '决斗胜利' : '未完的决斗') + '</h2><p class="result-sub">' + (draw ? '双方在同一时刻迎来结局。' : win ? '你与卡组的羁绊，回应了这场决斗。' : '命运不会止步于这一局。<br>下一次抽卡，也许就是转机。') + '<br><span style="font-size:9px;color:#738f6b">' + escape(engine.state.resultReason) + '</span></p><div class="result-stats"><div><b>' + engine.state.turn + '</b><small>决斗回合</small></div><div><b>' + engine.state.damage[0].toLocaleString('en-US') + '</b><small>造成伤害</small></div><div><b>' + engine.state.summons[0] + '</b><small>召唤次数</small></div></div><div class="result-actions"><button class="primary-button" data-action="rematch">' + icon('refresh') + '再来一场</button><button class="secondary-button" data-action="new-game">更换卡组</button></div><button class="result-close" data-action="close-modal">回到战场，查看记录</button></div>';
+    modal.innerHTML = '<div class="duel-result' + (win ? '' : ' result-defeat') + '"><div class="result-emblem">' + icon(win ? 'eye' : 'shield') + '</div><div class="result-en">' + (win ? 'VICTORY IS YOURS' : 'THE DUEL GOES ON') + '</div><h2 id="modal-title">' + (draw ? '决斗平局' : win ? '决斗胜利' : '未完的决斗') + '</h2><p class="result-sub">' + (draw ? '双方在同一时刻迎来结局。' : win ? '你与卡组的羁绊，回应了这场决斗。' : '命运不会止步于这一局。<br>下一次抽卡，也许就是转机。') + '</p>' + outcomePanel(engine.state) + '<div class="result-stats"><div><b>' + engine.state.turn + '</b><small>决斗回合</small></div><div><b>' + engine.state.damage[0].toLocaleString('en-US') + '</b><small>造成伤害</small></div><div><b>' + engine.state.summons[0] + '</b><small>召唤次数</small></div></div><div class="result-actions"><button class="primary-button" data-action="rematch">' + icon('refresh') + '再来一场</button><button class="secondary-button" data-action="new-game">更换卡组</button></div><button class="result-close" data-action="close-modal">回到战场，查看记录</button></div>';
     modal.insertAdjacentHTML('afterbegin','<div class="result-tools">'+I.picker()+'</div>');
     if (!modal.open) modal.showModal();
   }
@@ -799,7 +808,8 @@
     } catch { showToast('浏览器未允许全屏。游戏可以继续正常运行。'); }
   }
   function exportLog() {
-    const content = { game: '游戏王 · 决斗之境', date: new Date().toISOString(), decks: [engine.deckInfo(0).name, engine.deckInfo(1).name], turn: engine.state.turn, winner: engine.state.winner, log: [...engine.state.log].reverse() };
+    const names=tournamentView?.names||[I.player(0,engine),I.player(1,engine)];
+    const content = { format:'duel-sanctuary-log',version:2,game: '游戏王 · 决斗之境',date: new Date().toISOString(),language:I.language,decks:[engine.deckInfo(0).name,engine.deckInfo(1).name],turn:engine.state.turn,winner:engine.state.winner,outcome:window.DuelOutcome.read(engine.state),log:[...engine.state.log].reverse().map(entry=>window.DuelLog.exportEntry(entry,{allVisible:spectating(),view:I.logEntry(entry,engine,names)})),turns:window.DuelLog.turns(engine.state).map(group=>({turn:group.turn,owner:group.owner,events:group.entries.map(e=>e.n)}))};
     const blob = new Blob([JSON.stringify(content, null, 2)], { type: 'application/json;charset=utf-8' }), url = URL.createObjectURL(blob), anchor = document.createElement('a');
     anchor.href = url; anchor.download = '决斗记录-' + new Date().toISOString().slice(0, 10) + '.json'; anchor.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
     showToast('决斗记录已导出。');

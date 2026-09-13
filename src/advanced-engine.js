@@ -260,12 +260,14 @@
       this.move(uid,'grave',{kind:battle?'battle':'destroy',source:source?cp(source):null,byOwner:source?.owner,reason:battle?'战斗破坏':'效果破坏',...extraOptions});return true;
     }
     damage(owner,amount,source='战斗'){
+      if(this.state.winner!==null)return;
       if(this._advancedReady&&(this.state.players[owner].preventDamageUntil>=this.state.turn||(source==='战斗'&&this.state.players[owner].wabokuTurn===this.state.turn))){if(amount>0)this.log('effect',this.name(owner)+'受到的伤害变为0',owner);return;}
       super.damage(owner,Math.max(0,Math.floor(amount)),source);
     }
     heal(owner,amount){this.state.players[owner].lp+=amount;this.log('heal',this.name(owner)+'回复 '+amount+' LP',owner,{amount});}
     payLP(owner,amount){req(Number.isFinite(amount)&&amount>=0&&this.state.players[owner].lp>amount,'生命值不足以支付代价。');this.state.players[owner].lp-=amount;this.log('cost',this.name(owner)+'支付 '+amount+' LP',owner,{amount});}
     draw(owner,amount=1,silent=false){
+      if(this.state.winner!==null)return;
       if(this._advancedReady&&this.state.inDrawPhase&&amount===1)for(const source of this.passiveSources().filter(s=>s.owner===owner)){const fn=this.fx.passives[source.card.id]?.drawCount;if(fn)amount=Math.max(amount,fn(this,source)||1);}
       const p=this.state.players[owner],before=p.hand.length;super.draw(owner,amount,silent);
       for(const c of p.hand.slice(before))c.generation=(c.generation||0)+1;
@@ -286,9 +288,9 @@
       if(winners.length===2){this.state.winKind='draw';this.finish('draw','双方同时集齐了艾克佐迪亚。');}
       else if(winners.length){this.state.winKind='exodia';this.finish(winners[0],this.name(winners[0])+'集齐了艾克佐迪亚的五个不同部件。');}
     }
-    finish(winner,reason){
-      if(winner==='draw'&&this.state.winner===null){this.state.winner='draw';this.state.resultReason=reason;this.state.pending=null;this.log('victory','这场决斗以平局结束。',null);}
-      else super.finish(winner,reason);
+    finish(winner,reason,details={}){
+      if(this.state.winner!==null)return;
+      super.finish(winner,reason,details);
       if(this._advancedReady){this.state.tasks=[];this.state.triggers=[];this.state.chain=[];this.state.chainCleanup=[];this.state.building=null;this.state.frame=null;this.state.resolvingLink=null;this.state.chainResolving=false;this.state.chainId=null;}
     }
     useKey(owner,card,key,scope='name',duel=false){
@@ -1304,12 +1306,12 @@
         }
         const cost=action.noTribute?0:this.tributeCount(f.card);
         if(cost)score-=Math.min(...this.tributeSets(f.card,!!action.noTribute,owner).map(set=>set.reduce((n,uid)=>n+this.attackValue(this.find(uid).card)/15,0)));
-        return score;
+        return score+(!this._aiMarginalProbe&&root.DuelAITactics?root.DuelAITactics.defenseBias(this,action):0);
       }
       if(action.type==='set')return c.type==='trap'&&present(p.spells).length<(this.state.difficulty==='casual'?2:4)?180:-100;
       if(action.type==='stance'){
         if(!f.card.faceUp||f.card.position==='defense')return this.monsters(1-owner).some(m=>this.attackValue(f.card)>this.enemyValue(m))||!this.monsters(1-owner).length?260:-100;
-        return -100;
+        return -100+(!this._aiMarginalProbe&&root.DuelAITactics?root.DuelAITactics.defenseBias(this,action):0);
       }
       return 0;
     }
@@ -1360,7 +1362,9 @@
     }
     aiNext(){
       this._aiMarginalPlans=new Map();
+      this._aiDefenseCache=new Map();
       const s=this.state;if(s.winner!==null)return null;if(s.pending)return this.chooseAI(s.pending);
+      if(!this._aiMarginalProbe&&root.DuelAITactics){const win=root.DuelAITactics.battlePlan(this);if(win)return win.action;}
       if(s.phase==='battle'){
         for(const card of this.monsters(s.active).sort((a,b)=>this.attackValue(b)-this.attackValue(a))){
           const foes=this.monsters(1-s.active);
@@ -1372,7 +1376,10 @@
         return {type:'phase',phase:'main2'};
       }
       const ranked=this.allActions(s.active).map(action=>({action,score:this.actionScore(action)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
-      if(ranked.length)return root.DuelAIMarginal?root.DuelAIMarginal.action(this,ranked[0].action):ranked[0].action;
+      if(ranked.length){
+        if(!this._aiMarginalProbe&&root.DuelAITactics){const action=root.DuelAITactics.select(this,ranked);if(action)return action;}
+        else return root.DuelAIMarginal?root.DuelAIMarginal.action(this,ranked[0].action):ranked[0].action;
+      }
       if(s.phase==='main1'&&s.turn>1&&!this.attackBlocked(s.active)&&this.monsters(s.active).some(c=>c.faceUp&&c.position==='attack'))return {type:'phase',phase:'battle'};
       return {type:'end'};
     }
@@ -1431,5 +1438,5 @@
   root.LegacyDuelEngine=Base;root.DuelEngine=ModernDuelEngine;root.ModernDuelEngine=ModernDuelEngine;
   root.DuelModernUtils={req,cp,subsets,fieldMonster};
   if(typeof module!=='undefined'&&module.exports)module.exports={DuelEngine:ModernDuelEngine,RuleError,req,cp,subsets,fieldMonster};
-  if(typeof module!=='undefined'&&module.exports){require('./early-engine.js');require('./early-engine-extra.js');require('./advanced-effects.js');}
+  if(typeof module!=='undefined'&&module.exports){require('./early-engine.js');require('./early-engine-extra.js');require('./advanced-effects.js');require('./log-engine.js');}
 })(typeof globalThis!=='undefined'?globalThis:this);
