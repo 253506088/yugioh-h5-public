@@ -850,7 +850,9 @@
         }return;
       }
       if(p.kind==='order'){
-        const group=this.state.building.groups[0];group.events=uids.map(id=>group.events.find(e=>e.id===id));group.ordered=true;group.approved=true;return;
+        const group=this.state.building.groups[0];group.events=uids.map(id=>group.events.find(e=>e.id===id));
+        for(const event of group.events)if(action.choicesByEvent?.[event.id])event.provided=cp(action.choicesByEvent[event.id]);
+        group.ordered=true;group.approved=true;return;
       }
       if(p.kind==='choice'){
         const tasks=this.collectTasks(()=>this.fx.operation(this,{op:p.operation,owner:p.owner,context:p.context,picks:[...uids]}));this.state.tasks.unshift(...tasks);return;
@@ -885,7 +887,7 @@
       }
       const t=group.events.shift();
       if(group.approved||t.mandatory){
-        const ctx=this.abilityContext(t.uid,t.key,'trigger',{...t.event,controller:t.owner,sourceId:t.sourceId,mandatory:t.mandatory});this.prepare(ctx);
+        const ctx=this.abilityContext(t.uid,t.key,'trigger',{...t.event,controller:t.owner,sourceId:t.sourceId,mandatory:t.mandatory},t.provided||{});this.prepare(ctx);
       }else this.state.pending={kind:'trigger',owner:t.owner,responder:t.owner,trigger:cp(t),title:'可以发动诱发效果'};
     }
     chainPrevention(link){
@@ -1173,7 +1175,7 @@
       this.state.inDrawPhase=true;
       const p=this.state.players[this.state.active];
       if(p.skipTurn){p.skipTurn=false;this.state.inDrawPhase=false;this.log('phase','因卡片效果跳过这个回合',this.state.active);this.beginNextTurn();return;}
-      if(p.skipDraws>0){p.skipDraws--;this.log('draw','因无谋的贪欲跳过这次抽卡阶段',this.state.active);}
+      if(p.skipDraws>0){p.skipDraws--;this.log('draw','因卡片效果跳过这次抽卡阶段',this.state.active);}
       else this.draw(this.state.active,1);
       this.state.inDrawPhase=false;this.checkWin();
       if(this.state.winner===null)this.state.frame={kind:'main-open',owner:this.state.active,windowOffered:false};
@@ -1265,9 +1267,8 @@
       const owner=this.state.active,p=this.activePlayer,f=action.uid?this.find(action.uid):null,c=f?CARDS[f.card.id]:null;
       if(action.type==='activate'){
         const a=this.fx.get(action.key),ctx=this.abilityContext(action.uid,action.key,'main',{owner});
-        if(a.aiScore)return typeof a.aiScore==='function'?a.aiScore(this,ctx):a.aiScore;
-        if(f&&fieldMonster(f.zone)&&this.negated(f.card)&&!a.leavesAsCost)return -100;
-        return 350;
+        const score=a.aiScore?(typeof a.aiScore==='function'?a.aiScore(this,ctx):a.aiScore):f&&fieldMonster(f.zone)&&this.negated(f.card)&&!a.leavesAsCost?-100:350;
+        return root.DuelAIMarginal?root.DuelAIMarginal.score(this,action,owner,score):score;
       }
       if(action.type==='pendulum-scale'){
         const other=p.spells[action.slot===0?4:0],scale=c.scale;
@@ -1311,7 +1312,8 @@
       return 0;
     }
     chooseAI(p){
-      if(p.kind==='order')return {type:'choose',uids:p.candidates.map(c=>c.uid)};
+      if(!this._aiMarginalProbe)this._aiMarginalPlans=new Map();
+      if(p.kind==='order')return root.DuelAIMarginal?root.DuelAIMarginal.order(this,p):{type:'choose',uids:p.candidates.map(c=>c.uid)};
       if(p.kind==='materials'){
         if(p.purpose==='pendulum'){
           const ranked=[...p.candidates].sort((a,b)=>{
@@ -1343,16 +1345,19 @@
         return {type:'choose',uids:[target?.uid||'cancel']};
       }
       if(p.kind==='trigger'){
-        const t=p.trigger,ctx=this.abilityContext(t.uid,t.key,'trigger',{...t.event,controller:t.owner,sourceId:t.sourceId});
-        return this.fx.aiTrigger(this,ctx)?{type:'respond',uid:t.uid,key:t.key}:{type:'pass'};
+        const t=p.trigger,ctx=this.abilityContext(t.uid,t.key,'trigger',{...t.event,controller:t.owner,sourceId:t.sourceId,mandatory:t.mandatory});
+        const action=this.fx.aiTrigger(this,ctx)?{type:'respond',uid:t.uid,key:t.key}:{type:'pass'};
+        return root.DuelAIMarginal?root.DuelAIMarginal.action(this,action):action;
       }
       if(p.kind==='window'){
         const ranked=p.options.map(a=>({...a,score:this.fx.aiResponse(this,a,p.context,p.responder)})).filter(a=>a.score>0).sort((a,b)=>b.score-a.score);
-        return ranked.length?{type:'respond',uid:ranked[0].uid,key:ranked[0].key}:{type:'pass'};
+        const action=ranked.length?{type:'respond',uid:ranked[0].uid,key:ranked[0].key}:{type:'pass'};
+        return root.DuelAIMarginal?root.DuelAIMarginal.action(this,action):action;
       }
       return {type:'pass'};
     }
     aiNext(){
+      this._aiMarginalPlans=new Map();
       const s=this.state;if(s.winner!==null)return null;if(s.pending)return this.chooseAI(s.pending);
       if(s.phase==='battle'){
         for(const card of this.monsters(s.active).sort((a,b)=>this.attackValue(b)-this.attackValue(a))){
@@ -1365,7 +1370,7 @@
         return {type:'phase',phase:'main2'};
       }
       const ranked=this.allActions(s.active).map(action=>({action,score:this.actionScore(action)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
-      if(ranked.length)return ranked[0].action;
+      if(ranked.length)return root.DuelAIMarginal?root.DuelAIMarginal.action(this,ranked[0].action):ranked[0].action;
       if(s.phase==='main1'&&s.turn>1&&!this.attackBlocked(s.active)&&this.monsters(s.active).some(c=>c.faceUp&&c.position==='attack'))return {type:'phase',phase:'battle'};
       return {type:'end'};
     }

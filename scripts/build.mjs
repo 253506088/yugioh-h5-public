@@ -33,8 +33,10 @@ const scriptFiles = ['cards.js', 'expansion-cards.js', 'link-cards.js', 'early-c
 scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'effects-early-complex.js','effects-early-advanced.js');
 scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'effects-2002.js','effects-2002-monsters.js','effects-2002-spells.js','effects-2002-traps.js');
 scriptFiles.splice(scriptFiles.indexOf('advanced-effects.js'),0,'early-engine-extra.js');
+scriptFiles.splice(scriptFiles.indexOf('advanced-effects.js'),0,'ai-marginal.js');
 scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'card-locales.js','i18n-data.js','i18n-effects.js','i18n-help.js','i18n-experience.js','i18n-tournament.js','i18n.js','experience.js');
 scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'tournament.js','tournament-storage.js','tournament-ui.js');
+scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-ai.js');
 const styles = (await Promise.all(styleFiles.map(file => readFile(join(root, 'src', file), 'utf8')))).join('\n\n');
 const scripts = await Promise.all(scriptFiles.map(file => readFile(join(root, 'src', file), 'utf8')));
 new Script(scripts.join('\n\n'), { filename: 'duel-single-file.js' });

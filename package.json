@@ -20,6 +20,7 @@
     "art:experience": "node scripts/collect-experience-art.mjs",
     "test:experience": "node --test tests/experience.test.cjs && node tests/experience-browser.cjs && node tests/experience-layout-browser.cjs && node tests/experience-response-browser.cjs",
     "test:tournament": "node --test tests/tournament.test.cjs && node tests/tournament-browser.cjs",
+    "test:ai": "node --test tests/ai-marginal.test.cjs && node tests/ai-marginal-browser.cjs",
     "start": "node scripts/serve.mjs",
     "test": "node scripts/run-checks.mjs",
     "test:rules": "node --test tests/engine.test.cjs tests/v2-core.test.cjs tests/v2-regression.test.cjs tests/v3-rules.test.cjs tests/v4-rules.test.cjs tests/v4-2002.test.cjs tests/v4-2002-sweep.test.cjs",

@@ -13,7 +13,7 @@
   }
   for(const key of ['stardust-dragon::return','dododo-gogogoglove::expand','battle-fader::stop'])summonKeys.add(key);
   function get(key){return defs[key]||null;}
-  function passive(id,handlers){passives[id]={...(passives[id]||{}),...handlers};}
+  function passive(id,handlers){passives[id]={...(passives[id]||{}),...(handlers.stat||handlers.battleStat?{stacking:true}:{}),...handlers};}
   function willSummon(e,link){const flag=get(link?.key)?.summons;return typeof flag==='function'?flag(e,link):!!flag;}
   function willDestroy(e,link){
     const d=get(link.key);if(!d?.destroys)return false;
@@ -137,7 +137,7 @@
       }
     }return out;
   }
-  function payCost(e,ctx){const a=get(ctx.key);if(a.cost)a.cost(e,ctx);}
+  function payCost(e,ctx){const a=get(ctx.key),before=e._aiMarginalCost?.before(ctx);try{if(a.cost)a.cost(e,ctx);}finally{e._aiMarginalCost?.after(ctx,before);}}
   function resolve(e,ctx){const a=get(ctx.key);if(a.resolve)a.resolve(e,ctx);}
   function on(type,fn){(events[type]||=[]).push(fn);}
   function onEvent(e,event){for(const fn of events[event.type]||[])fn(e,event);}
@@ -243,18 +243,22 @@
     if(p.context?.preferIds){g.candidates=[...p.candidates].sort((a,b)=>p.context.preferIds.indexOf(a.cardId)-p.context.preferIds.indexOf(b.cardId));return g.candidates.slice(0,p.max).map(c=>c.uid);}
     return aiPick(e,ctx,g);
   }
-  function aiTrigger(e,ctx){const a=get(ctx.key);if(a.aiTrigger)return a.aiTrigger(e,ctx);const f=e.find(ctx.uid);if(f&&fieldZone(f.zone)&&e.negated(f.card)&&!a.leavesAsCost)return false;return true;}
+  function aiTrigger(e,ctx){
+    if(ctx.event.mandatory)return true;
+    const a=get(ctx.key),f=e.find(ctx.uid),wanted=a.aiTrigger?a.aiTrigger(e,ctx):!(f&&fieldZone(f.zone)&&e.negated(f.card)&&!a.leavesAsCost);
+    return wanted&&(!root.DuelAIMarginal||root.DuelAIMarginal.score(e,{type:'respond',uid:ctx.uid,key:ctx.key},ctx.owner,1)>0);
+  }
   function aiResponse(e,item,w,owner){
     const a=get(item.key),ctx=e.abilityContext(item.uid,item.key,'window',{owner,window:w});
-    if(a.aiResponse)return a.aiResponse(e,ctx,w);
-    if(a.aiScore)return typeof a.aiScore==='function'?a.aiScore(e,ctx):a.aiScore;
-    return w.chainLast&&w.chainLast.owner!==owner?200:0;
+    const score=a.aiResponse?a.aiResponse(e,ctx,w):a.aiScore?(typeof a.aiScore==='function'?a.aiScore(e,ctx):a.aiScore):w.chainLast&&w.chainLast.owner!==owner?200:0;
+    return root.DuelAIMarginal?root.DuelAIMarginal.score(e,{type:'respond',uid:item.uid,key:item.key},owner,score):score;
   }
   const H={mainPhase,fieldZone,source,self,args,first,frame,cards,monsterCards,options,group,customGroup,deck,grave,hand,field,monsters,specialable,normal,cyber,cry,noBanishReplacement,canSendGY,discard,sendCost,tributeCost,detachInput,targetField,legalTarget,destroyTargets,banishTargets,bounceTargets,once,isDamageWindow};
-  const API={register,get,willDestroy,willSummon,passive,passives,trigger,quick,spell,trap,on,op,endHandlers,canUse,nextInput,available,payCost,resolve,onEvent,operation,endPhase,onNegated,validateInput,aiPick,aiChoice,aiTrigger,aiResponse,H,defs};
+  const API={register,get,willDestroy,willSummon,passive,passives,trigger,quick,spell,trap,on,op,endHandlers,canUse,nextInput,available,payCost,resolve,onEvent,operation,endPhase,onNegated,validateInput,candidateScore,aiPick,aiChoice,aiTrigger,aiResponse,H,defs};
   root.DuelEffects=API;
   if(typeof module!=='undefined'&&module.exports){
     module.exports=API;
+    require('./ai-marginal.js');
     for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002'])require('./'+file+'.js');
   }
 })(typeof globalThis!=='undefined'?globalThis:this);
