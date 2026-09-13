@@ -104,8 +104,8 @@ async function detail(page,id){await page.evaluate(()=>duelApp.showLibrary());aw
  });
  await check('large name declarations keep their search and selection across languages',async()=>{
   const {context,page}=await open();try{
-   const ids=await stage(page,[[0,'hand','Prohibition']]);await activate(page,ids.Prohibition);await page.fill('#pending-search','青眼白龙');assert.equal(await page.locator('.selection-card:visible').count(),1);await page.locator('.selection-card:visible').click();
-   for(const language of ['en','ja']){await locale(page,language);assert.equal(await page.locator('#pending-search').inputValue(),'青眼白龙');assert.equal(await page.locator('.selection-card:visible').count(),1);assert.equal(await page.locator('.selection-card.chosen:visible').count(),1);assert.equal(await page.locator('#pending-confirm').isEnabled(),true);}
+   const ids=await stage(page,[[0,'hand','Prohibition']]);await activate(page,ids.Prohibition);await page.fill('#pending-search','青眼白龙');assert.equal(await page.locator('.selection-card:visible').count(),2);await page.locator('.selection-card[data-uid="blue-eyes"]:visible').click();
+   for(const language of ['en','ja']){await locale(page,language);assert.equal(await page.locator('#pending-search').inputValue(),'青眼白龙');assert.equal(await page.locator('.selection-card:visible').count(),2);assert.equal(await page.locator('.selection-card.chosen:visible').count(),1);assert.equal(await page.locator('#pending-confirm').isEnabled(),true);}
    assert.equal(await page.locator('.selection-grid .playing-card').count(),0);await page.click('#pending-confirm');
   }finally{await context.close();}
  });

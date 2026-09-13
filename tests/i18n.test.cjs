@@ -3,7 +3,7 @@ const {DuelEngine}=require('../src/advanced-engine.js');
 const D=globalThis.DuelData,E=globalThis.DuelEffects,I=require('../src/i18n.js'),root=path.resolve(__dirname,'..');
 const all=D.CARD_LIST.filter(c=>!c.notCollectible),languages=['zh-CN','en','ja'];
 test('every collectible card has three local names and complete descriptions',()=>{
- assert.equal(all.length,3695);
+ assert.equal(all.length,5754);
  for(const c of all)for(const language of languages){
   const text=I.references[c.id]?.locales[language];
   assert.ok(text?.name?.trim(),c.id+' '+language+' name');

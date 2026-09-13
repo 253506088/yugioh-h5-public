@@ -28,6 +28,6 @@
   ['Goldd, Wu-Lord of Dark World',3],['Sillva, Warlord of Dark World',3],['Beiige, Vanguard of Dark World',3],['Broww, Huntsman of Dark World',3],['Brron, Mad King of Dark World',2],['Scarr, Scout of Dark World',2],['Sangan',1],['Dekoichi the Battlechanted Locomotive',2],['Des Wombat',1],
   ['Graceful Charity',3],['Dark World Lightning',3],['Gateway to Dark World',2],['Pot of Greed',1],['Card Destruction',1],['Mystical Space Typhoon',1],['Monster Reborn',1],['Dark Deal',2],['Divine Wrath',2],['Karma Cut',2],['Mirror Force',1],['Torrential Tribute',1]
  ],[],['暗黑界只响应卡片效果的丢弃；天罚或因果切断的弃牌代价不会让它们复活。','暗黑界之雷先破坏盖卡再丢弃；被对方效果丢弃时，武神与军神还有追加处理。']);
- if(typeof module!=='undefined')require('./year-decks.js');
+ if(typeof module!=='undefined'){require('./year-decks.js');require('./chronicle-decks.js');}
  D.earlyDecksLoaded=true;if(typeof module!=='undefined')module.exports=D;
 })(globalThis);

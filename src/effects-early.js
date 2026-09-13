@@ -1,7 +1,8 @@
 (function(root){
  'use strict';
  const E=root.DuelEffects,D=root.DuelData,{CARDS,isMonster}=D,H=E.H;
- const C=name=>D.cardByName(name),I=name=>{const c=C(name);if(!c)throw new Error('Unknown early card: '+name);return c.id;};
+ const cardIds=new Map();
+ const C=name=>{let id=cardIds.get(name);if(!id){const card=D.cardByName(name);if(!card)return undefined;id=card.id;cardIds.set(name,id);}return CARDS[id];},I=name=>{const c=C(name);if(!c)throw new Error('Unknown early card: '+name);return c.id;};
  const is=(m,name)=>!!m&&m.id===C(name)?.id;
  const p=(e,c)=>e.state.players[c.owner],opp=c=>1-c.owner;
  const mark=(name,note='效果已接入本作规则',status='implemented')=>{const c=C(name);if(c){c.implementationStatus=status;c.implementationNote=note;}};

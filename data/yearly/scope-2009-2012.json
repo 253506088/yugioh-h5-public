@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "title": "OCG 2009—2012 年增量切片",
+  "createdOn": "2026-09-14",
+  "startYear": 2009,
+  "endYear": 2012,
+  "dateRegion": "ocg",
+  "dateField": "misc_info[].ocg_date",
+  "deduplicateBy": "provider card id; artwork bytes by SHA-256",
+  "collectImages": [
+    "cropped",
+    "full"
+  ],
+  "excludeTypes": [
+    "Skill Card",
+    "Token"
+  ],
+  "excludeRushDuel": true,
+  "catalogUrl": "https://db.ygoprodeck.com/api/v7/cardinfo.php?misc=yes&startdate=01%2F01%2F2009&enddate=12%2F31%2F2012&dateregion=ocg",
+  "catalogAuthority": "provider_candidate_requires_OCG_product_crosscheck",
+  "firstOCGYear": 1999,
+  "firstPackCandidate": "Vol.1",
+  "firstPackDateCandidate": "1999-02-04",
+  "historicalReferenceStatus": "secondary_tournament_and_metagame_references_reviewed_2026-09-14",
+  "runtimeImagePolicyTarget": "embedded-first-optional-online",
+  "implementationIsSeparateFromCollection": true
+}

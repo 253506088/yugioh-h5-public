@@ -8,10 +8,12 @@ const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),require=createR
 require('../src/advanced-engine.js');
 const {CARDS,DECKS}=globalThis.DuelData,locales=require('../src/card-locales.js');
 const showcase=['Magic Jammer','Seven Tools of the Bandit','Raigeki Break','Disappear','Call of the Haunted','Imperial Order','Emergency Provisions','Axe of Despair','Freed the Matchless General','Linkuriboh'].map(name=>globalThis.DuelData.cardByName(name)?.id);
-const ids=[...new Set([...Object.values(DECKS).filter(d=>d.preset).flatMap(d=>[d.ace,...d.cards,...d.extra]),...showcase])].filter(id=>CARDS[id]);
+const acesOnly=process.argv.includes('--aces');
+const ids=[...new Set([...Object.values(DECKS).filter(d=>d.preset).flatMap(d=>acesOnly?[d.ace]:[d.ace,...d.cards,...d.extra]),...(acesOnly?[]:showcase)])].filter(id=>CARDS[id]);
 const out=resolve(root,'assets/duel/art');
 if(!out.startsWith(root+sep))throw Error('Outside project');
 await mkdir(resolve(out,'source'),{recursive:true});
+const previous=JSON.parse(await readFile(resolve(out,'manifest.json'),'utf8').catch(()=>'{}'));
 const manifest={provider:'YGOPRODeck',cards:[]};let cursor=0,failed=0;
 const workers=await Promise.allSettled(Array.from({length:2},async()=>{
   while(cursor<ids.length){
@@ -34,6 +36,6 @@ const workers=await Promise.allSettled(Array.from({length:2},async()=>{
   }
 }));
 for(const worker of workers)if(worker.status==='rejected'){failed++;console.error('Artwork worker:',worker.reason);}
-manifest.cards.sort((a,b)=>ids.indexOf(a.id)-ids.indexOf(b.id));
+const merged=new Map((previous.cards||[]).map(c=>[c.id,c]));for(const card of manifest.cards)merged.set(card.id,card);manifest.cards=[...merged.values()].sort((a,b)=>a.id.localeCompare(b.id));
 await writeFile(resolve(out,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');console.log('Embedded artwork ready:',manifest.cards.length,'Missing:',failed);
 process.exitCode=failed?1:0;

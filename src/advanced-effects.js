@@ -132,8 +132,16 @@
     for(const f of e.refs(owner,['hand','monsters','extraMonster','spells','fieldSpell','grave','banished','extra'])){
       if(context.onlyUid&&context.onlyUid!==f.card.uid)continue;
       for(const a of byCard[f.card.id]||[]){
-        if(a.trigger)continue;
+        if(a.trigger||a.supersededByOriginal)continue;
         const origin=context.kind==='main'?'main':'window';
+        // Match the cheap, unconditional gates in canUse before calculating
+        // source ATK and continuous effects. This matters for large Graveyards
+        // and copied effects whose source card is still in the Extra Deck.
+        if(origin==='main'&&(!a.main||owner!==e.state.active))continue;
+        if(origin==='window'&&(a.speed<2||a.inherent))continue;
+        const handTrap=a.cardActivation&&CARDS[f.card.id].type==='trap'&&f.zone==='hand'&&e.state.players[owner].handTrapTurn===e.state.turn&&!e.state.players[owner].handTrapUsed;
+        if(!a.virtual&&!a.zones.includes(f.zone)&&!(fieldZone(f.zone)&&a.zones.includes('monsters'))&&!handTrap)continue;
+        if(a.copyTargetId&&f.card.gxCopy?.id!==a.copyTargetId)continue;
         const ctx=e.abilityContext(f.card.uid,a.key,origin,{owner,...(origin==='window'?{window:context}:{})});
         if(canUse(e,ctx))out.push({uid:f.card.uid,key:a.key,label:a.label,cardId:f.card.id,speed:a.speed});
       }
@@ -266,6 +274,6 @@
     module.exports=API;
     require('./ai-marginal.js');
     require('./ai-tactics.js');
-    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005','effects-2006','effects-2007','effects-2008','effects-year-final'])require('./'+file+'.js');
+    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005','effects-2006','effects-2007','effects-2008','effects-year-final','effects-chronicle','effects-2009','effects-2010','effects-2011','effects-2012','effects-chronicle-contracts','chronicle-rules'])require('./'+file+'.js');
   }
 })(typeof globalThis!=='undefined'?globalThis:this);

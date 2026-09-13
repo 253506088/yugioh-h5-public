@@ -83,3 +83,9 @@ html[lang="en"] .main-nav .nav-item{padding-left:11px;padding-right:11px}
 .rps-vs p{color:#e0cf8f;font-size:11px}
 .result-spectate .result-emblem{color:#d9c98a}
 @media (max-width:760px){.spectate-hand{max-width:180px}.spectate-hand .public-hand-card{width:24px;height:34px}.rps-stage{gap:14px}.rps-side b{font-size:36px}}
+/* The annual browser narrows only the first seat; the opponent can use any deck. */
+.deck-era-filter{display:flex;grid-column:1/-1;align-items:center;gap:10px;position:sticky;top:0;z-index:2;padding:12px 14px;margin-bottom:8px;background:#121719;border:1px solid #bba36835;border-radius:10px}
+.deck-era-filter .setting-label{margin:0;flex:1;min-width:0}
+.deck-era-filter select{min-width:100px;max-width:40%;padding:7px 10px;background:#1b2226;color:#eee8d8;border:1px solid #bba36866;border-radius:7px}
+.deck-era-filter span{font-size:12px;white-space:nowrap;color:#c2b38a;font-variant-numeric:tabular-nums}
+@media(max-width:600px){.deck-era-filter{gap:7px;padding:10px}.deck-era-filter .setting-label{font-size:12px}.deck-era-filter select{min-width:86px}}

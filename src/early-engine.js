@@ -60,7 +60,23 @@
   for(const f of participants){const r=CARDS[f.card.id].earlyRules||{};if(f.owner===owner&&r.ownBattleNoDamage&&this.state.active===owner&&!this.negated(f.card))amount=0;if(f.owner!==owner&&r.halfBattleDamage&&!this.negated(f.card))amount=Math.floor(amount/2);if(f.owner===owner&&r.reflectBattle&&!this.negated(f.card)&&(this.activeEquip(f.card).some(m=>m.monsterEquip)||a?.relinquishedWasEquipped))reflect=true;}
  }const before=this.state.players[owner].lp;old.damage.call(this,owner,amount,source);const actual=before-this.state.players[owner].lp;if(this._advancedReady&&actual>0){this.emit({type:'damage',owner,amount:actual,source,battle:source==='战斗',attack:a?cp(a):null});if(reflect&&this.state.winner===null)this.damage(1-owner,actual,'效果');}});
  wrap('heal',function(owner,amount){if(this._advancedReady&&this.hasEarly('Bad Reaction to Simochi',1-owner)){this.damage(owner,amount,'效果',{id:D.cardByName('Bad Reaction to Simochi').id,owner:1-owner});return;}old.heal.call(this,owner,amount);if(this._advancedReady&&amount>0)this.emit({type:'heal',owner,amount});});
- P.rawEarly=function(name){const id=D.cardByName(name)?.id;return id?[0,1].flatMap(p=>this.refs(p,['monsters','extraMonster','spells','fieldSpell'])).filter(f=>f.card.id===id&&f.card.faceUp&&!f.card.pendingActivation&&!f.card.effectNegated&&!f.card.spellNegated):[];};
+ const rawEarlyIds=new Map(),rawExtraKeys=['extraMonster','extraMonster2'];
+ const rawEarlyMatch=(m,id)=>m&&m.id===id&&m.faceUp&&!m.pendingActivation&&!m.effectNegated&&!m.spellNegated;
+ P.rawEarly=function(name){
+  let id=rawEarlyIds.get(name);if(!id){id=D.cardByName(name)?.id;if(!id)return [];rawEarlyIds.set(name,id);}
+  // Cache only the immutable name-to-ID lookup, never live negation or locations.
+  // Allocate references only for actual matches; suppression queries are hot
+  // paths shared by every generation of card effects and AI projection.
+  const out=[];
+  for(let owner=0;owner<2;owner++){
+   const p=this.state.players[owner];
+   for(let index=0;index<p.monsters.length;index++){const card=p.monsters[index];if(rawEarlyMatch(card,id))out.push({owner,zone:'monsters',index,card});}
+   for(const storageKey of rawExtraKeys){const card=p[storageKey];if(rawEarlyMatch(card,id))out.push({owner,zone:'extraMonster',index:card.extraSlot??owner,storageKey,card});}
+   for(let index=0;index<p.spells.length;index++){const card=p.spells[index];if(rawEarlyMatch(card,id))out.push({owner,zone:'spells',index,card});}
+   if(rawEarlyMatch(p.fieldSpell,id))out.push({owner,zone:'fieldSpell',index:0,card:p.fieldSpell});
+  }
+  return out;
+ };
  P.jinzoSuppresses=function(owner=null){return !this.rawEarly('Skill Drain').length&&this.rawEarly('Jinzo').some(f=>owner!==f.owner||!this.spells(f.owner).some(m=>m.faceUp&&!m.pendingActivation&&CARDS[m.id].officialName==='Amplifier'&&m.equipTarget===f.card.uid));};
  P.trapsSuppressed=function(owner=null){return this.rawEarly('Royal Decree').length>0||this.jinzoSuppresses(owner);};
  wrap('activeSpell',function(card){if(!old.activeSpell.call(this,card)||card.spellNegatedUntil>=this.state.turn)return false;if(!this._advancedReady)return true;const c=CARDS[card.id];if(c.type==='trap'&&this.trapsSuppressed(this.find(card.uid)?.owner)&&c.officialName!=='Royal Decree')return false;if((c.type==='spell'||card.monsterEquip)&&!this.trapsSuppressed()&&this.rawEarly('Imperial Order').length)return false;if(card.equipTarget&&!this.trapsSuppressed()&&this.rawEarly("The Emperor's Holiday").length)return false;return true;});

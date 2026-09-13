@@ -10,6 +10,12 @@
   const cp = v => JSON.parse(JSON.stringify(v));
   const present = a => a.filter(Boolean);
   const fieldMonster = zone => zone === 'monsters' || zone === 'extraMonster';
+  const referenceZones = ['hand','monsters','extraMonster','spells','fieldSpell','grave','extra','banished','deck'];
+  const locationHints = new WeakMap();
+  const rememberLocation = (engine,uid,found) => {
+    let hints=locationHints.get(engine);if(!hints){hints=new Map();locationHints.set(engine,hints);}
+    hints.set(uid,{owner:found.owner,zone:found.zone,index:found.index,storageKey:found.storageKey,parentUid:found.parentUid});return found;
+  };
   const req = (ok,msg) => {if(!ok)throw new RuleError(msg);};
   const subsets = (cards,min=1,max=cards.length) => {
     const result=[];
@@ -63,7 +69,7 @@
       const result=[];for(const c of all){result.push(c);for(const m of c.overlays||[])result.push(m);}return result;
     }
     physicalCards(){return [0,1].flatMap(owner=>this.playerPhysicalCards(owner));}
-    refs(owner,zones=['hand','monsters','extraMonster','spells','fieldSpell','grave','extra','banished','deck']){
+    refs(owner,zones=referenceZones){
       const p=this.state.players[owner],out=[];
       for(const zone of zones){
         if(zone==='extraMonster'){for(const storageKey of ['extraMonster','extraMonster2'])if(p[storageKey])out.push({owner,zone,index:p[storageKey].extraSlot??owner,storageKey,card:p[storageKey]});}
@@ -74,10 +80,32 @@
     }
     find(uid){
       if(!uid)return null;
-      for(let owner=0;owner<2;owner++)for(const f of this.refs(owner)){
-        if(f.card.uid===uid)return f;
-        const index=(f.card.overlays||[]).findIndex(c=>c.uid===uid);
-        if(index>=0)return {owner,zone:'overlays',index,card:f.card.overlays[index],parentUid:f.card.uid,parent:f.card};
+      // Hints contain locations, never card objects. Validate the actual live
+      // slot on every read; direct writes, rollback, shuffle and control changes
+      // need no invalidation and projections never share another engine's hints.
+      const hint=locationHints.get(this)?.get(uid);
+      if(hint){
+        if(hint.zone==='overlays'){
+          const parent=this.find(hint.parentUid),card=parent?.card.overlays?.[hint.index];
+          if(card?.uid===uid)return {owner:parent.owner,zone:'overlays',index:hint.index,card,parentUid:parent.card.uid,parent:parent.card};
+        }else{
+          const p=this.state.players[hint.owner],extra=hint.zone==='extraMonster',card=extra?p?.[hint.storageKey]:hint.zone==='fieldSpell'?p?.fieldSpell:p?.[hint.zone]?.[hint.index];
+          if(card?.uid===uid)return extra?{owner:hint.owner,zone:hint.zone,index:card.extraSlot??hint.owner,storageKey:hint.storageKey,card}:{owner:hint.owner,zone:hint.zone,index:hint.index,card};
+        }
+      }
+      // A full search allocates only the matching reference, not one object for
+      // every card in both Decks during each stat or continuous-effect query.
+      for(let owner=0;owner<2;owner++){
+        const p=this.state.players[owner];
+        for(const zone of referenceZones){
+          const extra=zone==='extraMonster',single=zone==='fieldSpell',size=extra?2:single?1:p[zone]?.length||0;
+          for(let at=0;at<size;at++){
+            const storageKey=extra?(at?'extraMonster2':'extraMonster'):zone,card=extra||single?p[storageKey]:p[zone][at];
+            if(!card)continue;
+            if(card.uid===uid)return rememberLocation(this,uid,extra?{owner,zone,index:card.extraSlot??owner,storageKey,card}:{owner,zone,index:at,card});
+            for(let index=0;index<(card.overlays?.length||0);index++)if(card.overlays[index].uid===uid)return rememberLocation(this,uid,{owner,zone:'overlays',index,card:card.overlays[index],parentUid:card.uid,parent:card});
+          }
+        }
       }return null;
     }
     ownCard(uid,zones,owner=this.state.active){
@@ -163,17 +191,17 @@
       if(!this._advancedReady)return;
       for(let p=0;p<2;p++)for(const equip of [...this.spells(p)])if(equip.equipTarget===targetUid)this.move(equip.uid,'grave',{kind:'rule-equip',reason:'装备对象离场'});
     }
-    activeEquip(card,id=null){const f=this.find(card.uid);if(!f)return[];return [0,1].flatMap(p=>this.spells(p)).filter(s=>this.activeSpell(s)&&s.equipTarget===card.uid&&(!id||s.id===id));}
+    activeEquip(card,id=null){const f=this.find(card.uid);if(!f)return[];return [0,1].flatMap(p=>this.spells(p)).filter(s=>s.equipTarget===card.uid&&(!id||s.id===id)&&this.activeSpell(s));}
     negated(card){
       if(!this._advancedReady)return !!card.effectNegated;
       const f=this.find(card.uid);if(!f||!fieldMonster(f.zone)||!card.faceUp)return false;
       if((this.state.battleNegated||[]).includes(card.uid))return true;
       if(card.effectNegated||card.negatedUntil>=this.state.turn)return true;
       if(card.id==='qli-towers')return false;
-      return [0,1].some(p=>this.spells(p).some(c=>this.activeSpell(c)&&c.id==='skill-drain'));
+      return [0,1].some(p=>this.spells(p).some(c=>c.id==='skill-drain'&&this.activeSpell(c)));
     }
     level(card){const c=CARDS[card.id];if(['xyz','link'].includes(c.type))return 0;if(card.qliReduced&&!this.negated(card))return 4;return card.levelOverride&&(!card.levelOverride.until||card.levelOverride.until>=this.state.turn)?card.levelOverride.value:c.level||0;}
-    attribute(card){return card.attributeOverride&&card.attributeOverride.until>=this.state.turn?card.attributeOverride.value:CARDS[card.id].attribute;}
+    attribute(card){return card.attributeOverride&&(card.attributeOverride.until==null||card.attributeOverride.until>=this.state.turn)?card.attributeOverride.value:CARDS[card.id].attribute;}
     isTuner(card){return !!(CARDS[card.id].tuner||(card.dynamicTuner&&!this.negated(card)));}
     cardNameId(card,zone=null){
       const f=this.find(card.uid),where=zone||f?.zone,c=CARDS[card.id];
@@ -219,7 +247,7 @@
         const handler=this.fx.passives?.[source.card.id]?.stat;if(handler)n+=handler(this,source,card,stat)||0;
       }
       for(const mod of card.mods||[])if((!mod.until||mod.until>=this.state.turn)&&(mod.stat===stat||mod.stat==='both')){
-        if(mod.kind==='add')n+=mod.value;else if(mod.kind==='set')n=mod.value;else if(mod.kind==='half')n=Math.floor(n/2);else if(mod.kind==='multiply')n*=mod.value;
+        if(mod.kind==='add')n+=mod.value;else if(mod.kind==='set')n=mod.value;else if(mod.kind==='half')n=Math.floor(n/2);else if((mod.kind==='multiply'||mod.kind==='mul'))n*=mod.value;
       }
       if(battle&&stat==='atk'){
         const mine=card.uid===battle.uid,enemy=this.find(mine?battle.target:battle.uid)?.card;
@@ -236,7 +264,7 @@
       if(stat==='def'&&CARDS[f.card.id].type==='link')return false;
       f.card.mods.push({stat,kind,value,until});return true;
     }
-    passiveSources(){return [0,1].flatMap(owner=>this.refs(owner,['monsters','extraMonster','spells','fieldSpell'])).filter(f=>f.card.faceUp&&(fieldMonster(f.zone)?!this.negated(f.card):this.activeSpell(f.card))&&this.fx.passives?.[f.card.id]);}
+    passiveSources(){return [0,1].flatMap(owner=>this.refs(owner,['monsters','extraMonster','spells','fieldSpell'])).filter(f=>f.card.faceUp&&this.fx.passives?.[f.card.id]&&(fieldMonster(f.zone)?!this.negated(f.card):this.activeSpell(f.card)));}
     unaffected(card,source){
       if(!source||this.negated(card)||!card.faceUp)return false;
       const f=this.find(card.uid),c=CARDS[card.id];if(!f||!fieldMonster(f.zone))return false;
@@ -447,6 +475,7 @@
       if(spec.attribute&&this.attribute(card)!==spec.attribute)return false;
       if(spec.race&&c.race!==spec.race)return false;
       if(spec.type&&c.type!==spec.type)return false;
+      if(spec.normal&&(this.isNormalMonster?!this.isNormalMonster(card):!!c.effect))return false;
       if(owner!==null&&f?.owner!==owner)return false;
       return true;
     }
@@ -526,17 +555,21 @@
         if(!options.virtual&&(!f||f.owner!==owner||!fieldMonster(f.zone)||!m.faceUp))return false;
         if(CARDS[m.id].cannotSynchro||this.level(m)<=0)return false;
       }
-      const tuners=materials.filter(m=>this.isTuner(m)),non=materials.filter(m=>!this.isTuner(m));
+      const isTuner=m=>this.synchroMaterialTuner?this.synchroMaterialTuner(m,extra,materials):this.isTuner(m);
+      const tuners=materials.filter(isTuner),non=materials.filter(m=>!isTuner(m));
       if(tuners.length<spec.minTuners||tuners.length>(spec.maxTuners??1)||non.length<spec.minNon||non.length>(spec.maxNon??5))return false;
-      if(materials.reduce((n,m)=>n+this.level(m),0)!==c.level)return false;
+      if(materials.reduce((n,m)=>n+(this.synchroMaterialLevel?this.synchroMaterialLevel(m,extra,materials):this.level(m)),0)!==c.level)return false;
       for(const m of tuners){
         const d=CARDS[m.id];
         if(d.synchronSubstitute&&!spec.namedSynchron&&spec.tunerFamily!=='synchron')return false;
         if(spec.tunerId&&m.id!==spec.tunerId&&!(d.synchronSubstitute&&spec.namedSynchron))return false;
         if(spec.tunerFamily&&!isFamily(d,spec.tunerFamily))return false;
         if(spec.tunerType&&d.type!==spec.tunerType)return false;
+        if(spec.tunerRace&&this.race(m)!==spec.tunerRace)return false;
       }
-      for(const m of non){if(spec.nonId&&m.id!==spec.nonId)return false;if(spec.nonType&&CARDS[m.id].type!==spec.nonType)return false;}
+      for(const m of non){if(spec.nonId&&m.id!==spec.nonId)return false;if(spec.nonType&&CARDS[m.id].type!==spec.nonType)return false;if(spec.nonLevel&&this.level(m)!==spec.nonLevel)return false;if(spec.nonGemini&&!CARDS[m.id].gemini)return false;}
+      if(spec.requiredNonIds&&!spec.requiredNonIds.every(id=>non.some(m=>m.id===id)))return false;
+      if(spec.additionalAttribute&&!tuners.some(t=>materials.every(m=>m===t||this.attribute(m)===spec.additionalAttribute)))return false;
       return options.virtual||this.freeZones(owner,extra,{materials:materials.map(m=>m.uid)}).length>0;
     }
     synchroCombos(owner,extra,requiredUid=null){
@@ -553,11 +586,11 @@
         const target=materials[0],d=CARDS[target.id];
         return !!(c.rankUpFrom?.includes(target.id)||(c.rankUpFamily&&d.family===c.rankUpFamily&&d.rank===c.rankUpRank));
       }
-      return materials.length===(c.xyzCount||2)&&materials.every(m=>this.level(m)===c.rank&&(!c.xyzRace||CARDS[m.id].race===c.xyzRace)&&(!c.xyzAttribute||this.attribute(m)===c.xyzAttribute));
+      return materials.length>=(c.xyzCount||2)&&materials.length<=(c.xyzMax||c.xyzCount||2)&&materials.every(m=>(this.xyzMaterialLevel?this.xyzMaterialLevel(m,extra):this.level(m))===c.rank&&(!c.xyzRace||this.race(m)===c.xyzRace)&&(!c.xyzAttribute||this.attribute(m)===c.xyzAttribute)&&(!c.xyzNormal||this.isNormalMonster(m))&&(!c.xyzNameIncludes||CARDS[m.id].officialName.includes(c.xyzNameIncludes)));
     }
     xyzCombos(owner,extra){
       const pool=this.monsters(owner).filter(c=>c.faceUp&&!CARDS[c.id].cannotXyz&&CARDS[c.id].type!=='token'),out=[];
-      for(const set of subsets(pool,CARDS[extra.id].xyzCount||2,CARDS[extra.id].xyzCount||2))if(this.xyzValid(owner,extra,set))out.push({materials:set.map(c=>c.uid),rankUp:false});
+      for(const set of subsets(pool,CARDS[extra.id].xyzCount||2,CARDS[extra.id].xyzMax||CARDS[extra.id].xyzCount||2))if(this.xyzValid(owner,extra,set))out.push({materials:set.map(c=>c.uid),rankUp:false});
       for(const card of pool)if(this.xyzValid(owner,extra,[card],true))out.push({materials:[card.uid],rankUp:true});
       return out;
     }
@@ -573,8 +606,8 @@
         return [];
       });
     }
-    takeMaterial(uid,transfer=false){
-      const f=this.find(uid);req(f&&fieldMonster(f.zone),'超量素材必须是场上的怪兽。');
+    takeMaterial(uid,transfer=false,byEffect=false){
+      const f=this.find(uid);req(f&&(fieldMonster(f.zone)||byEffect&&['hand','grave','banished','spells','fieldSpell','overlays'].includes(f.zone)),'超量素材必须是场上的怪兽，或由效果指定的卡片。');
       const card=f.card,snapshot=this.describe(card,f),under=[...(card.overlays||[])];
       if(!transfer)for(const m of under)this.move(m.uid,'grave',{kind:'rule-material',reason:'超量怪兽变为素材'});
       this.remove(uid);this.cleanupEquips(uid);card.overlays=[];card.mods=[];card.used={};card.banishOnLeave=false;card.effectNegated=false;card.granted={};card.qliReduced=false;card.levelOverride=null;card.attributeOverride=null;card.normalSummoned=false;card.summonKind=null;card.attacked=false;card.attacksMade=0;
@@ -582,8 +615,8 @@
     }
     attach(targetUid,materialUid,source=null){
       const host=this.find(targetUid),material=this.find(materialUid);
-      if(!host||!material||!fieldMonster(host.zone)||CARDS[host.card.id].type!=='xyz'||!fieldMonster(material.zone)||CARDS[material.card.id].type==='token'||targetUid===materialUid||this.unaffected(material.card,source))return false;
-      const taken=this.takeMaterial(materialUid,false);host.card.overlays.push(...taken.cards);
+      if(!host||!material||!fieldMonster(host.zone)||CARDS[host.card.id].type!=='xyz'||!['monsters','extraMonster','hand','grave','banished','spells','fieldSpell','overlays'].includes(material.zone)||CARDS[material.card.id].type==='token'||targetUid===materialUid||material.parentUid===targetUid||this.unaffected(material.card,source))return false;
+      const taken=this.takeMaterial(materialUid,false,true);host.card.overlays.push(...taken.cards);
       this.log('overlay',CARDS[taken.cards[0].id].name+'成为「'+CARDS[host.card.id].name+'」的超量素材',host.owner,{cardId:host.card.id,uid:host.card.uid});return true;
     }
     detach(uid,materials){
@@ -596,7 +629,8 @@
       req(['synchro','xyz','link'].includes(c.type),'这个额外怪兽需要由相应卡牌效果召唤。');
       const option=this.extraOptions(owner).find(o=>o.card.uid===extra.uid);req(option,'场上没有满足条件的素材组合。');
       if(!action.materials){
-        this.state.pending={kind:'materials',purpose:'extra',responder:owner,owner,uid:extra.uid,title:({synchro:'同调',xyz:'超量',link:'连接'}[c.type])+'召唤 · 选择素材',min:1,max:7,candidates:this.monsters(owner).filter(m=>m.faceUp).map(m=>this.option(m)),sets:option.combos.map(x=>x.materials),combos:cp(option.combos),action:{...action},cancelable:true};return;
+        const candidates=[...new Set(option.combos.flatMap(x=>x.materials))].map(uid=>this.find(uid)?.card).filter(Boolean);
+        this.state.pending={kind:'materials',purpose:'extra',responder:owner,owner,uid:extra.uid,title:({synchro:'同调',xyz:'超量',link:'连接'}[c.type])+'召唤 · 选择素材',min:1,max:7,candidates:candidates.map(m=>this.option(m,{viewer:owner})),sets:option.combos.map(x=>x.materials),combos:cp(option.combos),action:{...action},cancelable:true};return;
       }
       const combo=option.combos.find(x=>x.materials.length===action.materials.length&&x.materials.every(uid=>action.materials.includes(uid)));
       req(combo,'素材的等级、调整条件或数量不符合要求。');
@@ -1066,7 +1100,7 @@
     }
 
     attackBlocked(owner){
-      return this.spells(1-owner).some(c=>this.activeSpell(c)&&c.id==='swords'&&c.turnsLeft>0)||this.state.players[owner].cannotAttackTurn===this.state.turn;
+      return this.spells(1-owner).some(c=>c.id==='swords'&&c.turnsLeft>0&&this.activeSpell(c))||this.state.players[owner].cannotAttackTurn===this.state.turn;
     }
     attackAllowance(card){
       const c=CARDS[card.id],off=this.negated(card);

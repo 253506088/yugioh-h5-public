@@ -1,4 +1,17 @@
-# 1999—2001卡片与原图采集
+# 年度卡片与原图采集
+
+当前已保留1999—2012十四年离线快照，合计5,664个供应方身份；新批2009—2012为520／573／518／482张。原始提供方响应、规范化卡片和来源哈希均提交到Git，研究网页与采集过程日志在忽略的 `output/`。
+
+最新范围为 `scope-2009-2012.json`，元数据快照为 `data/providers/ocg-2009-2012.json`，可用以下命令离线重建卡池、三语文本和年度牌组：
+
+```powershell
+npm.cmd run cards:import
+npm.cmd run locales:sync
+npm.cmd run decks:chronicle
+npm.cmd run cards:coverage
+```
+
+后续新年先通过 `npm.cmd run cards:year -- 2013` 创建范围，再用 `collect-years.mjs --scope <范围文件> --no-images` 采集资料；保留原始响应到 `data/providers/`，更新导入年份、实现规则、素材语法及两条加载链后，再构建发布。采集本身不等于效果实现。以下保留最初的采集说明。
 
 范围配置：scope-1999-2001.json。完整方案见根目录YEARLY-CARD-ROLLOUT-PLAN.md。
 

@@ -1,0 +1,2038 @@
+{
+  "schemaVersion": 1,
+  "scope": [
+    2009,
+    2010,
+    2011,
+    2012
+  ],
+  "policy": "Representative adaptations using current stored card text and first-OCG-date candidates; not verbatim championship lists and not historical Forbidden/Limited List enforcement.",
+  "sources": [
+    {
+      "id": "worlds-2009",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2009/",
+      "title": "Yu-Gi-Oh! World Championship 2009",
+      "accessedOn": "2026-09-14",
+      "kind": "secondary-tournament-history",
+      "podium": [
+        "Benjamin Tan Hong Hwee — Blackwing",
+        "Chien Yen Jui — Cat Gladiator Beast",
+        "Roy St. Clair — Blackwing"
+      ]
+    },
+    {
+      "id": "worlds-2010",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2010/",
+      "title": "Yu-Gi-Oh! World Championship 2010",
+      "accessedOn": "2026-09-14",
+      "kind": "secondary-tournament-history",
+      "podium": [
+        "Galileo De Obaldia — Frog FTK",
+        "Vincent Paglia — Blackwing",
+        "Kuwano Kei — Herald of Perfection"
+      ]
+    },
+    {
+      "id": "worlds-2011",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2011/",
+      "title": "Yu-Gi-Oh! World Championship 2011",
+      "accessedOn": "2026-09-14",
+      "kind": "secondary-tournament-history",
+      "podium": [
+        "Ogawa Takashi — Agent Fairy",
+        "Murakoshi Kei — Junk Doppel",
+        "Galileo De Obaldia — Junk Doppel"
+      ]
+    },
+    {
+      "id": "worlds-2012",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2012/",
+      "title": "Yu-Gi-Oh! World Championship 2012",
+      "accessedOn": "2026-09-14",
+      "kind": "secondary-tournament-history",
+      "podium": [
+        "Saito Akikazu — Inzektor",
+        "Stefano Memoli — Inzektor",
+        "Joshua Schmidt — Inzektor"
+      ]
+    },
+    {
+      "id": "ocg-review",
+      "url": "https://roadoftheking.com/ocg-2008-03-ocg-2012-09-a-quinquennium-in-review/",
+      "title": "OCG 2008.03 – OCG 2012.09: A Quinquennium in Review",
+      "accessedOn": "2026-09-14",
+      "kind": "secondary-metagame-review"
+    },
+    {
+      "id": "ocg-2012-03",
+      "url": "https://roadoftheking.com/ocg-2012-03-metagame/",
+      "title": "OCG 2012.03 Metagame (1 March – 31 Aug 2012)",
+      "accessedOn": "2026-09-14",
+      "kind": "secondary-metagame-review"
+    },
+    {
+      "id": "ocg-2012-09",
+      "url": "https://roadoftheking.com/ocg-2012-09-metagame/",
+      "title": "OCG 2012.09 Metagame (1 September 2012 – 28 February 2013)",
+      "accessedOn": "2026-09-14",
+      "kind": "secondary-metagame-review",
+      "note": "The review includes January–February 2013. Our deck choices are capped at 2012 OCG candidates and do not use later cards."
+    }
+  ],
+  "decks": [
+    {
+      "id": "blackwing-2009",
+      "year": 2009,
+      "title": "黑羽疾风",
+      "en": "Blackwing Gale",
+      "ja": "BF・疾風",
+      "ace": "Blackwing Armor Master",
+      "description": "参考2009世界冠军 Benjamin Tan 的黑羽战术。黑旋风检索、月影保护战斗，暴雪衔接同调；用鸟兽解放和墓地资源争取节奏。",
+      "main": [
+        [
+          "Blackwing - Shura the Blue Flame",
+          3
+        ],
+        [
+          "Blackwing - Bora the Spear",
+          3
+        ],
+        [
+          "Blackwing - Kalut the Moon Shadow",
+          3
+        ],
+        [
+          "Blackwing - Blizzard the Far North",
+          2
+        ],
+        [
+          "Blackwing - Gale the Whirlwind",
+          1
+        ],
+        [
+          "Blackwing - Sirocco the Dawn",
+          3
+        ],
+        [
+          "Blackwing - Elphin the Raven",
+          1
+        ],
+        [
+          "Blackwing - Vayu the Emblem of Honor",
+          1
+        ],
+        [
+          "Dark Armed Dragon",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Black Whirlwind",
+          3
+        ],
+        [
+          "Allure of Darkness",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Brain Control",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Icarus Attack",
+          3
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Bottomless Trap Hole",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Blackwing Armed Wing",
+          3
+        ],
+        [
+          "Blackwing Armor Master",
+          2
+        ],
+        [
+          "Blackwing - Silverwind the Ascendant",
+          1
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Stardust Dragon",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Goyo Guardian",
+          1
+        ],
+        [
+          "Colossal Fighter",
+          1
+        ],
+        [
+          "Red Dragon Archfiend",
+          1
+        ],
+        [
+          "Ancient Fairy Dragon",
+          1
+        ],
+        [
+          "Mist Wurm",
+          1
+        ]
+      ],
+      "combo": [
+        "先发动黑旋风，再通常召唤黑羽；只能检索攻击力更低的同伴。",
+        "大旆从墓地除外自身与非调整黑羽，登场的黑羽同调效果无效。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "worlds-2009"
+      ]
+    },
+    {
+      "id": "cat-gladiator-2009",
+      "year": 2009,
+      "title": "猫剑斗兽",
+      "en": "Cat Gladiator Beast",
+      "ja": "猫剣闘獣",
+      "ace": "Gladiator Beast Gyzarus",
+      "description": "参考2009世界亚军 Chien Yen Jui 的猫剑斗兽。救援猫提供低星素材，剑斗兽在战后换人，以凯撒接触融合和战车控制场面。",
+      "main": [
+        [
+          "Gladiator Beast Laquari",
+          2
+        ],
+        [
+          "Gladiator Beast Bestiari",
+          1
+        ],
+        [
+          "Gladiator Beast Darius",
+          1
+        ],
+        [
+          "Gladiator Beast Equeste",
+          2
+        ],
+        [
+          "Gladiator Beast Murmillo",
+          1
+        ],
+        [
+          "Gladiator Beast Retiari",
+          1
+        ],
+        [
+          "X-Saber Airbellum",
+          1
+        ],
+        [
+          "Gladiator Beast Samnite",
+          2
+        ],
+        [
+          "Test Tiger",
+          3
+        ],
+        [
+          "Rescue Cat",
+          2
+        ],
+        [
+          "Elemental HERO Prisma",
+          2
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Gladiator Proving Ground",
+          3
+        ],
+        [
+          "Book of Moon",
+          3
+        ],
+        [
+          "Cold Wave",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Gladiator Beast War Chariot",
+          3
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Bottomless Trap Hole",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Trap Stun",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Gladiator Beast Gyzarus",
+          3
+        ],
+        [
+          "Gladiator Beast Heraklinos",
+          2
+        ],
+        [
+          "Gladiator Beast Gaiodiaz",
+          1
+        ],
+        [
+          "Chimeratech Fortress Dragon",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Goyo Guardian",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ]
+      ],
+      "combo": [
+        "救援猫按当前卡文处理：登场怪兽效果无效，仍可用作合法素材。",
+        "剑斗兽必须参加战斗才有通常的战后换人机会；接触融合会把素材洗回卡组。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "worlds-2009"
+      ]
+    },
+    {
+      "id": "cat-synchro-2009",
+      "year": 2009,
+      "title": "猫僧同调",
+      "en": "Cat Synchro",
+      "ja": "猫シンクロ",
+      "ace": "Arcanite Magician",
+      "description": "2009前三有两套黑羽，因此第三套选同年热门猫僧同调。召唤僧、救援猫、X-剑士和炎狱提供不同等级组合，奥金魔术师处理场面。",
+      "main": [
+        [
+          "Rescue Cat",
+          2
+        ],
+        [
+          "Summoner Monk",
+          2
+        ],
+        [
+          "X-Saber Airbellum",
+          3
+        ],
+        [
+          "Ryko, Lightsworn Hunter",
+          2
+        ],
+        [
+          "Des Koala",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Dark Armed Dragon",
+          1
+        ],
+        [
+          "Cyber Dragon",
+          1
+        ],
+        [
+          "Gravekeeper's Spy",
+          2
+        ],
+        [
+          "Gravekeeper's Guard",
+          1
+        ],
+        [
+          "Flamvell Firedog",
+          2
+        ],
+        [
+          "Flamvell Magician",
+          1
+        ],
+        [
+          "Book of Moon",
+          3
+        ],
+        [
+          "Pot of Avarice",
+          2
+        ],
+        [
+          "Cold Wave",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Brain Control",
+          1
+        ],
+        [
+          "Mind Control",
+          2
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Rekindling",
+          1
+        ],
+        [
+          "Bottomless Trap Hole",
+          2
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Trap Stun",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Arcanite Magician",
+          2
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Magical Android",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Goyo Guardian",
+          1
+        ],
+        [
+          "Gaia Knight, the Force of Earth",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Ancient Fairy Dragon",
+          1
+        ],
+        [
+          "Stardust Dragon",
+          2
+        ],
+        [
+          "Colossal Fighter",
+          1
+        ],
+        [
+          "Thought Ruler Archfiend",
+          1
+        ],
+        [
+          "Red Dragon Archfiend",
+          1
+        ],
+        [
+          "Mist Wurm",
+          1
+        ]
+      ],
+      "combo": [
+        "召唤僧的魔法弃牌是代价；先看卡组里是否还有合法4星展开目标。",
+        "奥金魔术师要求非调整魔法师族；御用守护者按当前卡文要求地属性调整。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "worlds-2009",
+        "ocg-review"
+      ]
+    },
+    {
+      "id": "frog-ftk-2010",
+      "year": 2010,
+      "title": "蛙炮循环",
+      "en": "Frog Cannon",
+      "ja": "ガエル・キャノン",
+      "ace": "Substitoad",
+      "description": "参考2010世界冠军 Galileo De Obaldia 的 Frog FTK 引擎改编。交换蛙、替代蛙和粹蛙把卡组与墓地变成资源，以质量加速器完成循环削血。",
+      "main": [
+        [
+          "Substitoad",
+          3
+        ],
+        [
+          "Swap Frog",
+          3
+        ],
+        [
+          "Ronintoadin",
+          2
+        ],
+        [
+          "Dupe Frog",
+          3
+        ],
+        [
+          "Des Frog",
+          2
+        ],
+        [
+          "Unifrog",
+          1
+        ],
+        [
+          "Treeborn Frog",
+          1
+        ],
+        [
+          "Fishborg Blaster",
+          1
+        ],
+        [
+          "Poison Draw Frog",
+          3
+        ],
+        [
+          "Beelze Frog",
+          3
+        ],
+        [
+          "Battle Fader",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Mass Driver",
+          3
+        ],
+        [
+          "Salvage",
+          3
+        ],
+        [
+          "One for One",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Moray of Greed",
+          3
+        ],
+        [
+          "Hand Destruction",
+          2
+        ],
+        [
+          "Card Destruction",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Giant Trunade",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Formula Synchron",
+          2
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Magical Android",
+          1
+        ],
+        [
+          "Sea Dragon Lord Gishilnodon",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Gungnir, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Stardust Dragon",
+          1
+        ],
+        [
+          "Colossal Fighter",
+          1
+        ],
+        [
+          "Trishula, Dragon of the Ice Barrier",
+          1
+        ]
+      ],
+      "combo": [
+        "粹蛙除外墓地青蛙复活；粹蛙自身不是青蛙，且不能作同调素材。",
+        "质量加速器每次实际解放一只怪兽造成400伤害；展开和削血均可被合法响应打断。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "worlds-2010"
+      ]
+    },
+    {
+      "id": "blackwing-2010",
+      "year": 2010,
+      "title": "黑羽旋风",
+      "en": "Blackwing Whirlwind",
+      "ja": "BF・旋風",
+      "ace": "Blackwing Armor Master",
+      "description": "参考2010世界亚军黑羽的全年代表构筑，加入精锐、微风与黑羽宝札。协调通常召唤检索、墓地同调与反击陷阱。",
+      "main": [
+        [
+          "Blackwing - Shura the Blue Flame",
+          3
+        ],
+        [
+          "Blackwing - Bora the Spear",
+          3
+        ],
+        [
+          "Blackwing - Kalut the Moon Shadow",
+          3
+        ],
+        [
+          "Blackwing - Blizzard the Far North",
+          2
+        ],
+        [
+          "Blackwing - Gale the Whirlwind",
+          1
+        ],
+        [
+          "Blackwing - Sirocco the Dawn",
+          2
+        ],
+        [
+          "Blackwing - Vayu the Emblem of Honor",
+          2
+        ],
+        [
+          "Blackwing - Zephyros the Elite",
+          1
+        ],
+        [
+          "Blackwing - Breeze the Zephyr",
+          1
+        ],
+        [
+          "Dark Armed Dragon",
+          1
+        ],
+        [
+          "Black Whirlwind",
+          2
+        ],
+        [
+          "Allure of Darkness",
+          1
+        ],
+        [
+          "Cards for Black Feathers",
+          2
+        ],
+        [
+          "Pot of Duality",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Icarus Attack",
+          3
+        ],
+        [
+          "Bottomless Trap Hole",
+          2
+        ],
+        [
+          "Solemn Warning",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Trap Stun",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Blackwing Armed Wing",
+          3
+        ],
+        [
+          "Blackwing Armor Master",
+          2
+        ],
+        [
+          "Blackwing - Silverwind the Ascendant",
+          1
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Stardust Dragon",
+          2
+        ],
+        [
+          "Scrap Dragon",
+          1
+        ],
+        [
+          "Colossal Fighter",
+          1
+        ],
+        [
+          "Trishula, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Mist Wurm",
+          1
+        ]
+      ],
+      "combo": [
+        "强欲而谦虚之壶和黑羽宝札会封锁本回合特殊召唤，先确定本回合的路线。",
+        "精锐返回自己一张表侧卡复活，需要支付400生命值。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "worlds-2010"
+      ]
+    },
+    {
+      "id": "herald-2010",
+      "year": 2010,
+      "title": "神光宣告",
+      "en": "Herald of Perfection",
+      "ja": "神光の宣告者",
+      "ace": "Herald of Perfection",
+      "description": "参考2010世界季军 Kuwano Kei 的宣告者体系。准备仪式、精确等级解放与天使手牌支撑神光；大天使的特殊召唤封锁形成另一种胜法。",
+      "main": [
+        [
+          "Herald of Perfection",
+          3
+        ],
+        [
+          "Manju of the Ten Thousand Hands",
+          3
+        ],
+        [
+          "Senju of the Thousand Hands",
+          1
+        ],
+        [
+          "Sonic Bird",
+          1
+        ],
+        [
+          "Archlord Kristya",
+          2
+        ],
+        [
+          "Honest",
+          2
+        ],
+        [
+          "Herald of Orange Light",
+          3
+        ],
+        [
+          "Mokey Mokey",
+          3
+        ],
+        [
+          "Mystical Shine Ball",
+          3
+        ],
+        [
+          "Happy Lover",
+          1
+        ],
+        [
+          "Gyakutenno Megami",
+          1
+        ],
+        [
+          "Dawn of the Herald",
+          3
+        ],
+        [
+          "Advanced Ritual Art",
+          1
+        ],
+        [
+          "Preparation of Rites",
+          3
+        ],
+        [
+          "Pot of Duality",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Dark Factory of Mass Production",
+          1
+        ],
+        [
+          "Royal Decree",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Ancient Sacred Wyvern",
+          1
+        ],
+        [
+          "Avenging Knight Parshath",
+          1
+        ],
+        [
+          "Stardust Dragon",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Mist Wurm",
+          1
+        ]
+      ],
+      "combo": [
+        "宣告者的预言要求等级合计恰好6；高等仪式术从卡组送墓通常怪兽。",
+        "神光每次无效都要送墓一张天使手牌，不能把有限手牌当作无限响应。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "worlds-2010"
+      ]
+    },
+    {
+      "id": "agents-2011",
+      "year": 2011,
+      "title": "代行天使",
+      "en": "Agent Fairy",
+      "ja": "代行天使",
+      "ace": "Master Hyperion",
+      "description": "参考2011世界冠军 Ogawa Takashi 的代行天使。地球检索、金星召唤球体，连接同调与2阶超量；主宰者将墓地天使转为去除。",
+      "main": [
+        [
+          "Master Hyperion",
+          3
+        ],
+        [
+          "The Agent of Mystery - Earth",
+          3
+        ],
+        [
+          "The Agent of Creation - Venus",
+          3
+        ],
+        [
+          "Mystical Shine Ball",
+          3
+        ],
+        [
+          "Archlord Kristya",
+          2
+        ],
+        [
+          "Herald of Orange Light",
+          3
+        ],
+        [
+          "Honest",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Gorz the Emissary of Darkness",
+          1
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Cards from the Sky",
+          2
+        ],
+        [
+          "Pot of Duality",
+          2
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Solemn Warning",
+          2
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Bottomless Trap Hole",
+          2
+        ],
+        [
+          "Call of the Haunted",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Gachi Gachi Gantetsu",
+          2
+        ],
+        [
+          "Daigusto Phoenix",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Number 17: Leviathan Dragon",
+          1
+        ],
+        [
+          "Leviair the Sea Dragon",
+          1
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Ancient Sacred Wyvern",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Stardust Dragon",
+          1
+        ],
+        [
+          "Scrap Dragon",
+          1
+        ],
+        [
+          "Colossal Fighter",
+          1
+        ],
+        [
+          "Trishula, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Mist Wurm",
+          1
+        ]
+      ],
+      "combo": [
+        "金星每次支付500生命值召唤一只神圣球体；两只球体可以叠放成2阶超量。",
+        "主宰者以代行者为特殊召唤资源，再消耗光属性天使发动破坏。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "worlds-2011"
+      ]
+    },
+    {
+      "id": "junk-doppel-2011",
+      "year": 2011,
+      "title": "废二同调",
+      "en": "Junk Doppel",
+      "ja": "ジャンクドッペル",
+      "ace": "Shooting Quasar Dragon",
+      "description": "参考2011世界亚军与季军共同使用的 Junk Doppel。保留一套废二，用二重身衍生物、植物调整和图书馆衔接加速同调。",
+      "main": [
+        [
+          "Junk Synchron",
+          3
+        ],
+        [
+          "Doppelwarrior",
+          3
+        ],
+        [
+          "Quickdraw Synchron",
+          1
+        ],
+        [
+          "Level Eater",
+          2
+        ],
+        [
+          "Debris Dragon",
+          1
+        ],
+        [
+          "Dandylion",
+          1
+        ],
+        [
+          "Spore",
+          1
+        ],
+        [
+          "Glow-Up Bulb",
+          1
+        ],
+        [
+          "Ryko, Lightsworn Hunter",
+          2
+        ],
+        [
+          "Lonefire Blossom",
+          1
+        ],
+        [
+          "Card Trooper",
+          2
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Tuning",
+          3
+        ],
+        [
+          "One for One",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Pot of Avarice",
+          1
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Enemy Controller",
+          2
+        ],
+        [
+          "Solemn Warning",
+          2
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Limit Reverse",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Formula Synchron",
+          2
+        ],
+        [
+          "T.G. Hyper Librarian",
+          1
+        ],
+        [
+          "Junk Warrior",
+          1
+        ],
+        [
+          "Junk Destroyer",
+          1
+        ],
+        [
+          "Drill Warrior",
+          1
+        ],
+        [
+          "Junk Archer",
+          1
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Stardust Dragon",
+          1
+        ],
+        [
+          "Shooting Star Dragon",
+          1
+        ],
+        [
+          "Shooting Quasar Dragon",
+          1
+        ],
+        [
+          "Trishula, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Scrap Dragon",
+          1
+        ]
+      ],
+      "combo": [
+        "方程式是同调调整；流天类加速路线要求同调怪兽素材，不能只看等级合计。",
+        "成长的鳞茎和孢子各有整场一次限制；二重身由墓地特殊召唤触发。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "worlds-2011"
+      ]
+    },
+    {
+      "id": "six-samurai-2011",
+      "year": 2011,
+      "title": "六武真传",
+      "en": "Legendary Six Samurai",
+      "ja": "真六武衆",
+      "ace": "Legendary Six Samurai - Shi En",
+      "description": "2011冠亚季军有两套废二，因此加入当年热门、世界赛八强也使用的六武众。影武者与影鬼出紫炎，道场和团结补充资源。",
+      "main": [
+        [
+          "Legendary Six Samurai - Kageki",
+          3
+        ],
+        [
+          "Kagemusha of the Six Samurai",
+          3
+        ],
+        [
+          "Legendary Six Samurai - Kizan",
+          3
+        ],
+        [
+          "Grandmaster of the Six Samurai",
+          2
+        ],
+        [
+          "Legendary Six Samurai - Enishi",
+          1
+        ],
+        [
+          "Legendary Six Samurai - Mizuho",
+          1
+        ],
+        [
+          "Legendary Six Samurai - Shinai",
+          1
+        ],
+        [
+          "Elder of the Six Samurai",
+          2
+        ],
+        [
+          "Shien's Squire",
+          1
+        ],
+        [
+          "Hand of the Six Samurai",
+          1
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Shien's Smoke Signal",
+          3
+        ],
+        [
+          "Shien's Dojo",
+          2
+        ],
+        [
+          "Gateway of the Six",
+          1
+        ],
+        [
+          "Six Samurai United",
+          3
+        ],
+        [
+          "Reinforcement of the Army",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Musakani Magatama",
+          2
+        ],
+        [
+          "Solemn Warning",
+          2
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Mirror Force",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Legendary Six Samurai - Shi En",
+          2
+        ],
+        [
+          "Naturia Beast",
+          1
+        ],
+        [
+          "Naturia Barkion",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Trishula, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Stardust Dragon",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Gaia Knight, the Force of Earth",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Leviair the Sea Dragon",
+          1
+        ],
+        [
+          "Number 17: Leviathan Dragon",
+          1
+        ],
+        [
+          "Gem-Knight Pearl",
+          1
+        ],
+        [
+          "Gachi Gachi Gantetsu",
+          1
+        ]
+      ],
+      "combo": [
+        "影鬼通常召唤展开影武者，2星调整加3星六武众同调真六武众 紫炎。",
+        "紫炎每回合无效一次魔法或陷阱；破坏代替会实际消耗另一只六武众。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "worlds-2011",
+        "ocg-review"
+      ]
+    },
+    {
+      "id": "inzektor-2012",
+      "year": 2012,
+      "title": "甲虫装机",
+      "en": "Inzektor",
+      "ja": "甲虫装機",
+      "ace": "Inzektor Dragonfly",
+      "description": "2012世界赛前四均为甲虫装机。保留冠军代表体系，以蜻蜓、蜈蚣和大黄蜂的装备送墓形成展开，瓢虫调整等级进入不同阶级。",
+      "main": [
+        [
+          "Inzektor Centipede",
+          3
+        ],
+        [
+          "Inzektor Dragonfly",
+          3
+        ],
+        [
+          "Inzektor Hornet",
+          2
+        ],
+        [
+          "Inzektor Ladybug",
+          2
+        ],
+        [
+          "Inzektor Giga-Mantis",
+          1
+        ],
+        [
+          "Inzektor Giga-Weevil",
+          1
+        ],
+        [
+          "Tour Guide From the Underworld",
+          2
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Card Trooper",
+          2
+        ],
+        [
+          "Effect Veiler",
+          3
+        ],
+        [
+          "Pot of Duality",
+          2
+        ],
+        [
+          "Allure of Darkness",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          3
+        ],
+        [
+          "Inzektor Sword - Zektkaliber",
+          1
+        ],
+        [
+          "Call of the Haunted",
+          2
+        ],
+        [
+          "Solemn Warning",
+          2
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          2
+        ],
+        [
+          "Compulsory Evacuation Device",
+          1
+        ],
+        [
+          "Safe Zone",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Inzektor Exa-Beetle",
+          1
+        ],
+        [
+          "Inzektor Exa-Stag",
+          1
+        ],
+        [
+          "Leviair the Sea Dragon",
+          1
+        ],
+        [
+          "Number 17: Leviathan Dragon",
+          1
+        ],
+        [
+          "Wind-Up Zenmaines",
+          1
+        ],
+        [
+          "Number 20: Giga-Brilliant",
+          1
+        ],
+        [
+          "Lavalval Chain",
+          1
+        ],
+        [
+          "Daigusto Emeral",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Maestroke the Symphony Djinn",
+          1
+        ],
+        [
+          "Photon Papilloperative",
+          1
+        ],
+        [
+          "Number 61: Volcasaurus",
+          1
+        ],
+        [
+          "Tiras, Keeper of Genesis",
+          1
+        ],
+        [
+          "Gaia Dragon, the Thunder Charger",
+          1
+        ],
+        [
+          "Number 50: Blackship of Corn",
+          1
+        ]
+      ],
+      "combo": [
+        "大黄蜂作为装备卡送墓是发动代价，随后宿主蜻蜓或蜈蚣获得各自的诱发机会。",
+        "瓢虫能改变等级；超量必须核对当前等级，叠放后的卡片不再是场上怪兽。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "worlds-2012"
+      ]
+    },
+    {
+      "id": "wind-up-2012",
+      "year": 2012,
+      "title": "发条连动",
+      "en": "Wind-Up",
+      "ja": "ゼンマイ",
+      "ace": "Wind-Up Carrier Zenmaity",
+      "description": "为避免三套甲虫装机重复，选入2012全年人气体系发条。鲨鱼调整等级，魔术师与老鼠展开，发条空母连接3阶超量。",
+      "main": [
+        [
+          "Wind-Up Magician",
+          3
+        ],
+        [
+          "Wind-Up Shark",
+          3
+        ],
+        [
+          "Wind-Up Rat",
+          3
+        ],
+        [
+          "Wind-Up Rabbit",
+          3
+        ],
+        [
+          "Wind-Up Hunter",
+          1
+        ],
+        [
+          "Wind-Up Kitten",
+          1
+        ],
+        [
+          "Tour Guide From the Underworld",
+          2
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Wind-Up Factory",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          3
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Pot of Avarice",
+          1
+        ],
+        [
+          "Mind Control",
+          1
+        ],
+        [
+          "Solemn Warning",
+          2
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          2
+        ],
+        [
+          "Bottomless Trap Hole",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Compulsory Evacuation Device",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Wind-Up Carrier Zenmaity",
+          2
+        ],
+        [
+          "Wind-Up Zenmaines",
+          1
+        ],
+        [
+          "Wind-Up Arsenal Zenmaioh",
+          1
+        ],
+        [
+          "Leviair the Sea Dragon",
+          1
+        ],
+        [
+          "Number 17: Leviathan Dragon",
+          1
+        ],
+        [
+          "Number 20: Giga-Brilliant",
+          1
+        ],
+        [
+          "Gachi Gachi Gantetsu",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Maestroke the Symphony Djinn",
+          1
+        ],
+        [
+          "Number 16: Shock Master",
+          1
+        ],
+        [
+          "Photon Papilloperative",
+          1
+        ],
+        [
+          "Adreus, Keeper of Armageddon",
+          1
+        ],
+        [
+          "Tiras, Keeper of Genesis",
+          1
+        ],
+        [
+          "Gaia Dragon, the Thunder Charger",
+          1
+        ]
+      ],
+      "combo": [
+        "多数发条怪兽每次表侧存在期间只能用一次效果；暂时除外或盖放重置与普通回合限制不同。",
+        "空母移除一枚真实素材展开，老鼠变为守备表示复活发条。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-review",
+        "ocg-2012-03",
+        "ocg-2012-09"
+      ]
+    },
+    {
+      "id": "mermail-atlantean-2012",
+      "year": 2012,
+      "title": "水精鳞海皇",
+      "en": "Mermail Atlantean",
+      "ja": "水精鱗海皇",
+      "ace": "Mermail Abyssmegalo",
+      "description": "以2012下半年登场的水精鳞海皇补足第三种玩法。水属性弃牌代价触发海皇，深渊球调度琳德，巨齿深渊鲨与水属性额外完成进攻。",
+      "main": [
+        [
+          "Mermail Abyssmegalo",
+          3
+        ],
+        [
+          "Mermail Abysspike",
+          3
+        ],
+        [
+          "Mermail Abyssturge",
+          1
+        ],
+        [
+          "Mermail Abysslinde",
+          3
+        ],
+        [
+          "Mermail Abyssgunde",
+          2
+        ],
+        [
+          "Mermail Abysshilde",
+          1
+        ],
+        [
+          "Atlantean Dragoons",
+          3
+        ],
+        [
+          "Atlantean Heavy Infantry",
+          2
+        ],
+        [
+          "Atlantean Marksman",
+          3
+        ],
+        [
+          "Deep Sea Diva",
+          3
+        ],
+        [
+          "Moulinglacia the Elemental Lord",
+          1
+        ],
+        [
+          "Genex Undine",
+          1
+        ],
+        [
+          "Genex Controller",
+          1
+        ],
+        [
+          "Salvage",
+          2
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Pot of Avarice",
+          1
+        ],
+        [
+          "Abyss-sphere",
+          3
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Mermail Abyssgaios",
+          1
+        ],
+        [
+          "Mermail Abysstrite",
+          1
+        ],
+        [
+          "Bahamut Shark",
+          1
+        ],
+        [
+          "Number 17: Leviathan Dragon",
+          1
+        ],
+        [
+          "Submersible Carrier Aero Shark",
+          1
+        ],
+        [
+          "Gachi Gachi Gantetsu",
+          1
+        ],
+        [
+          "Daigusto Phoenix",
+          1
+        ],
+        [
+          "Armored Kappa",
+          1
+        ],
+        [
+          "Gungnir, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Stardust Dragon",
+          1
+        ],
+        [
+          "Trishula, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ]
+      ],
+      "combo": [
+        "海皇只在为水属性怪兽效果支付送墓代价时触发；普通效果送墓不能混用。",
+        "深渊球在场时不能发动魔法；它离场会破坏关联怪兽，琳德可接续卡组特殊召唤。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-review",
+        "ocg-2012-03",
+        "ocg-2012-09"
+      ]
+    }
+  ]
+}

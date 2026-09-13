@@ -1,0 +1,7 @@
+# Release HTML and preserved provider responses are checksummed as exact bytes.
+# Disable Windows newline conversion so the tested release is the pushed release.
+/index.html -text
+/data/providers/*.json -text
+/data/locales/sources/**/*.cdb -text
+/assets/duel/**/*.webp -text
+/assets/duel/**/*.jpg -text
