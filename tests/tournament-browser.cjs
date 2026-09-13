@@ -58,7 +58,7 @@ async function geometry(page, label) {
       await page.waitForSelector('#t-seat-0');
       await page.locator('.t-advanced summary').click();
       await page.fill('#t-seed', '20260912'); await page.locator('#t-seed').blur();
-      const presets = await page.evaluate(() => DuelDecks.list().filter(d => d.preset).map(d => d.id));
+      const presets = await page.evaluate(() => DuelDecks.list().filter(d => d.preset).slice(0,14).map(d => d.id));
       for (const [i, id] of [...presets, customId, customId].entries()) await page.selectOption('#t-seat-' + i, id);
       const identities = await page.locator('.t-seat-identity strong').allTextContents();
       assert.ok(identities[14].endsWith('1号')); assert.ok(identities[15].endsWith('2号'));
@@ -138,7 +138,7 @@ async function geometry(page, label) {
         await shot(page, '06-bracket-' + locale);
       }
     });
-    await check('all fourteen presets and two custom bots complete a real sixteen-player tournament', async () => {
+    await check('the original fourteen presets and two custom bots complete a real sixteen-player tournament', async () => {
       await page.selectOption('[data-t-field="run-pace"]', 'turbo');
       await page.selectOption('[data-t-field="run-concurrency"]', '8');
       await page.click('[data-t-action="toggle"]');

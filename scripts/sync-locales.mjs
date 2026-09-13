@@ -39,6 +39,8 @@ for(const [language,folder] of [['zh-CN','zh-CN'],['en','en-US'],['ja','ja-JP']]
 await writeAtomic(join(directory,'source-manifest.json'),JSON.stringify(manifest,null,2)+'\n');
 const rawRecords=new Map();
 function ingest(payload){for(const r of payload?.data||[])if(Number.isSafeInteger(r.id)&&r.name)rawRecords.set(r.id,r);}
+// Retained links make an offline rebuild independent of ignored collection logs.
+ingest(await readJSON(join(root,'data/providers/encyclopedia-references.json'),{}));
 for(const file of (await readdir(join(root,'data/yearly'))).filter(f=>/^manifest-.*\.json$/.test(f)).sort()){
  const yearManifest=await readJSON(join(root,'data/yearly',file),{});
  if(yearManifest.catalogSnapshot)ingest(await readJSON(join(root,yearManifest.catalogSnapshot),{}));

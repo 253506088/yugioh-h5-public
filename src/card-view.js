@@ -37,7 +37,7 @@
     const ordinary=['效果已接入本作规则','通常怪兽：完整基础规则','指定素材融合','对应仪式与等级解放','沿用原有卡片实现；以本作卡片说明为准'],note=ordinary.includes(c.implementationNote)?'':c.implementationNote;
     return '<div class="card-coverage'+(c.implementationStatus==='pending'?' pending':'')+'"><b>OCG '+c.releaseYear+' · '+(c.implementationStatus==='pending'?'效果待落实':'可用于决斗')+'</b>'+(note?'<br>'+esc(note):'')+'<small>资料首发日期 '+esc(c.firstOCGDate)+' · YGOPRODeck</small>'+(c.type==='ritual'?'<small>仪式怪兽编入主卡组，由对应仪式魔法召唤。</small>':'')+'</div>';
   }
-  const yearValues=[['all','全部年代'],['1999','1999 · 首年'],['2000','2000 · 第二年'],['2001','2001 · 第三年'],['2002','2002 · 第四年'],['through-1999','截至 1999'],['through-2000','截至 2000'],['through-2001','截至 2001'],['through-2002','截至 2002']];
+  const yearValues=[['all','全部年代'],...root.DuelData.earlyYears.map(y=>[String(y),y===1999?'1999 · 首年':y===2000?'2000 · 第二年':y===2001?'2001 · 第三年':String(y)]),...root.DuelData.earlyYears.map(y=>['through-'+y,'截至 '+y])];
   const yearOptions=value=>yearValues.map(([v,label])=>'<option value="'+v+'"'+(v===value?' selected':'')+'>'+label+'</option>').join('');
   const yearMatch=(c,value)=>value==='all'||(value.startsWith('through-')?!!c.releaseYear&&c.releaseYear<=Number(value.slice(8)):c.releaseYear===Number(value));
   root.DuelView={card,details:(id,instance,engine)=>details(id,instance,engine)+coverage(CARDS[id]),kind,subtype,escape:esc,yearOptions,yearMatch};

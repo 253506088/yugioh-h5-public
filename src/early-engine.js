@@ -10,19 +10,20 @@
  P.canTribute=function(card,owner=this.state.active,kind='effect'){return !!card&&!CARDS[card.id].cannotTribute&&!(kind==='normal'&&CARDS[card.id].cannotTributeSummon)&&!this.hasEarly('Mask of Restrict')&&(this.find(card.uid)?.owner===owner||card.soulExchangeOwner===owner&&card.soulExchangeTurn===this.state.turn);};
  P.ritualPool=function(owner,target){return this.refs(owner,['hand','monsters','extraMonster']).filter(f=>f.card.uid!==target.uid&&(isMonster(CARDS[f.card.id])||fieldMonster(f.zone)&&f.card.asMonster)&&this.level(f.card)>0&&this.canTribute(f.card,owner,'ritual')).map(f=>f.card);};
  P.ritualRequirement=function(spellId,target){return CARDS[spellId]?.ritualLevel||CARDS[target.id].level;};
+ P.ritualAccepts=function(spellId,target){const spell=CARDS[spellId];return !!target&&CARDS[target.id]?.type==='ritual'&&!!spell&&(spell.ritualTarget===target.id||spell.ritualTargets?.includes(target.id)||spell.ritualAttribute===this.attribute(target));};
  P.ritualValid=function(owner,target,materials,spellId){
-  if(!target||this.find(target.uid)?.zone!=='hand'||this.find(target.uid)?.owner!==owner||CARDS[target.id].type!=='ritual'||CARDS[spellId]?.ritualTarget!==target.id||!this.canSpecial(owner,target,{via:'ritual'}))return false;
+  if(!target||this.find(target.uid)?.zone!=='hand'||this.find(target.uid)?.owner!==owner||!this.ritualAccepts(spellId,target)||!this.canSpecial(owner,target,{via:'ritual'}))return false;
   const pool=new Set(this.ritualPool(owner,target).map(c=>c.uid)),need=this.ritualRequirement(spellId,target),levels=materials.map(c=>c&&this.level(c)),sum=levels.reduce((a,b)=>a+b,0);
-  return materials.length>0&&new Set(materials.map(c=>c?.uid)).size===materials.length&&materials.every(c=>c&&pool.has(c.uid))&&sum>=need&&levels.every(n=>sum-n<need)&&this.freeZones(owner,target,{materials:materials.map(c=>c.uid)}).length>0;
+  return materials.length>0&&new Set(materials.map(c=>c?.uid)).size===materials.length&&materials.every(c=>c&&pool.has(c.uid))&&(CARDS[spellId].ritualExact?sum===need:sum>=need)&&levels.every(n=>sum-n<need)&&this.freeZones(owner,target,{materials:materials.map(c=>c.uid)}).length>0;
  };
  P.ritualCombos=function(owner,target,spellId){
-  if(!target||CARDS[spellId]?.ritualTarget!==target.id||!this.canSpecial(owner,target,{via:'ritual'}))return [];
+  if(!target||!this.ritualAccepts(spellId,target)||!this.canSpecial(owner,target,{via:'ritual'}))return [];
   const pool=this.ritualPool(owner,target),need=this.ritualRequirement(spellId,target),out=[];
   // Stop a branch once it meets the level requirement: adding more would be unnecessary.
   function walk(at,chosen,total,e){if(out.length>=200)return;if(total>=need){if(e.ritualValid(owner,target,chosen,spellId))out.push(chosen.map(c=>c.uid));return;}for(let i=at;i<pool.length;i++)walk(i+1,[...chosen,pool[i]],total+e.level(pool[i]),e);}
   walk(0,[],0,this);return out;
  };
- P.ritualOptions=function(owner,spellId){return this.state.players[owner].hand.filter(c=>c.id===CARDS[spellId]?.ritualTarget&&this.ritualCombos(owner,c,spellId).length);};
+ P.ritualOptions=function(owner,spellId){return this.state.players[owner].hand.filter(c=>this.ritualAccepts(spellId,c)&&this.ritualCombos(owner,c,spellId).length);};
  P.performRitual=function(owner,uid,uids,spellId,source,zone=null,position='attack'){
   const target=this.find(uid)?.card,materials=uids.map(x=>this.find(x)?.card);req(this.ritualValid(owner,target,materials,spellId),'仪式素材需要满足等级，不能额外解放多余素材，并须留下可用的主怪兽区。');
   const snapshots=materials.map(c=>this.describe(c));for(const card of materials)this.move(card.uid,'grave',{kind:'effect-ritual-tribute',source,byOwner:owner});
@@ -60,11 +61,12 @@
  }const before=this.state.players[owner].lp;old.damage.call(this,owner,amount,source);const actual=before-this.state.players[owner].lp;if(this._advancedReady&&actual>0){this.emit({type:'damage',owner,amount:actual,source,battle:source==='战斗',attack:a?cp(a):null});if(reflect&&this.state.winner===null)this.damage(1-owner,actual,'效果');}});
  wrap('heal',function(owner,amount){if(this._advancedReady&&this.hasEarly('Bad Reaction to Simochi',1-owner)){this.damage(owner,amount,'效果');return;}old.heal.call(this,owner,amount);if(this._advancedReady&&amount>0)this.emit({type:'heal',owner,amount});});
  P.rawEarly=function(name){const id=D.cardByName(name)?.id;return id?[0,1].flatMap(p=>this.refs(p,['monsters','extraMonster','spells','fieldSpell'])).filter(f=>f.card.id===id&&f.card.faceUp&&!f.card.pendingActivation&&!f.card.effectNegated&&!f.card.spellNegated):[];};
- P.trapsSuppressed=function(){return this.rawEarly('Royal Decree').length>0||this.rawEarly('Jinzo').length>0&&!this.rawEarly('Skill Drain').length;};
- wrap('activeSpell',function(card){if(!old.activeSpell.call(this,card)||card.spellNegatedUntil>=this.state.turn)return false;if(!this._advancedReady)return true;const c=CARDS[card.id];if(c.type==='trap'&&this.trapsSuppressed()&&c.officialName!=='Royal Decree')return false;if((c.type==='spell'||card.monsterEquip)&&!this.trapsSuppressed()&&this.rawEarly('Imperial Order').length)return false;if(card.equipTarget&&!this.trapsSuppressed()&&this.rawEarly("The Emperor's Holiday").length)return false;return true;});
+ P.jinzoSuppresses=function(owner=null){return !this.rawEarly('Skill Drain').length&&this.rawEarly('Jinzo').some(f=>owner!==f.owner||!this.spells(f.owner).some(m=>m.faceUp&&!m.pendingActivation&&CARDS[m.id].officialName==='Amplifier'&&m.equipTarget===f.card.uid));};
+ P.trapsSuppressed=function(owner=null){return this.rawEarly('Royal Decree').length>0||this.jinzoSuppresses(owner);};
+ wrap('activeSpell',function(card){if(!old.activeSpell.call(this,card)||card.spellNegatedUntil>=this.state.turn)return false;if(!this._advancedReady)return true;const c=CARDS[card.id];if(c.type==='trap'&&this.trapsSuppressed(this.find(card.uid)?.owner)&&c.officialName!=='Royal Decree')return false;if((c.type==='spell'||card.monsterEquip)&&!this.trapsSuppressed()&&this.rawEarly('Imperial Order').length)return false;if(card.equipTarget&&!this.trapsSuppressed()&&this.rawEarly("The Emperor's Holiday").length)return false;return true;});
  P.earlyCanUse=function(c,a){const d=CARDS[c.sourceId],f=this.find(c.uid);if(d.implementationStatus==='pending'||d.unplayableFromHand&&a.cardActivation)return false;if(this.isProhibited(c.sourceId,c.uid))return false;
   if(d.flip&&(this.hasEarly('Royal Command')||this.hasEarly('Fiend Skull Dragon')))return false;
-  if(d.type==='trap'&&this.hasEarly('Jinzo')&&(a.cardActivation||f?.zone==='spells'))return false;
+  if(d.type==='trap'&&this.jinzoSuppresses(c.owner)&&(a.cardActivation||f?.zone==='spells'))return false;
   if(a.cardActivation&&d.type==='spell'&&this.hasEarly('Anti-Spell Fragrance')&&(f?.zone==='hand'||f?.card.setTurn>=this.state.turn-1))return false;
   if(a.cardActivation&&['spell','trap'].includes(d.type)&&this.state.coldWaveUntil>=this.state.turn)return false;
   if(d.officialName==='Monster Reborn'&&this.hasEarly('Call of Darkness'))return false;
@@ -74,7 +76,7 @@
  P.isProhibited=function(id,uid){return [0,1].some(p=>this.spells(p).some(m=>this.activeSpell(m)&&m.prohibitedId===id&&!(m.prohibitionExempt||[]).includes(uid)));};
  P.canTarget=function(card,source){return !(card.faceUp&&this.race(card)==='龙族'&&this.hasEarly('Lord of D.')&&!this.unaffected(card,source));};
  P.earlyNegatesLink=function(link,probe=false){const f=this.find(link.uid),a=this.fx.get(link.key),type=link.source.effectType;if(a.cannotNegate)return false;
-  if(type==='trap'&&f&&['spells','fieldSpell'].includes(f.zone)&&this.trapsSuppressed())return true;
+  if(type==='trap'&&f&&['spells','fieldSpell'].includes(f.zone)&&this.trapsSuppressed(link.owner))return true;
   if(type==='spell'&&f&&['spells','fieldSpell'].includes(f.zone)&&this.rawEarly('Imperial Order').length&&!this.trapsSuppressed())return true;
   if(CARDS[link.sourceId].flip&&(this.hasEarly('Royal Command')||this.hasEarly('Fiend Skull Dragon')))return true;
   const targets=Object.values(link.targetMeta||{}).flatMap(x=>Object.keys(x)).map(uid=>this.find(uid)).filter(f=>f&&fieldMonster(f.zone)&&f.card.faceUp&&!this.negated(f.card));
@@ -136,7 +138,7 @@
  });
  wrap('emit',function(v){
   if(v.type==='flip'&&this.state.frame?.kind==='summon-attempt'&&this.state.frame.uid===v.uid){const m=this.find(v.uid)?.card;if(m){delete m.summonPending;v.previous.wasNegated=this.negated(m);m.summonPending=true;}this.state.frame.flipEvent=cp(v);return;}
-  if(this._advancedReady&&v.type==='summon'&&!this.state.acceptingSummon&&!this.state.resolvingLink&&!this.state.chainResolving&&(['normal','flip','synchro','xyz','link','pendulum','toon'].includes(v.kind)||v.kind.startsWith('early-special:'))){
+  if(this._advancedReady&&v.type==='summon'&&!this.state.acceptingSummon&&!this.state.resolvingLink&&!this.state.chainResolving&&(['normal','flip','synchro','xyz','link','pendulum','toon'].includes(v.kind)||v.kind.startsWith('early-special:')||v.kind.startsWith('year-special:')||v.kind.startsWith('contact:')||v.kind==='possessed')){
    const m=this.find(v.uid)?.card;if(m){m.summonPending=true;if(this.state.frame?.kind==='summon-attempt'&&v.kind==='pendulum')(this.state.frame.summonGroup||=[]).push(cp(v));else this.state.frame={kind:'summon-attempt',owner:v.owner,uid:v.uid,summonKind:v.kind,summonEvent:cp(v),resumeFrame:this.state.frame?cp(this.state.frame):null,windowOffered:false};return;}
   }
   if(this._advancedReady&&['summon','damage','move','added'].includes(v.type)){this.state.earlyEvent=cp(v);if(v.type==='summon')this.state.earlyWindowSummon=cp(v);if(['summon','damage'].includes(v.type))this.state.earlyNeedsWindow=!!this.state.chainResolving;}

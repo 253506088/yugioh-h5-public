@@ -68,7 +68,7 @@
    const canUnequip=e.freeMain(c.owner)>0&&e.spells(c.owner).some(m=>m.monsterEquip&&CARDS[m.id].earlyRules?.union&&!m.unionRiderLocked);
    return [H.customGroup('mode','选择效果',[...(canEquip?[{uid:'equip',label:'装备同盟怪兽',value:10}]:[]),...(canUnequip?[{uid:'unequip',label:'解除同盟装备',value:8}]:[])]),
    ...(first(c,'mode')==='equip'?[g(e,c,'union','选择要装备的同盟怪兽',ownM(e,c).filter(m=>CARDS[m.id].earlyRules?.union&&!m.monsterEquip&&(CARDS[m.id].earlyRules.unionPartners||[]).some(n=>ownM(e,c).some(t=>is(t,n)&&!e.activeEquip(t).some(eq=>CARDS[eq.id].earlyRules?.union)))),1,1,'cost'),
-     g(e,c,'target','选择装备对象',ownM(e,c).filter(t=>{const u=e.find(first(c,'union'))?.card;return u&&(CARDS[u.id].earlyRules.unionPartners||[]).some(n=>is(t,n))&&!e.activeEquip(t).some(eq=>CARDS[eq.id].earlyRules?.union);}),1,1,'own-boost')]:[]),
+     ...(first(c,'union')?[g(e,c,'target','选择装备对象',ownM(e,c).filter(t=>{const u=e.find(first(c,'union'))?.card;return u&&(CARDS[u.id].earlyRules.unionPartners||[]).some(n=>is(t,n))&&!e.activeEquip(t).some(eq=>CARDS[eq.id].earlyRules?.union);}),1,1,'own-boost')]:[])]:[]),
    ...(first(c,'mode')==='unequip'?[g(e,c,'target','选择解除的同盟装备',e.spells(c.owner).filter(m=>m.monsterEquip&&CARDS[m.id].earlyRules?.union&&!m.unionRiderLocked),1,1,'search')]:[])];},
   resolve:(e,c)=>{if(first(c,'mode')==='equip'){const u=first(c,'union');if(u)e.equipMonster(u,first(c),c.owner,c.source);}else{const f=e.find(first(c));if(f&&f.zone==='spells'&&e.canSpecial(c.owner,f.card,{via:'union'}))e.special(c.owner,f.card.uid,{via:'union'});}},
   aiScore:400});

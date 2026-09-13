@@ -114,17 +114,19 @@
     if(a.wholeTurnNoSpecial&&e.state.players[ctx.owner].turnStats.special>0)return false;
     try{
       if(a.condition&&!a.condition(e,ctx))return false;
-      const input=nextInput(e,ctx);
-      if(input&&(input.candidates||[]).length<(input.min??1))return false;
+      // All currently known groups must be satisfiable before offering an
+      // activation. Dependent groups are returned once their earlier choice is
+      // present, so a cost prompt cannot strand a player with no legal target.
+      if(inputGroups(e,ctx).some(g=>!Object.prototype.hasOwnProperty.call(ctx.args,g.key)&&(g.candidates||[]).length<(g.min??1)))return false;
     }catch{return false;}
     return true;
   }
-  function nextInput(e,ctx){
+  function inputGroups(e,ctx){
     const a=get(ctx.key),groups=a.inputs?a.inputs(e,ctx):[];
-    const group=groups.find(g=>!Object.prototype.hasOwnProperty.call(ctx.args,g.key))||null;
-    if(group&&e.canTarget&&!['cost','discard','send-cost','search','special','send-deck'].includes(group.role)&&group.key!=='cost')group.candidates=group.candidates.filter(o=>{const f=e.find(o.uid);return !f||!fieldZone(f.zone)||e.canTarget(f.card,ctx.source);});
-    return group;
+    for(const group of groups)if(e.canTarget&&!['cost','discard','send-cost','search','special','send-deck'].includes(group.role)&&group.key!=='cost')group.candidates=group.candidates.filter(o=>{const f=e.find(o.uid);return !f||!fieldZone(f.zone)||e.canTarget(f.card,ctx.source);});
+    return groups;
   }
+  function nextInput(e,ctx){return inputGroups(e,ctx).find(g=>!Object.prototype.hasOwnProperty.call(ctx.args,g.key))||null;}
   function available(e,owner,context={}){
     const out=[];
     for(const f of e.refs(owner,['hand','monsters','extraMonster','spells','fieldSpell','grave','banished'])){
@@ -259,6 +261,6 @@
   if(typeof module!=='undefined'&&module.exports){
     module.exports=API;
     require('./ai-marginal.js');
-    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002'])require('./'+file+'.js');
+    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005'])require('./'+file+'.js');
   }
 })(typeof globalThis!=='undefined'?globalThis:this);

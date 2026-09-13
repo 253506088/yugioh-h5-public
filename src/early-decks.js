@@ -16,5 +16,17 @@
   ['Necrovalley',3],['Royal Tribute',2],['Book of Moon',2],['Mystical Space Typhoon',2],['Pot of Greed',1],['Dark Core',1],['Scapegoat',1],
   ['Rite of Spirit',3],['Coffin Seller',2],['Bottomless Trap Hole',2],['Torrential Tribute',1],['Needle Wall',2],['Trap Dustshoot',1],['Raigeki Break',2]
  ],[],['王家长眠之谷在场时，守墓全体+500攻守，双方墓地的移动与除外被封锁；守墓长的控制者墓地不受影响。','间谍反转拉出低攻守墓，守卫反转弹回对方怪兽；灵魂的仪式的复活不受王家长眠之谷影响。']);
+ preset('chaos-2003','混沌 · 光与暗的使者','CHAOS · LIGHT AND DARK','Black Luster Soldier - Envoy of the Beginning','混沌 / 2003','用光与暗的怪兽积累墓地资源，混沌巫师与开辟的使者除外登场。反转与回收支撑中盘，保留防御牌等待反击。',[
+  ['Black Luster Soldier - Envoy of the Beginning',2],['Chaos Sorcerer',2],['Thunder Dragon',3],['Shining Angel',3],['Mystic Tomato',3],['Breaker the Magical Warrior',2],['Magician of Faith',2],['Tsukuyomi',1],['Sangan',1],['Spirit Reaper',1],
+  ['Pot of Greed',1],['Graceful Charity',2],['Foolish Burial',1],['Book of Moon',2],['Mystical Space Typhoon',2],['Snatch Steal',1],['Monster Reborn',1],['Raigeki',1],['Heavy Storm',1],['Waboku',2],['Sakuretsu Armor',2],['Torrential Tribute',1],['Mirror Force',1],['Compulsory Evacuation Device',2]
+ ],[],['光暗各一只作为除外代价，特殊召唤混沌巫师或开辟的使者。','月之书与月读命帮助反转怪兽再次使用效果；没有额外收益的重复保护留待以后回合。']);
+ preset('level-2004','LV · 龙的进化阶梯','LV · DRAGON ASCENSION','Horus the Black Flame Dragon LV8','LV升级 / 2004','武装龙在准备阶段升级，荷鲁斯在战斗破坏后进化。等级上升加速展开，沉默与反击保护成长中的怪兽。',[
+  ['Horus the Black Flame Dragon LV4',3],['Horus the Black Flame Dragon LV6',2],['Horus the Black Flame Dragon LV8',1],['Armed Dragon LV3',3],['Armed Dragon LV5',2],['Armed Dragon LV7',1],['Masked Dragon',3],['Mirage Dragon',2],['Dekoichi the Battlechanted Locomotive',2],['Sangan',1],
+  ['Pot of Greed',1],['Graceful Charity',1],['Level Up!',3],['Mystical Space Typhoon',2],['Book of Moon',2],['Monster Reborn',1],['The Graveyard in the Fourth Dimension',1],['Swords of Revealing Light',1],['Waboku',2],['Sakuretsu Armor',2],['Divine Wrath',2],['Call of the Haunted',1],['Torrential Tribute',1]
+ ],[],['武装龙LV3在准备阶段送墓升级；荷鲁斯需要先取得战斗破坏。','等级上升无视登场条件，但不把魔法卡的升级当成前一级怪兽的效果。']);
+ preset('darkworld-2005','暗黑界 · 从弃牌中归来','DARK WORLD · RETURN FROM DISCARD','Goldd, Wu-Lord of Dark World','暗黑界 / 2005','天使的施舍与暗黑界之雷以效果丢弃怪兽，武神与军神从墓地返回。暗之取引会把对方法术改写为弃牌，激活更强的追加效果。',[
+  ['Goldd, Wu-Lord of Dark World',3],['Sillva, Warlord of Dark World',3],['Beiige, Vanguard of Dark World',3],['Broww, Huntsman of Dark World',3],['Brron, Mad King of Dark World',2],['Scarr, Scout of Dark World',2],['Sangan',1],['Dekoichi the Battlechanted Locomotive',2],['Des Wombat',1],
+  ['Graceful Charity',3],['Dark World Lightning',3],['Gateway to Dark World',2],['Pot of Greed',1],['Card Destruction',1],['Mystical Space Typhoon',1],['Monster Reborn',1],['Dark Deal',2],['Divine Wrath',2],['Karma Cut',2],['Mirror Force',1],['Torrential Tribute',1]
+ ],[],['暗黑界只响应卡片效果的丢弃；天罚或因果切断的弃牌代价不会让它们复活。','暗黑界之雷先破坏盖卡再丢弃；被对方效果丢弃时，武神与军神还有追加处理。']);
  D.earlyDecksLoaded=true;if(typeof module!=='undefined')module.exports=D;
 })(globalThis);

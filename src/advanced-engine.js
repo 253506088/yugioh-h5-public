@@ -413,6 +413,7 @@
       this.log('summon',this.name(owner)+(card.faceUp?'通常召唤':'盖放')+(card.faceUp||owner===0?'「'+def.name+'」':'一只怪兽'),owner,{cardId:card.faceUp||owner===0?card.id:null,uid:card.uid,faceUp:card.faceUp});
       this.state.frame={kind:'summon',owner,uid:card.uid,summonKind:card.summonKind,windowOffered:false};
       if(card.faceUp)this.emit({type:'summon',owner,uid:card.uid,id:card.id,from:'hand',kind:'normal',materials});
+      else this.emit({type:'normal-set',owner,uid:card.uid,id:card.id,from:'hand',kind:'set',materials});
     }
     setCard(action){
       this.mainCheck();const f=this.ownCard(action.uid,['hand']);req(['spell','trap'].includes(CARDS[f.card.id].type),'只有魔法和陷阱可以盖放在魔陷区。');
@@ -995,6 +996,7 @@
           for(let p=0;p<2;p++)for(const c of this.monsters(p))if(c.faceUp&&!this.negated(c)&&['skilled-magician','royal-library'].includes(c.id))c.counters=Math.min(3,(c.counters||0)+1);
           this.emit({type:'spell-resolved',owner:link.owner,uid:link.uid,id:link.sourceId});
         }
+        if(link.cardActivation&&!link.negatedActivation&&link.source.effectType==='trap')this.emit({type:'trap-resolved',owner:link.owner,uid:link.uid,id:link.sourceId});
         if(link.negatedActivation)this.fx.onNegated(this,link);
         this.recordChain('resolved',link,{status:link.resolutionStatus||'resolved'});
         this.state.resolvingLink=null;this.checkWin();return;
