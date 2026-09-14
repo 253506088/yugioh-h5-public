@@ -1,0 +1,4 @@
+{$DUEL_DOMAIN:localhost} {
+  encode zstd gzip
+  reverse_proxy pvp:4173
+}

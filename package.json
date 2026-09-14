@@ -2,7 +2,7 @@
   "name": "yugioh-duel-sanctuary",
   "version": "4.1.0",
   "private": true,
-  "description": "A single-file Yu-Gi-Oh! tribute game with offline rules and Chinese, English and Japanese text",
+  "description": "Yu-Gi-Oh! tribute game with offline play and authoritative single-duel PVP",
   "scripts": {
     "art": "node scripts/generate-art.mjs",
     "build": "node scripts/build.mjs",
@@ -23,7 +23,7 @@
     "test:ai": "node --test tests/ai-marginal.test.cjs tests/ai-tactics.test.cjs && node tests/ai-marginal-browser.cjs",
     "test:polish": "node --test tests/ai-tactics.test.cjs tests/duel-outcome.test.cjs && node tests/polish-browser.cjs",
     "test:journal": "node --test tests/journal.test.cjs && node tests/journal-browser.cjs",
-    "start": "node scripts/serve.mjs",
+    "start": "node server/index.mjs",
     "test": "node scripts/run-checks.mjs",
     "test:rules": "node --test tests/engine.test.cjs tests/v2-core.test.cjs tests/v2-regression.test.cjs tests/v3-rules.test.cjs tests/v4-rules.test.cjs tests/v4-2002.test.cjs tests/v4-2002-sweep.test.cjs tests/v4-2003.test.cjs tests/v4-2003-sweep.test.cjs tests/v4-2004.test.cjs tests/v4-2004-sweep.test.cjs tests/v4-2005.test.cjs tests/v4-2005-sweep.test.cjs tests/gx-rules.test.cjs tests/gx-sweep.test.cjs tests/card-materials.test.mjs tests/controller-costs.test.cjs",
     "test:2002-sweep": "node --test tests/v4-2002-sweep.test.cjs",
@@ -50,7 +50,11 @@
     "decks:chronicle": "node scripts/generate-chronicle-decks.mjs",
     "test:chronicle": "node --test tests/chronicle-rules.test.cjs tests/chronicle-sweep.test.cjs tests/card-materials.test.mjs",
     "test:chronicle:simulation": "node tests/chronicle-simulation.cjs",
-    "test:chronicle:browser": "node tests/chronicle-browser.cjs"
+    "test:chronicle:browser": "node tests/chronicle-browser.cjs",
+    "start:pvp": "node server/index.mjs",
+    "start:static": "node scripts/serve.mjs",
+    "test:pvp": "node --test tests/pvp.test.mjs tests/pvp-network.test.mjs",
+    "test:pvp:browser": "node tests/pvp-browser.cjs"
   },
   "engines": {
     "node": ">=22.13.0"
@@ -59,5 +63,8 @@
     "playwright": "1.62.1",
     "playwright-core": "^1.63.0",
     "sharp": "0.35.4"
+  },
+  "dependencies": {
+    "ws": "8.21.3"
   }
 }

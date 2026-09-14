@@ -8,7 +8,8 @@ const files=['tests/engine.test.cjs','tests/v2-core.test.cjs','tests/v2-regressi
 files.push('tests/ai-tactics.test.cjs','tests/duel-outcome.test.cjs','tests/journal.test.cjs');
 files.push('tests/gx-rules.test.cjs','tests/gx-sweep.test.cjs','tests/card-materials.test.mjs','tests/chronicle-rules.test.cjs','tests/chronicle-sweep.test.cjs');
 files.push('tests/controller-costs.test.cjs');
+files.push('tests/pvp.test.mjs','tests/pvp-network.test.mjs');
 const result=spawnSync(process.execPath,['--test','--test-reporter=tap',...files],{cwd:root,encoding:'utf8',maxBuffer:20_000_000});
 const log=(result.stdout||'')+(result.stderr||'');await writeFile(join(run,'results.tap'),log);process.stdout.write(log);
-const number=key=>Number(log.match(new RegExp('^# '+key+' (\\d+)$','m'))?.[1]||0),report={at:new Date().toISOString(),node:process.version,ok:result.status===0,tests:number('tests'),pass:number('pass'),fail:number('fail'),files,archive:run,network:'no real requests; asset tests use synthetic fixtures'};
+const number=key=>Number(log.match(new RegExp('^# '+key+' (\\d+)$','m'))?.[1]||0),report={at:new Date().toISOString(),node:process.version,ok:result.status===0,tests:number('tests'),pass:number('pass'),fail:number('fail'),files,archive:run,network:'local HTTP/WebSocket for PVP; asset tests use synthetic fixtures'};
 await writeFile(join(run,'report.json'),JSON.stringify(report,null,2));await writeFile(join(root,'output/v4-checks-report.json'),JSON.stringify(report,null,2));process.exitCode=result.status||0;

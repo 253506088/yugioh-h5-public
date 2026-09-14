@@ -1,0 +1,38 @@
+services:
+  pvp:
+    build: .
+    init: true
+    restart: unless-stopped
+    ports:
+      - "${DUEL_BIND_ADDRESS:-127.0.0.1}:${DUEL_PORT:-4173}:4173"
+    environment:
+      DUEL_HOST: 0.0.0.0
+      DUEL_PORT: 4173
+      DUEL_MAX_ROOMS: ${DUEL_MAX_ROOMS:-100}
+      DUEL_DATA_DIR: /data
+      DUEL_TRUST_PROXY: ${DUEL_TRUST_PROXY:-0}
+      DUEL_ORIGINS: ${DUEL_ORIGINS:-}
+    volumes:
+      - pvp-data:/data
+    stop_grace_period: 15s
+  caddy:
+    image: caddy:2-alpine
+    profiles: [https]
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DUEL_DOMAIN: ${DUEL_DOMAIN:-localhost}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      pvp:
+        condition: service_healthy
+volumes:
+  pvp-data:
+  caddy-data:
+  caddy-config:

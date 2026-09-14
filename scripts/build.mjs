@@ -28,7 +28,7 @@ const music=await Promise.all(musicManifest.tracks.map(async track=>{
 }));
 const outAt=argv.indexOf('--out'),outputPath=outAt>=0?resolve(root,argv[outAt+1]||''):join(root,'index.html');
 if(!outputPath.startsWith(root+'\\')&&!outputPath.startsWith(root+'/'))throw new Error('构建输出必须位于项目目录内。');
-const styleFiles = ['style.css', 'expansion.css', 'link.css', 'early.css','experience.css','tournament.css','polish.css','log.css'];
+const styleFiles = ['style.css', 'expansion.css', 'link.css', 'early.css','experience.css','tournament.css','polish.css','log.css','pvp.css'];
 const scriptFiles = ['cards.js', 'expansion-cards.js', 'link-cards.js', 'early-cards.js', 'early-decks.js', 'link-rules.js', 'deck-tools.js', 'engine.js', 'advanced-engine.js', 'early-engine.js', 'advanced-effects.js', 'effects-classic.js', 'effects-hero.js', 'effects-blackwing.js', 'effects-synchron.js', 'effects-utopia.js', 'effects-qliphort.js', 'effects-exodia.js', 'effects-cyber.js', 'effects-crystron.js', 'effects-tearlaments.js', 'effects-link.js', 'effects-early.js', 'effects-early-spells.js', 'effects-early-monsters.js', 'effects-early-traps.js', 'audio.js', 'artwork-hybrid.js', 'card-view.js', 'workshop.js', 'game-v2.js'];
 scriptFiles.splice(scriptFiles.indexOf('engine.js'),0,'duel-outcome.js');
 scriptFiles.splice(scriptFiles.indexOf('engine.js'),0,'duel-log.js');
@@ -49,7 +49,8 @@ scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'tournament.js','tourname
 scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'log-ui.js');
 scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-ai.js');
 scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-years.js','i18n-years-gx.js','i18n-chronicle.js','i18n-chronicle-ui.js');
-scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-polish.js');
+scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-polish.js','i18n-pvp.js');
+scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'pvp-client.js','pvp-ui.js');
 const styles = (await Promise.all(styleFiles.map(file => readFile(join(root, 'src', file), 'utf8')))).join('\n\n');
 const scripts = await Promise.all(scriptFiles.map(file => readFile(join(root, 'src', file), 'utf8')));
 new Script(scripts.join('\n\n'), { filename: 'duel-single-file.js' });

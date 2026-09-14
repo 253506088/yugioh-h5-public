@@ -63,13 +63,15 @@
       <button class="home-destination archive-destination" data-action="library"><span class="destination-index">01 / ARCHIVE</span><svg class="icon"><use href="#i-card"/></svg><h2>卡牌图鉴</h2><p>每一张卡，都有它的灵魂。</p><span class="destination-tail"><b id="home-card-count">1,653 张卡片</b><i>↗</i></span></button>
       <button class="home-destination workshop-destination" data-action="workshop"><span class="destination-index">02 / ATELIER</span><svg class="icon"><use href="#i-spark"/></svg><h2>卡组工坊</h2><p>构筑你的下一场胜利。</p><span class="destination-tail"><b>自由构筑 · 预设卡组</b><i>↗</i></span></button>
       <button class="home-destination tournament-destination" data-action="tournament"><span class="destination-index">03 / BOT ARENA</span><svg class="icon"><use href="#i-swords"/></svg><h2>死斗竞技场</h2><p>万千可能，只留一位冠军。</p><span class="destination-tail"><b id="home-tournament-status" data-i18n-skip>16 强死斗 · 自由配置</b><i>↗</i></span></button>
-      <button class="home-destination guide-destination" data-action="help"><span class="destination-index">04 / HANDBOOK</span><svg class="icon"><use href="#i-book"/></svg><h2>玩法指南</h2><p>从第一次召唤，到无限可能。</p><span class="destination-tail"><b>召唤规则 · 连锁时机</b><i>↗</i></span></button>
+      <button class="home-destination pvp-destination" data-action="pvp"><span class="destination-index">04 / ONLINE DUELS</span><svg class="icon"><use href="#i-bolt"/></svg><h2>联机对战</h2><p>这一局，与真正的对手交锋。</p><span class="destination-tail"><b>邀请好友 · 单局决胜</b><i>↗</i></span></button>
     </nav>
-    <footer class="home-bottom"><span><i class="live-dot"></i> 进度自动保存 · 随时回来继续</span><a class="project-signature" href="https://github.com/253506088/yugioh-h5-public" target="_blank" rel="noopener noreferrer"><strong data-i18n-skip>不锈钢琴</strong><span>GitHub 仓库 ↗</span></a><button data-action="settings">个性化你的决斗 <svg class="icon"><use href="#i-settings"/></svg></button></footer>
+    <footer class="home-bottom"><span><i class="live-dot"></i> 进度自动保存 · 随时回来继续</span><a class="project-signature" href="https://github.com/253506088/yugioh-h5-public" target="_blank" rel="noopener noreferrer"><strong data-i18n-skip>不锈钢琴</strong><span>GitHub 仓库 ↗</span></a><button class="home-guide-link" data-action="help"><span>玩法指南</span> ↗</button><button data-action="settings">个性化你的决斗 <svg class="icon"><use href="#i-settings"/></svg></button></footer>
   </section>
 
   <section id="tournament-screen" class="tournament-screen" aria-label="死斗竞技场" data-i18n-skip hidden></section>
+  <section id="pvp-screen" class="pvp-screen" aria-label="联机对战" data-i18n-skip hidden></section>
   <main class="app-main">
+    <div id="pvp-duel-bar" class="pvp-duel-bar" data-i18n-skip hidden></div>
     <div id="tournament-viewer-bar" class="t-viewer-bar" data-i18n-skip hidden></div>
     <div class="page-heading">
       <div><div class="eyebrow"><span class="small-diamond"></span> THE HEART OF THE CARDS</div><h1>以卡之名，改写命运<span>。</span></h1></div>
