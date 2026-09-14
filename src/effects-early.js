@@ -38,7 +38,9 @@
  const GYbattle=v=>v.to==='grave'&&v.kind==='battle',GYfield=v=>v.to==='grave'&&H.fieldZone(v.from);
  const discardCost=(n=1,pred=()=>true)=>(e,c)=>g(e,c,'cost','选择丢弃的手牌',H.hand(e,c.owner,m=>m.uid!==c.uid&&pred(m)),n,n,'cost');
  const tributeInput=(n=1,pred=()=>true)=>(e,c)=>g(e,c,'cost','选择解放的怪兽',ownM(e,c).filter(m=>e.canTribute(m,c.owner)&&pred(m)),n,n,'cost');
- const tribute=(e,c,uids=H.args(c,'cost'))=>{for(const uid of uids){const f=e.find(uid);if(!f||!e.canTribute(f.card,c.owner))throw new root.DuelRuleError('不能解放选择的卡片。');}for(const uid of uids)e.move(uid,'grave',{kind:'cost-tribute',source:c.source,byOwner:c.owner});};
+ // Some Summon procedures explicitly allow Tributing the opponent's monsters.
+ // Keep that permission separate from the player performing the Tribute.
+ const tribute=(e,c,uids=H.args(c,'cost'),controller=c.owner)=>{for(const uid of uids){const f=e.find(uid);if(!f||!e.canTribute(f.card,controller))throw new root.DuelRuleError('不能解放选择的卡片。');}for(const uid of uids)e.move(uid,'grave',{kind:'cost-tribute',source:c.source,byOwner:c.owner,tributeController:controller});};
  const burn=(e,c,n)=>e.damage(1-c.owner,n,'效果');
  E.op('early-confirm',()=>{});
  E.op('early-discard',(e,t)=>moved(e,{source:t.context.source,owner:t.context.source?.owner??t.owner},t.picks,'grave','effect-discard'));

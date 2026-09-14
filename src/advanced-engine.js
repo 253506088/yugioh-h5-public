@@ -149,7 +149,7 @@
       this.remove(uid);
       if(c.type==='token'){
         this.log('destroy',c.name+'离场并消失',before.owner,{cardId:c.id,uid});
-        this.cleanupEquips(uid);this.emit({type:'move',uid,id:c.id,owner:before.owner,from:before.zone,to:'vanished',previous:snapshot,...options});
+        this.cleanupEquips(uid,{uid,id:c.id,owner:before.owner,from:before.zone,to:'vanished',kind:options.kind,atk:snapshot.atk,originalAtk:snapshot.originalAtk??c.atk??0,originalDef:snapshot.originalDef??c.def??0});this.emit({type:'move',uid,id:c.id,owner:before.owner,from:before.zone,to:'vanished',previous:snapshot,...options});
         return {card,from:before.zone,to:'vanished',owner:before.owner,destroyed:options.kind==='destroy'||options.kind==='battle'};
       }
       if(dest!=='overlays'){
@@ -167,7 +167,7 @@
       if(['hand','deck'].includes(dest))card.properlySummoned=false;
       if(dest==='extra-up'||dest==='extra-down')this.state.players[owner].extra.push(card);
       else {req(['hand','deck','grave','banished'].includes(dest),'无效的移动区域。');this.state.players[owner][dest].push(card);}
-      if(wasField)this.cleanupEquips(uid);
+      if(wasField)this.cleanupEquips(uid,{uid,id:c.id,owner:before.owner,from:before.zone,to:dest,kind:options.kind,atk:snapshot.atk,originalAtk:snapshot.originalAtk??c.atk??0,originalDef:snapshot.originalDef??c.def??0});
       if(options.log!==false){
         const labels={grave:'送入墓地',banished:'被除外',hand:'返回手牌',deck:'洗回卡组','extra-up':'表侧加入额外卡组','extra-down':'返回额外卡组'};
         this.log(options.kind==='battle'||options.kind==='destroy'?'destroy':'move',c.name+' '+(labels[dest]||dest),before.owner,{cardId:c.id,uid,reason:options.reason||''});
@@ -187,9 +187,12 @@
       for(const card of cards){const moved=this.move(card.uid,'grave',{kind:'effect-mill',source,byOwner:source?.owner??owner});if(moved.to==='grave')sent.push(card.uid);}
       this.log('mill',this.name(owner)+'将卡组顶'+cards.length+'张卡送墓',owner,{count:cards.length,sourceId:source?.id});return sent;
     }
-    cleanupEquips(targetUid){
+    cleanupEquips(targetUid,targetMove=null){
       if(!this._advancedReady)return;
-      for(let p=0;p<2;p++)for(const equip of [...this.spells(p)])if(equip.equipTarget===targetUid)this.move(equip.uid,'grave',{kind:'rule-equip',reason:'装备对象离场'});
+      // The target may already be in its owner's GY. Preserve its last field
+      // controller and original stats for linked cards instead of looking it up
+      // after the move and accidentally charging its owner.
+      for(let p=0;p<2;p++)for(const equip of [...this.spells(p)])if(equip.equipTarget===targetUid)this.move(equip.uid,'grave',{kind:'rule-equip',reason:'装备对象离场',...(targetMove?{equipTargetMove:targetMove,equipWasActive:this.activeSpell(equip)}:{})});
     }
     activeEquip(card,id=null){const f=this.find(card.uid);if(!f)return[];return [0,1].flatMap(p=>this.spells(p)).filter(s=>s.equipTarget===card.uid&&(!id||s.id===id)&&this.activeSpell(s));}
     negated(card){

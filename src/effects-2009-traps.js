@@ -7,6 +7,7 @@
  cast('Proof of Powerlessness',null,(e,c)=>{destroy(e,c,foeM(e,c).filter(m=>m.faceUp&&e.level(m)<=5).map(m=>m.uid));lock(e,c.owner,'noAttacks');},{condition:(e,c)=>ownM(e,c).some(m=>m.faceUp&&e.level(m)>=7)});
  for(const n of ['Reckoned Power','Delta Crow - Anti Reverse'])cast(n,null,(e,c)=>destroy(e,c,e.spells(1-c.owner).filter(m=>!m.faceUp).map(m=>m.uid)),{condition:n==='Reckoned Power'?core:(e,c)=>ownM(e,c).some(blackwing)});
  for(const [n,pred,o] of [['Wicked Rebirth',(e,m)=>def(m).type==='synchro',{negated:true,noAttack:true,fee:800}],['Core Reinforcement',(e,m)=>koaki(m),{}],["Miracle's Wake",(e,m)=>m.earlySent?.kind==='battle'&&m.earlySent.turn===e.state.turn,{}]])revivalSpell(n,pred,o);
+ sent('Core Reinforcement',(e,c)=>e.damage(c.event.owner,Math.max(0,c.event.equipTargetMove.atk),'效果',c.source),(e,v)=>v.equipWasActive&&v.equipTargetMove?.kind==='destroy'&&e.state.frame?.kind==='end'&&e.state.frame.owner===v.owner,{mandatory:true});
  counter('Crimson Fire','spell/trap',(e,c)=>has(e,'Red Dragon Archfiend',c.owner),{resolve:(e,c)=>{lock(e,c.owner,'reflectEffect',2);}});
  summonTrap('Mirror of Oaths',(e,c)=>card(e,w(c).uid)?.summonFrom==='deck',(e,c)=>{if(e.destroy(w(c).uid,c.source))e.draw(c.owner,1);});
  cast('Bone Temple Block',null,(e,c)=>{for(const p of [c.owner,1-c.owner])specialChoice(e,{...c,owner:p},grave(e,1-p,m=>monster(m)&&e.level(m)<=4),{end:'destroy'});},{inputs:(e,c)=>[g(e,c,'cost','选择丢弃的手牌',hand(e,c.owner),1,1,'cost')],cost:(e,c)=>H.discard(e,c,args(c,'cost')),summons:true});

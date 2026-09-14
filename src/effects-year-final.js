@@ -1,6 +1,8 @@
 /* Cross-year contracts and durable copied-effect registrations. */
 (function(root){
  'use strict';const X=root.Duel2008,{D,E,H,C,I,is,A,Q,mark,extend,field,has,allM,allS,allF,monster,ownM,foeM,hand,deck,grave,first,args,self,src,moved,search,revive,choose,target,g,once,onMove,onEntry,onEnd,guard}=X,{CARDS}=D;
+ // Tokens vanish instead of entering the GY; use the controller in the move event.
+ E.on('move',(e,v)=>{const amount={'gx-ivy-token':300,'gx-nightmare-token':800}[v.id];if(amount&&v.to==='vanished'&&field(v.from)&&['battle','destroy'].includes(v.kind))e.damage(v.owner,amount,'效果',{id:v.id,uid:v.uid,owner:v.owner,effectType:'monster'});});
  for(const n of ['The Wicked Avatar','The Wicked Eraser'])C(n).noNormal=false;
  E.get(I('Destiny HERO - Disk Commander')+'::draw').once.duel=true;
  const creator=E.get(I('The Dark Creator')+'::gx-effect');creator.inputs=(e,c)=>{const list=grave(e,c.owner,m=>X.dark(e,m));return [g(e,c,'cost','选择除外的暗属性怪兽',list.filter(m=>list.some(q=>q.uid!==m.uid&&e.canSpecial(c.owner,q,{via:'revive'}))),1,1,'cost'),g(e,c,'target','选择复活的暗属性怪兽',list.filter(m=>!args(c,'cost').includes(m.uid)&&e.canSpecial(c.owner,m,{via:'revive'})),1,1,'special')];};
