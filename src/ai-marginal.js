@@ -1,6 +1,12 @@
 (function(root){
   'use strict';
-  const cp=value=>JSON.parse(JSON.stringify(value));
+  // Plain-data clone with JSON semantics (undefined keys dropped, undefined
+  // array items become null) without the serialisation round trip.
+  function cp(value){
+    if(value===null||typeof value!=='object')return value;
+    if(Array.isArray(value)){const out=new Array(value.length);for(let i=0;i<value.length;i++){const v=value[i];out[i]=v===undefined?null:cp(v);}return out;}
+    const out={};for(const k in value){const v=value[k];if(v!==undefined&&typeof v!=='function')out[k]=cp(v);}return out;
+  }
   const traceKeys=new Set(['log','chainHistory','startedAt','chainId','nextUid','nextLog','nextLink','nextTrigger','nextChain',
     'frame','pending','building','resolvingLink','chain','chainCleanup','chainResolving','tasks','triggers','earlyEvent','earlyWindowSummon','earlyLastSummon',
     'used','usedTurn','duelUsed','lingering','nextLingering','actionsThisTurn','effectActivations','gxSpellTrapCount','gxNormals','gxSummonCounts','lpPaidByTurn','inputRoles','targetMeta','sourceUnavailableByNumber','effectNegatedByNumber','preventionState','deckSpec','earlySent']);
@@ -15,9 +21,17 @@
     // A projection may itself be the starting point of a tactical search. Do
     // not carry its instrumentation closures into the next simulated engine.
     if(engine._aiProjectionMethods)Object.assign(copy,engine._aiProjectionMethods);
-    delete copy._aiMarginalCost;delete copy._aiProjectionMethods;
+    delete copy._aiMarginalCost;delete copy._aiProjectionMethods;delete copy._aiPlannerCache;delete copy._aiPassProjection;delete copy._aiDefenseCache;
+    // A projection is discarded whenever an action fails, so the rollback
+    // snapshot and the invariant audit that act() performs on the live duel
+    // are skipped on copies.
+    copy.snapshot=function(){return {state:this.state,randomState:this.randomState};};copy.assertState=function(){};
     copy._aiMarginalProbe=true;copy._aiMarginalPlans=new Map();return copy;
   }
+  // A face-down opposing monster is projected as a plain 500/1600 body: the
+  // typical wall a Set monster represents, without a Flip effect.
+  let hiddenMonster=null;
+  function hiddenMonsterId(){return hiddenMonster||=(root.DuelData.cardByName('Green Phantom King')?.id||'battle-ox');}
   function priorCopy(engine,action,owner){
     const card=engine.find(action.uid)?.card;if(!card)return false;
     return engine.state.chain.some(link=>link.owner===owner&&link.sourceId===card.id&&link.key===action.key)
@@ -104,7 +118,7 @@
     e._aiProjectionMethods={random,move,payLP,commitPrepared:commit,shuffle,draw,mill,revealCards:reveal};
     if(options.redactOpponent){
       const known=new Set(e.state.chain.map(l=>l.uid)),p=e.state.players[1-owner];
-      for(const zone of ['hand','deck','extra','monsters','spells'])for(const card of p[zone])if(card&&!known.has(card.uid)&&(['hand','deck'].includes(zone)||zone==='extra'&&!card.faceUpExtra||['monsters','spells'].includes(zone)&&!card.faceUp))card.id=zone==='extra'?root.DuelData.cardByName('Blue-Eyes Ultimate Dragon').id:zone==='spells'?'mirror-force':'battle-ox';
+      for(const zone of ['hand','deck','extra','monsters','spells'])for(const card of p[zone])if(card&&!known.has(card.uid)&&(['hand','deck'].includes(zone)||zone==='extra'&&!card.faceUpExtra||['monsters','spells'].includes(zone)&&!card.faceUp))card.id=zone==='extra'?root.DuelData.cardByName('Blue-Eyes Ultimate Dragon').id:zone==='spells'?'mirror-force':zone==='monsters'?hiddenMonsterId():'battle-ox';
     }
     e.random=function(){if(!options.allowShuffle||!shuffling)uncertain=true;return random.call(this);};
     e.shuffle=function(items){shuffling++;try{return shuffle.call(this,items);}finally{shuffling--;}};

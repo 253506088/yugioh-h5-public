@@ -44,6 +44,7 @@ scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'log-engine.js');
 scriptFiles.splice(scriptFiles.indexOf('advanced-effects.js'),0,'early-engine-extra.js');
 scriptFiles.splice(scriptFiles.indexOf('advanced-effects.js'),0,'ai-marginal.js');
 scriptFiles.splice(scriptFiles.indexOf('advanced-effects.js'),0,'ai-tactics.js');
+scriptFiles.splice(scriptFiles.indexOf('advanced-effects.js'),0,'ai-planner.js');
 scriptFiles.splice(scriptFiles.indexOf('advanced-engine.js'),0,'lingering.js');
 scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-lingering.js');
 scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'card-locales.js','i18n-data.js','i18n-effects.js','i18n-help.js','i18n-experience.js','i18n-tournament.js','i18n.js','experience.js');

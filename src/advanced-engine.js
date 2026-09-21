@@ -1420,9 +1420,11 @@
     aiNext(){
       this._aiMarginalPlans=new Map();
       this._aiDefenseCache=new Map();
+      root.DuelAIPlanner?.reset(this);
       const s=this.state;if(s.winner!==null)return null;if(s.pending)return this.chooseAI(s.pending);
       if(!this._aiMarginalProbe&&root.DuelAITactics){const win=root.DuelAITactics.battlePlan(this);if(win)return win.action;}
       if(s.phase==='battle'){
+        const planned=root.DuelAIPlanner?.battle(this);if(planned)return planned;
         for(const card of this.monsters(s.active).sort((a,b)=>this.attackValue(b)-this.attackValue(a))){
           const foes=this.monsters(1-s.active);
           if(!foes.length&&this.canAttack(card,s.active,null))return {type:'attack',uid:card.uid};
@@ -1434,7 +1436,7 @@
       }
       const ranked=this.allActions(s.active).map(action=>({action,score:this.actionScore(action)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
       if(ranked.length){
-        if(!this._aiMarginalProbe&&root.DuelAITactics){const action=root.DuelAITactics.select(this,ranked);if(action)return action;}
+        if(!this._aiMarginalProbe&&root.DuelAITactics){const action=root.DuelAIPlanner?root.DuelAIPlanner.select(this,ranked):root.DuelAITactics.select(this,ranked);if(action)return action;}
         else return root.DuelAIMarginal?root.DuelAIMarginal.action(this,ranked[0].action):ranked[0].action;
       }
       if(s.phase==='main1'&&s.turn>1&&!this.attackBlocked(s.active)&&this.monsters(s.active).some(c=>c.faceUp&&c.position==='attack'))return {type:'phase',phase:'battle'};

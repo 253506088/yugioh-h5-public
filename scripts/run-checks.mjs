@@ -9,6 +9,7 @@ files.push('tests/ai-tactics.test.cjs','tests/duel-outcome.test.cjs','tests/jour
 files.push('tests/gx-rules.test.cjs','tests/gx-sweep.test.cjs','tests/card-materials.test.mjs','tests/chronicle-rules.test.cjs','tests/chronicle-2013.test.cjs','tests/chronicle-sweep.test.cjs');
 files.push('tests/controller-costs.test.cjs');
 files.push('tests/lingering.test.cjs','tests/simulation-fixes.test.cjs');
+files.push('tests/ai-planner.test.cjs');
 files.push('tests/pvp.test.mjs','tests/pvp-network.test.mjs');
 const result=spawnSync(process.execPath,['--test','--test-reporter=tap',...files],{cwd:root,encoding:'utf8',maxBuffer:20_000_000});
 const log=(result.stdout||'')+(result.stderr||'');await writeFile(join(run,'results.tap'),log);process.stdout.write(log);

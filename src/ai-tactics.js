@@ -54,7 +54,7 @@
     let power=0,maxAttack=0,ready=0;
     for(const m of monsters){
       const visible=isMine||m.faceUp,atk=visible?e.attackValue(m):1200,def=visible?e.defenseValue(m):1600;
-      const active=m.faceUp&&!e.negated(m),abilities=active?Object.values(e.fx.defs).filter(a=>a.id===m.id&&a.speed>=2&&a.zones.some(bodyZone)).length:0;
+      const active=m.faceUp&&!e.negated(m),abilities=active?(e.fx.byCard?.[m.id]||Object.values(e.fx.defs).filter(a=>a.id===m.id)).filter(a=>a.speed>=2&&a.zones.some(bodyZone)).length:0;
       power+=250+Math.max(atk,def*.8)*.6+Math.min(atk,def)*.08+Math.min(2,abilities)*250;
       if(m.faceUp){maxAttack=Math.max(maxAttack,atk);if(e.state.phase==='main1'&&e.state.turn>1&&attackActionsFor(e,m,owner).length)ready+=atk;}
     }
@@ -250,6 +250,6 @@
     if(last&&last.owner!==owner)return score;
     return evaluate(e,action,owner).useful?score:-100;
   }
-  const api={battlePlan,evaluate,select,defenseBias,response,assessment,expectedDamage,handTrapBias,handTraps,negationWorth,boardValue};root.DuelAITactics=api;
+  const api={battlePlan,evaluate,select,defenseBias,response,assessment,expectedDamage,handTrapBias,handTraps,negationWorth,boardValue,passProjection};root.DuelAITactics=api;
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(globalThis);

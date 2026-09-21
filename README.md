@@ -20,6 +20,7 @@
 ## 从这里开始
 
 - [机器人出牌逻辑解析](docs/bot-decision-logic.md)：规则评分 + 有限推演的四层结构、每层的代码位置、驱动节奏、当前局限与改进方向。
+- [机器人推演层](docs/bot-planner.md)：统一局面价值、本回合推演、战斗推演与响应门；镜像对局 60% 胜率的验证方法。
 - [生效中的效果、手坑与反击陷阱判断](docs/lingering-and-bot-judgment.md)：信息栏的效果芯片与完整列表、机器人不再召唤手坑、反击陷阱只在划算时发动。
 - [第三方 AI 组卡接入设计](docs/ai-deck-import-design.md)：OpenAI／Anthropic 两种协议、文本／图片／网址解析卡组的设计稿（未实现）。
 - [PVP 使用与部署](docs/pvp.md)：房间、匹配、BO1 规则、重连、存储、局域网／公网部署和协议。
