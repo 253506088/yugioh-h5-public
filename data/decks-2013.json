@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "scope": [
+    2013
+  ],
+  "policy": "Representative adaptations using current stored card text and first-OCG-date candidates; not verbatim championship lists and not historical Forbidden/Limited List enforcement.",
+  "sources": [
+    {
+      "id": "worlds-2013",
+      "url": "https://yugipedia.com/wiki/World_Championship_2013",
+      "title": "Yu-Gi-Oh! World Championship 2013",
+      "accessedOn": "2026-09-21",
+      "kind": "secondary-tournament-history",
+      "podium": [
+        "Shin En Huang (Taiwan) — Dragon Ruler",
+        "David J. Keener III (USA) — Spellbook",
+        "Weerapun Suebyoubol (Thailand) — Dragon Ruler"
+      ],
+      "homogeneityNote": "Top 8 was six Dragon Ruler and two Spellbook with no third archetype, so the runner-up strategy is represented separately and the third deck follows the popularity rule below."
+    },
+    {
+      "id": "ocg-metagame-2013",
+      "url": "https://roadoftheking.com/ocg-2013-03-metagame/",
+      "title": "OCG 2013.03 Metagame Report (covers 2013-03 to 2013-08)",
+      "accessedOn": "2026-09-21",
+      "kind": "secondary-tournament-history",
+      "ranking": [
+        "1st Dragon Ruler — 396 tops",
+        "2nd Prophecy (Spellbook) — 290 tops",
+        "3rd Evilswarm — 87 tops",
+        "4th 3-Axis Fire Fist — 27 tops",
+        "5th Mermail — 23 tops"
+      ]
+    },
+    {
+      "id": "ocg-metagame-2013-09",
+      "url": "https://roadoftheking.com/ocg-2013-09-metagame/",
+      "title": "OCG 2013.09 Metagame Report (covers 2013-09 to 2013-10)",
+      "accessedOn": "2026-09-21",
+      "kind": "secondary-tournament-history",
+      "ranking": [
+        "1st Dragon Ruler — 61 tops",
+        "2nd Atlantean Mermail — 54 tops",
+        "3rd Evilswarm — 33 tops",
+        "4th 4-Axis Fire Fist — 20 tops",
+        "5th Dragunity — 15 tops"
+      ]
+    },
+    {
+      "id": "recipe-spellbook-2013",
+      "url": "https://en.yugioh-list.com/decks/dtl/4958",
+      "title": "Magic of Eternity — 2013 Spellbook recipe",
+      "accessedOn": "2026-09-21",
+      "kind": "community-deck-recipe",
+      "note": "User-submitted recipe, not a verified topping list."
+    },
+    {
+      "id": "recipe-evilswarm-2013",
+      "url": "https://en.yugioh-list.com/decks/dtl/9137",
+      "title": "Pure Evilswarm — 2013 Evilswarm recipe",
+      "accessedOn": "2026-09-21",
+      "kind": "community-deck-recipe",
+      "note": "User-submitted recipe, not a verified topping list."
+    },
+    {
+      "id": "limit-2013-09",
+      "url": "https://yugipedia.com/wiki/September_2013_Lists_(OCG)",
+      "title": "OCG Forbidden/Limited List effective 2013-09-01",
+      "accessedOn": "2026-09-21",
+      "kind": "secondary-rules-history",
+      "note": "The four small Dragon Rulers and Spellbook of Judgment were Forbidden from 2013-09-01, after the World Championship. This rollout does not enforce historical lists; it uses the stored year snapshots."
+    }
+  ],
+  "decks": [
+    {
+      "id": "dragon-ruler-2013",
+      "year": 2013,
+      "title": "征龙烈焰",
+      "en": "Dragon Ruler Inferno",
+      "ja": "征竜・烈火",
+      "ace": "Blaster, Dragon Ruler of Infernos",
+      "description": "参考2013世界冠军 Shin En Huang（台湾）的征龙战术。四色征龙各自丢弃自身与1只同属性龙族，从卡组检索或从墓地复活；随后超量召唤大眼与幻兽机 龙骑兵，再用超再生把手牌循环成优势。",
+      "descriptionEn": "Inspired by 2013 world champion Shin En Huang. Each Dragon Ruler discards itself together with a same-Attribute Dragon to search or revive, then overlays into Number 11: Big Eye and Mecha Phantom Beast Dracossack while Super Rejuvenation turns the hand into advantage.",
+      "descriptionJa": "2013年世界王者Shin En Huangの征竜を参考にした構築。四色の征竜は自身と同属性のドラゴンを捨ててサーチと蘇生を行い、No.11 ビッグ・アイと幻獣機ドラゴサックへ繋ぐ。超再生で手札を循環させる。",
+      "main": [
+        ["Blaster, Dragon Ruler of Infernos", 3],
+        ["Redox, Dragon Ruler of Boulders", 3],
+        ["Tempest, Dragon Ruler of Storms", 3],
+        ["Tidal, Dragon Ruler of Waterfalls", 3],
+        ["Reactan, Dragon Ruler of Pebbles", 2],
+        ["Stream, Dragon Ruler of Droplets", 2],
+        ["Burner, Dragon Ruler of Sparks", 2],
+        ["Lightning, Dragon Ruler of Drafts", 2],
+        ["Light and Darkness Dragon", 1],
+        ["Eclipse Wyvern", 1],
+        ["Dragunity Corsesca", 1],
+        ["Maxx \"C\"", 3],
+        ["Effect Veiler", 2],
+        ["Super Rejuvenation", 3],
+        ["Sacred Sword of Seven Stars", 2],
+        ["Forbidden Chalice", 2],
+        ["Dragon Ravine", 1],
+        ["Book of Moon", 1],
+        ["Heavy Storm", 1],
+        ["Vanity's Emptiness", 2]
+      ],
+      "extra": [
+        ["Number 11: Big Eye", 3],
+        ["Mecha Phantom Beast Dracossack", 3],
+        ["Red Dragon Archfiend", 2],
+        ["Scrap Dragon", 1],
+        ["Crimson Blader", 1],
+        ["Colossal Fighter", 1],
+        ["Armory Arm", 1],
+        ["Karakuri Shogun mdl 00 \"Burei\"", 1],
+        ["Gaia Dragon, the Thunder Charger", 1],
+        ["Mermail Abyssgaios", 1]
+      ],
+      "combo": [
+        "征龙的检索与特殊召唤都要「丢弃自身＋1只同属性龙族」，先规划好送墓的龙族再发动。",
+        "超再生在手牌循环的那一回合抽卡最多；用七星宝刀与圣刻剑重新把手牌补回来。",
+        "虚无空间封锁双方的特殊召唤，只在对手更依赖展开时使用，用完立刻送墓解除。",
+        "大眼可以夺取对手怪兽；幻兽机 龙骑兵能用衍生物保护自己并清除对方卡片。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": ["worlds-2013", "ocg-metagame-2013"]
+    },
+    {
+      "id": "spellbook-2013",
+      "year": 2013,
+      "title": "魔导神判",
+      "en": "Spellbook Judgment",
+      "ja": "魔導書・神判",
+      "ace": "High Priestess of Prophecy",
+      "description": "参考2013世界亚军 David J. Keener III（美国）的魔导书战术。以魔导书的神判堆叠同名魔法并检索魔导士，再用魔导法士 朱诺与魔导书院 拉迈松回收资源，形成几乎不断的手牌循环。",
+      "descriptionEn": "Inspired by 2013 runner-up David J. Keener III. Spellbook of Judgment stacks same-name Spells and searches Prophecy monsters, while High Priestess of Prophecy and The Grand Spellbook Tower recycle everything back into the hand.",
+      "descriptionJa": "2013年世界準優勝David J. Keener IIIの魔導書を参考にした構築。魔導書の神判で同名魔法を積み魔導をサーチし、魔導法士ジュノンと魔導書院ラメイソンで資源を回収する。",
+      "main": [
+        ["High Priestess of Prophecy", 3],
+        ["Spellbook Magician of Prophecy", 3],
+        ["Justice of Prophecy", 3],
+        ["Star Drawing", 2],
+        ["Gravekeeper's Spy", 3],
+        ["Summoner Monk", 2],
+        ["Royal Magical Library", 1],
+        ["Spellbook of Secrets", 3],
+        ["Spellbook of the Master", 3],
+        ["Spellbook of Judgment", 3],
+        ["Spellbook of Wisdom", 3],
+        ["Spellbook of Fate", 2],
+        ["Spellbook of Power", 2],
+        ["Spellbook of Eternity", 2],
+        ["The Grand Spellbook Tower", 2],
+        ["Forbidden Dress", 2],
+        ["Forbidden Lance", 1]
+      ],
+      "extra": [
+        ["Alchemic Magician", 3],
+        ["Hierophant of Prophecy", 2],
+        ["Daigusto Emeral", 1],
+        ["Evigishki Merrowgeist", 1],
+        ["Gem-Knight Pearl", 1],
+        ["Number 106: Giant Hand", 1],
+        ["Maestroke the Symphony Djinn", 1],
+        ["Number 50: Blackship of Corn", 1],
+        ["Evilswarm Ouroboros", 1],
+        ["Number 39: Utopia", 1],
+        ["Photon Papilloperative", 1],
+        ["Steelswarm Roach", 1]
+      ],
+      "combo": [
+        "魔导书的神判在该回合结束阶段按本回合发动的魔导书数量抽卡并检索，堆叠同名魔法是核心。",
+        "魔导法士 朱诺展示3张魔导书即可特殊召唤，之后每回合都能除去场上任意卡片。",
+        "魔导书院 拉迈松把卡组的魔导书直接放置到场上的魔陷区，并把墓地的魔导书换回手牌。",
+        "魔导书士 巴特尔检索魔导书；魔导骑士 迪亚玫给全场的魔导怪兽加攻并保护它们。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": ["worlds-2013", "recipe-spellbook-2013", "ocg-metagame-2013"]
+    },
+    {
+      "id": "evilswarm-2013",
+      "year": 2013,
+      "title": "入魔疫病",
+      "en": "Evilswarm Pandemic",
+      "ja": "ヴェルズ・疫病",
+      "ace": "Evilswarm Ophion",
+      "description": "2013年OCG上位率第三、并且是当年除征龙与魔导书外最稳定的体系（冠亚季军同质化后按人气选取）。以救援兔募集入魔下级，超量召唤入魔·俄菲翁封锁高等级怪兽的特殊召唤，并用感染与疫情把场面锁死。",
+      "descriptionEn": "Third most successful 2013 OCG archetype and the most stable non-Dragon-Ruler, non-Spellbook system; chosen by the popularity rule because the championship podium was homogeneous. Rescue Rabbit assembles the Level 4 Evilswarm, and Evilswarm Ophion locks high-Level Special Summons out of the game.",
+      "descriptionJa": "2013年OCGで上位3番目、征竜と魔導書以外では最も安定した入魔。表彰台が同質化したため人気基準で選出。レスキューラビットでヴェルズを並べ、ヴェルズ・オピオンで高レベル特殊召喚を封じる。",
+      "main": [
+        ["Evilswarm Castor", 3],
+        ["Evilswarm Heliotrope", 3],
+        ["Evilswarm Kerykeion", 3],
+        ["Evilswarm Mandragora", 3],
+        ["Evilswarm Thunderbird", 3],
+        ["Effect Veiler", 2],
+        ["Rescue Rabbit", 2],
+        ["Evilswarm O'lantern", 1],
+        ["Mystical Space Typhoon", 3],
+        ["Forbidden Dress", 2],
+        ["Infestation Pandemic", 2],
+        ["Reinforcement of the Army", 1],
+        ["Heavy Storm", 1],
+        ["Monster Reborn", 1],
+        ["Book of Moon", 1],
+        ["Compulsory Evacuation Device", 2],
+        ["Bottomless Trap Hole", 2],
+        ["Fiendish Chain", 2],
+        ["Infestation Infection", 1],
+        ["Solemn Warning", 1],
+        ["Solemn Judgment", 1]
+      ],
+      "extra": [
+        ["Evilswarm Ophion", 3],
+        ["Evilswarm Bahamut", 1],
+        ["Evilswarm Nightmare", 1],
+        ["Evilswarm Thanatos", 1],
+        ["Evilswarm Ouroboros", 1],
+        ["Number 85: Crazy Box", 1],
+        ["Number 106: Giant Hand", 1],
+        ["Number 50: Blackship of Corn", 1],
+        ["Maestroke the Symphony Djinn", 1],
+        ["Number 39: Utopia", 1],
+        ["Diamond Dire Wolf", 1],
+        ["Gagaga Cowboy", 1],
+        ["Gem-Knight Pearl", 1]
+      ],
+      "combo": [
+        "入魔·俄菲翁在场时，5星以上的怪兽不能特殊召唤；注意自己的额外卡组也要按这个限制构筑。",
+        "救援兔把两只4星入魔直接从卡组拉到场上，一回合内即可完成超量召唤。",
+        "入魔·俄菲翁每次移除素材都能从卡组检索「感染」或「疫情」类魔法陷阱。",
+        "感染疫情让入魔怪兽不受其他魔法陷阱影响，并用疫情弱化对手的高等级怪兽。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": ["recipe-evilswarm-2013", "ocg-metagame-2013", "ocg-metagame-2013-09"]
+    }
+  ]
+}

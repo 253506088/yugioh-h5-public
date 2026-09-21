@@ -1,7 +1,7 @@
 (function(root){
  'use strict';const X=root.DuelChronicle,{D,E,H,C,I,is,allM,allS,allF,monster,hand,deck,grave,first,args,src,active,field,has,extend,g,target,moved,choose,revive,search,card,def,series,lock,locked,raw,rawHas,fmonster}=X,{CARDS}=D,P=root.ModernDuelEngine.prototype;
  const effects=m=>!!def(m)?.effect,fieldMonsters=(e,p=null)=>p===null?allM(e):e.monsters(p),live=(e,n,p=null)=>raw(e,n,p).some(f=>fmonster(f.zone)?!rawHas(e,'Skill Drain')&&!(f.card.eraNegatedUntil>=e.state.turn):!f.card.spellNegated),eq=(e,m,n)=>e.activeEquip(m).some(q=>is(q,n));
- for(const c of D.CARD_LIST.filter(c=>c.releaseYear>=2009&&c.releaseYear<=2012)){
+ for(const c of D.CARD_LIST.filter(c=>c.releaseYear>=2009&&c.releaseYear<=2013)){
   if(/(?:This card c|C)annot be Special Summoned\./.test(c.originalDescription||''))c.noSpecial=true;
   if(/cannot be Special Summoned by other ways/i.test(c.originalDescription||''))c.eraStrictSummon=true;
   if(c.masked)c.specialOnly='mask';

@@ -57,6 +57,6 @@
  extend('setPosition',function(prior,uid,pos,s,down=false){const r=prior.call(this,uid,pos,s,down);if(r&&down){const m=card(this,uid);delete m.eraNegatedUntil;delete m.eraFlags;delete m.eraCounters;}return r;});
  E.on('move',(e,v)=>{if(!field(v.from))return;for(const m of allS(e))if(m.eraRevivalLink===v.uid&&v.kind==='destroy')e.destroy(m.uid,src(e,m));if(v.previous?.eraRevivalLink)e.destroy(v.previous.eraRevivalLink,v.source);});
  extend('describe',function(prior,m,...a){return {...prior.call(this,m,...a),...Object.fromEntries(Object.entries(m).filter(([k])=>k.startsWith('era')))};});
- const api={...X,field,card,def,race,attr,arch,names,gy,isGY,fromField,destroyed,discarded,noHand,alive,stat,effect,cast,watch,entrySearch,entryRecruit,entryReturn,sent,sentRecruit,sentSearch,specialSelf,summonCost,aura,ownAura,protect,quickNegate,xyz,revivalSpell,equip,endBanish,lock,locked,negateMonster};root.DuelChronicle=api;
+ const api={...X,field,card,def,race,attr,arch,names,gy,isGY,fromField,destroyed,discarded,noHand,alive,stat,effect,cast,S:cast,T:cast,watch,entrySearch,entryRecruit,entryReturn,sent,sentRecruit,sentSearch,specialSelf,summonCost,aura,ownAura,protect,quickNegate,xyz,revivalSpell,equip,endBanish,lock,locked,negateMonster};root.DuelChronicle=api;
  if(typeof module!=='undefined')module.exports=api;
 })(globalThis);

@@ -73,6 +73,7 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
     if (attributes[body]) spec.nonAttribute = attributes[body];
     else if (races[body]) spec.nonRace = races[body];
     else if (/^".+"$/.test(body)) spec.nonNameIncludes = body.slice(1, -1);
+    else if (body === 'Normal') spec.nonNormal = true;
     else if (body === 'Gemini') spec.nonGemini = true;
     else if (body === 'Synchro') spec.nonType = 'synchro';
     else throw new Error('Unknown non-Tuner type: ' + name + ' / ' + body);
@@ -81,12 +82,16 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
 }
 
 export function parseXyz(name, text, {races, attributes}) {
-  const m = text.trim().match(/^(\d+)(?: or more \(max\. (\d+)\))? Level (\d+)(?: (.+?))? monsters$/i);
+  // YGOPRODeck prints Xyz materials in two orders: the long-standing
+  // "2 Level 4 Fairy-Type monsters" and the newer "2 Pyro-Type Level 4 monsters".
+  const levelFirst = text.trim().match(/^(\d+)(?: or more \(max\. (\d+)\))? Level (\d+)(?: (.+?))? monsters$/i);
+  const typeFirst = text.trim().match(/^(\d+)(?: or more \(max\. (\d+)\))? (.+?) Level (\d+) monsters$/i);
+  const m = levelFirst || typeFirst;
   if (!m) throw new Error('Unparsed Xyz materials: ' + name + ' / ' + text);
-  const out = {xyzCount: Number(m[1]), rank: Number(m[3])};
+  const out = {xyzCount: Number(m[1]), rank: Number(levelFirst ? m[3] : m[4])};
   if (m[2]) out.xyzMax = Number(m[2]);
-  if (m[4]) {
-    const body = m[4].replace(/-Type$/i, '');
+  const body = (levelFirst ? m[4] : m[3])?.replace(/-Type$/i, '');
+  if (body) {
     if (races[body]) out.xyzRace = races[body];
     else if (attributes[body]) out.xyzAttribute = attributes[body];
     else if (body === 'Normal') out.xyzNormal = true;

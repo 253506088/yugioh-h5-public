@@ -570,7 +570,7 @@
         if(spec.tunerType&&d.type!==spec.tunerType)return false;
         if(spec.tunerRace&&this.race(m)!==spec.tunerRace)return false;
       }
-      for(const m of non){if(spec.nonId&&m.id!==spec.nonId)return false;if(spec.nonType&&CARDS[m.id].type!==spec.nonType)return false;if(spec.nonLevel&&this.level(m)!==spec.nonLevel)return false;if(spec.nonGemini&&!CARDS[m.id].gemini)return false;}
+      for(const m of non){if(spec.nonId&&m.id!==spec.nonId)return false;if(spec.nonType&&CARDS[m.id].type!==spec.nonType)return false;if(spec.nonLevel&&this.level(m)!==spec.nonLevel)return false;if(spec.nonGemini&&!CARDS[m.id].gemini)return false;if(spec.nonNormal&&!this.isNormalMonster(m))return false;}
       if(spec.requiredNonIds&&!spec.requiredNonIds.every(id=>non.some(m=>m.id===id)))return false;
       if(spec.additionalAttribute&&!tuners.some(t=>materials.every(m=>m===t||this.attribute(m)===spec.additionalAttribute)))return false;
       return options.virtual||this.freeZones(owner,extra,{materials:materials.map(m=>m.uid)}).length>0;
