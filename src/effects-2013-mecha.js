@@ -48,8 +48,8 @@
  extend('synchroValid',function(prior,p,extra,list,o={}){if(list.some(m=>is(m,'Mecha Phantom Beast Blue Impala'))&&this.race(extra)!=='机械族')return false;return prior.call(this,p,extra,list,o);});
  // Dracossack: two Tokens, or one Token plus a Mecha Phantom Beast tribute to pop
  // any card; using the pop costs this card its attack for the turn.
- R('Mecha Phantom Beast Dracossack','era-token',{zones:['extraMonster','monsters'],label:C('Mecha Phantom Beast Dracossack').name,once:once('dracossack-token'),summons:true,inputs:(e,c)=>[H.detachInput(e,c,1)],cost:(e,c)=>e.detach(c.uid,args(c,'cost')),resolve:(e,c)=>tokens(e,c,2)});
- R('Mecha Phantom Beast Dracossack','era-pop',{zones:['extraMonster','monsters'],label:C('Mecha Phantom Beast Dracossack').name,once:once('dracossack-pop'),role:'destroy',inputs:(e,c)=>[g(e,c,'cost','选择解放的幻兽机怪兽',ownM(e,c).filter(m=>m.faceUp&&series(m,'Mecha Phantom Beast')),1,1,'cost'),g(e,c,'target','选择破坏的场上卡片',allF(e))],cost:(e,c)=>{X.tribute(e,c,args(c,'cost'));if(self(e,c))self(e,c).eraNoAttackUntil=e.state.turn;},resolve:(e,c)=>destroy(e,c,args(c))});
+ A('Mecha Phantom Beast Dracossack','era-token',{zones:['extraMonster','monsters'],main:true,label:C('Mecha Phantom Beast Dracossack').name,once:once('dracossack-token'),summons:true,inputs:(e,c)=>[H.detachInput(e,c,1)],cost:(e,c)=>e.detach(c.uid,args(c,'cost')),resolve:(e,c)=>tokens(e,c,2)});
+ A('Mecha Phantom Beast Dracossack','era-pop',{zones:['extraMonster','monsters'],main:true,label:C('Mecha Phantom Beast Dracossack').name,once:once('dracossack-pop'),role:'destroy',inputs:(e,c)=>[g(e,c,'cost','选择解放的幻兽机怪兽',ownM(e,c).filter(m=>m.faceUp&&series(m,'Mecha Phantom Beast')),1,1,'cost'),g(e,c,'target','选择破坏的场上卡片',allF(e))],cost:(e,c)=>{X.tribute(e,c,args(c,'cost'));if(self(e,c))self(e,c).eraNoAttackUntil=e.state.turn;},resolve:(e,c)=>destroy(e,c,args(c))});
  for(const name of mpbMembers.map(c=>c.officialName))mark(name,'幻兽机：衍生物保护、等级提升与逐条效果已登记');
  mark('Mecha Phantom Beast Warbluran','送入墓地的机械族同调素材生成衍生物；本回合只能特殊召唤风属性');
  mark('Mecha Phantom Beast Turtletracer','每回合首只被战斗破坏的衍生物保留；等级提升已登记');

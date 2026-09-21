@@ -49,7 +49,7 @@
     "test:gx:browser": "node tests/gx-browser.cjs",
     "test:gx:simulation": "node tests/gx-simulation.cjs",
     "decks:chronicle": "node scripts/generate-chronicle-decks.mjs",
-    "test:chronicle": "node --test tests/chronicle-rules.test.cjs tests/chronicle-sweep.test.cjs tests/card-materials.test.mjs",
+    "test:chronicle": "node --test tests/chronicle-rules.test.cjs tests/chronicle-2013.test.cjs tests/chronicle-sweep.test.cjs tests/card-materials.test.mjs",
     "test:chronicle:simulation": "node tests/chronicle-simulation.cjs",
     "test:chronicle:browser": "node tests/chronicle-browser.cjs",
     "start:pvp": "node server/index.mjs",

@@ -15,8 +15,9 @@
  const ghostrick=m=>series(m,'Ghostrick');
  const ghostrickSpell=m=>ghostrick(m)||/^Ghostrick-/.test(def(m)?.officialName||'');
  const ghostrickCount=(e,p)=>ownM(e,{owner:p}).filter(m=>m.faceUp&&ghostrick(m)).length;
- const trickBodies=D.CARD_LIST.filter(c=>c.releaseYear===2013&&monster(c)&&ghostrick(c)&&!D.isExtra(c)&&c.implementationStatus==='pending');
- for(const c of trickBodies)c.noNormal=true;
+ const trickBodies=D.CARD_LIST.filter(c=>c.releaseYear===2013&&monster(c)&&ghostrick(c)&&!D.isExtra(c));
+ // "Cannot be Normal Summoned, unless you control a Ghostrick monster" is a
+ // field condition, not an absolute ban, so it must not set noNormal.
  extend('canNormal',function(prior,m,p=this.state.active){const c=CARDS[m.id];if(c.releaseYear===2013&&ghostrick(c)&&!this.monsters(p).some(q=>q.faceUp&&ghostrick(q)))return false;return prior.call(this,m,p);});
  for(const c of trickBodies)Q(c.officialName,'era-hide',{zones:['monsters','extraMonster','spells','fieldSpell'],once:H.once('ghostrick-hide','card'),role:'own-boost',resolve:(e,ctx)=>e.setPosition(ctx.uid,'defense',ctx.source,true)});
  onFlip('Ghostrick Jiangshi',{resolve:(e,c)=>{const limit=ghostrickCount(e,c.owner);const list=deck(e,c.owner,m=>ghostrick(m)&&e.level(m)<=limit);if(list.length)choose(e,c,'选择加入手牌的幽灵',list,1,1,'early-move',{to:'hand',kind:'effect-search',shuffle:true});}});
@@ -43,7 +44,10 @@
  // ==========================================================================
  // Evilswarm Exciton Knight: the Level 4 reset that also ends the turn's damage.
  // ==========================================================================
- R('Evilswarm Exciton Knight','era-reset',{zones:['extraMonster','monsters'],label:C('Evilswarm Exciton Knight').name,once:H.once('exciton'),quick:true,role:'destroy',condition:(e,c)=>!e.state.chain.length&&((e.state.players[1-c.owner].hand||[]).length+e.field(1-c.owner).length)>(e.state.players[c.owner].hand||[]).length+e.field(c.owner).length,inputs:(e,c)=>[H.detachInput(e,c,1)],cost:(e,c)=>e.detach(c.uid,args(c,'cost')),resolve:(e,c)=>{for(const f of allF(e))if(f.card.uid!==c.uid)destroy(e,{...c,args:{target:[f.card.uid]}},[]);for(const p of [0,1])lock(e,p,'noDamage');}});
+ A('Evilswarm Exciton Knight','era-reset',{zones:['extraMonster','monsters'],main:true,quick:true,label:C('Evilswarm Exciton Knight').name,once:H.once('exciton'),quick:true,role:'destroy',condition:(e,c)=>!e.state.chain.length&&((e.state.players[1-c.owner].hand||[]).length+e.field(1-c.owner).length)>(e.state.players[c.owner].hand||[]).length+e.field(c.owner).length,inputs:(e,c)=>[H.detachInput(e,c,1)],cost:(e,c)=>e.detach(c.uid,args(c,'cost')),resolve:(e,c)=>{const targets=allF(e).filter(d=>d&&d.uid&&d.uid!==c.uid).map(d=>d.uid);if(targets.length)destroy(e,c,targets);for(const p of [0,1])e.state.players[p].excitonTurn=e.state.turn;}});
+ // "your opponent takes no further damage this turn" applies to both players'
+ // remaining damage for the rest of the turn, including battle damage.
+ extend('damage',function(prior,p,n,kind,...a){if(this.state.players[p].excitonTurn===this.state.turn)return;return prior.call(this,p,n,kind,...a);});
  // ==========================================================================
  // Noble Knight: bare Knights are Normal Monsters on the field; armed ones
  // become effect monsters with the printed ability.

@@ -18,5 +18,10 @@
  }
  // -- Battlin' Boxing Spirits -----------------------------------------------
  S('Battlin\' Boxing Spirits',{summons:true,once:H.once('boxing-spirits','name'),inputs:(e,c)=>[g(e,c,'target','选择复活的拳击手',grave(e,c.owner,m=>series(m,'Battlin\' Boxer')),1,1,'special')],resolve:(e,c)=>{const p=e.state.players[c.owner];if(p.deck.length)moved(e,c,[p.deck[p.deck.length-1].uid],'grave','effect-send');revive(e,c,first(c),{position:'defense'});}});
+ // -- Number 85: Crazy Box --------------------------------------------------
+ // The die is drawn from the engine's saved random stream, so a replay makes
+ // the same roll; the six branches are applied straight from the printed text.
+ R('Number 85: Crazy Box','era-die',{zones:['extraMonster','monsters'],label:C('Number 85: Crazy Box').name,once:H.once('crazy-box'),inputs:(e,c)=>[H.detachInput(e,c,1)],cost:(e,c)=>e.detach(c.uid,args(c,'cost')),resolve:(e,c)=>{const roll=1+Math.floor(e.random()*6);const p=e.state.players[c.owner];if(roll===1)p.lp=Math.floor(p.lp/2);else if(roll===2)e.draw(c.owner,1);else if(roll===3){const h=e.state.players[1-c.owner].hand;if(h.length){const pick=h[Math.floor(e.random()*h.length)];moved(e,c,[pick.uid],'grave','effect-discard');}}else if(roll===4){const list=e.field(1-c.owner).filter(f=>f.faceUp);if(list.length){const m=list[0].card;m.eraNegatedUntil=e.state.turn;}}else if(roll===5){const list=allF(e);if(list.length)destroy(e,c,[list[0].card.uid]);}else destroy(e,c,[c.uid]);}});
+ extend('canAttack',function(prior,m,p,t){return is(m,'Number 85: Crazy Box')?false:prior.call(this,m,p,t);});
  if(typeof module!=='undefined')module.exports=X;
 })(globalThis);

@@ -34,17 +34,17 @@
  const dragonMaterial=(e,m,a)=>!!m&&m.id!=='era-mpb-token'&&(e.hasAttribute(m,a)||e.race(m)==='龙族');
  const rulerPool=(e,c,a)=>H.cards(e,c.owner,['hand','grave'],m=>m.uid!==c.uid&&monster(m)&&dragonMaterial(e,m,a));
  const rulerPayoff={
-  'Blaster, Dragon Ruler of Infernos':{pool:(e,c)=>[...e.field(1-c.owner),...e.field(c.owner)].map(f=>f.uid),resolve:(e,c)=>destroy(e,c,args(c,'target')),title:'选择破坏的卡片'},
-  'Redox, Dragon Ruler of Boulders':{pool:(e,c)=>grave(e,c.owner,monster).map(m=>m.uid),resolve:(e,c)=>revive(e,c,first(c,'target')),title:'选择复活的怪兽'},
-  'Tempest, Dragon Ruler of Storms':{pool:(e,c)=>deck(e,c.owner,m=>e.race(m)==='龙族').map(m=>m.uid),resolve:(e,c)=>search(e,c,args(c,'target')),title:'选择检索的龙族'},
-  'Tidal, Dragon Ruler of Waterfalls':{pool:(e,c)=>deck(e,c.owner,monster).map(m=>m.uid),resolve:(e,c)=>{moved(e,c,args(c,'target'),'grave','effect-send');e.shuffle(e.state.players[c.owner].deck);},title:'选择送去墓地的怪兽'}
+  'Blaster, Dragon Ruler of Infernos':{pool:(e,c)=>[...e.field(1-c.owner),...e.field(c.owner)].map(f=>f.uid),cards:(e,c)=>[...e.field(1-c.owner),...e.field(c.owner)].map(f=>f.card),resolve:(e,c)=>destroy(e,c,args(c,'target')),title:'选择破坏的卡片'},
+  'Redox, Dragon Ruler of Boulders':{pool:(e,c)=>grave(e,c.owner,monster).map(m=>m.uid),cards:(e,c)=>grave(e,c.owner,monster),resolve:(e,c)=>revive(e,c,first(c,'target')),title:'选择复活的怪兽'},
+  'Tempest, Dragon Ruler of Storms':{pool:(e,c)=>deck(e,c.owner,m=>e.race(m)==='龙族').map(m=>m.uid),cards:(e,c)=>deck(e,c.owner,m=>e.race(m)==='龙族'),resolve:(e,c)=>search(e,c,args(c,'target')),title:'选择检索的龙族'},
+  'Tidal, Dragon Ruler of Waterfalls':{pool:(e,c)=>deck(e,c.owner,monster).map(m=>m.uid),cards:(e,c)=>deck(e,c.owner,monster),resolve:(e,c)=>{moved(e,c,args(c,'target'),'grave','effect-send');e.shuffle(e.state.players[c.owner].deck);},title:'选择送去墓地的怪兽'}
  };
  for(const [name,attribute] of rulers){
   const id=I(name),rulerLock=H.once('dragonruler-'+id,'name'),payoff=rulerPayoff[name];
   summonCost(name,(e,c)=>rulerPool(e,c,attribute),2,{zones:['hand','grave'],banish:true,position:'attack',condition:(e,c)=>rulerPool(e,c,attribute).length>=2});
   E.get(id+'::gx-special').once=rulerLock;
   effect(name,(e,c)=>payoff.pool(e,c),payoff.resolve,{mode:'era-ruler-payoff',zones:['hand'],once:rulerLock,role:'destroy',min:0,max:1,
-   inputs:(e,c)=>[...discardSelfAnd(e,c,'选择丢弃自身与1只'+attribute+'属性怪兽',(e2,m)=>e2.hasAttribute(m,attribute)),...(payoff.pool(e,c).length?[g(e,c,'target',payoff.title,payoff.pool(e,c),0,1,'target')]:[])],
+   inputs:(e,c)=>[...discardSelfAnd(e,c,'选择丢弃自身与1只'+attribute+'属性怪兽',(e2,m)=>e2.hasAttribute(m,attribute)),...(payoff.pool(e,c).length?[g(e,c,'target',payoff.title,payoff.cards?payoff.cards(e,c):payoff.pool(e,c),0,1,'target')]:[])],
    cost:(e,c)=>H.discard(e,c,args(c,'cost'))});
   onMove(name,'era-banished-search',{inputs:target('选择检索的'+attribute+'属性龙族',(e,c)=>deck(e,c.owner,m=>e.race(m)==='龙族'&&e.hasAttribute(m,attribute)),'search'),resolve:(e,c)=>search(e,c,args(c))},(e,v)=>v.to==='banished');
   onEnd(name,{oncePerTurn:false,resolve:(e,c)=>{if(self(e,c)?.summonKind&&self(e,c).summonKind!=='normal')moved(e,c,[c.uid],'hand','effect-return');}},{opponent:true,mandatory:true});

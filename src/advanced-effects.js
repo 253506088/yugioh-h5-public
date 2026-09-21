@@ -31,7 +31,9 @@
   function frame(ctx){return ctx.event.window||ctx.event.attack&&{kind:'attack',attack:ctx.event.attack}||{};}
   function cards(e,owner,zones,filter=()=>true){return e.refs(owner,zones).filter(f=>filter(f.card,f)).map(f=>f.card);}
   function monsterCards(e,owner,zones,filter=()=>true){return cards(e,owner,zones,(c,f)=>isMonster(CARDS[c.id])&&filter(c,f));}
-  function options(e,ctx,list,extra={}){return list.map(card=>e.option(card,{viewer:ctx.owner,...extra}));}
+  // Candidate lists may carry either live card objects or bare uids; both are
+  // accepted so a shared builder can pass whichever its caller already has.
+  function options(e,ctx,list,extra={}){return list.map(item=>{const card=typeof item==="string"?e.find(item)?.card:item;return card?e.option(card,{viewer:ctx.owner,...extra}):null;}).filter(Boolean);}
   function group(e,ctx,key,title,list,min=1,max=1,extra={}){return {key,title,candidates:options(e,ctx,list),min,max,...extra};}
   function customGroup(key,title,choices,min=1,max=1,extra={}){return {key,title,candidates:choices,min,max,...extra};}
   function deck(e,owner,filter=()=>true){return cards(e,owner,['deck'],filter);}

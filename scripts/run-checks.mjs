@@ -6,7 +6,7 @@ const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),run=join(root,'
 await mkdir(run,{recursive:true});
 const files=['tests/engine.test.cjs','tests/v2-core.test.cjs','tests/v2-regression.test.cjs','tests/v3-rules.test.cjs','tests/v4-rules.test.cjs','tests/v4-2002.test.cjs','tests/v4-2002-sweep.test.cjs','tests/yearly-collector.test.mjs','tests/game-art.test.mjs','tests/collection-progress.test.mjs','tests/i18n.test.cjs','tests/experience.test.cjs','tests/tournament.test.cjs','tests/ai-marginal.test.cjs','tests/v4-2003.test.cjs','tests/v4-2003-sweep.test.cjs','tests/v4-2004.test.cjs','tests/v4-2004-sweep.test.cjs','tests/v4-2005.test.cjs','tests/v4-2005-sweep.test.cjs'];
 files.push('tests/ai-tactics.test.cjs','tests/duel-outcome.test.cjs','tests/journal.test.cjs');
-files.push('tests/gx-rules.test.cjs','tests/gx-sweep.test.cjs','tests/card-materials.test.mjs','tests/chronicle-rules.test.cjs','tests/chronicle-sweep.test.cjs');
+files.push('tests/gx-rules.test.cjs','tests/gx-sweep.test.cjs','tests/card-materials.test.mjs','tests/chronicle-rules.test.cjs','tests/chronicle-2013.test.cjs','tests/chronicle-sweep.test.cjs');
 files.push('tests/controller-costs.test.cjs');
 files.push('tests/pvp.test.mjs','tests/pvp-network.test.mjs');
 const result=spawnSync(process.execPath,['--test','--test-reporter=tap',...files],{cwd:root,encoding:'utf8',maxBuffer:20_000_000});
