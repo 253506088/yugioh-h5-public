@@ -4,6 +4,7 @@
   if(typeof module!=='undefined'&&!D.earlyDecksLoaded)require('./early-decks.js');
   const LinkRules = root.DuelLinkRules || require('./link-rules.js');
   const DT = root.DuelDecks || require('./deck-tools.js');
+  const Lingering = root.DuelLingering || require('./lingering.js');
   const Base = root.LegacyDuelEngine || root.DuelEngine || require('./engine.js').DuelEngine;
   const RuleError = root.DuelRuleError || require('./engine.js').RuleError;
   const {CARDS,DECKS,isMonster,isExtra,isFamily} = D;
@@ -44,7 +45,7 @@
       s.duelFlags ||= {};s.lastNegatedAttack ||= null;s.version=3;s.damage ||= [0,0];s.summons ||= [0,0];s.nextChain ||= 1;s.chainId ??= null;
       if(s.chain.length&&s.chainId===null)s.chainId=s.nextChain++;
       for(const [index,link] of s.chain.entries()){link.chainId??=s.chainId;link.chainNumber??=index+1;}
-      s.chainHistory ||= [];
+      s.chainHistory ||= [];s.lingering ||= [];s.nextLingering ||= 1;
       for(let i=0;i<2;i++){
         const p=s.players[i];p.banished ||= [];p.extraMonster ||= null;p.extraMonster2 ||= null;p.fieldSpell ||= null;p.usedTurn ||= {};p.duelUsed ||= {};
         if(p.extraMonster)p.extraMonster.extraSlot ??= i;
@@ -801,7 +802,8 @@
       if(a.targetAfterCost&&ctx.args.target)this.rememberInput(ctx,{key:'target',role:'target'},ctx.args.target);
       this.state.tasks.unshift(...inputTasks);
       if(a.inherent){
-        const tasks=this.collectTasks(()=>this.fx.resolve(this,ctx));this.state.tasks.unshift(...tasks);
+        const lingeringBefore=Lingering.fingerprint(this.state);
+        const tasks=this.collectTasks(()=>this.fx.resolve(this,ctx));this.state.tasks.unshift(...tasks,{op:'lingering-diff',before:lingeringBefore,source:{sourceId:card?.id||null,by:ctx.owner,uid:ctx.uid}});
         if(!this.state.frame)this.state.frame={kind:'main-open',owner:ctx.owner,windowOffered:false};
         return;
       }
@@ -1008,12 +1010,14 @@
         this.recordChain('unavailable',link,{reason:'source-unavailable',byNumber:link.sourceUnavailableByNumber||null});
         this.log('chain-warning','连锁 '+link.chainNumber+'「'+CARDS[link.sourceId].name+'」需要保持在场，来源离场后效果未能适用',link.owner,{cardId:link.sourceId,chain:link.chainNumber,chainId:link.chainId,byChain:link.sourceUnavailableByNumber||null});
       }
+      const lingeringBefore=Lingering.fingerprint(this.state);
       const tasks=negated||unavailable?[]:this.collectTasks(()=>this.fx.resolve(this,link));
       if(this.state.winner!==null){this.recordChain('resolved',link,{status:link.resolutionStatus});return;}
       if(negated&&!link.negatedActivation)this.log('negate','「'+CARDS[link.sourceId].name+'」的效果未能适用',link.owner,{cardId:link.sourceId});
-      this.state.tasks.unshift(...tasks,{op:'finish-link',link:cp(link),applied:!negated&&!unavailable});
+      this.state.tasks.unshift(...tasks,{op:'finish-link',link:cp(link),applied:!negated&&!unavailable,lingeringBefore});
     }
     runTask(task){
+      if(task.op==='lingering-diff'){Lingering.record(this,task.before,task.source);return;}
       if(task.op==='link-materials'){
         const extra=this.find(task.extraUid)?.card,required=this.find(task.requiredUid);if(!extra||!required||!fieldMonster(required.zone)||(required.card.generation||0)!==task.source.generation)return;
         const sets=this.linkCombos(task.owner,extra,task.requiredUid);if(!sets.length)return;
@@ -1031,6 +1035,7 @@
       }
       if(task.op==='finish-link'){
         const link=task.link,f=this.find(link.uid);
+        if(task.lingeringBefore)Lingering.record(this,task.lingeringBefore,{sourceId:link.sourceId,by:link.owner,uid:link.uid,chain:link.chainNumber});
         if(link.cardActivation&&f&&['spells','fieldSpell'].includes(f.zone))f.card.pendingActivation=false;
         if(link.cardActivation&&!link.negatedActivation&&link.source.effectType==='spell'){
           for(let p=0;p<2;p++)for(const c of this.monsters(p))if(c.faceUp&&!this.negated(c)&&['skilled-magician','royal-library'].includes(c.id))c.counters=Math.min(3,(c.counters||0)+1);
@@ -1214,6 +1219,7 @@
         p.turnStats={special:0,extraTypes:[],qliTributes:0,crySynchros:0};p.extraNormalUsed=false;p.locks=p.locks.filter(l=>l.turn===this.state.turn);
         for(const c of [...present(p.monsters),p.extraMonster,p.extraMonster2].filter(Boolean)){c.attacksMade=0;c.attacked=false;c.extraAttacks=0;c.doubleAllowance=0;c.doubleNextAttack=false;c.battleBoost=null;c.mods=(c.mods||[]).filter(m=>!m.until||m.until>=this.state.turn);}
       }
+      Lingering.prune(this);
       this.log('turn','第 '+this.state.turn+' 回合 · '+this.name(this.state.active)+'的回合',this.state.active);
       this.state.inDrawPhase=true;
       const p=this.state.players[this.state.active];
@@ -1345,7 +1351,7 @@
         }
         const cost=action.noTribute?0:this.tributeCount(f.card);
         if(cost)score-=Math.min(...this.tributeSets(f.card,!!action.noTribute,owner).map(set=>set.reduce((n,uid)=>n+this.attackValue(this.find(uid).card)/15,0)));
-        return score+(!this._aiMarginalProbe&&root.DuelAITactics?root.DuelAITactics.defenseBias(this,action):0);
+        return score+(!this._aiMarginalProbe&&root.DuelAITactics?root.DuelAITactics.defenseBias(this,action)+(root.DuelAITactics.handTrapBias?root.DuelAITactics.handTrapBias(this,action):0):0);
       }
       if(action.type==='set')return c.type==='trap'&&present(p.spells).length<(this.state.difficulty==='casual'?2:4)?180:-100;
       if(action.type==='stance'){
@@ -1389,15 +1395,27 @@
       }
       if(p.kind==='trigger'){
         const t=p.trigger,ctx=this.abilityContext(t.uid,t.key,'trigger',{...t.event,controller:t.owner,sourceId:t.sourceId,mandatory:t.mandatory});
-        const action=this.fx.aiTrigger(this,ctx)?{type:'respond',uid:t.uid,key:t.key}:{type:'pass'};
-        return root.DuelAIMarginal?root.DuelAIMarginal.action(this,action):action;
+        let action=this.fx.aiTrigger(this,ctx)?{type:'respond',uid:t.uid,key:t.key}:{type:'pass'};
+        action=root.DuelAIMarginal?root.DuelAIMarginal.action(this,action):action;
+        if(action.type==='respond'&&!t.mandatory&&!this.aiCanCommit(action))action={type:'pass'};
+        return action;
       }
       if(p.kind==='window'){
         const ranked=p.options.map(a=>({...a,score:this.fx.aiResponse(this,a,p.context,p.responder)})).filter(a=>a.score>0).sort((a,b)=>b.score-a.score);
-        const action=ranked.length?{type:'respond',uid:ranked[0].uid,key:ranked[0].key}:{type:'pass'};
-        return root.DuelAIMarginal?root.DuelAIMarginal.action(this,action):action;
+        for(const option of ranked){
+          const base={type:'respond',uid:option.uid,key:option.key},action=root.DuelAIMarginal?root.DuelAIMarginal.action(this,base):base;
+          if(this.aiCanCommit(action))return action;
+        }
+        return {type:'pass'};
       }
       return {type:'pass'};
+    }
+    // A response can be offered by a window although its cost cannot actually
+    // be paid (Honest while Masked HERO Dark Law banishes the card instead).
+    // Bots confirm the commitment on a throwaway copy so a duel never stalls.
+    aiCanCommit(action){
+      if(this._aiMarginalProbe||!root.DuelAIMarginal)return true;
+      try{return root.DuelAIMarginal.clone(this).act(action).ok;}catch{return false;}
     }
     aiNext(){
       this._aiMarginalPlans=new Map();

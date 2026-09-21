@@ -1,0 +1,40 @@
+/* Lingering effects: chips on the duelist bars, the active-effects modal and the negated badge. */
+.status-effects{display:flex;align-items:center;gap:6px;flex:1 1 auto;min-width:0;margin-left:10px;overflow:hidden;white-space:nowrap}
+.status-chip{display:inline-flex;align-items:center;gap:6px;max-width:100%;min-width:0;height:24px;padding:0 9px 0 7px;border:1px solid #9fb8c44a;border-radius:12px;background:#0f2431d9;color:#d6e2e6;font:inherit;font-size:calc(10px * var(--ui-scale,1));line-height:1;cursor:pointer;transition:border-color .2s,background .2s,transform .2s;flex:0 1 auto}
+.status-chip:hover,.status-chip:focus-visible{border-color:var(--gold);background:#16303fe6;transform:translateY(-1px)}
+.status-chip>i{width:7px;height:7px;border-radius:50%;background:#9db8c2;box-shadow:0 0 0 3px #9db8c229;flex-shrink:0}
+.status-chip .chip-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.status-chip .chip-text em{font-style:normal;color:#f1dfae;margin-right:3px}
+.status-chip small{font-size:calc(8px * var(--ui-scale,1));color:#8fa8b5;white-space:nowrap;flex-shrink:0;max-width:140px;overflow:hidden;text-overflow:ellipsis}
+.status-chip.more{padding:0 8px;color:#c9b079;border-color:#c9b0796b;flex-shrink:0}
+.status-chip.tone-restriction>i{background:#e6a48c;box-shadow:0 0 0 3px #e6a48c2e}
+.status-chip.tone-boon>i{background:#8fd0a8;box-shadow:0 0 0 3px #8fd0a82e}
+.status-chip.tone-negated>i{background:#c3a2e6;box-shadow:0 0 0 3px #c3a2e62e}
+.opponent-bar .status-effects{order:0}
+.lingering-tool{position:relative;font-size:16px;width:auto;min-width:22px;gap:2px}
+.lingering-tool b{font:600 9px/1 var(--sans);color:var(--gold-light);margin-left:2px}
+.lingering-tool.active{color:var(--gold)}
+.lingering-modal .modal-body{padding-top:16px}
+.lingering-layout{display:grid;grid-template-columns:1fr;gap:18px}
+.lingering-group h3{display:flex;align-items:center;gap:10px;font:500 calc(15px * var(--ui-scale,1))/1.3 var(--serif);color:#e3e9e0;padding-bottom:9px;border-bottom:1px solid var(--line)}
+.lingering-group h3 small{font:600 10px/1 var(--sans);color:var(--gold);border:1px solid #c9b07955;border-radius:9px;padding:3px 7px}
+.lingering-list{list-style:none;margin:0;padding:0;display:grid;gap:10px;margin-top:12px}
+.lingering-item{display:grid;grid-template-columns:54px 1fr;gap:14px;align-items:start;padding:12px 14px;border:1px solid var(--line);border-left:3px solid #9db8c2;border-radius:10px;background:#12242e}
+.lingering-item.tone-restriction{border-left-color:#e6a48c}
+.lingering-item.tone-boon{border-left-color:#8fd0a8}
+.lingering-item.tone-negated{border-left-color:#c3a2e6}
+.lingering-card{display:block;padding:0;border:0;background:none;cursor:pointer;width:54px;height:76px;border-radius:4px;overflow:hidden;box-shadow:0 5px 12px #0005}
+.lingering-art{width:54px;height:76px;border-radius:4px;display:block}
+.lingering-card.empty{display:block;background:#0d1a22;border:1px dashed #3d5461;cursor:default;box-shadow:none}
+.lingering-body strong{display:block;font-size:calc(14px * var(--ui-scale,1));line-height:1.5;color:#eef2ea;font-weight:500}
+.lingering-body strong em{font-style:normal;color:#f1dfae}
+.lingering-meta{display:block;margin-top:5px;font-size:calc(11px * var(--ui-scale,1));color:#94adb8}
+.lingering-meta b{font-weight:500;color:#d8c690}
+.lingering-desc{margin:9px 0 0;font-size:calc(11px * var(--ui-scale,1));line-height:1.7;color:#a9bcc3;max-height:5.2em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+.lingering-empty{margin:12px 0 0;padding:14px;border:1px dashed #3d5461;border-radius:10px;color:#7f97a2;font-size:calc(12px * var(--ui-scale,1));text-align:center}
+.lingering-note{margin:20px 0 0;font-size:calc(11px * var(--ui-scale,1));line-height:1.7;color:#7f97a2}
+@media(min-width:900px){.lingering-layout{grid-template-columns:1fr 1fr}}
+@media(max-width:1190px){.status-chip small{display:none}.status-chip{padding-right:8px}}
+@media(max-width:760px){.status-effects{margin-left:6px;gap:4px}.status-chip{height:20px;padding:0 6px 0 5px;font-size:9px}.status-chip .chip-text em{display:none}.status-chip:not(.more):nth-child(n+2){display:none}}
+@media(max-width:440px){.status-chip:not(.more) .chip-text{max-width:74px}}
+@media(max-height:600px) and (orientation:landscape){.status-chip{height:18px;font-size:8px}.status-chip small{display:none}}

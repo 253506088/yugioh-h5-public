@@ -144,7 +144,7 @@
     $('#duel-turn-hud').classList.toggle('opponent-turn',s.active===1);
     $('#response-mode-switch').innerHTML=[['auto','AUTO','自动'],['on','ON','全部'],['off','OFF','关闭']].map(([id,name,label])=>'<button data-action="response-mode" data-value="'+id+'" class="'+(prefs.responseMode===id?'active':'')+'" aria-pressed="'+(prefs.responseMode===id)+'"><b>'+name+'</b><span>'+label+'</span></button>').join('');
     $('#response-mode-note').textContent=prefs.responseMode==='auto'?'关注对方发动、召唤和攻击。':prefs.responseMode==='on'?'每个合法响应时机都询问。':'自动放弃可选响应，强制处理保留。';
-    renderPeekBar();renderChainTimeline();updateMusicStatus();
+    renderPeekBar();renderChainTimeline();updateMusicStatus();renderLingeringTool();
   }
   function chainLabel(link){
     if(link.status==='unavailable')return (link.byNumber?'连锁 '+link.byNumber+' → ':'')+'来源离场，未能适用';
@@ -223,7 +223,7 @@
     const publicHand=owner===1&&(spec||engine.handRevealed?.(1,0)),top=engine.publicDeckTop?.(owner);
     const end=(owner===1?'<div class="enemy-hand'+(spec?' spectate-hand':'')+'" aria-label="对方有'+p.hand.length+'张手牌">'+(publicHand?p.hand.map(m=>'<button class="public-hand-card" data-action="card-detail" data-card-id="'+m.id+'" title="'+(spec?'机器人 B 的手牌：':'公开手牌：')+escape(CARDS[m.id].name)+'">'+Art.html(m.id)+'</button>').join(''):Array.from({length:Math.min(p.hand.length,8)},(_,i)=>'<span class="enemy-card" style="--angle:'+((i-Math.min(p.hand.length,8)/2)*5)+'deg"></span>').join(''))+'<small>'+p.hand.length+'</small></div>':'<div class="normal-counter'+(s.active!==0||s.normalUsed?' used':'')+'"><span class="counter-gem"></span>通常召唤 '+(s.active===0&&!s.normalUsed?'1 / 1':'0 / 1')+'</div>')+(top?'<small class="revealed-deck-top" title="天变地异：公开卡组顶">卡组顶 · '+escape(CARDS[top.id].name)+'</small>':'');
     const tag=engine.remote?'<span class="you-tag">'+(owner===0?'YOU':'PVP')+'</span>':spec?'<span class="you-tag robot-tag">'+(tournamentView?'BOT '+(owner===0?'A':'B'):escape(robotName(owner)))+'</span><span>AI · '+difficultyNames[s.difficulty]+'</span>':owner===0?'<span class="you-tag">YOU</span>':'<span>AI · '+difficultyNames[s.difficulty]+'</span>';
-    return '<div class="avatar-frame">'+Art.html(deck.ace,'avatar-art')+'</div><div class="duelist-info"><div class="duelist-name"'+(tournamentView||engine.remote?' data-user-content':'')+'>'+escape(tournamentView?robotName(owner):deck.player)+'</div><div class="duelist-sub">'+tag+'<span>'+escape(deck.mechanic||'决斗者')+'</span></div></div><div class="lp-section'+(p.lp<=2000?' critical':'')+'" id="lp-'+owner+'"><div class="lp-heading"><span>LIFE POINTS</span><b>'+p.lp.toLocaleString('en-US')+'</b></div><div class="lp-track"><div class="lp-fill" style="width:'+Math.min(100,p.lp/80)+'%"></div></div></div>'+end;
+    return '<div class="avatar-frame">'+Art.html(deck.ace,'avatar-art')+'</div><div class="duelist-info"><div class="duelist-name"'+(tournamentView||engine.remote?' data-user-content':'')+'>'+escape(tournamentView?robotName(owner):deck.player)+'</div><div class="duelist-sub">'+tag+'<span>'+escape(deck.mechanic||'决斗者')+'</span></div></div><div class="lp-section'+(p.lp<=2000?' critical':'')+'" id="lp-'+owner+'"><div class="lp-heading"><span>LIFE POINTS</span><b>'+p.lp.toLocaleString('en-US')+'</b></div><div class="lp-track"><div class="lp-fill" style="width:'+Math.min(100,p.lp/80)+'%"></div></div></div>'+statusChips(owner)+end;
   }
   function fieldCard(card,owner,zone,index) {
     const c=CARDS[card.id]||{name:'未公开卡牌'},monster=['monsters','extraMonster'].includes(zone),spec=spectating(),hidden=!!card.hidden||!card.faceUp&&owner===1&&!spec,shown=!hidden;
@@ -335,6 +335,49 @@
     if(!intent)return false;
     if(intent.kind==='attack')return owner===1&&['monsters','extraMonster'].includes(zone)&&engine.canAttack(engine.find(intent.uid)?.card,0,card.uid);
     return false;
+  }
+  const Lingering=()=>window.DuelLingering;
+  function lingeringName(owner){return tournamentView?robotName(owner):I.player(owner,engine);}
+  function lingeringTone(entry){
+    const zh=Lingering().describe(entry,{language:'zh-CN',turn:engine.state.turn}).text;
+    if(entry.scope==='card'&&/无效/.test(zh))return 'negated';
+    if(/不会受到|不会被|不受|回复|可以|重掷|贯通|第二次/.test(zh))return 'boon';
+    if(/不能|只能|跳过|限制|减半|互换|改为|破坏/.test(zh))return 'restriction';
+    return 'neutral';
+  }
+  function lingeringTarget(entry){
+    if(entry.scope!=='card')return '';
+    const known=entry.cardId&&(entry.faceUp||spectating()||entry.owner===0||engine.remote&&entry.owner===0);
+    return known?'「'+escape(I.name(entry.cardId))+'」':escape(I.term('里侧卡牌'));
+  }
+  // Effects that already resolved but still bind a player: shown on that
+  // player's bar. Duel-wide effects appear on both bars. Everything here is
+  // public information, so spectators see both sides.
+  function statusChips(owner){
+    const L=Lingering();if(!L)return '';
+    const list=L.forOwner(L.collect(engine),owner);if(!list.length)return '';
+    const shown=list.slice(0,3),language=I.language,turn=engine.state.turn,cardName=id=>I.name(id);
+    return '<div class="status-effects" data-owner="'+owner+'" data-i18n-skip aria-label="'+escape(I.term('生效中的效果'))+'">'+shown.map(entry=>{
+      const d=L.describe(entry,{language,turn,cardName}),target=lingeringTarget(entry),both=d.scope==='both';
+      const title=(target?target+' ':'')+d.text+' · '+d.duration+(d.source?' · '+d.source:'')+(both?' · '+I.term('双方'):'');
+      return '<button class="status-chip tone-'+lingeringTone(entry)+'" data-action="lingering" title="'+escape(title)+'"><i></i><span class="chip-text">'+(target?'<em>'+target+'</em>':'')+escape(d.text)+'</span><small>'+escape(d.source||'')+(d.source?' · ':'')+escape(d.duration)+'</small></button>';
+    }).join('')+(list.length>shown.length?'<button class="status-chip more" data-action="lingering" title="'+escape(I.term('生效中的效果'))+'">+'+(list.length-shown.length)+'</button>':'')+'</div>';
+  }
+  function showLingering(){
+    const L=Lingering(),list=L?L.collect(engine):[],language=I.language,turn=engine.state.turn,cardName=id=>I.name(id);
+    const section=owner=>{
+      const items=L?L.forOwner(list,owner):[];
+      return '<section class="lingering-group" data-owner="'+owner+'"><h3><span'+(tournamentView||engine.remote?' data-user-content':'')+'>'+escape(lingeringName(owner))+'</span><small>'+items.length+'</small></h3>'+(items.length?'<ul class="lingering-list" data-i18n-skip>'+items.map(entry=>{
+        const d=L.describe(entry,{language,turn,cardName}),src=entry.sourceId&&CARDS[entry.sourceId]?entry.sourceId:null,target=lingeringTarget(entry);
+        return '<li class="lingering-item tone-'+lingeringTone(entry)+'">'+(src?'<button class="lingering-card" data-action="card-detail" data-card-id="'+src+'" title="'+escape(I.name(src))+'">'+Art.html(src,'lingering-art')+'</button>':'<span class="lingering-card empty"></span>')+'<div class="lingering-body"><strong>'+(target?'<em>'+target+'</em> ':'')+escape(d.text)+'</strong><span class="lingering-meta">'+(src?'<b>'+escape(I.name(src))+'</b> · ':'')+escape(d.duration)+(d.scope==='both'?' · '+escape(I.term('双方')):'')+'</span>'+(src?'<p class="lingering-desc">'+escape(I.card(src).description||'')+'</p>':'')+'</div></li>';
+      }).join('')+'</ul>':'<p class="lingering-empty">当前没有生效中的持续效果。</p>')+'</section>';
+    };
+    openModal('lingering','生效中的效果','ACTIVE EFFECTS · 已结算、仍在生效','<div class="lingering-layout">'+section(1)+section(0)+'</div><p class="lingering-note">这里列出已经结算、仍在生效的效果：伤害保护、召唤限制、效果无效等。持续魔法·陷阱卡本身请直接查看场上的卡片。</p>','<button class="primary-button" data-action="close-modal">返回决斗</button>','lingering-modal');
+  }
+  function renderLingeringTool(){
+    const tool=$('#lingering-tool');if(!tool||!engine)return;
+    const n=Lingering()?Lingering().collect(engine).length:0;
+    tool.innerHTML='◎'+(n?'<b>'+n+'</b>':'');tool.classList.toggle('active',n>0);
   }
   function render() {
     const s=engine.state,deck=I.deck(engine.deckInfo(0)),rival=I.deck(engine.deckInfo(1));
@@ -583,6 +626,7 @@
     else if(modalKind==='pile'&&pileContext){const ctx={...pileContext};detailReturn=()=>showPile(ctx.owner,ctx.kind,ctx.onlyType);}
     else if(modalKind==='deck'){const owner=deckOwner;detailReturn=()=>showDeck(owner);}
     else if(modalKind==='overlays'){const uid=overlayHostUid;detailReturn=()=>showOverlays(uid);}
+    else if(modalKind==='lingering')detailReturn=()=>showLingering();
     else if(modalKind!=='detail')detailReturn=null;
     const instance=selectedUid&&engine.find(selectedUid)?.card.id===id?engine.find(selectedUid).card:null;
     openModal('detail','卡牌详情','THE HEART OF A CARD','<div class="card-detail-layout">'+cardHTML(id,instance)+'<div>'+detailsHTML(id,instance)+'<p class="card-detail-note">'+(isExtra(CARDS[id])?'额外怪兽需要满足相应召唤条件。':'卡片说明随显示语言切换，百科链接可查看来源资料。')+'</p>'+artCredit(id)+'</div></div>','<button class="secondary-button" data-action="detail-back">'+(detailReturn?'返回上一页':'浏览图鉴')+'</button><button class="primary-button" data-action="close-modal">返回决斗</button>','card-detail-modal');
@@ -981,6 +1025,7 @@
       }
       case 'response-help':openModal('response-help','在合适的时机，作出回应。','RESPONSE CONTROL','<div class="response-mode-guide"><h3>AUTO · 自动</h3><p>在对方发动效果、召唤怪兽和攻击时询问。普通盖放、开放时点和自己的连锁会自动略过，减少雷破等泛用陷阱的重复打断。</p><h3>ON · 全部</h3><p>每个合法时机都询问。需要精确控制准备阶段、自己的连锁或特殊战术时使用。</p><h3>OFF · 关闭</h3><p>自动放弃可选的快速响应。已经发动的效果、素材选择与强制处理仍然需要完成。</p><h3>查看战局</h3><p>收起选择面板，查看场上卡牌、墓地和记录。对局保持暂停，返回后保留原来的选择；关闭窗口或按 Esc 不会自动放弃机会。</p></div>','<button class="primary-button" data-action="close-modal">了解了</button>');break;
       case 'chain-log':showChainLog();break;
+      case 'lingering':showLingering();break;
       case 'skip-chain':chainDirector.skip();break;
       case 'replay-chain':{const links=engine.state.chainHistory.filter(l=>l.chainId===Number(b.dataset.chainId));dismissModal();setScreen('duel');clearTimeout(aiTimer);chainDirector.replay(links);break;}
       case 'new-game':showNewGame();break;
@@ -1144,6 +1189,7 @@
     else if(current==='deck')showDeck(deckOwner);
     else if(current==='pile'&&pileContext)showPile(pileContext.owner,pileContext.kind,pileContext.onlyType);
     else if(current==='overlays')showOverlays(overlayHostUid);
+    else if(current==='lingering')showLingering();
     else if(current==='new-game')renderNewGame();
     else if(current==='help')showHelp();
     else if(current==='settings')showSettings();
@@ -1178,7 +1224,7 @@
     get intent() { return intent ? { ...intent } : null; },
     get modalKind() { return modalKind; },
     get screen(){return currentScreen;},get music(){return sound.status();},get chainPlaying(){return chainDirector.busy;},
-    showHome,enterDuel,showSettings,showChainLog,skipChain:()=>chainDirector.skip(),
+    showHome,enterDuel,showSettings,showChainLog,showLingering,skipChain:()=>chainDirector.skip(),
     get language(){return I.language;},setLanguage:value=>I.setLanguage(value),
     newGame: options => startGame(options),
     beginSpectate: options => beginSpectate(options),

@@ -28,7 +28,7 @@ const music=await Promise.all(musicManifest.tracks.map(async track=>{
 }));
 const outAt=argv.indexOf('--out'),outputPath=outAt>=0?resolve(root,argv[outAt+1]||''):join(root,'index.html');
 if(!outputPath.startsWith(root+'\\')&&!outputPath.startsWith(root+'/'))throw new Error('构建输出必须位于项目目录内。');
-const styleFiles = ['style.css', 'expansion.css', 'link.css', 'early.css','experience.css','tournament.css','polish.css','log.css','pvp.css'];
+const styleFiles = ['style.css', 'expansion.css', 'link.css', 'early.css','experience.css','tournament.css','polish.css','log.css','pvp.css','lingering.css'];
 const scriptFiles = ['cards.js', 'expansion-cards.js', 'link-cards.js', 'early-cards.js', 'early-decks.js', 'link-rules.js', 'deck-tools.js', 'engine.js', 'advanced-engine.js', 'early-engine.js', 'advanced-effects.js', 'effects-classic.js', 'effects-hero.js', 'effects-blackwing.js', 'effects-synchron.js', 'effects-utopia.js', 'effects-qliphort.js', 'effects-exodia.js', 'effects-cyber.js', 'effects-crystron.js', 'effects-tearlaments.js', 'effects-link.js', 'effects-early.js', 'effects-early-spells.js', 'effects-early-monsters.js', 'effects-early-traps.js', 'audio.js', 'artwork-hybrid.js', 'card-view.js', 'workshop.js', 'game-v2.js'];
 scriptFiles.splice(scriptFiles.indexOf('engine.js'),0,'duel-outcome.js');
 scriptFiles.splice(scriptFiles.indexOf('engine.js'),0,'duel-log.js');
@@ -44,6 +44,8 @@ scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'log-engine.js');
 scriptFiles.splice(scriptFiles.indexOf('advanced-effects.js'),0,'early-engine-extra.js');
 scriptFiles.splice(scriptFiles.indexOf('advanced-effects.js'),0,'ai-marginal.js');
 scriptFiles.splice(scriptFiles.indexOf('advanced-effects.js'),0,'ai-tactics.js');
+scriptFiles.splice(scriptFiles.indexOf('advanced-engine.js'),0,'lingering.js');
+scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-lingering.js');
 scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'card-locales.js','i18n-data.js','i18n-effects.js','i18n-help.js','i18n-experience.js','i18n-tournament.js','i18n.js','experience.js');
 scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'tournament.js','tournament-storage.js','tournament-ui.js');
 scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'log-ui.js');

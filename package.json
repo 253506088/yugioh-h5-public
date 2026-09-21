@@ -22,6 +22,7 @@
     "test:requested-ui": "node tests/requested-ui-browser.cjs",
     "test:tournament": "node --test tests/tournament.test.cjs && node tests/tournament-browser.cjs",
     "test:ai": "node --test tests/ai-marginal.test.cjs tests/ai-tactics.test.cjs && node tests/ai-marginal-browser.cjs",
+    "test:lingering": "node --test tests/lingering.test.cjs tests/ai-tactics.test.cjs tests/simulation-fixes.test.cjs && node tests/lingering-browser.cjs",
     "test:polish": "node --test tests/ai-tactics.test.cjs tests/duel-outcome.test.cjs && node tests/polish-browser.cjs",
     "test:journal": "node --test tests/journal.test.cjs && node tests/journal-browser.cjs",
     "start": "node server/index.mjs",

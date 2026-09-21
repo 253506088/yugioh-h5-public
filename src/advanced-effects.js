@@ -273,7 +273,7 @@
     return root.DuelAITactics?root.DuelAITactics.response(e,action,owner,value):value;
   }
   const H={mainPhase,fieldZone,source,self,args,first,frame,cards,monsterCards,options,group,customGroup,deck,grave,hand,field,monsters,specialable,normal,cyber,cry,noBanishReplacement,canSendGY,discard,sendCost,tributeCost,detachInput,targetField,legalTarget,destroyTargets,banishTargets,bounceTargets,once,isDamageWindow};
-  const API={register,get,willDestroy,willSummon,passive,passives,trigger,quick,spell,trap,on,op,ops,endHandlers,canUse,nextInput,available,payCost,resolve,onEvent,operation,endPhase,onNegated,validateInput,candidateScore,aiPick,aiChoice,aiTrigger,aiResponse,H,defs};
+  const API={register,get,byCard,willDestroy,willSummon,passive,passives,trigger,quick,spell,trap,on,op,ops,endHandlers,canUse,nextInput,available,payCost,resolve,onEvent,operation,endPhase,onNegated,validateInput,candidateScore,aiPick,aiChoice,aiTrigger,aiResponse,H,defs};
   root.DuelEffects=API;
   if(typeof module!=='undefined'&&module.exports){
     module.exports=API;

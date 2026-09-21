@@ -19,6 +19,9 @@
 
 ## 从这里开始
 
+- [机器人出牌逻辑解析](docs/bot-decision-logic.md)：规则评分 + 有限推演的四层结构、每层的代码位置、驱动节奏、当前局限与改进方向。
+- [生效中的效果、手坑与反击陷阱判断](docs/lingering-and-bot-judgment.md)：信息栏的效果芯片与完整列表、机器人不再召唤手坑、反击陷阱只在划算时发动。
+- [第三方 AI 组卡接入设计](docs/ai-deck-import-design.md)：OpenAI／Anthropic 两种协议、文本／图片／网址解析卡组的设计稿（未实现）。
 - [PVP 使用与部署](docs/pvp.md)：房间、匹配、BO1 规则、重连、存储、局域网／公网部署和协议。
 - [决斗体验升级说明](docs/experience-upgrade.md)：主界面、一屏战斗、字号和分页设置、原声 BGM、卡背卡框、连锁演出及响应模式。
 - [死斗竞技场](docs/tournament.md)：2–64 名机器人淘汰赛、随机／指定本地及自定义卡组、重复编号、并行观战、晋级图和整场录像。

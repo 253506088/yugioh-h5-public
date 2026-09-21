@@ -3,7 +3,7 @@
  const D=root.DuelData||(typeof require==='function'?require('./early-cards.js'):null);
  const cardData=root.DuelCardLocales||(typeof require==='function'?require('./card-locales.js'):{});
  const ui=root.DuelUITranslations||(typeof require==='function'?require('./i18n-data.js'):{});
- if(typeof module!=='undefined'&&module.exports){require('./i18n-ai.js');require('./i18n-years.js');require('./i18n-years-gx.js');require('./i18n-chronicle.js');require('./i18n-chronicle-ui.js');require('./i18n-polish.js');}
+ if(typeof module!=='undefined'&&module.exports){require('./i18n-ai.js');require('./i18n-years.js');require('./i18n-years-gx.js');require('./i18n-chronicle.js');require('./i18n-chronicle-ui.js');require('./i18n-polish.js');require('./i18n-lingering.js');}
  if(!ui.effectLabels&&typeof require==='function')require('./i18n-effects.js');
  for(const d of Object.values(D.DECKS).filter(d=>d.preset)){const names=ui.deckNames[d.id],descriptions=ui.deckDescriptions[d.id];if(names)ui.messages[d.name]={en:names[0],ja:names[1]};if(descriptions){for(const value of [d.description,d.subtitle,...(d.combo||[])])if(value)ui.messages[value]={en:descriptions[0],ja:descriptions[1]};}}
  const languages=['zh-CN','en','ja'],key='duel-sanctuary-language-v1',unknown=new Set();

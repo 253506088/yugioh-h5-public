@@ -168,14 +168,88 @@
     }
     return null;
   }
+  const HAND_TRAP_ATK=1200;
+  // Effects that are meant to be activated from the hand as a response. Hand
+  // triggers that merely Special Summon the card itself (Kagetokage) are not
+  // penalised: their body is the point.
+  function handTraps(e,card){
+    const defs=e.fx.byCard?.[card.id]||Object.values(e.fx.defs).filter(a=>a.id===card.id);
+    return defs.filter(a=>Array.isArray(a.zones)&&a.zones.length===1&&a.zones[0]==='hand'&&(a.main===false||a.speed>=2)&&!(a.trigger&&a.mode==='special'));
+  }
+  // A hand trap is worth more waiting in the hand than standing on the field
+  // as a 0 ATK body. Summoning it stays acceptable when it is the material for
+  // an Extra Deck play right now, or when a Set body is the only way to survive.
+  function handTrapBias(e,action){
+    if(action.type!=='summon'||!main(e.state))return 0;
+    const f=e.find(action.uid);if(!f||f.zone!=='hand')return 0;
+    const owner=e.state.active,def=data().CARDS[f.card.id];
+    if(Math.max(0,def.atk||0)>HAND_TRAP_ATK)return 0;
+    const traps=handTraps(e,f.card);if(!traps.length)return 0;
+    const key='hand-trap|'+action.uid+'|'+action.mode+'|'+!!action.noTribute,cache=e._aiDefenseCache;
+    if(cache?.has(key))return cache.get(key);
+    // Strong enough to outweigh the defensive Set bonus: a wall made of a hand
+    // trap is only bought when nothing else keeps the player alive.
+    let bias=-1500;
+    try{
+      const before=e.extraOptions(owner).length,trial=project(e,action,owner);
+      if(!trial.uncertain&&trial.engine.state.winner!==1-owner){
+        if(trial.engine.extraOptions(owner).length>before)bias=Math.max(0,-defenseBias(e,action))+100;
+        else if(action.mode==='defense'&&!e.monsters(owner).length){
+          const lp=e.state.players[owner].lp,stopsFromHand=traps.some(a=>['stop','protect','end-battle','damage','year-damage'].includes(a.mode));
+          if(!stopsFromHand&&expectedDamage(e,owner)>=lp&&expectedDamage(trial.engine,owner)<lp)bias=0;
+        }
+      }
+    }catch{/* An unknown outcome keeps the card in hand. */}
+    if(cache)cache.set(key,bias);return bias;
+  }
+  function passProjection(e,owner){
+    const key=[e.state.nextLog,e.state.turn,e.state.chain.length,e.state.pending?.kind,owner].join('|');
+    if(e._aiPassProjection?.key===key)return e._aiPassProjection.value;
+    const value=project(e,null,owner);e._aiPassProjection={key,value};return value;
+  }
+  // Board worth for a negation decision: the assessment plus the backrow that
+  // survives on both sides and the opponent's hand. Active face-up Spell/Trap
+  // cards count more than set ones.
+  function boardValue(e,owner){
+    const foe=1-owner;
+    return assessment(e,owner).value+e.spells(owner).filter(c=>c.faceUp&&e.activeSpell(c)).length*300-e.spells(foe).length*160-e.state.players[foe].hand.length*120;
+  }
+  // Paying Life Points or another card to negate an opposing effect is only
+  // right when the board after negating is worth more than the board after
+  // simply letting the effect resolve. Solemn Judgment against a Heavy Storm
+  // that would only destroy Solemn Judgment itself fails this test.
+  function negationWorth(e,action,owner){
+    const pending=e.state.pending;
+    if(!pending||pending.kind!=='window'||pending.responder!==owner||action?.type!=='respond')return null;
+    if(!e.fx.get(action.key)?.cost)return null;
+    const last=e.state.chain.at(-1),w=pending.context||{};
+    const foreign=last?last.owner!==owner:w.kind==='summon-attempt'&&w.owner!==undefined&&w.owner!==owner;
+    if(!foreign)return null;
+    let pass,respond;
+    try{pass=passProjection(e,owner);respond=project(e,action,owner);}catch{return null;}
+    if(!pass||pass.uncertain||respond.uncertain)return null;
+    const lpCost=respond.lpCosts[owner]||0;
+    const cardCost=[...respond.costs].some(uid=>{const f=e.find(uid);return f&&f.owner===owner&&uid!==action.uid&&['hand','monsters','extraMonster','spells','fieldSpell'].includes(f.zone);});
+    if(!lpCost&&!cardCost)return null;
+    const foe=1-owner;
+    if(pass.engine.state.winner===foe)return {worthwhile:true,reason:'prevents-loss'};
+    if(respond.engine.state.winner===foe)return {worthwhile:false,reason:'loses-anyway'};
+    if(respond.engine.state.winner===owner)return {worthwhile:true,reason:'wins'};
+    const alone=boardValue(pass.engine,owner),after=boardValue(respond.engine,owner),lpAfter=respond.engine.state.players[owner].lp;
+    if(lpCost&&expectedDamage(respond.engine,owner)>=lpAfter&&expectedDamage(pass.engine,owner)<pass.engine.state.players[owner].lp)return {worthwhile:false,reason:'cost-exposes-lethal',pass:Math.round(alone),respond:Math.round(after)};
+    return {worthwhile:after>alone,reason:after>alone?'protects-board':'cost-exceeds-benefit',pass:Math.round(alone),respond:Math.round(after)};
+  }
   function response(e,action,owner,score){
-    if(e._aiMarginalProbe||score<=0||owner!==e.state.active||!main(e.state))return score;
+    if(e._aiMarginalProbe||score<=0)return score;
+    const worth=negationWorth(e,action,owner);
+    if(worth&&!worth.worthwhile)return -100;
+    if(owner!==e.state.active||!main(e.state))return score;
     const last=e.state.chain.at(-1);
     // Reactive disruption remains available. Restraint applies to extending
     // our own play with an optional action that would dismantle our board.
     if(last&&last.owner!==owner)return score;
     return evaluate(e,action,owner).useful?score:-100;
   }
-  const api={battlePlan,evaluate,select,defenseBias,response,assessment,expectedDamage};root.DuelAITactics=api;
+  const api={battlePlan,evaluate,select,defenseBias,response,assessment,expectedDamage,handTrapBias,handTraps,negationWorth,boardValue};root.DuelAITactics=api;
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(globalThis);

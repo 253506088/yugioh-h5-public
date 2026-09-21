@@ -111,3 +111,96 @@ test('saved games make the same choice without consuming the live random sequenc
   assert.equal(T.evaluate(e,{type:'activate',uid:wand.uid,key:wand.id+'::draw'}).useful,false);
   assert.deepEqual(restored.aiNext(),action);assert.deepEqual(e.snapshot(),before);assert.equal(e.random(),restored.random());
 });
+
+// --- 2026-09-21: hand traps stay in the hand; paid negations must be worth their cost ---
+
+test('a hand trap is not Normal Summoned while the field already has a body',()=>{
+  const e=fresh();put(e,0,'monsters','Blue-Eyes White Dragon');const veiler=put(e,0,'hand','Effect Veiler');put(e,1,'monsters','Battle Ox');
+  assert.ok(T.handTrapBias(e,{type:'summon',uid:veiler.uid,mode:'attack'})<-1000);
+  const action=e.aiNext();assert.notEqual(action.type,'summon',JSON.stringify(action));assert.equal(e.find(veiler.uid).zone,'hand');
+});
+
+test('a hand trap waits in the hand when the opponent cannot deal lethal damage',()=>{
+  const e=fresh();const veiler=put(e,0,'hand','Effect Veiler');put(e,1,'monsters','Battle Ox');e.state.players[0].lp=5000;
+  assert.deepEqual(e.aiNext(),{type:'end'});
+  const fader=fresh();put(fader,0,'hand','Battle Fader');put(fader,1,'monsters','Blue-Eyes White Dragon');fader.state.players[0].lp=1500;
+  assert.deepEqual(fader.aiNext(),{type:'end'},'Battle Fader stops the direct attack from the hand, so it is not Set as a wall');
+});
+
+test('a hand trap is Set as a wall only when that is the last way to survive',()=>{
+  const e=fresh();const veiler=put(e,0,'hand','Effect Veiler');put(e,1,'monsters','Blue-Eyes White Dragon');e.state.players[0].lp=1500;
+  const action=e.aiNext();assert.equal(action.type,'summon');assert.equal(action.uid,veiler.uid);assert.equal(action.mode,'defense');
+});
+
+test('a tuner hand trap is summoned when it enables a Synchro Summon right now',()=>{
+  const e=fresh();put(e,0,'monsters','Dark Magician');const veiler=put(e,0,'hand','Effect Veiler');put(e,0,'extra','Stardust Dragon');put(e,1,'monsters','Battle Ox');
+  const action=e.aiNext();assert.equal(action.type,'summon');assert.equal(action.uid,veiler.uid);assert.equal(action.mode,'attack');
+  run(e,action);const next=e.aiNext();assert.equal(next.type,'extra-summon',JSON.stringify(next));
+});
+
+test('ordinary low-ATK monsters and self-summoning hand triggers keep their normal scoring',()=>{
+  const ball=fresh();const b=put(ball,0,'hand','Mystical Shine Ball');put(ball,1,'monsters','Battle Ox');
+  assert.equal(T.handTrapBias(ball,{type:'summon',uid:b.uid,mode:'attack'}),0);assert.equal(ball.aiNext().type,'summon');
+  const shadow=fresh();const k=put(shadow,0,'hand','Kagetokage');
+  assert.equal(T.handTrapBias(shadow,{type:'summon',uid:k.uid,mode:'attack'}),0);
+  assert.ok(T.handTraps(shadow,put(shadow,0,'hand','Effect Veiler')).length>0);assert.equal(T.handTraps(shadow,k).length,0);
+});
+
+function storm(extraBackrow=[]){
+  const e=fresh(),solemn=put(e,1,'spells','Solemn Judgment',{faceUp:false});
+  for(const [name,props] of extraBackrow)put(e,1,'spells',name,props);
+  const heavy=put(e,0,'hand','Heavy Storm');act(e,{type:'activate',uid:heavy.uid,key:heavy.id+'::cast'});
+  assert.equal(e.state.pending?.kind,'window');assert.equal(e.state.pending.responder,1);
+  return {e,solemn,respond:{type:'respond',uid:solemn.uid,key:solemn.id+'::cast'}};
+}
+
+test('Solemn Judgment is not paid for when Heavy Storm would only destroy Solemn Judgment itself',()=>{
+  const {e,solemn,respond}=storm();
+  const worth=T.negationWorth(e,respond,1);assert.equal(worth.worthwhile,false);assert.equal(worth.reason,'cost-exceeds-benefit');assert.ok(worth.respond<worth.pass);
+  assert.deepEqual(e.chooseAI(e.state.pending),{type:'pass'});
+  act(e,e.chooseAI(e.state.pending));settle(e);
+  assert.equal(e.state.players[1].lp,8000,'no Life Points were paid');assert.equal(e.find(solemn.uid).zone,'grave');
+});
+
+test('Solemn Judgment still protects a developed backrow from Heavy Storm',()=>{
+  const {e,respond}=storm([['Skill Drain',{faceUp:true}],['Mirror Force',{faceUp:false}],['Torrential Tribute',{faceUp:false}]]);
+  const worth=T.negationWorth(e,respond,1);assert.equal(worth.worthwhile,true,JSON.stringify(worth));
+  assert.equal(e.chooseAI(e.state.pending).type,'respond');
+  act(e,e.chooseAI(e.state.pending));settle(e);
+  assert.equal(e.state.players[1].lp,4000);assert.equal(e.spells(1).length,3,'the rest of the backrow survived');
+});
+
+test('Solemn Judgment still negates a board wipe aimed at a strong monster',()=>{
+  const e=fresh(),solemn=put(e,1,'spells','Solemn Judgment',{faceUp:false}),dragon=put(e,1,'monsters','Blue-Eyes White Dragon'),hole=put(e,0,'hand','Dark Hole');
+  act(e,{type:'activate',uid:hole.uid,key:hole.id+'::cast'});
+  assert.equal(T.negationWorth(e,{type:'respond',uid:solemn.uid,key:solemn.id+'::cast'},1).worthwhile,true);
+  act(e,e.chooseAI(e.state.pending));settle(e);assert.equal(e.find(dragon.uid).zone,'monsters');assert.equal(e.state.players[1].lp,4000);
+});
+
+test('Solemn Judgment is not spent on a Mystical Space Typhoon that targets itself',()=>{
+  const e=fresh(),solemn=put(e,1,'spells','Solemn Judgment',{faceUp:false}),typhoon=put(e,0,'hand','Mystical Space Typhoon');
+  act(e,{type:'activate',uid:typhoon.uid,key:typhoon.id+'::cast',choices:{target:[solemn.uid]}});
+  assert.equal(e.state.pending?.kind,'window');assert.deepEqual(e.chooseAI(e.state.pending),{type:'pass'});
+});
+
+test('Solemn Judgment negates a 2500 ATK Tribute Summon but lets a 500 ATK summon through',()=>{
+  const big=fresh(),solemnA=put(big,1,'spells','Solemn Judgment',{faceUp:false}),skull=put(big,0,'hand','Summoned Skull');put(big,0,'monsters','Battle Ox');
+  act(big,{type:'summon',uid:skull.uid,mode:'attack'});if(big.state.pending?.kind==='materials')act(big,big.chooseAI(big.state.pending));
+  assert.equal(big.state.pending?.kind,'window');assert.equal(big.state.pending.context.kind,'summon-attempt');
+  assert.deepEqual(big.chooseAI(big.state.pending),{type:'respond',uid:solemnA.uid,key:solemnA.id+'::cast'});
+  const small=fresh();put(small,1,'spells','Solemn Judgment',{faceUp:false});const ball=put(small,0,'hand','Mystical Shine Ball');
+  act(small,{type:'summon',uid:ball.uid,mode:'attack'});assert.equal(small.state.pending?.kind,'window');
+  assert.deepEqual(small.chooseAI(small.state.pending),{type:'pass'});
+});
+
+test('the negation restraint is an AI policy, not a rule restriction',()=>{
+  const {e,respond}=storm();
+  const result=e.act(respond);assert.equal(result.ok,true,result.error);assert.equal(e.state.players[1].lp,4000);
+});
+
+test('free responses and the responder’s own-turn plays are not touched by the negation gate',()=>{
+  const e=fresh(1),veiler=put(e,0,'hand','Effect Veiler'),target=put(e,1,'monsters','Sangan');
+  e.state.frame={kind:'main-open',owner:1,windowOffered:false};e.pump();
+  assert.equal(e.state.pending?.kind,'window');
+  assert.equal(T.negationWorth(e,{type:'respond',uid:veiler.uid,key:veiler.id+'::era-negate'},0),null,'Effect Veiler pays no Life Points or extra card');
+});

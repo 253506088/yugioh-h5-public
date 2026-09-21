@@ -1,5 +1,5 @@
 import { createHmac } from 'node:crypto';
-import { Data, visible } from './engine.mjs';
+import { Data, Lingering, visible } from './engine.mjs';
 
 const fieldZones = new Set(['monsters', 'extraMonster', 'spells', 'fieldSpell']);
 const pick = (object, keys) => Object.fromEntries(keys.filter(key => object?.[key] !== undefined).map(key => [key, object[key]]));
@@ -111,6 +111,17 @@ export function project(room, viewer) {
     chain: s.chain.map(link), chainHistory: s.chainHistory.map(link), pending: pending(s.pending),
     log: s.log.map(item => item.pvpLog?.[viewer]).filter(Boolean), nextLog: s.nextLog
   };
+  // Effects still in force are public: they were created by resolved chain links.
+  // Face-down cards keep their identity hidden from the other seat.
+  state.activeEffects = (Lingering ? Lingering.collect(e) : []).map(entry => {
+    const owner = [0, 1].includes(entry.owner) ? side(entry.owner) : null;
+    const out = { ...pick(entry, ['n', 'scope', 'key', 'value', 'turn', 'until', 'chain', 'sourceId']), owner, by: [0, 1].includes(entry.by) ? side(entry.by) : null };
+    if (entry.scope === 'card') {
+      const ref = e.find(entry.uid), known = ref ? visible(e, ref, viewer) : false;
+      out.uid = handle(entry.uid); out.faceUp = !!entry.faceUp; out.cardId = known ? entry.cardId : null;
+    }
+    return out;
+  });
   if (s.winner !== null) {
     const kind = room.result?.kind || s.outcome?.kind || 'special';
     state.outcome = { kind, winner: side(s.winner), loser: side(s.winner === 0 ? 1 : s.winner === 1 ? 0 : null), turn: s.turn };

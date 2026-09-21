@@ -5,6 +5,7 @@ const require = createRequire(import.meta.url);
 const { DuelEngine } = require('../src/advanced-engine.js');
 export const Data = globalThis.DuelData;
 export const Decks = globalThis.DuelDecks;
+export const Lingering = globalThis.DuelLingering;
 
 const publicZones = new Set(['grave', 'monsters', 'extraMonster', 'spells', 'fieldSpell', 'overlays']);
 export function visible(engine, ref, viewer) {

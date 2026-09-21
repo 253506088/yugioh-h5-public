@@ -57,7 +57,7 @@
  for(const [name,race] of Object.entries({'Breath of Light':'岩石族','Acid Rain':'机械族','Eternal Drought':'鱼族','Warrior Elimination':'战士族','Eradicating Aerosol':'昆虫族','Exile of the Wicked':'恶魔族','Last Day of Witch':'魔法师族'}))wipe(name,e=>allM(e).filter(m=>m.faceUp&&e.race(m)===race));
  S('Remove Trap',{destroys:true,inputs:target('选择表侧陷阱',e=>allS(e).filter(m=>m.faceUp&&CARDS[m.id].type==='trap')),resolve:(e,c)=>destroy(e,c,args(c))});
  S('De-Spell',{destroys:true,inputs:target('选择魔法或盖放的魔陷',e=>allS(e).filter(m=>!m.faceUp||CARDS[m.id].type==='spell')),resolve:(e,c)=>{const f=e.find(first(c));if(f){e.revealCards(c.owner,[f.card],'确认卡片种类');if(CARDS[f.card.id].type==='spell')e.destroy(f.card.uid,c.source);}}});
- S('Giant Trunade',{condition:e=>allS(e).length>0,resolve:(e,c)=>moved(e,c,allS(e).map(m=>m.uid),'hand','effect-return'),aiScore:500});
+ S('Giant Trunade',{condition:(e,c)=>allS(e).some(m=>m.uid!==c.uid),resolve:(e,c)=>moved(e,c,allS(e).filter(m=>m.uid!==c.uid).map(m=>m.uid),'hand','effect-return'),aiScore:500});
  for(const [name,pool,max] of [['Soul Release',e=>[...grave(e,0),...grave(e,1)],5],['Gravedigger Ghoul',(e,c)=>grave(e,1-c.owner,monster),2]])S(name,{inputs:target('选择要除外的墓地卡片',pool,'banish',1,max),resolve:(e,c)=>moved(e,c,args(c),'banished','effect-banish'),aiScore:350});
  S('The Cheerful Coffin',{inputs:target('选择丢弃的手牌怪兽',(e,c)=>hand(e,c.owner,monster),'discard',1,3),resolve:(e,c)=>moved(e,c,args(c),'grave','effect-discard'),aiScore:160});
  S('Tribute to the Doomed',{destroys:true,inputs:(e,c)=>[discardCost()(e,c),g(e,c,'target','选择破坏的怪兽',allM(e),1,1,'destroy')],cost:(e,c)=>H.discard(e,c,args(c,'cost')),resolve:(e,c)=>destroy(e,c,args(c)),aiScore:900});

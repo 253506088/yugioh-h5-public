@@ -3,7 +3,7 @@
   const cp=value=>JSON.parse(JSON.stringify(value));
   const traceKeys=new Set(['log','chainHistory','startedAt','chainId','nextUid','nextLog','nextLink','nextTrigger','nextChain',
     'frame','pending','building','resolvingLink','chain','chainCleanup','chainResolving','tasks','triggers','earlyEvent','earlyWindowSummon','earlyLastSummon',
-    'used','usedTurn','duelUsed','actionsThisTurn','effectActivations','gxSpellTrapCount','gxNormals','gxSummonCounts','lpPaidByTurn','inputRoles','targetMeta','sourceUnavailableByNumber','effectNegatedByNumber','preventionState','deckSpec','earlySent']);
+    'used','usedTurn','duelUsed','lingering','nextLingering','actionsThisTurn','effectActivations','gxSpellTrapCount','gxNormals','gxSummonCounts','lpPaidByTurn','inputRoles','targetMeta','sourceUnavailableByNumber','effectNegatedByNumber','preventionState','deckSpec','earlySent']);
   const cardIdentity=new Set(['uid','id','originalOwner','faceUp','position','attacked','summonTurn','changedTurn','setTurn','generation',
     'properlySummoned','faceUpExtra','summonKind','pendingActivation','attacksMade','used','overlays']);
   function cloneEngine(engine){
