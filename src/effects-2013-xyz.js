@@ -112,7 +112,7 @@
  effect('Number C96: Dark Storm',frontM,(e,c)=>{const m=card(e,first(c,'target'));if(m){const atk=e.originalAttack(m);e.modify(m.uid,'atk','set',0,e.state.turn,c.source);if(self(e,c))e.modify(c.uid,'atk','add',atk,e.state.turn,c.source);}},{mode:'era-darkstorm',detach:1,quick:true,role:'own-boost',condition:(e,c)=>!!(card(e,c.uid)?.overlays||[]).some(m=>is(m,'Number 96: Dark Mist')),inputs:(e,c)=>[...detachN(1)(e,c),g(e,c,'target','选择攻击力归零的对方怪兽',frontM(e,c),1,1,'target')]});
  // Number 49: Fortune Tune
  onStandby('Number 49: Fortune Tune',{zones:['extraMonster','monsters'],resolve:(e,c)=>e.heal(c.owner,500)});
- extend('canTarget',function(prior,e,c,uid){if(is(card(e,uid),'Number 49: Fortune Tune'))return false;return prior.call(this,e,c,uid);});
+ extend('canTarget',function(prior,m,source){if(is(m,'Number 49: Fortune Tune'))return false;return prior.call(this,m,source);});
  guardMat('Number 49: Fortune Tune',(e,m)=>{const f=e.find(m.uid);if(!is(m,'Number 49: Fortune Tune')||!f?.card.overlays?.length)return false;e.detach(m.uid,[f.card.overlays[0].uid]);return true;});
  sent('Number 49: Fortune Tune',(e,c)=>{const list=grave(e,c.owner,m=>monster(m)&&e.level(m)===3).slice(0,2);if(list.length<2)return;moved(e,c,list.map(m=>m.uid),'deck','effect-return');e.shuffle(e.state.players[c.owner].deck);if(e.find(c.uid)?.zone==='grave')moved(e,c,[c.uid],'extra','effect-return');},isGY,{once:H.once('fortune-tune')});
  // Number 72: Shogi Rook
@@ -128,7 +128,7 @@
  passive('Number 48: Shadow Lich',{stat:(e,s,m,k)=>k==='atk'&&m.uid===s.card.uid?ownM(e,{owner:e.find(s.card.uid)?.owner}).filter(q=>q.id==='era-phantom-token').length*500:0});
  extend('attackTargets',function(prior,m,p=this.state.active){let list=prior.call(this,m,p);const lich=allM(this).find(q=>q.faceUp&&is(q,'Number 48: Shadow Lich')&&ownM(this,{owner:this.find(q.uid)?.owner}).some(t=>t.id==='era-phantom-token'));if(!lich||this.find(lich.uid)?.owner===p)return list;return list.filter(uid=>uid!==lich.uid);});
  // Full Armored Black Ray Lancer
- extend('attackValue',function(prior,m){const n=prior.call(this,m);return is(m,'Full Armored Black Ray Lancer')?n+200*overlayCount(this,m.uid):n;});
+ extend('attackValue',function(prior,m,...rest){const n=prior.call(this,m,...rest);return is(m,'Full Armored Black Ray Lancer')?n+200*overlayCount(this,m.uid):n;});
  guardMat('Full Armored Black Ray Lancer',(e,m)=>{const f=e.find(m.uid);if(!is(m,'Full Armored Black Ray Lancer')||!f?.card.overlays?.length)return false;e.detach(m.uid,f.card.overlays.map(q=>q.uid));return true;});
  onBattleWin('Full Armored Black Ray Lancer',{role:'destroy',inputs:(e,c)=>[g(e,c,'target','选择破坏的对方魔法／陷阱',e.refs(1-c.owner,['spells','fieldSpell']).map(f=>f.card),1,1,'destroy')],resolve:(e,c)=>destroy(e,c,args(c))});
  // Number 73: Abyss Splash
@@ -136,7 +136,7 @@
  // Number 94: Crystalzero
  xyzOnce('Number 94: Crystalzero','era-halve',{quick:true,pool:allM,inputs:(e,c)=>[...detachN(1)(e,c),g(e,c,'target','选择攻击力减半的表侧怪兽',allM(e).filter(m=>m.faceUp),1,1,'target')],resolve:(e,c)=>{const m=card(e,first(c,'target'));if(m)e.modify(m.uid,'atk','mul',0.5,e.state.turn,c.source);}});
  // Full Armored Crystalzero Lancer
- extend('attackValue',function(prior,m){const n=prior.call(this,m);return is(m,'Full Armored Crystalzero Lancer')?n+500*overlayCount(this,m.uid):n;});
+ extend('attackValue',function(prior,m,...rest){const n=prior.call(this,m,...rest);return is(m,'Full Armored Crystalzero Lancer')?n+500*overlayCount(this,m.uid):n;});
  guardMat('Full Armored Crystalzero Lancer',(e,m)=>{const f=e.find(m.uid);if(!is(m,'Full Armored Crystalzero Lancer')||!f?.card.overlays?.length)return false;e.detach(m.uid,[f.card.overlays[0].uid]);return true;});
  xyzOnce('Full Armored Crystalzero Lancer','era-negate-all',{resolve:(e,c)=>{for(const m of frontM(e,c))m.eraNegatedUntil=e.state.turn;}});
  // Number 36: Chronomaly Chateau Huyuk
@@ -184,7 +184,7 @@
  // Number 44: Sky Pegasus
  xyzOnce('Number 44: Sky Pegasus','era-pegasus',{inputs:(e,c)=>[...detachN(1)(e,c),g(e,c,'target','选择破坏或支付的对方怪兽',frontM(e,c),1,1,'target')],resolve:(e,c)=>{const m=card(e,first(c,'target'));if(!m)return;const p=e.state.players[1-c.owner];if(p.lp>=1000){p.lp-=1000;return;}destroy(e,c,[m.uid]);}});
  // CXyz Coach Lord Ultimatrainer
- extend('canTarget',function(prior,e,c,uid){if(is(card(e,uid),'CXyz Coach Lord Ultimatrainer')&&c&&c.source?.owner!==e.find(uid)?.owner)return false;return prior.call(this,e,c,uid);});
+ extend('canTarget',function(prior,m,source){if(is(m,'CXyz Coach Lord Ultimatrainer')&&source&&source.owner!==this.find(m.uid)?.owner)return false;return prior.call(this,m,source);});
  effect('CXyz Coach Lord Ultimatrainer',null,(e,c)=>{const list=e.draw(c.owner,1)||[];if(list.length)e.revealCards(1-c.owner,list,'公开抽到的卡片');if(list.length&&monster(list[0]))X.burn(e,c,800);},{mode:'era-ultimatrainer',detach:1,role:'search',condition:(e,c)=>!!(card(e,c.uid)?.overlays||[]).some(m=>CARDS[m.id]?.type==='xyz'),inputs:detachN(1)});
  // Number 58: Burner Visor
  effect('Number 58: Burner Visor',(e,c)=>allM(e).filter(m=>CARDS[m.id].type==='xyz'&&m.uid!==c.uid),(e,c)=>{const t=card(e,first(c,'target'));if(t)e.equipMonster(c.uid,t.uid,c.owner,c.source);},{mode:'era-visor',role:'own-boost',summons:false,inputs:(e,c)=>[g(e,c,'target','选择装备的超量怪兽',allM(e).filter(m=>CARDS[m.id].type==='xyz'&&m.uid!==c.uid),1,1,'own-boost')]});

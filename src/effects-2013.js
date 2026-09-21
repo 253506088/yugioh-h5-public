@@ -67,6 +67,6 @@
  cast('Spellbook of Judgment',null,(e,c)=>{const s=card(e,c.uid);if(s)s.eraJudgment={turn:e.state.turn,count:0};},{zones:['hand'],once:H.once('spellbook-judgment','card'),role:'search'});
  onEnd('Spellbook of Judgment',{oncePerTurn:false,zones:['spells'],condition:(e,c)=>card(e,c.uid)?.eraJudgment?.turn===e.state.turn,resolve:(e,c)=>{const s=card(e,c.uid),n=Math.min(6,s?.eraJudgment?.count||0);if(s)delete s.eraJudgment;if(!n)return;const list=deck(e,c.owner,m=>def(m).type==='spell'&&series(m,'Spellbook')&&!is(m,'Spellbook of Judgment'));if(list.length)choose(e,c,'选择加入手牌的魔导书',list,0,Math.min(n,list.length),'era-judgment-search',{role:'search',judgmentCount:n});}},{mandatory:true});
  Object.assign(X,{dragonruler,mecha,spellbookTeam,prophecy13,evilswarm,nobleKnight,nobleArms,bujin,bujingi,boxer,firefist13,chronomaly13,gimmick,sylvan,fireking,archfiend13,vampire,gorgonic,coach,umbral,traptrix,starSeraph,galaxy,mythic,ghostrick,gagaga13,dododo13,zubaba13,heraldic13,ninja13,discardSelfAnd,mpbTokens,hasMpbToken,mpbProtect,movePicks});
- if(typeof module!=='undefined')for(const part of ['monsters','monsters-extra','mecha','extra','firefist','sylvan','themes','gagaga','spells','traps'])require('./effects-2013-'+part+'.js');
+ if(typeof module!=='undefined')for(const part of ['monsters','monsters-extra','mecha','extra','firefist','sylvan','themes','gagaga','xyz','monsters-b','extra-b','monsters-c','spells-b','traps-b','final','spells','traps'])require('./effects-2013-'+part+'.js');
  if(typeof module!=='undefined')module.exports=X;
 })(globalThis);

@@ -33,7 +33,6 @@
  cast('Chronomaly City Babylon',null,(e,c)=>{}, {zones:['hand'],role:'field'});
  effect('Chronomaly City Babylon',null,(e,c)=>{}, {zones:['fieldSpell'],mode:'era-babylon',summons:true,once:H.once('babylon','name'),inputs:(e,c)=>[g(e,c,'cost','选择除外的先史遗产',grave(e,c.owner,chronomaly),1,1,'cost')],cost:(e,c)=>{c.eraLevel=e.level(card(e,first(c,'cost')));moved(e,c,args(c,'cost'),'banished','cost-banish');},resolve:(e,c)=>{const list=grave(e,c.owner,m=>chronomaly(m)&&e.level(m)===c.eraLevel);if(list.length)choose(e,c,'选择复活的同等级先史遗产',list,0,1,'era-babylon-revive',{role:'special'});}});
  E.op('era-babylon-revive',(e,t)=>{if(t.picks[0])revive(e,{owner:t.owner,source:t.context.source},t.picks[0]);});
- extend('piercing',function(prior,m,p=this.state.active){if(monster(m)&&chronomaly(m)&&this.monsters(p).some(q=>q.faceUp&&is(q,'Chronomaly Mud Golem')))return true;return prior.call(this,m,p);});
  // ==========================================================================
  // Gimmick Puppet
  // ==========================================================================
