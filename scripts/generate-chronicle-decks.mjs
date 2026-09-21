@@ -18,7 +18,10 @@ const decks=input.decks.map(row=>{
  const counts=new Map();for(const id of [...cards,...extra])counts.set(id,(counts.get(id)||0)+1);if([...counts.values()].some(n=>n>3))throw Error('Combined copy limit: '+row.id);
  return {id:row.id,name:row.title+' · '+row.year,en:row.en.toUpperCase(),ace:ace.id,mechanic:row.year+' / '+row.title,description:row.description,player:row.title,avatar:'early',subtitle:'重返这一年的决斗现场。',preset:true,year:row.year,sourceKind:row.sourceKind,sourceRefs:row.sourceRefs,cards,extra,combo:row.combo};
 });
-for(const year of input.scope)if(decks.filter(d=>d.year===year).length!==3)throw Error('Expected three decks for '+year);
+// Each source file must contribute at least three decks per year it declares;
+// a year may carry more when a later batch adds further representative builds.
+for(const file of inputs)for(const year of file.scope)if(file.decks.filter(d=>d.year===year).length<3)throw Error('Expected at least three decks for '+year+' in one source file');
+if(new Set(decks.map(d=>d.id)).size!==decks.length)throw Error('Duplicate annual deck id');
 const safe=v=>JSON.stringify(v).replace(/</g,'\\u003c');
 await writeFile(join(root,'src/chronicle-decks.js'),`/* Generated from the data/decks-*.json rollout tables. */\n(function(root){'use strict';const D=root.DuelData;if(D.chronicleDecksLoaded)return;for(const deck of ${safe(decks)})D.DECKS[deck.id]=deck;D.chronicleDecksLoaded=true;if(typeof module!=='undefined')module.exports=D;})(globalThis);\n`);
 const names=Object.fromEntries(input.decks.map(d=>[d.id,[d.en+' · '+d.year,d.ja+' · '+d.year]]));

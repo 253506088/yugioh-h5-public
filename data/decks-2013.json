@@ -69,6 +69,22 @@
       "accessedOn": "2026-09-21",
       "kind": "secondary-rules-history",
       "note": "The four small Dragon Rulers and Spellbook of Judgment were Forbidden from 2013-09-01, after the World Championship. This rollout does not enforce historical lists; it uses the stored year snapshots."
+    },
+    {
+      "id": "recipe-firefist-2013",
+      "url": "https://roadoftheking.com/ocg-2013-09-metagame/",
+      "title": "OCG 2013.09 Metagame Report — 4-Axis Fire Fist deck profile",
+      "accessedOn": "2026-09-21",
+      "kind": "community-deck-recipe",
+      "note": "四轴炎星在该报告的上位榜排第 4；同一年 3 月的报告同样把炎星列在第 4 位。"
+    },
+    {
+      "id": "archetype-bujin-2013",
+      "url": "https://yugipedia.com/wiki/Bujin",
+      "title": "Bujin — 2013 debut archetype profile",
+      "accessedOn": "2026-09-21",
+      "kind": "archetype-release-profile",
+      "note": "武神是 2013 年首发的系列。它没有出现在本批保存的两份 2013 OCG 上位榜前五名里，所以这套是按系列本身的构筑逻辑改编的代表卡组，不是赛事上位记录。"
     }
   ],
   "decks": [
@@ -83,38 +99,128 @@
       "descriptionEn": "Inspired by 2013 world champion Shin En Huang. Each Dragon Ruler discards itself together with a same-Attribute Dragon to search or revive, then overlays into Number 11: Big Eye and Mecha Phantom Beast Dracossack while Super Rejuvenation turns the hand into advantage.",
       "descriptionJa": "2013年世界王者Shin En Huangの征竜を参考にした構築。四色の征竜は自身と同属性のドラゴンを捨ててサーチと蘇生を行い、No.11 ビッグ・アイと幻獣機ドラゴサックへ繋ぐ。超再生で手札を循環させる。",
       "main": [
-        ["Blaster, Dragon Ruler of Infernos", 3],
-        ["Redox, Dragon Ruler of Boulders", 3],
-        ["Tempest, Dragon Ruler of Storms", 3],
-        ["Tidal, Dragon Ruler of Waterfalls", 3],
-        ["Reactan, Dragon Ruler of Pebbles", 2],
-        ["Stream, Dragon Ruler of Droplets", 2],
-        ["Burner, Dragon Ruler of Sparks", 2],
-        ["Lightning, Dragon Ruler of Drafts", 2],
-        ["Light and Darkness Dragon", 1],
-        ["Eclipse Wyvern", 1],
-        ["Dragunity Corsesca", 1],
-        ["Maxx \"C\"", 3],
-        ["Effect Veiler", 2],
-        ["Super Rejuvenation", 3],
-        ["Sacred Sword of Seven Stars", 2],
-        ["Forbidden Chalice", 2],
-        ["Dragon Ravine", 1],
-        ["Book of Moon", 1],
-        ["Heavy Storm", 1],
-        ["Vanity's Emptiness", 2]
+        [
+          "Blaster, Dragon Ruler of Infernos",
+          3
+        ],
+        [
+          "Redox, Dragon Ruler of Boulders",
+          3
+        ],
+        [
+          "Tempest, Dragon Ruler of Storms",
+          3
+        ],
+        [
+          "Tidal, Dragon Ruler of Waterfalls",
+          3
+        ],
+        [
+          "Reactan, Dragon Ruler of Pebbles",
+          2
+        ],
+        [
+          "Stream, Dragon Ruler of Droplets",
+          2
+        ],
+        [
+          "Burner, Dragon Ruler of Sparks",
+          2
+        ],
+        [
+          "Lightning, Dragon Ruler of Drafts",
+          2
+        ],
+        [
+          "Light and Darkness Dragon",
+          1
+        ],
+        [
+          "Eclipse Wyvern",
+          1
+        ],
+        [
+          "Dragunity Corsesca",
+          1
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Super Rejuvenation",
+          3
+        ],
+        [
+          "Sacred Sword of Seven Stars",
+          2
+        ],
+        [
+          "Forbidden Chalice",
+          2
+        ],
+        [
+          "Dragon Ravine",
+          1
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Vanity's Emptiness",
+          2
+        ]
       ],
       "extra": [
-        ["Number 11: Big Eye", 3],
-        ["Mecha Phantom Beast Dracossack", 3],
-        ["Red Dragon Archfiend", 2],
-        ["Scrap Dragon", 1],
-        ["Crimson Blader", 1],
-        ["Colossal Fighter", 1],
-        ["Armory Arm", 1],
-        ["Karakuri Shogun mdl 00 \"Burei\"", 1],
-        ["Gaia Dragon, the Thunder Charger", 1],
-        ["Mermail Abyssgaios", 1]
+        [
+          "Number 11: Big Eye",
+          3
+        ],
+        [
+          "Mecha Phantom Beast Dracossack",
+          3
+        ],
+        [
+          "Red Dragon Archfiend",
+          2
+        ],
+        [
+          "Scrap Dragon",
+          1
+        ],
+        [
+          "Crimson Blader",
+          1
+        ],
+        [
+          "Colossal Fighter",
+          1
+        ],
+        [
+          "Armory Arm",
+          1
+        ],
+        [
+          "Karakuri Shogun mdl 00 \"Burei\"",
+          1
+        ],
+        [
+          "Gaia Dragon, the Thunder Charger",
+          1
+        ],
+        [
+          "Mermail Abyssgaios",
+          1
+        ]
       ],
       "combo": [
         "征龙的检索与特殊召唤都要「丢弃自身＋1只同属性龙族」，先规划好送墓的龙族再发动。",
@@ -123,7 +229,10 @@
         "大眼可以夺取对手怪兽；幻兽机 龙骑兵能用衍生物保护自己并清除对方卡片。"
       ],
       "sourceKind": "representative-adaptation",
-      "sourceRefs": ["worlds-2013", "ocg-metagame-2013"]
+      "sourceRefs": [
+        "worlds-2013",
+        "ocg-metagame-2013"
+      ]
     },
     {
       "id": "spellbook-2013",
@@ -136,37 +245,124 @@
       "descriptionEn": "Inspired by 2013 runner-up David J. Keener III. Spellbook of Judgment stacks same-name Spells and searches Prophecy monsters, while High Priestess of Prophecy and The Grand Spellbook Tower recycle everything back into the hand.",
       "descriptionJa": "2013年世界準優勝David J. Keener IIIの魔導書を参考にした構築。魔導書の神判で同名魔法を積み魔導をサーチし、魔導法士ジュノンと魔導書院ラメイソンで資源を回収する。",
       "main": [
-        ["High Priestess of Prophecy", 3],
-        ["Spellbook Magician of Prophecy", 3],
-        ["Justice of Prophecy", 3],
-        ["Star Drawing", 2],
-        ["Gravekeeper's Spy", 3],
-        ["Summoner Monk", 2],
-        ["Royal Magical Library", 1],
-        ["Spellbook of Secrets", 3],
-        ["Spellbook of the Master", 3],
-        ["Spellbook of Judgment", 3],
-        ["Spellbook of Wisdom", 3],
-        ["Spellbook of Fate", 2],
-        ["Spellbook of Power", 2],
-        ["Spellbook of Eternity", 2],
-        ["The Grand Spellbook Tower", 2],
-        ["Forbidden Dress", 2],
-        ["Forbidden Lance", 1]
+        [
+          "High Priestess of Prophecy",
+          3
+        ],
+        [
+          "Spellbook Magician of Prophecy",
+          3
+        ],
+        [
+          "Justice of Prophecy",
+          3
+        ],
+        [
+          "Star Drawing",
+          2
+        ],
+        [
+          "Gravekeeper's Spy",
+          3
+        ],
+        [
+          "Summoner Monk",
+          2
+        ],
+        [
+          "Royal Magical Library",
+          1
+        ],
+        [
+          "Spellbook of Secrets",
+          3
+        ],
+        [
+          "Spellbook of the Master",
+          3
+        ],
+        [
+          "Spellbook of Judgment",
+          3
+        ],
+        [
+          "Spellbook of Wisdom",
+          3
+        ],
+        [
+          "Spellbook of Fate",
+          2
+        ],
+        [
+          "Spellbook of Power",
+          2
+        ],
+        [
+          "Spellbook of Eternity",
+          2
+        ],
+        [
+          "The Grand Spellbook Tower",
+          2
+        ],
+        [
+          "Forbidden Dress",
+          2
+        ],
+        [
+          "Forbidden Lance",
+          1
+        ]
       ],
       "extra": [
-        ["Alchemic Magician", 3],
-        ["Hierophant of Prophecy", 2],
-        ["Daigusto Emeral", 1],
-        ["Evigishki Merrowgeist", 1],
-        ["Gem-Knight Pearl", 1],
-        ["Number 106: Giant Hand", 1],
-        ["Maestroke the Symphony Djinn", 1],
-        ["Number 50: Blackship of Corn", 1],
-        ["Evilswarm Ouroboros", 1],
-        ["Number 39: Utopia", 1],
-        ["Photon Papilloperative", 1],
-        ["Steelswarm Roach", 1]
+        [
+          "Alchemic Magician",
+          3
+        ],
+        [
+          "Hierophant of Prophecy",
+          2
+        ],
+        [
+          "Daigusto Emeral",
+          1
+        ],
+        [
+          "Evigishki Merrowgeist",
+          1
+        ],
+        [
+          "Gem-Knight Pearl",
+          1
+        ],
+        [
+          "Number 106: Giant Hand",
+          1
+        ],
+        [
+          "Maestroke the Symphony Djinn",
+          1
+        ],
+        [
+          "Number 50: Blackship of Corn",
+          1
+        ],
+        [
+          "Evilswarm Ouroboros",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Photon Papilloperative",
+          1
+        ],
+        [
+          "Steelswarm Roach",
+          1
+        ]
       ],
       "combo": [
         "魔导书的神判在该回合结束阶段按本回合发动的魔导书数量抽卡并检索，堆叠同名魔法是核心。",
@@ -175,7 +371,11 @@
         "魔导书士 巴特尔检索魔导书；魔导骑士 迪亚玫给全场的魔导怪兽加攻并保护它们。"
       ],
       "sourceKind": "representative-adaptation",
-      "sourceRefs": ["worlds-2013", "recipe-spellbook-2013", "ocg-metagame-2013"]
+      "sourceRefs": [
+        "worlds-2013",
+        "recipe-spellbook-2013",
+        "ocg-metagame-2013"
+      ]
     },
     {
       "id": "evilswarm-2013",
@@ -188,42 +388,144 @@
       "descriptionEn": "Third most successful 2013 OCG archetype and the most stable non-Dragon-Ruler, non-Spellbook system; chosen by the popularity rule because the championship podium was homogeneous. Rescue Rabbit assembles the Level 4 Evilswarm, and Evilswarm Ophion locks high-Level Special Summons out of the game.",
       "descriptionJa": "2013年OCGで上位3番目、征竜と魔導書以外では最も安定した入魔。表彰台が同質化したため人気基準で選出。レスキューラビットでヴェルズを並べ、ヴェルズ・オピオンで高レベル特殊召喚を封じる。",
       "main": [
-        ["Evilswarm Castor", 3],
-        ["Evilswarm Heliotrope", 3],
-        ["Evilswarm Kerykeion", 3],
-        ["Evilswarm Mandragora", 3],
-        ["Evilswarm Thunderbird", 3],
-        ["Effect Veiler", 2],
-        ["Rescue Rabbit", 2],
-        ["Evilswarm O'lantern", 1],
-        ["Mystical Space Typhoon", 3],
-        ["Forbidden Dress", 2],
-        ["Infestation Pandemic", 2],
-        ["Reinforcement of the Army", 1],
-        ["Heavy Storm", 1],
-        ["Monster Reborn", 1],
-        ["Book of Moon", 1],
-        ["Compulsory Evacuation Device", 2],
-        ["Bottomless Trap Hole", 2],
-        ["Fiendish Chain", 2],
-        ["Infestation Infection", 1],
-        ["Solemn Warning", 1],
-        ["Solemn Judgment", 1]
+        [
+          "Evilswarm Castor",
+          3
+        ],
+        [
+          "Evilswarm Heliotrope",
+          3
+        ],
+        [
+          "Evilswarm Kerykeion",
+          3
+        ],
+        [
+          "Evilswarm Mandragora",
+          3
+        ],
+        [
+          "Evilswarm Thunderbird",
+          3
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Rescue Rabbit",
+          2
+        ],
+        [
+          "Evilswarm O'lantern",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          3
+        ],
+        [
+          "Forbidden Dress",
+          2
+        ],
+        [
+          "Infestation Pandemic",
+          2
+        ],
+        [
+          "Reinforcement of the Army",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Compulsory Evacuation Device",
+          2
+        ],
+        [
+          "Bottomless Trap Hole",
+          2
+        ],
+        [
+          "Fiendish Chain",
+          2
+        ],
+        [
+          "Infestation Infection",
+          1
+        ],
+        [
+          "Solemn Warning",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ]
       ],
       "extra": [
-        ["Evilswarm Ophion", 3],
-        ["Evilswarm Bahamut", 1],
-        ["Evilswarm Nightmare", 1],
-        ["Evilswarm Thanatos", 1],
-        ["Evilswarm Ouroboros", 1],
-        ["Number 85: Crazy Box", 1],
-        ["Number 106: Giant Hand", 1],
-        ["Number 50: Blackship of Corn", 1],
-        ["Maestroke the Symphony Djinn", 1],
-        ["Number 39: Utopia", 1],
-        ["Diamond Dire Wolf", 1],
-        ["Gagaga Cowboy", 1],
-        ["Gem-Knight Pearl", 1]
+        [
+          "Evilswarm Ophion",
+          3
+        ],
+        [
+          "Evilswarm Bahamut",
+          1
+        ],
+        [
+          "Evilswarm Nightmare",
+          1
+        ],
+        [
+          "Evilswarm Thanatos",
+          1
+        ],
+        [
+          "Evilswarm Ouroboros",
+          1
+        ],
+        [
+          "Number 85: Crazy Box",
+          1
+        ],
+        [
+          "Number 106: Giant Hand",
+          1
+        ],
+        [
+          "Number 50: Blackship of Corn",
+          1
+        ],
+        [
+          "Maestroke the Symphony Djinn",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Diamond Dire Wolf",
+          1
+        ],
+        [
+          "Gagaga Cowboy",
+          1
+        ],
+        [
+          "Gem-Knight Pearl",
+          1
+        ]
       ],
       "combo": [
         "入魔·俄菲翁在场时，5星以上的怪兽不能特殊召唤；注意自己的额外卡组也要按这个限制构筑。",
@@ -232,7 +534,364 @@
         "感染疫情让入魔怪兽不受其他魔法陷阱影响，并用疫情弱化对手的高等级怪兽。"
       ],
       "sourceKind": "representative-adaptation",
-      "sourceRefs": ["recipe-evilswarm-2013", "ocg-metagame-2013", "ocg-metagame-2013-09"]
+      "sourceRefs": [
+        "recipe-evilswarm-2013",
+        "ocg-metagame-2013",
+        "ocg-metagame-2013-09"
+      ]
+    },
+    {
+      "id": "fire-fist-2013",
+      "year": 2013,
+      "title": "炎星四轴",
+      "en": "Fire Fist Four-Axis",
+      "ja": "炎星・四軸",
+      "ace": "Brotherhood of the Fire Fist - Tiger King",
+      "description": "参考2013年OCG上位榜第4名的四轴炎星。「炎舞-天枢」提供追加通常召唤，「炎舞-天玑」检索兽战士族，两级同调与四级超量共用同一批炎星怪兽。首领猛虎可以在超量召唤时从卡组直接盖放炎舞，并且每回合无效对方全场的表侧效果怪兽（炎星兽战士族除外）。",
+      "descriptionEn": "A 2013 OCG build of Four-Axis Fire Fist, ranked 4th in both of the year’s metagame reports. Tenki searches the Beast-Warriors, Tensu grants the extra Normal Summon, and Tiger King Sets a Fire Formation on arrival and negates opposing face-up Effect Monsters each turn.",
+      "descriptionJa": "2013年のOCG上位で第4位だった4軸炎星。天璣で獣戦士をサーチし、天枢で通常召喚を追加。タイガー・キングはエクシーズ召喚時に炎舞をセットし、毎ターン相手の表側効果モンスターを無効化する。",
+      "main": [
+        [
+          "Brotherhood of the Fire Fist - Rooster",
+          3
+        ],
+        [
+          "Brotherhood of the Fire Fist - Leopard",
+          3
+        ],
+        [
+          "Brotherhood of the Fire Fist - Wolf",
+          2
+        ],
+        [
+          "Brotherhood of the Fire Fist - Boar",
+          2
+        ],
+        [
+          "Brotherhood of the Fire Fist - Rhino",
+          2
+        ],
+        [
+          "Brotherhood of the Fire Fist - Buffalo",
+          2
+        ],
+        [
+          "Brotherhood of the Fire Fist - Bear",
+          2
+        ],
+        [
+          "Brotherhood of the Fire Fist - Gorilla",
+          2
+        ],
+        [
+          "Brotherhood of the Fire Fist - Spirit",
+          2
+        ],
+        [
+          "Brotherhood of the Fire Fist - Dragon",
+          1
+        ],
+        [
+          "Brotherhood of the Fire Fist - Coyote",
+          1
+        ],
+        [
+          "Fire Formation - Tenki",
+          3
+        ],
+        [
+          "Fire Formation - Tensu",
+          2
+        ],
+        [
+          "Fire Formation - Gyokkou",
+          2
+        ],
+        [
+          "Fire Formation - Yoko",
+          2
+        ],
+        [
+          "Fire Formation - Tenken",
+          1
+        ],
+        [
+          "Fire Formation - Tensen",
+          1
+        ],
+        [
+          "Fire Formation - Kaiyo",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Brotherhood of the Fire Fist - Tiger King",
+          2
+        ],
+        [
+          "Brotherhood of the Fire Fist - Cardinal",
+          2
+        ],
+        [
+          "Brotherhood of the Fire Fist - Lion Emperor",
+          1
+        ],
+        [
+          "Brotherhood of the Fire Fist - Kirin",
+          1
+        ],
+        [
+          "Brotherhood of the Fire Fist - Horse Prince",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Maestroke the Symphony Djinn",
+          1
+        ],
+        [
+          "Gagaga Cowboy",
+          1
+        ],
+        [
+          "Number 50: Blackship of Corn",
+          1
+        ],
+        [
+          "Diamond Dire Wolf",
+          1
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Number 101: Silent Honor ARK",
+          1
+        ],
+        [
+          "Evilswarm Exciton Knight",
+          1
+        ]
+      ],
+      "combo": [
+        "「炎舞-天玑」检索龙儿或豹子，再用「炎舞-天枢」在同一回合追加一次通常召唤，把四轴怪兽铺满。",
+        "龙儿在特殊召唤时可以检索炎星；豹子与狼能把炎舞直接盖到场上，为猛虎的盖放效果准备第二个炎舞。",
+        "猛虎超量召唤时从卡组盖放炎舞，之后每回合移除1个素材无效对方表侧效果怪兽；本作按当前规则检查炎星兽战士族不受影响。",
+        "烈风与犀牛提供战斗阶段的攻击力加成，野牛从墓地特殊召唤自己，红衣与麒麟负责同调收尾。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-metagame-2013",
+        "ocg-metagame-2013-09",
+        "recipe-firefist-2013"
+      ]
+    },
+    {
+      "id": "bujin-2013",
+      "year": 2013,
+      "title": "武神降临",
+      "en": "Bujin Descent",
+      "ja": "武神降臨",
+      "ace": "Bujintei Susanowo",
+      "description": "2013年首发系列武神的代表构筑。武神器从手牌或墓地支付自己，把战斗结果改写：天羽羽斩把手牌送去墓地让攻击力翻倍，灵龟除外自己无效指定武神的效果。四轴武神叠出须佐之男与迦具土，山命每回合结束阶段检索下一只武神。",
+      "descriptionEn": "A representative build of Bujin, the 2013 debut archetype. The Bujingi pay for themselves from the hand or Graveyard and rewrite combat: Crane doubles a Bujin’s original ATK, Turtle banishes itself to stop a targeting effect. Yamato searches another Bujin each End Phase.",
+      "descriptionJa": "2013年に登場した武神の代表的な構築。武神器は手札や墓地から自身を消費して戦闘結果を書き換える。ヤマトは毎ターンのエンドフェイズに武神をサーチし、4軸でスサノオとカグツチを重ねる。",
+      "main": [
+        [
+          "Bujin Yamato",
+          3
+        ],
+        [
+          "Bujin Mikazuchi",
+          2
+        ],
+        [
+          "Bujin Arasuda",
+          2
+        ],
+        [
+          "Bujingi Crane",
+          3
+        ],
+        [
+          "Bujingi Turtle",
+          3
+        ],
+        [
+          "Bujingi Quilin",
+          2
+        ],
+        [
+          "Bujingi Hare",
+          2
+        ],
+        [
+          "Bujingi Crow",
+          2
+        ],
+        [
+          "Bujingi Ibis",
+          1
+        ],
+        [
+          "Bujingi Ophidian",
+          1
+        ],
+        [
+          "Bujingi Centipede",
+          1
+        ],
+        [
+          "Bujingi Boar",
+          1
+        ],
+        [
+          "Bujingi Fox",
+          1
+        ],
+        [
+          "Bujingi Peacock",
+          1
+        ],
+        [
+          "Bujingi Swallow",
+          1
+        ],
+        [
+          "Bujingi Wolf",
+          1
+        ],
+        [
+          "Bujincarnation",
+          2
+        ],
+        [
+          "Bujin Regalia - The Mirror",
+          1
+        ],
+        [
+          "Bujinunity",
+          1
+        ],
+        [
+          "Bujinfidel",
+          1
+        ],
+        [
+          "Bujin Regalia - The Sword",
+          1
+        ],
+        [
+          "Bujin Regalia - The Jewel",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Bujintei Susanowo",
+          2
+        ],
+        [
+          "Bujintei Kagutsuchi",
+          2
+        ],
+        [
+          "Bujintei Tsukuyomi",
+          2
+        ],
+        [
+          "Number 101: Silent Honor ARK",
+          1
+        ],
+        [
+          "Evilswarm Exciton Knight",
+          1
+        ],
+        [
+          "Gagaga Cowboy",
+          1
+        ],
+        [
+          "Maestroke the Symphony Djinn",
+          1
+        ],
+        [
+          "Number 50: Blackship of Corn",
+          1
+        ],
+        [
+          "Diamond Dire Wolf",
+          1
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Number 16: Shock Master",
+          1
+        ]
+      ],
+      "combo": [
+        "山命在结束阶段检索武神并丢弃1张手牌；丢弃正好把武神器送进墓地，为下一回合的墓地支付做准备。",
+        "天羽羽斩在伤害计算时把手牌中的自己送去墓地，让武神的攻击力变成原本的2倍；灵龟则除外自己，无效指定武神的对方效果。",
+        "须佐之男可以攻击对方所有怪兽各一次，并每回合移除1个素材从卡组检索或送墓另一只武神；迦具土在超量召唤时翻5张，且能用素材代替武神被破坏。",
+        "武神降临在对方有怪兽、自己空场时从墓地与除外区各拉一只武神，是主要的翻盘手段。"
+      ],
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "archetype-bujin-2013",
+        "ocg-metagame-2013-09"
+      ]
     }
   ]
 }

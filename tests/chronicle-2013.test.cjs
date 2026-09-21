@@ -120,11 +120,11 @@ test('Evilswarm Exciton Knight wipes the board and stops all further damage',()=
  e.damage(0,1000,'效果');
  assert.equal(e.state.players[0].lp,8000);
 });
-test('the three 2013 annual decks exist, are localized and are legal',()=>{
+test('the five 2013 annual decks exist, are localized and are legal',()=>{
  const Decks=require('../src/deck-tools.js');
  const table=JSON.parse(fs.readFileSync(path.join(__dirname,'../data/decks-2013.json')));
- assert.equal(table.decks.length,3);
- assert.equal(Object.values(D.DECKS).filter(d=>d.year===2013).length,3);
+ assert.equal(table.decks.length,5);
+ assert.equal(Object.values(D.DECKS).filter(d=>d.year===2013).length,5);
  for(const d of table.decks){
   const deck=D.DECKS[d.id];
   assert.ok(deck,'deck registered: '+d.id);
@@ -134,6 +134,27 @@ test('the three 2013 annual decks exist, are localized and are legal',()=>{
   assert.ok([...deck.cards,...deck.extra].every(i=>D.CARDS[i].releaseYear<=2013));
   assert.ok(Decks.analyze(deck).valid,JSON.stringify(Decks.analyze(deck).errors));
   assert.ok(d.descriptionEn&&d.descriptionJa,'both translations are present');
+ }
+});
+test('the two archetype decks are built from cards this batch implemented',()=>{
+ // Fire Fist and Bujin exist because of the 2013 rollout: their 2013 members were
+ // pending until this batch, so a deck carrying them is genuine coverage.
+ const Decks=require('../src/deck-tools.js');
+ const cars={
+  'fire-fist-2013':/Fire Fist|Fire Formation/,
+  'bujin-2013':/Bujin/
+ };
+ for(const [id,re] of Object.entries(cars)){
+  const deck=D.DECKS[id];
+  assert.ok(deck,'deck exists: '+id);
+  const theme=[...deck.cards,...deck.extra].filter(i=>re.test(D.CARDS[i].officialName||''));
+  assert.ok(theme.length>=15,id+' should be built around its own archetype, found '+theme.length);
+  assert.ok(theme.every(i=>D.CARDS[i].releaseYear<=2013),id+' stays within the year');
+  // The archetype's 2013 members must all be registered, not pending.
+  const mine=theme.filter(i=>D.CARDS[i].releaseYear===2013);
+  assert.ok(mine.length>=8,id+' should lean on 2013 members, found '+mine.length);
+  assert.ok(mine.every(i=>D.CARDS[i].implementationStatus!=='pending'),id+' uses an unimplemented card');
+  assert.ok(Decks.analyze(deck).valid,JSON.stringify(Decks.analyze(deck).errors));
  }
 });
 test('every 2013 identity is either implemented or explicitly pending, never silently absent',()=>{

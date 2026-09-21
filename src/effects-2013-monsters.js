@@ -14,7 +14,7 @@
  const uniqueFaceUp=['Bujin Yamato','Bujin Mikazuchi','Bujin Arasuda','Bujintei Susanowo','Bujintei Kagutsuchi','Bujintei Tsukuyomi'];
  extend('canNormal',function(prior,m,p=this.state.active){if(uniqueFaceUp.some(n=>is(m,n))&&this.monsters(p).some(q=>q.faceUp&&q.id===m.id))return false;return prior.call(this,m,p);});
  onEnd('Bujin Yamato',{zones:['monsters'],once:H.once('yamato'),condition:(e,c)=>hand(e,c.owner).length>0,inline:true,resolve:(e,c)=>{const picks=deck(e,c.owner,bujin);if(!picks.length)return;choose(e,c,'选择加入手牌的武神怪兽',picks,0,1,'era-bujin-yamato',{role:'search'});}});
- E.op('era-bujin-yamato',(e,t)=>{if(t.picks[0])moved(e,t,t.picks,['hand'],'effect-search');e.shuffle(e.state.players[t.owner].deck);const rest=hand(e,t.owner);if(rest.length)choose(e,{owner:t.owner,source:t.context.source},'选择送去墓地的1张手牌',rest,1,1,'era-bujin-discard',{role:'cost'});});
+ E.op('era-bujin-yamato',(e,t)=>{if(t.picks[0])moved(e,t,t.picks,'hand','effect-search');e.shuffle(e.state.players[t.owner].deck);const rest=hand(e,t.owner);if(rest.length)choose(e,{owner:t.owner,source:t.context.source},'选择送去墓地的1张手牌',rest,1,1,'era-bujin-discard',{role:'cost'});});
  E.op('era-bujin-discard',(e,t)=>{moved(e,t,t.picks,'grave','effect-send');});
  // Mikazuchi arrives when a Beast-Warrior Bujin is destroyed; Arasuda arrives
  // when any Bujin is banished. Neither trigger is optional in this adaptation.
