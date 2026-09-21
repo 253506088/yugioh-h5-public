@@ -101,6 +101,79 @@ test('auto response skips generic set windows but retains opponent effects, summ
   assert.equal(X.responseDecision(pending({attack:{}}),'off'),'pass');
   for(const kind of ['trigger','order','materials','choice','input'])assert.equal(X.responseDecision({kind,responder:0,trigger:{mandatory:true}},'off'),'ask');
 });
+
+test('multiple set fast effects share one post-Summon response and one pass declines all of them',()=>{
+  const e=fresh();e.state.active=1;
+  const moons=[put(e,0,'spells','Book of Moon',{faceUp:false}),put(e,0,'spells','Book of Moon',{faceUp:false})];
+  const mst=put(e,0,'spells','mst',{faceUp:false});put(e,0,'monsters','blue-eyes');
+  const monster=put(e,1,'hand','battle-ox');
+  act(e,{type:'summon',uid:monster.uid,mode:'attack'});
+  assert.equal(e.state.pending.context.kind,'summon');
+  assert.deepEqual(new Set(e.state.pending.options.map(o=>o.uid)),new Set([...moons,mst].map(c=>c.uid)));
+  act(e,{type:'pass'});assert.equal(e.state.pending,null);assert.equal(e.state.frame,null);
+  assert.ok(moons.every(c=>!e.find(c.uid).card.faceUp));
+
+  const pot=put(e,1,'hand','pot-of-greed');act(e,{type:'activate',uid:pot.uid,key:pot.id+'::cast'});
+  assert.equal(e.state.pending.responder,0);assert.equal(e.state.pending.options.length,3);
+  act(e,{type:'pass'});assert.equal(e.state.pending,null);e.assertState();
+});
+
+test('Icarus Attack with two set Books of Moon asks once after activation',()=>{
+  const e=fresh();e.state.active=1;
+  const moons=[put(e,0,'spells','Book of Moon',{faceUp:false,setTurn:1}),put(e,0,'spells','Book of Moon',{faceUp:false,setTurn:1})];
+  const targetA=put(e,0,'monsters','battle-ox'),targetB=put(e,0,'monsters','celtic-guardian');
+  const bird=put(e,1,'monsters','Blackwing - Shura the Blue Flame');
+  const icarus=put(e,1,'spells','Icarus Attack',{faceUp:false,setTurn:1});
+  act(e,{type:'activate',uid:icarus.uid,key:icarus.id+'::cast',choices:{cost:[bird.uid],target:[targetA.uid,targetB.uid]}});
+  assert.equal(e.state.pending.kind,'window');assert.equal(e.state.pending.responder,0);
+  assert.deepEqual(e.state.pending.options.map(o=>o.uid),moons.map(c=>c.uid));
+  act(e,{type:'pass'});assert.equal(e.state.pending,null);e.assertState();
+  assert.ok(moons.every(c=>e.find(c.uid)?.card.faceUp===false));
+  assert.equal(e.find(targetA.uid)?.zone,'grave');assert.equal(e.find(targetB.uid)?.zone,'grave');
+});
+
+test('passing two Books of Moon at attack declaration proceeds to damage without a duplicate prompt',()=>{
+  const e=fresh();e.state.active=1;e.state.phase='battle';
+  put(e,0,'spells','Book of Moon',{faceUp:false});put(e,0,'spells','Book of Moon',{faceUp:false});
+  const defender=put(e,0,'monsters','battle-ox'),attacker=put(e,1,'monsters','blue-eyes');
+  act(e,{type:'attack',uid:attacker.uid,target:defender.uid});
+  assert.equal(e.state.pending.context.attack.stage,'declare');assert.equal(e.state.pending.options.length,2);
+  act(e,{type:'pass'});
+  assert.equal(e.state.pending,null);assert.equal(e.state.players[0].lp,6700);assert.equal(e.find(defender.uid).zone,'grave');e.assertState();
+});
+
+test('Summon negation and responses to it remain available before the successful-Summon window',()=>{
+  const e=fresh();e.state.active=1;
+  const judgment=put(e,0,'spells','Solemn Judgment',{faceUp:false}),moon=put(e,0,'spells','Book of Moon',{faceUp:false});
+  const tools=put(e,1,'spells','Seven Tools of the Bandit',{faceUp:false}),monster=put(e,1,'hand','battle-ox');
+  act(e,{type:'summon',uid:monster.uid,mode:'attack'});
+  assert.equal(e.state.pending.context.kind,'summon-attempt');assert.deepEqual(e.state.pending.options.map(o=>o.uid),[judgment.uid]);
+  act(e,{type:'respond',uid:judgment.uid,key:judgment.id+'::cast'});
+  assert.deepEqual(e.state.pending.options.map(o=>o.uid),[tools.uid]);
+  act(e,{type:'respond',uid:tools.uid,key:tools.id+'::cast'});
+  assert.equal(e.state.pending.context.kind,'summon');assert.deepEqual(e.state.pending.options.map(o=>o.uid),[moon.uid]);
+  act(e,{type:'pass'});assert.equal(e.state.pending,null);assert.equal(e.find(monster.uid).zone,'monsters');e.assertState();
+});
+
+test('a legal damage-step effect is still offered while Book of Moon is excluded',()=>{
+  const e=fresh();e.state.active=1;e.state.phase='battle';
+  put(e,0,'spells','Book of Moon',{faceUp:false});const shrink=put(e,0,'spells','Shrink',{faceUp:false});
+  const defender=put(e,0,'monsters','battle-ox'),attacker=put(e,1,'monsters','blue-eyes');
+  act(e,{type:'attack',uid:attacker.uid,target:defender.uid});act(e,{type:'pass'});
+  assert.equal(e.state.pending.context.attack.stage,'calc');assert.deepEqual(e.state.pending.options.map(o=>o.uid),[shrink.uid]);
+  act(e,{type:'respond',uid:shrink.uid,key:shrink.id+'::cast',choices:{target:[attacker.uid]}});settle(e);
+  assert.equal(e.find(attacker.uid).zone,'grave');assert.equal(e.state.players[0].lp,8000);
+});
+
+test('passing a response never suppresses the opportunity to respond to a new chain link',()=>{
+  const e=fresh();e.state.active=1;
+  const moons=[put(e,0,'spells','Book of Moon',{faceUp:false}),put(e,0,'spells','Book of Moon',{faceUp:false})];
+  put(e,0,'monsters','battle-ox');const mst=put(e,1,'spells','mst',{faceUp:false}),pot=put(e,1,'hand','pot-of-greed');
+  act(e,{type:'activate',uid:pot.uid,key:pot.id+'::cast'});const first=e.state.pending.context.chainLast.id;
+  act(e,{type:'pass'});assert.equal(e.state.pending.responder,1);
+  act(e,{type:'respond',uid:mst.uid,key:mst.id+'::cast',choices:{target:[moons[0].uid]}});
+  assert.equal(e.state.pending.responder,0);assert.notEqual(e.state.pending.context.chainLast.id,first);assert.equal(e.state.pending.options.length,2);settle(e);
+});
 test('battle shuffle plays every track once per round and never repeats at round boundaries',()=>{
   const bag=new X.ShuffleBag(['a','b','c','d','e','f'],()=>.37),result=Array.from({length:120},()=>bag.next());
   for(let i=0;i<result.length;i+=6)assert.equal(new Set(result.slice(i,i+6)).size,6);

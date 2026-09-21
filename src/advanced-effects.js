@@ -96,6 +96,9 @@
     const w=ctx.event.window||ctx.window?.context||{};
     if(ctx.origin==='window'){
       if(a.trigger||a.speed<2||a.inherent)return false;
+      // A Summon attempt only accepts effects that negate the Summon. Other
+      // fast effects get their opportunity after it succeeds, or on a chain.
+      if(w.kind==='summon-attempt'&&!w.chainLast&&!a.summonNegation)return false;
       if(isDamageWindow(w)&&!a.damageStep)return false;
       if(a.cardActivation&&d.type==='spell'&&f.zone==='hand'&&ctx.owner!==e.state.active)return false;
       if(!w.chainLast&&['main-open','battle-open'].includes(w.kind)&&ctx.owner===e.state.active)return false;

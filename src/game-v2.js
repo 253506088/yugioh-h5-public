@@ -616,12 +616,75 @@
     const own=engine?.state.players[0].deckId,rival=engine?.state.players[1].deckId,list=DeckTools.list();
     setupOptions={deck:list.some(d=>d.id===own)?own:'hero',opponentDeck:list.some(d=>d.id===rival)?rival:'blackwing',first:0,difficulty:engine?.state.difficulty||'standard',mode:spectating()?'spectate':'duel'};renderNewGame();
   }
+  let setupDeckIndex = new Map();
+  const normalizeDeckQuery = value => String(value || '').normalize('NFKC').toLowerCase().replace(/[·・—–_-]/g, ' ');
+  function setupDeckMatches(deck, query) {
+    const text = setupDeckIndex.get(deck.id) || '';
+    return normalizeDeckQuery(query).trim().split(/\s+/).every(word => text.includes(word));
+  }
+  function setupSearchHTML(id, value, label) {
+    return '<div class="setup-deck-search">'+icon('search')+'<input type="search" id="'+id+'" value="'+escape(value||'')+'" placeholder="名称、年份或卡名…" aria-label="'+label+'" autocomplete="off" spellcheck="false"><button type="button" data-action="clear-deck-search" data-input="'+id+'" aria-label="清空搜索"'+(value?'':' hidden')+'>'+icon('close')+'</button></div>';
+  }
+  function updateSetupSearchClear(id, visible) {
+    const input=document.getElementById(id),button=input?.parentElement?.querySelector('[data-action="clear-deck-search"]');
+    if(button)button.hidden=!visible;
+  }
+  function renderSetupRoster(resetScroll = false) {
+    const node = $('#setup-deck-roster');if(!node)return;
+    const list = DeckTools.list().map(d=>I.deck(d));
+    const roster = list.filter(d=>(!setupOptions.year||setupOptions.year==='all'||d.year===Number(setupOptions.year))&&setupDeckMatches(d,setupOptions.query));
+    const scroll = resetScroll ? 0 : node.scrollTop;
+    node.innerHTML = roster.map((deck,i)=>'<button type="button" class="deck-roster-item'+(setupOptions.deck===deck.id?' active':'')+'" data-action="choose-deck" data-deck="'+escape(deck.id)+'" aria-pressed="'+(setupOptions.deck===deck.id)+'">'+Art.html(deck.ace,'roster-art')+'<span class="roster-index">'+String(i+1).padStart(2,'0')+'</span><span class="roster-copy"><strong>'+deckNameHTML(deck)+'</strong><small>'+escape(deck.en)+'</small></span><span class="mechanic-chip">'+escape(deck.mechanic)+'</span><span class="roster-check" aria-hidden="true">'+(setupOptions.deck===deck.id?'✓':'↗')+'</span></button>').join('') || '<div class="deck-search-empty">'+icon('search')+'<strong>没有匹配的卡组</strong><p>试试其他关键词，或清除筛选。</p><button type="button" class="text-button" data-action="reset-deck-filters">清除筛选</button></div>';
+    node.scrollTop=scroll;
+    $('#setup-year-count').textContent=roster.length+' / '+list.length;
+    updateSetupSearchClear('setup-deck-search',!!setupOptions.query);
+  }
+  function updateSetupDeck() {
+    $$('#setup-deck-roster [data-action="choose-deck"]').forEach(button=>{
+      const active=button.dataset.deck===setupOptions.deck;
+      button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));
+      button.querySelector('.roster-check').textContent=active?'✓':'↗';
+    });
+    const selected=DECKS[setupOptions.deck]||DECKS.hero,spec=setupOptions.mode==='spectate';
+    $('#setup-deck-showcase').innerHTML='<div class="showcase-glow"></div><div class="showcase-card">'+cardHTML(selected.ace)+'</div><span class="showcase-kicker">'+(spec?'机器人 A · ':'')+escape(selected.mechanic)+' / '+selected.cards.length+' + '+selected.extra.length+'</span><h3>'+deckNameHTML(selected)+'</h3><p>'+escape(selected.description)+'</p><div class="showcase-combo"><small>FIRST COMBO · 展开思路</small><p>'+escape(selected.combo?.[0]||'')+'</p></div><button type="button" class="text-button" data-action="edit-setup-deck">编辑这副构筑 →</button>';
+  }
+  function renderSetupOpponent() {
+    const select=$('#opponent-deck');if(!select)return;
+    const list=DeckTools.list().map(d=>I.deck(d)),matches=list.filter(d=>setupDeckMatches(d,setupOptions.opponentQuery));
+    const selected=list.find(d=>d.id===setupOptions.opponentDeck)||list[0];
+    const option=d=>'<option'+(d.custom?' data-user-content':'')+' value="'+escape(d.id)+'">'+escape(d.name)+'</option>';
+    const keepSelected=selected&&!matches.some(d=>d.id===selected.id);
+    select.innerHTML=(keepSelected?'<optgroup label="当前选择">'+option(selected)+'</optgroup>':'')+(keepSelected&&matches.length?'<optgroup label="搜索结果">':'')+matches.map(option).join('')+(keepSelected&&matches.length?'</optgroup>':'');
+    select.value=selected.id;
+    $('#opponent-search-count').textContent=matches.length+' / '+list.length;
+    $('#opponent-search-empty').hidden=matches.length>0;
+    updateSetupSearchClear('opponent-deck-search',!!setupOptions.opponentQuery);
+  }
+  function updateSetupSegment(button, key, value) {
+    setupOptions[key]=value;
+    for(const sibling of button.parentElement.querySelectorAll('button')){
+      const active=sibling===button;sibling.classList.toggle('active',active);sibling.setAttribute('aria-pressed',String(active));
+    }
+  }
   function renderNewGame() {
-    const list=DeckTools.list().map(d=>I.deck(d)),years=[...new Set(list.map(d=>d.year).filter(Boolean))].sort((a,b)=>a-b),roster=list.filter(d=>!setupOptions.year||setupOptions.year==='all'||d.year===Number(setupOptions.year)),selected=DECKS[setupOptions.deck]||DECKS.hero,spec=setupOptions.mode==='spectate';
-    const modeControl='<div class="setup-mode"><label class="setting-label">对战模式</label><div class="segmented-control">'+[['duel','我 vs 机器人'],['spectate','机器人 vs 机器人'],['tournament','机器人淘汰赛'],['pvp','联机对战']].map(([id,label])=>'<button class="'+(setupOptions.mode===id?'active':'')+'" data-action="choose-mode" data-value="'+id+'">'+label+'</button>').join('')+'</div>'+(spec?'<p class="setup-mode-note">为机器人 A 和机器人 B 各选一副卡组。观战时双方手牌与盖牌全部公开，先后手由猜拳决定。</p>':'')+'</div>';
-    const eraFilter='<div class="deck-era-filter"><label class="setting-label" for="setup-year">按年度选择预设</label><select id="setup-year" aria-label="按年度选择预设"><option value="all">全部年代</option>'+years.map(y=>'<option value="'+y+'"'+(String(y)===String(setupOptions.year)?' selected':'')+'>'+y+'</option>').join('')+'</select><span id="setup-year-count">'+roster.length+' / '+list.length+'</span></div>';
-    const rosterTitle=eraFilter+(spec?'<p class="roster-heading">机器人 A 的卡组</p>':'');
-    openModal('new-game',spec?'让两位机器人一决高下。':'选择与你共鸣的力量。','ALL GENERATIONS · ONE DESTINY','<div class="deck-select-intro"><p>跨越世代的决斗，从这里开始。<br><span>'+Object.values(DECKS).filter(d=>d.preset).length+'套预设，或一副亲手构筑的卡组。</span></p><button class="outline-button" data-action="workshop">＋ 组卡工坊</button></div>'+modeControl+'<div class="deck-select-layout"><div class="deck-roster">'+rosterTitle+roster.map((deck,i)=>'<button class="deck-roster-item'+(setupOptions.deck===deck.id?' active':'')+'" data-action="choose-deck" data-deck="'+deck.id+'">'+Art.html(deck.ace,'roster-art')+'<span class="roster-index">'+String(i+1).padStart(2,'0')+'</span><span class="roster-copy"><strong>'+deckNameHTML(deck)+'</strong><small>'+escape(deck.en)+'</small></span><span class="mechanic-chip">'+escape(deck.mechanic)+'</span><span class="roster-check">'+(setupOptions.deck===deck.id?'✓':'↗')+'</span></button>').join('')+'</div><aside class="selected-deck-showcase"><div class="showcase-glow"></div><div class="showcase-card">'+cardHTML(selected.ace)+'</div><span class="showcase-kicker">'+(spec?'机器人 A · ':'')+escape(selected.mechanic)+' / '+selected.cards.length+' + '+selected.extra.length+'</span><h3>'+deckNameHTML(selected)+'</h3><p>'+escape(selected.description)+'</p><div class="showcase-combo"><small>FIRST COMBO · 展开思路</small><p>'+escape(selected.combo?.[0]||'召唤海马侠，解放它呼唤青眼白龙；运用魔法与陷阱把握战机。')+'</p></div><button class="text-button" data-action="edit-setup-deck">编辑这副构筑 →</button></aside></div><div class="setup-options v2-setup"><div><label class="setting-label" for="opponent-deck">'+(spec?'机器人 B 的卡组':'对手卡组')+'</label><select id="opponent-deck">'+list.map(d=>'<option'+(d.custom?' data-user-content':'')+' value="'+d.id+'"'+(setupOptions.opponentDeck===d.id?' selected':'')+'>'+escape(d.name)+'</option>').join('')+'</select></div><div><label class="setting-label">'+(spec?'机器人难度':'对手难度')+'</label><div class="segmented-control">'+[['casual','休闲'],['standard','标准']].map(([id,label])=>'<button class="'+(setupOptions.difficulty===id?'active':'')+'" data-action="choose-difficulty" data-value="'+id+'">'+label+'</button>').join('')+'</div></div><div><label class="setting-label">出场顺序</label>'+(spec?'<p class="setup-order-note">✊ ✌️ 🖐️ 先后手由猜拳决定</p>':'<div class="segmented-control">'+[[0,'我先攻'],[1,'我后攻']].map(([id,label])=>'<button class="'+(setupOptions.first===id?'active':'')+'" data-action="choose-first" data-value="'+id+'">'+label+'</button>').join('')+'</div>')+'</div></div><p class="new-game-note">8000 LP · 随机起手 5 张 · 先攻首回合不抽卡、不攻击<br>开始新决斗会替换当前对局存档；保存的卡组与工坊草稿会保留。</p>','<button class="secondary-button" data-action="close-modal">继续当前对局</button><button class="primary-button" data-action="begin-game">'+(spec?'开始观战 ':'开始决斗 ')+icon('arrow')+'</button>','new-game-modal v2-new-game');
+    const scrolls=modalKind==='new-game'?['#modal .modal-body','.deck-roster'].map(selector=>({selector,top:$(selector)?.scrollTop||0})):[];
+    const list=DeckTools.list().map(d=>I.deck(d)),years=[...new Set(list.map(d=>d.year).filter(Boolean))].sort((a,b)=>a-b),spec=setupOptions.mode==='spectate';
+    setupDeckIndex=new Map(list.map(deck=>[deck.id,normalizeDeckQuery([
+      deck.name,deck.en,deck.mechanic,deck.year,window.DuelData.DECKS[deck.id]?.name,
+      ...(window.DuelUITranslations.deckNames[deck.id]||[]),
+      ...[...new Set([deck.ace,...deck.cards,...deck.extra])].map(id=>I.searchName(id))
+    ].join(' '))]));
+    const segment=(action,current,choices)=>'<div class="segmented-control">'+choices.map(([id,label])=>'<button type="button" class="'+(current===id?'active':'')+'" data-action="'+action+'" data-value="'+id+'" aria-pressed="'+(current===id)+'">'+label+'</button>').join('')+'</div>';
+    const modeControl='<div class="setup-mode"><label class="setting-label">对战模式</label>'+segment('choose-mode',setupOptions.mode,[['duel','我 vs 机器人'],['spectate','机器人 vs 机器人'],['tournament','机器人淘汰赛'],['pvp','联机对战']])+(spec?'<p class="setup-mode-note">为机器人 A 和机器人 B 各选一副卡组。观战时双方手牌与盖牌全部公开，先后手由猜拳决定。</p>':'')+'</div>';
+    const filters='<div class="setup-deck-heading"><label class="setting-label" for="setup-deck-search">'+(spec?'机器人 A 的卡组':'我的卡组')+'</label><span id="setup-year-count" class="setup-result-count" role="status" aria-live="polite"></span></div><div class="setup-deck-filters">'+setupSearchHTML('setup-deck-search',setupOptions.query,'搜索我的卡组')+'<select id="setup-year" aria-label="按年度选择预设"><option value="all">全部年代</option>'+years.map(y=>'<option value="'+y+'"'+(String(y)===String(setupOptions.year)?' selected':'')+'>'+y+'</option>').join('')+'</select></div>';
+    const opponent='<div class="setup-opponent"><div class="setup-deck-heading"><label class="setting-label" for="opponent-deck">'+(spec?'机器人 B 的卡组':'对手卡组')+'</label><span id="opponent-search-count" class="setup-result-count" role="status" aria-live="polite"></span></div>'+setupSearchHTML('opponent-deck-search',setupOptions.opponentQuery,'搜索对手卡组')+'<select id="opponent-deck" aria-describedby="opponent-search-empty"></select><p id="opponent-search-empty" class="setup-search-note" hidden>没有匹配的卡组，当前选择已保留。</p></div>';
+    openModal('new-game',spec?'让两位机器人一决高下。':'选择与你共鸣的力量。','ALL GENERATIONS · ONE DESTINY',
+      '<div class="deck-select-intro"><p>跨越世代的决斗，从这里开始。<br><span>'+Object.values(DECKS).filter(d=>d.preset).length+'套预设，或一副亲手构筑的卡组。</span></p><button class="outline-button" data-action="workshop">＋ 组卡工坊</button></div>'+modeControl+
+      '<div class="deck-select-layout"><section class="setup-deck-browser">'+filters+'<div class="deck-roster" id="setup-deck-roster"></div></section><aside class="selected-deck-showcase" id="setup-deck-showcase"></aside></div>'+
+      '<div class="setup-options v2-setup">'+opponent+'<div><label class="setting-label">'+(spec?'机器人难度':'对手难度')+'</label>'+segment('choose-difficulty',setupOptions.difficulty,[['casual','休闲'],['standard','标准']])+'</div><div><label class="setting-label">出场顺序</label>'+(spec?'<p class="setup-order-note">✊ ✌️ 🖐️ 先后手由猜拳决定</p>':segment('choose-first',setupOptions.first,[[0,'我先攻'],[1,'我后攻']]))+'</div></div><p class="new-game-note">8000 LP · 随机起手 5 张 · 先攻首回合不抽卡、不攻击<br>开始新决斗会替换当前对局存档；保存的卡组与工坊草稿会保留。</p>',
+      '<button class="secondary-button" data-action="close-modal">继续当前对局</button><button class="primary-button" data-action="begin-game">'+(spec?'开始观战 ':'开始决斗 ')+icon('arrow')+'</button>','new-game-modal v2-new-game');
+    renderSetupRoster();updateSetupDeck();renderSetupOpponent();
+    for(const saved of scrolls)if($(saved.selector))$(saved.selector).scrollTop=saved.top;
   }
   function showHelp() {
     if(I.language!=='zh-CN'){const guide=window.DuelUITranslations.help[I.language];openModal('help',guide.title,'THE DUELIST’S HANDBOOK',guide.body,'<button class="primary-button" data-action="close-modal">'+I.term('准备好了')+'</button>');return;}
@@ -645,6 +708,38 @@
   }
   function openTargetSelection() { showPending(); }
   function renderSelection() { showPending(true); }
+  function selectionOwner(candidate, pending=engine.state.pending) {
+    const owner=engine.find(candidate.uid)?.owner??candidate.owner??(pending?.kind==='order'?pending.owner:null);
+    return owner===0||owner===1?owner:null;
+  }
+  function selectionZone(candidate) {
+    const zone=engine.find(candidate.uid)?.zone||candidate.zone;
+    return I.term(({hand:'手牌',deck:'卡组',grave:'墓地',extra:'额外卡组',monsters:'场上',extraMonster:'额外怪兽区',overlays:'超量素材',banished:'除外区',spells:'魔陷区',fieldSpell:'场地区'})[zone]||zone||'');
+  }
+  function selectionOwnerHTML(owner) {
+    return owner===null?'':'<span class="selection-owner" data-selection-owner="'+owner+'">'+I.term(owner===0?'我方':'对方')+'</span>';
+  }
+  function selectionGridHTML(candidates, pending) {
+    return [1,0,null].map(owner=>{
+      const group=candidates.filter(c=>selectionOwner(c,pending)===owner);if(!group.length)return '';
+      const heading=owner===null?'':'<div class="selection-side-heading" data-selection-side="'+owner+'" role="heading" aria-level="3"><strong>'+I.term(owner===0?'我方卡片':'对方卡片')+'</strong><span class="selection-side-count">'+group.length+'</span></div>';
+      return heading+group.map(c=>{
+        const label=c.label||CARDS[c.cardId]?.name||c.uid,zone=selectionZone(c);
+        const description=[owner===null?'':I.term(owner===0?'我方':'对方'),zone,label].filter(Boolean).join(' · ');
+        return '<button type="button" class="selection-card'+(!c.cardId&&!c.hidden?' text-selection':'')+'" data-action="pending-pick" data-uid="'+escape(c.uid)+'"'+(owner===null?'':' data-selection-owner="'+owner+'"')+' aria-label="'+escape(description)+'" aria-pressed="false">'+selectionOwnerHTML(owner)+(c.hidden?'<img class="selection-back" src="'+ART['card-back']+'" alt="未公开的卡片">':c.cardId?cardHTML(c.cardId,engine.find(c.uid)?.card):'<span class="text-option-symbol">'+(c.uid==='cancel'?'↶':c.uid==='direct'?'⚔':'◇')+'</span>')+'<b class="pick-number"></b><small>'+escape(label)+'</small><span>'+escape([zone,c.detail].filter(Boolean).join(' · '))+'</span>'+(c.mandatory?'<em class="mandatory-badge">'+(pending.kind==='order'?'强制':'必选')+'</em>':'')+'</button>';
+      }).join('');
+    }).join('');
+  }
+  function renderPickInspector(candidate, materialNote='') {
+    const inspector=$('#pick-inspector');if(!inspector)return;
+    let html='<span>点选卡牌，查看效果与选择顺序。</span>';
+    if(candidate){
+      const c=I.option(candidate,engine.state.pending,engine),owner=selectionOwner(c),zone=selectionZone(c);
+      html='<div class="pick-inspector-context">'+selectionOwnerHTML(owner)+'<small>'+escape(zone)+'</small></div>';
+      html+=!c.hidden&&c.cardId?detailsHTML(c.cardId,engine.find(c.uid)?.card):'<strong class="pick-hidden-name">'+escape(c.label)+'</strong><p>'+escape(c.detail||'')+'</p>';
+    }
+    inspector.innerHTML=html+(materialNote?'<p class="level-equation">'+escape(materialNote)+'</p>':'');
+  }
   function showPending(force=false) {
     const p=engine.state.pending;if(!p||p.responder!==0||engine.state.winner!==null||modal.open&&modalKind!=='pending'||chainDirector.busy)return;
     if(peekState&&!force){renderPeekBar();return;}
@@ -656,11 +751,11 @@
     const situation=Experience.responseSummary(engine,p),chain=engine.state.chain,sourceId=p.ctx?.sourceId||trigger?.sourceId||engine.find(p.uid)?.card.id||situation.cardId;
     const chainHTML=chain.length?'<div class="pending-chain"><small>CHAIN · '+chain.map(l=>l.chainNumber).reverse().join(' → ')+' · 后发动先结算</small>'+chain.map(l=>'<span class="chain-owner-'+l.owner+'"><b>'+String(l.chainNumber).padStart(2,'0')+'</b><strong>'+(l.owner===0?'我方':'对方')+'</strong>'+escape(CARDS[l.sourceId].name)+'<em>'+escape(I.effectLabel(window.DuelEffects.get(l.key))||'')+'</em></span>').join('')+'</div>':'';
     const min=p.min??p.group?.min??1,max=p.max??p.group?.max??1;
-    const notice=p.kind==='order'?'依次点选想发动的效果，序号就是连锁顺序；后选择的效果先结算。必须包含标注为「强制」的效果。':p.purpose==='pendulum'?'手牌使用主怪兽区；表侧额外的灵摆需要共享额外区或Link箭头指向的主区，且等级位于两刻度之间。':['extra','link-effect'].includes(p.purpose)?'选择素材，再选择合法召唤区域。Link怪兽作为素材可计为1或自身Link值，合计须精确等于目标Link值。' :p.kind==='discard'?'手牌上限为6张。请选择需要送墓的卡片。':p.kind==='window'?'现在可以连锁发动效果，也可以保留卡片。':p.kind==='trigger'?'满足了诱发条件。可以发动这个效果，也可以保留。':p.cancelable?'先选择代价或目标，再确认发动。':'效果正在结算中，请完成这一步选择。';
+    const notice=p.kind==='order'?'依次点选想发动的效果，序号就是连锁顺序；后选择的效果先结算。必须包含标注为「强制」的效果。':p.purpose==='pendulum'?'手牌使用主怪兽区；表侧额外的灵摆需要共享额外区或Link箭头指向的主区，且等级位于两刻度之间。':['extra','link-effect'].includes(p.purpose)?'选择素材，再选择合法召唤区域。Link怪兽作为素材可计为1或自身Link值，合计须精确等于目标Link值。' :p.kind==='discard'?'手牌上限为6张。请选择需要送墓的卡片。':p.kind==='window'?'选择效果连锁，或跳过本次响应。':p.kind==='trigger'?'满足了诱发条件。可以发动这个效果，也可以保留。':p.cancelable?'先选择代价或目标，再确认发动。':'效果正在结算中，请完成这一步选择。';
     const back=(CARDS[sourceId]?'<div class="pending-source">'+Art.html(sourceId,'pending-source-art')+'<div><small>'+escape(isResponse?situation.label:'EFFECT PROCESS')+(situation.number?' · CHAIN '+situation.number:'')+'</small><h3>'+escape(CARDS[sourceId].name)+'</h3>'+(!isResponse?'<p>'+escape(I.effectLabel(window.DuelEffects.get(p.ctx?.key||trigger?.key)))+'</p>':'')+'</div></div>':'')+(isResponse?'<div class="response-context"><p>'+escape(situation.label)+' · '+escape(situation.text||'')+'</p>'+(situation.detail?'<p class="response-action-detail">'+escape(situation.detail)+'</p>':'')+(situation.targets.length?'<p class="response-target-list">目标：'+situation.targets.map(x=>escape(x.label)).join('、')+'</p>':'')+(sourceId?'<details><summary>查看发动卡片的效果</summary><p>'+escape(CARDS[sourceId]?.description||'')+'</p></details>':'')+'<small>战局已暂停，查看后再决定。</small></div>':'');
-    const body=back+chainHTML+'<p class="modal-lead">'+notice+'</p>'+(isResponse?'<div class="response-options">'+options.map((o,i)=>{const id=o.cardId||engine.find(o.uid)?.card.id;return '<button class="response-option" data-action="pending-response" data-index="'+i+'">'+(id?Art.html(id,'response-art'):'')+'<span><strong>'+escape(I.effectLabel(window.DuelEffects.get(o.key))||o.label||I.effectLabel(window.DuelEffects.get(o.key))||CARDS[id]?.name)+'</strong><small>'+escape(CARDS[id]?.description||'')+'</small></span><b>↗</b></button>';}).join('')+'</div>':'<div class="pending-selection-layout"><div><div class="selection-grid">'+candidates.map((c,i)=>'<button class="selection-card'+(!c.cardId&&!c.hidden?' text-selection':'')+'" data-action="pending-pick" data-uid="'+escape(c.uid)+'" aria-pressed="false">'+(c.hidden?'<img class="selection-back" src="'+ART['card-back']+'" alt="未公开的卡片">':c.cardId?cardHTML(c.cardId,engine.find(c.uid)?.card):'<span class="text-option-symbol">'+(c.uid==='cancel'?'↶':c.uid==='direct'?'⚔':'◇')+'</span>')+'<b class="pick-number"></b><small>'+escape(c.label||CARDS[c.cardId]?.name||c.uid)+'</small><span>'+escape((c.zone?({hand:'手牌',deck:'卡组',grave:'墓地',extra:'额外卡组',monsters:'场上',extraMonster:'额外怪兽区',overlays:'超量素材',banished:'除外区',spells:'魔陷区'}[c.zone]||c.zone)+' · ':'')+(c.detail||''))+'</span>'+(c.mandatory?'<em class="mandatory-badge">'+(p.kind==='order'?'强制':'必选')+'</em>':'')+'</button>').join('')+'</div>'+(p.sets?.length?'<div class="material-presets"><small>合法组合 · 共 '+p.sets.length+' 种</small>'+p.sets.slice(0,16).map((set,i)=>'<button data-action="pending-combo" data-index="'+i+'">'+set.map(uid=>{const c=candidates.find(c=>c.uid===uid);return escape(c?.label||uid);}).join(' ＋ ')+'</button>').join('')+'</div>':'')+'</div><aside class="pick-inspector" id="pick-inspector"><span>点选卡牌，查看效果与选择顺序。</span></aside></div>')+'<p class="pick-feedback" id="pick-feedback" role="status">'+(isResponse?'请选择要发动的效果。':'需选 '+min+(min===max?'':'—'+max)+' 项 · 已选 0')+'</p>';
+    const body=back+chainHTML+'<p class="modal-lead">'+notice+'</p>'+(isResponse?'<div class="response-options">'+options.map((o,i)=>{const id=o.cardId||engine.find(o.uid)?.card.id;return '<button class="response-option" data-action="pending-response" data-index="'+i+'">'+(id?Art.html(id,'response-art'):'')+'<span><strong>'+escape(I.effectLabel(window.DuelEffects.get(o.key))||o.label||I.effectLabel(window.DuelEffects.get(o.key))||CARDS[id]?.name)+'</strong><small>'+escape(CARDS[id]?.description||'')+'</small></span><b>↗</b></button>';}).join('')+'</div>':'<div class="pending-selection-layout"><div><div class="selection-grid">'+selectionGridHTML(candidates,p)+'</div>'+(p.sets?.length?'<div class="material-presets"><small>合法组合 · 共 '+p.sets.length+' 种</small>'+p.sets.slice(0,16).map((set,i)=>'<button data-action="pending-combo" data-index="'+i+'">'+set.map(uid=>{const c=candidates.find(c=>c.uid===uid);return escape(c?.label||uid);}).join(' ＋ ')+'</button>').join('')+'</div>':'')+'</div><aside class="pick-inspector" id="pick-inspector"><span>点选卡牌，查看效果与选择顺序。</span></aside></div>')+'<p class="pick-feedback" id="pick-feedback" role="status">'+(isResponse?'请选择要发动的效果。':'需选 '+min+(min===max?'':'—'+max)+' 项 · 已选 0')+'</p>';
     const canPass=isResponse&&!trigger?.mandatory;
-    openModal('pending',escape(I.pendingTitle(p,engine)),isResponse?'YOUR RESPONSE · 把握这一刻':'YOUR CHOICE · 每次选择都算数',body,'<button class="peek-field-button" data-action="pending-peek">'+icon('eye')+'查看战局</button>'+(canPass?'<button class="secondary-button" data-action="pending-pass">'+(p.kind==='window'?'不连锁':'不发动')+'</button>':p.cancelable?'<button class="secondary-button" data-action="pending-cancel">取消选择</button>':'')+'<button class="primary-button" id="pending-confirm" data-action="pending-confirm" disabled>'+(isResponse?'发动效果':p.kind==='order'?'确认连锁顺序':p.kind==='materials'?'确认素材并召唤':'确认选择')+' '+icon('spark')+'</button>','selection-modal modern-pending');
+    openModal('pending',escape(I.pendingTitle(p,engine)),isResponse?'YOUR RESPONSE · 把握这一刻':'YOUR CHOICE · 每次选择都算数',body,'<button class="peek-field-button" data-action="pending-peek">'+icon('eye')+'查看战局</button>'+(canPass?'<button class="secondary-button" data-action="pending-pass">'+(p.kind==='window'?'本次不连锁':'不发动')+'</button>':p.cancelable?'<button class="secondary-button" data-action="pending-cancel">取消选择</button>':'')+'<button class="primary-button" id="pending-confirm" data-action="pending-confirm" disabled>'+(isResponse?'发动效果':p.kind==='order'?'确认连锁顺序':p.kind==='materials'?'确认素材并召唤':'确认选择')+' '+icon('spark')+'</button>','selection-modal modern-pending');
     if(candidates.length>30)$('#modal .selection-grid')?.insertAdjacentHTML('beforebegin','<input type="search" id="pending-search" class="selection-search" placeholder="搜索候选卡名…" aria-label="搜索当前候选卡片">');
     if(p.kind==='materials'&&['extra','fusion','ritual','pendulum','link-effect'].includes(p.purpose)){
       const isLink=CARDS[engine.find(p.uid)?.card.id]?.type==='link';
@@ -682,7 +777,7 @@
       else materialNote=target?.type==='synchro'?'等级合计 '+materials.reduce((n,c)=>n+engine.level(c),0)+' → 目标 '+target.level+' 星':materials.length===1&&CARDS[materials[0].id].type==='xyz'?'叠放升阶 · 继承已有素材':materials.map(c=>'LV '+engine.level(c)).join(' ＋ ')+' → RANK '+(target?.rank||'');
     }
     if(p.purpose==='ritual')materialNote='解放等级合计 '+materials.reduce((n,c)=>n+engine.level(c),0)+' / 仪式魔法要求 '+engine.ritualRequirement(p.spellId,extra)+' 星';
-    if(last?.cardId&&$('#pick-inspector'))$('#pick-inspector').innerHTML=detailsHTML(last.cardId,engine.find(last.uid)?.card)+(materialNote?'<p class="level-equation">'+escape(materialNote)+'</p>':'');
+    renderPickInspector(last,materialNote);
     const picker=$('#summon-zone-picker');if(picker){const zones=valid.valid&&extra?engine.freeZones(p.owner,extra,{materials:selected}):[];if(!zones.includes(selectionState.zone))selectionState.zone=zones[0]??null;picker.innerHTML='<span>召唤区域</span><div>'+ (zones.length?zones.map(z=>'<button data-action="summon-zone" data-zone="'+z+'" class="'+(selectionState.zone===z?'active':'')+'">'+zoneName(p.owner,z)+'</button>').join(''):'<small>选择合法素材后显示可用区域</small>')+'</div>';}
   }
   function zoneName(owner,zone) {return typeof zone==='number'?'主怪兽区 '+(zone+1):'共享额外区 '+(engine.extraSlot(owner,zone)===0?'Ⅰ':'Ⅱ');}
@@ -690,7 +785,7 @@
     const p=engine.state.pending;if(!p||!selectionState)return;
     const candidates=p.candidates||p.group?.candidates||[];if(!candidates.some(c=>c.uid===uid))return;
     const max=p.max??p.group?.max??1,selected=selectionState.selected;
-    if(max===0){const c=candidates.find(c=>c.uid===uid);if(c?.cardId&&$('#pick-inspector'))$('#pick-inspector').innerHTML=detailsHTML(c.cardId,engine.find(uid)?.card);return;}
+    if(max===0){renderPickInspector(candidates.find(c=>c.uid===uid));return;}
     if(selected.includes(uid))selectionState.selected=selected.filter(x=>x!==uid);else if(max===1)selectionState.selected=[uid];else if(selected.length<max)selected.push(uid);else{showToast('已选满，先取消一项即可更换。');return;}updatePicks();
   }
   function filterPending(query) {
@@ -700,6 +795,10 @@
       const option=candidates.find(c=>c.uid===el.dataset.uid);
       const searchable=option?.cardId&&!option.hidden?I.searchName(option.cardId):el.textContent.normalize('NFKC').toLowerCase();
       el.hidden=!searchable.includes(q);
+    }
+    for(const heading of $$('#modal .selection-side-heading')){
+      const count=$$('#modal .selection-card[data-selection-owner="'+heading.dataset.selectionSide+'"]').filter(el=>!el.hidden).length;
+      heading.hidden=count===0;heading.querySelector('.selection-side-count').textContent=count;
     }
   }
   function showLog() {
@@ -911,10 +1010,12 @@
       case 'cancel-intent':clearIntent();break;
       case 'library-filter':libraryFilter=b.dataset.filter;libraryPage=0;renderLibraryResults();break;
       case 'library-page':libraryPage+=Number(b.dataset.delta);renderLibraryResults();$('#modal .modal-body')?.scrollTo({top:0});break;
-      case 'choose-deck':setupOptions.deck=b.dataset.deck;{const scroll=$('.deck-roster').scrollTop;renderNewGame();$('.deck-roster').scrollTop=scroll;}break;
-      case 'choose-first':setupOptions.first=Number(b.dataset.value);renderNewGame();break;
+      case 'choose-deck':setupOptions.deck=b.dataset.deck;updateSetupDeck();break;
+      case 'choose-first':updateSetupSegment(b,'first',Number(b.dataset.value));break;
       case 'choose-mode':if(b.dataset.value==='pvp'){showPvp();break;}if(b.dataset.value==='tournament'){showTournament();break;}setupOptions.mode=b.dataset.value==='spectate'?'spectate':'duel';renderNewGame();break;
-      case 'choose-difficulty':setupOptions.difficulty=b.dataset.value;renderNewGame();break;
+      case 'choose-difficulty':updateSetupSegment(b,'difficulty',b.dataset.value);break;
+      case 'clear-deck-search':{const input=document.getElementById(b.dataset.input);input.value='';input.dispatchEvent(new Event('input',{bubbles:true}));input.focus({preventScroll:true});break;}
+      case 'reset-deck-filters':setupOptions.query='';setupOptions.year='all';$('#setup-deck-search').value='';$('#setup-year').value='all';renderSetupRoster(true);$('#setup-deck-search').focus({preventScroll:true});break;
       case 'begin-game':if(setupOptions.mode==='spectate')beginSpectate(setupOptions);else startGame({...setupOptions,seed:Date.now()});break;
       case 'rematch':{const base={deck:engine.state.players[0].deckId,opponentDeck:engine.state.players[1].deckId,difficulty:engine.state.difficulty};if(spectating())beginSpectate(base);else startGame({...base,first:0,seed:Date.now()});break;}
       case 'spectate-toggle':spectateToggle();break;
@@ -939,6 +1040,8 @@
   });
   document.addEventListener('input',event=>{
     if(workshop.input(event.target))return;
+    if(event.target.id==='setup-deck-search'){setupOptions.query=event.target.value;renderSetupRoster(true);}
+    if(event.target.id==='opponent-deck-search'){setupOptions.opponentQuery=event.target.value;renderSetupOpponent();}
     if(event.target.id==='pending-search')filterPending(event.target.value);
     if(event.target.id==='library-search'){libraryQuery=event.target.value;libraryPage=0;renderLibraryResults();}
     if(event.target.id==='volume-control'){prefs.volume=Number(event.target.value)/100;updatePrefs();$('#volume-label').textContent=Math.round(prefs.volume*100)+'%';}
@@ -954,7 +1057,7 @@
     if(event.target.id==='library-page-jump'){libraryPage=Math.max(0,Math.floor(Number(event.target.value)||1)-1);renderLibraryResults();$('#modal .modal-body')?.scrollTo({top:0});}
     if(event.target.id==='card-style'){prefs.cardStyle=event.target.value==='full-art'?'full-art':'classic';updatePrefs();}
     if(event.target.id==='opponent-deck')setupOptions.opponentDeck=event.target.value;
-    if(event.target.id==='setup-year'){setupOptions.year=event.target.value;const list=DeckTools.list().filter(d=>setupOptions.year==='all'||d.year===Number(setupOptions.year));if(list.length&&!list.some(d=>d.id===setupOptions.deck))setupOptions.deck=list[0].id;renderNewGame();}
+    if(event.target.id==='setup-year'){setupOptions.year=event.target.value;renderSetupRoster(true);}
   });
   document.addEventListener('pointerover', event => {
     if (event.pointerType === 'touch' || modal.open || intent) return;

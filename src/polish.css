@@ -13,3 +13,76 @@
 .t-result-notice{padding:9px 13px;margin-top:7px;border:1px solid #d2b77870;border-radius:6px;color:#ecdbac;background:#344131;font-size:calc(12px * var(--ui-scale));line-height:1.5;overflow-wrap:anywhere}
 .t-result-notice[hidden]{display:none}.t-result-notice[data-outcome-kind=deck-out]{background:#50382460}.t-verdict{font-size:calc(12px * var(--ui-scale));line-height:1.65}
 @media(max-width:760px){.home-bottom .project-signature{font-size:10px;gap:6px}.project-credit{padding:14px}.result-cause{padding:12px 14px}.result-cause>strong{font-size:calc(15px * var(--ui-scale))}.result-cause>p{font-size:calc(12px * var(--ui-scale))}.t-result-notice{font-size:11px;padding:7px 9px}}
+
+/* Keep deck browsing stable while the surrounding match settings change. */
+.setup-deck-browser{display:flex;flex-direction:column;gap:10px;min-width:0}
+.setup-deck-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:20px}
+.setup-deck-heading .setting-label{margin:0;color:#c7d8dc}
+.setup-result-count{color:#9bb4c2;font-size:calc(11px * var(--ui-scale));font-variant-numeric:tabular-nums;white-space:nowrap}
+.setup-deck-filters{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px}
+.setup-deck-search{display:flex;align-items:center;gap:9px;min-width:0;min-height:40px;padding:0 10px;border:1px solid #7699ad50;border-radius:7px;background:#0b1d2b;transition:border-color .15s,box-shadow .15s}
+.setup-deck-search:focus-within{border-color:#d2be84;box-shadow:0 0 0 2px #d2be8418}
+.setup-deck-search>.icon{flex:none;width:16px;height:16px;color:#9cb7c4}
+.setup-deck-search input{min-width:0;width:100%;padding:10px 0;background:transparent;border:0;outline:none;color:#e2eae4;font:inherit;font-size:calc(12px * var(--ui-scale))}
+.setup-deck-search input::placeholder{color:#8da5b3;opacity:1}
+.setup-deck-search input::-webkit-search-cancel-button{-webkit-appearance:none}
+.setup-deck-search button{display:grid;place-items:center;flex:none;width:28px;height:28px;margin-right:-5px;border-radius:4px;color:#a7bdc9}
+.setup-deck-search button:hover{background:#284456;color:#f0ddb0}
+.setup-deck-search button[hidden]{display:none}
+.setup-deck-search button .icon{width:15px;height:15px}
+.setup-deck-filters select{min-width:102px;max-width:150px;border:1px solid #7699ad50;border-radius:7px;padding:8px 10px;background:#132a38;color:#ded7b9;font:inherit;font-size:calc(12px * var(--ui-scale))}
+.v2-new-game .deck-roster{height:clamp(250px,35dvh,390px);max-height:none;min-height:0;overscroll-behavior:contain;scrollbar-gutter:stable;scrollbar-color:#6f94a5 #152e3c;align-content:start}
+.v2-new-game .deck-roster-item:focus-visible{outline:2px solid #e5cb89;outline-offset:-3px}
+.setup-opponent>.setup-deck-heading{margin-bottom:9px}
+.setup-opponent>#opponent-deck{margin-top:8px;min-height:40px;color:#e0e8e2}
+.setup-search-note{font-size:calc(11px * var(--ui-scale));line-height:1.7;color:#d4bd87;margin-top:7px}
+.setup-search-note[hidden]{display:none}
+.deck-search-empty{grid-column:1/-1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;min-height:220px;padding:24px 16px;text-align:center;color:#9db3bf;border:1px dashed #7394a345;border-radius:8px;background:#11253260}
+.deck-search-empty>.icon{width:28px;height:28px;color:#adc6ce;margin-bottom:4px}
+.deck-search-empty strong{color:#d6e3e2;font-size:calc(15px * var(--ui-scale));font-weight:500}
+.deck-search-empty p{font-size:calc(12px * var(--ui-scale));line-height:1.7}
+.deck-search-empty .text-button{color:#dfca8e}
+
+/* Ownership follows the current controller, including hidden field cards. */
+.modern-pending .selection-grid{row-gap:14px;align-items:start;overscroll-behavior:contain}
+.selection-side-heading{--side-color:#92d5e5;grid-column:1/-1;display:flex;align-items:center;gap:10px;padding:9px 11px;border-left:3px solid var(--side-color);border-radius:3px;background:#163342;color:var(--side-color)}
+.selection-side-heading[data-selection-side="1"]{--side-color:#efa5b0;background:#3c283740}
+.selection-side-heading strong{font-size:calc(12px * var(--ui-scale));font-weight:600;letter-spacing:.06em}
+.selection-side-count{display:grid;place-items:center;min-width:22px;height:22px;padding:0 6px;margin-left:auto;border:1px solid currentColor;border-radius:12px;font-size:11px;font-variant-numeric:tabular-nums}
+.selection-side-heading[hidden]{display:none}
+.modern-pending .selection-card[data-selection-owner]{padding:7px;border:1px solid #6dabc044;border-radius:7px;background:#16344240}
+.modern-pending .selection-card[data-selection-owner="1"]{border-color:#b87a8944;background:#40263626}
+.modern-pending .selection-card.chosen{border-color:#e1cb8b;background:#bca36718;box-shadow:0 0 0 1px #e1cb8b55}
+.modern-pending .selection-card.chosen:after{display:none}
+.modern-pending .selection-card .pick-number{top:7px;right:7px;border-radius:4px}
+.modern-pending .selection-card:focus-visible{outline:2px solid #e8d093;outline-offset:2px}
+.selection-owner,.selection-card>.selection-owner{display:flex;align-items:center;justify-content:flex-start;gap:6px;min-height:23px;margin:0 0 7px;padding:2px 5px;color:#a2e0ed;font-size:calc(11px * var(--ui-scale));font-weight:600;line-height:1.4;letter-spacing:.04em}
+.selection-owner:before{content:"";width:6px;height:6px;flex:none;border-radius:50%;background:currentColor}
+.selection-owner[data-selection-owner="1"]{color:#f2a6b2}
+.selection-card>.selection-owner{padding-right:23px}
+.modern-pending .selection-card>small{color:#d4dfda;font-size:calc(11px * var(--ui-scale));margin-top:8px}
+.modern-pending .selection-card>span:not(.selection-owner){color:#9ab3be;font-size:calc(10px * var(--ui-scale))}
+.pick-inspector-context{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid #819fac35}
+.pick-inspector-context .selection-owner{margin:0;padding:0}
+.pick-inspector-context small{color:#b1c5ce;font-size:calc(11px * var(--ui-scale))}
+.pick-hidden-name{display:block;font-size:calc(14px * var(--ui-scale));font-weight:500;color:#dbe6e3;margin:12px 0 8px}
+
+@media(max-width:760px){
+  .setup-deck-filters{gap:7px}
+  .setup-deck-filters select{min-width:90px;max-width:115px;padding:7px}
+  .setup-deck-search{gap:6px;padding:0 8px}
+  .setup-deck-search input{font-size:calc(11px * var(--ui-scale))}
+  .selection-side-heading{padding:7px 9px}
+  .selection-side-heading strong{font-size:calc(11px * var(--ui-scale))}
+  .modern-pending .selection-card[data-selection-owner]{padding:5px}
+  .selection-card>.selection-owner{font-size:calc(10px * var(--ui-scale));padding-left:1px}
+  .modern-pending .selection-card .pick-number{top:5px;right:5px}
+}
+@media(max-width:540px){
+  .v2-new-game .deck-roster{height:260px}
+  .setup-deck-heading .setting-label{font-size:calc(11px * var(--ui-scale))}
+  .setup-deck-search{min-height:42px}
+  .setup-deck-search button{width:32px;height:32px}
+  .deck-search-empty{min-height:245px;padding:20px 12px}
+  .modern-pending .selection-grid{gap:12px 9px}
+}
