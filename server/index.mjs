@@ -8,6 +8,7 @@ import { createGzip } from 'node:zlib';
 import { WebSocketServer, WebSocket } from 'ws';
 import { Store } from './store.mjs';
 import { PvpService, PROTOCOL } from './service.mjs';
+import { createAIProxy } from './ai-proxy.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const mime = { '.html': 'text/html; charset=utf-8', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.png': 'image/png', '.mp3': 'audio/mpeg', '.m4a': 'audio/mp4', '.ogg': 'audio/ogg', '.ico': 'image/x-icon' };
@@ -26,6 +27,7 @@ export async function createPvpServer(options = {}) {
   const origins = new Set((options.origins || []).map(value => new URL(value).origin));
   const peers = new Map(), creationRates = new Map();
   const peerOf = request => options.trustProxy && request.headers['x-forwarded-for'] ? String(request.headers['x-forwarded-for']).split(',').at(-1).trim() : request.socket.remoteAddress;
+  const aiProxy = createAIProxy({ peerOf, ...options.aiOptions });
   const originAllowed = request => {
     if (!request.headers.origin) return true; // Native clients still authenticate with a session capability.
     try {
@@ -39,6 +41,8 @@ export async function createPvpServer(options = {}) {
   };
   const server = createServer(async (request, response) => {
     try {
+      const aiPath = new URL(request.url, 'http://localhost').pathname;
+      if (await aiProxy(request, response, aiPath)) return;
       if (!['GET', 'HEAD'].includes(request.method)) { response.writeHead(405, { ...headers, Allow: 'GET, HEAD' }); response.end(); return; }
       const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
       if (pathname === '/api/health' || pathname === '/api/pvp/info') {

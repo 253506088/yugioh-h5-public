@@ -43,16 +43,17 @@ async function check(name, fn) {
     await check('own and opponent deck selectors support search', async () => {
       await page.click('#home-screen [data-action="new-game"]');
       await page.waitForSelector('#setup-deck-search');
+      const totalDecks = await page.evaluate(() => DuelDecks.list().length);
 
       await page.fill('#setup-deck-search', 'blue');
       const ownCount = await page.locator('#setup-deck-roster [data-action="choose-deck"]').count();
-      assert.ok(ownCount > 0 && ownCount < 38, `unexpected own-deck result count: ${ownCount}`);
+      assert.ok(ownCount > 0 && ownCount < totalDecks, `unexpected own-deck result count: ${ownCount}`);
       const ownIds = await page.locator('#setup-deck-roster [data-action="choose-deck"]').evaluateAll(elements => elements.map(element => element.dataset.deck));
       assert.ok(ownIds.length === ownCount && ownIds.every(Boolean));
       assert.equal(await page.locator('#setup-year').isVisible(), true);
 
       await page.fill('#opponent-deck-search', '2012');
-      assert.equal((await page.locator('#opponent-search-count').textContent()).trim(), '3 / 38');
+      assert.equal((await page.locator('#opponent-search-count').textContent()).trim(), '3 / ' + totalDecks);
       const opponentOptions = await page.locator('#opponent-deck option').allTextContents();
       assert.ok(opponentOptions.some(text => text.includes('2012')));
       assert.equal(await page.locator('#opponent-deck').isVisible(), true);

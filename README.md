@@ -22,7 +22,7 @@
 - [机器人出牌逻辑解析](docs/bot-decision-logic.md)：规则评分 + 有限推演的四层结构、每层的代码位置、驱动节奏、当前局限与改进方向。
 - [机器人推演层](docs/bot-planner.md)：统一局面价值、本回合推演、战斗推演与响应门；镜像对局 60% 胜率的验证方法。
 - [生效中的效果、手坑与反击陷阱判断](docs/lingering-and-bot-judgment.md)：信息栏的效果芯片与完整列表、机器人不再召唤手坑、反击陷阱只在划算时发动。
-- [第三方 AI 组卡接入设计](docs/ai-deck-import-design.md)：OpenAI／Anthropic 两种协议、文本／图片／网址解析卡组的设计稿（未实现）。
+- [AI 卡组导入](docs/ai-deck-import.md)：YDK／YDKe／清单离线识别，OpenAI／Anthropic 文本与图片抽取，服务器网址导入、逐卡确认与多卡组草稿。附[设计稿](docs/ai-deck-import-design.md)。
 - [PVP 使用与部署](docs/pvp.md)：房间、匹配、BO1 规则、重连、存储、局域网／公网部署和协议。
 - [决斗体验升级说明](docs/experience-upgrade.md)：主界面、一屏战斗、字号和分页设置、原声 BGM、卡背卡框、连锁演出及响应模式。
 - [死斗竞技场](docs/tournament.md)：2–64 名机器人淘汰赛、随机／指定本地及自定义卡组、重复编号、并行观战、晋级图和整场录像。
@@ -58,6 +58,8 @@ macOS / Linux 使用 `npm`。要求 Node.js 22.13 或以上，建议 24 LTS；�
 | `npm run cards:coverage` | 导出逐卡实现和输入覆盖报告 |
 | `npm run locales:sync` | 从保留的文本数据库离线生成当前卡池的三语资料 |
 | `npm run locales:update` | 手动联网更新三语文本数据库；不下载卡图 |
+| `npm run cards:catalog` | 从已提交的三语数据库离线重建全库名录 |
+| `npm run test:ai-import` | AI 导入核心、代理安全与桌面／手机浏览器验证 |
 | `npm test` | 规则、回归、三语完整性和采集日志测试 |
 | `npm run test:v4-simulation` | 预设 / 年度混合牌组模拟 |
 | `npm run test:browser` | 离线规则、组卡、三语切换、移动布局及模拟在线卡图验证 |

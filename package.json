@@ -56,7 +56,11 @@
     "start:pvp": "node server/index.mjs",
     "start:static": "node scripts/serve.mjs",
     "test:pvp": "node --test tests/pvp.test.mjs tests/pvp-network.test.mjs",
-    "test:pvp:browser": "node tests/pvp-browser.cjs"
+    "test:pvp:browser": "node tests/pvp-browser.cjs",
+    "cards:catalog": "node scripts/build-card-catalog.mjs",
+    "test:ai-import:unit": "node --test tests/ai-provider.test.cjs tests/card-resolver.test.cjs tests/deck-parse.test.cjs tests/ai-proxy.test.mjs",
+    "test:ai-import:browser": "node tests/ai-import-browser.cjs",
+    "test:ai-import": "npm run test:ai-import:unit && npm run test:ai-import:browser"
   },
   "engines": {
     "node": ">=22.13.0"

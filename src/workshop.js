@@ -7,7 +7,7 @@
   const typeFilters=[['all','全部'],['monster','怪兽'],['spell','魔法'],['trap','陷阱'],['ritual','仪式'],['fusion','融合'],['synchro','同调'],['xyz','超量'],['link','连接'],['pendulum','灵摆'],['tuner','调整']];
   function create(host){
     let draft={name:I.term('我的新卡组'),cards:[],extra:[]},query='',family='all',year='all',type='all',page=0,focus='hero-sunrise',onlyIncluded=false,onlyPlayable=true,undo=[],redo=[],savedNote='',deleteArmed=false,mobileView='collection';
-    try{const d=JSON.parse(localStorage.getItem(DRAFT));if(d&&Array.isArray(d.cards)&&Array.isArray(d.extra)){draft={name:String(d.name||I.term('我的新卡组')).slice(0,40),cards:d.cards.filter(id=>CARDS[id]&&!CARDS[id].notCollectible&&!isExtra(CARDS[id])).slice(0,60),extra:d.extra.filter(id=>CARDS[id]&&isExtra(CARDS[id])).slice(0,15),...(T.getSaved().some(s=>s.id===d.id)?{id:d.id}:{})};}}catch{}
+    try{const d=JSON.parse(localStorage.getItem(DRAFT));if(d&&Array.isArray(d.cards)&&Array.isArray(d.extra)){draft={name:String(d.name||I.term('我的新卡组')).slice(0,40),notes:String(d.notes||'').slice(0,16000),cards:d.cards.filter(id=>Object.hasOwn(CARDS,id)&&!CARDS[id].notCollectible).slice(0,1200),extra:d.extra.filter(id=>Object.hasOwn(CARDS,id)&&!CARDS[id].notCollectible).slice(0,1200),...(T.getSaved().some(s=>s.id===d.id)?{id:d.id}:{})};}}catch{}
     const $=s=>document.querySelector(s);
     const sameName=id=>(CARDS[id]?.nameAlias||CARDS[id]?.officialName||id).toLowerCase();
     const count=id=>[...draft.cards,...draft.extra].filter(x=>sameName(x)===sameName(id)).length;
@@ -15,11 +15,12 @@
     function remember(){undo.push(clone(draft));if(undo.length>80)undo.shift();redo=[];}
     function changes(){persist();renderBuild();renderCollection();renderToolbar();}
     function show(id=null){
-      if(id&&D.DECKS[id]){remember();const d=D.DECKS[id];draft=d.custom?{id:d.id,name:d.name,cards:[...d.cards],extra:[...d.extra]}:T.copy(id);if(!d.custom)draft.name=(I.deck(d).name+(I.language==='zh-CN'?' · 我的构筑':I.language==='en'?' · My Deck':' · マイデッキ')).slice(0,40);focus=d.ace;persist();}
+      if(id&&D.DECKS[id]){remember();const d=D.DECKS[id];draft=d.custom?{id:d.id,name:d.name,cards:[...d.cards],extra:[...d.extra],notes:d.notes||''}:T.copy(id);if(!d.custom)draft.name=(I.deck(d).name+(I.language==='zh-CN'?' · 我的构筑':I.language==='en'?' · My Deck':' · マイデッキ')).slice(0,40);focus=d.ace;persist();}
       const body='<div class="ws-toolbar" id="ws-toolbar"></div><div class="workshop-layout"><aside class="ws-inspector" id="ws-inspector"></aside><section class="ws-collection"><button class="ws-filter-toggle" id="ws-filter-toggle" data-action="ws-toggle-filters" aria-expanded="false" aria-controls="ws-filter-content"><span>筛选与搜索</span><b id="ws-filter-result"></b><i>⌄</i></button><div class="ws-filter-content" id="ws-filter-content"><div class="ws-search"><label class="search-box"><svg class="icon"><use href="#i-search"/></svg><input id="ws-search" type="search" placeholder="搜索卡名、效果或英文名…" value="'+esc(query)+'" aria-label="搜索组卡牌库"></label><select id="ws-family" aria-label="筛选卡片系列">'+Object.entries(D.families).map(([id,label])=>'<option value="'+id+'"'+(family===id?' selected':'')+'>'+label+'</option>').join('')+'</select></div><div class="ws-filters" id="ws-filters"></div><div class="ws-collection-meta"><span id="ws-result-count"></span><label><input id="ws-included" type="checkbox"'+(onlyIncluded?' checked':'')+'> 仅已编入</label></div><button class="ws-filter-done" data-action="ws-toggle-filters">显示筛选结果</button></div><div class="ws-card-grid" id="ws-card-grid"></div><div class="ws-pagination" id="ws-pagination"></div></section><aside class="ws-build"><div class="ws-build-title"><small>YOUR DECK</small><span id="ws-draft-status"></span></div><label class="ws-name-label">卡组名称<input id="ws-name" maxlength="40" value="'+esc(draft.name)+'" aria-label="卡组名称"></label><div id="ws-build-content"></div></aside></div><input id="ws-import-file" type="file" accept=".json,application/json" hidden>';
       host.open('workshop','构筑你的下一场胜利。','THE DECK ATELIER · 组卡工坊',body,'<span class="ws-footer-note">本作不采用赛事禁限卡表 · 默认仅显示可用卡片</span><button class="secondary-button" data-action="close-modal">返回决斗</button><button class="secondary-button" data-action="ws-save" id="ws-save">保存卡组</button><button class="primary-button" data-action="ws-play" id="ws-play">保存并出战 <svg class="icon"><use href="#i-arrow"/></svg></button>','workshop-modal');
       $('.ws-search').insertAdjacentHTML('beforeend','<select class="ws-year" id="ws-year" aria-label="组卡按发行年份筛选">'+V.yearOptions(year)+'</select>');
       $('.ws-collection-meta').insertAdjacentHTML('beforeend','<label><input type="checkbox" id="ws-playable"'+(onlyPlayable?' checked':'')+'> 仅可用于决斗</label>');
+      $('.ws-build').insertAdjacentHTML('beforeend','<label class="ws-notes">'+esc(I.term('导入备注'))+'<textarea id="ws-notes" maxlength="16000" data-user-content>'+esc(draft.notes||'')+'</textarea></label>');
       renderToolbar();renderBuild();renderCollection();renderInspector();
     }
     function renderToolbar(){
@@ -27,6 +28,7 @@
       node.innerHTML='<div class="ws-source"><label for="ws-source">从构筑开始</label><select id="ws-source"><option value="">选择预设 / 已保存卡组</option><optgroup label="预设卡组 · 自动建立副本">'+T.list().filter(d=>d.preset).map(d=>I.deck(d)).map(d=>'<option value="'+d.id+'">'+esc(d.name)+'</option>').join('')+'</optgroup><optgroup label="你的卡组">'+T.getSaved().map(d=>'<option data-user-content value="'+d.id+'">'+esc(d.name)+'</option>').join('')+'</optgroup></select></div><div class="ws-tools"><button data-action="ws-new">＋ 空白卡组</button><button data-action="ws-clone">复制当前</button><button data-action="ws-undo" title="撤销上次编辑"'+(!undo.length?' disabled':'')+'>↶ 撤销</button><button data-action="ws-redo" title="重做"'+(!redo.length?' disabled':'')+'>↷</button><button data-action="ws-import">导入</button><button data-action="ws-export">导出</button>'+(draft.id?'<button class="ws-delete" data-action="ws-delete">'+(deleteArmed?'确认删除？':'删除')+'</button>':'')+'</div>';
       node.insertAdjacentHTML('beforeend','<div class="ws-mobile-tabs"><button data-action="ws-view" data-view="collection" class="'+(mobileView==='collection'?'active':'')+'">牌库 · 添加卡片</button><button data-action="ws-view" data-view="build" class="'+(mobileView==='build'?'active':'')+'">当前构筑 '+draft.cards.length+' ＋ '+draft.extra.length+'</button></div>');
       $('.workshop-layout').dataset.mobileView=mobileView;
+      $('.ws-tools [data-action="ws-import"]').insertAdjacentHTML('afterend','<button class="ai-settings-link" data-action="ws-ai-import">✧ '+esc(I.term('AI 导入'))+'</button>');
     }
     function renderInspector(){
       const el=$('#ws-inspector');if(!el)return;
@@ -82,17 +84,19 @@
         case 'ws-reset-filters':query='';family='all';year='all';type='all';onlyIncluded=false;onlyPlayable=true;page=0;show();break;
         case 'ws-page':page+=Number(b.dataset.delta);renderCollection();$('#ws-card-grid')?.scrollTo({top:0});break;
         case 'ws-new':remember();draft={name:I.term('我的新卡组'),cards:[],extra:[]};persist();show();break;
-        case 'ws-clone':remember();draft={name:(draft.name+' · '+I.term('副本')).slice(0,40),cards:[...draft.cards],extra:[...draft.extra]};persist();show();break;
+        case 'ws-clone':remember();draft={name:(draft.name+' · '+I.term('副本')).slice(0,40),cards:[...draft.cards],extra:[...draft.extra],notes:draft.notes||''};persist();show();break;
         case 'ws-undo':if(undo.length){redo.push(clone(draft));draft=undo.pop();persist();show();}break;
         case 'ws-redo':if(redo.length){undo.push(clone(draft));draft=redo.pop();persist();show();}break;
         case 'ws-save':save();break;
         case 'ws-play':save(true);break;
         case 'ws-export':download();break;
         case 'ws-import':$('#ws-import-file')?.click();break;
+        case 'ws-ai-import':host.aiImport();break;
         case 'ws-delete':if(draft.id){if(!deleteArmed){deleteArmed=true;renderToolbar();setTimeout(()=>{deleteArmed=false;renderToolbar();},4500);}else{try{T.remove(draft.id);delete draft.id;deleteArmed=false;persist();renderToolbar();host.toast('已删除保存的卡组，当前草稿仍保留。');}catch(e){host.toast(e.message,true);}}}break;
       }return true;
     }
     function input(el){
+      if(el.id==='ws-notes'){draft.notes=el.value.slice(0,16000);persist();return true;}
       if(el.id==='ws-search'){query=el.value;page=0;renderCollection();return true;}
       if(el.id==='ws-name'){draft.name=el.value;persist();renderBuild();return true;}return false;
     }
@@ -108,7 +112,8 @@
         const file=el.files[0];try{if(file.size>100000)throw new Error('卡组文件过大，请选择导出的 JSON 卡组。');const imported=T.parseJSON(await file.text());remember();draft=imported;persist();show();host.toast('已导入草稿，保存后即可出战。');}catch(error){host.toast(error.message,true);}finally{el.value='';}
       }
     }
-    return {show,handle,input,change,get draft(){return clone(draft);}};
+    function importDraft(value){remember();draft={name:String(value.name).slice(0,40),cards:[...value.cards],extra:[...value.extra],notes:String(value.notes||'').slice(0,16000)};persist();show();}
+    return {show,handle,input,change,importDraft,get draft(){return clone(draft);}};
   }
   root.DuelWorkshop={create};
 })(globalThis);

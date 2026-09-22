@@ -34,6 +34,7 @@
   function clean(input, id = null) {
     const result = {id:id || ('custom-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,7)),name:String(input.name||'我的新卡组').trim().slice(0,40),cards:Array.isArray(input.cards)?input.cards.slice(0,100):[],extra:Array.isArray(input.extra)?input.extra.slice(0,40):[],updatedAt:Date.now(),version:2};
     if (!/^custom-[a-z0-9-]{1,70}$/.test(result.id)) throw new Error('自建卡组标识不合法。');
+    if (typeof input.notes === 'string' && input.notes) result.notes = input.notes.slice(0,16000);
     const check = analyze(result);
     if (!check.valid) throw new Error(check.errors.join('\n'));
     return result;
@@ -79,17 +80,17 @@
   function list() { return [...Object.values(DECKS).filter(d=>d.preset),...saved.map(d=>DECKS[d.id])]; }
   function copy(id) {
     const d=DECKS[id];if(!d)throw new Error('找不到来源卡组。');
-    return {name:(d.name+' · 我的构筑').slice(0,40),cards:[...d.cards],extra:[...d.extra]};
+    return {name:(d.name+' · 我的构筑').slice(0,40),cards:[...d.cards],extra:[...d.extra],...(d.notes?{notes:d.notes}:{})};
   }
   function parseJSON(text) {
     let input;try{input=JSON.parse(text);}catch{throw new Error('无法读取JSON卡组文件。');}
     if(input && input.format==='duel-sanctuary-deck' && input.deck)input=input.deck;
     const check=analyze(input);if(!check.valid)throw new Error(check.errors.join('\n'));
-    return {name:input.name.trim().slice(0,40),cards:[...input.cards],extra:[...input.extra]};
+    return {name:input.name.trim().slice(0,40),cards:[...input.cards],extra:[...input.extra],...(typeof input.notes==='string'?{notes:input.notes.slice(0,16000)}:{})};
   }
   function exportJSON(deck) {
     const check=analyze(deck);if(!check.valid)throw new Error(check.errors.join('\n'));
-    return JSON.stringify({format:'duel-sanctuary-deck',version:2,exportedAt:new Date().toISOString(),deck:{name:deck.name,cards:[...deck.cards],extra:[...deck.extra]}},null,2);
+    return JSON.stringify({format:'duel-sanctuary-deck',version:2,exportedAt:new Date().toISOString(),deck:{name:deck.name,cards:[...deck.cards],extra:[...deck.extra],...(typeof deck.notes==='string'&&deck.notes?{notes:deck.notes.slice(0,16000)}:{})}},null,2);
   }
   function registerSnapshot(spec) {
     const check=analyze(spec);if(!check.valid)throw new Error('存档里的卡组构筑不合法。');

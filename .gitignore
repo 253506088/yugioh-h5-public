@@ -17,6 +17,15 @@
 !/.env.example
 
 # ===== 构建与验证 =====
+# 2026-09-22 AI 卡组导入：正式模块、别名 JSON、生成的 src/card-catalog.js、
+# 名录构建脚本、自动化测试、使用文档及根目录 index.html 需要提交。
+# output/ai-import/ 下的无图构建、浏览器截图、测试报告和真实接口探测结果
+# 均为本地验证产物，由下方 /output/ 统一排除。测试报告不得包含 API 令牌。
+# 真实 API 令牌只放浏览器本地存储或已忽略的 .env.local；不写入源码与样例。
+# 浏览器调试配置、录制与下载文件仅留本机。
+/playwright-report/
+/test-results/
+/.ai-import-local/
 # 2009—2012：正式源码、14 年离线快照、12 套牌表、三语资料、测试代码、
 # 交接和根目录 index.html 均提交。新增王牌压缩 WebP 与来源哈希也提交。
 # output/chronicle-* 与 output/rollout-2009-2012/ 中的研究网页、草拟脚本、

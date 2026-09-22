@@ -30,7 +30,8 @@
   const spectate = { paused: false };
   const spectating = () => engine?.state.mode === 'spectate';
   const robotName = owner => tournamentView?.names[owner] || (owner === 0 ? '机器人 A' : '机器人 B');
-  const workshop = window.DuelWorkshop.create({ open:(...args)=>openModal(...args),toast:(...args)=>showToast(...args),getPageSize:()=>prefs.workshopPageSize,setPageSize:value=>{prefs.workshopPageSize=Experience.pageSize(value);updatePrefs();},play:id=>{setupOptions={deck:id,opponentDeck:engine?.state.players[1].deckId||'blackwing',first:0,difficulty:'standard',mode:'duel'};renderNewGame();} });
+  const workshop = window.DuelWorkshop.create({ aiImport:()=>aiImport.show(),open:(...args)=>openModal(...args),toast:(...args)=>showToast(...args),getPageSize:()=>prefs.workshopPageSize,setPageSize:value=>{prefs.workshopPageSize=Experience.pageSize(value);updatePrefs();},play:id=>{setupOptions={deck:id,opponentDeck:engine?.state.players[1].deckId||'blackwing',first:0,difficulty:'standard',mode:'duel'};renderNewGame();} });
+  const aiImport = window.DuelAIImport.create({open:openModal,workshop:()=>workshop.show(),load:deck=>workshop.importDraft(deck),settings:showSettings});
   let positionCache = new Map(), animationTimers = [], resultShown = false, cinematicTimer = null;
   let hoverId = null, savedAvailable = true;
   let currentScreen='home',peekState=null,audioScene='lobby';
@@ -589,6 +590,7 @@
 
   function openModal(kind, title, kicker, body, footer = '', className = '') {
     clearTimeout(aiTimer); hidePopover();
+    if(modalKind.startsWith('ai-')&&modalKind!==kind)aiImport.cancel();
     modalKind = kind;
     const scene={library:'library',workshop:'workshop',help:'help','new-game':'lobby'}[kind];if(scene){audioScene=scene;sound.setScene(scene);}
     if(currentScreen==='home')footer=footer.replace(/返回决斗/g,'返回主界面');
@@ -597,6 +599,7 @@
     if (!modal.open) modal.showModal();
   }
   function dismissModal() {
+    if(modalKind.startsWith('ai-'))aiImport.cancel();
     modalKind = ''; selectionState = null; responseUid = null; pendingKey = '';
     if (modal.open) modal.close();
   }
@@ -738,7 +741,7 @@
   function showSettings() {
     const toggle = (key, title, description) => '<div class="setting-row"><div><h3>' + title + '</h3><p>' + description + '</p></div><button class="toggle-button' + (prefs[key] ? ' on' : '') + '" data-action="toggle-pref" data-pref="' + key + '" role="switch" aria-checked="' + !!prefs[key] + '" aria-label="' + title + '"></button></div>';
     openModal('settings', '你的决斗，随你设定。', 'PERSONAL SANCTUARY',
-      '<section class="reading-settings"><div><h3>阅读与显示</h3><p>字体独立缩放，战场保持一屏。</p></div><div class="font-setting"><label for="font-size-control">字体大小 <b id="font-size-label">'+prefs.fontScale+'%</b></label><input id="font-size-control" type="range" min="90" max="150" step="5" value="'+prefs.fontScale+'" aria-label="字体大小"><div class="font-presets">'+[[100,'标准'],[115,'舒适'],[130,'大字'],[150,'超大']].map(([n,label])=>'<button data-action="font-preset" data-value="'+n+'">'+label+'</button>').join('')+'</div></div><p class="font-preview">相信卡组，也相信每一次抉择。<small>调整后会自动保存，卡片效果与操作文字同步放大。</small></p></section><div class="setting-row"><div><h3>卡面样式</h3><p>经典卡框与全图展示，随时切换。</p></div><select id="card-style" aria-label="卡面样式"><option value="classic"'+(prefs.cardStyle!=='full-art'?' selected':'')+'>经典卡框</option><option value="full-art"'+(prefs.cardStyle==='full-art'?' selected':'')+'>全图卡面</option></select></div><div class="frame-samples">'+[['blue-eyes','通常'],['hero-stratos','效果'],['hero-sunrise','融合'],['stardust-dragon','同调'],['utopia','超量'],['qli-scout','灵摆'],['early-5405694','仪式'],['linkuriboh','Link'],['monster-reborn','魔法'],['mirror-force','陷阱']].filter(([id])=>CARDS[id]).map(([id,label])=>'<span>'+cardHTML(id)+'<small>'+label+'</small></span>').join('')+'</div>'+
+      '<div class="setting-row"><div><h3>AI 助手</h3></div><button class="outline-button" data-action="ai-settings">AI 助手 →</button></div><section class="reading-settings"><div><h3>阅读与显示</h3><p>字体独立缩放，战场保持一屏。</p></div><div class="font-setting"><label for="font-size-control">字体大小 <b id="font-size-label">'+prefs.fontScale+'%</b></label><input id="font-size-control" type="range" min="90" max="150" step="5" value="'+prefs.fontScale+'" aria-label="字体大小"><div class="font-presets">'+[[100,'标准'],[115,'舒适'],[130,'大字'],[150,'超大']].map(([n,label])=>'<button data-action="font-preset" data-value="'+n+'">'+label+'</button>').join('')+'</div></div><p class="font-preview">相信卡组，也相信每一次抉择。<small>调整后会自动保存，卡片效果与操作文字同步放大。</small></p></section><div class="setting-row"><div><h3>卡面样式</h3><p>经典卡框与全图展示，随时切换。</p></div><select id="card-style" aria-label="卡面样式"><option value="classic"'+(prefs.cardStyle!=='full-art'?' selected':'')+'>经典卡框</option><option value="full-art"'+(prefs.cardStyle==='full-art'?' selected':'')+'>全图卡面</option></select></div><div class="frame-samples">'+[['blue-eyes','通常'],['hero-stratos','效果'],['hero-sunrise','融合'],['stardust-dragon','同调'],['utopia','超量'],['qli-scout','灵摆'],['early-5405694','仪式'],['linkuriboh','Link'],['monster-reborn','魔法'],['mirror-force','陷阱']].filter(([id])=>CARDS[id]).map(([id,label])=>'<span>'+cardHTML(id)+'<small>'+label+'</small></span>').join('')+'</div>'+
       '<div class="setting-row"><div><h3>显示语言</h3><p>选择界面、卡名和卡片说明的语言。</p></div>'+I.picker()+'</div><div class="setting-row"><div><h3>显示卡图</h3><p>优先显示内嵌卡图，缺图时使用备用卡面。</p></div><button class="toggle-button' + (Art.status().enabled ? ' on' : '') + '" data-action="toggle-artwork" role="switch" aria-checked="' + Art.status().enabled + '" aria-label="显示卡图"></button></div><div class="setting-row"><div><h3>在线原版卡图</h3><p>缺少内嵌图片时联网加载原版卡图。关闭后仍可离线决斗。</p></div><button class="toggle-button'+(Art.status().onlineEnabled?' on':'')+'" data-action="toggle-online-artwork" role="switch" aria-checked="'+Art.status().onlineEnabled+'" aria-label="在线原版卡图"></button></div><div class="setting-row"><p>'+I.term('本地原版卡图')+' · '+Art.status().embedded+'</p><button class="text-button" data-action="retry-artwork">刷新卡图</button></div>' +
       toggle('sound', '决斗音效', '抽卡、召唤与战斗的声音。') +
       '<div class="setting-row"><div><h3>音量 <span id="volume-label" style="color:#839a76;font-size:10px">' + Math.round(prefs.volume * 100) + '%</span></h3><p>一点声音，让决斗更有温度。</p></div><input class="volume-control" id="volume-control" type="range" min="0" max="100" value="' + Math.round(prefs.volume * 100) + '" aria-label="音量"></div>' +
@@ -1012,6 +1015,7 @@
       case 'library':showLibrary();break;
       case 'help':showHelp();break;
       case 'settings':showSettings();break;
+      case 'ai-settings':aiImport.showSettings();break;
       case 'music-settings':showSettings();$('#music-library').open=true;$('#music-library').scrollIntoView({block:'center'});break;
       case 'music-toggle':prefs.music=!prefs.music;updatePrefs();break;
       case 'music-next':sound.nextTrack();break;
@@ -1193,6 +1197,7 @@
     else if(current==='new-game')renderNewGame();
     else if(current==='help')showHelp();
     else if(current==='settings')showSettings();
+    else if(current==='ai-import'||current==='ai-settings')aiImport.refresh();
     else if(current==='pending'){
       showPending(true);
       if(picks){

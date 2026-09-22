@@ -11,6 +11,7 @@ files.push('tests/controller-costs.test.cjs');
 files.push('tests/lingering.test.cjs','tests/simulation-fixes.test.cjs');
 files.push('tests/ai-planner.test.cjs');
 files.push('tests/pvp.test.mjs','tests/pvp-network.test.mjs');
+files.push('tests/ai-provider.test.cjs','tests/card-resolver.test.cjs','tests/deck-parse.test.cjs','tests/ai-proxy.test.mjs');
 const result=spawnSync(process.execPath,['--test','--test-reporter=tap',...files],{cwd:root,encoding:'utf8',maxBuffer:20_000_000});
 const log=(result.stdout||'')+(result.stderr||'');await writeFile(join(run,'results.tap'),log);process.stdout.write(log);
 const number=key=>Number(log.match(new RegExp('^# '+key+' (\\d+)$','m'))?.[1]||0),report={at:new Date().toISOString(),node:process.version,ok:result.status===0,tests:number('tests'),pass:number('pass'),fail:number('fail'),files,archive:run,network:'local HTTP/WebSocket for PVP; asset tests use synthetic fixtures'};
