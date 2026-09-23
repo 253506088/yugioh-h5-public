@@ -49,7 +49,7 @@ ingest(await readJSON(join(directory,'sources',manifest.commit,'references.json'
 try{for(const run of await readdir(join(root,'output/game-art'),{withFileTypes:true})){if(!run.isDirectory()||!run.name.startsWith('run-'))continue;const folder=join(root,'output/game-art',run.name,'raw');try{for(const file of await readdir(folder))if(file.endsWith('.json'))ingest(await readJSON(join(folder,file),{}));}catch{}}}catch{}
 
 function splitPendulum(text){
- const separator=/[\[【]\s*(?:Monster Effect|怪兽效果|怪兽描述|モンスター効果)\s*[\]】]/i,match=separator.exec(text);
+ const separator=/[\[【]\s*(?:Monster Effect|Monster Description|怪兽效果|怪兽描述|モンスター効果)\s*[\]】]/i,match=separator.exec(text);
  if(!match)return {description:text};
  return {pendulumDescription:text.slice(0,match.index).replace(/^[\s\S]*?[\[【]\s*(?:Pendulum Effect|灵摆效果|ペンデュラム効果)\s*[\]】]\s*/i,'').replace(/^←[^\r\n]+[\r\n]+/,'').replace(/^【[PＰ]スケール[^】]+】\s*/,'').replace(/[-－─]{3,}/g,'').trim(),description:text.slice(match.index+match[0].length).trim()};
 }
@@ -69,7 +69,9 @@ for(const card of cards){
   const row=databases[language].query.get(textId);let name=row?.name,description=row?.desc;
   if(language==='en'){name=card.officialName;if(raw?.desc||card.originalDescription)description=raw?.desc||card.originalDescription;}
   if(!name||!description){missing.push({id:card.id,providerId,language,reason:'missing_localized_text'});continue;}
-  record.locales[language]={name, ...(card.type==='pendulum'?splitPendulum(description):{description})};totals[language]++;
+  const texts=card.type==='pendulum'?splitPendulum(description):{description};
+  if(card.type==='pendulum'&&!card.pendulumDescription&&!card.effect)texts.pendulumDescription={'zh-CN':'无灵摆效果。',en:'No Pendulum effect.',ja:'ペンデュラム効果なし。'}[language];
+  record.locales[language]={name,...texts};totals[language]++;
  }
  output[card.id]=record;
 }

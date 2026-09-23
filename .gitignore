@@ -58,6 +58,13 @@
 # 赛事录像、浏览器截图、验证报告和无卡图构建全部放在 output/，保留本机不提交。
 # 必须提交：data/providers/ocg-2006-2008.json、data/yearly/、三语数据、
 # data/decks-2006-2008.json、效果源码、测试、交接文档和正式 index.html。
+# 2026-09-24 2014 批次：必须提交 data/providers/ocg-2014.json、data/yearly/2014/、
+# scope/manifest-2014-2014.json、data/decks-2014.json、scripts/lib/card-pendulum.mjs、
+# src/effects-2014*.js、tests/chronicle-2014*.test.cjs、三语资料、交接/2014批次交接.md 与 index.html。
+# 只留本机（由下方 /output/ 排除）：output/scratch/ 的分批卡表、草稿脚本与检查日志，
+# output/chronicle-sweep/ 与 output/chronicle-simulation/ 的逐卡现场和对局报告，
+# output/localization/ 覆盖报告，output/no-art/ 无卡图构建，以及尚未交付的
+# 全局规则模式草稿 output/rule-mode-draft/（未接入构建，不属于本次提交）。
 /output/
 
 # 本轮资源：提交卡背、11 张卡框、预设/连锁预览用的压缩 WebP 和来源清单。

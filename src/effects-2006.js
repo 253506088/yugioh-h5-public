@@ -22,7 +22,7 @@
  extend('passiveSources',function(prior,...a){return prior.call(this,...a).filter(f=>!CARDS[f.card.id].gemini||this.geminiActive(f.card));});
  for(const c of D.CARD_LIST.filter(c=>c.gemini))A(c.officialName,'gemini-summon',{label:'二重召唤',inherent:true,summons:true,condition:(e,x)=>!!self(e,x)&&!e.state.normalUsed&&!e.geminiActive(self(e,x))&&e.canNormal(self(e,x),x.owner),resolve:(e,x)=>{const m=self(e,x);if(!m)return;e.state.normalUsed=true;m.geminiSummoned=true;m.normalSummoned=true;e.state.summons[x.owner]++;e.log('summon','二重召唤 · '+CARDS[m.id].name,x.owner,{uid:m.uid,cardId:m.id});e.emit({type:'summon',owner:x.owner,uid:m.uid,id:m.id,from:e.find(m.uid).zone,kind:'normal',materials:[],gemini:true});},aiScore:820});
  extend('move',function(prior,uid,to,o={}){const f=this.find(uid),was=f&&field(f.zone),m=f?.card;let dest=to;
-  if(this._advancedReady&&to==='grave'&&!o.ignoreReplacement&&(has(this,'Macro Cosmos')||has(this,'Banisher of the Radiance')||m&&monster(m)&&(has(this,'Dimensional Fissure')||this.state.dimensionalRiftTurn===this.state.turn)))dest='banished';
+  if(this._advancedReady&&to==='grave'&&!o.ignoreReplacement&&(has(this,'Macro Cosmos')||has(this,'Banisher of the Radiance')||m&&monster(m)&&!['spells','fieldSpell','overlays'].includes(f.zone)&&(has(this,'Dimensional Fissure')||this.state.dimensionalRiftTurn===this.state.turn)))dest='banished';
   if(this._advancedReady&&was&&to==='hand'&&monster(m)&&has(this,'Degenerate Circuit'))dest='banished';
   const r=prior.call(this,uid,dest,o);if(was&&r&&r.to!==r.from&&m){delete m.geminiSummoned;delete m.alienCounters;delete m.venomCounters;delete m.fogCounters;delete m.gxFlags;}
   return r;

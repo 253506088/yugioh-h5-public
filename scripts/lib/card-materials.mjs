@@ -1,6 +1,8 @@
 // Explicit material grammar for the preserved OCG snapshots. Unknown wording is
 // an import error, never an unrestricted material or a silently normal monster.
 export function parseFusion(name, text, {byName, norm, races, attributes}) {
+  if (name === 'Pair Cycroid') return {fusion: [{race: races.Machine}, {race: races.Machine}], fusionSameName: true};
+  if (name === 'Elder Entity Norden') return {fusion: [{types: ['synchro', 'xyz']}, {types: ['synchro', 'xyz']}]};
   if (/^Masked HERO /.test(name)) return {fusion: [], masked: true, specialOnly: 'mask'};
   if (/^Neo-Spacian (Marine Dolphin|Twinkle Moss)$/.test(name)) return {fusion: [], nexOnly: true};
   if (name === 'Elemental HERO Divine Neos') return {
@@ -18,7 +20,9 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
     if (level) { spec.minLevel = Number(level[1]); body = level[2]; }
     const type = body.match(/^(.*?)\s*Synchro$/i);
     if (type) { spec.type = 'synchro'; body = type[1]; }
-    if (/^non-Effect$/i.test(body)) { spec.normal = true; body = ''; }
+    if (/^(?:non-Effect|Normal)$/i.test(body)) { spec.normal = true; body = ''; }
+    const attributeRace = body.match(/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) (.+)$/);
+    if (attributeRace && races[attributeRace[2]]) { spec.attribute = attributes[attributeRace[1]]; spec.race = races[attributeRace[2]]; body = ''; }
     const combined = body.match(/^(.+?)\s+"([^"]+)"$/);
     if (combined && races[combined[1]]) { spec.race = races[combined[1]]; body = '"' + combined[2] + '"'; }
     const series = body.match(/^"([^"]+)"$/);
@@ -26,7 +30,7 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
     else if (races[body]) spec.race = races[body];
     else if (attributes[body]) spec.attribute = attributes[body];
     else if (body === 'Gemini') spec.gemini = true;
-    else if (body || !spec.type) throw new Error('Unknown Fusion material: ' + name + ' / ' + body);
+    else if (body || !Object.keys(spec).length) throw new Error('Unknown Fusion material: ' + name + ' / ' + body);
     fusion.push(...Array.from({length: Number(generic[1])}, () => ({...spec})));
     if (generic[2]) fusionMore = spec;
   }
@@ -35,6 +39,7 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
 }
 
 export function parseSynchro(name, text, {byName, norm, races, attributes}) {
+  if (name === 'Ultimaya Tzolkin') return {synchro: {noSummon: true}, noNormal: true, specialOnly: 'tzolkin'};
   const parts = text.trim().split(/\s+\+\s+/);
   if (parts.length < 2 || parts.length > 3) throw new Error('Unparsed Synchro materials: ' + name);
   const spec = {minTuners: 1, maxTuners: 1, minNon: 1};
@@ -82,6 +87,9 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
 }
 
 export function parseXyz(name, text, {races, attributes}) {
+  if (name === 'Number F0: Utopic Future') return {xyzCount: 2, rank: 0, xyzMaterialType: 'xyz', xyzSameRank: true, xyzExcludeNameIncludes: 'Number'};
+  const unlimited = /^(\d+) or more Level/.test(text);
+  if (unlimited) text = text.replace(/^(\d+) or more Level/, '$1 or more (max. 7) Level');
   // YGOPRODeck prints Xyz materials in two orders: the long-standing
   // "2 Level 4 Fairy-Type monsters" and the newer "2 Pyro-Type Level 4 monsters".
   const levelFirst = text.trim().match(/^(\d+)(?: or more \(max\. (\d+)\))? Level (\d+)(?: (.+?))? monsters$/i);

@@ -689,7 +689,10 @@
       extra.materialCount=materials.length;extra.linkMaterialUids=[...uids];extra.linkProtection=materials.some(m=>m.id==='ip-masquerena');
       return this.special(owner,extraUid,{via:'link',position:'attack',zone,materials:snapshots});
     }
-    scales(owner){const p=this.state.players[owner];return [p.spells[0],p.spells[4]].map(c=>c&&c.faceUp&&!c.pendingActivation&&CARDS[c.id].type==='pendulum'?{card:c,scale:CARDS[c.id].scale}:null);}
+    isPendulumScale(card){const f=card&&this.find(card.uid);return !!f&&f.zone==='spells'&&[0,4].includes(f.index)&&CARDS[card.id].type==='pendulum'&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell;}
+    pendulumScale(card){const value=card?.pendulumScaleOverride;return value&&(!value.until||value.until>=this.state.turn)?value.value:CARDS[card?.id]?.scale;}
+    canActivatePendulumScale(card,owner){return !!card&&CARDS[card.id].type==='pendulum'&&this.find(card.uid)?.zone==='hand'&&this.find(card.uid)?.owner===owner;}
+    scales(owner){const p=this.state.players[owner];return [p.spells[0],p.spells[4]].map(c=>c&&c.faceUp&&!c.pendingActivation&&this.isPendulumScale(c)?{card:c,scale:this.pendulumScale(c)}:null);}
     pendulumCandidates(owner=this.state.active){
       const s=this.scales(owner);if(s.some(c=>!c)||s[0].scale===s[1].scale||this.state.players[owner].pendulumTurn===this.state.turn)return [];
       const low=Math.min(s[0].scale,s[1].scale),high=Math.max(s[0].scale,s[1].scale),p=this.state.players[owner];
@@ -715,7 +718,7 @@
       const layout=this.pendulumLayout(owner,action.uids);
       const ordered=[...action.uids].sort((a,b)=>Number(this.find(b).zone==='extra')-Number(this.find(a).zone==='extra'));
       for(const uid of ordered)this.special(owner,uid,{via:'pendulum',position:action.position||'attack',zone:layout[uid]});
-      const nextFrame={kind:'summon',owner,uid:ordered[0],uids:[...ordered],summonKind:'pendulum',windowOffered:false};
+      const nextFrame={kind:'summon',owner,uid:ordered[0],uids:[...ordered],summonKind:'pendulum',summonGroup:ordered.slice(1).map(uid=>({owner,uid,kind:'pendulum'})),windowOffered:false};
       if(this.state.frame?.kind==='summon-attempt')this.state.frame.resumeFrame=nextFrame;else this.state.frame=nextFrame;
     }
     option(card,extra={}){
@@ -1283,7 +1286,7 @@
           if(this.tributeSets(f.card,false,owner).length){out.push({type:'summon',uid,mode:'attack',label:this.tributeCount(f.card)?'上级召唤 · '+this.tributeCount(f.card)+'份祭品':'攻击表示召唤',icon:'swords'});out.push({type:'summon',uid,mode:'defense',label:'里侧守备盖放',icon:'shield'});}
         }
         if(['spell','trap'].includes(c.type)&&this.state.players[owner].spells.includes(null))out.push({type:'set',uid,label:'盖放到场上',icon:'card'});
-        if(c.type==='pendulum')for(const slot of [0,4])if(!this.state.players[owner].spells[slot])out.push({type:'pendulum-scale',uid,slot,label:(slot===0?'左':'右')+'刻度 '+c.scale,icon:'pendulum'});
+        if(c.type==='pendulum'&&this.canActivatePendulumScale(f.card,owner))for(const slot of [0,4])if(!this.state.players[owner].spells[slot])out.push({type:'pendulum-scale',uid,slot,label:(slot===0?'左':'右')+'刻度 '+c.scale,icon:'pendulum'});
       }
       if(main&&fieldMonster(f.zone)&&c.type!=='link'&&f.card.summonTurn<this.state.turn&&f.card.changedTurn<this.state.turn&&(f.card.attacksMade||0)===0)out.push({type:'stance',uid,label:!f.card.faceUp?'反转召唤':f.card.position==='attack'?'变为守备表示':'变为攻击表示',icon:'shield'});
       if(this.state.phase==='battle'&&fieldMonster(f.zone)){
@@ -1480,7 +1483,7 @@
           if(fieldMonster(f.zone)&&c.type==='link'&&(!card.faceUp||card.position!=='attack'))throw new Error('Link monster must be face-up in attack position');
           if(f.zone==='extraMonster'){if(![0,1].includes(card.extraSlot)||extraOccupied.has(card.extraSlot))throw new Error('Invalid or shared extra monster zone collision');extraOccupied.add(card.extraSlot);}
           if(f.zone==='spells'&&!['spell','trap','pendulum'].includes(c.type)&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell)throw new Error('Invalid back-row card');
-          if(f.zone==='spells'&&c.type==='pendulum'&&![0,4].includes(f.index))throw new Error('Pendulum card outside pendulum zone');
+          if(f.zone==='spells'&&c.type==='pendulum'&&![0,4].includes(f.index)&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell)throw new Error('Pendulum card outside pendulum zone');
           if(f.zone==='fieldSpell'&&(c.type!=='spell'||c.spellKind!=='field'))throw new Error('Invalid field spell');
           if(c.type==='token'&&!fieldMonster(f.zone))throw new Error('Token outside field');
           for(const material of card.overlays||[]){

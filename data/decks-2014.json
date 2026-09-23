@@ -1,0 +1,480 @@
+{
+  "schemaVersion": 1,
+  "scope": [
+    2014
+  ],
+  "policy": "Representative adaptations using the preserved current text and first OCG release year, without historical Forbidden/Limited enforcement. The top three year-end OCG strategies are selected for variety; these are not claimed as World Championship podium decklists.",
+  "sources": [
+    {
+      "id": "ocg-2014-10",
+      "url": "https://roadoftheking.com/ocg-2014-10-metagame/",
+      "title": "OCG 2014.10 Metagame",
+      "accessedOn": "2026-09-23",
+      "kind": "secondary-tournament-history",
+      "ranking": [
+        "Nekroz: 127 tops",
+        "Qliphort: 28 tops",
+        "Shaddoll: 16 tops"
+      ],
+      "note": "Different summoning mechanics and the three most represented strategies in the year-end OCG report. Representative adaptations, not verbatim podium lists."
+    }
+  ],
+  "decks": [
+    {
+      "id": "shaddoll-2014",
+      "title": "影依交织",
+      "en": "Shaddoll Weave",
+      "ja": "影依の織り手",
+      "ace": "El Shaddoll Construct",
+      "description": "2014 OCG 年末上位第三的影依。以影依融合、墓地诱发与米德拉什控制节奏。",
+      "descriptionEn": "An adaptation of the third most represented strategy in the 2014 year-end OCG report. Fusion materials trigger graveyard effects.",
+      "descriptionJa": "2014年末OCG上位分布3位のシャドールを参考にした構築。融合素材の墓地効果で展開する。",
+      "combo": [
+        "影依融合可以在对方控制从额外卡组登场的怪兽时使用卡组素材。",
+        "先用数学家或影依蜥蜴准备墓地，再以神影依展开。",
+        "注意米德拉什限制双方每回合特殊召唤次数。"
+      ],
+      "main": [
+        [
+          "Shaddoll Squamata",
+          3
+        ],
+        [
+          "Shaddoll Hedgehog",
+          3
+        ],
+        [
+          "Shaddoll Beast",
+          2
+        ],
+        [
+          "Shaddoll Dragon",
+          2
+        ],
+        [
+          "Shaddoll Falco",
+          1
+        ],
+        [
+          "Mathematician",
+          3
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Black Luster Soldier - Envoy of the Beginning",
+          1
+        ],
+        [
+          "Dark Armed Dragon",
+          1
+        ],
+        [
+          "Chaos Sorcerer",
+          1
+        ],
+        [
+          "Shaddoll Fusion",
+          3
+        ],
+        [
+          "El Shaddoll Fusion",
+          3
+        ],
+        [
+          "Super Polymerization",
+          1
+        ],
+        [
+          "Allure of Darkness",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Soul Charge",
+          1
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Sinister Shadow Games",
+          3
+        ],
+        [
+          "Shaddoll Core",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Solemn Warning",
+          1
+        ],
+        [
+          "Bottomless Trap Hole",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "El Shaddoll Construct",
+          3
+        ],
+        [
+          "El Shaddoll Winda",
+          3
+        ],
+        [
+          "El Shaddoll Shekhinaga",
+          2
+        ],
+        [
+          "El Shaddoll Grysta",
+          1
+        ],
+        [
+          "El Shaddoll Wendigo",
+          1
+        ],
+        [
+          "Castel, the Skyblaster Musketeer",
+          1
+        ],
+        [
+          "Dark Rebellion Xyz Dragon",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Goyo Guardian",
+          1
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ]
+      ],
+      "year": 2014,
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2014-10"
+      ]
+    },
+    {
+      "id": "qliphort-2014",
+      "title": "机壳再启动",
+      "en": "Qliphort Reboot",
+      "ja": "クリフォート再起動",
+      "ace": "Apoqliphort Towers",
+      "description": "2014 OCG 年末上位第二的机壳。侦察机检索、灵摆补充祭品，再以上级召唤与技能抽取压制。",
+      "descriptionEn": "An adaptation of the second most represented strategy in the 2014 year-end OCG report. Scout searches, Pendulum Summons supply Tributes.",
+      "descriptionJa": "2014年末OCG上位分布2位のクリフォートを参考にした構築。ツールでサーチし、ペンデュラム召喚からアドバンス召喚へ。",
+      "combo": [
+        "侦察机支付800LP检索机壳卡。",
+        "运载者和螺旋机被解放后分别回手怪兽和破坏魔法陷阱。",
+        "灵摆区存在机壳时只能特殊召唤机壳怪兽。"
+      ],
+      "main": [
+        [
+          "Qliphort Scout",
+          3
+        ],
+        [
+          "Qliphort Carrier",
+          3
+        ],
+        [
+          "Qliphort Helix",
+          3
+        ],
+        [
+          "Qliphort Disk",
+          2
+        ],
+        [
+          "Qliphort Stealth",
+          2
+        ],
+        [
+          "Qliphort Shell",
+          1
+        ],
+        [
+          "Qliphort Monolith",
+          1
+        ],
+        [
+          "Apoqliphort Towers",
+          1
+        ],
+        [
+          "Qliphort Cephalopod",
+          1
+        ],
+        [
+          "Summoner's Art",
+          3
+        ],
+        [
+          "Saqlifice",
+          3
+        ],
+        [
+          "Pot of Duality",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          3
+        ],
+        [
+          "Laser Qlip",
+          1
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Skill Drain",
+          3
+        ],
+        [
+          "Vanity's Emptiness",
+          2
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Solemn Warning",
+          1
+        ],
+        [
+          "Mirror Force",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Castel, the Skyblaster Musketeer",
+          1
+        ],
+        [
+          "Dark Rebellion Xyz Dragon",
+          1
+        ],
+        [
+          "Number 101: Silent Honor ARK",
+          1
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Gagaga Cowboy",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Diamond Dire Wolf",
+          1
+        ],
+        [
+          "Number 50: Blackship of Corn",
+          1
+        ],
+        [
+          "Gem-Knight Pearl",
+          1
+        ],
+        [
+          "Maestroke the Symphony Djinn",
+          1
+        ]
+      ],
+      "year": 2014,
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2014-10"
+      ]
+    },
+    {
+      "id": "nekroz-2014",
+      "title": "影灵衣降临",
+      "en": "Nekroz Ascension",
+      "ja": "影霊衣降臨",
+      "ace": "Nekroz of Trishula",
+      "description": "2014 OCG 年末上位第一的影灵衣。手牌检索、万华镜送墓虹光之宣告者，以及降魔镜和返魂术的精确等级仪式。",
+      "descriptionEn": "An adaptation of the most represented strategy in the 2014 year-end OCG report. Ritual searches and Kaleidoscope turn the Extra Deck into resources.",
+      "descriptionJa": "2014年末OCG上位分布1位の影霊衣を参考にした構築。儀式サーチと万華鏡によるエクストラデッキ活用。",
+      "combo": [
+        "万华镜送墓虹光之宣告者可仪式召唤独角兽并检索仪式资源。",
+        "施里特可满足恰好一只影灵衣仪式怪兽的全部素材需求。",
+        "三叉龙必须同时能除外对方手牌、场上与墓地各一张卡。"
+      ],
+      "main": [
+        [
+          "Nekroz of Brionac",
+          3
+        ],
+        [
+          "Nekroz of Unicore",
+          3
+        ],
+        [
+          "Nekroz of Trishula",
+          2
+        ],
+        [
+          "Nekroz of Valkyrus",
+          2
+        ],
+        [
+          "Nekroz of Gungnir",
+          1
+        ],
+        [
+          "Nekroz of Decisive Armor",
+          1
+        ],
+        [
+          "Nekroz of Catastor",
+          1
+        ],
+        [
+          "Nekroz of Clausolas",
+          2
+        ],
+        [
+          "Shurit, Strategist of the Nekroz",
+          3
+        ],
+        [
+          "Manju of the Ten Thousand Hands",
+          3
+        ],
+        [
+          "Senju of the Thousand Hands",
+          2
+        ],
+        [
+          "Djinn Releaser of Rituals",
+          1
+        ],
+        [
+          "Nekroz Kaleidoscope",
+          3
+        ],
+        [
+          "Nekroz Mirror",
+          2
+        ],
+        [
+          "Nekroz Cycle",
+          2
+        ],
+        [
+          "Preparation of Rites",
+          3
+        ],
+        [
+          "Reinforcement of the Army",
+          1
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Herald of the Arc Light",
+          3
+        ],
+        [
+          "Shooting Quasar Dragon",
+          1
+        ],
+        [
+          "Star Eater",
+          1
+        ],
+        [
+          "Leo, the Keeper of the Sacred Tree",
+          1
+        ],
+        [
+          "Stardust Dragon",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Goyo Guardian",
+          1
+        ],
+        [
+          "Castel, the Skyblaster Musketeer",
+          1
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Gagaga Cowboy",
+          1
+        ],
+        [
+          "Diamond Dire Wolf",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ]
+      ],
+      "year": 2014,
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2014-10"
+      ]
+    }
+  ]
+}

@@ -18,7 +18,7 @@
  const ends=new Map();
  function onEnd(name,s,{zones=['monsters','extraMonster','spells','fieldSpell'],both=false,opponent=false,mandatory=false}={}){R(name,'year-end',{zones,...s});ends.set(I(name),{zones,both,opponent,mandatory});}
  E.on('end-phase',(e,v)=>{for(const owner of [0,1])for(const f of e.refs(owner)){const d=ends.get(f.card.id);if(!d||!d.zones.includes(f.zone)||(['spells','fieldSpell','monsters','extraMonster'].includes(f.zone)&&!active(e,f.card)))continue;if(d.both||(d.opponent?v.owner!==owner:v.owner===owner))e.addTrigger(f.card.uid,f.card.id+'::year-end',v,{owner,mandatory:d.mandatory});}});
- function die(e,c){let n=1+Math.floor(e.random()*6);const p=e.state.players[c.owner];if(p.diceRerollTurn===e.state.turn){p.diceRerollTurn=-1;n=1+Math.floor(e.random()*6);}e.log('effect','骰子结果：'+n,c.owner);return n;}
+ function die(e,c){let n=1+Math.floor(e.random()*6);const p=e.state.players[c.owner];if(p.diceRerollTurn===e.state.turn){p.diceRerollTurn=-1;n=1+Math.floor(e.random()*6);}e.log('effect','骰子结果：'+n,c.owner);if(e.adjustDie){const m=e.adjustDie(n,c);if(m!==n){n=m;e.log('effect','骰子结果改为：'+n,c.owner);}}return n;}
  const coin=(e,c,n=3)=>Array.from({length:n},()=>e.random()<.5).filter(Boolean).length;
  const defer=(e,c,phase,turn,operation,data={},owner=c.owner)=>(e.state.earlyDelayed||=[]).push({phase,turn,operation,owner,source:c.source,data});
  function banishCost(n,predicate){return (e,c)=>g(e,c,'cost','选择除外的墓地卡片',grave(e,c.owner,m=>predicate(e,m,c)),n,n,'cost');}

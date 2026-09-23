@@ -123,7 +123,8 @@
     actionsFor(uid, owner = 0) { return owner === 0 && !this.busy && !this.blocked && this.connection.connected ? this.data.actions.filter(a => a.uid === uid && a.type !== 'extra-summon').map(a => ({ ...a })) : []; }
     extraOptions(owner) { return owner === 0 ? this.data.actions.filter(a => a.type === 'extra-summon').map(a => ({ type: root.DuelData.CARDS[this.find(a.uid)?.card.id]?.type, card: this.find(a.uid)?.card })).filter(a => a.card) : []; }
     pendulumCandidates(owner) { return owner === 0 ? (this.data.pendulumUids || []).map(uid => this.find(uid)?.card).filter(Boolean) : []; }
-    scales(owner) { const p = this.state.players[owner]; return [p.spells[0], p.spells[4]].map(card => card?.faceUp && root.DuelData.CARDS[card.id]?.type === 'pendulum' ? { card, scale: root.DuelData.CARDS[card.id].scale } : null); }
+    pendulumScale(card) { return card?.publicStats?.scale ?? root.DuelData.CARDS[card?.id]?.scale; }
+    scales(owner) { const p = this.state.players[owner]; return [p.spells[0], p.spells[4]].map(card => card?.faceUp && card.publicStats?.pendulumZone && !card.publicStats?.pendingActivation ? { card, scale: this.pendulumScale(card) } : null); }
     attackBlocked(owner) { return !!this.data.attackBlocked[owner]; }
     canAttack(card, owner, target = null) { const options = this.data.attackTargets[card?.uid]; return owner === 0 && !!options && (target === null ? options.direct : options.targets.includes(target)); }
     canDirect(card, owner) { return this.canAttack(card, owner, null); }

@@ -77,7 +77,7 @@
     if(e.earlyCanUse&&!e.earlyCanUse(ctx,a))return false;
     if(!a.virtual&&(!f||f.owner!==ctx.owner||(!a.generic&&a.id!==c.id)))return false;
     if(a.generic&&(!f||!a.generic(d)))return false;
-    const handTrap=a.cardActivation&&d.type==='trap'&&f?.zone==='hand'&&e.state.players[ctx.owner].handTrapTurn===e.state.turn&&!e.state.players[ctx.owner].handTrapUsed;
+    const handTrap=a.cardActivation&&d.type==='trap'&&f?.zone==='hand'&&(e.state.players[ctx.owner].handTrapTurn===e.state.turn&&!e.state.players[ctx.owner].handTrapUsed||!!a.handActivation?.(e,ctx));
     if(!a.virtual&&!a.zones.includes(f.zone)&&!(fieldZone(f.zone)&&a.zones.includes('monsters'))&&!handTrap)return false;
     if(f?.zone==='grave'&&e.state.players[ctx.owner].graveLockTurn===e.state.turn)return false;
     if(a.trigger&&ctx.origin!=='trigger')return false;
@@ -102,7 +102,7 @@
       // fast effects get their opportunity after it succeeds, or on a chain.
       if(w.kind==='summon-attempt'&&!w.chainLast&&!a.summonNegation)return false;
       if(isDamageWindow(w)&&!a.damageStep)return false;
-      if(a.cardActivation&&d.type==='spell'&&f.zone==='hand'&&ctx.owner!==e.state.active)return false;
+      if(a.cardActivation&&d.type==='spell'&&f.zone==='hand'&&ctx.owner!==e.state.active&&!e.handSpellAllowed?.(ctx,a))return false;
       if(!w.chainLast&&['main-open','battle-open'].includes(w.kind)&&ctx.owner===e.state.active)return false;
     }
     if(a.cardActivation){
@@ -144,7 +144,7 @@
         // and copied effects whose source card is still in the Extra Deck.
         if(origin==='main'&&(!a.main||owner!==e.state.active))continue;
         if(origin==='window'&&(a.speed<2||a.inherent))continue;
-        const handTrap=a.cardActivation&&CARDS[f.card.id].type==='trap'&&f.zone==='hand'&&e.state.players[owner].handTrapTurn===e.state.turn&&!e.state.players[owner].handTrapUsed;
+        const handTrap=a.cardActivation&&CARDS[f.card.id].type==='trap'&&f.zone==='hand'&&(e.state.players[owner].handTrapTurn===e.state.turn&&!e.state.players[owner].handTrapUsed||!!a.handActivation);
         if(!a.virtual&&!a.zones.includes(f.zone)&&!(fieldZone(f.zone)&&a.zones.includes('monsters'))&&!handTrap)continue;
         if(a.copyTargetId&&f.card.gxCopy?.id!==a.copyTargetId)continue;
         const ctx=e.abilityContext(f.card.uid,a.key,origin,{owner,...(origin==='window'?{window:context}:{})});
@@ -281,6 +281,6 @@
     require('./ai-marginal.js');
     require('./ai-tactics.js');
     require('./ai-planner.js');
-    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005','effects-2006','effects-2007','effects-2008','effects-year-final','effects-chronicle','effects-2009','effects-2010','effects-2011','effects-2012','effects-2013','effects-chronicle-contracts','chronicle-rules'])require('./'+file+'.js');
+    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005','effects-2006','effects-2007','effects-2008','effects-year-final','effects-chronicle','effects-2009','effects-2010','effects-2011','effects-2012','effects-2013','effects-chronicle-contracts','chronicle-rules','effects-2014'])require('./'+file+'.js');
   }
 })(typeof globalThis!=='undefined'?globalThis:this);

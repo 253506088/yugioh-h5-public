@@ -3,7 +3,7 @@ import {createRequire} from 'node:module';
 import {fileURLToPath} from 'node:url';
 import {dirname,resolve,join} from 'node:path';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),require=createRequire(import.meta.url),D=require('../src/early-cards.js');
-const inputs=await Promise.all(['decks-2009-2012','decks-2013'].map(name=>readFile(join(root,'data',name+'.json'),'utf8').then(JSON.parse)));
+const inputs=await Promise.all(['decks-2009-2012','decks-2013','decks-2014'].map(name=>readFile(join(root,'data',name+'.json'),'utf8').then(JSON.parse)));
 const input={scope:inputs.flatMap(i=>i.scope),decks:inputs.flatMap(i=>i.decks),sources:inputs.flatMap(i=>i.sources)};
 const decks=input.decks.map(row=>{
  const expand=(pairs,extra)=>pairs.flatMap(([name,count])=>{

@@ -18,6 +18,7 @@
   const opponentAttack=(e,c)=>{const w=c.event.window;return !!w?.attack&&w.attack.owner!==c.owner&&w.attack.stage==='declare'&&!w.attack.negated;};
   const allMonsters=(e,owner,zones)=>H.monsterCards(e,owner,zones);
   E.register('$pendulum','place',{label:'设置灵摆刻度',generic:c=>c.type==='pendulum',zones:['hand'],cardActivation:true,pendulum:true,effectType:'spell',
+    condition:(e,c)=>e.canActivatePendulumScale(source(e,c)?.card,c.owner),
     inputs:(e,c)=>[customGroup('slot','选择灵摆区',[0,4].filter(i=>!e.state.players[c.owner].spells[i]).map(i=>({uid:'slot:'+i,label:i===0?'左灵摆区':'右灵摆区',detail:'刻度 '+CARDS[c.sourceId].scale})))],resolve:()=>{}});
   E.spell('pot-of-greed',{label:'抽2张卡',condition:(e,c)=>e.state.players[c.owner].deck.length>0,resolve:(e,c)=>e.draw(c.owner,2),aiScore:(e,c)=>e.state.players[c.owner].deck.length>=2?1300:-100});
   E.spell('dian-keto',{label:'回复1000LP',resolve:(e,c)=>e.heal(c.owner,1000),aiScore:(e,c)=>e.state.players[c.owner].lp<=7000?200:-100});

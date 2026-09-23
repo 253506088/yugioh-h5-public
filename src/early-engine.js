@@ -48,7 +48,11 @@
    if(!f.windowOffered){f.windowOffered=true;this.openWindow(1-f.owner,0);return true;}
    if(this.state.pending||this.state.chain.length||this.state.chainResolving)return false;
    this.state.frame=f.resumeFrame||{kind:'summon',owner:f.owner,uid:f.uid,summonKind:f.summonKind,windowOffered:false};
-   for(const v of [f.summonEvent,...(f.summonGroup||[])]){const m=this.find(v.uid)?.card;if(m){delete m.summonPending;if(!f.summonNegated&&fieldMonster(this.find(m.uid)?.zone)){this.state.acceptingSummon=true;try{this.emit({...v,group:f.summonGroup||[]});if(f.flipEvent)this.emit(f.flipEvent);}finally{this.state.acceptingSummon=false;}}}}return true;
+   const events=[f.summonEvent,...(f.summonGroup||[])];
+   // Every member has entered simultaneously before any continuous effect or
+   // successful-Summon trigger is evaluated. Preserve a common batch identity.
+   for(const v of events){const m=this.find(v.uid)?.card;if(m)delete m.summonPending;}
+   for(const v of events){const m=this.find(v.uid)?.card;if(m&&!f.summonNegated&&fieldMonster(this.find(m.uid)?.zone)){this.state.acceptingSummon=true;try{this.emit({...v,group:f.summonGroup||[],groupFirstUid:f.summonEvent.uid});if(f.flipEvent)this.emit(f.flipEvent);}finally{this.state.acceptingSummon=false;}}}return true;
   }
   if(f?.kind==='standby'&&f.stage===0){f.stage=1;const p=this.state.players[f.owner];if(p.skipStandby>0)p.skipStandby--;else this.emit({type:'standby',owner:f.owner});return true;}
   if(f?.kind==='standby'&&f.stage===1&&!this.state.pending){f.stage=2;this.state.frame={kind:'main-open',owner:f.owner,windowOffered:false};return true;}return old.settleFrame.call(this);

@@ -30,7 +30,8 @@ export function project(room, viewer) {
         atk: Data.isMonster(Data.CARDS[c.id]) ? e.attackValue(c) : 0,
         def: Data.isMonster(Data.CARDS[c.id]) ? e.defenseValue(c) : 0,
         level: Data.isMonster(Data.CARDS[c.id]) ? e.level(c) : 0,
-        negated: !!e.negated(c)
+        negated: !!e.negated(c),
+        ...(Data.CARDS[c.id]?.type === 'pendulum' ? { scale: e.pendulumScale(c), pendulumZone: e.isPendulumScale(c), pendingActivation: !!c.pendingActivation } : {})
       }
     };
     if (Number.isInteger(c.extraSlot)) out.extraSlot = side(c.extraSlot);
