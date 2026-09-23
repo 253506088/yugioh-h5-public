@@ -294,7 +294,7 @@
     function showFrame() {
       if (!view) return;
       const match = currentMatch();
-      host.frame(view.cursor.engine, {names:match.entrants.map(id => name(cup.participant(id))), live:view.live, matchId:match.id});
+      host.frame(view.cursor.engine, {names:match.entrants.map(id => name(cup.participant(id))), live:view.live, matchId:match.id,gameIndex:view.gameIndex});
       renderBoardTools();
     }
     function watch(id, gameIndex, replay = false) {

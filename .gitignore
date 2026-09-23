@@ -23,6 +23,11 @@
 # 均为本地验证产物，由下方 /output/ 统一排除。测试报告不得包含 API 令牌。
 # 真实 API 令牌只放浏览器本地存储或已忽略的 .env.local；不写入源码与样例。
 # 浏览器调试配置、录制与下载文件仅留本机。
+# 联网组卡扩展：output/ai-research/ 的检索响应、临时网页、真实模型试验、
+# 截图和验证报告也由 /output/ 排除；只提交正式检索适配器、校验器、界面和测试。
+# 2026-09-23 优化问题2：output/optimization-2/ 的问题复现、弹窗/BGM截图、
+# 历史牌表原图、联网采集响应和测试报告仅留本机；需求文档及其截图沿用个人文件排除。
+# tests/fixtures/frog-bilingual.txt 是无密钥回归夹具；data/deck-research/ 是可复核来源清单，需提交。
 /playwright-report/
 /test-results/
 /.ai-import-local/

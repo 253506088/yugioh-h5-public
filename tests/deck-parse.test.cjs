@@ -12,7 +12,7 @@ test('YDKe decodes unsigned little-endian passwords and validates base64/length'
   for (const invalid of ['ydke://abc!!!', 'ydke://!!!!', 'ydke://YWJj!!!']) assert.throws(() => parse(invalid), { code: 'invalidYdke' });
 });
 test('line lists support both quantity directions and multilingual zones without dropping prose', () => {
-  for (const line of ['3 青眼白龙', '3x青眼白龙', '3 × 青眼白龙', '青眼白龙 x3']) assert.deepEqual(parse(line).decks[0].main[0], { name: '青眼白龙', count: 3, language: 'unknown' });
+  for (const line of ['3 青眼白龙', '3x青眼白龙', '3 × 青眼白龙', '青眼白龙 x3']) assert.deepEqual(parse(line).decks[0].main[0], { name: '青眼白龙', count: 3, language: 'unknown', autoZone: true });
   const d = parse('Main Deck (40)\n3 Blue-Eyes White Dragon\nエクストラデッキ\n1 Stardust Dragon\n副卡组\n2 灰流丽').decks[0]; assert.equal(d.extra.length, 1); assert.equal(d.side.length, 1);
   assert.equal(parse('This article uses\n3 Blue-Eyes White Dragon\nand two other cards'), null);
   assert.equal(parse(''), null);

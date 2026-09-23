@@ -24,6 +24,7 @@
   let pvp = null, parkedOffline = null;
   const onlineLocked = () => !!engine?.remote && (!pvp?.connected || engine.busy || pvp.room?.clock.paused);
   let aiTimer = null, aiEpoch = 0, modalKind = '', pendingKey = '', libraryQuery = '', libraryFilter = 'all';
+  let modalHistory = [], restoringModal = false;
   let setupOptions = { deck: 'early-ritual', opponentDeck: 'early-fusion', first: 0, difficulty: 'standard', mode: 'duel' }, selectionState = null, responseUid = null;
   let libraryFamily = 'all',libraryYear='all',libraryPage=0,libraryStatus='all',detailReturn = null,detailCardId=null,pileContext = null,deckOwner=0,overlayHostUid=null;
   const journal=window.DuelLogUI.create({engine:()=>engine,names:()=>tournamentView?.names||[I.player(0,engine),I.player(1,engine)],open:openModal,card:showCardDetail});
@@ -31,7 +32,7 @@
   const spectating = () => engine?.state.mode === 'spectate';
   const robotName = owner => tournamentView?.names[owner] || (owner === 0 ? '机器人 A' : '机器人 B');
   const workshop = window.DuelWorkshop.create({ aiImport:()=>aiImport.show(),open:(...args)=>openModal(...args),toast:(...args)=>showToast(...args),getPageSize:()=>prefs.workshopPageSize,setPageSize:value=>{prefs.workshopPageSize=Experience.pageSize(value);updatePrefs();},play:id=>{setupOptions={deck:id,opponentDeck:engine?.state.players[1].deckId||'blackwing',first:0,difficulty:'standard',mode:'duel'};renderNewGame();} });
-  const aiImport = window.DuelAIImport.create({open:openModal,workshop:()=>workshop.show(),load:deck=>workshop.importDraft(deck),settings:showSettings});
+  const aiImport = window.DuelAIImport.create({open:openModal,back:backModal,workshop:()=>workshop.show(),load:deck=>workshop.importDraft(deck),settings:showSettings});
   let positionCache = new Map(), animationTimers = [], resultShown = false, cinematicTimer = null;
   let hoverId = null, savedAvailable = true;
   let currentScreen='home',peekState=null,audioScene='lobby';
@@ -49,7 +50,7 @@
     for(const [name,url] of Object.entries(window.DUEL_FRAMES||{}))document.documentElement.style.setProperty('--frame-'+name,'url("'+url+'")');
     window.dispatchEvent(new Event('duel-display-change'));
   }
-  function setScreen(screen){
+  function setScreen(screen,freshDuel=false){
     currentScreen=screen;document.body.dataset.screen=screen;
     $('#home-screen').hidden=screen!=='home';$('.app-main').hidden=screen!=='duel';
     $('#tournament-screen').hidden=screen!=='tournament';
@@ -57,7 +58,7 @@
     if(screen!=='pvp')pvp?.hide();
     if(screen!=='tournament')tournament?.hide();
     $('#duel-turn-hud').hidden=screen!=='duel';
-    audioScene=screen==='duel'?'battle':'lobby';sound.setScene(audioScene);
+    audioScene=screen==='duel'?'battle':'lobby';if(freshDuel&&screen==='duel')sound.beginDuel();else sound.setScene(audioScene);
     if(screen!=='duel')clearTimeout(aiTimer);
     renderChrome();
   }
@@ -102,7 +103,7 @@
     previewId=engine.deckInfo(0).ace;document.body.classList.add('pvp-dueling');
     remote.onPickUpdate=()=>{if(modalKind==='pending'&&selectionState)updatePicks();};
     remote.onBusyUpdate=()=>{if(engine!==remote)return;render();pvp?.updateClocks();scheduleAI();};
-    bindEngine();setScreen('duel');render();saveGame();scheduleAI();
+    bindEngine();setScreen('duel',true);render();saveGame();scheduleAI();
     if(engine.state.winner!==null)finishGame();
   }
   function detachRemote(){
@@ -115,6 +116,7 @@
   }
   function showTournamentFrame(watched,meta){
     const first=!parkedDuel;
+    const freshMusic=!tournamentView||tournamentView.matchId!==meta.matchId||tournamentView.gameIndex!==meta.gameIndex;
     if(first){
       parkedDuel={engine,selectedUid,previewId,previewHidden,intent,peekState,resultShown,paused:spectate.paused};
       aiEpoch++;clearTimeout(aiTimer);clearTimeout(cinematicTimer);chainDirector.reset();dismissModal();hidePopover();
@@ -127,7 +129,7 @@
     if(selectedUid&&!engine.find(selectedUid))selectedUid=null;
     document.body.classList.add('tournament-viewing');
     $('#turn-panel').setAttribute('data-i18n-skip','');$('#mobile-turn-control').setAttribute('data-i18n-skip','');
-    setScreen('duel');render();
+    setScreen('duel',freshMusic);render();
   }
   function renderHome(){
     const count=CARD_LIST.filter(c=>!c.notCollectible).length,decks=Object.values(DECKS).filter(d=>d.preset).length;
@@ -557,12 +559,12 @@
   function startGame(options = {}, instantOpening = false) {
     if(engine?.remote){showPvp();showToast('请先离开联机房间，再开始其他对局。');return;}
     leaveTournamentView();
-    chainDirector.reset();peekState=null;setScreen('duel');
+    chainDirector.reset();peekState=null;setScreen('duel',true);
     aiEpoch++; clearTimeout(aiTimer); clearTimeout(cinematicTimer);
     for (const timer of animationTimers) clearTimeout(timer); animationTimers = [];
     $('#cinematic').classList.remove('visible'); $('#fx-layer').innerHTML = '';
     $('#toast-stack').innerHTML = '';
-    modalKind = ''; if (modal.open) modal.close(); hidePopover();
+    modalHistory=[];modalKind = ''; if (modal.open) modal.close(); hidePopover();
     intent = null; selectedUid = null; previewHidden = false; pendingKey = ''; resultShown = false; spectate.paused = false;
     const { mode, ...engineOptions } = options;
     engine = new window.DuelEngine(engineOptions); previewId = engine.deckInfo(0).ace;
@@ -588,22 +590,59 @@
   }
   function beginSpectate(options) { leaveTournamentView();if (modal.open) modal.close(); playRps(first => startGame({ ...options, mode: 'spectate', first, seed: Date.now() })); }
 
+  function captureModal(){
+    const events=['onclick','oninput','onchange','ondragover','ondragleave','ondrop','ondragstart','onkeydown'];
+    return {kind:modalKind,nodes:[...modal.childNodes],className:modal.className,events:Object.fromEntries(events.map(key=>[key,modal[key]])),
+      scrolls:[modal,...modal.querySelectorAll('*')].filter(el=>el.scrollTop||el.scrollLeft).map(el=>({el,top:el.scrollTop,left:el.scrollLeft})),
+      focus:document.activeElement,selectionState,pendingKey,engine,pending:JSON.stringify(engine?.state.pending),audioScene,language:I.language,bodyTop:modal.querySelector('.modal-body')?.scrollTop||0,aiView:modalKind.startsWith('ai-')?aiImport.snapshot():null};
+  }
+  function backModal(){
+    if(!modalHistory.length)return false;
+    if(modalKind.startsWith('ai-'))aiImport.cancel();
+    const saved=modalHistory.pop();
+    if(saved.kind==='pending'&&(saved.engine!==engine||saved.pending!==JSON.stringify(engine?.state.pending))){dismissModal();scheduleAI();return true;}
+    restoringModal=true;
+    try{
+      modalKind=saved.kind;selectionState=saved.selectionState;pendingKey=saved.pendingKey;audioScene=saved.audioScene;sound.setScene(audioScene);
+      modal.className=saved.className;modal.replaceChildren(...saved.nodes);Object.assign(modal,saved.events);
+      if(saved.kind.startsWith('ai-'))aiImport.resume(saved.kind,saved.aiView);
+      else if(saved.language!==I.language){const refresh={library:showLibrary,workshop:()=>workshop.show(),settings:showSettings,help:showHelp,'new-game':renderNewGame,log:showLog,'chain-log':showChainLog};refresh[saved.kind]?.();}
+      I.apply(modal);
+      for(const s of saved.scrolls){s.el.scrollTop=s.top;s.el.scrollLeft=s.left;}
+      if(modal.querySelector('.modal-body'))modal.querySelector('.modal-body').scrollTop=saved.bodyTop;
+      if(saved.focus?.isConnected)saved.focus.focus({preventScroll:true});
+      requestAnimationFrame(()=>{if(modal.open&&modalKind===saved.kind){for(const s of saved.scrolls){s.el.scrollTop=s.top;s.el.scrollLeft=s.left;}if(modal.querySelector('.modal-body'))modal.querySelector('.modal-body').scrollTop=saved.bodyTop;}});
+    }finally{restoringModal=false;}
+    return true;
+  }
   function openModal(kind, title, kicker, body, footer = '', className = '') {
     clearTimeout(aiTimer); hidePopover();
+    if(!restoringModal){
+      if(!modal.open||kind==='pending'||kind==='result')modalHistory=[];
+      else if(modalKind!==kind){
+        const ancestor=modalHistory.map(s=>s.kind).lastIndexOf(kind);
+        if(ancestor>=0)modalHistory.length=ancestor;
+        else if(modalKind&&modalKind!=='result'){modalHistory.push(captureModal());if(modalHistory.length>10)modalHistory.shift();}
+      }
+    }
     if(modalKind.startsWith('ai-')&&modalKind!==kind)aiImport.cancel();
     modalKind = kind;
     const scene={library:'library',workshop:'workshop',help:'help','new-game':'lobby'}[kind];if(scene){audioScene=scene;sound.setScene(scene);}
     if(currentScreen==='home')footer=footer.replace(/返回决斗/g,'返回主界面');
+    if(modalHistory.length)footer=footer.replace(/返回决斗|返回主界面|返回战场/g,'返回上一页');
     modal.className = 'modal ' + className;
     modal.innerHTML = '<header class="modal-header"><div><div class="eyebrow">' + kicker + '</div><h2 id="modal-title">' + title + '</h2></div><div class="modal-tools">'+I.picker()+'<button class="modal-close" data-action="close-modal" aria-label="关闭窗口">' + icon('close') + '</button></div></header><div class="modal-body">' + body + '</div>' + (footer ? '<footer class="modal-footer">' + footer + '</footer>' : '');
     if (!modal.open) modal.showModal();
+    if(modalHistory.length&&!modal.querySelector('[data-action="modal-back"]'))modal.querySelector('.modal-tools')?.insertAdjacentHTML('afterbegin','<button class="modal-back-button" data-action="modal-back" aria-label="'+escape(I.term('返回上一页'))+'">←</button>');
   }
   function dismissModal() {
     if(modalKind.startsWith('ai-'))aiImport.cancel();
+    modalHistory=[];
     modalKind = ''; selectionState = null; responseUid = null; pendingKey = '';
     if (modal.open) modal.close();
   }
   function closeModal() {
+    if(backModal())return;
     if(modalKind==='pending'&&engine.state.pending){
       peekPending();return;
     }
@@ -876,7 +915,7 @@
   function showResult() {
     if(tournamentView)return;
     if (engine.state.winner === null) return;
-    clearTimeout(aiTimer); hidePopover(); resultShown = true; modalKind = 'result';
+    clearTimeout(aiTimer); hidePopover(); resultShown = true; modalHistory=[];modalKind = 'result';
     if(engine.remote){pvp?.showResult();return;}
     if (spectating()) { showSpectateResult(); return; }
     const win = engine.state.winner === 0, draw = engine.state.winner === 'draw';
@@ -1037,9 +1076,10 @@
       case 'edit-current-deck':workshop.show(engine.state.players[Number(b.dataset.owner)||0].deckId);break;
       case 'edit-setup-deck':workshop.show(setupOptions.deck);break;
       case 'close-modal':closeModal();break;
+      case 'modal-back':backModal();break;
       case 'inspect-full':if(!previewHidden)showCardDetail(previewId);break;
       case 'card-detail':showCardDetail(b.dataset.cardId);break;
-      case 'detail-back':if(detailReturn)detailReturn();else showLibrary();break;
+      case 'detail-back':if(!backModal()){if(detailReturn)detailReturn();else showLibrary();}break;
       case 'my-deck':showDeck(0);break;
       case 'pile':showPile(Number(b.dataset.owner),b.dataset.pile);break;
       case 'overlays':showOverlays(b.dataset.uid);break;
@@ -1147,7 +1187,7 @@
   modal.addEventListener('click', event => {
     if (event.target !== modal) return;
     const r = modal.getBoundingClientRect();
-    if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) closeModal();
+    if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) {event.preventDefault();event.stopPropagation();}
   });
   window.addEventListener('resize', () => {hidePopover();requestAnimationFrame(()=>{renderHand();highlightLinkZones();});}, { passive: true });
   window.addEventListener('scroll', event => { if (!event.target.closest?.('#modal')) positionPopover(); }, { passive: true });
@@ -1228,6 +1268,7 @@
     get preferences() { return { ...prefs }; },
     get intent() { return intent ? { ...intent } : null; },
     get modalKind() { return modalKind; },
+    get modalDepth(){return modalHistory.length;},
     get screen(){return currentScreen;},get music(){return sound.status();},get chainPlaying(){return chainDirector.busy;},
     showHome,enterDuel,showSettings,showChainLog,showLingering,skipChain:()=>chainDirector.skip(),
     get language(){return I.language;},setLanguage:value=>I.setLanguage(value),

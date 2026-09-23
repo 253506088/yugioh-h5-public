@@ -2,6 +2,17 @@ const test = require('node:test'), assert = require('node:assert/strict');
 require('../src/advanced-engine.js'); require('../src/advanced-effects.js'); require('../src/deck-tools.js');
 const D = globalThis.DuelData, locales = require('../src/card-locales.js'), catalog = require('../src/card-catalog.js'), aliases = require('../data/card-aliases.json');
 const R = require('../src/card-resolver.js'), r = R.create({ cards: D.CARDS, locales, catalog, aliases });
+test('reported bilingual Frog list resolves offline into a valid 40/15 deck', () => {
+  const input = require('node:fs').readFileSync(require('node:path').join(__dirname, 'fixtures/frog-bilingual.txt'), 'utf8');
+  const parsed = require('../src/deck-parse.js').parse(input), deck = r.resolveDeck(parsed.decks[0]);
+  assert.ok([...deck.main, ...deck.extra].every(c => c.status === 'playable'));
+  assert.equal(r.draft(deck).check.valid, true); assert.equal(r.draft(deck).check.mainCount, 40); assert.equal(r.draft(deck).check.extraCount, 15);
+  assert.equal(r.resolve('光帝 克莱斯（Kuraz the Light Monarch）').id, r.resolve('Kuraz the Light Monarch').id);
+  assert.equal(r.resolve('一击必杀 侍女（One for One）').id, r.resolve('One for One').id);
+  assert.equal(r.resolve('青眼白龙（Dark Magician）').labelMismatch, true);
+  const explicit = r.resolveDeck(require('../src/deck-parse.js').parse('主卡组\n1 星尘龙（Stardust Dragon）').decks[0]);
+  assert.equal(explicit.main.length, 1); assert.equal(explicit.extra.length, 0);
+});
 test('four ordered exact indexes, multilingual normalization and all five known collisions', () => {
   for (const name of ['青眼白龙', 'Blue-Eyes White Dragon', '青眼の白龍', 'blue-eyes white dragon']) assert.equal(r.resolve(name).id, 'blue-eyes');
   assert.equal(r.resolve('Blue Eyes White Dragon').method, 'C'); assert.equal(r.resolve('Maxx “C”').id, 'early-23434538');

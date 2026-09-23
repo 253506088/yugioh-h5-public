@@ -1,5 +1,6 @@
 (function (root) {
   'use strict';
+  const Research = root.DuelDeckResearch || (typeof require === 'function' ? require('./deck-research.js') : null);
   const STORAGE = 'duel-sanctuary-ai-provider-v1';
   const defaults = { protocol: 'openai', baseUrl: '', apiKey: '', model: '', openaiEndpoint: 'responses', transport: 'browser', secondPass: false };
   class ProviderError extends Error {
@@ -31,6 +32,7 @@
   function load() { try { return config(JSON.parse(root.localStorage?.getItem(STORAGE) || '{}')); } catch { return { ...defaults }; } }
   function save(value) { const c = config(value); try { root.localStorage.setItem(STORAGE, JSON.stringify(c)); } catch { throw error('storage'); } return c; }
   function validate(value, type = 'extract', inputs = []) {
+    if (['plan', 'rank', 'build'].includes(type)) return Research.validateModel(value, type);
     const exactKeys = (v, keys) => v && typeof v === 'object' && !Array.isArray(v) && Object.keys(v).length === keys.length && keys.every(key => Object.hasOwn(v, key));
     const str = (v, max = 200) => typeof v === 'string' && v.length <= max;
     if (type === 'normalize') {
@@ -55,7 +57,7 @@
     return value;
   }
   function payload(input = {}, operation = 'extract') {
-    if (!['extract', 'normalize', 'test'].includes(operation)) throw error('config');
+    if (!['extract', 'normalize', 'test', 'plan', 'rank', 'build'].includes(operation)) throw error('config');
     const text = input.text ?? '', images = input.images ?? [], inputs = input.inputs ?? [];
     if (typeof text !== 'string' || new TextEncoder().encode(text).length > 60000) throw error('textLimit');
     if (!Array.isArray(images) || images.length > 4) throw error('imageLimit');
@@ -66,23 +68,24 @@
   function buildRequest(value, input, operation = 'extract', jsonMode = false) {
     const c = config(value), p = payload(input, operation), url = endpoint(c);
     if (!c.model) throw error('model');
-    const testing = operation === 'test', targetSchema = operation === 'normalize' ? secondSchema : schema;
-    let instruction = testing ? 'Reply OK.' : operation === 'normalize' ? secondPrompt : prompt;
+    const testing = operation === 'test', targetSchema = Research?.schemas[operation] || (operation === 'normalize' ? secondSchema : schema);
+    const outputLimit = operation === 'plan' ? 2048 : operation === 'rank' ? 2048 : 8192;
+    let instruction = Research?.prompts[operation] || (testing ? 'Reply OK.' : operation === 'normalize' ? secondPrompt : prompt);
     if (jsonMode) instruction += '\nJSON Schema: ' + JSON.stringify(targetSchema);
     const text = testing ? 'Reply with exactly OK.' : operation === 'normalize' ? JSON.stringify(p.inputs) : p.text || '从这些图片中抽取卡组。';
     let body, headers = { 'Content-Type': 'application/json' };
     if (c.protocol === 'anthropic') {
       headers['x-api-key'] = c.apiKey; headers['anthropic-version'] = '2023-06-01';
       if (c.transport === 'browser') headers['anthropic-dangerous-direct-browser-access'] = 'true';
-      body = { model: c.model, max_tokens: testing ? 16 : 8192, system: instruction, messages: [{ role: 'user', content: [{ type: 'text', text }, ...p.images.map(image => ({ type: 'image', source: { type: 'base64', media_type: image.slice(5, image.indexOf(';')), data: image.split(',')[1] } }))] }] };
+      body = { model: c.model, max_tokens: testing ? 16 : outputLimit, system: instruction, messages: [{ role: 'user', content: [{ type: 'text', text }, ...p.images.map(image => ({ type: 'image', source: { type: 'base64', media_type: image.slice(5, image.indexOf(';')), data: image.split(',')[1] } }))] }] };
       if (!testing) Object.assign(body, { tools: [{ name: 'extract_decks', description: 'Return the extracted data.', input_schema: targetSchema }], tool_choice: { type: 'tool', name: 'extract_decks' } });
     } else {
       headers.Authorization = 'Bearer ' + c.apiKey;
       if (c.openaiEndpoint === 'responses') {
-        body = { model: c.model, instructions: instruction, max_output_tokens: testing ? 32 : 8192, input: [{ role: 'user', content: [{ type: 'input_text', text }, ...p.images.map(image => ({ type: 'input_image', image_url: image }))] }] };
+        body = { model: c.model, instructions: instruction, max_output_tokens: testing ? 32 : outputLimit, input: [{ role: 'user', content: [{ type: 'input_text', text }, ...p.images.map(image => ({ type: 'input_image', image_url: image }))] }] };
         if (!testing) body.text = { format: { type: 'json_schema', name: 'deck_import', schema: targetSchema, strict: true } };
       } else {
-        body = { model: c.model, max_tokens: testing ? 128 : 8192, messages: [{ role: 'system', content: instruction }, { role: 'user', content: [{ type: 'text', text }, ...p.images.map(image => ({ type: 'image_url', image_url: { url: image } }))] }] };
+        body = { model: c.model, max_tokens: testing ? 128 : outputLimit, messages: [{ role: 'system', content: instruction }, { role: 'user', content: [{ type: 'text', text }, ...p.images.map(image => ({ type: 'image_url', image_url: { url: image } }))] }] };
         // DeepSeek Flash enables thinking by default, even for an OK connection probe.
         // Extraction needs transcription, so avoid spending tokens on a reasoning phase.
         if (new URL(c.baseUrl).hostname === 'api.deepseek.com') body.thinking = { type: 'disabled' };
@@ -146,6 +149,7 @@
       if (options.signal?.aborted) throw error('cancelled');
       if (signal.aborted) throw error('timeout');
       if (e instanceof ProviderError) throw e;
+      if (e.code === 'schema') throw error('schema');
       if (['privateAddress', 'upstreamDenied', 'responseLimit'].includes(e.code)) throw error(e.code, { status: e.status });
       throw error('network');
     }

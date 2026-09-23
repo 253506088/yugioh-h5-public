@@ -5,6 +5,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --omit=dev --ignore-scripts --registry=https://registry.npmjs.org && npm cache clean --force
 COPY src/ ./src/
 COPY server/ ./server/
+COPY data/deck-research/ ./data/deck-research/
 COPY index.html ./index.html
 RUN mkdir -p /data && chown node:node /data
 USER node

@@ -12,6 +12,7 @@
   }
   function parse(text, { cards = root.DuelData?.CARDS || {} } = {}) {
     text = String(text).replace(/^\uFEFF/, '').trim();
+    text = text.replace(/^```(?:text|txt|json|ydk)?\s*\n([\s\S]*?)\n```$/i, '$1').trim();
     if (!text) return null;
     if (new TextEncoder().encode(text).length > 60000) fail('textLimit');
     if (/^ydke:\/\//i.test(text)) {
@@ -70,16 +71,16 @@
       });
       return { decks, format: 'json' };
     }
-    const deck = empty('Imported deck'); let zone = 'main', hasEntries = false;
+    const deck = empty('Imported deck'); let zone = 'main', hasEntries = false, explicitZone = false;
     for (const raw of text.split(/\r?\n/)) {
       const line = raw.trim(); if (!line) continue;
-      const found = section(line); if (found) { zone = found; continue; }
+      const found = section(line); if (found) { zone = found; explicitZone = true; continue; }
       const prefix = /^(\d{1,2})(?:\s*[x×*]\s*|\s+)(.+)$/i.exec(line);
       const match = prefix || /^(.+?)\s*[x×*]\s*(\d{1,2})$/i.exec(line);
       if (!match) return null; // Never silently drop prose or an unparsed line.
       const name = prefix ? match[2] : match[1], count = Number(prefix ? match[1] : match[2]);
       if (!Number.isInteger(count) || count < 1 || count > 99 || !name.trim() || name.length > 200) return null;
-      deck[zone].push(entry(name, count)); hasEntries = true;
+      deck[zone].push({ ...entry(name, count), ...(!explicitZone ? { autoZone: true } : {}) }); hasEntries = true;
       if (deck[zone].length > 400) fail('entryLimit');
     }
     return hasEntries ? { decks: [deck], format: 'list' } : null;

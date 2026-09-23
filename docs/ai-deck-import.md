@@ -1,5 +1,7 @@
 # AI 卡组导入
 
+新增「联网组卡」标签：根据自然语言需求检索真实公开牌表，再推荐原版或调整成当前卡池可用的构筑。流程、来源与费用边界见 [根据描述联网组卡](ai-deck-research.md)。
+
 在「组卡工坊 → AI 导入」中粘贴清单、选择 YDK / JSON / TXT 文件、粘贴 YDKe 链接或上传最多四张图片。文本支持 `3 青眼白龙`、`3x青眼白龙`、`青眼白龙 ×3`，以及中英日分区标题。结构化输入完全离线，不需要 API 令牌。
 
 文章、图片使用「设置 → AI 助手」里配置的模型。支持 OpenAI Responses、Chat Completions 与 Anthropic Messages。地址填主机或路径前缀，末尾已有 `/v1` 时不会重复添加。默认 Responses；DeepSeek 预设使用 `https://api.deepseek.com`、Chat Completions、`deepseek-flash`。密钥必须自行填写。图片需要模型本身支持视觉；选择 PNG、JPG、WebP 后会自动缩放到最长边 1568 像素并压缩为 JPEG。

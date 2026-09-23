@@ -57,7 +57,7 @@ scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'pvp-client.js','pvp-ui.j
 styleFiles.push('ai-import.css');
 scriptFiles.splice(scriptFiles.indexOf('card-locales.js')+1,0,'card-catalog.js');
 scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-ai-import.js');
-scriptFiles.splice(scriptFiles.indexOf('workshop.js'),0,'deck-parse.js','card-resolver.js','ai-provider.js','ai-import-ui.js');
+scriptFiles.splice(scriptFiles.indexOf('workshop.js'),0,'deck-parse.js','card-resolver.js','deck-research.js','ai-provider.js','ai-import-ui.js');
 const styles = (await Promise.all(styleFiles.map(file => readFile(join(root, 'src', file), 'utf8')))).join('\n\n');
 const scripts = await Promise.all(scriptFiles.map(file => readFile(join(root, 'src', file), 'utf8')));
 scripts.unshift('globalThis.DuelCardAliases='+JSON.stringify(JSON.parse(await readFile(join(root,'data/card-aliases.json'),'utf8'))).replace(/</g,'\\u003c')+';');

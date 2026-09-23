@@ -60,7 +60,11 @@
     "cards:catalog": "node scripts/build-card-catalog.mjs",
     "test:ai-import:unit": "node --test tests/ai-provider.test.cjs tests/card-resolver.test.cjs tests/deck-parse.test.cjs tests/ai-proxy.test.mjs",
     "test:ai-import:browser": "node tests/ai-import-browser.cjs",
-    "test:ai-import": "npm run test:ai-import:unit && npm run test:ai-import:browser"
+    "test:ai-import": "npm run test:ai-import:unit && npm run test:ai-import:browser",
+    "test:deck-research:unit": "node --test tests/deck-research.test.cjs tests/deck-search.test.mjs",
+    "test:deck-research:browser": "node tests/deck-research-browser.cjs",
+    "test:deck-research": "npm run test:deck-research:unit && npm run test:deck-research:browser",
+    "test:optimization-2": "node --test tests/card-resolver.test.cjs tests/deck-parse.test.cjs tests/audio-lifecycle.test.cjs && node tests/optimization-2-browser.cjs"
   },
   "engines": {
     "node": ">=22.13.0"

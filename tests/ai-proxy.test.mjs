@@ -22,6 +22,9 @@ test('the TLS connection uses the already checked DNS records and bounded respon
   await assert.rejects(safeFetch('https://public.example', {}, { limit: 3, lookup: async () => [{ address: '1.1.1.1', family: 4 }], request: (_u, _o, callback) => {
     const req = new EventEmitter(); req.setTimeout = () => {}; req.end = () => { const stream = new PassThrough(); stream.statusCode = 200; stream.headers = {}; callback(stream); stream.end('too large'); }; return req;
   } }), { code: 'responseLimit' });
+  await assert.rejects(safeFetch('https://public.example', {}, { limit: 3, lookup: async () => [{ address: '1.1.1.1', family: 4 }], request: (_u, _o, callback) => {
+    const req = new EventEmitter(); req.setTimeout = () => {}; req.end = () => { const stream = new PassThrough(); stream.statusCode = 200; stream.headers = { 'content-length': '9999999' }; callback(stream); }; return req;
+  } }), { code: 'responseLimit' });
 });
 test('web text preserves lists and table text, removes scripts and follows at most three redirects', async () => {
   const html = '<script>bad</script><style>bad</style><h1>Deck</h1><table><tr><td>3</td><td>Blue-Eyes &amp; friends</td></tr></table><ul><li>1 Maxx &quot;C&quot;</li></ul>';

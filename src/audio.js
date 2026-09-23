@@ -4,6 +4,7 @@
     constructor(prefs) {
       this.prefs=prefs;this.context=null;this.master=null;this.scene='lobby';this.unlocked=false;this.musicState='ready';this.currentTrack=null;this.failed=new Set();this.positions=new Map();this.sceneTracks=new Map();this.playEpoch=0;this.fadeTimer=null;
       this.tracks=root.DUEL_MUSIC||[];
+      this.lastBattleTrack=null;
       this.shuffle=new root.DuelExperience.ShuffleBag(this.tracks.filter(t=>t.scene==='battle').map(t=>t.id));
       this.player=new root.Audio();this.player.preload='metadata';this.player.volume=0;
       this.player.addEventListener('ended',()=>{if(this.scene==='battle')this.nextTrack();});
@@ -46,23 +47,29 @@
       const saved=this.sceneTracks.get(scene),id=scene==='battle'?(saved||this.shuffle.next()):this.tracks.find(t=>t.scene===scene)?.id;
       this.selectTrack(id,true);
     }
+    beginDuel(){
+      this.scene='battle';this.sceneTracks.delete('battle');this.nextTrack();
+    }
     selectTrack(id,resume=false){
       const track=this.tracks.find(t=>t.id===id);if(!track)return;
       if(this.currentTrack){this.positions.set(this.currentTrack.id,this.player.currentTime||0);}
       this.playEpoch++;clearInterval(this.fadeTimer);this.fadeTimer=null;this.player.pause();this.player.volume=0;
       this.currentTrack=track;this.sceneTracks.set(this.scene,id);this.musicState='ready';
+      if(track.scene==='battle')this.lastBattleTrack=id;
       if(!track.src){this.musicState='missing';this.announce();return;}
       this.player.src=track.src;this.player.loop=this.scene!=='battle';
       const position=resume?this.positions.get(id)||0:0;
-      this.player.onloadedmetadata=()=>{if(this.currentTrack?.id!==id)return;if(position>0&&position<this.player.duration)this.player.currentTime=position;};
+      this.player.onloadedmetadata=()=>{if(this.currentTrack?.id!==id)return;this.player.currentTime=position>0&&position<this.player.duration?position:0;};
+      if(!resume)try{this.player.currentTime=0;}catch{}
       this.update();
     }
     nextTrack(){
       if(this.scene!=='battle')return;
-      let id=null;for(let i=0;i<this.tracks.length;i++){const candidate=this.shuffle.next();if(candidate&&!this.failed.has(candidate)){id=candidate;break;}}
+      const choices=this.tracks.filter(t=>t.scene==='battle'&&t.src&&!this.failed.has(t.id));
+      let id=null;for(let i=0;i<this.tracks.length*2;i++){const candidate=this.shuffle.next();if(choices.some(t=>t.id===candidate)&&(choices.length===1||candidate!==this.lastBattleTrack)){id=candidate;break;}}
       if(id)this.selectTrack(id,false);
     }
-    status(){return {scene:this.scene,state:this.musicState,id:this.currentTrack?.id||null,title:this.currentTrack?.title||'',available:this.tracks.filter(t=>t.src).length,total:this.tracks.length};}
+    status(){return {scene:this.scene,state:this.musicState,id:this.currentTrack?.id||null,title:this.currentTrack?.title||'',position:this.player.currentTime||0,available:this.tracks.filter(t=>t.src).length,total:this.tracks.length};}
     announce(){root.dispatchEvent(new CustomEvent('duel-music-status',{detail:this.status()}));}
     tone(frequency, duration, type = 'sine', volume = .15, delay = 0, endFrequency = null) {
       if (!this.context || this.context.state !== 'running') return;

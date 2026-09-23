@@ -1,0 +1,228 @@
+[
+  {
+    "year": 2010,
+    "champion": "Galileo De Obaldia",
+    "archetype": "Frog FTK",
+    "title": "World Championship 2010 — Galileo De Obaldia — Frog FTK",
+    "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2010/",
+    "imageUrl": "https://roadoftheking.com/wp-content/uploads/2010/08/WCS2010_1st.jpg",
+    "imageSha256": "f0769dd41d5be0fbcdb0adabf62702e87333296f4f039046e9653b1960472051",
+    "verifiedOn": "2026-09-23",
+    "main": [
+      {
+        "name": "Des Frog",
+        "count": 2,
+        "password": "84451804"
+      },
+      {
+        "name": "Beelze Frog",
+        "count": 1,
+        "password": "49522489"
+      },
+      {
+        "name": "Swap Frog",
+        "count": 3,
+        "password": "9126351"
+      },
+      {
+        "name": "Dupe Frog",
+        "count": 3,
+        "password": "46239604"
+      },
+      {
+        "name": "Flip Flop Frog",
+        "count": 3,
+        "password": "81278754"
+      },
+      {
+        "name": "Unifrog",
+        "count": 3,
+        "password": "56052205"
+      },
+      {
+        "name": "Poison Draw Frog",
+        "count": 3,
+        "password": "56840658"
+      },
+      {
+        "name": "Ronintoadin",
+        "count": 2,
+        "password": "1357146"
+      },
+      {
+        "name": "Substitoad",
+        "count": 3,
+        "password": "20663556"
+      },
+      {
+        "name": "Treeborn Frog",
+        "count": 2,
+        "password": "12538374"
+      },
+      {
+        "name": "Fishborg Blaster",
+        "count": 1,
+        "password": "93369354"
+      },
+      {
+        "name": "Mass Driver",
+        "count": 2,
+        "password": "34906152"
+      },
+      {
+        "name": "Moray of Greed",
+        "count": 3,
+        "password": "22123627"
+      },
+      {
+        "name": "Hand Destruction",
+        "count": 3,
+        "password": "74519184"
+      },
+      {
+        "name": "Salvage",
+        "count": 3,
+        "password": "96947648"
+      },
+      {
+        "name": "Card Destruction",
+        "count": 1,
+        "password": "72892473"
+      },
+      {
+        "name": "Giant Trunade",
+        "count": 1,
+        "password": "42703248"
+      },
+      {
+        "name": "Heavy Storm",
+        "count": 1,
+        "password": "19613556"
+      },
+      {
+        "name": "One for One",
+        "count": 1,
+        "password": "2295440"
+      }
+    ],
+    "extra": [
+      {
+        "name": "Armory Arm",
+        "count": 2,
+        "password": "29071332"
+      },
+      {
+        "name": "Ally of Justice Catastor",
+        "count": 1,
+        "password": "26593852"
+      },
+      {
+        "name": "Brionac, Dragon of the Ice Barrier",
+        "count": 2,
+        "password": "50321796"
+      },
+      {
+        "name": "Dewloren, Tiger King of the Ice Barrier",
+        "count": 1,
+        "password": "70583986"
+      },
+      {
+        "name": "Goyo Guardian",
+        "count": 1,
+        "password": "7391448"
+      },
+      {
+        "name": "Turbo Warrior",
+        "count": 1,
+        "password": "46195773"
+      },
+      {
+        "name": "Black Rose Dragon",
+        "count": 1,
+        "password": "73580471"
+      },
+      {
+        "name": "Nitro Warrior",
+        "count": 1,
+        "password": "18013090"
+      },
+      {
+        "name": "Junk Archer",
+        "count": 1,
+        "password": "42810973"
+      },
+      {
+        "name": "Stardust Dragon",
+        "count": 1,
+        "password": "44508094"
+      },
+      {
+        "name": "Light End Dragon",
+        "count": 1,
+        "password": "25132288"
+      },
+      {
+        "name": "Colossal Fighter",
+        "count": 1,
+        "password": "23693634"
+      },
+      {
+        "name": "Mist Wurm",
+        "count": 1,
+        "password": "27315304"
+      }
+    ],
+    "side": [
+      {
+        "name": "Light and Darkness Dragon",
+        "count": 2,
+        "password": "47297616"
+      },
+      {
+        "name": "Cyber Dragon",
+        "count": 2,
+        "password": "70095154"
+      },
+      {
+        "name": "Quickdraw Synchron",
+        "count": 2,
+        "password": "20932152"
+      },
+      {
+        "name": "Hanewata",
+        "count": 2,
+        "password": "20450925"
+      },
+      {
+        "name": "Fishborg Blaster",
+        "count": 1,
+        "password": "93369354"
+      },
+      {
+        "name": "Brain Control",
+        "count": 1,
+        "password": "87910978"
+      },
+      {
+        "name": "Cold Wave",
+        "count": 1,
+        "password": "60682203"
+      },
+      {
+        "name": "Mystical Space Typhoon",
+        "count": 1,
+        "password": "5318639"
+      },
+      {
+        "name": "Royal Decree",
+        "count": 2,
+        "password": "51452091"
+      },
+      {
+        "name": "Treacherous Trap Hole",
+        "count": 1,
+        "password": "99590524"
+      }
+    ]
+  }
+]

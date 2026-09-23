@@ -115,6 +115,17 @@
         result ||= passwords.has(id) ? select(passwords.get(id), 'password') : catalogCards.has(id) ? catalogResult(id, 'password') : null;
       } else {
         result = exact(name);
+        // A bilingual label is a display name plus an explicit official name,
+        // not one long card name. Keep genuine parenthesized official names intact.
+        const bilingual = !result && /^(.+?)\s*[（(【\[]([^()（）【】\[\]]+)[）)】\]]\s*$/.exec(name);
+        if (bilingual) {
+          const inside = resolve(bilingual[2].trim(), { fuzzy: false });
+          const outside = resolve(bilingual[1].trim(), { fuzzy: false });
+          const usable = hit => ['playable', 'pending', 'not-in-pool'].includes(hit.status);
+          if (usable(inside)) result = { ...inside, method: 'bilingual', matchedName: bilingual[2].trim(),
+            labelMismatch: usable(outside) && (outside.id || outside.password) !== (inside.id || inside.password) };
+          else if (usable(outside)) result = { ...outside, method: 'bilingual', matchedName: bilingual[1].trim() };
+        }
         const alias = aliasMap.get(light(name));
         if (!result && alias) {
           result = exact(alias);
@@ -131,8 +142,12 @@
       cache.set(cacheKey, result); return structuredClone(result);
     }
     function resolveDeck(deck) {
-      return { name: deck.name.slice(0, 40), uncertain: [...(deck.uncertain || [])], notes: deck.notes || '',
-        ...Object.fromEntries(['main', 'extra', 'side'].map(zone => [zone, (deck[zone] || []).map(entry => ({ ...resolve(entry), count: entry.count, language: entry.language || 'unknown' }))])) };
+      const result = { name: deck.name.slice(0, 40), uncertain: [...(deck.uncertain || [])], notes: deck.notes || '', main: [], extra: [], side: [] };
+      for (const zone of ['main', 'extra', 'side']) for (const entry of deck[zone] || []) {
+        const hit = resolve(entry), inferred = zone === 'main' && entry.autoZone && hit.id && root.DuelData?.isExtra(cards[hit.id]);
+        result[inferred ? 'extra' : zone].push({ ...hit, count: entry.count, language: entry.language || 'unknown', ...(inferred ? { zoneInferred: true } : {}) });
+      }
+      return result;
     }
     function draft(deck) {
       const output = { name: deck.name.slice(0, 40), cards: [], extra: [], notes: '' }, counts = new Map(), warnings = [], omitted = [];
