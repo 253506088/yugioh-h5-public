@@ -17,6 +17,11 @@
 !/.env.example
 
 # ===== 构建与验证 =====
+# 2026-09-24 天命法则：提交 src/rule-modes*、引擎/界面/联机/赛事接入、正式测试、
+# docs/rule-modes.md、交接/天命法则与后续年度卡片维护.md 以及重建的根目录 index.html。
+# output/rule-modes/ 中的试验脚本、失败局面、TAP/JSON 报告、无图无音频测试构建、
+# 桌面/手机截图只留本机，由 /output/ 排除。旧 output/rule-mode-draft/ 仅为历史草稿。
+# 需求文档仍是个人工作输入，继续由 /需求文档/ 排除；正式规则和解释已转入交付文档。
 # 2026-09-22 AI 卡组导入：正式模块、别名 JSON、生成的 src/card-catalog.js、
 # 名录构建脚本、自动化测试、使用文档及根目录 index.html 需要提交。
 # output/ai-import/ 下的无图构建、浏览器截图、测试报告和真实接口探测结果

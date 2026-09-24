@@ -12,6 +12,13 @@ function finish(cup) {
 }
 function roster(n) { return Array.from({length:n}, (_, i) => ['blue', 'dark', 'early-ritual', 'early-fusion'][i % 4]); }
 
+test('Fate tournament stores the drawn decree and replays the complete final deterministically',()=>{
+  const cup=finish(T.create({deckIds:roster(2),seed:9281,ruleMode:'random'})),game=cup.matches[0].games[0];
+  assert.equal(cup.data.settings.ruleMode,'random');assert.ok(globalThis.DuelRuleModes.get(game.initial.state.ruleMode.id));
+  const restored=T.Tournament.restore(copy(cup.snapshot()));assert.equal(restored.data.settings.ruleMode,'random');
+  const cursor=new T.ReplayCursor(game);while(cursor.next()){}assert.deepEqual(cursor.engine.snapshot(),game.final);
+});
+
 test('2–64 entrants get a connected bracket with evenly spread byes and no empty matches', () => {
   for (let n = 2; n <= 64; n++) {
     const participants = Array.from({length:n}, (_, i) => ({id:'p' + (i + 1)})), result = T.bracket(participants);

@@ -30,6 +30,7 @@
   const journal=window.DuelLogUI.create({engine:()=>engine,names:()=>tournamentView?.names||[I.player(0,engine),I.player(1,engine)],open:openModal,card:showCardDetail});
   const spectate = { paused: false };
   const spectating = () => engine?.state.mode === 'spectate';
+  const fate=window.DuelRuleUI.create({engine:()=>engine,open:openModal,spectating,reducedMotion:()=>prefs.reducedMotion,attacking:()=>intent?.kind==='attack'?intent.uid:null});
   const robotName = owner => tournamentView?.names[owner] || (owner === 0 ? '机器人 A' : '机器人 B');
   const workshop = window.DuelWorkshop.create({ aiImport:()=>aiImport.show(),open:(...args)=>openModal(...args),toast:(...args)=>showToast(...args),getPageSize:()=>prefs.workshopPageSize,setPageSize:value=>{prefs.workshopPageSize=Experience.pageSize(value);updatePrefs();},play:id=>{setupOptions={deck:id,opponentDeck:engine?.state.players[1].deckId||'blackwing',first:0,difficulty:'standard',mode:'duel'};renderNewGame();} });
   const aiImport = window.DuelAIImport.create({open:openModal,back:backModal,workshop:()=>workshop.show(),load:deck=>workshop.importDraft(deck),settings:showSettings});
@@ -398,6 +399,7 @@
     document.body.classList.toggle('spectate-mode',spectating());
     updateSoundButton();Art.refresh();highlightLinkZones();
     renderChrome();
+    fate.render();
   }
   function renderModernControls() {
     const s=engine.state,main=!spectating()&&s.active===0&&s.winner===null&&!s.pending&&['main1','main2'].includes(s.phase),extra=main?engine.extraOptions(0):[],links=extra.filter(o=>o.type==='link'),pend=main?engine.pendulumCandidates(0):[],scales=engine.scales(0);
@@ -520,7 +522,7 @@
     if(s.pending?.responder===0){
       if(peekState){renderPeekBar();return;}
       if(modal.open&&modalKind!=='pending')return;
-      if(Experience.responseDecision(s.pending,prefs.responseMode)==='pass'){
+      if(!engine.ruleActions?.(0).length&&Experience.responseDecision(s.pending,prefs.responseMode)==='pass'){
         const pending=s.pending,token=aiEpoch;
         aiTimer=setTimeout(()=>{if(token===aiEpoch&&engine.state.pending===pending&&!modal.open&&!peekState&&currentScreen==='duel'&&!chainDirector.busy)dispatch({type:'pass'});},110);return;
       }
@@ -575,7 +577,7 @@
         const action = engine.aiNext(); if (!action || !engine.act(action).ok) break;
       }
     }
-    bindEngine(); render(); saveGame(); scheduleAI();
+    bindEngine(); render(); saveGame(); scheduleAI();fate.reveal();
     if (!instantOpening) { sound.play('phase'); showToast(spectating() ? robotName(engine.state.active) + ' 先攻，观战开始。' : engine.state.active === 0 ? '决斗开始。你的先攻回合不能攻击。' : '决斗开始，对方先攻。'); }
   }
   const rpsHands = [['石头', '✊'], ['剪刀', '✌️'], ['布', '🖐️']];
@@ -616,6 +618,7 @@
     return true;
   }
   function openModal(kind, title, kicker, body, footer = '', className = '') {
+    if(kind==='pending')for(const a of engine.ruleActions?.(0)||[])footer='<button class="fate-rule-action" data-action="perform-rule" data-rule-key="'+a.key+'">'+escape(a.label)+'</button>'+footer;
     clearTimeout(aiTimer); hidePopover();
     if(!restoringModal){
       if(!modal.open||kind==='pending'||kind==='result')modalHistory=[];
@@ -700,7 +703,7 @@
   function showNewGame() {
     if(engine?.remote){showPvp();return;}
     const own=engine?.state.players[0].deckId,rival=engine?.state.players[1].deckId,list=DeckTools.list();
-    setupOptions={deck:list.some(d=>d.id===own)?own:'hero',opponentDeck:list.some(d=>d.id===rival)?rival:'blackwing',first:0,difficulty:engine?.state.difficulty||'standard',mode:spectating()?'spectate':'duel'};renderNewGame();
+    setupOptions={deck:list.some(d=>d.id===own)?own:'hero',opponentDeck:list.some(d=>d.id===rival)?rival:'blackwing',first:0,difficulty:engine?.state.difficulty||'standard',mode:spectating()?'spectate':'duel',ruleMode:engine?.state.ruleMode?'random':'off'};renderNewGame();
   }
   let setupDeckIndex = new Map();
   const normalizeDeckQuery = value => String(value || '').normalize('NFKC').toLowerCase().replace(/[·・—–_-]/g, ' ');
@@ -765,7 +768,7 @@
     const filters='<div class="setup-deck-heading"><label class="setting-label" for="setup-deck-search">'+(spec?'机器人 A 的卡组':'我的卡组')+'</label><span id="setup-year-count" class="setup-result-count" role="status" aria-live="polite"></span></div><div class="setup-deck-filters">'+setupSearchHTML('setup-deck-search',setupOptions.query,'搜索我的卡组')+'<select id="setup-year" aria-label="按年度选择预设"><option value="all">全部年代</option>'+years.map(y=>'<option value="'+y+'"'+(String(y)===String(setupOptions.year)?' selected':'')+'>'+y+'</option>').join('')+'</select></div>';
     const opponent='<div class="setup-opponent"><div class="setup-deck-heading"><label class="setting-label" for="opponent-deck">'+(spec?'机器人 B 的卡组':'对手卡组')+'</label><span id="opponent-search-count" class="setup-result-count" role="status" aria-live="polite"></span></div>'+setupSearchHTML('opponent-deck-search',setupOptions.opponentQuery,'搜索对手卡组')+'<select id="opponent-deck" aria-describedby="opponent-search-empty"></select><p id="opponent-search-empty" class="setup-search-note" hidden>没有匹配的卡组，当前选择已保留。</p></div>';
     openModal('new-game',spec?'让两位机器人一决高下。':'选择与你共鸣的力量。','ALL GENERATIONS · ONE DESTINY',
-      '<div class="deck-select-intro"><p>跨越世代的决斗，从这里开始。<br><span>'+Object.values(DECKS).filter(d=>d.preset).length+'套预设，或一副亲手构筑的卡组。</span></p><button class="outline-button" data-action="workshop">＋ 组卡工坊</button></div>'+modeControl+
+      '<div class="deck-select-intro"><p>跨越世代的决斗，从这里开始。<br><span>'+Object.values(DECKS).filter(d=>d.preset).length+'套预设，或一副亲手构筑的卡组。</span></p><button class="outline-button" data-action="workshop">＋ 组卡工坊</button></div>'+modeControl+fate.setup(setupOptions.ruleMode||'off')+
       '<div class="deck-select-layout"><section class="setup-deck-browser">'+filters+'<div class="deck-roster" id="setup-deck-roster"></div></section><aside class="selected-deck-showcase" id="setup-deck-showcase"></aside></div>'+
       '<div class="setup-options v2-setup">'+opponent+'<div><label class="setting-label">'+(spec?'机器人难度':'对手难度')+'</label>'+segment('choose-difficulty',setupOptions.difficulty,[['casual','休闲'],['standard','标准']])+'</div><div><label class="setting-label">出场顺序</label>'+(spec?'<p class="setup-order-note">✊ ✌️ 🖐️ 先后手由猜拳决定</p>':segment('choose-first',setupOptions.first,[[0,'我先攻'],[1,'我后攻']]))+'</div></div><p class="new-game-note">8000 LP · 随机起手 5 张 · 先攻首回合不抽卡、不攻击<br>开始新决斗会替换当前对局存档；保存的卡组与工坊草稿会保留。</p>',
       '<button class="secondary-button" data-action="close-modal">继续当前对局</button><button class="primary-button" data-action="begin-game">'+(spec?'开始观战 ':'开始决斗 ')+icon('arrow')+'</button>','new-game-modal v2-new-game');
@@ -1072,6 +1075,11 @@
       case 'skip-chain':chainDirector.skip();break;
       case 'replay-chain':{const links=engine.state.chainHistory.filter(l=>l.chainId===Number(b.dataset.chainId));dismissModal();setScreen('duel');clearTimeout(aiTimer);chainDirector.replay(links);break;}
       case 'new-game':showNewGame();break;
+      case 'rule-gallery':fate.show();break;
+      case 'rule-details':fate.showDetail();break;
+      case 'new-fate-game':if(engine?.remote){showPvp();break;}showNewGame();setupOptions.ruleMode='random';renderNewGame();break;
+      case 'choose-rule-mode':setupOptions.ruleMode=b.dataset.value==='random'?'random':'off';renderNewGame();break;
+      case 'perform-rule':if(!spectating()){if(modalKind==='pending')dismissModal();dispatch({type:'rule-action',key:b.dataset.ruleKey});}break;
       case 'workshop':workshop.show();break;
       case 'edit-current-deck':workshop.show(engine.state.players[Number(b.dataset.owner)||0].deckId);break;
       case 'edit-setup-deck':workshop.show(setupOptions.deck);break;
@@ -1106,7 +1114,7 @@
       case 'clear-deck-search':{const input=document.getElementById(b.dataset.input);input.value='';input.dispatchEvent(new Event('input',{bubbles:true}));input.focus({preventScroll:true});break;}
       case 'reset-deck-filters':setupOptions.query='';setupOptions.year='all';$('#setup-deck-search').value='';$('#setup-year').value='all';renderSetupRoster(true);$('#setup-deck-search').focus({preventScroll:true});break;
       case 'begin-game':if(setupOptions.mode==='spectate')beginSpectate(setupOptions);else startGame({...setupOptions,seed:Date.now()});break;
-      case 'rematch':{const base={deck:engine.state.players[0].deckId,opponentDeck:engine.state.players[1].deckId,difficulty:engine.state.difficulty};if(spectating())beginSpectate(base);else startGame({...base,first:0,seed:Date.now()});break;}
+      case 'rematch':{const base={deck:engine.state.players[0].deckId,opponentDeck:engine.state.players[1].deckId,difficulty:engine.state.difficulty,ruleMode:engine.state.ruleMode?'random':'off'};if(spectating())beginSpectate(base);else startGame({...base,first:0,seed:Date.now()});break;}
       case 'spectate-toggle':spectateToggle();break;
       case 'spectate-step':spectateStep();break;
       case 'spectate-speed':prefs.speed=b.dataset.value==='fast'?'fast':'normal';updatePrefs();render();scheduleAI();break;
@@ -1235,6 +1243,8 @@
     else if(current==='overlays')showOverlays(overlayHostUid);
     else if(current==='lingering')showLingering();
     else if(current==='new-game')renderNewGame();
+    else if(current==='rule-gallery')fate.show();
+    else if(current==='rule-detail')fate.showDetail(document.querySelector('[data-rule-id]')?.dataset.ruleId);
     else if(current==='help')showHelp();
     else if(current==='settings')showSettings();
     else if(current==='ai-import'||current==='ai-settings')aiImport.refresh();

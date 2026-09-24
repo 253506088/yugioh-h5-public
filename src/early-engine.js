@@ -123,7 +123,7 @@
  const originalAtk=P.originalAttack,originalDef=P.originalDefense;
  P.originalAttack=function(card){if(card.hourglassUntil&&!this.negated(card))return (CARDS[card.id].atk||0)*(this.state.turn<=card.hourglassUntil?.5:2);if(card.swappedOriginalUntil>=this.state.turn)return CARDS[card.id].def||0;return originalAtk.call(this,card);};
  P.originalDefense=function(card){if(card.hourglassUntil&&!this.negated(card))return (CARDS[card.id].def||0)*(this.state.turn<=card.hourglassUntil?.5:2);if(card.swappedOriginalUntil>=this.state.turn)return CARDS[card.id].atk||0;return originalDef.call(this,card);};
- wrap('stat',function(card,stat,battle=null){let value=old.stat.call(this,card,stat,battle);if(!card||!this._advancedReady)return value;const f=this.find(card.uid);if(f&&fieldMonster(f.zone)&&card.faceUp&&battle){for(const s of this.passiveSources()){const fn=this.fx.passives[s.card.id]?.battleStat;if(fn)value+=fn(this,s,card,stat,battle)||0;}if(card.earlyBattleBoost?.serial===battle.serial)value+=card.earlyBattleBoost[stat]||0;}
+ wrap('stat',function(card,stat,battle=null){let value=old.stat.call(this,card,stat,battle);if(!card||!this._advancedReady)return value;const f=this.find(card.uid);if(f&&fieldMonster(f.zone)&&card.faceUp&&battle){for(const s of this.passiveSources()){const fn=this.fx.passives[s.card.id]?.battleStat;if(fn)value+=fn(this,s,card,stat,battle)||0;}if(card.earlyBattleBoost&&card.earlyBattleBoost.serial===battle.serial)value+=card.earlyBattleBoost[stat]||0;}
   if(stat==='atk'&&card.mirrorWallSources?.some(uid=>{const s=this.find(uid);return s&&this.activeSpell(s.card);}))value=Math.floor(value/2);
   return Math.max(0,Math.floor(value));
  });

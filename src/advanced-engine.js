@@ -32,6 +32,7 @@
       }
       super({...options,openingGuarantee:options.openingGuarantee===true});
       this.initModern();
+      root.DuelRuleModes?.install(this,options.ruleMode);
       this.state.originalCardCount=this.physicalCards().filter(c=>CARDS[c.id].type!=='token').length;
       this.state.version=3;
       this.checkWin();
@@ -248,7 +249,8 @@
         if(stat==='atk')for(const equip of this.activeEquip(card))n+=equip.id==='saqlifice'?300:equip.id==='wonder-wand'?500:0;
       }
       if(f&&fieldMonster(f.zone)&&card.faceUp&&this._advancedReady)for(const source of this.passiveSources()){
-        const handler=this.fx.passives?.[source.card.id]?.stat;if(handler)n+=handler(this,source,card,stat)||0;
+        const handler=this.fx.passives?.[source.card.id]?.stat;
+        if(handler&&!this.ruleUnaffected?.(card,{uid:source.card.uid,id:source.card.id,owner:source.owner,effectType:fieldMonster(source.zone)?'monster':CARDS[source.card.id].type}))n+=handler(this,source,card,stat)||0;
       }
       for(const mod of card.mods||[])if((!mod.until||mod.until>=this.state.turn)&&(mod.stat===stat||mod.stat==='both')){
         if(mod.kind==='add')n+=mod.value;else if(mod.kind==='set')n=mod.value;else if(mod.kind==='half')n=Math.floor(n/2);else if((mod.kind==='multiply'||mod.kind==='mul'))n*=mod.value;
@@ -298,9 +300,10 @@
     }
     heal(owner,amount){this.state.players[owner].lp+=amount;this.log('heal',this.name(owner)+'回复 '+amount+' LP',owner,{amount});}
     payLP(owner,amount){req(Number.isFinite(amount)&&amount>=0&&this.state.players[owner].lp>amount,'生命值不足以支付代价。');this.state.players[owner].lp-=amount;this.log('cost',this.name(owner)+'支付 '+amount+' LP',owner,{amount});}
+    loseLP(owner,amount,source=null){req(Number.isFinite(amount)&&amount>=0,'生命值变化无效。');amount=Math.floor(amount);this.state.players[owner].lp=Math.max(0,this.state.players[owner].lp-amount);this.log('lp-change',this.name(owner)+'失去 '+amount+' LP',owner,{amount,sourceId:source?.id});this.checkWin();}
     draw(owner,amount=1,silent=false){
       if(this.state.winner!==null)return;
-      if(this._advancedReady&&this.state.inDrawPhase&&amount===1)for(const source of this.passiveSources().filter(s=>s.owner===owner)){const fn=this.fx.passives[source.card.id]?.drawCount;if(fn)amount=Math.max(amount,fn(this,source)||1);}
+      if(this._advancedReady&&this.state.inDrawPhase&&amount===1&&!this.ruleReplacesDraw?.())for(const source of this.passiveSources().filter(s=>s.owner===owner)){const fn=this.fx.passives[source.card.id]?.drawCount;if(fn)amount=Math.max(amount,fn(this,source)||1);}
       const p=this.state.players[owner],before=p.hand.length;super.draw(owner,amount,silent);
       for(const c of p.hand.slice(before))c.generation=(c.generation||0)+1;
       if(this._advancedReady&&p.hand.length>before)this.emit({type:'added',owner,from:'deck',uids:p.hand.slice(before).map(c=>c.uid),normalDraw:!!this.state.inDrawPhase,reason:'draw'});
@@ -312,6 +315,8 @@
     }
     checkWin(){
       if(!this._advancedReady||this.state.winner!==null||this.state.resolvingLink)return;
+      const empty=this.state.players.map((p,i)=>p.lp<=0?i:null).filter(i=>i!==null);
+      if(empty.length){this.finish(empty.length===2?'draw':1-empty[0],empty.length===2?'双方生命值同时归零。':this.name(empty[0])+'的生命值归零。',{kind:'lp-zero'});return;}
       const winners=[];
       for(let owner=0;owner<2;owner++){
         const parts=new Set(this.state.players[owner].hand.map(c=>CARDS[c.id].exodiaPart).filter(Boolean));
@@ -437,7 +442,9 @@
       const materials=chosen.map(uid=>this.describe(this.find(uid).card));const p=this.state.players[owner];
       for(const uid of chosen)this.move(uid,'grave',{kind:'tribute',summoningId:card.id,byOwner:owner});
       p.turnStats.qliTributes+=materials.filter(m=>CARDS[m.id].family==='qliphort').length;
-      this.remove(card.uid);const slot=p.monsters.indexOf(null);req(slot>=0,'通常召唤只能使用主怪兽区域。');
+      const slot=action.zone??this.preferredNormalSlot?.(owner)??p.monsters.indexOf(null);
+      req(Number.isInteger(slot)&&slot>=0&&slot<5&&!p.monsters[slot],'通常召唤只能使用空闲的主怪兽区域。');
+      this.remove(card.uid);
       card.generation=(card.generation||0)+1;
       if(this.state.normalUsed)p.extraNormalUsed=true;else this.state.normalUsed=true;
       card.faceUp=mode!=='defense';card.position=mode;card.normalSummoned=true;card.summonKind=mode==='defense'?'set':'normal';
@@ -857,7 +864,7 @@
       let current=owner,n=passes;
       while(n<2){
         const options=this.responseOptions(current,context);
-        if(options.length){this.state.pending={kind:'window',owner:current,responder:current,passes:n,context,options:cp(options),title:context.attack?'战斗中的响应时机':'连锁响应'};return;}
+        if(options.length||this.ruleWindowActions?.(current,context).length){this.state.pending={kind:'window',owner:current,responder:current,passes:n,context,options:cp(options),title:context.attack?'战斗中的响应时机':'连锁响应'};return;}
         current=1-current;n++;
       }
       if(this.state.chain.length)this.state.chainResolving=true;
@@ -1079,11 +1086,12 @@
       const before=this.snapshot();this.events=[];
       try{
         req(this.state.winner===null,'这场决斗已经结束。');req(action&&typeof action.type==='string','无效的操作。');
-        if(this.state.pending)req(['choose','respond','pass','discard'].includes(action.type),'请先处理当前的选择或连锁。');
+        if(this.state.pending)req(['choose','respond','pass','discard','rule-action'].includes(action.type),'请先处理当前的选择或连锁。');
         else req(!['choose','respond','pass','discard'].includes(action.type),'当前没有待处理的响应。');
         if(action.owner!==undefined)req(action.owner===(this.state.pending?.responder??this.state.active),'现在不是这一方的行动时机。');
         switch(action.type){
           case 'summon':this.normalSummon(action);break;
+          case 'rule-action':this.ruleAction(action);break;
           case 'set':this.setCard(action);break;
           case 'stance':this.changeStance(action);break;
           case 'activate':case 'cast':case 'effect':this.activate(action);break;
@@ -1431,7 +1439,7 @@
         for(const card of this.monsters(s.active).sort((a,b)=>this.attackValue(b)-this.attackValue(a))){
           const foes=this.monsters(1-s.active);
           if(!foes.length&&this.canAttack(card,s.active,null))return {type:'attack',uid:card.uid};
-          const targets=foes.filter(t=>this.canAttack(card,s.active,t.uid)&&this.enemyValue(t)<this.attackValue(card)).sort((a,b)=>this.enemyValue(b)-this.enemyValue(a));
+          const targets=foes.filter(t=>this.canAttack(card,s.active,t.uid)&&(t.faceUp&&this.ruleBattleValue?this.ruleBattleValue(t,card,card.uid)<this.ruleBattleValue(card,t,card.uid):this.enemyValue(t)<this.attackValue(card))).sort((a,b)=>this.enemyValue(b)-this.enemyValue(a));
           if(targets.length)return {type:'attack',uid:card.uid,target:targets[0].uid};
           if(card.directAttackTurn===s.turn&&this.canAttack(card,s.active,null))return {type:'attack',uid:card.uid};
         }
@@ -1500,5 +1508,5 @@
   root.LegacyDuelEngine=Base;root.DuelEngine=ModernDuelEngine;root.ModernDuelEngine=ModernDuelEngine;
   root.DuelModernUtils={req,cp,subsets,fieldMonster};
   if(typeof module!=='undefined'&&module.exports)module.exports={DuelEngine:ModernDuelEngine,RuleError,req,cp,subsets,fieldMonster};
-  if(typeof module!=='undefined'&&module.exports){require('./early-engine.js');require('./early-engine-extra.js');require('./advanced-effects.js');require('./log-engine.js');}
+  if(typeof module!=='undefined'&&module.exports){require('./early-engine.js');require('./early-engine-extra.js');require('./advanced-effects.js');require('./log-engine.js');require('./rule-modes.js');}
 })(typeof globalThis!=='undefined'?globalThis:this);

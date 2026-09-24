@@ -108,10 +108,10 @@
     if(a.cardActivation){
       if(d.type==='trap'){
         const temple=e.hasEarly?.('Temple of the Kings',ctx.owner)&&!e.wasUsed(ctx.owner,{id:D.cardByName('Temple of the Kings').id},'same-turn-trap','name');
-        if(!f||(!handTrap&&(f.zone!=='spells'||c.faceUp||c.setTurn>=e.state.turn&&!temple&&!(e.hasEarly?.('Night Wing Sorceress',ctx.owner)&&c.id===D.cardByName('Assault Mode Activate')?.id)&&!ctx.event.forcedTrap)))return false;
+        if(!f||(!handTrap&&(f.zone!=='spells'||c.faceUp||c.setTurn>=e.state.turn&&!e.ruleAllowsSetActivation?.(c)&&!temple&&!(e.hasEarly?.('Night Wing Sorceress',ctx.owner)&&c.id===D.cardByName('Assault Mode Activate')?.id)&&!ctx.event.forcedTrap)))return false;
       }else if(f?.zone==='spells'){
         if(c.faceUp)return false;
-        if((a.quickPlay||a.speed===2)&&c.setTurn>=e.state.turn)return false;
+        if((a.quickPlay||a.speed===2)&&c.setTurn>=e.state.turn&&!e.ruleAllowsSetActivation?.(c))return false;
       }
       if(f?.zone==='hand'&&d.spellKind!=='field'&&!a.pendulum&&!e.state.players[ctx.owner].spells.includes(null))return false;
     }

@@ -4,6 +4,9 @@
   "private": true,
   "description": "Yu-Gi-Oh! tribute game with offline play and authoritative single-duel PVP",
   "scripts": {
+    "test:rule-modes": "node --test tests/rule-modes.test.cjs",
+    "test:rule-modes:browser": "node scripts/build.mjs --no-art --no-audio --out output/rule-modes/index.html && node tests/rule-modes-browser.cjs",
+    "test:rule-modes:simulation": "node tests/rule-modes-simulation.cjs",
     "art": "node scripts/generate-art.mjs",
     "build": "node scripts/build.mjs",
     "build:no-art": "node scripts/build.mjs --no-art --out output/no-art/index.html",

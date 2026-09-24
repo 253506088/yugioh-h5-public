@@ -21,7 +21,7 @@
   function store(e){return e._aiPlannerCache||=({rollouts:new Map(),projections:0});}
   function reset(e){e._aiPlannerCache={rollouts:new Map(),projections:0};}
   function project(e,action,owner,cache=store(e)){cache.projections++;return marginal().project(e,action,owner,action?.choices,projectionOptions);}
-  function signature(action){return [action.type,action.uid||'',action.key||'',action.mode||'',action.noTribute?1:0,action.target||'',action.phase||'',action.slot??''].join('|');}
+  function signature(action){return [action.type,action.uid||'',action.key||'',action.mode||'',action.noTribute?1:0,action.bloodPact?1:0,action.target||'',action.phase||'',action.slot??''].join('|');}
   function quickAbilities(e,m){return (e.fx.byCard?.[m.id]||[]).filter(a=>a.speed>=2&&Array.isArray(a.zones)&&a.zones.some(bodyZone)).length;}
   function bodyWorth(e,m,visible){
     const atk=visible?e.attackValue(m):HIDDEN_ATK,def=visible?e.defenseValue(m):HIDDEN_DEF;
@@ -114,9 +114,9 @@
     return actions;
   }
   function staticGain(e,a){
-    const m=e.find(a.uid)?.card,t=a.target?e.find(a.target)?.card:null,atk=e.attackValue(m);
+    const m=e.find(a.uid)?.card,t=a.target?e.find(a.target)?.card:null,atk=t?.faceUp&&e.ruleBattleValue?e.ruleBattleValue(m,t,m.uid):e.attackValue(m);
     if(!t)return atk*.6;
-    const guard=e.enemyValue(t);
+    const guard=t.faceUp&&e.ruleBattleValue?e.ruleBattleValue(t,m,m.uid):e.enemyValue(t);
     if(atk>guard)return (t.faceUp?guard:HIDDEN_DEF)*.7+(t.position==='attack'?(atk-guard)*.45:0);
     return atk===guard?-atk*.3:-(guard-atk)*.5-atk*.4;
   }

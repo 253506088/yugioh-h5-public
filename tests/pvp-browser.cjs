@@ -91,6 +91,7 @@ async function returnToRoom(page) {
 
   await a.locator('#pvp-name').fill('星尘 Aster'); await a.locator('#pvp-deck').selectOption('blue');
   await a.locator('#pvp-room-title').fill('星夜对决'); await a.locator('#pvp-visibility').selectOption('private');
+  await a.locator('#pvp-rule-mode').selectOption('random');
   await a.locator('[data-pvp-action="create"]').click(); await a.waitForFunction(() => !!duelApp.pvp.room);
   const code = await a.evaluate(() => duelApp.pvp.room.code);
   await b.locator('#pvp-name').fill('月影 Luna'); await b.locator('#pvp-deck').selectOption('dark'); await b.locator('#pvp-code').fill(code);
@@ -105,6 +106,9 @@ async function returnToRoom(page) {
   check('Room seats, readiness and invitation controls fit a 320px phone at 150% type size');
   await a.locator('[data-pvp-action="ready"]').click(); await b.locator('[data-pvp-action="ready"]').click();
   await Promise.all(pages.map(page => page.waitForFunction(() => duelApp.engine.remote && duelApp.screen === 'duel')));
+  const decree=roomOf().engine.state.ruleMode.id;
+  for(const page of pages){assert.equal(await page.evaluate(()=>duelApp.engine.state.ruleMode.id),decree);assert.ok(await page.locator('#fate-duel-bar').isVisible());}
+  check('Fate room selects its rule on the server and both isolated clients show the same decree');
   for (let seat = 0; seat < 2; seat++) {
     const state = await pages[seat].evaluate(() => duelApp.engine.state);
     assert.deepEqual(state.players[0].hand.map(c => c.id), roomOf().engine.state.players[seat].hand.map(c => c.id));

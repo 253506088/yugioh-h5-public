@@ -120,6 +120,8 @@
     defenseValue(card) { return card?.publicStats?.def ?? root.DuelData.CARDS[card?.id]?.def ?? 0; }
     level(card) { return card?.publicStats?.level ?? root.DuelData.CARDS[card?.id]?.level ?? 0; }
     negated(card) { return !!card?.publicStats?.negated; }
+    ruleActions(owner=0) { return owner===0&&!this.busy&&!this.blocked&&this.connection.connected?this.data.actions.filter(a=>a.type==='rule-action'):[]; }
+    plannedQuota(owner){const r=this.state.ruleMode;if(r?.id!=='planned')return null;const p=r.players?.[owner]||{};return {used:p.plannedAt===this.state.turn?p.planned||0:0,limit:owner===this.state.active?10:3};}
     actionsFor(uid, owner = 0) { return owner === 0 && !this.busy && !this.blocked && this.connection.connected ? this.data.actions.filter(a => a.uid === uid && a.type !== 'extra-summon').map(a => ({ ...a })) : []; }
     extraOptions(owner) { return owner === 0 ? this.data.actions.filter(a => a.type === 'extra-summon').map(a => ({ type: root.DuelData.CARDS[this.find(a.uid)?.card.id]?.type, card: this.find(a.uid)?.card })).filter(a => a.card) : []; }
     pendulumCandidates(owner) { return owner === 0 ? (this.data.pendulumUids || []).map(uid => this.find(uid)?.card).filter(Boolean) : []; }
@@ -156,7 +158,7 @@
     }
     act(input) {
       if (!this.connection.connected || this.busy || this.blocked) return { ok: false, error: '等待服务器连接与确认…' };
-      const keys = ['type', 'uid', 'key', 'mode', 'noTribute', 'slot', 'target', 'position', 'zone', 'phase', 'cancel', 'uids'];
+      const keys = ['type', 'uid', 'key', 'mode', 'noTribute', 'bloodPact', 'slot', 'target', 'position', 'zone', 'phase', 'cancel', 'uids'];
       const action = Object.fromEntries(keys.filter(key => input[key] !== undefined).map(key => [key, input[key]]));
       this.busy = true; this.pendingRevision = this.revision; this.onBusyUpdate();
       this.connection.request('act', { revision: this.revision, action }).then(() => {

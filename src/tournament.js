@@ -44,6 +44,7 @@
       concurrency:integer(input.concurrency ?? 4, 1, 8, '同时对局数量'),
       pace:['normal', 'fast', 'turbo'].includes(input.pace) ? input.pace : 'fast',
       difficulty:input.difficulty === 'casual' ? 'casual' : 'standard',
+      ruleMode:input.ruleMode==='random'?'random':'off',
       maxActions:LIMITS.actions, maxTurns:LIMITS.turns
     };
   }
@@ -142,7 +143,7 @@
       const number = match.games.length, seed = hash(this.data.seed + ':' + match.id + ':' + number), opening = rps(seed);
       const specs = match.entrants.map(id => this.data.decks[this.participant(id).deckId]);
       const engine = new Engine({deck:specs[0].id, opponentDeck:specs[1].id, deckSpecs:specs,
-        first:opening.first, seed:hash(seed + ':shuffle'), difficulty:this.data.settings.difficulty});
+        first:opening.first, seed:hash(seed + ':shuffle'), difficulty:this.data.settings.difficulty, ruleMode:this.data.settings.ruleMode});
       engine.state.mode = 'spectate';
       const game = {id:match.id + '-g' + (number + 1), seed, opening, startedAt:Date.now(), initial:engine.snapshot(),
         steps:[], final:null, verdict:null, error:null};

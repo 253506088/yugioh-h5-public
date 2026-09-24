@@ -70,7 +70,7 @@ export class PvpService {
   view(room, s) {
     const you = this.seat(room, s);
     return { type: 'room', code: room.code, title: room.title, visibility: room.visibility, status: room.status,
-      revision: room.revision, you, clockSeconds: room.clockSeconds, incrementSeconds: 20,
+      revision: room.revision, you, ruleMode:room.ruleMode||'off', clockSeconds: room.clockSeconds, incrementSeconds: 20,
       seats: room.seats.map((m, i) => m ? { name: m.name, connected: m.connected, ready: m.ready, hasDeck: !!m.deck,
         rematch: !!m.rematch, ...(i === you && m.deck ? { deckName: m.deck.name } : {}) } : null),
       gameId: room.gameId, result: room.result, clock: this.clock(room),
@@ -82,7 +82,7 @@ export class PvpService {
   lobby() {
     return { type: 'lobby', online: this.connections.size, playing: [...this.rooms.values()].filter(r => r.status === 'playing').length,
       queued: this.queue.size, rooms: [...this.rooms.values()].filter(r => r.visibility === 'public' && r.status === 'waiting' && r.seats.filter(Boolean).length === 1 && r.seats.some(m => m?.connected))
-        .sort((a, b) => b.createdAt - a.createdAt).slice(0, 50).map(r => ({ code: r.code, title: r.title, host: r.seats.find(Boolean).name, clockSeconds: r.clockSeconds, createdAt: r.createdAt })) };
+        .sort((a, b) => b.createdAt - a.createdAt).slice(0, 50).map(r => ({ code: r.code, title: r.title, host: r.seats.find(Boolean).name, ruleMode:r.ruleMode||'off', clockSeconds: r.clockSeconds, createdAt: r.createdAt })) };
   }
   broadcastLobby() { const data = this.lobby(); for (const connection of this.connections.values()) connection.send(data); }
 
@@ -185,12 +185,13 @@ export class PvpService {
   createRoom(s, message, c) {
     need(this.rooms.size < this.maxRooms, 'CAPACITY', '当前房间已满，请稍后重试。');
     need([180, 300, 600].includes(message.clockSeconds ?? 300), 'CLOCK', '请选择 3、5 或 10 分钟思考时间。');
+    need(message.ruleMode===undefined||['off','random'].includes(message.ruleMode),'RULE_MODE','请选择经典规则或天命法则。');
     need(!message.visibility || ['public', 'private'].includes(message.visibility), 'VISIBILITY', '房间类型无效。');
     const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     let code; do { code = Array.from({ length: 6 }, () => alphabet[randomInt(alphabet.length)]).join(''); } while (this.rooms.has(code));
     const room = { code, secret: randomBytes(32).toString('hex'), title: nameOf(message.title) || `${s.name}的决斗房间`, visibility: message.visibility || 'public',
       status: 'waiting', revision: 1, createdAt: this.now(), updatedAt: this.now(), seats: [this.member(s), null],
-      clockSeconds: message.clockSeconds ?? 300, remaining: [0, 0], clockAt: this.now(), gameId: null, result: null,
+      ruleMode:message.ruleMode||'off', clockSeconds: message.clockSeconds ?? 300, remaining: [0, 0], clockAt: this.now(), gameId: null, result: null,
       engine: null, frames: new Map(), events: [], actions: 0 };
     this.rooms.set(code, room); s.roomCode = code; c.sessions.add(s); c.rooms.add(room);
     return room;
@@ -201,7 +202,7 @@ export class PvpService {
     const specs = decks.map((deck, i) => ({ ...structuredClone(deck), id: deck.preset ? deck.id : `custom-pvp-${gameId}-${i}`,
       player: room.seats[i].name, ace: deck.ace || [...deck.extra, ...deck.cards].sort((a, b) => (Data.CARDS[b].atk || 0) - (Data.CARDS[a].atk || 0))[0],
       mechanic: deck.mechanic || '自由构筑', description: deck.description || '由决斗者亲手构筑的卡组。' }));
-    const engine = new ServerEngine({ deck: specs[0].id, opponentDeck: specs[1].id, deckSpecs: specs, first: randomInt(2), openingGuarantee: false });
+    const engine = new ServerEngine({ deck: specs[0].id, opponentDeck: specs[1].id, deckSpecs: specs, first: randomInt(2), openingGuarantee: false, ruleMode:room.ruleMode });
     return { engine, gameId, status: 'playing', startedAt: this.now(), clockAt: this.now(), remaining: [room.clockSeconds * 1000, room.clockSeconds * 1000], actions: 0, result: null };
   }
 
@@ -307,7 +308,9 @@ export class PvpService {
     need(input.owner === undefined || input.owner === seat, 'OWNER', '不能代替对手操作。');
     const frame = this.frame(room, seat), pending = room.engine.state.pending;
     let action;
-    if (pending) {
+    if(input.type==='rule-action'){
+      const candidate=frame.legal.find(a=>a.type==='rule-action'&&a.key===input.key);need(candidate,'ILLEGAL_ACTION','当前不能执行这个规则行动。');action={...candidate};
+    } else if (pending) {
       need(['respond', 'pass', 'choose'].includes(input.type), 'CHOICE', '请先完成当前选择。');
       action = { type: input.type };
       if (input.type === 'respond') { action.uid = this.decode(frame, input.uid); if (typeof input.key === 'string') action.key = input.key; }
@@ -320,7 +323,7 @@ export class PvpService {
       if (input.type === 'phase') { need(['battle', 'main2'].includes(input.phase), 'PHASE', '不能进入这个阶段。'); action.phase = input.phase; }
     } else {
       const uid = input.uid ? this.decode(frame, input.uid) : undefined;
-      const candidate = frame.legal.find(a => a.type === input.type && a.uid === uid && a.key === input.key && a.mode === input.mode && a.slot === input.slot && !!a.noTribute === !!input.noTribute);
+      const candidate = frame.legal.find(a => a.type === input.type && a.uid === uid && a.key === input.key && a.mode === input.mode && a.slot === input.slot && !!a.noTribute === !!input.noTribute && !!a.bloodPact === !!input.bloodPact);
       need(candidate, 'ILLEGAL_ACTION', '这张卡当前不能进行这个操作。');
       action = { ...candidate };
       if (input.type === 'attack') action.target = input.target == null ? null : this.decode(frame, input.target);

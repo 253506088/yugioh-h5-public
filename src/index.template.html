@@ -59,6 +59,7 @@
       <div class="home-hero-copy"><span class="home-kicker"><i></i> DUEL SANCTUARY / 决斗之境</span><h1>下一场决斗，<br>由你<span>改写。</span></h1><p>相信卡组，也相信每一次抉择。<br>从最初的羁绊，走向属于你的决斗。</p><div class="home-hero-actions"><button class="primary-button" data-action="new-game">开始新的决斗 <svg class="icon"><use href="#i-swords"/></svg></button><button class="home-continue" data-action="duel" id="home-continue">继续决斗 →</button></div><div class="home-stats" id="home-stats"></div></div>
       <div class="home-art" id="home-art" aria-hidden="true"></div><div class="home-orbit orbit-one" aria-hidden="true"></div><div class="home-orbit orbit-two" aria-hidden="true"></div><span class="home-hero-watermark" aria-hidden="true">THE HEART<br>OF THE CARDS</span>
     </div>
+    <button class="fate-home" data-action="rule-gallery"><i aria-hidden="true">✦</i><div><small>NEW MODE / FATE DECREE</small><strong>天命法则</strong><p>25 条不可无效的法则。每次开局，命运重新洗牌。</p></div><b aria-hidden="true">↗</b></button>
     <nav class="home-destinations" aria-label="主导航">
       <button class="home-destination archive-destination" data-action="library"><span class="destination-index">01 / ARCHIVE</span><svg class="icon"><use href="#i-card"/></svg><h2>卡牌图鉴</h2><p>每一张卡，都有它的灵魂。</p><span class="destination-tail"><b id="home-card-count">1,653 张卡片</b><i>↗</i></span></button>
       <button class="home-destination workshop-destination" data-action="workshop"><span class="destination-index">02 / ATELIER</span><svg class="icon"><use href="#i-spark"/></svg><h2>卡组工坊</h2><p>构筑你的下一场胜利。</p><span class="destination-tail"><b>自由构筑 · 预设卡组</b><i>↗</i></span></button>
@@ -90,6 +91,7 @@
       </aside>
 
       <section class="arena-column" aria-label="决斗场">
+        <div id="fate-duel-bar" class="fate-duel-bar" data-i18n-skip hidden></div>
         <div class="arena-caption"><span><i class="live-dot"></i> DUEL IN PROGRESS</span><span id="match-label">青眼的觉醒 <b>VS</b> 黑魔术的传承</span><div class="arena-tools"><button class="tiny-button lingering-tool" id="lingering-tool" data-action="lingering" title="生效中的效果" aria-label="生效中的效果">◎</button><button class="tiny-button" data-action="chain-log" title="连锁记录" aria-label="连锁记录">∞</button><button class="tiny-button" data-action="log" title="决斗记录" aria-label="决斗记录"><svg><use href="#i-history"/></svg></button><button class="tiny-button" data-action="help" title="查看规则" aria-label="查看规则"><svg><use href="#i-help"/></svg></button></div></div>
         <div class="arena" id="arena">
           <div id="chain-theater" class="chain-theater" hidden></div>
@@ -142,6 +144,7 @@
   <div class="music-dock" id="music-dock"><button data-action="music-toggle" id="music-toggle" aria-label="切换背景音乐">♫</button><button data-action="music-settings" class="music-track"><small id="music-scene">SOUNDTRACK</small><span id="music-title">配乐已就绪</span></button><button data-action="music-next" id="music-next" aria-label="下一首战斗配乐">↠</button></div>
   <div id="response-peek-bar" class="response-peek-bar" hidden></div>
   <div id="mobile-turn-control" class="mobile-turn-control" aria-label="便捷回合控制"></div>
+  <div id="fate-reveal" class="fate-reveal" data-i18n-skip role="status" aria-live="polite" hidden></div>
   <div id="toast-stack" class="toast-stack" role="status" aria-live="polite"></div>
   <div id="card-popover" class="card-popover" hidden></div>
   <div id="cinematic" class="cinematic" aria-hidden="true"></div>

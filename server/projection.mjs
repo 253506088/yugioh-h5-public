@@ -21,9 +21,9 @@ export function project(room, viewer) {
     if (!ref?.card) return null;
     const { card: c, owner, zone } = ref, known = forceKnown || visible(e, ref, viewer);
     if (!known && !fieldZones.has(zone) && zone !== 'banished') return hidden(c);
-    if (!known) return { ...hidden(c), uid: handle(c.uid) };
+    if (!known) return { ...hidden(c), uid: handle(c.uid), ...(c.ruleWanted?{ruleWanted:true}:{}) };
     const out = {
-      ...pick(c, ['id', 'faceUp', 'position', 'faceUpExtra', 'counters', 'attacksMade', 'summonTurn', 'changedTurn', 'setTurn', 'properlySummoned', 'summonKind']),
+      ...pick(c, ['id', 'faceUp', 'position', 'faceUpExtra', 'counters', 'attacksMade', 'summonTurn', 'changedTurn', 'setTurn', 'properlySummoned', 'summonKind', 'ruleWanted', 'ruleEchoed', 'ruleStars', 'sentTurn']),
       uid: handle(c.uid), originalOwner: side(c.originalOwner), hidden: false,
       overlays: (c.overlays || []).map(m => card({ card: m, owner, zone: 'overlays' })),
       publicStats: {
@@ -129,7 +129,8 @@ export function project(room, viewer) {
     if (s.outcome?.sourceId) state.outcome.sourceId = s.outcome.sourceId;
   }
   const legal = s.winner === null ? e.allActions(viewer) : [];
-  const actions = legal.map(a => ({ ...pick(a, ['type', 'key', 'label', 'icon', 'mode', 'noTribute', 'slot']), ...(a.uid ? { uid: handle(a.uid) } : {}) }));
+  if(s.ruleMode)state.ruleMode={id:s.ruleMode.id,version:1,source:s.ruleMode.source,players:[viewer,1-viewer].map(p=>pick(s.ruleMode.players?.[p],['plannedAt','planned','bitterTurn','vacuumAt','extraNormalTurn']))};
+  const actions = legal.map(a => ({ ...pick(a, ['type', 'key', 'label', 'icon', 'mode', 'noTribute', 'slot', 'bloodPact', 'cost']), ...(a.uid ? { uid: handle(a.uid) } : {}) }));
   const attackTargets = {};
   for (const a of legal.filter(a => a.type === 'attack')) {
     const c = e.find(a.uid).card;

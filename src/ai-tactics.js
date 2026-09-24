@@ -13,7 +13,7 @@
       for(const target of foes)if(e.canAttack(m,owner,target.uid))actions.push({type:'attack',uid:m.uid,target:target.uid});
     }
     const value=a=>{
-      const m=e.find(a.uid)?.card,t=e.find(a.target)?.card,atk=e.attackValue(m),def=t?e.enemyValue(t):0;
+      const m=e.find(a.uid)?.card,t=e.find(a.target)?.card,pair=t?.faceUp&&e.ruleBattleValue,atk=pair?e.ruleBattleValue(m,t,m.uid):e.attackValue(m),def=t?(pair?e.ruleBattleValue(t,m,m.uid):e.enemyValue(t)):0;
       const hit=!t?atk:t.position==='attack'?Math.max(0,atk-def):0;
       return hit*2+(t&&atk>def?1000:0)-atk/10;
     };
