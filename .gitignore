@@ -17,6 +17,14 @@
 !/.env.example
 
 # ===== 构建与验证 =====
+# 2026-09-26 2015 年度与系列识别修复：提交年度快照/原始JSON、三副牌表、
+# src/effects-2015*.js、素材与身份解析、正式测试、压缩王牌WebP及其manifest、
+# 2015交接、系列修复方案/维护规范和重建的根目录index.html。
+# output/rollout-2015/ 的研究网页、原始牌表图片、诊断脚本、TAP/JSON日志、
+# 浏览器截图、无图副本及提交草稿只留本机，由 /output/ 排除。
+# output/scratch/ 的系列码审计原型、注入脚本与对比报告也不提交；正式守卫测试提交。
+# 大图仍放 assets/official-archive/ 或 assets/duel/art/source/，由既有缓存规则排除；
+# 已固定的三语 .cdb、生成的语言库和后续系列码资料属于离线重建输入，不能忽略。
 # 2026-09-24 天命法则：提交 src/rule-modes*、引擎/界面/联机/赛事接入、正式测试、
 # docs/rule-modes.md、交接/天命法则与后续年度卡片维护.md 以及重建的根目录 index.html。
 # output/rule-modes/ 中的试验脚本、失败局面、TAP/JSON 报告、无图无音频测试构建、

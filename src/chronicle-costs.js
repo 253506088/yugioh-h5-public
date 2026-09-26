@@ -5,6 +5,23 @@
  // an annual listener must never give the same card two identical triggers.
  const reused={'hero-the-shining':['era-sent'],'bw-shura':['battle-win'],'bw-blizzard':['era-revive'],'bw-kalut':['era-damage'],'black-whirlwind':['era-search'],'junk-archer':['era-effect'],'gagaga-girl':['era-effect'],'cardcar-d':['era-effect']};
  for(const [id,modes] of Object.entries(reused))for(const mode of modes){const a=E.get(id+'::'+mode);if(a){a.condition=()=>false;a.supersededByOriginal=true;}}
+ // Imported members must be visible to the original handlers, which consume
+ // family/flags. The frozen CDB setcodes guard these centralized name rules.
+ const treated=c=>[...String(c.originalDescription||'').matchAll(/This card is always treated as an? "([^"]+)" card/g)].map(m=>m[1]);
+ const legacyTags=[['blackwing',/Blackwing/,'monster',true],['synchron',/Synchron\b/,'monster',true],['utopia',/Utopia/,'xyz',true],['galaxy',/Galaxy/,'monster',true],['bamboo',/Bamboo Sword/,'any',true],['junk',/\bJunk\b/,'monster',false],['hero',/\bHERO\b/,'monster',false],['gagaga',/Gagaga/,'monster',false],['gogogo',/Gogogo/,'monster',false],['dododo',/Dododo/,'monster',false],['zubaba',/Zubaba/,'monster',false]];
+ function applyLegacyTags(c){
+  const also=treated(c);if(also.length)c.series=[...new Set([...(c.series||[]),...also])];
+  const names=[c.officialName||'',...also],scope={monster:D.isMonster(c),xyz:c.type==='xyz',any:true};
+  for(const [key,re,where,primary] of legacyTags)if(scope[where]&&names.some(n=>re.test(n))){if(primary&&['early','generic'].includes(c.family))c.family=key;c.families=[...new Set([...(c.families||[]),key])];}
+  if(scope.monster&&names.some(n=>/\bJunk\b/.test(n)))c.junk=true;
+  if(scope.monster&&names.some(n=>/\bElemental HERO\b/.test(n)))c.elemental=true;
+  if(names.some(n=>/Cyber Dragon/.test(n)))c.cyberDragon=true;
+  if(names.some(n=>/^Crystron(?: |$)/.test(n)))c.crystron=true;
+ }
+ for(const c of D.CARD_LIST)applyLegacyTags(c);
+ // Later annual volumes create tokens after this file has loaded.
+ const createToken=X.token;X.token=function(...args){const result=createToken(...args);const c=CARDS[args[0]];if(c)applyLegacyTags(c);return result;};
+ const uo=C('Utopic Onomatopoeia');if(uo)uo.series=[...new Set([...(uo.series||[]),'Gagaga','Gogogo','Dododo','Zubaba'])];
  if(E.passives['hero-the-shining'])delete E.passives['hero-the-shining'].stat;
  if(E.passives['bw-armed-wing'])delete E.passives['bw-armed-wing'].battleStat;
  if(CARDS['bw-armed-wing'].earlyRules)delete CARDS['bw-armed-wing'].earlyRules.piercing;

@@ -162,7 +162,7 @@
  wrap('emit',function(v){
   if(v.type==='flip'&&this.state.frame?.kind==='summon-attempt'&&this.state.frame.uid===v.uid){const m=this.find(v.uid)?.card;if(m){delete m.summonPending;v.previous.wasNegated=this.negated(m);m.summonPending=true;}this.state.frame.flipEvent=cp(v);return;}
   if(this._advancedReady&&v.type==='summon'&&!this.state.acceptingSummon&&!this.state.resolvingLink&&!this.state.chainResolving&&(['normal','flip','synchro','xyz','link','pendulum','toon'].includes(v.kind)||v.kind.startsWith('early-special:')||v.kind.startsWith('year-special:')||v.kind.startsWith('contact:')||v.kind==='possessed')){
-   const m=this.find(v.uid)?.card;if(m){m.summonPending=true;if(this.state.frame?.kind==='summon-attempt'&&v.kind==='pendulum')(this.state.frame.summonGroup||=[]).push(cp(v));else this.state.frame={kind:'summon-attempt',owner:v.owner,uid:v.uid,summonKind:v.kind,summonEvent:cp(v),resumeFrame:this.state.frame?cp(this.state.frame):null,windowOffered:false};return;}
+   const m=this.find(v.uid)?.card;if(m){m.summonPending=true;if(this.state.frame?.kind==='summon-attempt'&&v.kind==='pendulum')(this.state.frame.summonGroup||=[]).push(cp(v));else this.state.frame={kind:'summon-attempt',owner:v.summoningOwner??v.owner,uid:v.uid,summonKind:v.kind,summonEvent:cp(v),resumeFrame:this.state.frame?cp(this.state.frame):null,windowOffered:false};return;}
   }
   if(this._advancedReady&&['summon','damage','move','added'].includes(v.type)){this.state.earlyEvent=cp(v);if(v.type==='summon')this.state.earlyWindowSummon=cp(v);if(['summon','damage'].includes(v.type))this.state.earlyNeedsWindow=!!this.state.chainResolving;}
   return old.emit.call(this,v);

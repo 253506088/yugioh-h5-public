@@ -140,7 +140,7 @@
       if(fieldMonster(before.zone)&&card.banishOnLeave&&dest!=='overlays'&&!options.ignoreLeaveReplacement)dest='banished';
       if(dest==='grave'&&!options.ignoreReplacement){
         if(this.monsters(1-card.originalOwner).some(m=>m.faceUp&&m.id==='masked-dark-law'&&!this.negated(m)))dest='banished';
-        else if(c.type==='pendulum'&&wasField&&!options.negatedActivation)dest='extra-up';
+        else if((c.type==='pendulum'||c.pendulum)&&wasField&&!options.negatedActivation)dest='extra-up';
       }
       if(dest==='hand'&&isExtra(c))dest='extra-down';
       if(dest==='deck'&&isExtra(c))dest='extra-down';
@@ -434,16 +434,19 @@
       const sets=this.tributeSets(card,!!action.noTribute,owner);req(sets.length,'祭品不足或没有可用的主怪兽区域。');
       const choices=action.tributes;
       if(!choices&&sets[0].length){
-        this.state.pending={kind:'materials',purpose:'tribute',responder:owner,owner,uid:card.uid,action:{...action},title:'选择上级召唤的祭品',min:1,max:this.tributeCount(card),candidates:this.monsters(owner).filter(c=>!CARDS[c.id].cannotTribute).map(c=>this.option(c)),sets:sets.map(x=>[...x]),cancelable:true};return;
+        const pool=def.normalTributeEitherSide?[...new Set(sets.flat())].map(u=>this.find(u)?.card).filter(Boolean):this.monsters(owner).filter(c=>!CARDS[c.id].cannotTribute);
+        this.state.pending={kind:'materials',purpose:'tribute',responder:owner,owner,uid:card.uid,action:{...action},title:'选择上级召唤的祭品',min:1,max:this.tributeCount(card),candidates:pool.map(c=>this.option(c)),sets:sets.map(x=>[...x]),cancelable:true};return;
       }
       const chosen=choices||[];
       req(sets.some(set=>set.length===chosen.length&&set.every(uid=>chosen.includes(uid))),'请选择足够且合法的祭品。');
       const mode=action.mode||'attack';req(['attack','defense'].includes(mode),'召唤表示无效。');
+      req(!(def.cannotNormalSet&&mode==='defense'),'这张卡不能通常盖放。');
+      const summonOwner=def.normalTributeEitherSide&&chosen.length&&chosen.every(u=>this.find(u)?.owner===1-owner)?1-owner:owner,targetPlayer=this.state.players[summonOwner];
       const materials=chosen.map(uid=>this.describe(this.find(uid).card));const p=this.state.players[owner];
       for(const uid of chosen)this.move(uid,'grave',{kind:'tribute',summoningId:card.id,byOwner:owner});
       p.turnStats.qliTributes+=materials.filter(m=>CARDS[m.id].family==='qliphort').length;
-      const slot=action.zone??this.preferredNormalSlot?.(owner)??p.monsters.indexOf(null);
-      req(Number.isInteger(slot)&&slot>=0&&slot<5&&!p.monsters[slot],'通常召唤只能使用空闲的主怪兽区域。');
+      const slot=action.zone??this.preferredNormalSlot?.(summonOwner)??targetPlayer.monsters.indexOf(null);
+      req(Number.isInteger(slot)&&slot>=0&&slot<5&&!targetPlayer.monsters[slot],'通常召唤只能使用空闲的主怪兽区域。');
       this.remove(card.uid);
       card.generation=(card.generation||0)+1;
       if(this.state.normalUsed)p.extraNormalUsed=true;else this.state.normalUsed=true;
@@ -451,10 +454,10 @@
       card.qliReduced=!!def.qliReduced&&chosen.length===0;card.summonTurn=this.state.turn;card.changedTurn=this.state.turn;card.attacksMade=0;card.attacked=false;
       card.tributeCount=materials.length;card.tributedQli=materials.some(m=>CARDS[m.id].family==='qliphort');card.granted ||= {};
       if(card.id==='breaker'&&card.faceUp)card.counters=1;
-      p.monsters[slot]=card;this.state.summons[owner]++;
+      targetPlayer.monsters[slot]=card;this.state.summons[owner]++;
       this.log('summon',this.name(owner)+(card.faceUp?'通常召唤':'盖放')+(card.faceUp||owner===0?'「'+def.name+'」':'一只怪兽'),owner,{cardId:card.faceUp||owner===0?card.id:null,uid:card.uid,faceUp:card.faceUp});
       this.state.frame={kind:'summon',owner,uid:card.uid,summonKind:card.summonKind,windowOffered:false};
-      if(card.faceUp)this.emit({type:'summon',owner,uid:card.uid,id:card.id,from:'hand',kind:'normal',materials});
+      if(card.faceUp)this.emit({type:'summon',owner:summonOwner,...(summonOwner!==owner?{summoningOwner:owner}:{}),uid:card.uid,id:card.id,from:'hand',kind:'normal',materials});
       else this.emit({type:'normal-set',owner,uid:card.uid,id:card.id,from:'hand',kind:'set',materials});
     }
     setCard(action){
@@ -696,14 +699,14 @@
       extra.materialCount=materials.length;extra.linkMaterialUids=[...uids];extra.linkProtection=materials.some(m=>m.id==='ip-masquerena');
       return this.special(owner,extraUid,{via:'link',position:'attack',zone,materials:snapshots});
     }
-    isPendulumScale(card){const f=card&&this.find(card.uid);return !!f&&f.zone==='spells'&&[0,4].includes(f.index)&&CARDS[card.id].type==='pendulum'&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell;}
+    isPendulumScale(card){const f=card&&this.find(card.uid);return !!f&&f.zone==='spells'&&[0,4].includes(f.index)&&(CARDS[card.id].type==='pendulum'||CARDS[card.id].pendulum)&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell;}
     pendulumScale(card){const value=card?.pendulumScaleOverride;return value&&(!value.until||value.until>=this.state.turn)?value.value:CARDS[card?.id]?.scale;}
-    canActivatePendulumScale(card,owner){return !!card&&CARDS[card.id].type==='pendulum'&&this.find(card.uid)?.zone==='hand'&&this.find(card.uid)?.owner===owner;}
+    canActivatePendulumScale(card,owner){return !!card&&(CARDS[card.id].type==='pendulum'||CARDS[card.id].pendulum)&&this.find(card.uid)?.zone==='hand'&&this.find(card.uid)?.owner===owner;}
     scales(owner){const p=this.state.players[owner];return [p.spells[0],p.spells[4]].map(c=>c&&c.faceUp&&!c.pendingActivation&&this.isPendulumScale(c)?{card:c,scale:this.pendulumScale(c)}:null);}
     pendulumCandidates(owner=this.state.active){
       const s=this.scales(owner);if(s.some(c=>!c)||s[0].scale===s[1].scale||this.state.players[owner].pendulumTurn===this.state.turn)return [];
       const low=Math.min(s[0].scale,s[1].scale),high=Math.max(s[0].scale,s[1].scale),p=this.state.players[owner];
-      return [...p.hand,...p.extra.filter(c=>c.faceUpExtra)].filter(card=>isMonster(CARDS[card.id])&&!isExtra(CARDS[card.id])&&CARDS[card.id].level>low&&CARDS[card.id].level<high&&this.canSpecial(owner,card,{via:'pendulum'})&&this.freeZones(owner,card).length);
+      return [...p.hand,...p.extra.filter(c=>c.faceUpExtra)].filter(card=>isMonster(CARDS[card.id])&&(!isExtra(CARDS[card.id])||CARDS[card.id].pendulum&&card.faceUpExtra&&card.properlySummoned)&&(CARDS[card.id].level||CARDS[card.id].rank)>low&&(CARDS[card.id].level||CARDS[card.id].rank)<high&&this.canSpecial(owner,card,{via:'pendulum'})&&this.freeZones(owner,card).length);
     }
     pendulumValid(owner,uids){
       const candidates=this.pendulumCandidates(owner),p=this.state.players[owner];
@@ -1294,7 +1297,7 @@
           if(this.tributeSets(f.card,false,owner).length){out.push({type:'summon',uid,mode:'attack',label:this.tributeCount(f.card)?'上级召唤 · '+this.tributeCount(f.card)+'份祭品':'攻击表示召唤',icon:'swords'});out.push({type:'summon',uid,mode:'defense',label:'里侧守备盖放',icon:'shield'});}
         }
         if(['spell','trap'].includes(c.type)&&this.state.players[owner].spells.includes(null))out.push({type:'set',uid,label:'盖放到场上',icon:'card'});
-        if(c.type==='pendulum'&&this.canActivatePendulumScale(f.card,owner))for(const slot of [0,4])if(!this.state.players[owner].spells[slot])out.push({type:'pendulum-scale',uid,slot,label:(slot===0?'左':'右')+'刻度 '+c.scale,icon:'pendulum'});
+        if((c.type==='pendulum'||c.pendulum)&&this.canActivatePendulumScale(f.card,owner))for(const slot of [0,4])if(!this.state.players[owner].spells[slot])out.push({type:'pendulum-scale',uid,slot,label:(slot===0?'左':'右')+'刻度 '+c.scale,icon:'pendulum'});
       }
       if(main&&fieldMonster(f.zone)&&c.type!=='link'&&f.card.summonTurn<this.state.turn&&f.card.changedTurn<this.state.turn&&(f.card.attacksMade||0)===0)out.push({type:'stance',uid,label:!f.card.faceUp?'反转召唤':f.card.position==='attack'?'变为守备表示':'变为攻击表示',icon:'shield'});
       if(this.state.phase==='battle'&&fieldMonster(f.zone)){
@@ -1490,8 +1493,8 @@
           if(fieldMonster(f.zone)&&!isMonster(c)&&!card.asMonster)throw new Error('Non-monster in monster zone');
           if(fieldMonster(f.zone)&&c.type==='link'&&(!card.faceUp||card.position!=='attack'))throw new Error('Link monster must be face-up in attack position');
           if(f.zone==='extraMonster'){if(![0,1].includes(card.extraSlot)||extraOccupied.has(card.extraSlot))throw new Error('Invalid or shared extra monster zone collision');extraOccupied.add(card.extraSlot);}
-          if(f.zone==='spells'&&!['spell','trap','pendulum'].includes(c.type)&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell)throw new Error('Invalid back-row card');
-          if(f.zone==='spells'&&c.type==='pendulum'&&![0,4].includes(f.index)&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell)throw new Error('Pendulum card outside pendulum zone');
+          if(f.zone==='spells'&&!['spell','trap','pendulum'].includes(c.type)&&!c.pendulum&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell)throw new Error('Invalid back-row card');
+          if(f.zone==='spells'&&(c.type==='pendulum'||c.pendulum)&&![0,4].includes(f.index)&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell)throw new Error('Pendulum card outside pendulum zone');
           if(f.zone==='fieldSpell'&&(c.type!=='spell'||c.spellKind!=='field'))throw new Error('Invalid field spell');
           if(c.type==='token'&&!fieldMonster(f.zone))throw new Error('Token outside field');
           for(const material of card.overlays||[]){

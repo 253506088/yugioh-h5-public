@@ -47,7 +47,8 @@
   function cry(c){return !!CARDS[c.id].crystron;}
   function noBanishReplacement(e,owner){return !e.monsters(1-owner).some(c=>c.faceUp&&c.id==='masked-dark-law'&&!e.negated(c));}
   function canSendGY(e,card){
-    const f=e.find(card.uid);if(e._advancedReady&&(e.hasEarly('Macro Cosmos')||e.hasEarly('Banisher of the Radiance')||isMonster(CARDS[card.id])&&e.hasEarly('Dimensional Fissure')||f?.zone==='deck'&&e.hasEarly('Dimension Fortress Weapon')))return false;return !!f&&noBanishReplacement(e,card.originalOwner)&&CARDS[card.id].type!=='token'&&!(fieldZone(f.zone)&&card.banishOnLeave)&&!(CARDS[card.id].type==='pendulum'&&(fieldZone(f.zone)||['spells','fieldSpell'].includes(f.zone)));
+    if(e.graveCostAllowed?.(card)===false)return false;
+    const f=e.find(card.uid);if(e._advancedReady&&(e.hasEarly('Macro Cosmos')||e.hasEarly('Banisher of the Radiance')||isMonster(CARDS[card.id])&&e.hasEarly('Dimensional Fissure')||f?.zone==='deck'&&e.hasEarly('Dimension Fortress Weapon')))return false;return !!f&&noBanishReplacement(e,card.originalOwner)&&CARDS[card.id].type!=='token'&&!(fieldZone(f.zone)&&card.banishOnLeave)&&!((CARDS[card.id].type==='pendulum'||CARDS[card.id].pendulum)&&(fieldZone(f.zone)||['spells','fieldSpell'].includes(f.zone)));
   }
   function discard(e,ctx,uids){for(const uid of uids){e.ownCard(uid,['hand'],ctx.owner);e.move(uid,'grave',{kind:'cost-discard',source:ctx.source,byOwner:ctx.owner});}}
   function sendCost(e,ctx,uids){for(const uid of uids){const f=e.find(uid);if(!f||!canSendGY(e,f.card))throw new root.DuelRuleError('这张卡不能实际送去墓地，因此不能支付这个代价。');}for(const uid of uids)e.move(uid,'grave',{kind:'cost-send',source:ctx.source,byOwner:ctx.owner});}
@@ -108,7 +109,7 @@
     if(a.cardActivation){
       if(d.type==='trap'){
         const temple=e.hasEarly?.('Temple of the Kings',ctx.owner)&&!e.wasUsed(ctx.owner,{id:D.cardByName('Temple of the Kings').id},'same-turn-trap','name');
-        if(!f||(!handTrap&&(f.zone!=='spells'||c.faceUp||c.setTurn>=e.state.turn&&!e.ruleAllowsSetActivation?.(c)&&!temple&&!(e.hasEarly?.('Night Wing Sorceress',ctx.owner)&&c.id===D.cardByName('Assault Mode Activate')?.id)&&!ctx.event.forcedTrap)))return false;
+        if(!f||(!handTrap&&(f.zone!=='spells'||c.faceUp||c.setTurn>=e.state.turn&&c.effectSetActivationTurn!==e.state.turn&&!e.ruleAllowsSetActivation?.(c)&&!temple&&!(e.hasEarly?.('Night Wing Sorceress',ctx.owner)&&c.id===D.cardByName('Assault Mode Activate')?.id)&&!ctx.event.forcedTrap)))return false;
       }else if(f?.zone==='spells'){
         if(c.faceUp)return false;
         if((a.quickPlay||a.speed===2)&&c.setTurn>=e.state.turn&&!e.ruleAllowsSetActivation?.(c))return false;
@@ -281,6 +282,6 @@
     require('./ai-marginal.js');
     require('./ai-tactics.js');
     require('./ai-planner.js');
-    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005','effects-2006','effects-2007','effects-2008','effects-year-final','effects-chronicle','effects-2009','effects-2010','effects-2011','effects-2012','effects-2013','effects-chronicle-contracts','chronicle-rules','effects-2014'])require('./'+file+'.js');
+    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005','effects-2006','effects-2007','effects-2008','effects-year-final','effects-chronicle','effects-2009','effects-2010','effects-2011','effects-2012','effects-2013','effects-chronicle-contracts','chronicle-rules','effects-2014','effects-2015'])require('./'+file+'.js');
   }
 })(typeof globalThis!=='undefined'?globalThis:this);

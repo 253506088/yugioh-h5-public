@@ -4,7 +4,7 @@
 const test=require('node:test'),fs=require('node:fs'),path=require('node:path');
 const {assert,D,E,put,act,settle,run,fresh,fieldCard}=require('./gx-helpers.cjs');
 const report={cards:[],errors:[]},out=path.resolve(__dirname,'../output/chronicle-sweep');fs.mkdirSync(out,{recursive:true});
-const cards=D.CARD_LIST.filter(c=>c.early&&c.releaseYear>=2009&&c.releaseYear<=2014&&(!process.env.DUEL_YEAR||c.releaseYear===Number(process.env.DUEL_YEAR)));
+const cards=D.CARD_LIST.filter(c=>c.early&&c.releaseYear>=2009&&c.releaseYear<=2015&&(!process.env.DUEL_YEAR||c.releaseYear===Number(process.env.DUEL_YEAR)));
 const quoted=d=>[...d.originalDescription.matchAll(/"([^"]+)"/g)].map(m=>D.cardByName(m[1])).filter(c=>c&&c.id!==d.id&&!c.notCollectible).slice(0,8);
 function fixture(d){const e=fresh(d.providerId);for(const p of e.state.players)p.lp=16000;
  for(const n of ['Battle Ox','Mystical Shine Ball'])fieldCard(e,0,n);fieldCard(e,1,'Blue-Eyes White Dragon');fieldCard(e,1,'Man-Eater Bug',{faceUp:false,position:'defense'});

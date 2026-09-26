@@ -1,6 +1,13 @@
 // Explicit material grammar for the preserved OCG snapshots. Unknown wording is
 // an import error, never an unrestricted material or a silently normal monster.
 export function parseFusion(name, text, {byName, norm, races, attributes}) {
+  const legendary = text.match(/^Must be Special Summoned with "(The Claw of Hermos|The Fang of Critias)", using (?:a (.+?) monster|"([^"]+)")\./);
+  if (legendary) {
+    if (legendary[2] && !races[legendary[2]]) throw new Error('Unknown legendary Fusion material: ' + name);
+    return {fusion: [], legendaryFusion: legendary[1], legendaryMaterial: legendary[3] ? {officialName: legendary[3]} : {race: races[legendary[2]]}, specialOnly: legendary[1] === 'The Claw of Hermos' ? 'hermos' : 'critias'};
+  }
+  const differentNames = / monsters with different names$/.test(text);
+  text = text.replace(/ monsters with different names$/, ' monsters');
   if (name === 'Pair Cycroid') return {fusion: [{race: races.Machine}, {race: races.Machine}], fusionSameName: true};
   if (name === 'Elder Entity Norden') return {fusion: [{types: ['synchro', 'xyz']}, {types: ['synchro', 'xyz']}]};
   if (/^Masked HERO /.test(name)) return {fusion: [], masked: true, specialOnly: 'mask'};
@@ -18,15 +25,19 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
     let body = generic[3].replace(/-Type\b/gi, ''), spec = {};
     const level = body.match(/^Level (\d+) or higher (.+)$/i);
     if (level) { spec.minLevel = Number(level[1]); body = level[2]; }
-    const type = body.match(/^(.*?)\s*Synchro$/i);
-    if (type) { spec.type = 'synchro'; body = type[1]; }
+    const exactLevel = body.match(/^Level (\d+) (.+)$/i);
+    if (exactLevel) { spec.level = Number(exactLevel[1]); body = exactLevel[2]; }
+    const type = body.match(/^(.*?)\s*(Synchro|Fusion|Xyz|Pendulum)$/i);
+    if (type) { spec.type = type[2].toLowerCase(); body = type[1]; }
+    if (/ Normal$/.test(body)) { spec.normal = true; body = body.replace(/ Normal$/, ''); }
     if (/^(?:non-Effect|Normal)$/i.test(body)) { spec.normal = true; body = ''; }
     const attributeRace = body.match(/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) (.+)$/);
     if (attributeRace && races[attributeRace[2]]) { spec.attribute = attributes[attributeRace[1]]; spec.race = races[attributeRace[2]]; body = ''; }
     const combined = body.match(/^(.+?)\s+"([^"]+)"$/);
     if (combined && races[combined[1]]) { spec.race = races[combined[1]]; body = '"' + combined[2] + '"'; }
     const series = body.match(/^"([^"]+)"$/);
-    if (series) spec.nameIncludes = series[1];
+    if (/^"[^"]+"(?: and\/or "[^"]+")+$/.test(body)) spec.nameIncludesAny = [...body.matchAll(/"([^"]+)"/g)].map(m=>m[1]);
+    else if (series) spec.nameIncludes = series[1];
     else if (races[body]) spec.race = races[body];
     else if (attributes[body]) spec.attribute = attributes[body];
     else if (body === 'Gemini') spec.gemini = true;
@@ -35,7 +46,7 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
     if (generic[2]) fusionMore = spec;
   }
   if (fusion.length < 2) throw new Error('Missing Fusion materials: ' + name);
-  return {fusion, ...(fusionMore ? {fusionMore} : {})};
+  return {fusion, ...(fusionMore ? {fusionMore} : {}), ...(differentNames ? {fusionDifferentNames: true} : {})};
 }
 
 export function parseSynchro(name, text, {byName, norm, races, attributes}) {
@@ -74,13 +85,17 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
   if (!non[2]) spec.maxNon = spec.minNon;
   if (non[3]) spec.nonLevel = Number(non[3]);
   if (non[4]) {
-    const body = non[4].replace(/-Type$/i, '');
+    let body = non[4].replace(/-Type\b/gi, '');
+    if (/ Synchro$/.test(body)) { spec.nonType = 'synchro'; body = body.replace(/ Synchro$/, ''); }
+    const combined = body.match(/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) (.+)$/);
+    if (combined && races[combined[2]]) { spec.nonAttribute = attributes[combined[1]]; body = combined[2]; }
     if (attributes[body]) spec.nonAttribute = attributes[body];
     else if (races[body]) spec.nonRace = races[body];
     else if (/^".+"$/.test(body)) spec.nonNameIncludes = body.slice(1, -1);
     else if (body === 'Normal') spec.nonNormal = true;
     else if (body === 'Gemini') spec.nonGemini = true;
     else if (body === 'Synchro') spec.nonType = 'synchro';
+    else if (body === 'Pendulum') spec.nonType = 'pendulum';
     else throw new Error('Unknown non-Tuner type: ' + name + ' / ' + body);
   }
   return {synchro: spec};
@@ -88,6 +103,9 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
 
 export function parseXyz(name, text, {races, attributes}) {
   if (name === 'Number F0: Utopic Future') return {xyzCount: 2, rank: 0, xyzMaterialType: 'xyz', xyzSameRank: true, xyzExcludeNameIncludes: 'Number'};
+  if (name === 'Number S0: Utopic ZEXAL') return {xyzCount: 3, rank: 0, xyzMaterialType: 'xyz', xyzSameRank: true, xyzNameIncludes: 'Number'};
+  if (name === 'Number 93: Utopia Kaiser') return {xyzCount: 2, xyzMax: 5, rank: 12, xyzMaterialType: 'xyz', xyzSameRank: true, xyzNameIncludes: 'Number', xyzRequireOverlay: true};
+  text = text.split(' / ')[0];
   const unlimited = /^(\d+) or more Level/.test(text);
   if (unlimited) text = text.replace(/^(\d+) or more Level/, '$1 or more (max. 7) Level');
   // YGOPRODeck prints Xyz materials in two orders: the long-standing
@@ -102,7 +120,13 @@ export function parseXyz(name, text, {races, attributes}) {
   if (body) {
     if (races[body]) out.xyzRace = races[body];
     else if (attributes[body]) out.xyzAttribute = attributes[body];
+    else if (/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) (.+)$/.test(body)) {
+      const [,attribute,race] = body.match(/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) (.+)$/);
+      if (!races[race]) throw new Error('Unknown Xyz race: ' + name + ' / ' + race);
+      out.xyzAttribute = attributes[attribute]; out.xyzRace = races[race];
+    }
     else if (body === 'Normal') out.xyzNormal = true;
+    else if (body === 'Pendulum') out.xyzPendulum = true;
     else if (/^".+"$/.test(body)) out.xyzNameIncludes = body.slice(1, -1);
     else throw new Error('Unknown Xyz material: ' + name + ' / ' + body);
   }

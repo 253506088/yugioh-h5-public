@@ -1,0 +1,595 @@
+{
+  "scope": [
+    2015
+  ],
+  "sources": [
+    {
+      "id": "worlds-2015",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2015/",
+      "title": "Yu-Gi-Oh! World Championship 2015",
+      "accessed": "2026-09-24",
+      "evidence": "Final standings: Hiyama Shunsuke (Tellarknight), Galileo De Obaldia (Nekroz), Hasegawa Akira (Nekroz). First and second deck images transcribed in full: 41 main, 15 extra, 15 side.",
+      "deckImages": [
+        "https://roadoftheking.com/wp-content/uploads/2015/08/WCS2015_1st.jpg",
+        "https://roadoftheking.com/wp-content/uploads/2015/08/WCS2015_2nd.jpg"
+      ]
+    },
+    {
+      "id": "ocg-2015-10",
+      "url": "https://roadoftheking.com/ocg-2015-10-metagame/",
+      "title": "OCG 2015.10 Metagame (1 Oct – 31 Dec 2015)",
+      "accessed": "2026-09-24",
+      "evidence": "309 Performapal Performage finishes, including 308 Performapal Performage and 1 Performapal Performage Magician. Used as the varied third strategy because second and third at Worlds both used Nekroz; representative year-end build, not a Worlds third-place list."
+    }
+  ],
+  "decks": [
+    {
+      "id": "tellarknight-2015",
+      "year": 2015,
+      "title": "世界冠军 · 星骑士",
+      "en": "World Champion · Tellarknight",
+      "ja": "世界王者 · テラナイト",
+      "ace": "Stellarknight Triverr",
+      "sourceKind": "historical-decklist",
+      "sourceRefs": [
+        "worlds-2015"
+      ],
+      "playerName": "Hiyama Shunsuke",
+      "placement": 1,
+      "description": "2015 世界冠军桧山俊介的 41 张主卡原构筑。天津四检索、织女星与牵牛星展开，三叉戟全场回手，托勒密升阶控制。副卡组保留在来源牌表中。",
+      "descriptionEn": "Hiyama Shunsuke’s 2015 Worlds winning 41-card list. Deneb, Vega and Altair build Triverr; Ptolemaeus offers Rank-Up control. The source file preserves the side deck.",
+      "descriptionJa": "2015年世界王者・桧山俊介のメイン41枚を再現。デネブ、ベガ、アルタイルからトライヴェールへ。プトレマイオスでランクアップ。サイドは出典データに保存。",
+      "combo": [
+        "天津四检索牵牛星与织女星",
+        "牵牛星复活形成三素材超量",
+        "三叉戟回手重置永续陷阱",
+        "托勒密附加星辉士并升阶"
+      ],
+      "main": [
+        [
+          "Satellarknight Deneb",
+          3
+        ],
+        [
+          "Satellarknight Altair",
+          3
+        ],
+        [
+          "Satellarknight Unukalhai",
+          3
+        ],
+        [
+          "Satellarknight Vega",
+          2
+        ],
+        [
+          "Satellarknight Rigel",
+          1
+        ],
+        [
+          "Thunder King Rai-Oh",
+          1
+        ],
+        [
+          "Honest",
+          2
+        ],
+        [
+          "Satellarknight Skybridge",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          3
+        ],
+        [
+          "Reinforcement of the Army",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Soul Charge",
+          1
+        ],
+        [
+          "Stellarnova Alpha",
+          3
+        ],
+        [
+          "Call of the Haunted",
+          3
+        ],
+        [
+          "Oasis of Dragon Souls",
+          3
+        ],
+        [
+          "Fiendish Chain",
+          3
+        ],
+        [
+          "Breakthrough Skill",
+          2
+        ],
+        [
+          "Ring of Destruction",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Solemn Warning",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Tellarknight Ptolemaeus",
+          2
+        ],
+        [
+          "Stellarknight Triverr",
+          2
+        ],
+        [
+          "Stellarknight Delteros",
+          1
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Castel, the Skyblaster Musketeer",
+          1
+        ],
+        [
+          "Daigusto Emeral",
+          1
+        ],
+        [
+          "Evilswarm Exciton Knight",
+          1
+        ],
+        [
+          "Number 80: Rhapsody in Berserk",
+          1
+        ],
+        [
+          "Number 86: Heroic Champion - Rhongomyniad",
+          1
+        ],
+        [
+          "Stellarknight Constellar Diamond",
+          1
+        ],
+        [
+          "Tiras, Keeper of Genesis",
+          1
+        ],
+        [
+          "Constellar Pleiades",
+          1
+        ],
+        [
+          "Constellar Ptolemy M7",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Ice Hand",
+          3
+        ],
+        [
+          "Fire Hand",
+          2
+        ],
+        [
+          "Artifact Lancea",
+          1
+        ],
+        [
+          "Ghost Ogre & Snow Rabbit",
+          3
+        ],
+        [
+          "Galaxy Cyclone",
+          1
+        ],
+        [
+          "Imperial Iron Wall",
+          3
+        ],
+        [
+          "Fairy Wind",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "nekroz-2015",
+      "year": 2015,
+      "title": "世界亚军 · 影灵衣",
+      "en": "World Runner-up · Nekroz",
+      "ja": "世界準優勝 · 影霊衣",
+      "ace": "Nekroz of Trishula",
+      "sourceKind": "historical-decklist",
+      "sourceRefs": [
+        "worlds-2015"
+      ],
+      "playerName": "Galileo De Obaldia",
+      "placement": 2,
+      "description": "2015 世界亚军 Galileo De Obaldia 的 41 张主卡原构筑。仪式检索与万华镜运用额外等级，三叉龙除外三个区域；火冰手、幽鬼兔和王宫的通告支援。",
+      "descriptionEn": "Galileo De Obaldia’s 41-card 2015 Worlds runner-up list. Ritual searches and Kaleidoscope unlock Trishula; Hands, Ghost Ogre and Royal Decree support the engine.",
+      "descriptionJa": "2015年世界準優勝Galileo De Obaldiaのメイン41枚。儀式サーチと万華鏡からトリシューラへ。ハンド、幽鬼うさぎ、王宮のお触れで支援。",
+      "combo": [
+        "万手神补齐仪式与怪兽",
+        "万华镜送虹光之宣告者再检索",
+        "仪式魔人作为素材封锁特殊召唤",
+        "三叉龙同时除外手牌场上墓地"
+      ],
+      "main": [
+        [
+          "Nekroz of Decisive Armor",
+          1
+        ],
+        [
+          "Nekroz of Trishula",
+          1
+        ],
+        [
+          "Nekroz of Valkyrus",
+          2
+        ],
+        [
+          "Nekroz of Brionac",
+          1
+        ],
+        [
+          "Nekroz of Catastor",
+          1
+        ],
+        [
+          "Nekroz of Unicore",
+          1
+        ],
+        [
+          "Nekroz of Clausolas",
+          3
+        ],
+        [
+          "Exa, Enforcer of the Nekroz",
+          1
+        ],
+        [
+          "Great Sorcerer of the Nekroz",
+          1
+        ],
+        [
+          "Shurit, Strategist of the Nekroz",
+          1
+        ],
+        [
+          "Djinn Releaser of Rituals",
+          3
+        ],
+        [
+          "Manju of the Ten Thousand Hands",
+          2
+        ],
+        [
+          "Ice Hand",
+          3
+        ],
+        [
+          "Fire Hand",
+          2
+        ],
+        [
+          "Ghost Ogre & Snow Rabbit",
+          3
+        ],
+        [
+          "Nekroz Kaleidoscope",
+          2
+        ],
+        [
+          "Nekroz Mirror",
+          2
+        ],
+        [
+          "Nekroz Cycle",
+          1
+        ],
+        [
+          "Preparation of Rites",
+          1
+        ],
+        [
+          "Reinforcement of the Army",
+          1
+        ],
+        [
+          "Gold Sarcophagus",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Royal Decree",
+          3
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Flame Ghost",
+          1
+        ],
+        [
+          "Herald of the Arc Light",
+          2
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Ancient Sacred Wyvern",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Star Eater",
+          1
+        ],
+        [
+          "Shooting Quasar Dragon",
+          1
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Castel, the Skyblaster Musketeer",
+          1
+        ],
+        [
+          "Daigusto Emeral",
+          1
+        ],
+        [
+          "Diamond Dire Wolf",
+          1
+        ],
+        [
+          "Evilswarm Exciton Knight",
+          1
+        ],
+        [
+          "Number 80: Rhapsody in Berserk",
+          1
+        ],
+        [
+          "Number 86: Heroic Champion - Rhongomyniad",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Denko Sekka",
+          2
+        ],
+        [
+          "Gallis the Star Beast",
+          2
+        ],
+        [
+          "Artifact Lancea",
+          2
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Forbidden Chalice",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Mirror Force",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "performapal-performage-2015",
+      "year": 2015,
+      "title": "年度人气 · 娱乐伙伴娱乐法师",
+      "en": "Year-end Favorites · Performapal Performage",
+      "ja": "年間人気 · EMEm",
+      "ace": "Ignister Prominence, the Blasting Dracoslayer",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2015-10"
+      ],
+      "description": "2015 年末 OCG 人气代表构筑。丑角与猴子检索刻度，龙剑士破坏火布偶连接娱乐法师展开，升龙剑士与四阶超量应对不同局面。",
+      "descriptionEn": "A representative late-2015 OCG Performapal Performage build. Joker and Monkeyboard find scales; Luster destroys Plushfire to recruit Performages and build Synchro/Xyz boards.",
+      "descriptionJa": "2015年末OCGの代表的なEMEm。ジョーカーとモンキーボードでスケールを揃え、ラスターPでヒグルミを破壊して展開。シンクロとランク4を使い分ける。",
+      "combo": [
+        "丑角检索猴子或刻度",
+        "龙剑士破坏火布偶并检索同名卡",
+        "火布偶特殊召唤娱乐法师",
+        "灵摆召唤后升龙剑士或四阶超量"
+      ],
+      "main": [
+        [
+          "Performapal Skullcrobat Joker",
+          3
+        ],
+        [
+          "Performapal Monkeyboard",
+          3
+        ],
+        [
+          "Performapal Pendulum Sorcerer",
+          3
+        ],
+        [
+          "Performapal Lizardraw",
+          2
+        ],
+        [
+          "Performapal Guitartle",
+          1
+        ],
+        [
+          "Luster Pendulum, the Dracoslayer",
+          3
+        ],
+        [
+          "Master Pendulum, the Dracoslayer",
+          1
+        ],
+        [
+          "Vector Pendulum, the Dracoverlord",
+          1
+        ],
+        [
+          "Performage Plushfire",
+          3
+        ],
+        [
+          "Performage Damage Juggler",
+          3
+        ],
+        [
+          "Performage Trick Clown",
+          1
+        ],
+        [
+          "Performage Hat Tricker",
+          1
+        ],
+        [
+          "Performage Mirror Conductor",
+          1
+        ],
+        [
+          "Archfiend Eccentrick",
+          1
+        ],
+        [
+          "Majespecter Unicorn - Kirin",
+          1
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Wavering Eyes",
+          3
+        ],
+        [
+          "Draco Face-Off",
+          3
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Solemn Strike",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Ignister Prominence, the Blasting Dracoslayer",
+          2
+        ],
+        [
+          "Dinoster Power, the Mighty Dracoslayer",
+          1
+        ],
+        [
+          "Majester Paladin, the Ascending Dracoslayer",
+          1
+        ],
+        [
+          "Tellarknight Ptolemaeus",
+          1
+        ],
+        [
+          "Cyber Dragon Nova",
+          1
+        ],
+        [
+          "Cyber Dragon Infinity",
+          1
+        ],
+        [
+          "Performage Trapeze Magician",
+          1
+        ],
+        [
+          "Castel, the Skyblaster Musketeer",
+          1
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Daigusto Emeral",
+          1
+        ],
+        [
+          "Diamond Dire Wolf",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Number S39: Utopia the Lightning",
+          1
+        ],
+        [
+          "Evilswarm Exciton Knight",
+          1
+        ]
+      ],
+      "side": []
+    }
+  ]
+}

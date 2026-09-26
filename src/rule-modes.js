@@ -361,6 +361,7 @@
     if(counting&&this.state.pending?.kind==='window'&&this.state.pending.responder===owner&&plannedUsed(this,owner)>=plannedLimit(this,owner)){const passes=this.state.pending.passes;this.state.pending=null;this.openWindow(owner,passes);}
     return r;
   });
+  extend('graveCostAllowed',function(prior,card){return !is(this,'liberation')&&(prior?.call(this,card)??true);});
   P.ruleAllowsSetActivation=function(card){if(!is(this,'quickdraw'))return false;const c=CARDS[card.id];return c.type==='trap'?(!c.trapKind||c.trapKind==='normal'):c.type==='spell'&&c.spellKind==='quick';};
 
   // ---- chain carnival -----------------------------------------------------------

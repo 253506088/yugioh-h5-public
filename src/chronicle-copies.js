@@ -7,7 +7,7 @@
  // Later yearly volumes call registerCopies again once their own effects exist.
  const copyable=year=>Object.values(E.defs).filter(a=>!a.trigger&&!a.cardActivation&&!a.inherent&&!a.supersededByOriginal&&!a.mode.startsWith('copied:')&&a.zones.includes('monsters')&&!hosts.has(a.id)&&year(D.CARDS[a.id]?.releaseYear));
  const original=copyable(y=>y<=2013);
- function registerCopies(list){for(const name of names)for(const a of list){const {id,key,mode,...spec}=a,adapt=c=>({...c,sourceId:id});
+ function registerCopies(list,hostNames=names){for(const name of hostNames)for(const a of list){const {id,key,mode,...spec}=a,adapt=c=>({...c,sourceId:id});
   E.register(I(name),'copied:'+key,{...spec,chronicleCopyOf:key,copyTargetId:id,label:a.label,once:spec.once?{...spec.once,...(spec.once.scope==='name'?{cardId:id}:{})}:undefined,
    condition:(e,c)=>{const m=H.self(e,c),copy=m?.gxCopy;return copy?.id===id&&copy.turn>=e.state.turn&&!(name==='Majestic Star Dragon'&&m.eraMajesticCopyTurn===e.state.turn)&&(!a.condition||a.condition(e,adapt(c)));},
    inputs:a.inputs?(e,c)=>a.inputs(e,adapt(c)):undefined,cost:(e,c)=>{const adapted=adapt(c);a.cost?.(e,adapted);const sourceId=c.sourceId;Object.assign(c,adapted,{sourceId});const m=H.self(e,c);if(m&&name==='Majestic Star Dragon')m.eraMajesticCopyTurn=e.state.turn;},resolve:(e,c)=>a.resolve(e,adapt(c))});
@@ -19,5 +19,6 @@
  // Do not let later boilerplate registration erase a specific adaptation note.
  const notesById=new Map();for(const a of Object.values(E.defs))if(!a.chronicleCopyOf&&a.note?.startsWith('本作适配')){const notes=notesById.get(a.id)||new Set();notes.add(a.note);notesById.set(a.id,notes);}
  for(const c of D.CARD_LIST.filter(c=>c.releaseYear>=2009&&c.releaseYear<=2013&&!hosts.has(c.id))){const notes=notesById.get(c.id);if(notes?.size)c.implementationNote=[...notes].join(' ');}
- root.DuelChronicleCopies={hosts:[...hosts],sourceEffects:original.length,copyable,registerCopies};
+ const registerHost=name=>{if(hosts.has(I(name)))return;names.push(name);hosts.add(I(name));registerCopies(copyable(()=>true),[name]);root.DuelChronicleCopies.hosts=[...hosts];};
+ root.DuelChronicleCopies={hosts:[...hosts],sourceEffects:original.length,copyable,registerCopies,registerHost};
 })(globalThis);

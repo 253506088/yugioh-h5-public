@@ -28,6 +28,12 @@
     function canonical(value) {
       let id = String(Number(value)), seen = new Set();
       while (rows.get(id)?.[4] && rows.has(String(rows.get(id)[4])) && !seen.has(id)) {
+        // CDB alias also encodes rule-name equivalence: Fusion Substitute is
+        // always treated as Polymerization but remains a distinct physical card.
+        // Fold artwork/password variants only when the catalog names agree.
+        const row = rows.get(id), target = rows.get(String(row[4]));
+        if (row[2] && target[2] && light(row[2]) !== light(target[2])) break;
+        if (![1, 2, 3].some(i => row[i] && target[i] && light(row[i]) === light(target[i]))) break;
         seen.add(id); id = String(rows.get(id)[4]);
       }
       return id;

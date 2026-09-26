@@ -6,7 +6,9 @@ export function parsePendulum(row) {
   const text = String(row.description || '');
   const marker = /\[\s*Monster (?:Effect|Description)\s*\]/i.exec(text);
   const normal = /Pendulum Normal/.test(row.providerType);
-  if (!marker && !normal) throw new Error('Missing Pendulum monster text: ' + row.name);
+  // Cards with no Pendulum effect (e.g. Majespecters) have only one text box
+  // in this provider. An incomplete, explicitly delimited pair remains invalid.
+  if (!marker && /\[\s*Pendulum Effect\s*\]/i.test(text)) throw new Error('Missing Pendulum monster text: ' + row.name);
   const scale = Number(row.pendulumScale);
   if (row.pendulumScale == null || !Number.isInteger(scale) || scale < 0 || scale > 13) {
     throw new Error('Invalid Pendulum scale: ' + row.name);

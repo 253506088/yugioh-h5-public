@@ -16,7 +16,7 @@
  const attackOf=c=>c.event.window?.attack||c.event.attack;
 
  // ---- Superheavy Samurai: attacking from Defense Position uses DEF -----------
- const defAttacker=(e,m)=>{const f=m&&e.find(m.uid);if(!f||!fm(f.zone)||!m.faceUp||e.negated(m))return false;if(is(m,'Superheavy Samurai Warlord Susanowo')||is(m,'Superheavy Samurai Ogre Shutendoji'))return true;return shs(m)&&e.monsters(f.owner).some(q=>q.faceUp&&is(q,'Superheavy Samurai Big Benkei')&&!e.negated(q));};
+ const defAttacker=(e,m)=>{const f=m&&e.find(m.uid);if(!f||!fm(f.zone)||!m.faceUp||e.negated(m))return false;if(def(m).defenseAttack||is(m,'Superheavy Samurai Warlord Susanowo')||is(m,'Superheavy Samurai Ogre Shutendoji'))return true;return shs(m)&&e.monsters(f.owner).some(q=>q.faceUp&&is(q,'Superheavy Samurai Big Benkei')&&!e.negated(q));};
  const asAttack=(m,fn)=>{if(m&&m.position==='defense'){m.position='attack';try{return fn();}finally{m.position='defense';}}return fn();};
  extend('canAttack',function(prior,m,p=this.state.active,t=null){if(m?.position==='defense'&&defAttacker(this,m))return asAttack(m,()=>prior.call(this,m,p,t));return prior.call(this,m,p,t);});
  extend('declareAttack',function(prior,a){const m=card(this,a?.uid);if(m?.position==='defense'&&defAttacker(this,m)){const r=asAttack(m,()=>prior.call(this,a));if(this.state.frame?.attack)this.state.frame.attack.defAttack=true;return r;}return prior.call(this,a);});

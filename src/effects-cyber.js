@@ -2,7 +2,7 @@
 const {CARDS,isMonster,isExtra}=D;
 const {source,self,first,args,group,deck,grave,hand,monsters,specialable,once}=H;
 const machine=c=>isMonster(CARDS[c.id])&&CARDS[c.id].race==='机械族';
-const cyberSpell=c=>['spell','trap'].includes(CARDS[c.id].type)&&/^Cyber/i.test(CARDS[c.id].officialName);
+const cyberSpell=c=>['spell','trap'].includes(CARDS[c.id].type)&&/^Cyber(?!netic)/.test(CARDS[c.id].officialName);
 const namedCyber=(e,c,zone=null)=>e.cardNameId(c,zone)==='cyber-dragon';
 E.register('cyber-dragon','special',{label:'仅对方有怪兽，特殊召唤电子龙',zones:['hand'],inherent:true,
   condition:(e,c)=>e.monsters(c.owner).length===0&&e.monsters(1-c.owner).length>0&&e.canSpecial(c.owner,source(e,c).card)&&e.freeMain(c.owner)>0,

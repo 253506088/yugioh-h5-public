@@ -1,7 +1,7 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {DuelEngine}=require('../src/advanced-engine.js'),T=require('../src/tournament.js');
 const quick=process.argv.includes('--quick'),out=path.resolve(__dirname,'../output/chronicle-simulation');fs.mkdirSync(out,{recursive:true});
-const decks=Object.values(global.DuelData.DECKS).filter(d=>d.year>=2009&&d.year<=2014).map(d=>d.id);
+const decks=Object.values(global.DuelData.DECKS).filter(d=>d.year>=2009&&d.year<=2015).map(d=>d.id);
 const report={at:new Date().toISOString(),quick,matches:[],errors:[],effects:{},summons:{}};let index=0;
 const fixtures=decks.flatMap(deck=>(quick?['blue']:['blue','dark','hero','gladiator-2008']).flatMap(opponent=>(quick?[0]:[0,1]).map(first=>({deck,opponent,first}))));
 if(!quick)for(let i=0;i<decks.length;i++)for(const first of [0,1])fixtures.push({deck:decks[i],opponent:decks[(i+1)%decks.length],first});

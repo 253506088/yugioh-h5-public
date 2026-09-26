@@ -53,7 +53,7 @@
     "test:gx:browser": "node tests/gx-browser.cjs",
     "test:gx:simulation": "node tests/gx-simulation.cjs",
     "decks:chronicle": "node scripts/generate-chronicle-decks.mjs",
-    "test:chronicle": "node --test tests/chronicle-rules.test.cjs tests/chronicle-2013.test.cjs tests/chronicle-sweep.test.cjs tests/card-materials.test.mjs",
+    "test:chronicle": "node --test tests/chronicle-rules.test.cjs tests/chronicle-2013.test.cjs tests/chronicle-sweep.test.cjs tests/card-materials.test.mjs tests/archetype-membership.test.cjs",
     "test:chronicle:simulation": "node tests/chronicle-simulation.cjs",
     "test:chronicle:browser": "node tests/chronicle-browser.cjs",
     "start:pvp": "node server/index.mjs",
@@ -67,7 +67,10 @@
     "test:deck-research:unit": "node --test tests/deck-research.test.cjs tests/deck-search.test.mjs",
     "test:deck-research:browser": "node tests/deck-research-browser.cjs",
     "test:deck-research": "npm run test:deck-research:unit && npm run test:deck-research:browser",
-    "test:optimization-2": "node --test tests/card-resolver.test.cjs tests/deck-parse.test.cjs tests/audio-lifecycle.test.cjs && node tests/optimization-2-browser.cjs"
+    "test:optimization-2": "node --test tests/card-resolver.test.cjs tests/deck-parse.test.cjs tests/audio-lifecycle.test.cjs && node tests/optimization-2-browser.cjs",
+    "test:2015": "node --test tests/chronicle-2015-pendulum.test.cjs tests/chronicle-2015-engines.test.cjs tests/chronicle-2015-themes.test.cjs tests/chronicle-2015-expansion.test.cjs tests/chronicle-2015-final.test.cjs",
+    "test:2015:browser": "node tests/chronicle-2015-browser.cjs",
+    "test:archetypes": "node --test tests/archetype-membership.test.cjs"
   },
   "engines": {
     "node": ">=22.13.0"

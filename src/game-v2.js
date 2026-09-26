@@ -608,7 +608,7 @@
       modalKind=saved.kind;selectionState=saved.selectionState;pendingKey=saved.pendingKey;audioScene=saved.audioScene;sound.setScene(audioScene);
       modal.className=saved.className;modal.replaceChildren(...saved.nodes);Object.assign(modal,saved.events);
       if(saved.kind.startsWith('ai-'))aiImport.resume(saved.kind,saved.aiView);
-      else if(saved.language!==I.language){const refresh={library:showLibrary,workshop:()=>workshop.show(),settings:showSettings,help:showHelp,'new-game':renderNewGame,log:showLog,'chain-log':showChainLog};refresh[saved.kind]?.();}
+      else if(saved.language!==I.language){const refresh={library:showLibrary,workshop:()=>workshop.show(),settings:showSettings,help:showHelp,'new-game':renderNewGame,log:showLog,'chain-log':showChainLog,deck:()=>showDeck(deckOwner),pile:()=>pileContext&&showPile(pileContext.owner,pileContext.kind,pileContext.onlyType),overlays:()=>showOverlays(overlayHostUid)};refresh[saved.kind]?.();}
       I.apply(modal);
       for(const s of saved.scrolls){s.el.scrollTop=s.top;s.el.scrollLeft=s.left;}
       if(modal.querySelector('.modal-body'))modal.querySelector('.modal-body').scrollTop=saved.bodyTop;

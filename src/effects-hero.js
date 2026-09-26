@@ -84,7 +84,7 @@ E.on('summon',(e,v)=>{
 E.on('move',(e,v)=>{
   if(v.id==='hero-shadow-mist'&&v.to==='grave')e.addTrigger(v.uid,v.id+'::grave-search',v);
   if(v.id==='hero-solid-soldier'&&v.to==='grave'&&H.fieldZone(v.from)&&v.source?.effectType==='spell'&&!String(v.kind).startsWith('cost'))e.addTrigger(v.uid,v.id+'::grave-revive',v);
-  if(v.id==='hero-liquid-soldier'&&['grave','banished'].includes(v.to)&&v.kind==='fusion-material'&&CARDS[v.summoningId]?.family==='hero')e.addTrigger(v.uid,v.id+'::material-draw',v);
+  if(v.id==='hero-liquid-soldier'&&['grave','banished'].includes(v.to)&&v.kind==='fusion-material'&&!!CARDS[v.summoningId]&&isFamily(CARDS[v.summoningId],'hero'))e.addTrigger(v.uid,v.id+'::material-draw',v);
   if(v.id==='hero-absolute-zero'&&H.fieldZone(v.from)&&['grave','banished'].includes(v.to))e.addTrigger(v.uid,v.id+'::leave-wipe',v,{mandatory:true});
   if(v.id==='hero-the-shining'&&H.fieldZone(v.from)&&v.to==='grave')e.addTrigger(v.uid,v.id+'::recover',v);
 });
