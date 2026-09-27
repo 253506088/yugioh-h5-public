@@ -5,7 +5,7 @@
  const S=cast,T=cast;
  const zombie=(e,m)=>monster(m)&&e.race(m)==='不死族',rock=(e,m)=>monster(m)&&e.race(m)==='岩石族';
  const vampire=m=>series(m,'Vampire'),archfiend=m=>series(m,'Archfiend'),gorgonic=m=>series(m,'Gorgonic'),traptrix=m=>series(m,'Traptrix'),mermail=m=>series(m,'Mermail');
- const hole=m=>def(m)?.type==='trap'&&def(m)?.trapKind==='normal'&&/Hole/.test(def(m)?.officialName||'');
+ const hole=m=>def(m)?.type==='trap'&&def(m)?.trapKind==='normal'&&D.inArchetype(def(m),"Hole");
  // ==========================================================================
  // Vampire
  // ==========================================================================
@@ -26,17 +26,17 @@
  aura('Archfiend Palabyrinth',(e,m,s)=>monster(m)&&e.race(m)==='恶魔族'&&e.find(s.card.uid)?.owner===e.find(m.uid)?.owner,500);
  effect('Archfiend Palabyrinth',(e,c)=>ownM(e,c).filter(m=>archfiend(m)&&m.faceUp),(e,c)=>{const t=card(e,first(c,'target'));if(!t)return;const lv=e.level(t);const other=ownM(e,c).find(m=>m.uid!==t.uid&&monster(m)&&e.race(m)==='恶魔族');if(!other)return;moved(e,c,[other.uid],'banished','cost-banish');const pool=[...hand(e,c.owner,archfiend),...deck(e,c.owner,archfiend),...grave(e,c.owner,archfiend)].filter(m=>e.level(m)===lv&&e.canSpecial(c.owner,m,{via:'effect'}));if(pool.length)revive(e,c,pool[0].uid);},{zones:['fieldSpell'],mode:'era-palab',once:H.once('palab','name'),summons:true,condition:(e,c)=>ownM(e,c).filter(m=>m.faceUp&&e.race(m)==='恶魔族').length>=2,inputs:(e,c)=>[g(e,c,'target','选择选择的恶魔怪兽',ownM(e,c).filter(m=>archfiend(m)&&m.faceUp),1,1,'special')]});
  sent('Archfiend Heiress',(e,c)=>search(e,c,deck(e,c.owner,m=>archfiend(m)&&m.id!==c.sourceId)),(e,v)=>v.to==='grave'&&(v.kind==='destroy'||v.kind==='battle'||/^effect-/.test(v.kind||'')),{once:H.once('heiress')});
- specialSelf('Archfiend Commander',(e,c)=>ownM(e,c).some(m=>archfiend(m)||(monster(m)&&/Archfiend/.test(def(m)?.officialName||''))),{position:'attack'});
+ specialSelf('Archfiend Commander',(e,c)=>ownM(e,c).some(m=>archfiend(m)||(monster(m)&&D.inArchetype(def(m),"Archfiend"))),{position:'attack'});
  E.on('summon',(e,v)=>{if(CARDS[v.id]?.officialName!=='Archfiend Commander'||v.kind!=='special')return;const m=card(e,v.uid);if(m)m.eraNoAttackUntil=e.state.turn;});
- effect('Archfiend Commander',(e,c)=>allM(e).filter(m=>archfiend(m)||/Archfiend/.test(def(m)?.officialName||'')),(e,c)=>{if(first(c))destroy(e,c,[first(c)]);},{mode:'era-commander',summons:false,mandatory:true,inputs:(e,c)=>[g(e,c,'target','选择破坏的恶魔卡片',allF(e).filter(f=>/Archfiend/.test(def(f.card)?.officialName||'')),0,1,'destroy')]});
+ effect('Archfiend Commander',(e,c)=>allM(e).filter(m=>archfiend(m)||D.inArchetype(def(m),"Archfiend")),(e,c)=>{if(first(c))destroy(e,c,[first(c)]);},{mode:'era-commander',summons:false,mandatory:true,inputs:(e,c)=>[g(e,c,'target','选择破坏的恶魔卡片',allF(e).filter(f=>D.inArchetype(def(f.card),"Archfiend")),0,1,'destroy')]});
  onEntry('Archfiend Commander','era-revive',{summons:true,inputs:(e,c)=>[g(e,c,'target','选择复活的6星恶魔',grave(e,c.owner,m=>archfiend(m)&&e.level(m)===6),1,1,'special')],resolve:(e,c)=>revive(e,c,first(c),{position:'defense'})},['normal']);
  sent('Archfiend Cavalry',(e,c)=>{const list=grave(e,c.owner,m=>archfiend(m)&&m.id!==c.sourceId);if(list.length)revive(e,c,list[0].uid);},(e,v)=>v.to==='grave'&&v.kind==='destroy');
- effect('Archfiend Emperor, the First Lord of Horror',null,(e,c)=>destroy(e,c,args(c)),{mode:'era-emperor',once:H.once('emperor'),role:'destroy',inputs:(e,c)=>[g(e,c,'cost','选择除外的恶魔卡片',[...hand(e,c.owner,m=>archfiend(m)||/Archfiend/.test(def(m)?.officialName||'')),...grave(e,c.owner,m=>archfiend(m))],1,1,'cost'),g(e,c,'target','选择破坏的场上卡片',allF(e).map(f=>f.card),1,1,'destroy')],cost:(e,c)=>moved(e,c,args(c,'cost'),'banished','cost-banish')});
+ effect('Archfiend Emperor, the First Lord of Horror',null,(e,c)=>destroy(e,c,args(c)),{mode:'era-emperor',once:H.once('emperor'),role:'destroy',inputs:(e,c)=>[g(e,c,'cost','选择除外的恶魔卡片',[...hand(e,c.owner,m=>archfiend(m)||D.inArchetype(def(m),"Archfiend")),...grave(e,c.owner,m=>archfiend(m))],1,1,'cost'),g(e,c,'target','选择破坏的场上卡片',allF(e).map(f=>f.card),1,1,'destroy')],cost:(e,c)=>moved(e,c,args(c,'cost'),'banished','cost-banish')});
  C('Archfiend Emperor, the First Lord of Horror').tributeCount=0;
  extend('tributeCount',function(prior,m){return is(m,'Archfiend Emperor, the First Lord of Horror')?0:prior.call(this,m);});
  E.on('summon',(e,v)=>{if(CARDS[v.id]?.officialName!=='Archfiend Emperor, the First Lord of Horror'||v.kind!=='normal')return;const m=card(e,v.uid);if(m){m.atkOverride=Math.floor((CARDS[m.id].atk||0)/2);m.defOverride=Math.floor((CARDS[m.id].def||0)/2);m.eraEmperorEnd=true;}});
  onEnd('Archfiend Emperor, the First Lord of Horror',{zones:['monsters'],mandatory:true,condition:(e,c)=>self(e,c)?.eraEmperorEnd,resolve:(e,c)=>destroy(e,c,[c.uid])});
- extend('canSpecial',function(prior,p,m,o={}){const d=m&&CARDS[m.id];if(d&&this.monsters(p).some(q=>q.faceUp&&is(q,'Archfiend Emperor, the First Lord of Horror'))&&this.race(m)!=='恶魔族'&&!D.isExtra(d)&&!/Archfiend/.test(d.officialName||''))return false;return prior.call(this,p,m,o);});
+ extend('canSpecial',function(prior,p,m,o={}){const d=m&&CARDS[m.id];if(d&&this.monsters(p).some(q=>q.faceUp&&is(q,'Archfiend Emperor, the First Lord of Horror'))&&this.race(m)!=='恶魔族'&&!D.isExtra(d)&&!D.inArchetype(d,"Archfiend"))return false;return prior.call(this,p,m,o);});
  // ==========================================================================
  // Gorgonic
  // ==========================================================================
@@ -82,9 +82,9 @@
  // Gravekeeper's (2013)
  // ==========================================================================
  onFlip('Gravekeeper\'s Ambusher',{resolve:(e,c)=>{const list=grave(e,1-c.owner);if(list.length)e.putOnDeck(list[0].uid,'bottom',c.source);}});
- sent('Gravekeeper\'s Ambusher',(e,c)=>{const list=grave(e,c.owner,m=>/Necrovalley/.test(def(m)?.officialName||''));if(list.length)search(e,c,list);},(e,v)=>v.to==='grave');
- watch('Gravekeeper\'s Nobleman','era-recruit','move',(e,v)=>v.to==='grave'&&v.kind==='battle'&&CARDS[v.id]?.officialName==='Gravekeeper\'s Nobleman',{summons:true,resolve:(e,c)=>{const list=deck(e,c.owner,m=>/Gravekeeper/.test(def(m)?.officialName||'')&&m.id!==c.sourceId);if(list.length)revive(e,c,list[0].uid,{position:'defense',faceDown:true,shuffle:true});}},{zones:['monsters']});
+ sent('Gravekeeper\'s Ambusher',(e,c)=>{const list=grave(e,c.owner,m=>D.inArchetype(def(m),"Necrovalley"));if(list.length)search(e,c,list);},(e,v)=>v.to==='grave');
+ watch('Gravekeeper\'s Nobleman','era-recruit','move',(e,v)=>v.to==='grave'&&v.kind==='battle'&&CARDS[v.id]?.officialName==='Gravekeeper\'s Nobleman',{summons:true,resolve:(e,c)=>{const list=deck(e,c.owner,m=>D.inArchetype(def(m),"Gravekeeper's")&&m.id!==c.sourceId);if(list.length)revive(e,c,list[0].uid,{position:'defense',faceDown:true,shuffle:true});}},{zones:['monsters']});
  R('Gravekeeper\'s Shaman','era-shaman',{zones:['monsters'],label:C('Gravekeeper\'s Shaman').name,mandatory:true,main:false,resolve:()=>{}});
- passive('Gravekeeper\'s Shaman',{stat:(e,s,m,k)=>{if(k!=='def'||m.uid!==s.card.uid)return 0;return grave(e,e.find(s.card.uid)?.owner,m=>/Gravekeeper/.test(def(m)?.officialName||'')).length*200;}});
+ passive('Gravekeeper\'s Shaman',{stat:(e,s,m,k)=>{if(k!=='def'||m.uid!==s.card.uid)return 0;return grave(e,e.find(s.card.uid)?.owner,m=>D.inArchetype(def(m),"Gravekeeper's")).length*200;}});
  if(typeof module!=='undefined')module.exports=X;
 })(globalThis);

@@ -1,0 +1,2418 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "repository": "mycard/ygopro-database",
+    "commit": "ac5d8fb80465e74b33f3b4a294e3b22c02d743f2",
+    "truth": "datas.setcode; OCG/Japanese snapshot; four 16-bit setcodes with subtype masks"
+  },
+  "entries": [
+    {
+      "name": "/Assault Mode",
+      "kind": "setcode",
+      "code": "0x104f",
+      "fallback": {
+        "match": "contains",
+        "value": "/Assault Mode"
+      }
+    },
+    {
+      "name": "Abyss-",
+      "kind": "setcode",
+      "code": "0x75",
+      "fallback": {
+        "match": "contains",
+        "value": "Abyss-"
+      }
+    },
+    {
+      "name": "Aesir",
+      "kind": "setcode",
+      "code": "0x4b",
+      "fallback": {
+        "match": "contains",
+        "value": "Aesir"
+      }
+    },
+    {
+      "name": "Aether",
+      "kind": "setcode",
+      "code": "0xcb",
+      "fallback": {
+        "match": "contains",
+        "value": "Aether"
+      }
+    },
+    {
+      "name": "Alien",
+      "kind": "setcode",
+      "code": "0xc",
+      "fallback": {
+        "match": "contains",
+        "value": "Alien"
+      }
+    },
+    {
+      "name": "Allure Queen",
+      "kind": "setcode",
+      "code": "0x3",
+      "fallback": {
+        "match": "contains",
+        "value": "Allure Queen"
+      }
+    },
+    {
+      "name": "Ally of Justice",
+      "kind": "setcode",
+      "code": "0x1",
+      "aliases": [
+        "allyjustice"
+      ],
+      "fallback": {
+        "match": "contains",
+        "value": "Ally of Justice"
+      }
+    },
+    {
+      "name": "Amazoness",
+      "kind": "setcode",
+      "code": "0x4",
+      "fallback": {
+        "match": "contains",
+        "value": "Amazoness"
+      }
+    },
+    {
+      "name": "Ancient Gear",
+      "kind": "setcode",
+      "code": "0x7",
+      "fallback": {
+        "match": "contains",
+        "value": "Ancient Gear"
+      }
+    },
+    {
+      "name": "Aquaactress",
+      "kind": "setcode",
+      "code": "0xcd",
+      "fallback": {
+        "match": "contains",
+        "value": "Aquaactress"
+      }
+    },
+    {
+      "name": "Aquarium",
+      "kind": "setcode",
+      "code": "0xce",
+      "fallback": {
+        "match": "contains",
+        "value": "Aquarium"
+      }
+    },
+    {
+      "name": "Arcana Force",
+      "kind": "setcode",
+      "code": "0x5",
+      "aliases": [
+        "arcana"
+      ],
+      "fallback": {
+        "match": "contains",
+        "value": "Arcana Force"
+      }
+    },
+    {
+      "name": "Archfiend",
+      "kind": "setcode",
+      "code": "0x45",
+      "fallback": {
+        "match": "contains",
+        "value": "Archfiend"
+      }
+    },
+    {
+      "name": "Aroma",
+      "kind": "setcode",
+      "code": "0xc9",
+      "fallback": {
+        "match": "contains",
+        "value": "Aroma"
+      }
+    },
+    {
+      "name": "Artifact",
+      "kind": "setcode",
+      "code": "0x97",
+      "fallback": {
+        "match": "contains",
+        "value": "Artifact"
+      }
+    },
+    {
+      "name": "Artorigus",
+      "kind": "setcode",
+      "code": "0xa7",
+      "fallback": {
+        "match": "contains",
+        "value": "Artorigus"
+      }
+    },
+    {
+      "name": "Atlantean",
+      "kind": "setcode",
+      "code": "0x77",
+      "fallback": {
+        "match": "contains",
+        "value": "Atlantean"
+      }
+    },
+    {
+      "name": "Bamboo Sword",
+      "kind": "setcode",
+      "code": "0x60",
+      "aliases": [
+        "bamboo"
+      ],
+      "fallback": {
+        "match": "contains",
+        "value": "Bamboo Sword"
+      }
+    },
+    {
+      "name": "Batteryman",
+      "kind": "setcode",
+      "code": "0x28",
+      "fallback": {
+        "match": "contains",
+        "value": "Batteryman"
+      }
+    },
+    {
+      "name": "Battlin' Boxer",
+      "kind": "setcode",
+      "code": "0x1084",
+      "fallback": {
+        "match": "contains",
+        "value": "Battlin' Boxer"
+      }
+    },
+    {
+      "name": "Black Luster Soldier",
+      "kind": "setcode",
+      "code": "0x10cf",
+      "aliases": [
+        "bls"
+      ],
+      "fallback": {
+        "match": "contains",
+        "value": "Black Luster Soldier"
+      }
+    },
+    {
+      "name": "Blackwing",
+      "kind": "setcode",
+      "code": "0x33",
+      "fallback": {
+        "match": "contains",
+        "value": "Blackwing"
+      }
+    },
+    {
+      "name": "Blaze Accelerator",
+      "kind": "setcode",
+      "code": "0xb9",
+      "fallback": {
+        "match": "contains",
+        "value": "Blaze Accelerator"
+      }
+    },
+    {
+      "name": "Blue-Eyes",
+      "kind": "setcode",
+      "code": "0xdd",
+      "fallback": {
+        "match": "contains",
+        "value": "Blue-Eyes"
+      }
+    },
+    {
+      "name": "Bounzer",
+      "kind": "setcode",
+      "code": "0x6b",
+      "fallback": {
+        "match": "contains",
+        "value": "Bounzer"
+      }
+    },
+    {
+      "name": "Bujin",
+      "kind": "setcode",
+      "code": "0x88",
+      "fallback": {
+        "match": "contains",
+        "value": "Bujin"
+      }
+    },
+    {
+      "name": "Bujingi",
+      "kind": "name-fragment",
+      "match": "prefix",
+      "value": "Bujingi ",
+      "reason": "武神器是武神中的卡名子集，没有独立系列码。"
+    },
+    {
+      "name": "Burning Abyss",
+      "kind": "setcode",
+      "code": "0xb1",
+      "fallback": {
+        "match": "contains",
+        "value": "Burning Abyss"
+      }
+    },
+    {
+      "name": "Buster Blader",
+      "kind": "setcode",
+      "code": "0xd7",
+      "fallback": {
+        "match": "contains",
+        "value": "Buster Blader"
+      }
+    },
+    {
+      "name": "Butterspy",
+      "kind": "setcode",
+      "code": "0x6a",
+      "fallback": {
+        "match": "contains",
+        "value": "Butterspy"
+      }
+    },
+    {
+      "name": "Change",
+      "kind": "setcode",
+      "code": "0xa5",
+      "fallback": {
+        "match": "contains",
+        "value": "Change"
+      }
+    },
+    {
+      "name": "Charmer",
+      "kind": "setcode",
+      "code": "0xbf",
+      "fallback": {
+        "match": "contains",
+        "value": "Charmer"
+      }
+    },
+    {
+      "name": "Chronomaly",
+      "kind": "setcode",
+      "code": "0x70",
+      "fallback": {
+        "match": "contains",
+        "value": "Chronomaly"
+      }
+    },
+    {
+      "name": "Chrysalis",
+      "kind": "setcode",
+      "code": "0x1e",
+      "fallback": {
+        "match": "contains",
+        "value": "Chrysalis"
+      }
+    },
+    {
+      "name": "Cloudian",
+      "kind": "setcode",
+      "code": "0x18",
+      "fallback": {
+        "match": "contains",
+        "value": "Cloudian"
+      }
+    },
+    {
+      "name": "Coach",
+      "kind": "name-fragment",
+      "match": "prefix",
+      "value": "Coach ",
+      "reason": "旧环境卡名分组，没有独立的OCG Coach系列码。"
+    },
+    {
+      "name": "Constellar",
+      "kind": "setcode",
+      "code": "0x53",
+      "fallback": {
+        "match": "contains",
+        "value": "Constellar"
+      }
+    },
+    {
+      "name": "Crystal",
+      "kind": "setcode",
+      "code": "0x34",
+      "fallback": {
+        "match": "contains",
+        "value": "Crystal"
+      }
+    },
+    {
+      "name": "Crystal Beast",
+      "kind": "setcode",
+      "code": "0x1034",
+      "fallback": {
+        "match": "contains",
+        "value": "Crystal Beast"
+      }
+    },
+    {
+      "name": "Crystron",
+      "kind": "setcode",
+      "code": "0xea",
+      "fallback": {
+        "match": "contains",
+        "value": "Crystron"
+      }
+    },
+    {
+      "name": "CXyz",
+      "kind": "setcode",
+      "code": "0x1073",
+      "fallback": {
+        "match": "contains",
+        "value": "CXyz"
+      }
+    },
+    {
+      "name": "Cyber Dragon",
+      "kind": "setcode",
+      "code": "0x1093",
+      "fallback": {
+        "match": "contains",
+        "value": "Cyber Dragon"
+      }
+    },
+    {
+      "name": "D/D",
+      "kind": "setcode",
+      "code": "0xaf",
+      "fallback": {
+        "match": "contains",
+        "value": "D/D"
+      }
+    },
+    {
+      "name": "D/D/D",
+      "kind": "setcode",
+      "code": "0x10af",
+      "fallback": {
+        "match": "contains",
+        "value": "D/D/D"
+      }
+    },
+    {
+      "name": "Dante",
+      "kind": "setcode",
+      "code": "0xd5",
+      "fallback": {
+        "match": "contains",
+        "value": "Dante"
+      }
+    },
+    {
+      "name": "Dark Contract",
+      "kind": "setcode",
+      "code": "0xae",
+      "fallback": {
+        "match": "contains",
+        "value": "Dark Contract"
+      }
+    },
+    {
+      "name": "Dark Magician",
+      "kind": "setcode",
+      "code": "0x10a2",
+      "fallback": {
+        "match": "contains",
+        "value": "Dark Magician"
+      }
+    },
+    {
+      "name": "Dark Magician Girl",
+      "kind": "setcode",
+      "code": "0x30a2",
+      "fallback": {
+        "match": "contains",
+        "value": "Dark Magician Girl"
+      }
+    },
+    {
+      "name": "Deskbot",
+      "kind": "setcode",
+      "code": "0xab",
+      "fallback": {
+        "match": "contains",
+        "value": "Deskbot"
+      }
+    },
+    {
+      "name": "Destiny HERO",
+      "kind": "setcode",
+      "code": "0xc008",
+      "fallback": {
+        "match": "contains",
+        "value": "Destiny HERO"
+      }
+    },
+    {
+      "name": "Destruction Sword",
+      "kind": "setcode",
+      "code": "0xd6",
+      "fallback": {
+        "match": "contains",
+        "value": "Destruction Sword"
+      }
+    },
+    {
+      "name": "Dinomist",
+      "kind": "setcode",
+      "code": "0xd8",
+      "fallback": {
+        "match": "contains",
+        "value": "Dinomist"
+      }
+    },
+    {
+      "name": "Djinn",
+      "kind": "setcode",
+      "code": "0x6d",
+      "fallback": {
+        "match": "contains",
+        "value": "Djinn"
+      }
+    },
+    {
+      "name": "Dododo",
+      "kind": "setcode",
+      "code": "0x82",
+      "fallback": {
+        "match": "contains",
+        "value": "Dododo"
+      }
+    },
+    {
+      "name": "Dracoslayer",
+      "kind": "setcode",
+      "code": "0xc7",
+      "fallback": {
+        "match": "contains",
+        "value": "Dracoslayer"
+      }
+    },
+    {
+      "name": "Dracoverlord",
+      "kind": "setcode",
+      "code": "0xda",
+      "fallback": {
+        "match": "contains",
+        "value": "Dracoverlord"
+      }
+    },
+    {
+      "name": "Dragon Ruler",
+      "kind": "setcode",
+      "code": "0x1c4",
+      "fallback": {
+        "match": "contains",
+        "value": "Dragon Ruler"
+      }
+    },
+    {
+      "name": "Dragunity",
+      "kind": "setcode",
+      "code": "0x29",
+      "fallback": {
+        "match": "contains",
+        "value": "Dragunity"
+      }
+    },
+    {
+      "name": "Duston",
+      "kind": "setcode",
+      "code": "0x80",
+      "fallback": {
+        "match": "contains",
+        "value": "Duston"
+      }
+    },
+    {
+      "name": "Earthbound Immortal",
+      "kind": "setcode",
+      "code": "0x1021",
+      "fallback": {
+        "match": "contains",
+        "value": "Earthbound Immortal"
+      }
+    },
+    {
+      "name": "Edge Imp",
+      "kind": "setcode",
+      "code": "0xc3",
+      "fallback": {
+        "match": "contains",
+        "value": "Edge Imp"
+      }
+    },
+    {
+      "name": "Elemental HERO",
+      "kind": "setcode",
+      "code": "0x3008",
+      "aliases": [
+        "elemental"
+      ],
+      "fallback": {
+        "match": "contains",
+        "value": "Elemental HERO"
+      }
+    },
+    {
+      "name": "Empowered Warrior",
+      "kind": "setcode",
+      "code": "0xca",
+      "fallback": {
+        "match": "contains",
+        "value": "Empowered Warrior"
+      }
+    },
+    {
+      "name": "Evilswarm",
+      "kind": "setcode",
+      "code": "0xa",
+      "fallback": {
+        "match": "contains",
+        "value": "Evilswarm"
+      }
+    },
+    {
+      "name": "Evol",
+      "kind": "setcode",
+      "code": "0x4e",
+      "fallback": {
+        "match": "contains",
+        "value": "Evol"
+      }
+    },
+    {
+      "name": "Evolsaur",
+      "kind": "setcode",
+      "code": "0x604e",
+      "fallback": {
+        "match": "contains",
+        "value": "Evolsaur"
+      }
+    },
+    {
+      "name": "Evoltile",
+      "kind": "setcode",
+      "code": "0x304e",
+      "fallback": {
+        "match": "contains",
+        "value": "Evoltile"
+      }
+    },
+    {
+      "name": "Evolzar",
+      "kind": "setcode",
+      "code": "0x504e",
+      "fallback": {
+        "match": "contains",
+        "value": "Evolzar"
+      }
+    },
+    {
+      "name": "Exodia",
+      "kind": "setcode",
+      "code": "0xde",
+      "fallback": {
+        "match": "contains",
+        "value": "Exodia"
+      }
+    },
+    {
+      "name": "Fabled",
+      "kind": "setcode",
+      "code": "0x35",
+      "fallback": {
+        "match": "contains",
+        "value": "Fabled"
+      }
+    },
+    {
+      "name": "Familiar-Possessed",
+      "kind": "setcode",
+      "code": "0x10c0",
+      "fallback": {
+        "match": "contains",
+        "value": "Familiar-Possessed"
+      }
+    },
+    {
+      "name": "Fire Fist",
+      "kind": "setcode",
+      "code": "0x79",
+      "fallback": {
+        "match": "contains",
+        "value": "Fire Fist"
+      }
+    },
+    {
+      "name": "Fire Formation",
+      "kind": "setcode",
+      "code": "0x7c",
+      "fallback": {
+        "match": "contains",
+        "value": "Fire Formation"
+      }
+    },
+    {
+      "name": "Fire King",
+      "kind": "setcode",
+      "code": "0x81",
+      "fallback": {
+        "match": "contains",
+        "value": "Fire King"
+      }
+    },
+    {
+      "name": "Fire King Avatar",
+      "kind": "setcode",
+      "code": "0x1081",
+      "fallback": {
+        "match": "contains",
+        "value": "Fire King Avatar"
+      }
+    },
+    {
+      "name": "Fishborg",
+      "kind": "setcode",
+      "code": "0x96",
+      "fallback": {
+        "match": "contains",
+        "value": "Fishborg"
+      }
+    },
+    {
+      "name": "Flamvell",
+      "kind": "setcode",
+      "code": "0x2c",
+      "fallback": {
+        "match": "contains",
+        "value": "Flamvell"
+      }
+    },
+    {
+      "name": "Fluffal",
+      "kind": "setcode",
+      "code": "0xa9",
+      "fallback": {
+        "match": "contains",
+        "value": "Fluffal"
+      }
+    },
+    {
+      "name": "Forbidden One",
+      "kind": "setcode",
+      "code": "0x40",
+      "fallback": {
+        "match": "contains",
+        "value": "Forbidden One"
+      }
+    },
+    {
+      "name": "Fortune Lady",
+      "kind": "setcode",
+      "code": "0x31",
+      "fallback": {
+        "match": "contains",
+        "value": "Fortune Lady"
+      }
+    },
+    {
+      "name": "Frightfur",
+      "kind": "setcode",
+      "code": "0xad",
+      "fallback": {
+        "match": "contains",
+        "value": "Frightfur"
+      }
+    },
+    {
+      "name": "Frog",
+      "kind": "setcode",
+      "code": "0x12",
+      "fallback": {
+        "match": "contains",
+        "value": "Frog"
+      }
+    },
+    {
+      "name": "Fusion",
+      "kind": "setcode",
+      "code": "0x46",
+      "fallback": {
+        "match": "contains",
+        "value": "Fusion"
+      }
+    },
+    {
+      "name": "Gadget",
+      "kind": "setcode",
+      "code": "0x51",
+      "fallback": {
+        "match": "contains",
+        "value": "Gadget"
+      }
+    },
+    {
+      "name": "Gagaga",
+      "kind": "setcode",
+      "code": "0x54",
+      "fallback": {
+        "match": "contains",
+        "value": "Gagaga"
+      }
+    },
+    {
+      "name": "Gaia the Fierce Knight",
+      "kind": "setcode",
+      "code": "0xbd",
+      "fallback": {
+        "match": "contains",
+        "value": "Gaia the Fierce Knight"
+      },
+      "aliases": [
+        "Gaia The Fierce Knight"
+      ]
+    },
+    {
+      "name": "Galaxy",
+      "kind": "setcode",
+      "code": "0x7b",
+      "fallback": {
+        "match": "contains",
+        "value": "Galaxy"
+      }
+    },
+    {
+      "name": "Galaxy-Eyes",
+      "kind": "setcode",
+      "code": "0x107b",
+      "fallback": {
+        "match": "contains",
+        "value": "Galaxy-Eyes"
+      }
+    },
+    {
+      "name": "Geargia",
+      "kind": "setcode",
+      "code": "0x72",
+      "fallback": {
+        "match": "contains",
+        "value": "Geargia"
+      }
+    },
+    {
+      "name": "Geargiano",
+      "kind": "setcode",
+      "code": "0x1072",
+      "fallback": {
+        "match": "contains",
+        "value": "Geargiano"
+      }
+    },
+    {
+      "name": "Gem-",
+      "kind": "setcode",
+      "code": "0x47",
+      "fallback": {
+        "match": "contains",
+        "value": "Gem-"
+      }
+    },
+    {
+      "name": "Gem-Knight",
+      "kind": "setcode",
+      "code": "0x1047",
+      "aliases": [
+        "gemknight"
+      ],
+      "fallback": {
+        "match": "contains",
+        "value": "Gem-Knight"
+      }
+    },
+    {
+      "name": "Genex",
+      "kind": "setcode",
+      "code": "0x2",
+      "fallback": {
+        "match": "contains",
+        "value": "Genex"
+      }
+    },
+    {
+      "name": "Ghostrick",
+      "kind": "setcode",
+      "code": "0x8d",
+      "fallback": {
+        "match": "contains",
+        "value": "Ghostrick"
+      }
+    },
+    {
+      "name": "Gimmick Puppet",
+      "kind": "setcode",
+      "code": "0x1083",
+      "fallback": {
+        "match": "contains",
+        "value": "Gimmick Puppet"
+      }
+    },
+    {
+      "name": "Gishki",
+      "kind": "setcode",
+      "code": "0x3a",
+      "fallback": {
+        "match": "contains",
+        "value": "Gishki"
+      }
+    },
+    {
+      "name": "Gladiator Beast",
+      "kind": "setcode",
+      "code": "0x1019",
+      "aliases": [
+        "gladiator"
+      ],
+      "fallback": {
+        "match": "contains",
+        "value": "Gladiator Beast"
+      }
+    },
+    {
+      "name": "Goblin",
+      "kind": "setcode",
+      "code": "0xac",
+      "fallback": {
+        "match": "contains",
+        "value": "Goblin"
+      }
+    },
+    {
+      "name": "Gogogo",
+      "kind": "setcode",
+      "code": "0x59",
+      "fallback": {
+        "match": "contains",
+        "value": "Gogogo"
+      }
+    },
+    {
+      "name": "Gorgonic",
+      "kind": "name-fragment",
+      "match": "prefix",
+      "value": "Gorgonic ",
+      "reason": "岩石族卡名分组，没有独立系列码。"
+    },
+    {
+      "name": "Gottoms",
+      "kind": "setcode",
+      "code": "0xb0",
+      "fallback": {
+        "match": "contains",
+        "value": "Gottoms"
+      }
+    },
+    {
+      "name": "Gravekeeper's",
+      "kind": "setcode",
+      "code": "0x2e",
+      "aliases": [
+        "gravekeeper"
+      ],
+      "fallback": {
+        "match": "contains",
+        "value": "Gravekeeper's"
+      }
+    },
+    {
+      "name": "Graydle",
+      "kind": "setcode",
+      "code": "0xd1",
+      "fallback": {
+        "match": "contains",
+        "value": "Graydle"
+      }
+    },
+    {
+      "name": "Gusto",
+      "kind": "setcode",
+      "code": "0x10",
+      "fallback": {
+        "match": "contains",
+        "value": "Gusto"
+      }
+    },
+    {
+      "name": "Harpie",
+      "kind": "setcode",
+      "code": "0x64",
+      "fallback": {
+        "match": "contains",
+        "value": "Harpie"
+      }
+    },
+    {
+      "name": "Hazy",
+      "kind": "setcode",
+      "code": "0x7d",
+      "fallback": {
+        "match": "contains",
+        "value": "Hazy"
+      }
+    },
+    {
+      "name": "Hazy Flame",
+      "kind": "setcode",
+      "code": "0x107d",
+      "fallback": {
+        "match": "contains",
+        "value": "Hazy Flame"
+      }
+    },
+    {
+      "name": "Heraldic Beast",
+      "kind": "setcode",
+      "code": "0x76",
+      "fallback": {
+        "match": "contains",
+        "value": "Heraldic Beast"
+      }
+    },
+    {
+      "name": "HERO",
+      "kind": "setcode",
+      "code": "0x8",
+      "fallback": {
+        "match": "contains",
+        "value": "HERO"
+      }
+    },
+    {
+      "name": "Heroic",
+      "kind": "setcode",
+      "code": "0x6f",
+      "aliases": [
+        "heroic"
+      ],
+      "fallback": {
+        "match": "contains",
+        "value": "Heroic"
+      }
+    },
+    {
+      "name": "Heroic Challenger",
+      "kind": "setcode",
+      "code": "0x106f",
+      "fallback": {
+        "match": "contains",
+        "value": "Heroic Challenger"
+      }
+    },
+    {
+      "name": "Hieratic",
+      "kind": "setcode",
+      "code": "0x69",
+      "fallback": {
+        "match": "contains",
+        "value": "Hieratic"
+      }
+    },
+    {
+      "name": "Ice Barrier",
+      "kind": "setcode",
+      "code": "0x2f",
+      "fallback": {
+        "match": "contains",
+        "value": "Ice Barrier"
+      }
+    },
+    {
+      "name": "Igknight",
+      "kind": "setcode",
+      "code": "0xc8",
+      "fallback": {
+        "match": "contains",
+        "value": "Igknight"
+      }
+    },
+    {
+      "name": "Infernity",
+      "kind": "setcode",
+      "code": "0xb",
+      "fallback": {
+        "match": "contains",
+        "value": "Infernity"
+      }
+    },
+    {
+      "name": "Infernoid",
+      "kind": "setcode",
+      "code": "0xbb",
+      "fallback": {
+        "match": "contains",
+        "value": "Infernoid"
+      }
+    },
+    {
+      "name": "Infestation",
+      "kind": "setcode",
+      "code": "0x65",
+      "fallback": {
+        "match": "contains",
+        "value": "Infestation"
+      }
+    },
+    {
+      "name": "Inmato",
+      "kind": "setcode",
+      "code": "0x5b",
+      "fallback": {
+        "match": "contains",
+        "value": "Inmato"
+      }
+    },
+    {
+      "name": "Inzektor",
+      "kind": "setcode",
+      "code": "0x56",
+      "fallback": {
+        "match": "contains",
+        "value": "Inzektor"
+      }
+    },
+    {
+      "name": "Iron Chain",
+      "kind": "setcode",
+      "code": "0x25",
+      "fallback": {
+        "match": "contains",
+        "value": "Iron Chain"
+      }
+    },
+    {
+      "name": "Jinzo",
+      "kind": "setcode",
+      "code": "0xbc",
+      "fallback": {
+        "match": "contains",
+        "value": "Jinzo"
+      }
+    },
+    {
+      "name": "Junk",
+      "kind": "setcode",
+      "code": "0x43",
+      "fallback": {
+        "match": "contains",
+        "value": "Junk"
+      }
+    },
+    {
+      "name": "Jurrac",
+      "kind": "setcode",
+      "code": "0x22",
+      "fallback": {
+        "match": "contains",
+        "value": "Jurrac"
+      }
+    },
+    {
+      "name": "Karakuri",
+      "kind": "setcode",
+      "code": "0x11",
+      "fallback": {
+        "match": "contains",
+        "value": "Karakuri"
+      }
+    },
+    {
+      "name": "Koa'ki Meiru",
+      "kind": "setcode",
+      "code": "0x1d",
+      "fallback": {
+        "match": "contains",
+        "value": "Koa'ki Meiru"
+      }
+    },
+    {
+      "name": "Kuriboh",
+      "kind": "setcode",
+      "code": "0xa4",
+      "fallback": {
+        "match": "contains",
+        "value": "Kuriboh"
+      }
+    },
+    {
+      "name": "Laundsallyn",
+      "kind": "setcode",
+      "code": "0xa8",
+      "fallback": {
+        "match": "contains",
+        "value": "Laundsallyn"
+      }
+    },
+    {
+      "name": "Laval",
+      "kind": "setcode",
+      "code": "0x39",
+      "fallback": {
+        "match": "contains",
+        "value": "Laval"
+      }
+    },
+    {
+      "name": "Legendary Dragon",
+      "kind": "setcode",
+      "code": "0xa1",
+      "fallback": {
+        "match": "contains",
+        "value": "Legendary Dragon"
+      }
+    },
+    {
+      "name": "Legendary Knight",
+      "kind": "setcode",
+      "code": "0xa0",
+      "fallback": {
+        "match": "contains",
+        "value": "Legendary Knight"
+      }
+    },
+    {
+      "name": "Lightsworn",
+      "kind": "setcode",
+      "code": "0x38",
+      "fallback": {
+        "match": "contains",
+        "value": "Lightsworn"
+      }
+    },
+    {
+      "name": "lswarm",
+      "kind": "setcode",
+      "code": "0xa",
+      "fallback": {
+        "match": "contains",
+        "value": "lswarm"
+      }
+    },
+    {
+      "name": "Machina",
+      "kind": "setcode",
+      "code": "0x36",
+      "fallback": {
+        "match": "contains",
+        "value": "Machina"
+      }
+    },
+    {
+      "name": "Madolche",
+      "kind": "setcode",
+      "code": "0x71",
+      "fallback": {
+        "match": "contains",
+        "value": "Madolche"
+      }
+    },
+    {
+      "name": "Magician",
+      "kind": "setcode",
+      "code": "0x98",
+      "fallback": {
+        "match": "contains",
+        "value": "Magician"
+      }
+    },
+    {
+      "name": "Majespecter",
+      "kind": "setcode",
+      "code": "0xd0",
+      "fallback": {
+        "match": "contains",
+        "value": "Majespecter"
+      }
+    },
+    {
+      "name": "Majestic",
+      "kind": "setcode",
+      "code": "0x3f",
+      "fallback": {
+        "match": "contains",
+        "value": "Majestic"
+      }
+    },
+    {
+      "name": "Malefic",
+      "kind": "setcode",
+      "code": "0x23",
+      "fallback": {
+        "match": "contains",
+        "value": "Malefic"
+      }
+    },
+    {
+      "name": "Malicevorous",
+      "kind": "setcode",
+      "code": "0x8b",
+      "fallback": {
+        "match": "contains",
+        "value": "Malicevorous"
+      }
+    },
+    {
+      "name": "Masked HERO",
+      "kind": "setcode",
+      "code": "0xa008",
+      "aliases": [
+        "masked"
+      ],
+      "fallback": {
+        "match": "contains",
+        "value": "Masked HERO"
+      }
+    },
+    {
+      "name": "Mecha Phantom Beast",
+      "kind": "setcode",
+      "code": "0x101b",
+      "aliases": [
+        "mecha"
+      ],
+      "fallback": {
+        "match": "contains",
+        "value": "Mecha Phantom Beast"
+      }
+    },
+    {
+      "name": "Meklord",
+      "kind": "setcode",
+      "code": "0x13",
+      "fallback": {
+        "match": "contains",
+        "value": "Meklord"
+      }
+    },
+    {
+      "name": "Meklord Army",
+      "kind": "setcode",
+      "code": "0x6013",
+      "fallback": {
+        "match": "contains",
+        "value": "Meklord Army"
+      }
+    },
+    {
+      "name": "Meklord Emperor",
+      "kind": "setcode",
+      "code": "0x3013",
+      "fallback": {
+        "match": "contains",
+        "value": "Meklord Emperor"
+      }
+    },
+    {
+      "name": "Melodious",
+      "kind": "setcode",
+      "code": "0x9b",
+      "fallback": {
+        "match": "contains",
+        "value": "Melodious"
+      }
+    },
+    {
+      "name": "Melodious Maestra",
+      "kind": "setcode",
+      "code": "0x109b",
+      "fallback": {
+        "match": "contains",
+        "value": "Melodious Maestra"
+      }
+    },
+    {
+      "name": "Mermail",
+      "kind": "setcode",
+      "code": "0x74",
+      "fallback": {
+        "match": "contains",
+        "value": "Mermail"
+      }
+    },
+    {
+      "name": "Mist Valley",
+      "kind": "setcode",
+      "code": "0x37",
+      "fallback": {
+        "match": "contains",
+        "value": "Mist Valley"
+      }
+    },
+    {
+      "name": "Monarch",
+      "kind": "setcode",
+      "code": "0xbe",
+      "fallback": {
+        "match": "contains",
+        "value": "Monarch"
+      }
+    },
+    {
+      "name": "Morphtronic",
+      "kind": "setcode",
+      "code": "0x26",
+      "fallback": {
+        "match": "contains",
+        "value": "Morphtronic"
+      }
+    },
+    {
+      "name": "Mythic",
+      "kind": "name-fragment",
+      "match": "prefix",
+      "value": "Mythic ",
+      "reason": "Mythic Tree/Water Dragon的卡名分组，不是Mythical Beast系列。"
+    },
+    {
+      "name": "Naturia",
+      "kind": "setcode",
+      "code": "0x2a",
+      "fallback": {
+        "match": "contains",
+        "value": "Naturia"
+      }
+    },
+    {
+      "name": "Nekroz",
+      "kind": "setcode",
+      "code": "0xb4",
+      "fallback": {
+        "match": "contains",
+        "value": "Nekroz"
+      }
+    },
+    {
+      "name": "Neo Space",
+      "kind": "name-fragment",
+      "match": "contains",
+      "value": "Neo Space",
+      "reason": "Divine Neos素材文本中的卡名片段；Neos系列本身另有0x9。"
+    },
+    {
+      "name": "Neo-Spacian",
+      "kind": "setcode",
+      "code": "0x1f",
+      "fallback": {
+        "match": "contains",
+        "value": "Neo-Spacian"
+      }
+    },
+    {
+      "name": "Neos",
+      "kind": "setcode",
+      "code": "0x9",
+      "fallback": {
+        "match": "contains",
+        "value": "Neos"
+      }
+    },
+    {
+      "name": "Nimble",
+      "kind": "setcode",
+      "code": "0x78",
+      "fallback": {
+        "match": "contains",
+        "value": "Nimble"
+      }
+    },
+    {
+      "name": "Ninja",
+      "kind": "setcode",
+      "code": "0x2b",
+      "fallback": {
+        "match": "contains",
+        "value": "Ninja"
+      }
+    },
+    {
+      "name": "Ninjitsu Art",
+      "kind": "setcode",
+      "code": "0x61",
+      "fallback": {
+        "match": "contains",
+        "value": "Ninjitsu Art"
+      }
+    },
+    {
+      "name": "Nitro",
+      "kind": "name-fragment",
+      "match": "prefix",
+      "value": "Nitro ",
+      "reason": "Nitro Synchron素材附加效果指定的同调怪兽卡名片段。"
+    },
+    {
+      "name": "Noble Arms",
+      "kind": "setcode",
+      "code": "0x207a",
+      "fallback": {
+        "match": "contains",
+        "value": "Noble Arms"
+      }
+    },
+    {
+      "name": "Noble Knight",
+      "kind": "setcode",
+      "code": "0x107a",
+      "fallback": {
+        "match": "contains",
+        "value": "Noble Knight"
+      }
+    },
+    {
+      "name": "Nordic",
+      "kind": "setcode",
+      "code": "0x42",
+      "fallback": {
+        "match": "contains",
+        "value": "Nordic"
+      }
+    },
+    {
+      "name": "Nordic Alfar",
+      "kind": "setcode",
+      "code": "0xa042",
+      "fallback": {
+        "match": "contains",
+        "value": "Nordic Alfar"
+      }
+    },
+    {
+      "name": "Nordic Ascendant",
+      "kind": "setcode",
+      "code": "0x3042",
+      "fallback": {
+        "match": "contains",
+        "value": "Nordic Ascendant"
+      }
+    },
+    {
+      "name": "Nordic Beast",
+      "kind": "setcode",
+      "code": "0x6042",
+      "fallback": {
+        "match": "contains",
+        "value": "Nordic Beast"
+      }
+    },
+    {
+      "name": "Nordic Relic",
+      "kind": "setcode",
+      "code": "0x5042",
+      "fallback": {
+        "match": "contains",
+        "value": "Nordic Relic"
+      }
+    },
+    {
+      "name": "Number",
+      "kind": "setcode",
+      "code": "0x48",
+      "fallback": {
+        "match": "contains",
+        "value": "Number"
+      }
+    },
+    {
+      "name": "Obelisk Force",
+      "kind": "name-fragment",
+      "match": "prefix",
+      "value": "Obelisk Force ",
+      "reason": "旧分册预留的卡名分组，当前卡池没有成员。"
+    },
+    {
+      "name": "Odd-Eyes",
+      "kind": "setcode",
+      "code": "0x99",
+      "fallback": {
+        "match": "contains",
+        "value": "Odd-Eyes"
+      }
+    },
+    {
+      "name": "Ojama",
+      "kind": "setcode",
+      "code": "0xf",
+      "fallback": {
+        "match": "contains",
+        "value": "Ojama"
+      }
+    },
+    {
+      "name": "Outer Entity",
+      "kind": "setcode",
+      "code": "0xb6",
+      "fallback": {
+        "match": "contains",
+        "value": "Outer Entity"
+      }
+    },
+    {
+      "name": "Penguin",
+      "kind": "setcode",
+      "code": "0x5a",
+      "fallback": {
+        "match": "contains",
+        "value": "Penguin"
+      }
+    },
+    {
+      "name": "Performage",
+      "kind": "setcode",
+      "code": "0xc6",
+      "fallback": {
+        "match": "contains",
+        "value": "Performage"
+      }
+    },
+    {
+      "name": "Performapal",
+      "kind": "setcode",
+      "code": "0x9f",
+      "fallback": {
+        "match": "contains",
+        "value": "Performapal"
+      }
+    },
+    {
+      "name": "Phantom Beast",
+      "kind": "setcode",
+      "code": "0x1b",
+      "fallback": {
+        "match": "contains",
+        "value": "Phantom Beast"
+      }
+    },
+    {
+      "name": "Phantom Knights",
+      "kind": "setcode",
+      "code": "0xdb",
+      "fallback": {
+        "match": "contains",
+        "value": "Phantom Knights"
+      }
+    },
+    {
+      "name": "Photon",
+      "kind": "setcode",
+      "code": "0x55",
+      "fallback": {
+        "match": "contains",
+        "value": "Photon"
+      }
+    },
+    {
+      "name": "Polymerization",
+      "kind": "setcode",
+      "code": "0x46",
+      "fallback": {
+        "match": "contains",
+        "value": "Polymerization"
+      }
+    },
+    {
+      "name": "Power Tool",
+      "kind": "setcode",
+      "code": "0xc2",
+      "fallback": {
+        "match": "contains",
+        "value": "Power Tool"
+      }
+    },
+    {
+      "name": "Prediction Princess",
+      "kind": "setcode",
+      "code": "0xcc",
+      "fallback": {
+        "match": "contains",
+        "value": "Prediction Princess"
+      }
+    },
+    {
+      "name": "Prophecy",
+      "kind": "setcode",
+      "code": "0x6e",
+      "fallback": {
+        "match": "contains",
+        "value": "Prophecy"
+      }
+    },
+    {
+      "name": "PSY-Frame",
+      "kind": "setcode",
+      "code": "0xc1",
+      "fallback": {
+        "match": "contains",
+        "value": "PSY-Frame"
+      }
+    },
+    {
+      "name": "Psychic",
+      "kind": "race",
+      "race": "念动力族",
+      "reason": "旧编辑器的念动力族分组，不是OCG系列。"
+    },
+    {
+      "name": "Qli",
+      "kind": "setcode",
+      "code": "0xaa",
+      "fallback": {
+        "match": "contains",
+        "value": "Qli"
+      },
+      "aliases": [
+        "qliphort"
+      ]
+    },
+    {
+      "name": "R-Genex",
+      "kind": "setcode",
+      "code": "0x1002",
+      "fallback": {
+        "match": "contains",
+        "value": "R-Genex"
+      }
+    },
+    {
+      "name": "Raidraptor",
+      "kind": "setcode",
+      "code": "0xba",
+      "fallback": {
+        "match": "contains",
+        "value": "Raidraptor"
+      }
+    },
+    {
+      "name": "Rank-Up-Magic",
+      "kind": "setcode",
+      "code": "0x95",
+      "fallback": {
+        "match": "contains",
+        "value": "Rank-Up-Magic"
+      }
+    },
+    {
+      "name": "Reactor",
+      "kind": "setcode",
+      "code": "0x63",
+      "fallback": {
+        "match": "contains",
+        "value": "Reactor"
+      }
+    },
+    {
+      "name": "Red Dragon Archfiend",
+      "kind": "setcode",
+      "code": "0x1045",
+      "fallback": {
+        "match": "contains",
+        "value": "Red Dragon Archfiend"
+      }
+    },
+    {
+      "name": "Red-Eyes",
+      "kind": "setcode",
+      "code": "0x3b",
+      "fallback": {
+        "match": "contains",
+        "value": "Red-Eyes"
+      }
+    },
+    {
+      "name": "Reptilianne",
+      "kind": "setcode",
+      "code": "0x3c",
+      "fallback": {
+        "match": "contains",
+        "value": "Reptilianne"
+      }
+    },
+    {
+      "name": "Resonator",
+      "kind": "setcode",
+      "code": "0x57",
+      "fallback": {
+        "match": "contains",
+        "value": "Resonator"
+      }
+    },
+    {
+      "name": "Ritual Beast",
+      "kind": "setcode",
+      "code": "0xb5",
+      "fallback": {
+        "match": "contains",
+        "value": "Ritual Beast"
+      }
+    },
+    {
+      "name": "Ritual Beast Tamer",
+      "kind": "setcode",
+      "code": "0x10b5",
+      "fallback": {
+        "match": "contains",
+        "value": "Ritual Beast Tamer"
+      }
+    },
+    {
+      "name": "Ritual Beast Ulti",
+      "kind": "setcode",
+      "code": "0x40b5",
+      "fallback": {
+        "match": "contains",
+        "value": "Ritual Beast Ulti"
+      }
+    },
+    {
+      "name": "roid",
+      "kind": "setcode",
+      "code": "0x16",
+      "fallback": {
+        "match": "contains",
+        "value": "roid"
+      }
+    },
+    {
+      "name": "Saber",
+      "kind": "setcode",
+      "code": "0xd",
+      "fallback": {
+        "match": "contains",
+        "value": "Saber"
+      }
+    },
+    {
+      "name": "Scrap",
+      "kind": "setcode",
+      "code": "0x24",
+      "fallback": {
+        "match": "contains",
+        "value": "Scrap"
+      }
+    },
+    {
+      "name": "Shaddoll",
+      "kind": "setcode",
+      "code": "0x9d",
+      "fallback": {
+        "match": "contains",
+        "value": "Shaddoll"
+      }
+    },
+    {
+      "name": "Shien",
+      "kind": "setcode",
+      "code": "0x20",
+      "fallback": {
+        "match": "contains",
+        "value": "Shien"
+      }
+    },
+    {
+      "name": "Shiranui",
+      "kind": "setcode",
+      "code": "0xd9",
+      "fallback": {
+        "match": "contains",
+        "value": "Shiranui"
+      }
+    },
+    {
+      "name": "Six Samurai",
+      "kind": "setcode",
+      "code": "0x103d",
+      "fallback": {
+        "match": "contains",
+        "value": "Six Samurai"
+      }
+    },
+    {
+      "name": "Speedroid",
+      "kind": "setcode",
+      "code": "0x2016",
+      "fallback": {
+        "match": "contains",
+        "value": "Speedroid"
+      }
+    },
+    {
+      "name": "Spellbook",
+      "kind": "setcode",
+      "code": "0x106e",
+      "fallback": {
+        "match": "contains",
+        "value": "Spellbook"
+      }
+    },
+    {
+      "name": "Spiritual Beast",
+      "kind": "setcode",
+      "code": "0x20b5",
+      "fallback": {
+        "match": "contains",
+        "value": "Spiritual Beast"
+      }
+    },
+    {
+      "name": "Star Seraph",
+      "kind": "setcode",
+      "code": "0x86",
+      "fallback": {
+        "match": "contains",
+        "value": "Star Seraph"
+      }
+    },
+    {
+      "name": "Stardust",
+      "kind": "setcode",
+      "code": "0xa3",
+      "fallback": {
+        "match": "contains",
+        "value": "Stardust"
+      }
+    },
+    {
+      "name": "Steelswarm",
+      "kind": "setcode",
+      "code": "0x100a",
+      "fallback": {
+        "match": "contains",
+        "value": "Steelswarm"
+      }
+    },
+    {
+      "name": "Stellarknight",
+      "kind": "setcode",
+      "code": "0x109c",
+      "fallback": {
+        "match": "contains",
+        "value": "Stellarknight"
+      }
+    },
+    {
+      "name": "Super Defense Robot",
+      "kind": "setcode",
+      "code": "0x85",
+      "fallback": {
+        "match": "contains",
+        "value": "Super Defense Robot"
+      }
+    },
+    {
+      "name": "Super Quant",
+      "kind": "setcode",
+      "code": "0xdc",
+      "fallback": {
+        "match": "contains",
+        "value": "Super Quant"
+      }
+    },
+    {
+      "name": "Super Quantal Mech Beast",
+      "kind": "setcode",
+      "code": "0x20dc",
+      "fallback": {
+        "match": "contains",
+        "value": "Super Quantal Mech Beast"
+      }
+    },
+    {
+      "name": "Super Quantum",
+      "kind": "setcode",
+      "code": "0x10dc",
+      "fallback": {
+        "match": "contains",
+        "value": "Super Quantum"
+      }
+    },
+    {
+      "name": "Superheavy Samurai",
+      "kind": "setcode",
+      "code": "0x9a",
+      "fallback": {
+        "match": "contains",
+        "value": "Superheavy Samurai"
+      }
+    },
+    {
+      "name": "Sylvan",
+      "kind": "setcode",
+      "code": "0x90",
+      "fallback": {
+        "match": "contains",
+        "value": "Sylvan"
+      }
+    },
+    {
+      "name": "Symphonic Warrior",
+      "kind": "setcode",
+      "code": "0x1066",
+      "fallback": {
+        "match": "contains",
+        "value": "Symphonic Warrior"
+      }
+    },
+    {
+      "name": "Synchron",
+      "kind": "setcode",
+      "code": "0x1017",
+      "fallback": {
+        "match": "contains",
+        "value": "Synchron"
+      }
+    },
+    {
+      "name": "T.G.",
+      "kind": "setcode",
+      "code": "0x27",
+      "fallback": {
+        "match": "contains",
+        "value": "T.G."
+      }
+    },
+    {
+      "name": "Tearlaments",
+      "kind": "setcode",
+      "code": "0x181",
+      "fallback": {
+        "match": "contains",
+        "value": "Tearlaments"
+      }
+    },
+    {
+      "name": "tellarknight",
+      "kind": "setcode",
+      "code": "0x9c",
+      "fallback": {
+        "match": "contains",
+        "value": "tellarknight"
+      }
+    },
+    {
+      "name": "The Agent",
+      "kind": "setcode",
+      "code": "0x44",
+      "fallback": {
+        "match": "contains",
+        "value": "The Agent"
+      }
+    },
+    {
+      "name": "The Phantom Knights",
+      "kind": "setcode",
+      "code": "0x10db",
+      "fallback": {
+        "match": "contains",
+        "value": "The Phantom Knights"
+      }
+    },
+    {
+      "name": "Traptrix",
+      "kind": "setcode",
+      "code": "0x108a",
+      "fallback": {
+        "match": "contains",
+        "value": "Traptrix"
+      }
+    },
+    {
+      "name": "U.A.",
+      "kind": "setcode",
+      "code": "0xb2",
+      "fallback": {
+        "match": "contains",
+        "value": "U.A."
+      }
+    },
+    {
+      "name": "Ultimate Crystal",
+      "kind": "setcode",
+      "code": "0x2034",
+      "fallback": {
+        "match": "contains",
+        "value": "Ultimate Crystal"
+      }
+    },
+    {
+      "name": "Umbral Horror",
+      "kind": "setcode",
+      "code": "0x87",
+      "fallback": {
+        "match": "contains",
+        "value": "Umbral Horror"
+      }
+    },
+    {
+      "name": "Utopia",
+      "kind": "setcode",
+      "code": "0x107f",
+      "fallback": {
+        "match": "contains",
+        "value": "Utopia"
+      }
+    },
+    {
+      "name": "Vampire",
+      "kind": "setcode",
+      "code": "0x8e",
+      "fallback": {
+        "match": "contains",
+        "value": "Vampire"
+      }
+    },
+    {
+      "name": "Vehicroid",
+      "kind": "setcode",
+      "code": "0x1016",
+      "fallback": {
+        "match": "contains",
+        "value": "Vehicroid"
+      }
+    },
+    {
+      "name": "Venom",
+      "kind": "setcode",
+      "code": "0x50",
+      "fallback": {
+        "match": "contains",
+        "value": "Venom"
+      }
+    },
+    {
+      "name": "Void",
+      "kind": "setcode",
+      "code": "0xc5",
+      "fallback": {
+        "match": "contains",
+        "value": "Void"
+      }
+    },
+    {
+      "name": "Volcanic",
+      "kind": "setcode",
+      "code": "0x32",
+      "fallback": {
+        "match": "contains",
+        "value": "Volcanic"
+      }
+    },
+    {
+      "name": "Vylon",
+      "kind": "setcode",
+      "code": "0x30",
+      "fallback": {
+        "match": "contains",
+        "value": "Vylon"
+      }
+    },
+    {
+      "name": "Warrior",
+      "kind": "setcode",
+      "code": "0x66",
+      "fallback": {
+        "match": "contains",
+        "value": "Warrior"
+      }
+    },
+    {
+      "name": "Watt",
+      "kind": "setcode",
+      "code": "0xe",
+      "fallback": {
+        "match": "contains",
+        "value": "Watt"
+      }
+    },
+    {
+      "name": "Wind-Up",
+      "kind": "setcode",
+      "code": "0x58",
+      "fallback": {
+        "match": "contains",
+        "value": "Wind-Up"
+      }
+    },
+    {
+      "name": "Winged Kuriboh",
+      "kind": "setcode",
+      "code": "0x10a4",
+      "fallback": {
+        "match": "contains",
+        "value": "Winged Kuriboh"
+      }
+    },
+    {
+      "name": "Worm",
+      "kind": "setcode",
+      "code": "0x3e",
+      "fallback": {
+        "match": "contains",
+        "value": "Worm"
+      }
+    },
+    {
+      "name": "X-Saber",
+      "kind": "setcode",
+      "code": "0x100d",
+      "fallback": {
+        "match": "contains",
+        "value": "X-Saber"
+      }
+    },
+    {
+      "name": "Xyz",
+      "kind": "setcode",
+      "code": "0x73",
+      "fallback": {
+        "match": "contains",
+        "value": "Xyz"
+      }
+    },
+    {
+      "name": "Yang Zing",
+      "kind": "setcode",
+      "code": "0x9e",
+      "aliases": [
+        "yangzing"
+      ],
+      "fallback": {
+        "match": "contains",
+        "value": "Yang Zing"
+      }
+    },
+    {
+      "name": "Yosenju",
+      "kind": "setcode",
+      "code": "0xb3",
+      "fallback": {
+        "match": "contains",
+        "value": "Yosenju"
+      }
+    },
+    {
+      "name": "Zefra",
+      "kind": "setcode",
+      "code": "0xc4",
+      "fallback": {
+        "match": "contains",
+        "value": "Zefra"
+      }
+    },
+    {
+      "name": "Zubaba",
+      "kind": "setcode",
+      "code": "0x8f",
+      "fallback": {
+        "match": "contains",
+        "value": "Zubaba"
+      }
+    },
+    {
+      "name": "ZW -",
+      "kind": "setcode",
+      "code": "0x107e",
+      "fallback": {
+        "match": "contains",
+        "value": "ZW -"
+      }
+    },
+    {
+      "name": "Guardian",
+      "kind": "setcode",
+      "code": "0x52",
+      "fallback": {
+        "match": "contains",
+        "value": "Guardian"
+      }
+    },
+    {
+      "name": "Dark Scorpion",
+      "kind": "setcode",
+      "code": "0x1a",
+      "fallback": {
+        "match": "contains",
+        "value": "Dark Scorpion"
+      }
+    },
+    {
+      "name": "Cyber",
+      "kind": "setcode",
+      "code": "0x93",
+      "fallback": {
+        "match": "contains",
+        "value": "Cyber"
+      }
+    },
+    {
+      "name": "Hole",
+      "kind": "setcode",
+      "code": "0x89",
+      "fallback": {
+        "match": "contains",
+        "value": "Hole"
+      }
+    },
+    {
+      "name": "Trap Hole",
+      "kind": "setcode",
+      "code": "0x4c",
+      "fallback": {
+        "match": "contains",
+        "value": "Trap Hole"
+      }
+    },
+    {
+      "name": "LV",
+      "kind": "setcode",
+      "code": "0x41",
+      "fallback": {
+        "match": "contains",
+        "value": "LV"
+      }
+    },
+    {
+      "name": "B.E.S.",
+      "kind": "setcode",
+      "code": "0x15",
+      "fallback": {
+        "match": "contains",
+        "value": "B.E.S."
+      }
+    },
+    {
+      "name": "Sphinx",
+      "kind": "name-fragment",
+      "match": "contains",
+      "value": "Sphinx",
+      "reason": "守护神 艾克佐德指定的卡名片段；固定数据库没有独立系列码。"
+    },
+    {
+      "name": "Necrovalley",
+      "kind": "setcode",
+      "code": "0x91",
+      "fallback": {
+        "match": "contains",
+        "value": "Necrovalley"
+      }
+    },
+    {
+      "name": "Dark World",
+      "kind": "setcode",
+      "code": "0x6",
+      "fallback": {
+        "match": "contains",
+        "value": "Dark World"
+      }
+    },
+    {
+      "name": "Chaos",
+      "kind": "setcode",
+      "code": "0xcf",
+      "fallback": {
+        "match": "contains",
+        "value": "Chaos"
+      }
+    },
+    {
+      "name": "Horus the Black Flame Dragon",
+      "kind": "setcode",
+      "code": "0x119d",
+      "fallback": {
+        "match": "contains",
+        "value": "Horus the Black Flame Dragon"
+      }
+    },
+    {
+      "name": "Heraldry",
+      "kind": "setcode",
+      "code": "0x92",
+      "fallback": {
+        "match": "contains",
+        "value": "Heraldry"
+      }
+    },
+    {
+      "name": "Chaos Number",
+      "kind": "setcode",
+      "code": "0x1048",
+      "fallback": {
+        "match": "contains",
+        "value": "Chaos Number"
+      }
+    },
+    {
+      "name": "Sprout",
+      "kind": "setcode",
+      "code": "0xa6",
+      "fallback": {
+        "match": "contains",
+        "value": "Sprout"
+      }
+    },
+    {
+      "name": "PSY-Framegear",
+      "kind": "setcode",
+      "code": "0x10c1",
+      "fallback": {
+        "match": "contains",
+        "value": "PSY-Framegear"
+      }
+    },
+    {
+      "name": "Spirit Message",
+      "kind": "setcode",
+      "code": "0x1c",
+      "fallback": {
+        "match": "contains",
+        "value": "Spirit Message"
+      }
+    },
+    {
+      "name": "Galaxy-Eyes Tachyon Dragon",
+      "kind": "setcode",
+      "code": "0x307b",
+      "fallback": {
+        "match": "contains",
+        "value": "Galaxy-Eyes Tachyon Dragon"
+      }
+    },
+    {
+      "name": "Toon",
+      "kind": "setcode",
+      "code": "0x62",
+      "fallback": {
+        "match": "contains",
+        "value": "Toon"
+      }
+    }
+  ]
+}

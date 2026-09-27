@@ -2,7 +2,7 @@
   'use strict';
   const E=root.DuelEffects,D=root.DuelData,H=E.H,{CARDS,isMonster}=D;
   const {source,self,first,args,group,customGroup,deck,grave,hand,monsters,specialable,once}=H;
-  const tear=c=>!!CARDS[c.id].tearlaments,tearMonster=c=>tear(c)&&isMonster(CARDS[c.id]),tearTrap=c=>tear(c)&&CARDS[c.id].type==='trap';
+  const tear=c=>D.inArchetype(c,'Tearlaments'),tearMonster=c=>tear(c)&&isMonster(CARDS[c.id]),tearTrap=c=>tear(c)&&CARDS[c.id].type==='trap';
   const visas=c=>c.id==='visas-starfrost',controller=(e,p)=>monsters(e,p,m=>m.faceUp&&(tearMonster(m)||visas(m))).length>0;
   const sameSource=(e,c,zone)=>{const f=source(e,c);return f&&f.zone===zone&&(f.card.generation||0)===c.source.generation?f:null;};
   const canMove=(e,c,m)=>{const f=e.find(m.uid);return f&&(!(H.fieldZone(f.zone)||['spells','fieldSpell'].includes(f.zone))||!e.unaffected(m,c.source));};
@@ -131,13 +131,13 @@
       const same=e.monsters(c.owner).some(m=>m.id===d.id&&m.faceUp);
       return (same?0:7000)+({'tear-kitkallos':!e.wasUsed(c.owner,f.card,'search-send')?18000:7000,'tear-rulkallos':14500,'tear-kaleido-heart':e.field(1-c.owner).length?16000:12500}[d.id]||d.atk||0);
     }
-    if(['tear-send','send-deck'].includes(role)&&d.tearlaments){
+    if(['tear-send','send-deck'].includes(role)&&D.inArchetype(d,'Tearlaments')){
       if(['tear-scheiren','tear-havnis','tear-merrli'].includes(d.id))return e.wasUsed(c.owner,f.card,'fusion')?800:17000;
       if(d.id==='tear-kitkallos')return e.wasUsed(c.owner,f.card,'mill-five')?500:19000;
       return ({'tear-reinoheart':9500,'tear-kashtira':14500,'tear-scream':11000,'tear-sulliek':10500,'tear-heartbeat':6000,'tear-grief':2000,'tear-cryme':2000,'tear-metanoise':7000}[d.id]||4000);
     }
     if(role==='tear-send')return -e.cardUtility(f.card,c.owner);
-    if(['tear-search','search'].includes(role)&&d.tearlaments){
+    if(['tear-search','search'].includes(role)&&D.inArchetype(d,'Tearlaments')){
       const have=p.hand.some(m=>m.id===d.id)||e.field(c.owner).some(m=>m.id===d.id);
       return (have?-5000:0)+({'tear-merrli':11000,'tear-scheiren':15000,'tear-reinoheart':e.state.normalUsed?7000:16000,'tear-havnis':12000,'tear-kashtira':12500,'tear-sulliek':14000,'tear-cryme':11500,'tear-scream':13000}[d.id]||6000);
     }

@@ -1,10 +1,10 @@
 (function(root){
  'use strict';
  const X=root.Duel2004,{E,D,H,C,I,is,mark,A,Q,R,allM,allS,monster,face,ownM,foeM,g,first,args,hand,deck,grave,pay,src,active,ctx,extend,rule,field,has,guard,revive,recruit,token,cp,normal}=X,{CARDS}=D;
- const hero=m=>!!m&&(CARDS[m.id].elemental||CARDS[m.id].officialName.startsWith('Elemental HERO'));
- const darkWorld=m=>!!m&&CARDS[m.id].officialName.includes('Dark World'),gear=m=>!!m&&CARDS[m.id].officialName.startsWith('Ancient Gear'),machina=m=>!!m&&CARDS[m.id].officialName.startsWith('Machina '),batteryman=m=>!!m&&CARDS[m.id].officialName.startsWith('Batteryman');
+ const hero=m=>D.inArchetype(m,'Elemental HERO');
+ const darkWorld=m=>!!m&&D.inArchetype(m,'Dark World'),gear=m=>!!m&&D.inArchetype(CARDS[m.id],"Ancient Gear"),machina=m=>!!m&&D.inArchetype(CARDS[m.id],"Machina"),batteryman=m=>!!m&&D.inArchetype(CARDS[m.id],"Batteryman");
  D.families.darkworld='暗黑界';D.families.ancientgear='古代机械';D.families.machina='机甲';D.families.charmer='灵使';D.families.batteryman='电池人';
- for(const c of D.CARD_LIST){if(hero(c)){c.elemental=true;c.families=[...new Set([...(c.families||[]),'hero'])];}for(const [family,match] of [['darkworld',darkWorld(c)],['ancientgear',gear(c)],['machina',machina(c)],['batteryman',batteryman(c)],['charmer',/Charmer|Familiar-Possessed/.test(c.officialName)]])if(match)c.families=[...new Set([...(c.families||[]),family])];}
+ for(const c of D.CARD_LIST){if(hero(c)){c.elemental=true;c.families=[...new Set([...(c.families||[]),'hero'])];}for(const [family,match] of [['darkworld',darkWorld(c)],['ancientgear',gear(c)],['machina',machina(c)],['batteryman',batteryman(c)],['charmer',D.inArchetype(c,'Charmer')||D.inArchetype(c,'Familiar-Possessed')]])if(match)c.families=[...new Set([...(c.families||[]),family])];}
  for(const c of D.CARD_LIST.filter(c=>c.releaseYear===2005&&c.type==='fusion')){if(/Must be Fusion Summoned/.test(c.originalDescription))c.fusionOnly=true;if(/only be (?:done|conducted) with the above/.test(c.originalDescription))c.fusionExact=true;}
  token('2005-fluff-token','绵毛衍生物','Fluff Token',1,0,0,'风','植物族');token('2005-phantasm-token','幻魔衍生物','Phantasm Token',1,1000,1000,'暗','恶魔族');token('2005-block-token','积木衍生物','Block Token',4,1000,1500,'地','岩石族');
  const multi=m=>is(m,'Elemental Mistress Doriado')||is(m,'Elemental HERO Electrum');

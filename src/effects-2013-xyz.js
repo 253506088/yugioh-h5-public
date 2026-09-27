@@ -46,7 +46,7 @@
  R('Number 107: Galaxy-Eyes Tachyon Dragon','era-tachyon',{zones:['extraMonster','monsters'],label:C('Number 107: Galaxy-Eyes Tachyon Dragon').name,once:H.once('tachyon'),inputs:(e,c)=>[H.detachInput(e,c,1)],cost:(e,c)=>spend(e,c),resolve:(e,c)=>{for(const m of allM(e))if(m.uid!==c.uid&&m.faceUp)m.eraNegatedUntil=e.state.turn;const s=self(e,c);if(s){s.bonusAttacks=(s.bonusAttacks||0)+1;s.eraTachyonTurn=e.state.turn;}}});
  E.on('phase',(e,v)=>{if(v.phase!=='battle')return;const m=allM(e).find(q=>q.faceUp&&is(q,'Number 107: Galaxy-Eyes Tachyon Dragon')&&overlayCount(e,q.uid)>0);if(m)e.addTrigger(m.uid,I('Number 107: Galaxy-Eyes Tachyon Dragon')+'::era-tachyon',v,{owner:e.find(m.uid).owner});});
  // Number C106: Giant Red Hand
- xyzOnce('Number C106: Giant Red Hand','era-seal',{quick:true,condition:(e,c)=>!e.state.chain.length&&(card(e,c.uid)?.overlays||[]).some(m=>/^Number/.test(def(m)?.officialName||'')),resolve:(e,c)=>{for(const m of allM(e))if(m.uid!==c.uid&&m.faceUp)m.eraNegatedUntil=e.state.turn;for(const s of allS(e))if(s.faceUp&&s.uid!==c.uid)s.eraNegatedUntil=e.state.turn;}});
+ xyzOnce('Number C106: Giant Red Hand','era-seal',{quick:true,condition:(e,c)=>!e.state.chain.length&&(card(e,c.uid)?.overlays||[]).some(m=>D.inArchetype(def(m),"Number")),resolve:(e,c)=>{for(const m of allM(e))if(m.uid!==c.uid&&m.faceUp)m.eraNegatedUntil=e.state.turn;for(const s of allS(e))if(s.faceUp&&s.uid!==c.uid)s.eraNegatedUntil=e.state.turn;}});
  // Herald of Pure Light
  xyzOnce('Herald of Pure Light','era-recover',{pool:(e,c)=>grave(e,c.owner,monster),role:'search',inputs:(e,c)=>[...detachN(1)(e,c),g(e,c,'target','选择回收的墓地怪兽',grave(e,c.owner,monster),1,1,'search'),g(e,c,'cost','选择洗回卡组的手牌',hand(e,c.owner),1,1,'cost')],cost:(e,c)=>{spend(e,c);moved(e,c,args(c,'cost'),'deck','cost-return');e.shuffle(e.state.players[c.owner].deck);},resolve:(e,c)=>moved(e,c,args(c,'target'),'hand','effect-return')});
  // Number 104: Masquerade
@@ -74,7 +74,7 @@
  sent('Googly-Eyes Drum Dragon',(e,c)=>{const list=grave(e,c.owner,m=>series(m,'Super Defense Robot'));if(!list.length)return;moved(e,c,[list[0].uid],'banished','effect-banish');const r=revive(e,c,c.uid,{position:'defense'});if(r)e.attach(r.uid,list[1]?.uid||list[0].uid);},(e,v)=>v.to==='grave'&&v.kind==='destroy',{condition:()=>true});
  // Number C39: Utopia Ray Victory
  extend('battleLocked',function(prior,p,attack){const m=attack&&allM(this).find(q=>is(q,'Number C39: Utopia Ray Victory'));if(m&&this.find(m.uid)?.owner===p)return true;return prior.call(this,p,attack);});
- xyzOnce('Number C39: Utopia Ray Victory','era-victory',{condition:(e,c)=>!!(card(e,c.uid)?.overlays||[]).some(m=>/Utopia/.test(def(m)?.officialName||''))});
+ xyzOnce('Number C39: Utopia Ray Victory','era-victory',{condition:(e,c)=>!!(card(e,c.uid)?.overlays||[]).some(m=>D.inArchetype(def(m),"Utopia"))});
  effect('Number C39: Utopia Ray Victory',frontM,(e,c)=>{const m=card(e,first(c,'target'));if(m){m.eraNegatedUntil=e.state.turn;if(self(e,c))e.modify(c.uid,'atk','add',e.attackValue(m),e.state.turn,c.source);}},{mode:'era-victory-gain',detach:1,role:'own-boost',inputs:(e,c)=>[...detachN(1)(e,c),g(e,c,'target','选择攻击宣言的对方怪兽',frontM(e,c),1,1,'target')]});
  // Number C105: Battlin' Boxer Comet Cestus
  onBattleWin('Number C105: Battlin\' Boxer Comet Cestus',{resolve:(e,c)=>X.burn(e,c,Math.floor((CARDS[c.event.victim?.id]?.atk||0)/2))});

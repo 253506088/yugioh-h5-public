@@ -26,7 +26,7 @@ async function open({file='output/no-art/index.html',online=false,route=null}={}
  return {context,page,requests};
 }
 async function locale(page,language){await page.locator((await page.locator('#modal').evaluate(el=>el.open)?'#modal ':'.header-tools ')+'[data-locale-select]').first().selectOption(language);await page.waitForFunction(language=>document.documentElement.lang===language,language);}
-async function close(page){if(await page.locator('#modal').evaluate(el=>el.open))await page.locator('#modal [data-action="close-modal"]').first().click();}
+async function close(page){for(let depth=0;depth<12&&await page.locator('#modal').evaluate(el=>el.open);depth++)await page.locator('#modal [data-action="close-modal"]').first().click();assert.equal(await page.locator('#modal').evaluate(el=>el.open),false);}
 async function stage(page,entries,options={}){
  return page.evaluate(({entries,options})=>{
   const e=new DuelEngine({deck:options.deck||'early-ritual',opponentDeck:options.opponentDeck||'early-fusion',first:0,seed:44});

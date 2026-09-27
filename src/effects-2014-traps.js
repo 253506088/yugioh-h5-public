@@ -34,7 +34,7 @@
  // ---- negation / counter traps -------------------------------------------
  const galaxyEyes=m=>series(m,'Galaxy-Eyes');
  T('Tachyon Transmigration',null,(e,c)=>{for(const l of [...e.state.chain])if(l.owner!==c.owner&&['spell','trap','monster'].includes(l.source.effectType)&&e.negateLink(l.id,c.source,true,false)){const f=e.find(l.uid);if(f&&field(f.zone))moved(e,c,[l.uid],'deck','effect-return');}for(const p of [0,1])e.shuffle(e.state.players[p].deck);},
-  {main:false,condition:(e,c)=>ownM(e,c).some(m=>m.faceUp&&galaxyEyes(m))&&e.state.chain.some(l=>l.owner!==c.owner),handActivation:(e,c)=>ownM(e,c).some(m=>m.faceUp&&/Galaxy-Eyes Tachyon Dragon/.test(def(m).officialName)),aiResponse:()=>1800});
+  {main:false,condition:(e,c)=>ownM(e,c).some(m=>m.faceUp&&galaxyEyes(m))&&e.state.chain.some(l=>l.owner!==c.owner),handActivation:(e,c)=>ownM(e,c).some(m=>m.faceUp&&D.inArchetype(def(m),"Galaxy-Eyes Tachyon Dragon")),aiResponse:()=>1800});
  T('Jolt Counter',null,(e,c)=>X.negate(e,c),{main:false,condition:(e,c)=>e.state.phase==='battle'&&!!last(c)&&ownM(e,c).some(m=>m.faceUp&&series(m,"Battlin' Boxer")),aiResponse:(e,c)=>last(c)?.owner!==c.owner?1700:0});
  T('Face-Off',null,(e,c)=>X.negate(e,c),{main:false,damageStep:true,condition:(e,c)=>!!last(c)&&H.isDamageWindow(c.event.window),aiResponse:(e,c)=>last(c)?.owner!==c.owner?1600:0});
  T('Wiretap',null,(e,c)=>{const l=e.state.chain.find(l=>l.id===c.responseTo);if(!l)return;if(e.negateLink(l.id,c.source,true,false)&&e.find(l.uid))toDeck(e,c,[l.uid]);},{main:false,condition:(e,c)=>last(c)?.source.effectType==='trap'&&def({id:last(c).sourceId})?.type==='trap',aiResponse:(e,c)=>last(c)?.owner!==c.owner?1500:0});

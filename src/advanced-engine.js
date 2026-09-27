@@ -1,6 +1,7 @@
 (function (root) {
   'use strict';
   const D = root.DuelData?.earlyLoaded ? root.DuelData : require('./early-cards.js');
+  if(!D.inArchetype&&typeof require==='function')require('./archetypes.js');
   if(typeof module!=='undefined'&&!D.earlyDecksLoaded)require('./early-decks.js');
   const LinkRules = root.DuelLinkRules || require('./link-rules.js');
   const DT = root.DuelDecks || require('./deck-tools.js');
@@ -229,7 +230,7 @@
         if(c.effect==='breaker')n+=(card.counters||0)*300;
         if(c.effect==='dark-girl')n+=this.state.players.reduce((a,p)=>a+p.grave.filter(m=>m.id==='dark-magician').length*300,0);
         if(c.id==='cyber-infinity')n+=(card.overlays||[]).length*200;
-        if(c.id==='hero-the-shining'&&f)n+=(this.state.players[f.owner].banished||[]).filter(m=>CARDS[m.id].elemental).length*300;
+        if(c.id==='hero-the-shining'&&f)n+=(this.state.players[f.owner].banished||[]).filter(m=>D.inArchetype(CARDS[m.id],'Elemental HERO')).length*300;
         if(c.id==='hero-absolute-zero')n+=[0,1].reduce((a,p)=>a+this.monsters(p).filter(m=>m.uid!==card.uid&&m.faceUp&&this.attribute(m)==='水').length*500,0);
       }
       if(f&&fieldMonster(f.zone)&&card.faceUp&&this._advancedReady){
@@ -241,9 +242,9 @@
         for(let p=0;p<2;p++){
           for(const source of this.monsters(p))if(source.faceUp&&source.id==='qli-towers'&&!this.negated(source)&&card.summonKind&&card.summonKind!=='normal'&&card.summonKind!=='set')n-=500;
           for(const source of this.spells(p))if(this.activeSpell(source)){
-            if(stat==='atk'&&p===owner&&['qli-carrier','qli-disk','qli-stealth'].includes(source.id)&&c.family==='qliphort')n+=300;
+            if(stat==='atk'&&p===owner&&['qli-carrier','qli-disk','qli-stealth'].includes(source.id)&&D.inArchetype(c,'qliphort'))n+=300;
             if(stat==='atk'&&p!==owner&&source.id==='qli-helix')n-=300;
-            if(p===owner&&source.id==='crystolic-potential'&&c.family==='crystron')n+=300;
+            if(p===owner&&source.id==='crystolic-potential'&&D.inArchetype(c,'crystron'))n+=300;
           }
         }
         if(stat==='atk')for(const equip of this.activeEquip(card))n+=equip.id==='saqlifice'?300:equip.id==='wonder-wand'?500:0;
@@ -277,7 +278,7 @@
       const sourceDef=CARDS[source.id]||source,sourceType=source.effectType||source.type||sourceDef.type;
       if(c.id==='qli-towers'&&['spell','trap','pendulum-spell'].includes(sourceType))return true;
       const sourceLevel=source.originalLevel??sourceDef.rank??sourceDef.level;
-      if((c.id==='qli-towers'||(c.family==='qliphort'&&card.normalSummoned))&&isMonster(sourceDef)&&!['spell','pendulum-spell'].includes(sourceType)&&sourceLevel>0&&sourceLevel<this.level(card))return true;
+      if((c.id==='qli-towers'||(D.inArchetype(c,'qliphort')&&card.normalSummoned))&&isMonster(sourceDef)&&!['spell','pendulum-spell'].includes(sourceType)&&sourceLevel>0&&sourceLevel<this.level(card))return true;
       return false;
     }
     destroy(uid,source=null,battle=false,extraOptions={}){
@@ -344,11 +345,11 @@
       if(!isMonster(c)&&!card.asMonster)return false;
       if(c.type==='link'&&options.position&&options.position!=='attack')return false;
       if(c.noSpecial)return false;
-      if(c.masked&&options.via!=='mask')return false;
+      if(D.inArchetype(c,'Masked HERO')&&options.via!=='mask')return false;
       if(c.fusionOnly&&options.via!=='fusion')return false;
       if(c.specialOnly&&!card.properlySummoned&&options.via!==c.specialOnly)return false;
       if(isExtra(c)&&['grave','banished'].includes(where)&&!card.properlySummoned)return false;
-      if(this.spells(owner).some(s=>this.activeSpell(s)&&CARDS[s.id].type==='pendulum'&&CARDS[s.id].family==='qliphort')&&c.family!=='qliphort')return false;
+      if(this.spells(owner).some(s=>this.activeSpell(s)&&CARDS[s.id].type==='pendulum'&&D.inArchetype(CARDS[s.id],'qliphort'))&&!D.inArchetype(c,'qliphort'))return false;
       for(const lock of p.locks)if(lock.turn===this.state.turn){
         if(lock.kind==='no-special')return false;
         if(lock.kind==='machine'&&c.race!=='机械族')return false;
@@ -396,7 +397,7 @@
       if(options.banishOnLeave)card.banishOnLeave=true;
       if(['extra','extra2'].includes(zone)){card.extraSlot=this.extraSlot(owner,zone);this.state.players[owner][this.state.players[owner].extraMonster?'extraMonster2':'extraMonster']=card;}else{delete card.extraSlot;this.state.players[owner].monsters[zone]=card;}
       const p=this.state.players[owner];p.turnStats.special++;if(from==='extra')p.turnStats.extraTypes.push(c.type);
-      if(options.via==='synchro'&&c.family==='crystron')p.turnStats.crySynchros++;
+      if(options.via==='synchro'&&D.inArchetype(c,'crystron'))p.turnStats.crySynchros++;
       this.state.summons[owner]++;
       card.faceUp=!options.faceDown;
       this.log(['synchro','xyz','link','pendulum','ritual'].includes(options.via)?options.via:'special',this.name(owner)+({synchro:'同调召唤',xyz:'超量召唤',link:'连接召唤',fusion:'融合召唤',ritual:'仪式召唤',pendulum:'灵摆召唤'}[options.via]||'特殊召唤')+(card.faceUp?'「'+c.name+'」':'里侧守备怪兽'),owner,{uid,cardId:card.faceUp?c.id:null,summonKind:card.summonKind});
@@ -418,14 +419,14 @@
       if(!['monster','pendulum'].includes(c.type)||c.noNormal)return false;
       if(c.uniqueFaceUp&&this.monsters(owner).some(m=>m.faceUp&&m.id===card.id))return false;
       if(!this.state.normalUsed)return true;
-      return c.family==='blackwing'&&!p.extraNormalUsed&&this.monsters(owner).some(m=>m.faceUp&&m.id==='bw-nothung'&&!this.negated(m));
+      return D.inArchetype(c,'blackwing')&&!p.extraNormalUsed&&this.monsters(owner).some(m=>m.faceUp&&m.id==='bw-nothung'&&!this.negated(m));
     }
     tributeCount(card){const n=this.level(card);return CARDS[card.id].tributeCount??(n>=7?2:n>=5?1:0);}
-    tributeWeight(card,target){return CARDS[target.id].family==='qliphort'&&this.activeEquip(card,'saqlifice').length?2:1;}
+    tributeWeight(card,target){return D.inArchetype(CARDS[target.id],'qliphort')&&this.activeEquip(card,'saqlifice').length?2:1;}
     tributeSets(card,noTribute=false,owner=this.state.active){
       const cost=noTribute&&CARDS[card.id].qliReduced?0:this.tributeCount(card),p=this.state.players[owner],def=CARDS[card.id];
       if(!cost)return this.freeMain(owner)>0?[[]]:[];
-      const pool=this.monsters(owner).filter(c=>!CARDS[c.id].cannotTribute&&(!def.tributeFamily||CARDS[c.id].family===def.tributeFamily));
+      const pool=this.monsters(owner).filter(c=>!CARDS[c.id].cannotTribute&&(!def.tributeFamily||D.inArchetype(CARDS[c.id],def.tributeFamily)));
       return subsets(pool,1,Math.min(cost,pool.length)).filter(set=>set.length<=cost&&set.reduce((n,c)=>n+this.tributeWeight(c,card),0)>=cost&&(this.freeMain(owner)>0||set.some(c=>this.find(c.uid)?.zone==='monsters'))).map(set=>set.map(c=>c.uid));
     }
     normalSummon(action){
@@ -444,7 +445,7 @@
       const summonOwner=def.normalTributeEitherSide&&chosen.length&&chosen.every(u=>this.find(u)?.owner===1-owner)?1-owner:owner,targetPlayer=this.state.players[summonOwner];
       const materials=chosen.map(uid=>this.describe(this.find(uid).card));const p=this.state.players[owner];
       for(const uid of chosen)this.move(uid,'grave',{kind:'tribute',summoningId:card.id,byOwner:owner});
-      p.turnStats.qliTributes+=materials.filter(m=>CARDS[m.id].family==='qliphort').length;
+      p.turnStats.qliTributes+=materials.filter(m=>D.inArchetype(CARDS[m.id],'qliphort')).length;
       const slot=action.zone??this.preferredNormalSlot?.(summonOwner)??targetPlayer.monsters.indexOf(null);
       req(Number.isInteger(slot)&&slot>=0&&slot<5&&!targetPlayer.monsters[slot],'通常召唤只能使用空闲的主怪兽区域。');
       this.remove(card.uid);
@@ -452,7 +453,7 @@
       if(this.state.normalUsed)p.extraNormalUsed=true;else this.state.normalUsed=true;
       card.faceUp=mode!=='defense';card.position=mode;card.normalSummoned=true;card.summonKind=mode==='defense'?'set':'normal';
       card.qliReduced=!!def.qliReduced&&chosen.length===0;card.summonTurn=this.state.turn;card.changedTurn=this.state.turn;card.attacksMade=0;card.attacked=false;
-      card.tributeCount=materials.length;card.tributedQli=materials.some(m=>CARDS[m.id].family==='qliphort');card.granted ||= {};
+      card.tributeCount=materials.length;card.tributedQli=materials.some(m=>D.inArchetype(CARDS[m.id],'qliphort'));card.granted ||= {};
       if(card.id==='breaker'&&card.faceUp)card.counters=1;
       targetPlayer.monsters[slot]=card;this.state.summons[owner]++;
       this.log('summon',this.name(owner)+(card.faceUp?'通常召唤':'盖放')+(card.faceUp||owner===0?'「'+def.name+'」':'一只怪兽'),owner,{cardId:card.faceUp||owner===0?card.id:null,uid:card.uid,faceUp:card.faceUp});
@@ -482,10 +483,10 @@
       const c=CARDS[card.id],f=this.find(card.uid);
       if(spec.id&&card.id!==spec.id)return false;
       if(spec.nameId&&this.cardNameId(card)!==spec.nameId)return false;
-      if(spec.family&&!isFamily(c,spec.family))return false;
-      if(spec.cyberDragon&&!c.cyberDragon)return false;
-      if(spec.tearlaments&&!c.tearlaments)return false;
-      if(spec.elemental&&!c.elemental)return false;
+      if(spec.family&&!D.inArchetype(c,spec.family))return false;
+      if(spec.cyberDragon&&!D.inArchetype(c,'Cyber Dragon'))return false;
+      if(spec.tearlaments&&!D.inArchetype(c,'Tearlaments'))return false;
+      if(spec.elemental&&!D.inArchetype(c,'Elemental HERO'))return false;
       if(spec.attribute&&this.attribute(card)!==spec.attribute)return false;
       if(spec.race&&c.race!==spec.race)return false;
       if(spec.type&&c.type!==spec.type)return false;
@@ -501,11 +502,11 @@
       return this.refs(owner,zones).filter(f=>isMonster(CARDS[f.card.id])&&!CARDS[f.card.id].cannotFusionMaterial&&(!fieldMonster(f.zone)||f.card.faceUp||f.owner===owner)&&(!(spellId==='cyberload-fusion'||profile?.noTokens)||CARDS[f.card.id].type!=='token')).map(f=>f.card).sort((a,b)=>Number(b.uid===profile?.requiredUid)-Number(a.uid===profile?.requiredUid));
     }
     fusionAllowed(card,spellId){
-      const c=CARDS[card.id];if(c.type!=='fusion'||c.masked||(!c.fusion&&!c.materials))return false;
-      if(spellId==='miracle-fusion'&&!c.elemental)return false;
+      const c=CARDS[card.id];if(c.type!=='fusion'||D.inArchetype(c,'Masked HERO')||(!c.fusion&&!c.materials))return false;
+      if(spellId==='miracle-fusion'&&!D.inArchetype(c,'Elemental HERO'))return false;
       if(spellId==='power-bond'&&c.race!=='机械族')return false;
       if(spellId==='overload-fusion'&&(c.race!=='机械族'||c.attribute!=='暗'))return false;
-      if(spellId==='cyberload-fusion'&&c.family!=='cyber')return false;
+      if(spellId==='cyberload-fusion'&&!(c.fusion||[]).some(s=>s.nameId==='cyber-dragon'||s.id==='cyber-dragon'||s.cyberDragon||s.nameIncludes==='Cyber Dragon'))return false;
       return true;
     }
     fusionValid(owner,extra,materials,spellId='polymerization'){
@@ -577,7 +578,7 @@
         const d=CARDS[m.id];
         if(d.synchronSubstitute&&!spec.namedSynchron&&spec.tunerFamily!=='synchron')return false;
         if(spec.tunerId&&m.id!==spec.tunerId&&!(d.synchronSubstitute&&spec.namedSynchron))return false;
-        if(spec.tunerFamily&&!isFamily(d,spec.tunerFamily))return false;
+        if(spec.tunerFamily&&!D.inArchetype(d,spec.tunerFamily))return false;
         if(spec.tunerType&&d.type!==spec.tunerType)return false;
         if(spec.tunerRace&&this.race(m)!==spec.tunerRace)return false;
       }
@@ -598,7 +599,7 @@
       if(rankUp){
         if(materials.length!==1||this.state.players[owner].usedTurn['rankup:'+extra.id]===this.state.turn)return false;
         const target=materials[0],d=CARDS[target.id];
-        return !!(c.rankUpFrom?.includes(target.id)||(c.rankUpFamily&&d.family===c.rankUpFamily&&d.rank===c.rankUpRank));
+        return !!(c.rankUpFrom?.includes(target.id)||(c.rankUpFamily&&D.inArchetype(d,c.rankUpFamily)&&d.rank===c.rankUpRank));
       }
       return materials.length>=(c.xyzCount||2)&&materials.length<=(c.xyzMax||c.xyzCount||2)&&materials.every(m=>(this.xyzMaterialLevel?this.xyzMaterialLevel(m,extra):this.level(m))===c.rank&&(!c.xyzRace||this.race(m)===c.xyzRace)&&(!c.xyzAttribute||this.attribute(m)===c.xyzAttribute)&&(!c.xyzNormal||this.isNormalMonster(m))&&(!c.xyzNameIncludes||CARDS[m.id].officialName.includes(c.xyzNameIncludes)));
     }
@@ -661,7 +662,7 @@
       for(const c of materials)this.move(c.uid,options.materialDestination||'grave',{kind:'synchro-material',summoningId:extra.id,source:options.source||null,byOwner:owner});
       if(options.materialDestination==='deck')this.shuffle(this.state.players[owner].deck);
       extra.materialCount=materials.length;extra.nonTunerMaterialCount=snapshots.filter(m=>!m.tuner).length;
-      extra.dynamicTuner=extra.id==='bw-raikiri'&&snapshots.some(m=>CARDS[m.id].family==='blackwing');
+      extra.dynamicTuner=extra.id==='bw-raikiri'&&snapshots.some(m=>D.inArchetype(CARDS[m.id],'blackwing'));
       return this.special(owner,extra.uid,{via:'synchro',position:options.position,materials:snapshots,...(options.zone!==undefined?{zone:options.zone}:{})});
     }
     performXyz(owner,extraUid,uids,options={}){
@@ -672,7 +673,7 @@
       const snapshots=materials.map(c=>this.describe(c)),overlays=[];
       for(const card of materials)overlays.push(...this.takeMaterial(card.uid,!!options.rankUp||!!options.byEffect).cards);
       extra.overlays=overlays;extra.materialCount=materials.length;
-      extra.granted={sage:CARDS[extra.id].family==='utopia'&&materials.some(c=>c.id==='zs-ascended-sage'),girl:materials.some(c=>c.id==='gagaga-girl')&&materials.some(c=>c.id!=='gagaga-girl'&&isFamily(CARDS[c.id],'gagaga'))};
+      extra.granted={sage:D.inArchetype(CARDS[extra.id],'utopia')&&materials.some(c=>c.id==='zs-ascended-sage'),girl:materials.some(c=>c.id==='gagaga-girl')&&materials.some(c=>c.id!=='gagaga-girl'&&D.inArchetype(CARDS[c.id],'gagaga'))};
       if(options.rankUp&&!options.byEffect)this.state.players[owner].usedTurn['rankup:'+extra.id]=this.state.turn;
       const result=this.special(owner,extra.uid,{via:'xyz',position:options.position,materials:snapshots,...(options.zone!==undefined?{zone:options.zone}:{})});
       return result;
@@ -1352,9 +1353,9 @@
       if(action.type==='summon'){
         if(c.exodiaPart)return -100;
         let score=380+(c.atk||0)/30+(c.tuner?50:0);
-        const bonuses={'hero-stratos':520,'hero-solid-soldier':p.hand.some(m=>isFamily(CARDS[m.id],'hero')&&m.uid!==f.card.uid)?640:200,'hero-blazeman':460,'hero-liquid-soldier':p.grave.some(m=>isFamily(CARDS[m.id],'hero'))?590:160,'junk-synchron':p.grave.some(m=>isMonster(CARDS[m.id])&&CARDS[m.id].level<=2)?900:120,'cyber-core':800,'cyber-drei':this.monsters(owner).some(m=>this.cardNameId(m)==='cyber-dragon')?850:250,'royal-library':1000,'cardcar-d':this.monsters(owner).length?180:650,'scrap-recycler':820,'goblindbergh':p.hand.length>=2?680:200,'gagaga-magician':260,'utopic-onomatopoeia':400,'bw-shura':500,'bw-kris':500,'bw-blizzard':p.grave.some(m=>CARDS[m.id].family==='blackwing')?750:160,'kaibaman':p.hand.some(m=>m.id==='blue-eyes')?700:0};
+        const bonuses={'hero-stratos':520,'hero-solid-soldier':p.hand.some(m=>D.inArchetype(CARDS[m.id],'hero')&&m.uid!==f.card.uid)?640:200,'hero-blazeman':460,'hero-liquid-soldier':p.grave.some(m=>D.inArchetype(CARDS[m.id],'hero'))?590:160,'junk-synchron':p.grave.some(m=>isMonster(CARDS[m.id])&&CARDS[m.id].level<=2)?900:120,'cyber-core':800,'cyber-drei':this.monsters(owner).some(m=>this.cardNameId(m)==='cyber-dragon')?850:250,'royal-library':1000,'cardcar-d':this.monsters(owner).length?180:650,'scrap-recycler':820,'goblindbergh':p.hand.length>=2?680:200,'gagaga-magician':260,'utopic-onomatopoeia':400,'bw-shura':500,'bw-kris':500,'bw-blizzard':p.grave.some(m=>D.inArchetype(CARDS[m.id],'blackwing'))?750:160,'kaibaman':p.hand.some(m=>m.id==='blue-eyes')?700:0};
         score+=(bonuses[c.id]||0)+(c.normalPriority||0);
-        if(c.family==='qliphort'){
+        if(D.inArchetype(c,'qliphort')){
           if(!action.noTribute&&this.tributeCount(f.card)>0)score+=c.id==='qli-towers'?1200:['qli-disk','qli-stealth'].includes(c.id)?900:100;
           else score+=100;
         }

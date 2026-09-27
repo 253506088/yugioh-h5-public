@@ -1,7 +1,7 @@
 (function(root){ 'use strict'; const E=root.DuelEffects,D=root.DuelData,H=E.H;
 const {CARDS,isMonster}=D;
 const {source,self,first,args,group,deck,grave,hand,monsters,specialable,normal,once}=H;
-const qliMonster=c=>isMonster(CARDS[c.id])&&CARDS[c.id].family==='qliphort';
+const qliMonster=c=>isMonster(CARDS[c.id])&&D.inArchetype(CARDS[c.id],'qliphort');
 const qliCard=c=>qliMonster(c)||c.id==='saqlifice';
 E.register('qli-scout','search',{label:'支付800LP，检索机壳',zones:['spells'],effectType:'spell',once:once('search','card'),
   condition:(e,c)=>e.activeSpell(source(e,c)?.card)&&e.state.players[c.owner].lp>800&&deck(e,c.owner,m=>qliCard(m)&&m.id!=='qli-scout').length>0,

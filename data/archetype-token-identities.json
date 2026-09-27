@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "ac5d8fb80465e74b33f3b4a294e3b22c02d743f2",
+  "reason": "Legacy authored English token names differ from the CDB names. IDs were checked against each creating card and the token's level, ATK and DEF; they are identities, not membership overrides.",
+  "tokens": {
+    "gx-thunder-token": {"providerId": 14089429, "createdBy": 14089428, "name": "Thunder Option Token"},
+    "gx-sky-token": {"providerId": 12958920, "createdBy": 12958919, "name": "Skyblaster Token"},
+    "gx-engine-token": {"providerId": 82556059, "createdBy": 82556058, "name": "Engine Token"},
+    "gx-ivy-token": {"providerId": 30069399, "createdBy": 30069398, "name": "Ivy Token"},
+    "gx-metabo-token": {"providerId": 49808197, "createdBy": 49808196, "name": "Metabo Token"},
+    "gx-plant-token": {"providerId": 28062326, "createdBy": 28062325, "name": "Plant Token"},
+    "gx-nightmare-token": {"providerId": 42956964, "createdBy": 42956963, "name": "Nightmare Archfiend Token"},
+    "gx-gift-token": {"providerId": 93912846, "createdBy": 93912845, "name": "Gift Fiend Token"},
+    "era-maize-token": {"providerId": 74983882, "createdBy": 74983881, "name": "Maize Token"}
+  }
+}

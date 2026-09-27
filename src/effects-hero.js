@@ -1,8 +1,8 @@
 (function(root){ 'use strict'; const E=root.DuelEffects,D=root.DuelData,H=E.H;
 const {CARDS,isMonster,isFamily}=D;
 const {source,self,first,args,group,customGroup,deck,grave,hand,monsters,specialable,discard,once}=H;
-const hero=c=>isMonster(CARDS[c.id])&&isFamily(CARDS[c.id],'hero');
-const elemental=c=>isMonster(CARDS[c.id])&&!!CARDS[c.id].elemental;
+const hero=c=>isMonster(CARDS[c.id])&&D.inArchetype(CARDS[c.id],'hero');
+const elemental=c=>isMonster(CARDS[c.id])&&!!D.inArchetype(CARDS[c.id],'Elemental HERO');
 function searchChoice(e,c,filter,title='选择加入手牌的卡牌'){
   const list=deck(e,c.owner,filter);if(list.length)e.queueChoice(c.owner,title,H.options(e,c,list),1,1,'search-selected',{source:c.source,role:'search'});
 }
@@ -47,12 +47,12 @@ E.register('hero-bubbleman','special',{label:'仅此手牌，特殊召唤水泡�
 E.trigger('hero-bubbleman','draw',{label:'水泡侠：抽2张',condition:(e,c)=>hand(e,c.owner).length===0&&e.field(c.owner).every(m=>m.uid===c.uid),resolve:(e,c)=>{if(hand(e,c.owner).length===0&&e.field(c.owner).every(m=>m.uid===c.uid))e.draw(c.owner,2);}});
 E.spell('e-emergency-call',{label:'检索元素英雄',condition:(e,c)=>deck(e,c.owner,elemental).length>0,resolve:(e,c)=>searchChoice(e,c,elemental),aiScore:1100});
 E.spell('a-hero-lives',{label:'支付一半LP，从卡组展开HERO',condition:(e,c)=>!monsters(e,c.owner,m=>m.faceUp).length&&e.state.players[c.owner].lp>1&&specialable(e,c.owner,deck(e,c.owner,m=>elemental(m)&&CARDS[m.id].level<=4)).length>0,cost:(e,c)=>e.payLP(c.owner,Math.floor(e.state.players[c.owner].lp/2)),resolve:(e,c)=>specialChoice(e,c,deck(e,c.owner,m=>elemental(m)&&CARDS[m.id].level<=4)),aiScore:1050});
-E.spell('mask-change',{label:'假面变化',inputs:(e,c)=>[group(e,c,'target','选择变化的HERO',monsters(e,c.owner,m=>m.faceUp&&hero(m)&&e.state.players[c.owner].extra.some(x=>CARDS[x.id].masked&&CARDS[x.id].attribute===e.attribute(m)&&e.canSpecial(c.owner,x,{via:'mask'}))),1,1,{role:'mask-target'})],
+E.spell('mask-change',{label:'假面变化',inputs:(e,c)=>[group(e,c,'target','选择变化的HERO',monsters(e,c.owner,m=>m.faceUp&&hero(m)&&e.state.players[c.owner].extra.some(x=>D.inArchetype(CARDS[x.id],'Masked HERO')&&CARDS[x.id].attribute===e.attribute(m)&&e.canSpecial(c.owner,x,{via:'mask'}))),1,1,{role:'mask-target'})],
   resolve:(e,c)=>{
     const f=H.legalTarget(e,c,first(c),(m,f)=>f.owner===c.owner&&H.fieldZone(f.zone)&&m.faceUp&&hero(m));if(!f)return;
     const attribute=e.attribute(f.card),result=e.move(f.card.uid,'grave',{kind:'effect-send',source:c.source,byOwner:c.owner});
     if(result.to!=='grave')return;
-    const list=e.state.players[c.owner].extra.filter(m=>CARDS[m.id].masked&&CARDS[m.id].attribute===attribute&&e.canSpecial(c.owner,m,{via:'mask'})&&e.freeZones(c.owner,m).length);
+    const list=e.state.players[c.owner].extra.filter(m=>D.inArchetype(CARDS[m.id],'Masked HERO')&&CARDS[m.id].attribute===attribute&&e.canSpecial(c.owner,m,{via:'mask'})&&e.freeZones(c.owner,m).length);
     if(list.length)e.queueChoice(c.owner,'选择假面英雄',H.options(e,c,list),1,1,'special-selected',{source:c.source,via:'mask',role:'special'});
   },aiScore:(e,c)=>monsters(e,c.owner,m=>m.id==='hero-absolute-zero').length?1200:monsters(e,c.owner,m=>m.id==='hero-shadow-mist').length?1000:-100,
   aiResponse:(e,c,w)=>w.chainLast&&w.chainLast.owner!==c.owner?1100:w.attack&&w.attack.owner!==c.owner?1000:0});
@@ -84,7 +84,7 @@ E.on('summon',(e,v)=>{
 E.on('move',(e,v)=>{
   if(v.id==='hero-shadow-mist'&&v.to==='grave')e.addTrigger(v.uid,v.id+'::grave-search',v);
   if(v.id==='hero-solid-soldier'&&v.to==='grave'&&H.fieldZone(v.from)&&v.source?.effectType==='spell'&&!String(v.kind).startsWith('cost'))e.addTrigger(v.uid,v.id+'::grave-revive',v);
-  if(v.id==='hero-liquid-soldier'&&['grave','banished'].includes(v.to)&&v.kind==='fusion-material'&&!!CARDS[v.summoningId]&&isFamily(CARDS[v.summoningId],'hero'))e.addTrigger(v.uid,v.id+'::material-draw',v);
+  if(v.id==='hero-liquid-soldier'&&['grave','banished'].includes(v.to)&&v.kind==='fusion-material'&&!!CARDS[v.summoningId]&&D.inArchetype(CARDS[v.summoningId],'hero'))e.addTrigger(v.uid,v.id+'::material-draw',v);
   if(v.id==='hero-absolute-zero'&&H.fieldZone(v.from)&&['grave','banished'].includes(v.to))e.addTrigger(v.uid,v.id+'::leave-wipe',v,{mandatory:true});
   if(v.id==='hero-the-shining'&&H.fieldZone(v.from)&&v.to==='grave')e.addTrigger(v.uid,v.id+'::recover',v);
 });

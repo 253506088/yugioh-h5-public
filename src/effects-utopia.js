@@ -1,13 +1,13 @@
 (function(root){ 'use strict'; const E=root.DuelEffects,D=root.DuelData,H=E.H;
 const {CARDS,isMonster,isFamily}=D;
 const {source,self,first,args,group,customGroup,deck,grave,hand,monsters,specialable,once}=H;
-const onomat=c=>['gagaga','gogogo','dododo','zubaba'].some(f=>isFamily(CARDS[c.id],f));
+const onomat=c=>['gagaga','gogogo','dododo','zubaba'].some(f=>D.inArchetype(CARDS[c.id],f));
 E.register('gagaga-magician','level',{label:'宣言1—8星，改变等级',once:once('level','card'),
   inputs:()=>[customGroup('level','宣言我我我魔术师的等级',Array.from({length:8},(_,i)=>({uid:'level:'+(i+1),label:(i+1)+' 星',value:i+1})),1,1,{aiValues:()=>['level:4']})],
   resolve:(e,c)=>{const m=self(e,c);if(m)m.levelOverride={value:Number(first(c,'level').split(':')[1]),until:e.state.turn};},aiScore:(e,c)=>e.level(source(e,c).card)!==4?650:-100});
 E.register('gagaga-girl','level',{label:'与另一只我我我同步等级',once:once('level','card'),
-  inputs:(e,c)=>[group(e,c,'target','选择等级参照怪兽',monsters(e,c.owner,m=>m.uid!==c.uid&&m.faceUp&&isFamily(CARDS[m.id],'gagaga')&&e.level(m)>0),1,1,{role:'own-boost'})],
-  resolve:(e,c)=>{const m=self(e,c),target=e.find(first(c));if(m&&target&&H.fieldZone(target.zone)&&target.card.faceUp)m.levelOverride={value:e.level(target.card)};},aiScore:(e,c)=>monsters(e,c.owner,m=>m.uid!==c.uid&&isFamily(CARDS[m.id],'gagaga')&&e.level(m)===4).length&&e.level(source(e,c).card)!==4?800:-100});
+  inputs:(e,c)=>[group(e,c,'target','选择等级参照怪兽',monsters(e,c.owner,m=>m.uid!==c.uid&&m.faceUp&&D.inArchetype(CARDS[m.id],'gagaga')&&e.level(m)>0),1,1,{role:'own-boost'})],
+  resolve:(e,c)=>{const m=self(e,c),target=e.find(first(c));if(m&&target&&H.fieldZone(target.zone)&&target.card.faceUp)m.levelOverride={value:e.level(target.card)};},aiScore:(e,c)=>monsters(e,c.owner,m=>m.uid!==c.uid&&D.inArchetype(CARDS[m.id],'gagaga')&&e.level(m)===4).length&&e.level(source(e,c).card)!==4?800:-100});
 E.trigger('goblindbergh','special',{label:'哥布林德伯格：展开低星手牌',condition:(e,c)=>specialable(e,c.owner,hand(e,c.owner,m=>isMonster(CARDS[m.id])&&CARDS[m.id].level<=4)).length>0,
   resolve:(e,c)=>{const list=specialable(e,c.owner,hand(e,c.owner,m=>isMonster(CARDS[m.id])&&CARDS[m.id].level<=4));if(list.length)e.queueChoice(c.owner,'选择特殊召唤的4星以下怪兽',H.options(e,c,list),1,1,'goblin-special',{source:c.source,role:'special'});}});
 E.op('goblin-special',(e,t)=>{
@@ -30,16 +30,16 @@ E.op('onomat-expand',(e,t)=>{
   for(const uid of t.picks){const f=e.find(uid);if(f?.zone==='hand'&&e.freeMain(t.owner))e.special(t.owner,uid,{via:'effect',position:'defense'});}
 });
 E.register('zubaba-gagagacoat','special',{label:'控制刷拉拉／我我我，特殊召唤外套',zones:['hand'],once:once('special'),
-  condition:(e,c)=>monsters(e,c.owner,m=>m.faceUp&&m.id!=='zubaba-gagagacoat'&&(isFamily(CARDS[m.id],'gagaga')||isFamily(CARDS[m.id],'zubaba'))).length>0&&e.canSpecial(c.owner,source(e,c).card)&&e.freeMain(c.owner)>0,
+  condition:(e,c)=>monsters(e,c.owner,m=>m.faceUp&&m.id!=='zubaba-gagagacoat'&&(D.inArchetype(CARDS[m.id],'gagaga')||D.inArchetype(CARDS[m.id],'zubaba'))).length>0&&e.canSpecial(c.owner,source(e,c).card)&&e.freeMain(c.owner)>0,
   resolve:(e,c)=>e.special(c.owner,c.uid,{via:'effect'}),aiScore:900});
 E.register('zubaba-gagagacoat','revive',{label:'外套：复活隆隆隆／怒怒怒',once:once('revive'),
-  inputs:(e,c)=>[group(e,c,'target','选择墓地的隆隆隆／怒怒怒',specialable(e,c.owner,grave(e,c.owner,m=>isFamily(CARDS[m.id],'gogogo')||isFamily(CARDS[m.id],'dododo')),'revive'),1,1,{role:'special'})],
+  inputs:(e,c)=>[group(e,c,'target','选择墓地的隆隆隆／怒怒怒',specialable(e,c.owner,grave(e,c.owner,m=>D.inArchetype(CARDS[m.id],'gogogo')||D.inArchetype(CARDS[m.id],'dododo')),'revive'),1,1,{role:'special'})],
   resolve:(e,c)=>{const f=e.find(first(c));if(f?.zone==='grave')e.special(c.owner,f.card.uid,{via:'revive'});e.addLock(c.owner,'extra','xyz');},aiScore:1050});
 E.register('dododo-gogogoglove','expand',{label:'手套：特殊召唤刷拉拉／我我我',once:once('expand'),
-  condition:(e,c)=>specialable(e,c.owner,hand(e,c.owner,m=>isFamily(CARDS[m.id],'zubaba')||isFamily(CARDS[m.id],'gagaga'))).length>0,
-  resolve:(e,c)=>H.specialChoice(e,c,hand(e,c.owner,m=>isFamily(CARDS[m.id],'zubaba')||isFamily(CARDS[m.id],'gagaga'))),aiScore:950});
+  condition:(e,c)=>specialable(e,c.owner,hand(e,c.owner,m=>D.inArchetype(CARDS[m.id],'zubaba')||D.inArchetype(CARDS[m.id],'gagaga'))).length>0,
+  resolve:(e,c)=>H.specialChoice(e,c,hand(e,c.owner,m=>D.inArchetype(CARDS[m.id],'zubaba')||D.inArchetype(CARDS[m.id],'gagaga'))),aiScore:950});
 E.register('dododo-gogogoglove','revive',{label:'控制隆隆隆／怒怒怒，复活手套',zones:['grave'],once:once('revive'),
-  condition:(e,c)=>monsters(e,c.owner,m=>m.faceUp&&m.id!==c.sourceId&&(isFamily(CARDS[m.id],'gogogo')||isFamily(CARDS[m.id],'dododo'))).length>0&&e.canSpecial(c.owner,source(e,c).card)&&e.freeMain(c.owner)>0,
+  condition:(e,c)=>monsters(e,c.owner,m=>m.faceUp&&m.id!==c.sourceId&&(D.inArchetype(CARDS[m.id],'gogogo')||D.inArchetype(CARDS[m.id],'dododo'))).length>0&&e.canSpecial(c.owner,source(e,c).card)&&e.freeMain(c.owner)>0,
   resolve:(e,c)=>e.special(c.owner,c.uid,{via:'revive',banishOnLeave:true}),aiScore:900});
 E.spell('onomatopaira',{label:'手牌送墓，检索拟声怪兽',once:once('activate'),onlyActivate:true,
   condition:(e,c)=>deck(e,c.owner,onomat).length>0,
@@ -58,13 +58,13 @@ E.spell('double-or-nothing',{label:'翻倍机会，再次攻击',main:false,
   resolve:(e,c)=>{const a=e.state.frame?.attack,f=a?e.find(a.uid):null;if(f&&H.fieldZone(f.zone)){f.card.doubleAllowance=Math.max(f.card.doubleAllowance||0,1);f.card.doubleNextAttack=true;e.log('effect',CARDS[f.card.id].name+'获得再攻击的机会，下一次攻击伤害计算时攻击力翻倍',c.owner,{uid:f.card.uid});}},
   aiResponse:(e,c,w)=>w.kind==='attack-negated'&&w.attack.owner===c.owner?2500:0});
 E.quick('utopia-double','upgrade',{label:'移除素材，检索翻倍机会并叠放希望皇',once:once('upgrade','card'),
-  condition:(e,c)=>(source(e,c)?.card.overlays.length||0)>=1&&deck(e,c.owner,m=>m.id==='double-or-nothing').length>0&&e.state.players[c.owner].extra.some(m=>CARDS[m.id].family==='utopia'&&CARDS[m.id].type==='xyz'&&m.id!=='utopia-double'&&e.canSpecial(c.owner,m,{via:'xyz'})),
+  condition:(e,c)=>(source(e,c)?.card.overlays.length||0)>=1&&deck(e,c.owner,m=>m.id==='double-or-nothing').length>0&&e.state.players[c.owner].extra.some(m=>D.inArchetype(CARDS[m.id],'utopia')&&CARDS[m.id].type==='xyz'&&m.id!=='utopia-double'&&e.canSpecial(c.owner,m,{via:'xyz'})),
   inputs:(e,c)=>[H.detachInput(e,c,1)],cost:(e,c)=>e.detach(c.uid,args(c,'cost')),
-  resolve:(e,c)=>{const m=self(e,c),spell=deck(e,c.owner,m=>m.id==='double-or-nothing')[0];if(!m||!spell)return;e.search(c.owner,[spell.uid]);const list=e.state.players[c.owner].extra.filter(m=>CARDS[m.id].family==='utopia'&&CARDS[m.id].type==='xyz'&&m.id!=='utopia-double'&&e.canSpecial(c.owner,m,{via:'xyz'}));if(list.length)e.queueChoice(c.owner,'选择叠放的希望皇',H.options(e,c,list),1,1,'utopia-double-upgrade',{source:c.source,role:'xyz-upgrade'});},
+  resolve:(e,c)=>{const m=self(e,c),spell=deck(e,c.owner,m=>m.id==='double-or-nothing')[0];if(!m||!spell)return;e.search(c.owner,[spell.uid]);const list=e.state.players[c.owner].extra.filter(m=>D.inArchetype(CARDS[m.id],'utopia')&&CARDS[m.id].type==='xyz'&&m.id!=='utopia-double'&&e.canSpecial(c.owner,m,{via:'xyz'}));if(list.length)e.queueChoice(c.owner,'选择叠放的希望皇',H.options(e,c,list),1,1,'utopia-double-upgrade',{source:c.source,role:'xyz-upgrade'});},
   aiScore:1800,aiResponse:(e,c,w)=>w.attack||w.chainLast?.owner!==c.owner?1800:0});
 E.op('utopia-double-upgrade',(e,t)=>{const actor=e.find(t.context.source.uid);if(!actor||!H.fieldZone(actor.zone)||(actor.card.generation||0)!==t.context.source.generation)return;const summoned=e.performXyz(t.owner,t.picks[0],[actor.card.uid],{byEffect:true,rankUp:true});if(summoned){e.modify(summoned.uid,'atk','multiply',2,null,t.context.source);summoned.noDirect=true;}});
 E.quick('utopia-lightning','five-thousand',{label:'电光皇：移除2素材，攻击力变为5000',main:false,damageStep:true,
-  condition:(e,c)=>{const m=source(e,c)?.card,a=c.event.window?.attack;return !!m&&H.isDamageWindow(c.event.window)&&!!a.target&&(a.uid===c.uid||a.target===c.uid)&&m.overlays.length>=2&&m.overlays.some(x=>CARDS[x.id].family==='utopia')&&m.lightningUseSerial!==a.serial;},
+  condition:(e,c)=>{const m=source(e,c)?.card,a=c.event.window?.attack;return !!m&&H.isDamageWindow(c.event.window)&&!!a.target&&(a.uid===c.uid||a.target===c.uid)&&m.overlays.length>=2&&m.overlays.some(x=>D.inArchetype(CARDS[x.id],'utopia'))&&m.lightningUseSerial!==a.serial;},
   inputs:(e,c)=>[H.detachInput(e,c,2)],cost:(e,c)=>{source(e,c).card.lightningUseSerial=c.event.window.attack.serial;e.detach(c.uid,args(c,'cost'));},
   resolve:(e,c)=>{const m=self(e,c),a=e.state.frame?.attack;if(m&&a){m.lightningTurn=e.state.turn;m.lightningAttack=a.serial;}},aiResponse:()=>2200});
 E.register('utopia-ray','boost',{label:'LP1000以下：移除素材，逆转攻守',condition:(e,c)=>e.state.players[c.owner].lp<=1000&&(source(e,c)?.card.overlays.length||0)>0&&monsters(e,1-c.owner,m=>m.faceUp).length>0,
@@ -106,7 +106,7 @@ E.on('summon',(e,v)=>{
     const card=e.find(v.uid)?.card;if(!card)return;
     if(card.granted?.sage)e.addTrigger(card.uid,'zs-ascended-sage::grant-search',v,{owner:v.owner});
     if(card.granted?.girl)e.addTrigger(card.uid,'gagaga-girl::grant-zero',v,{owner:v.owner});
-    if(CARDS[v.id].family==='utopia')for(const s of e.spells(v.owner))if(s.id==='xyz-change-tactics'&&e.activeSpell(s))e.addTrigger(s.uid,'xyz-change-tactics::draw',v,{owner:v.owner,priority:30});
+    if(D.inArchetype(CARDS[v.id],'utopia'))for(const s of e.spells(v.owner))if(s.id==='xyz-change-tactics'&&e.activeSpell(s))e.addTrigger(s.uid,'xyz-change-tactics::draw',v,{owner:v.owner,priority:30});
   }
 });
 E.on('attack',(e,v)=>{

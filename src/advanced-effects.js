@@ -43,8 +43,8 @@
   function monsters(e,owner,filter=()=>true){return e.monsters(owner).filter(c=>filter(c,e.find(c.uid)));}
   function specialable(e,owner,list,via='special'){return list.filter(c=>e.canSpecial(owner,c,{via})&&e.freeZones(owner,c).length);}
   function normal(c){return ['monster','pendulum'].includes(CARDS[c.id].type)&&!CARDS[c.id].effect;}
-  function cyber(c){return !!CARDS[c.id].cyberDragon;}
-  function cry(c){return !!CARDS[c.id].crystron;}
+  function cyber(c){return !!D.inArchetype(CARDS[c.id],'Cyber Dragon');}
+  function cry(c){return !!D.inArchetype(CARDS[c.id],'Crystron');}
   function noBanishReplacement(e,owner){return !e.monsters(1-owner).some(c=>c.faceUp&&c.id==='masked-dark-law'&&!e.negated(c));}
   function canSendGY(e,card){
     if(e.graveCostAllowed?.(card)===false)return false;
@@ -170,7 +170,7 @@
   function validateInput(e,ctx,g,uids){
     if(g.validator?.startsWith('early-')&&e.earlyValidateInput)return e.earlyValidateInput(ctx,g,uids);
     if(g.validator==='onomat'){
-      const groups=uids.map(uid=>{const c=CARDS[e.find(uid).card.id];return ['gagaga','gogogo','dododo','zubaba'].filter(f=>isFamily(c,f));});
+      const groups=uids.map(uid=>{const c=CARDS[e.find(uid).card.id];return ['gagaga','gogogo','dododo','zubaba'].filter(f=>D.inArchetype(c,f));});
       const walk=(i,used)=>i===groups.length||groups[i].some(x=>!used.includes(x)&&walk(i+1,[...used,x]));
       return walk(0,[])||'每个拟声系列最多选择1只；有多个系列名的怪兽可任选其中1个系列。';
     }
@@ -191,11 +191,11 @@
       if((fieldZone(f.zone)||f.zone==='spells')&&!f.card.faceUp)return 1700;
       return isMonster(c)?e.attackValue(f.card)+1200:(c.type==='pendulum'?3200:c.spellKind==='continuous'||c.trapKind==='continuous'?2900:1700);
     }
-    if(role==='self-destroy')return f.card.uid===ctx.uid?12000:CARDS[f.card.id].crystron?9000:CARDS[f.card.id].type==='token'?5000:-e.cardUtility(f.card,owner);
+    if(role==='self-destroy')return f.card.uid===ctx.uid?12000:D.inArchetype(CARDS[f.card.id],'Crystron')?9000:CARDS[f.card.id].type==='token'?5000:-e.cardUtility(f.card,owner);
     if(role==='own-boost'){
       const a=ctx.event.window?.attack;return f.owner!==owner?-20000:(a&&(a.uid===f.card.uid||a.target===f.card.uid)?20000:10000)+(c.atk||0);
     }
-    if(role==='mask-target')return c.id==='hero-absolute-zero'?25000:c.id==='hero-shadow-mist'?20000:c.masked?1000:5000+(c.atk||0);
+    if(role==='mask-target')return c.id==='hero-absolute-zero'?25000:c.id==='hero-shadow-mist'?20000:D.inArchetype(c,'Masked HERO')?1000:5000+(c.atk||0);
     if(role==='fusion-choice'){
       if(c.id==='hero-sunrise')return e.monsters(owner).some(m=>m.id===c.id)?3500:12000;
       if(c.id==='hero-absolute-zero')return hand(e,owner,m=>m.id==='mask-change').length?14000:9500;

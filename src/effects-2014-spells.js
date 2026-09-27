@@ -9,7 +9,7 @@
  const oneTurn=n=>H.once('2014-'+n,'name');
  const attackOf=c=>c.event.window?.attack||c.event.attack;
  const number=m=>{const r=/^Number (?:C|S|F)?(\d+):/.exec(def(m)?.officialName||'');return r?Number(r[1]):null;};
- const isC=m=>/^Number C\d+:/.test(def(m)?.officialName||'');
+ const isC=m=>D.inArchetype(m,'Chaos Number');
  const extra=(e,p,pred)=>e.state.players[p].extra.filter(m=>!m.faceUpExtra&&pred(m));
  const rankUpTo=(e,c,m,list)=>choose(e,c,'选择升阶的超量怪兽',list,1,1,'rankup-selected',{target:m.uid,role:'special'});
  const discard1=(e,c)=>g(e,c,'cost','选择丢弃的手牌',hand(e,c.owner,m=>m.uid!==c.uid),1,1,'cost');

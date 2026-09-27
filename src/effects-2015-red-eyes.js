@@ -9,7 +9,7 @@
  onMove('Black Metal Dragon','y15-search',{resolve:(e,c)=>search(e,c,deck(e,c.owner,m=>series(m,'Red-Eyes')))},(e,v)=>field(v.from)&&v.to==='grave');
  cast('Cards of the Red Stone',null,(e,c)=>{e.draw(c.owner,2);choose(e,c,'可以送墓7星真红眼',deck(e,c.owner,m=>red(m)&&monster(m)&&e.level(m)===7),0,1,'early-move',{to:'grave',kind:'effect-send',shuffle:true,role:'search'});},{once:limit('red-stone-cards'),inputs:(e,c)=>[g(e,c,'cost','选择送墓的7星真红眼',hand(e,c.owner,m=>red(m)&&monster(m)&&e.level(m)===7&&canSend(e,m)),1,1,'cost')],cost:(e,c)=>H.sendCost(e,c,args(c,'cost'))});
  const profile={year2015:'red-eyes',zones:['hand','deck','monsters','extraMonster']};
- const redMaterial=s=>s.id&&red({id:s.id})||s.officialName&&s.officialName.includes('Red-Eyes')||s.nameIncludes==='Red-Eyes';
+ const redMaterial=s=>s.id&&red({id:s.id})||s.officialName&&D.inArchetype(s,"Red-Eyes")||s.nameIncludes==='Red-Eyes';
  extend('fusionAllowed',function(prior,m,s){return (s?.year2015!=='red-eyes'||(def(m).fusion||[]).some(redMaterial))&&prior.call(this,m,s);});
  cast('Red-Eyes Fusion',null,(e,c)=>fusion(e,c,profile),{once:limit('red-eyes-fusion'),summons:true,condition:(e,c)=>!e.state.normalUsed&&!e.state.players[c.owner].turnStats.special&&e.fusions(c.owner,profile).length>0,cost:(e,c)=>lock(e,c.owner,'y15RedFusion')});
  extend('canNormal',function(prior,m,p=this.state.active){return !locked(this,p,'y15RedFusion')&&prior.call(this,m,p);});

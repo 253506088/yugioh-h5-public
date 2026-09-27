@@ -13,7 +13,7 @@
  // function while the opponent cannot reach a set monster.
  // ==========================================================================
  const ghostrick=m=>series(m,'Ghostrick');
- const ghostrickSpell=m=>ghostrick(m)||/^Ghostrick-/.test(def(m)?.officialName||'');
+ const ghostrickSpell=m=>ghostrick(m)||D.inArchetype(def(m),"Ghostrick");
  const ghostrickCount=(e,p)=>ownM(e,{owner:p}).filter(m=>m.faceUp&&ghostrick(m)).length;
  const trickBodies=D.CARD_LIST.filter(c=>c.releaseYear===2013&&monster(c)&&ghostrick(c)&&!D.isExtra(c));
  // "Cannot be Normal Summoned, unless you control a Ghostrick monster" is a

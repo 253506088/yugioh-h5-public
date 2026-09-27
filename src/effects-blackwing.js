@@ -1,7 +1,7 @@
 (function(root){ 'use strict'; const E=root.DuelEffects,D=root.DuelData,H=E.H;
 const {CARDS,isMonster}=D;
 const {source,self,first,args,group,deck,grave,hand,monsters,specialable,once}=H;
-const blackwing=c=>isMonster(CARDS[c.id])&&CARDS[c.id].family==='blackwing';
+const blackwing=c=>isMonster(CARDS[c.id])&&D.inArchetype(CARDS[c.id],'blackwing');
 for(const id of ['bw-bora','bw-gale','bw-kris']){
   E.register(id,'special',{label:'从手牌特殊召唤黑羽',zones:['hand'],inherent:true,once:id==='bw-kris'?once('hand-special'):null,
     condition:(e,c)=>monsters(e,c.owner,m=>m.faceUp&&blackwing(m)&&m.id!==c.sourceId).length>0&&e.canSpecial(c.owner,source(e,c).card)&&e.freeMain(c.owner)>0,

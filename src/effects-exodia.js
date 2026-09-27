@@ -31,14 +31,14 @@ E.spell('one-day-peace',{label:'双方抽卡，并进入短暂和平',
   },aiScore:1250});
 H.registerEquip('broken-bamboo',()=>true);H.registerEquip('cursed-bamboo',()=>true);
 H.registerEquip('wonder-wand',c=>CARDS[c.id].race==='魔法师族');
-E.spell('golden-bamboo',{label:'控制竹光装备，抽2张卡',condition:(e,c)=>e.state.players[c.owner].deck.length>0&&e.spells(c.owner).some(s=>e.activeSpell(s)&&CARDS[s.id].family==='bamboo'&&s.equipTarget),
+E.spell('golden-bamboo',{label:'控制竹光装备，抽2张卡',condition:(e,c)=>e.state.players[c.owner].deck.length>0&&e.spells(c.owner).some(s=>e.activeSpell(s)&&D.inArchetype(CARDS[s.id],'bamboo')&&s.equipTarget),
   resolve:(e,c)=>e.draw(c.owner,2),aiScore:(e,c)=>e.state.players[c.owner].deck.length>=2?1600:-100});
 E.register('cursed-bamboo','direct',{label:'返回另一张竹光，获得直接攻击',zones:['spells'],effectType:'spell',requiresField:true,once:once('direct'),
   condition:(e,c)=>!!e.find(source(e,c)?.card.equipTarget),
-  inputs:(e,c)=>[group(e,c,'target','选择返回手牌的另一张竹光',e.spells(c.owner).filter(s=>s.uid!==c.uid&&s.faceUp&&CARDS[s.id].family==='bamboo'),1,1,{role:'bounce'})],
+  inputs:(e,c)=>[group(e,c,'target','选择返回手牌的另一张竹光',e.spells(c.owner).filter(s=>s.uid!==c.uid&&s.faceUp&&D.inArchetype(CARDS[s.id],'bamboo')),1,1,{role:'bounce'})],
   resolve:(e,c)=>{const equipped=e.find(source(e,c)?.card.equipTarget),f=H.legalTarget(e,c,first(c));if(equipped&&f){e.move(f.card.uid,'hand',{kind:'effect-return',source:c.source,byOwner:c.owner});equipped.card.directAttackTurn=e.state.turn;}},aiScore:(e,c)=>{const m=e.find(source(e,c)?.card.equipTarget)?.card;return m&&e.attackValue(m)>0?100:-100;}});
-E.trigger('cursed-bamboo','search',{label:'妖刀竹光：检索其他竹光',zones:['grave'],condition:(e,c)=>deck(e,c.owner,m=>CARDS[m.id].family==='bamboo'&&m.id!=='cursed-bamboo').length>0,
-  resolve:(e,c)=>H.searchChoice(e,c,m=>CARDS[m.id].family==='bamboo'&&m.id!=='cursed-bamboo')});
+E.trigger('cursed-bamboo','search',{label:'妖刀竹光：检索其他竹光',zones:['grave'],condition:(e,c)=>deck(e,c.owner,m=>D.inArchetype(CARDS[m.id],'bamboo')&&m.id!=='cursed-bamboo').length>0,
+  resolve:(e,c)=>H.searchChoice(e,c,m=>D.inArchetype(CARDS[m.id],'bamboo')&&m.id!=='cursed-bamboo')});
 E.register('wonder-wand','draw',{label:'魔杖与装备怪兽送墓，抽2张',zones:['spells'],effectType:'spell',leavesAsCost:true,
   condition:(e,c)=>{const s=source(e,c)?.card,m=e.find(s?.equipTarget);return !!m&&m.owner===c.owner&&H.fieldZone(m.zone)&&H.canSendGY(e,m.card)&&H.canSendGY(e,s)&&e.state.players[c.owner].deck.length>0;},
   cost:(e,c)=>{const target=source(e,c).card.equipTarget;c.costMonster=target;H.sendCost(e,c,[c.uid,target]);},

@@ -14,7 +14,7 @@ files.push('tests/pvp.test.mjs','tests/pvp-network.test.mjs');
 files.push('tests/ai-provider.test.cjs','tests/card-resolver.test.cjs','tests/deck-parse.test.cjs','tests/ai-proxy.test.mjs');
 files.push('tests/deck-research.test.cjs','tests/deck-search.test.mjs');
 files.push('tests/audio-lifecycle.test.cjs');
-files.push('tests/rule-modes.test.cjs','tests/archetype-membership.test.cjs');
+files.push('tests/rule-modes.test.cjs','tests/archetype-membership.test.cjs','tests/archetype-registry.test.cjs','tests/archetype-interactions.test.cjs');
 files.push(...['pendulum','engines','themes','expansion','final'].map(n=>'tests/chronicle-2015-'+n+'.test.cjs'));
 const result=spawnSync(process.execPath,['--test','--test-reporter=tap',...files],{cwd:root,encoding:'utf8',maxBuffer:20_000_000});
 const log=(result.stdout||'')+(result.stderr||'');await writeFile(join(run,'results.tap'),log);process.stdout.write(log);

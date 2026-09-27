@@ -164,7 +164,7 @@
  onFlip('Old Vindictive Magician',{destroys:true,inputs:target('选择破坏的对方怪兽',foeM),resolve:(e,c)=>destroy(e,c,args(c))});
  onFlip('Des Koala',{resolve:(e,c)=>burn(e,c,hand(e,1-c.owner).length*400)});
  onFlip('Des Feral Imp',{inputs:target('选择洗回卡组的墓地卡',(e,c)=>grave(e,c.owner),'search'),resolve:(e,c)=>{const f=e.find(first(c));if(f?.zone==='grave'){e.move(f.card.uid,'deck',{kind:'effect-return',source:c.source});e.shuffle(e.state.players[c.owner].deck);}}});
- onFlip('Arsenal Summoner',{inputs:target('选择加入手牌的守护者卡',(e,c)=>deck(e,c.owner,m=>(CARDS[m.id].families||[]).includes('guardian')),'search'),resolve:(e,c)=>{if(e.find(first(c))?.zone==='deck')e.search(c.owner,args(c));}});
+ onFlip('Arsenal Summoner',{inputs:target('选择加入手牌的守护者卡',(e,c)=>deck(e,c.owner,m=>D.inArchetype(m,'Guardian')&&!['Celtic Guardian','Winged Dragon, Guardian of the Fortress #1','Winged Dragon, Guardian of the Fortress #2','Guardian of the Labyrinth','The Reliable Guardian'].includes(CARDS[m.id].officialName)),'search'),resolve:(e,c)=>{if(e.find(first(c))?.zone==='deck')e.search(c.owner,args(c));}});
  // ---- Dark Scorpion and battle-damage discarders --------------------------------------------
  const damageOption=(extra)=>H.customGroup('mode','选择效果',extra,1,1);
  onDamage('Don Zaloog',{inputs:()=>[damageOption([{uid:'discard',label:'随机丢弃1张手牌',value:10},{uid:'mill',label:'卡组顶2张送墓',value:5}])],resolve:(e,c)=>first(c,'mode')==='discard'?randomDiscard(e,1-c.owner,1,c.source):e.mill(1-c.owner,2,c.source)});

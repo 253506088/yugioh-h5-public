@@ -18,8 +18,8 @@
  // Barian's Force / Numeron Force / Astral Force share one resolution: use an
  // Xyz Monster you control as material for a Chaos Xyz one Rank higher.
  const rankUp=(name,pred,extra={})=>S(name,null,null,{summons:true,once:H.once(name,'name'),inputs:(e,c)=>[g(e,c,'cost','选择作为素材的超量怪兽',ownM(e,c).filter(m=>CARDS[m.id].type==='xyz'),1,1,'cost')],cost:(e,c)=>{c.eraHost=first(c,'cost');moved(e,c,[first(c,'cost')],'grave','cost-return');},resolve:(e,c)=>{const host=c.eraHost&&e.find(c.eraHost);if(!host)return;const rank=(def(host.card).rank||0)+1;const list=e.state.players[c.owner].extra.filter(m=>CARDS[m.id].type==='xyz'&&def(m).rank===rank&&pred(CARDS[m.id],host.card));if(list.length)specialChoice(e,c,list,{via:'xyz',...extra});}});
- rankUp('Rank-Up-Magic Barian\'s Force',(d)=>/Number C|CXyz/.test(d.officialName||''));
- rankUp('Rank-Up-Magic Numeron Force',(d)=>/Number C|CXyz/.test(d.officialName||''));
+ rankUp('Rank-Up-Magic Barian\'s Force',(d)=>(D.inArchetype(d,'Chaos Number')||D.inArchetype(d,'CXyz')));
+ rankUp('Rank-Up-Magic Numeron Force',(d)=>(D.inArchetype(d,'Chaos Number')||D.inArchetype(d,'CXyz')));
  rankUp('Rank-Up-Magic Astral Force',(d,host)=>(d.rank||0)===(CARDS[host.id].rank||0)+1);
  // --- Gimmick / Gagaga / ZW support spells already registered in their parts -
  // --- Chronomaly and Gogogo spells live with their themes ------------------

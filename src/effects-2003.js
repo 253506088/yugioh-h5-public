@@ -3,12 +3,12 @@
  'use strict';
  const X=root.Duel2002,{E,D,H,C,I,is,mark,S,T,A,Q,R,passive,allM,allS,allF,monster,face,ownM,foeM,exact,moved,destroy,choose,g,target,drawDiscard,randomDiscard,pay,once,declare,declared,onEntry,onFlip,onMove,onStandby,onDamage,onBattleWin,src,active,ctx,GYbattle,GYfield,discardCost,tributeInput,tribute,burn,races,attrs,first,args,self,hand,deck,grave,P,extend,rule}=X,{CARDS}=D;
  const cp=v=>JSON.parse(JSON.stringify(v)),field=H.fieldZone;
- const has=(e,name,owner=null)=>e.hasEarly(name,owner),named=(m,part)=>!!m&&CARDS[m.id].officialName.includes(part);
- const arch=m=>named(m,'Archfiend')||!!m&&/always treated as an "Archfiend"/.test(CARDS[m.id].originalDescription||'');
- const ninja=m=>named(m,'Ninja'),scorpion=m=>X.darkScorpion(m)||is(m,'Don Zaloog');
+ const has=(e,name,owner=null)=>e.hasEarly(name,owner),named=(m,part)=>D.inArchetype(m,part);
+ const arch=m=>D.inArchetype(m,'Archfiend');
+ const ninja=m=>D.inArchetype(m,'Ninja'),scorpion=m=>X.darkScorpion(m)||is(m,'Don Zaloog');
  D.families.archfiend='恶魔棋子';D.families.chaos='混沌';D.families.agent='代行者';D.families.ojama='扰乱';
- for(const c of D.CARD_LIST)for(const [key,yes] of [['archfiend',arch(c)],['chaos',/Chaos|Envoy/.test(c.officialName)],['agent',c.officialName.startsWith('The Agent of ')],['ojama',c.officialName.startsWith('Ojama')]])if(yes)c.families=[...new Set([...(c.families||[]),key])];
- function token(id,name,en,level,atk,def,attribute,race,extra={}){if(CARDS[id])return;const c={id,name,officialName:en,en:en.toUpperCase(),type:'token',level,atk,def,attribute,race,family:'early',description:name,notCollectible:true,...extra};CARDS[id]=c;D.CARD_LIST.push(c);}
+ for(const c of D.CARD_LIST)for(const [key,yes] of [['archfiend',arch(c)],['chaos',D.inArchetype(c,'Chaos')],['agent',D.inArchetype(c,'The Agent')],['ojama',D.inArchetype(c,"Ojama")]])if(yes)c.families=[...new Set([...(c.families||[]),key])];
+ function token(id,name,en,level,atk,def,attribute,race,extra={}){if(CARDS[id])return;const c={id,name,officialName:en,en:en.toUpperCase(),type:'token',level,atk,def,attribute,race,family:'early',description:name,notCollectible:true,...extra};CARDS[id]=c;D.applyArchetypeTags(c);D.CARD_LIST.push(c);}
  token('2003-lekunga-token','勒昆加衍生物','Lekunga Token',2,700,700,'水','植物族');
  token('2003-ant-token','兵队蚁衍生物','Army Ant Token',4,500,1200,'地','昆虫族',{cannotTributeSummon:true});
  token('2003-lamb-token','迷途羊衍生物','Lamb Token',1,0,0,'地','兽族');

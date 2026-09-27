@@ -6,10 +6,10 @@
  const P=root.ModernDuelEngine.prototype;
  const rule=(name,values,note)=>{C(name).earlyRules={...(C(name).earlyRules||{}),...values};mark(name,note);};
  function extend(name,fn){const prior=P[name];P[name]=function(...a){return fn.call(this,prior,...a);};}
- const gk=m=>!!m&&CARDS[m.id].officialName.startsWith("Gravekeeper's");
- const amazoness=m=>!!m&&CARDS[m.id].officialName.startsWith('Amazoness');
- const guardian=m=>!!m&&CARDS[m.id].officialName.startsWith('Guardian ');
- const darkScorpion=m=>!!m&&CARDS[m.id].officialName.startsWith('Dark Scorpion');
+ const gk=m=>D.inArchetype(m,"Gravekeeper's");
+ const amazoness=m=>D.inArchetype(m,'Amazoness');
+ const guardian=m=>D.inArchetype(m,'Guardian');
+ const darkScorpion=m=>D.inArchetype(m,'Dark Scorpion');
  // Series labels let both decks and the archive filter the new 2002 themes.
  D.families.gravekeeper='守墓';D.families.amazoness='亚马逊';D.families.guardian='守护者';D.families.toon='卡通';D.families.darkscorpion='黑蝎';
  for(const c of D.CARD_LIST){
@@ -27,7 +27,7 @@
   ['2002-metal-fiend-token','金属恶魔衍生物','Metal Fiend Token',0,0,'暗','恶魔族','恶魔圣域的衍生物；不能攻击，战斗伤害由召唤者承受。'],
   ['2002-wicked-plant-token','邪恶植物衍生物','Wicked Plant Token',800,800,'地','植物族','吸血兰魔掌之棘的衍生物。'],
   ['2002-mirage-token','蜃景衍生物','Mirage Token',0,0,'光','战士族','身体分裂的衍生物；复制对象能力数值，结束阶段破坏。']
- ])if(!CARDS[id]){const c={id,name,officialName,en:officialName.toUpperCase(),type:'token',level:1,atk,def,attribute,race,description:note,family:'early',notCollectible:true};CARDS[id]=c;D.CARD_LIST.push(c);}
+ ])if(!CARDS[id]){const c={id,name,officialName,en:officialName.toUpperCase(),type:'token',level:1,atk,def,attribute,race,description:note,family:'early',notCollectible:true};CARDS[id]=c;D.applyArchetypeTags(c);D.CARD_LIST.push(c);}
  // ---------------------------------------------------------------- Union monsters
  function union(name,partners,spec={}){
   const def=C(name);def.earlyRules={...(def.earlyRules||{}),union:true,unionPartners:partners};

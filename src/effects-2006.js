@@ -3,7 +3,7 @@
 (function(root){
  'use strict';
  const X=root.Duel2005,{E,D,H,C,I,is,mark,S,T,A,Q,R,passive,allM,allS,allF,monster,face,ownM,foeM,moved,destroy,choose,g,target,pay,once,src,active,ctx,first,args,self,hand,deck,grave,extend,rule,field,has,onEnd,defer,revive,search,recruit,token,onEntry,onMove,onStandby}=X,{CARDS}=D,P=root.ModernDuelEngine.prototype;
- const series=(m,name)=>!!CARDS[m?.id]&&((CARDS[m.id].officialName||'').toLowerCase().includes(name.toLowerCase())||(CARDS[m.id].series||[]).includes(name));
+ const series=(m,name)=>D.inArchetype(m,name);
  const destiny=m=>series(m,'Destiny HERO'),neo=m=>series(m,'Neo-Spacian'),six=m=>series(m,'Six Samurai'),alien=m=>series(m,'Alien'),crystal=m=>series(m,'Crystal Beast'),gladiator=m=>series(m,'Gladiator Beast'),lightsworn=m=>series(m,'Lightsworn');
  const groups={destinyhero:['命运英雄','Destiny HERO'],neospacian:['新空间侠','Neo-Spacian'],sixsamurai:['六武众','Six Samurai'],alien:['外星人','Alien'],crystalbeast:['宝玉兽','Crystal Beast'],gladiator:['剑斗兽','Gladiator Beast'],lightsworn:['光道','Lightsworn'],cloudian:['云魔物','Cloudian'],volcanic:['火山','Volcanic'],venom:['毒蛇','Venom'],arcana:['秘仪之力','Arcana Force'],morphtronic:['变形斗士','Morphtronic'],psychic:['念动力','Psychic'],naturia:['自然','Naturia'],genex:['次世代','Genex'],jurrac:['侏罗纪','Jurrac'],fabled:['魔轰神','Fabled'],icebarrier:['冰结界','Ice Barrier'],x_saber:['X-剑士','X-Saber'],allyjustice:['正义盟军','Ally of Justice']};
  for(const [key,[label,n]] of Object.entries(groups)){D.families[key]=label;for(const c of D.CARD_LIST)if(series(c,n)||key==='psychic'&&c.race==='念动力族')c.families=[...new Set([...(c.families||[]),key])];}
@@ -11,7 +11,6 @@
   if(c.type==='fusion'&&/Must be Fusion Summoned/.test(c.originalDescription))c.fusionOnly=true;
   if(c.nexOnly){c.specialOnly='nex';c.noNormal=true;}
   if(c.gemini)c.earlyRules={...(c.earlyRules||{}),gemini:true};
-  if(/always treated as an? "Ultimate Crystal"/.test(c.originalDescription)||['Rainbow Dragon','Rainbow Dark Dragon'].includes(c.officialName))c.series=[...(c.series||[]),'Ultimate Crystal'];
  }
  const normal=(e,m)=>!!m&&monster(m)&&CARDS[m.id].type!=='token'&&(!CARDS[m.id].effect||CARDS[m.id].gemini&&['grave','monsters','extraMonster'].includes(e.find(m.uid)?.zone)&&!e.geminiActive(m));
  P.isNormalMonster=function(m){return normal(this,m);};

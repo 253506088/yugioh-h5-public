@@ -47,7 +47,8 @@ scriptFiles.splice(scriptFiles.indexOf('advanced-effects.js'),0,'ai-tactics.js')
 scriptFiles.splice(scriptFiles.indexOf('advanced-effects.js'),0,'ai-planner.js');
 scriptFiles.splice(scriptFiles.indexOf('advanced-engine.js'),0,'lingering.js');
 scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-lingering.js');
-scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'card-locales.js','i18n-data.js','i18n-effects.js','i18n-help.js','i18n-experience.js','i18n-tournament.js','i18n.js','experience.js');
+scriptFiles.splice(scriptFiles.indexOf('engine.js'),0,'card-locales.js','archetype-data.js','archetypes.js');
+scriptFiles.splice(scriptFiles.indexOf('audio.js'),0,'i18n-data.js','i18n-effects.js','i18n-help.js','i18n-experience.js','i18n-tournament.js','i18n.js','experience.js');
 scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'tournament.js','tournament-storage.js','tournament-ui.js');
 scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'log-ui.js');
 scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-ai.js');
@@ -62,7 +63,7 @@ scriptFiles.splice(scriptFiles.indexOf('log-engine.js')+1,0,'rule-modes.js');
 scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'rule-modes-ui.js');
 styleFiles.push('rule-modes.css');
 const styles = (await Promise.all(styleFiles.map(file => readFile(join(root, 'src', file), 'utf8')))).join('\n\n');
-const scripts = await Promise.all(scriptFiles.map(file => readFile(join(root, 'src', file), 'utf8')));
+const scripts = await Promise.all(scriptFiles.map(async file => (await readFile(join(root, 'src', file), 'utf8')).replace(/\r\n/g,'\n')));
 scripts.unshift('globalThis.DuelCardAliases='+JSON.stringify(JSON.parse(await readFile(join(root,'data/card-aliases.json'),'utf8'))).replace(/</g,'\\u003c')+';');
 new Script(scripts.join('\n\n'), { filename: 'duel-single-file.js' });
 let template = await readFile(join(root, 'src/index.template.html'), 'utf8');

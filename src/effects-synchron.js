@@ -4,9 +4,9 @@ const {source,self,first,args,group,deck,grave,hand,monsters,specialable,once}=H
 E.trigger('junk-synchron','revive',{label:'废品同调士：复活2星以下怪兽',inputs:(e,c)=>[group(e,c,'target','选择墓地2星以下怪兽',specialable(e,c.owner,grave(e,c.owner,m=>isMonster(CARDS[m.id])&&CARDS[m.id].level<=2),'revive'),1,1,{role:'special'})],
   resolve:(e,c)=>{const f=e.find(first(c));if(f?.zone==='grave')e.special(c.owner,f.card.uid,{via:'revive',position:'defense',negated:true});}});
 E.register('junk-converter','search',{label:'丢弃转换者与调整，检索同调士',zones:['hand'],once:once('search'),
-  condition:(e,c)=>deck(e,c.owner,m=>CARDS[m.id].family==='synchron').length>0,
+  condition:(e,c)=>deck(e,c.owner,m=>D.inArchetype(CARDS[m.id],'synchron')).length>0,
   inputs:(e,c)=>[group(e,c,'cost','选择一起丢弃的调整',hand(e,c.owner,m=>m.uid!==c.uid&&CARDS[m.id].tuner),1,1,{role:'cost'})],
-  cost:(e,c)=>H.discard(e,c,[c.uid,...args(c,'cost')]),resolve:(e,c)=>H.searchChoice(e,c,m=>CARDS[m.id].family==='synchron'),aiScore:1250});
+  cost:(e,c)=>H.discard(e,c,[c.uid,...args(c,'cost')]),resolve:(e,c)=>H.searchChoice(e,c,m=>D.inArchetype(CARDS[m.id],'synchron')),aiScore:1250});
 E.trigger('junk-converter','revive',{label:'转换者：复活调整',zones:['grave'],once:once('revive'),inputs:(e,c)=>[group(e,c,'target','选择墓地的调整',specialable(e,c.owner,grave(e,c.owner,m=>CARDS[m.id].tuner),'revive'),1,1,{role:'special'})],resolve:(e,c)=>{const f=e.find(first(c));if(f?.zone==='grave')e.special(c.owner,f.card.uid,{via:'revive',position:'defense',cannotActivate:true});}});
 E.trigger('doppelwarrior','special',{label:'二重身战士：从手牌展开',zones:['hand'],condition:(e,c)=>e.freeMain(c.owner)>0&&e.canSpecial(c.owner,source(e,c).card),resolve:(e,c)=>{if(e.find(c.uid)?.zone==='hand')e.special(c.owner,c.uid,{via:'effect'});}});
 E.trigger('doppelwarrior','tokens',{label:'二重身：产生2只衍生物',zones:['grave'],condition:(e,c)=>e.freeMain(c.owner)>=2,resolve:(e,c)=>e.createTokens(c.owner,'doppel-token',2)});
@@ -16,23 +16,23 @@ E.register('jet-synchron','revive',{label:'手牌送墓，复活喷气同调士'
   inputs:(e,c)=>[group(e,c,'cost','选择送去墓地的手牌',hand(e,c.owner,m=>H.canSendGY(e,m)),1,1,{role:'send-cost'})],
   condition:(e,c)=>e.canSpecial(c.owner,source(e,c).card)&&e.freeMain(c.owner)>0,
   cost:(e,c)=>H.sendCost(e,c,args(c,'cost')),resolve:(e,c)=>e.special(c.owner,c.uid,{via:'revive',banishOnLeave:true}),aiScore:800});
-E.trigger('jet-synchron','search',{label:'喷气同调士：检索废品怪兽',zones:['grave'],once:once('one-effect'),condition:(e,c)=>deck(e,c.owner,m=>!!CARDS[m.id].junk).length>0,resolve:(e,c)=>H.searchChoice(e,c,m=>!!CARDS[m.id].junk)});
+E.trigger('jet-synchron','search',{label:'喷气同调士：检索废品怪兽',zones:['grave'],once:once('one-effect'),condition:(e,c)=>deck(e,c.owner,m=>!!D.inArchetype(CARDS[m.id],'Junk')).length>0,resolve:(e,c)=>H.searchChoice(e,c,m=>!!D.inArchetype(CARDS[m.id],'Junk'))});
 E.register('quickdraw-synchron','special',{label:'手牌怪兽送墓，特殊召唤速攻同调士',zones:['hand'],inherent:true,condition:(e,c)=>e.canSpecial(c.owner,source(e,c).card)&&e.freeMain(c.owner)>0,
   inputs:(e,c)=>[group(e,c,'cost','选择送去墓地的其他怪兽',hand(e,c.owner,m=>m.uid!==c.uid&&isMonster(CARDS[m.id])&&H.canSendGY(e,m)),1,1,{role:'send-cost'})],
   cost:(e,c)=>H.sendCost(e,c,args(c,'cost')),resolve:(e,c)=>e.special(c.owner,c.uid,{via:'effect'}),aiScore:680});
 E.trigger('fleur-synchron','special',{label:'花之同调士：展开低星手牌',zones:['grave'],condition:(e,c)=>specialable(e,c.owner,hand(e,c.owner,m=>isMonster(CARDS[m.id])&&CARDS[m.id].level<=2)).length>0,resolve:(e,c)=>H.specialChoice(e,c,hand(e,c.owner,m=>isMonster(CARDS[m.id])&&CARDS[m.id].level<=2))});
-E.spell('tuning',{label:'检索同调士调整，再送墓卡组顶',condition:(e,c)=>deck(e,c.owner,m=>CARDS[m.id].family==='synchron'&&CARDS[m.id].tuner).length>0,
-  resolve:(e,c)=>{const list=deck(e,c.owner,m=>CARDS[m.id].family==='synchron'&&CARDS[m.id].tuner);if(list.length)e.queueChoice(c.owner,'调律：选择同调士调整',H.options(e,c,list),1,1,'tuning-search',{source:c.source,role:'search'});},aiScore:1300});
+E.spell('tuning',{label:'检索同调士调整，再送墓卡组顶',condition:(e,c)=>deck(e,c.owner,m=>D.inArchetype(CARDS[m.id],'synchron')&&CARDS[m.id].tuner).length>0,
+  resolve:(e,c)=>{const list=deck(e,c.owner,m=>D.inArchetype(CARDS[m.id],'synchron')&&CARDS[m.id].tuner);if(list.length)e.queueChoice(c.owner,'调律：选择同调士调整',H.options(e,c,list),1,1,'tuning-search',{source:c.source,role:'search'});},aiScore:1300});
 E.op('tuning-search',(e,t)=>{
   const f=e.find(t.picks[0]);if(!f||f.zone!=='deck')return;e.search(t.owner,[f.card.uid]);
   const top=e.state.players[t.owner].deck[0];if(top)e.move(top.uid,'grave',{kind:'effect-send',source:t.context.source,byOwner:t.owner});
 });
 E.trigger('junk-warrior','gain',{label:'废品战士：吸收低星怪兽攻击力',mandatory:true,resolve:(e,c)=>{const m=self(e,c);if(m){const value=monsters(e,c.owner,x=>x.faceUp&&x.uid!==m.uid&&e.level(x)<=2&&e.level(x)>0).reduce((n,x)=>n+e.attackValue(x),0);e.modify(m.uid,'atk','add',value,null,c.source);}}});
 E.trigger('junk-speeder','recruit',{label:'增速者：展开不同等级同调士',once:once('recruit'),wholeTurnExtra:'synchro',
-  condition:(e,c)=>e.freeMain(c.owner)>0&&specialable(e,c.owner,deck(e,c.owner,m=>CARDS[m.id].family==='synchron'&&CARDS[m.id].tuner)).length>0,
+  condition:(e,c)=>e.freeMain(c.owner)>0&&specialable(e,c.owner,deck(e,c.owner,m=>D.inArchetype(CARDS[m.id],'synchron')&&CARDS[m.id].tuner)).length>0,
   resolve:(e,c)=>{
     e.addLock(c.owner,'extra','synchro');
-    const list=specialable(e,c.owner,deck(e,c.owner,m=>CARDS[m.id].family==='synchron'&&CARDS[m.id].tuner)),count=Math.min(e.freeMain(c.owner),new Set(list.map(m=>CARDS[m.id].level)).size);
+    const list=specialable(e,c.owner,deck(e,c.owner,m=>D.inArchetype(CARDS[m.id],'synchron')&&CARDS[m.id].tuner)),count=Math.min(e.freeMain(c.owner),new Set(list.map(m=>CARDS[m.id].level)).size);
     if(count)e.queueChoice(c.owner,'选择等级各不相同的同调士',list.map(m=>e.option(m,{viewer:c.owner,level:CARDS[m.id].level})),count,count,'speeder-recruit',{source:c.source,role:'synchrons',distinct:'level'});
   }});
 E.op('speeder-recruit',(e,t)=>{

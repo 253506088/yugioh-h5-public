@@ -1,8 +1,8 @@
 (function(root){ 'use strict'; const E=root.DuelEffects,D=root.DuelData,H=E.H;
 const {CARDS,isMonster}=D;
 const {source,self,first,args,group,deck,grave,hand,monsters,specialable,once}=H;
-const cryMonster=c=>isMonster(CARDS[c.id])&&CARDS[c.id].crystron;
-const cryCard=c=>CARDS[c.id].crystron;
+const cryMonster=c=>isMonster(CARDS[c.id])&&D.inArchetype(CARDS[c.id],'Crystron');
+const cryCard=c=>D.inArchetype(CARDS[c.id],'Crystron');
 const cryTuner=c=>cryMonster(c)&&CARDS[c.id].tuner;
 E.register('cry-sulfefnir','special',{label:'丢弃水晶机巧，特殊召唤并破坏己方卡',zones:['hand','grave'],once:once('special'),
   condition:(e,c)=>e.canSpecial(c.owner,source(e,c).card)&&e.freeMain(c.owner)>0,

@@ -7,7 +7,7 @@
  const gagaga=m=>series(m,'Gagaga'),gogogo=m=>series(m,'Gogogo'),dododo=m=>series(m,'Dododo');
  const starseraph=m=>series(m,'Star Seraph'),umbral=m=>series(m,'Umbral Horror'),malice=m=>series(m,'Malicevorous');
  const sdr=m=>series(m,'Super Defense Robot')||is(m,'Orbital 7'),mythic=m=>series(m,'Mythic');
- const utopia=m=>monster(m)&&/Utopia/.test(def(m)?.officialName||'');
+ const utopia=m=>monster(m)&&D.inArchetype(def(m),"Utopia");
  const discardOne=(e,c,pred,after)=>{const list=hand(e,c.owner,pred);if(!list.length)return false;H.discard(e,c,[list[0].uid]);after?.(list[0]);return true;};
  // ==========================================================================
  // Gagaga / Gogogo / Dododo / Zubaba

@@ -1,0 +1,1175 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "ac5d8fb80465e74b33f3b4a294e3b22c02d743f2",
+  "tokens": {
+    "Koa'ki Meiru Token": {
+      "providerId": 176393,
+      "setcodes": [
+        29
+      ],
+      "setcodeSourceId": 176393
+    },
+    "Gadget Token": {
+      "providerId": 645088,
+      "setcodes": [
+        81
+      ],
+      "setcodeSourceId": 645088
+    },
+    "Phantom Token": {
+      "providerId": 1426715,
+      "setcodes": [],
+      "setcodeSourceId": 1426715
+    },
+    "Moult Token": {
+      "providerId": 1799465,
+      "setcodes": [],
+      "setcodeSourceId": 1799465
+    },
+    "Spool Token": {
+      "providerId": 2625940,
+      "setcodes": [],
+      "setcodeSourceId": 2625940
+    },
+    "Phantasm Spiral Token": {
+      "providerId": 2819436,
+      "setcodes": [
+        250
+      ],
+      "setcodeSourceId": 2819436
+    },
+    "Delta Token": {
+      "providerId": 3129134,
+      "setcodes": [],
+      "setcodeSourceId": 3129134
+    },
+    "Scapedgoat Tokens": {
+      "providerId": 3129528,
+      "setcodes": [],
+      "setcodeSourceId": 3129528
+    },
+    "Adventurer Token": {
+      "providerId": 3285552,
+      "setcodes": [],
+      "setcodeSourceId": 3285552
+    },
+    "Chewbone Jr. Token": {
+      "providerId": 7392746,
+      "setcodes": [],
+      "setcodeSourceId": 7392746
+    },
+    "Familiar of the Evil Eye Token": {
+      "providerId": 7610395,
+      "setcodes": [
+        297
+      ],
+      "setcodeSourceId": 7610395
+    },
+    "Gadget Box Token": {
+      "providerId": 8025951,
+      "setcodes": [
+        81
+      ],
+      "setcodeSourceId": 8025951
+    },
+    "Dark Soul Token": {
+      "providerId": 8198621,
+      "setcodes": [],
+      "setcodeSourceId": 8198621
+    },
+    "Steam Token": {
+      "providerId": 9047461,
+      "setcodes": [],
+      "setcodeSourceId": 9047461
+    },
+    "Blackwing - Black Crest Token": {
+      "providerId": 9925983,
+      "setcodes": [
+        51
+      ],
+      "setcodeSourceId": 9925983
+    },
+    "Vague Shadow Token": {
+      "providerId": 9929399,
+      "setcodes": [],
+      "setcodeSourceId": 9929399
+    },
+    "Battle Eagle Token": {
+      "providerId": 10389143,
+      "setcodes": [],
+      "setcodeSourceId": 10389143
+    },
+    "@Ignister Token": {
+      "providerId": 11738490,
+      "setcodes": [
+        309
+      ],
+      "setcodeSourceId": 11738490
+    },
+    "Skyblaster Token": {
+      "providerId": 12958920,
+      "setcodes": [
+        73
+      ],
+      "setcodeSourceId": 12958920
+    },
+    "Wicked Plant Token": {
+      "providerId": 12965762,
+      "setcodes": [],
+      "setcodeSourceId": 12965762
+    },
+    "V-LAN Token": {
+      "providerId": 13536607,
+      "setcodes": [],
+      "setcodeSourceId": 13536607
+    },
+    "Lunalight Token": {
+      "providerId": 13935002,
+      "setcodes": [
+        223
+      ],
+      "setcodeSourceId": 13935002
+    },
+    "Thunder Option Token": {
+      "providerId": 14089429,
+      "setcodes": [],
+      "setcodeSourceId": 14089429
+    },
+    "Otoshidamashi Token": {
+      "providerId": 14957441,
+      "setcodes": [],
+      "setcodeSourceId": 14957441
+    },
+    "Fluff Token": {
+      "providerId": 15341822,
+      "setcodes": [],
+      "setcodeSourceId": 15341822
+    },
+    "Nordic Beast Token": {
+      "providerId": 15394084,
+      "setcodes": [
+        24642
+      ],
+      "setcodeSourceId": 15394084
+    },
+    "Fire Token": {
+      "providerId": 15590356,
+      "setcodes": [],
+      "setcodeSourceId": 15590356
+    },
+    "Waltz Token": {
+      "providerId": 15629802,
+      "setcodes": [],
+      "setcodeSourceId": 15629802
+    },
+    "Synthetic Seraphim Token": {
+      "providerId": 16946850,
+      "setcodes": [],
+      "setcodeSourceId": 16946850
+    },
+    "Jurraegg Token": {
+      "providerId": 17228909,
+      "setcodes": [],
+      "setcodeSourceId": 17228909
+    },
+    "Photon Token": {
+      "providerId": 17418745,
+      "setcodes": [
+        85
+      ],
+      "setcodeSourceId": 17418745
+    },
+    "Hippo Token": {
+      "providerId": 18027139,
+      "setcodes": [],
+      "setcodeSourceId": 18027139
+    },
+    "Icejade Token": {
+      "providerId": 18494512,
+      "setcodes": [
+        364
+      ],
+      "setcodeSourceId": 18494512
+    },
+    "Wyvern Token": {
+      "providerId": 18905770,
+      "setcodes": [],
+      "setcodeSourceId": 18905770
+    },
+    "Prince of Fairies": {
+      "providerId": 19144623,
+      "setcodes": [],
+      "setcodeSourceId": 19144623
+    },
+    "Tellus Wing Token": {
+      "providerId": 19280590,
+      "setcodes": [],
+      "setcodeSourceId": 19280590
+    },
+    "Swordsoul Token": {
+      "providerId": 20001444,
+      "setcodes": [
+        363
+      ],
+      "setcodeSourceId": 20001444
+    },
+    "Reptilianne Token": {
+      "providerId": 21179144,
+      "setcodes": [
+        60
+      ],
+      "setcodeSourceId": 21179144
+    },
+    "Slime Token": {
+      "providerId": 21770261,
+      "setcodes": [],
+      "setcodeSourceId": 21770261
+    },
+    "Clock Token": {
+      "providerId": 21830680,
+      "setcodes": [],
+      "setcodeSourceId": 21830680
+    },
+    "Vassal Token": {
+      "providerId": 22404676,
+      "setcodes": [],
+      "setcodeSourceId": 22404676
+    },
+    "Bomb Token": {
+      "providerId": 22411610,
+      "setcodes": [],
+      "setcodeSourceId": 22411610
+    },
+    "Army Ant Token": {
+      "providerId": 22493812,
+      "setcodes": [],
+      "setcodeSourceId": 22493812
+    },
+    "Paralyzing Token": {
+      "providerId": 22712878,
+      "setcodes": [],
+      "setcodeSourceId": 22712878
+    },
+    "Bellcat Token": {
+      "providerId": 22953212,
+      "setcodes": [],
+      "setcodeSourceId": 22953212
+    },
+    "Fireball Token": {
+      "providerId": 23116809,
+      "setcodes": [],
+      "setcodeSourceId": 23116809
+    },
+    "Data Token": {
+      "providerId": 23331401,
+      "setcodes": [],
+      "setcodeSourceId": 23331401
+    },
+    "Ogdoadic Token": {
+      "providerId": 23837055,
+      "setcodes": [
+        353
+      ],
+      "setcodeSourceId": 23837055
+    },
+    "Metal Fiend Token": {
+      "providerId": 24874631,
+      "setcodes": [],
+      "setcodeSourceId": 24874631
+    },
+    "Shinobird Token": {
+      "providerId": 25415053,
+      "setcodes": [],
+      "setcodeSourceId": 25415053
+    },
+    "Dinomorphia Token": {
+      "providerId": 25419324,
+      "setcodes": [
+        371
+      ],
+      "setcodeSourceId": 25419324
+    },
+    "Shiranui Token": {
+      "providerId": 26326542,
+      "setcodes": [
+        217
+      ],
+      "setcodeSourceId": 26326542
+    },
+    "Homunculus Token": {
+      "providerId": 26364382,
+      "setcodes": [],
+      "setcodeSourceId": 26364382
+    },
+    "Fox Token": {
+      "providerId": 27198002,
+      "setcodes": [],
+      "setcodeSourceId": 27198002
+    },
+    "Primal Being Token": {
+      "providerId": 27204312,
+      "setcodes": [],
+      "setcodeSourceId": 27204312
+    },
+    "Compass Token": {
+      "providerId": 27450401,
+      "setcodes": [
+        242
+      ],
+      "setcodeSourceId": 27450401
+    },
+    "Vilepawn Salmon Token": {
+      "providerId": 27882994,
+      "setcodes": [],
+      "setcodeSourceId": 27882994
+    },
+    "Dragonoid Token": {
+      "providerId": 28053764,
+      "setcodes": [],
+      "setcodeSourceId": 28053764
+    },
+    "Plant Token": {
+      "providerId": 28062326,
+      "setcodes": [],
+      "setcodeSourceId": 28062326
+    },
+    "Double Dude Token": {
+      "providerId": 28355719,
+      "setcodes": [],
+      "setcodeSourceId": 28355719
+    },
+    "Radian Token": {
+      "providerId": 28674153,
+      "setcodes": [],
+      "setcodeSourceId": 28674153
+    },
+    "DOG Fighter Token": {
+      "providerId": 29491335,
+      "setcodes": [],
+      "setcodeSourceId": 29491335
+    },
+    "Ojama Token": {
+      "providerId": 29843092,
+      "setcodes": [
+        15
+      ],
+      "setcodeSourceId": 29843092
+    },
+    "Ivy Token": {
+      "providerId": 30069399,
+      "setcodes": [],
+      "setcodeSourceId": 30069399
+    },
+    "Dark Beast Token": {
+      "providerId": 30327675,
+      "setcodes": [],
+      "setcodeSourceId": 30327675
+    },
+    "Light Beast Token": {
+      "providerId": 30327676,
+      "setcodes": [],
+      "setcodeSourceId": 30327676
+    },
+    "Vendread Token": {
+      "providerId": 30650148,
+      "setcodes": [
+        262
+      ],
+      "setcodeSourceId": 30650148
+    },
+    "Hundred Apples Token": {
+      "providerId": 30765616,
+      "setcodes": [],
+      "setcodeSourceId": 30765616
+    },
+    "Mecha Phantom Beast Token": {
+      "providerId": 31533705,
+      "setcodes": [
+        4123
+      ],
+      "setcodeSourceId": 31533705
+    },
+    "Baby Mantis Token": {
+      "providerId": 31600514,
+      "setcodes": [],
+      "setcodeSourceId": 31600514
+    },
+    "Regenerating Rose Token": {
+      "providerId": 31986289,
+      "setcodes": [],
+      "setcodeSourceId": 31986289
+    },
+    "Haunted Token": {
+      "providerId": 32335698,
+      "setcodes": [],
+      "setcodeSourceId": 32335698
+    },
+    "Manipulator Token": {
+      "providerId": 32446631,
+      "setcodes": [],
+      "setcodeSourceId": 32446631
+    },
+    "Escapegoat Token": {
+      "providerId": 33676147,
+      "setcodes": [],
+      "setcodeSourceId": 33676147
+    },
+    "Alligator Token": {
+      "providerId": 34479659,
+      "setcodes": [],
+      "setcodeSourceId": 34479659
+    },
+    "Cynet Token": {
+      "providerId": 34767866,
+      "setcodes": [
+        280
+      ],
+      "setcodeSourceId": 34767866
+    },
+    "Infernoid Token": {
+      "providerId": 34822851,
+      "setcodes": [
+        187
+      ],
+      "setcodeSourceId": 34822851
+    },
+    "Surprise Token": {
+      "providerId": 35167376,
+      "setcodes": [],
+      "setcodeSourceId": 35167376
+    },
+    "Snack Token": {
+      "providerId": 35263181,
+      "setcodes": [],
+      "setcodeSourceId": 35263181
+    },
+    "Ghost Token": {
+      "providerId": 35268888,
+      "setcodes": [],
+      "setcodeSourceId": 35268888
+    },
+    "Multi Token": {
+      "providerId": 35514097,
+      "setcodes": [],
+      "setcodeSourceId": 35514097
+    },
+    "Fiendsmith Token": {
+      "providerId": 35552986,
+      "setcodes": [
+        432
+      ],
+      "setcodeSourceId": 35552986
+    },
+    "Lamp Token": {
+      "providerId": 35834120,
+      "setcodes": [],
+      "setcodeSourceId": 35834120
+    },
+    "White Fluff Token": {
+      "providerId": 36629636,
+      "setcodes": [],
+      "setcodeSourceId": 36629636
+    },
+    "Mechbeast Token": {
+      "providerId": 37654624,
+      "setcodes": [],
+      "setcodeSourceId": 37654624
+    },
+    "Tenyi Spirit Token": {
+      "providerId": 38030233,
+      "setcodes": [
+        300
+      ],
+      "setcodeSourceId": 38030233
+    },
+    "Seed Token": {
+      "providerId": 38041941,
+      "setcodes": [],
+      "setcodeSourceId": 38041941
+    },
+    "Generaider Token": {
+      "providerId": 38053382,
+      "setcodes": [
+        308
+      ],
+      "setcodeSourceId": 38053382
+    },
+    "Kagemusha Raccoon Token": {
+      "providerId": 39972130,
+      "setcodes": [],
+      "setcodeSourceId": 39972130
+    },
+    "Nouvelles Token": {
+      "providerId": 40551411,
+      "setcodes": [
+        406
+      ],
+      "setcodeSourceId": 40551411
+    },
+    "Kuriboh Token": {
+      "providerId": 40703223,
+      "setcodes": [
+        164
+      ],
+      "setcodeSourceId": 40703223
+    },
+    "Einherjar Token": {
+      "providerId": 40844553,
+      "setcodes": [],
+      "setcodeSourceId": 40844553
+    },
+    "Glimmer Token": {
+      "providerId": 41458362,
+      "setcodes": [],
+      "setcodeSourceId": 41458362
+    },
+    "Machine Token": {
+      "providerId": 42427231,
+      "setcodes": [],
+      "setcodeSourceId": 42427231
+    },
+    "Malus Token": {
+      "providerId": 42671152,
+      "setcodes": [],
+      "setcodeSourceId": 42671152
+    },
+    "Nightmare Archfiend Token": {
+      "providerId": 42956964,
+      "setcodes": [
+        69
+      ],
+      "setcodeSourceId": 42956964
+    },
+    "Worm Token": {
+      "providerId": 43140792,
+      "setcodes": [
+        62
+      ],
+      "setcodeSourceId": 43140792
+    },
+    "Prank-Kids Token": {
+      "providerId": 43664495,
+      "setcodes": [
+        288
+      ],
+      "setcodeSourceId": 43664495
+    },
+    "Ancient Gear Token": {
+      "providerId": 44052075,
+      "setcodes": [
+        7
+      ],
+      "setcodeSourceId": 44052075
+    },
+    "Parasomnia Token": {
+      "providerId": 44092305,
+      "setcodes": [],
+      "setcodeSourceId": 44092305
+    },
+    "Ice Barrier Token": {
+      "providerId": 44308318,
+      "setcodes": [
+        47
+      ],
+      "setcodeSourceId": 44308318
+    },
+    "Emissary of Darkness Token": {
+      "providerId": 44330099,
+      "setcodes": [],
+      "setcodeSourceId": 44330099
+    },
+    "Batteryman Token": {
+      "providerId": 44586427,
+      "setcodes": [
+        40
+      ],
+      "setcodeSourceId": 44586427
+    },
+    "Spinos Token": {
+      "providerId": 44689689,
+      "setcodes": [],
+      "setcodeSourceId": 44689689
+    },
+    "Doomsday Token": {
+      "providerId": 46173680,
+      "setcodes": [],
+      "setcodeSourceId": 46173680
+    },
+    "World Legacy Token": {
+      "providerId": 46647145,
+      "setcodes": [
+        254
+      ],
+      "setcodeSourceId": 46647145
+    },
+    "Laval Token": {
+      "providerId": 47658965,
+      "setcodes": [
+        57
+      ],
+      "setcodeSourceId": 47658965
+    },
+    "Link Token": {
+      "providerId": 48068379,
+      "setcodes": [],
+      "setcodeSourceId": 48068379
+    },
+    "Block Token": {
+      "providerId": 48115278,
+      "setcodes": [],
+      "setcodeSourceId": 48115278
+    },
+    "Pyrite Token": {
+      "providerId": 48228391,
+      "setcodes": [],
+      "setcodeSourceId": 48228391
+    },
+    "Jurrac Token": {
+      "providerId": 48411997,
+      "setcodes": [
+        34
+      ],
+      "setcodeSourceId": 48411997
+    },
+    "Metabo Token": {
+      "providerId": 49808197,
+      "setcodes": [],
+      "setcodeSourceId": 49808197
+    },
+    "Trickstar Token": {
+      "providerId": 51208047,
+      "setcodes": [
+        251
+      ],
+      "setcodeSourceId": 51208047
+    },
+    "Epigonos Token": {
+      "providerId": 51611042,
+      "setcodes": [],
+      "setcodeSourceId": 51611042
+    },
+    "Rockstone Token": {
+      "providerId": 51987572,
+      "setcodes": [],
+      "setcodeSourceId": 51987572
+    },
+    "Sky Striker Ace Token": {
+      "providerId": 52340445,
+      "setcodes": [
+        4373
+      ],
+      "setcodeSourceId": 52340445
+    },
+    "Dark Creator Token": {
+      "providerId": 52768391,
+      "setcodes": [],
+      "setcodeSourceId": 52768391
+    },
+    "Diagram Token": {
+      "providerId": 52782440,
+      "setcodes": [],
+      "setcodeSourceId": 52782440
+    },
+    "Support Token": {
+      "providerId": 53545927,
+      "setcodes": [],
+      "setcodeSourceId": 53545927
+    },
+    "Armament Reincarnation Tokens": {
+      "providerId": 53770667,
+      "setcodes": [],
+      "setcodeSourceId": 53770667
+    },
+    "Doppel Token": {
+      "providerId": 53855410,
+      "setcodes": [],
+      "setcodeSourceId": 53855410
+    },
+    "Mini Mare Mare Token": {
+      "providerId": 54537490,
+      "setcodes": [],
+      "setcodeSourceId": 54537490
+    },
+    "Arc Token": {
+      "providerId": 54577950,
+      "setcodes": [],
+      "setcodeSourceId": 54577950
+    },
+    "Crystron Token": {
+      "providerId": 55326323,
+      "setcodes": [
+        234
+      ],
+      "setcodeSourceId": 55326323
+    },
+    "Spider Token": {
+      "providerId": 56051649,
+      "setcodes": [],
+      "setcodeSourceId": 56051649
+    },
+    "Cloudian Token": {
+      "providerId": 56597273,
+      "setcodes": [
+        24
+      ],
+      "setcodeSourceId": 56597273
+    },
+    "Crystal Beast Token": {
+      "providerId": 58371672,
+      "setcodes": [
+        4148
+      ],
+      "setcodeSourceId": 58371672
+    },
+    "Elfnote Seraphim Token": {
+      "providerId": 58809686,
+      "setcodes": [
+        472
+      ],
+      "setcodeSourceId": 58809686
+    },
+    "Torment Token": {
+      "providerId": 59160189,
+      "setcodes": [],
+      "setcodeSourceId": 59160189
+    },
+    "Nytro Token": {
+      "providerId": 59900656,
+      "setcodes": [],
+      "setcodeSourceId": 59900656
+    },
+    "Duel Dragon Token": {
+      "providerId": 60025884,
+      "setcodes": [],
+      "setcodeSourceId": 60025884
+    },
+    "Gold Pride Token": {
+      "providerId": 60203671,
+      "setcodes": [
+        402
+      ],
+      "setcodeSourceId": 60203671
+    },
+    "Sinister Seed Token": {
+      "providerId": 60406592,
+      "setcodes": [],
+      "setcodeSourceId": 60406592
+    },
+    "Mask Token": {
+      "providerId": 60514626,
+      "setcodes": [],
+      "setcodeSourceId": 60514626
+    },
+    "Lamb Token": {
+      "providerId": 60764582,
+      "setcodes": [],
+      "setcodeSourceId": 60764582
+    },
+    "Synchron Token": {
+      "providerId": 62125439,
+      "setcodes": [
+        4119
+      ],
+      "setcodeSourceId": 62125439
+    },
+    "Lekunga Token": {
+      "providerId": 62543394,
+      "setcodes": [],
+      "setcodeSourceId": 62543394
+    },
+    "Stardust Token": {
+      "providerId": 63184228,
+      "setcodes": [
+        163
+      ],
+      "setcodeSourceId": 63184228
+    },
+    "Mirage Token": {
+      "providerId": 63442605,
+      "setcodes": [],
+      "setcodeSourceId": 63442605
+    },
+    "Beetrooper Token": {
+      "providerId": 64213018,
+      "setcodes": [
+        368
+      ],
+      "setcodeSourceId": 64213018
+    },
+    "Eva Token": {
+      "providerId": 64382840,
+      "setcodes": [],
+      "setcodeSourceId": 64382840
+    },
+    "Dragon Token": {
+      "providerId": 64583601,
+      "setcodes": [],
+      "setcodeSourceId": 64583601
+    },
+    "Squid Ink Token": {
+      "providerId": 65500516,
+      "setcodes": [],
+      "setcodeSourceId": 65500516
+    },
+    "Wicked Token": {
+      "providerId": 65810490,
+      "setcodes": [],
+      "setcodeSourceId": 65810490
+    },
+    "Ice Coffin Token": {
+      "providerId": 66661679,
+      "setcodes": [],
+      "setcodeSourceId": 66661679
+    },
+    "Black Sheep Token": {
+      "providerId": 67284108,
+      "setcodes": [],
+      "setcodeSourceId": 67284108
+    },
+    "Umbral Horror Mirage Token": {
+      "providerId": 67949764,
+      "setcodes": [
+        135
+      ],
+      "setcodeSourceId": 67949764
+    },
+    "Wild Fire Token": {
+      "providerId": 68815402,
+      "setcodes": [],
+      "setcodeSourceId": 68815402
+    },
+    "Speedroid Token": {
+      "providerId": 69550260,
+      "setcodes": [
+        8214
+      ],
+      "setcodeSourceId": 69550260
+    },
+    "Dragon Lord Token": {
+      "providerId": 69868556,
+      "setcodes": [],
+      "setcodeSourceId": 69868556
+    },
+    "Phantasm Token": {
+      "providerId": 69890968,
+      "setcodes": [],
+      "setcodeSourceId": 69890968
+    },
+    "Siphon Token": {
+      "providerId": 70391589,
+      "setcodes": [],
+      "setcodeSourceId": 70391589
+    },
+    "Phantom Glimmer Token": {
+      "providerId": 70465811,
+      "setcodes": [],
+      "setcodeSourceId": 70465811
+    },
+    "Stag Token": {
+      "providerId": 70950699,
+      "setcodes": [],
+      "setcodeSourceId": 70950699
+    },
+    "Rose Token": {
+      "providerId": 71645243,
+      "setcodes": [],
+      "setcodeSourceId": 71645243
+    },
+    "Sacrificial Offering Token": {
+      "providerId": 71771005,
+      "setcodes": [],
+      "setcodeSourceId": 71771005
+    },
+    "Doppelganger Token": {
+      "providerId": 71939276,
+      "setcodes": [],
+      "setcodeSourceId": 71939276
+    },
+    "Sheep Token": {
+      "providerId": 73915052,
+      "setcodes": [],
+      "setcodeSourceId": 73915052
+    },
+    "Needle Token": {
+      "providerId": 74440056,
+      "setcodes": [],
+      "setcodeSourceId": 74440056
+    },
+    "T.G. Token": {
+      "providerId": 74627017,
+      "setcodes": [
+        39
+      ],
+      "setcodeSourceId": 74627017
+    },
+    "Runick Token": {
+      "providerId": 74659583,
+      "setcodes": [
+        383
+      ],
+      "setcodeSourceId": 74659583
+    },
+    "Maize Token": {
+      "providerId": 74983882,
+      "setcodes": [],
+      "setcodeSourceId": 74983882
+    },
+    "Tindangle Token": {
+      "providerId": 75119041,
+      "setcodes": [
+        267
+      ],
+      "setcodeSourceId": 75119041
+    },
+    "Evil Token": {
+      "providerId": 75524093,
+      "setcodes": [],
+      "setcodeSourceId": 75524093
+    },
+    "Tricky Token": {
+      "providerId": 75622825,
+      "setcodes": [],
+      "setcodeSourceId": 75622825
+    },
+    "Grinder Token": {
+      "providerId": 75732623,
+      "setcodes": [],
+      "setcodeSourceId": 75732623
+    },
+    "Overflow Token": {
+      "providerId": 76589547,
+      "setcodes": [],
+      "setcodeSourceId": 76589547
+    },
+    "Iron Rubble Token": {
+      "providerId": 77435269,
+      "setcodes": [],
+      "setcodeSourceId": 77435269
+    },
+    "Unknown": {
+      "providerId": 77571455,
+      "setcodes": [],
+      "setcodeSourceId": 77571455
+    },
+    "Iceblade Token": {
+      "providerId": 81767889,
+      "setcodes": [],
+      "setcodeSourceId": 81767889
+    },
+    "Ancient Warriors Token": {
+      "providerId": 82255873,
+      "setcodes": [
+        311
+      ],
+      "setcodeSourceId": 82255873
+    },
+    "Soul Token": {
+      "providerId": 82324106,
+      "setcodes": [],
+      "setcodeSourceId": 82324106
+    },
+    "Ceremonial Token": {
+      "providerId": 82340057,
+      "setcodes": [],
+      "setcodeSourceId": 82340057
+    },
+    "Engine Token": {
+      "providerId": 82556059,
+      "setcodes": [],
+      "setcodeSourceId": 82556059
+    },
+    "Horseytail Token": {
+      "providerId": 82994510,
+      "setcodes": [],
+      "setcodeSourceId": 82994510
+    },
+    "Oyster Token": {
+      "providerId": 83239740,
+      "setcodes": [],
+      "setcodeSourceId": 83239740
+    },
+    "Darklord Token": {
+      "providerId": 84031360,
+      "setcodes": [
+        239
+      ],
+      "setcodeSourceId": 84031360
+    },
+    "Data Acorn Token": {
+      "providerId": 84816245,
+      "setcodes": [],
+      "setcodeSourceId": 84816245
+    },
+    "Asmo Token": {
+      "providerId": 85771020,
+      "setcodes": [],
+      "setcodeSourceId": 85771020
+    },
+    "Deus Token": {
+      "providerId": 85771021,
+      "setcodes": [],
+      "setcodeSourceId": 85771021
+    },
+    "Plunder Patroll Token": {
+      "providerId": 85969518,
+      "setcodes": [
+        319
+      ],
+      "setcodeSourceId": 85969518
+    },
+    "Poisonous Snake Token": {
+      "providerId": 86801872,
+      "setcodes": [],
+      "setcodeSourceId": 86801872
+    },
+    "Clone Token": {
+      "providerId": 86871615,
+      "setcodes": [],
+      "setcodeSourceId": 86871615
+    },
+    "Dual Avatar Spirit Token": {
+      "providerId": 87669905,
+      "setcodes": [
+        335
+      ],
+      "setcodeSourceId": 87669905
+    },
+    "Ice Pillar Token": {
+      "providerId": 88477150,
+      "setcodes": [],
+      "setcodeSourceId": 88477150
+    },
+    "Noble Knight Token": {
+      "providerId": 88923964,
+      "setcodes": [
+        4218
+      ],
+      "setcodeSourceId": 88923964
+    },
+    "Imposter Token": {
+      "providerId": 89027419,
+      "setcodes": [],
+      "setcodeSourceId": 89027419
+    },
+    "Divine Dragon Token": {
+      "providerId": 89907228,
+      "setcodes": [],
+      "setcodeSourceId": 89907228
+    },
+    "Utchatzimime Token": {
+      "providerId": 90884404,
+      "setcodes": [],
+      "setcodeSourceId": 90884404
+    },
+    "Insect Monster Token": {
+      "providerId": 91512836,
+      "setcodes": [],
+      "setcodeSourceId": 91512836
+    },
+    "Centur-Ion Token": {
+      "providerId": 92907249,
+      "setcodes": [
+        418
+      ],
+      "setcodeSourceId": 92907249
+    },
+    "Security Token": {
+      "providerId": 93104633,
+      "setcodes": [],
+      "setcodeSourceId": 93104633
+    },
+    "Option Token": {
+      "providerId": 93130022,
+      "setcodes": [],
+      "setcodeSourceId": 93130022
+    },
+    "Phantasmal Martyr Token": {
+      "providerId": 93224849,
+      "setcodes": [],
+      "setcodeSourceId": 93224849
+    },
+    "Gift Fiend Token": {
+      "providerId": 93912846,
+      "setcodes": [],
+      "setcodeSourceId": 93912846
+    },
+    "Shinsen Token": {
+      "providerId": 94384775,
+      "setcodes": [],
+      "setcodeSourceId": 94384775
+    },
+    "Ebisu Token": {
+      "providerId": 94384776,
+      "setcodes": [],
+      "setcodeSourceId": 94384776
+    },
+    "Congester Token": {
+      "providerId": 94703022,
+      "setcodes": [],
+      "setcodeSourceId": 94703022
+    },
+    "Moon Token": {
+      "providerId": 97452818,
+      "setcodes": [],
+      "setcodeSourceId": 97452818
+    },
+    "G Golem Token": {
+      "providerId": 98875864,
+      "setcodes": [
+        390
+      ],
+      "setcodeSourceId": 98875864
+    }
+  },
+  "tokenIds": {
+    "gx-thunder-token": {
+      "providerId": 14089429,
+      "setcodes": [],
+      "setcodeSourceId": 14089429
+    },
+    "gx-sky-token": {
+      "providerId": 12958920,
+      "setcodes": [
+        73
+      ],
+      "setcodeSourceId": 12958920
+    },
+    "gx-engine-token": {
+      "providerId": 82556059,
+      "setcodes": [],
+      "setcodeSourceId": 82556059
+    },
+    "gx-ivy-token": {
+      "providerId": 30069399,
+      "setcodes": [],
+      "setcodeSourceId": 30069399
+    },
+    "gx-metabo-token": {
+      "providerId": 49808197,
+      "setcodes": [],
+      "setcodeSourceId": 49808197
+    },
+    "gx-plant-token": {
+      "providerId": 28062326,
+      "setcodes": [],
+      "setcodeSourceId": 28062326
+    },
+    "gx-nightmare-token": {
+      "providerId": 42956964,
+      "setcodes": [
+        69
+      ],
+      "setcodeSourceId": 42956964
+    },
+    "gx-gift-token": {
+      "providerId": 93912846,
+      "setcodes": [],
+      "setcodeSourceId": 93912846
+    },
+    "era-maize-token": {
+      "providerId": 74983882,
+      "setcodes": [],
+      "setcodeSourceId": 74983882
+    }
+  }
+}

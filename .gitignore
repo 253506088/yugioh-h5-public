@@ -23,6 +23,8 @@
 # output/rollout-2015/ 的研究网页、原始牌表图片、诊断脚本、TAP/JSON日志、
 # 浏览器截图、无图副本及提交草稿只留本机，由 /output/ 排除。
 # output/scratch/ 的系列码审计原型、注入脚本与对比报告也不提交；正式守卫测试提交。
+# output/archetypes/ 的阶段二候选表、迁移原型、TAP/模拟/浏览器日志不提交。
+# data/archetypes.json、archetype-token*.json 与 src/archetype*.js 是正式离线输入和运行时产物，必须提交。
 # 大图仍放 assets/official-archive/ 或 assets/duel/art/source/，由既有缓存规则排除；
 # 已固定的三语 .cdb、生成的语言库和后续系列码资料属于离线重建输入，不能忽略。
 # 2026-09-24 天命法则：提交 src/rule-modes*、引擎/界面/联机/赛事接入、正式测试、
