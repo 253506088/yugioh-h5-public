@@ -18,5 +18,20 @@ try{await page.goto(pathToFileURL(html).href);await page.waitForFunction(()=>win
  await check('legacy Blackwing menus recognize Sirocco, summon Bora and let Kalut win the battle',async()=>{await page.evaluate(()=>duelApp.setLanguage('zh-CN'));let ids=await fixture(page,'blackwing-bora');await command(page,ids.bora,'从手牌特殊召唤黑羽');await settle(page);assert.equal(await page.evaluate(u=>duelApp.engine.find(u).zone,ids.bora),'monsters');ids=await fixture(page,'blackwing-kalut');await command(page,ids.sirocco,'选择攻击目标');await page.locator('[data-action="select-card"][data-card-uid="'+ids.enemy+'"]').first().click();await settle(page,ids.kalut);assert.equal(await page.evaluate(u=>duelApp.engine.attackValue(duelApp.engine.find(u).card),ids.sirocco),3400);assert.equal(await page.evaluate(u=>duelApp.engine.find(u).zone,ids.enemy),'grave');await page.screenshot({path:path.join(out,'07-blackwing-cross-era.png'),animations:'disabled'});});
  await check('mobile annual selection has no horizontal overflow and retains exactly three decks',async()=>{await page.setViewportSize({width:390,height:844});await menu(page,'new-game');await page.selectOption('#setup-year','2015');assert.equal(await page.locator('[data-action="choose-deck"]').count(),3);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);await page.screenshot({path:path.join(out,'06-presets-phone.png'),animations:'disabled'});});
  await check('offline browser shares authoritative OCG membership across all languages',async()=>{for(const lang of ['zh-CN','en','ja']){await page.evaluate(l=>duelApp.setLanguage(l),lang);assert.deepEqual(await page.evaluate(()=>{const d=DuelData;return {cards:d.CARD_LIST.filter(c=>!c.notCollectible&&Array.isArray(c.setcodes)).length,hero:d.inArchetype(d.cardByName('Heroic Challenger - Double Lance'),'HERO'),worm:d.inArchetype(d.cardByName('Electric Virus'),'Worm'),scrap:d.inArchetype(d.cardByName('Skyscraper'),'Scrap'),dragon:d.inArchetype(d.cardByName('The Fang of Critias'),'Legendary Dragon')};}),{cards:7486,hero:false,worm:true,scrap:false,dragon:true});}});
+ await check('offline engine accepts Laundsallyn Xyz materials and excludes Spell/Trap monster-search targets in all languages',async()=>{
+  for(const lang of ['zh-CN','en','ja']){
+   await page.evaluate(l=>duelApp.setLanguage(l),lang);
+   const result=await page.evaluate(()=>{
+    const D=DuelData,E=DuelEffects,e=new ModernDuelEngine({deck:'blue',opponentDeck:'dark',seed:927,first:0});e.state.turn=6;e.state.phase='main1';
+    const put=(zone,name)=>{const m=e.makeCard(D.cardByName(name).id,0);Object.assign(m,{faceUp:true,position:'attack',setTurn:0});const p=e.state.players[0];if(zone==='monsters')p.monsters[p.monsters.indexOf(null)]=m;else p[zone].push(m);return m;};
+    const a=put('monsters','Ignoble Knight of Black Laundsallyn'),b=put('monsters','Ignoble Knight of High Laundsallyn'),x=put('extra','Sacred Noble Knight of King Artorigus');
+    e.performXyz(0,x.uid,[a.uid,b.uid]);e.pump();
+    for(const n of ['Galaxy Cyclone','Junk Box','Gagagabolt'])put('deck',n);
+    const searches=['Galaxy Soldier','Jet Synchron','Onomatopaira'].map(n=>{const m=put(n==='Jet Synchron'?'grave':'hand',n),key=m.id+(n==='Onomatopaira'?'::cast':'::search');return E.get(key).condition(e,e.abilityContext(m.uid,key,n==='Onomatopaira'?'main':'trigger'));});
+    return {summon:x.summonKind,materials:x.overlays.length,searches};
+   });
+   assert.deepEqual(result,{summon:'xyz',materials:2,searches:[false,false,false]});
+  }
+ });
  assert.deepEqual(report.errors,[]);
 }catch(error){report.failure=error.stack;console.error(error);await page.screenshot({path:path.join(out,'failure.png')}).catch(()=>{});process.exitCode=1;}finally{await fs.writeFile(path.join(out,'report.json'),JSON.stringify(report,null,2));await browser.close();}})();

@@ -12,3 +12,38 @@ test('Ophion uses Infestation membership and still excludes its monster member',
 test('Archfiend Heiress really searches a rule-treated member after being sent',()=>{const e=fresh(),h=fieldCard(e,0,'Archfiend Heiress'),q=put(e,0,'deck','Lesser Fiend');trigger(e,()=>e.move(h.uid,'grave',{kind:'effect-send',source:source(e)}),select(q.uid));assert.equal(e.find(q.uid).zone,'hand');});
 test('Cyberload checks the printed Cyber Dragon material, not the Cyber deck theme',()=>{const e=fresh();for(const n of ['Cyber Twin Dragon','Cyber End Dragon','Chimeratech Rampage Dragon','Chimeratech Overdragon'])assert.equal(e.fusionAllowed(D.cardByName(n),'cyberload-fusion'),true,n);assert.equal(e.fusionAllowed(D.cardByName('Cyber Blader'),'cyberload-fusion'),false);});
 test('Arsenal Summoner respects the five printed exceptions despite Guardian membership',()=>{const e=fresh(),s=fieldCard(e,0,'Arsenal Summoner'),good=put(e,0,'deck','Guardian Elma'),bad=put(e,0,'deck','Celtic Guardian');s.faceUp=false;trigger(e,()=>e.flipFaceUp(s.uid,{position:'attack'}),p=>{if(p.kind==='input')assert.ok(!p.group.candidates.some(c=>c.uid===bad.uid));return select(good.uid)(p);});assert.equal(e.find(good.uid).zone,'hand');assert.equal(e.find(bad.uid).zone,'deck');});
+
+for(const rank of [4,5])test('Noble Knight Xyz materials accept both Laundsallyns at Level '+rank,()=>{
+ const e=fresh(),a=fieldCard(e,0,'Ignoble Knight of Black Laundsallyn'),b=fieldCard(e,0,'Ignoble Knight of High Laundsallyn');
+ if(rank===4)put(e,1,'spells','Stygian Dirge');
+ const x=put(e,0,'extra',rank===4?'Artorigus, King of the Noble Knights':'Sacred Noble Knight of King Artorigus');
+ assert.equal(e.level(a),rank);assert.equal(e.level(b),rank);
+ assert.ok(e.xyzCombos(0,x).some(s=>s.materials.includes(a.uid)&&s.materials.includes(b.uid)));
+ e.performXyz(0,x.uid,[a.uid,b.uid]);e.pump();drain(e);
+ assert.equal(x.summonKind,'xyz');assert.deepEqual(new Set(x.overlays.map(m=>m.uid)),new Set([a.uid,b.uid]));
+});
+test('Galaxion accepts Kuriphoton after real level changes, but rejects wrong levels and non-Photon monsters',()=>{
+ const e=fresh(),k=fieldCard(e,0,'Kuriphoton'),p=fieldCard(e,0,'Photon Thrasher'),bad=fieldCard(e,0,'Battle Ox'),x=put(e,0,'extra','Starliege Lord Galaxion');
+ assert.equal(e.xyzValid(0,x,[k,p]),false);
+ for(let i=0;i<3;i++)use(e,put(e,0,'hand','Star Changer'),'cast',{target:[k.uid],delta:['1']});
+ assert.equal(e.level(k),4);assert.equal(e.xyzValid(0,x,[k,bad]),false);
+ e.performXyz(0,x.uid,[k.uid,p.uid]);e.pump();drain(e);
+ assert.equal(x.summonKind,'xyz');assert.deepEqual(new Set(x.overlays.map(m=>m.uid)),new Set([k.uid,p.uid]));
+});
+for(const goodPresent of [false,true])for(const kind of ['Galaxy','Junk','Onomat'])test(kind+' monster search excludes every same-series Spell/Trap; monster present: '+goodPresent,()=>{
+ const e=fresh(),member=c=>kind==='Onomat'?['Gagaga','Gogogo','Dododo','Zubaba'].some(n=>D.inArchetype(c,n)):D.inArchetype(c,kind);
+ const bad=D.CARD_LIST.filter(c=>!D.isMonster(c)&&member(c)).map(c=>put(e,0,'deck',c.id));assert.ok(bad.length);
+ const good=goodPresent?put(e,0,'deck',({Galaxy:'Galaxy Knight',Junk:'Junk Forward',Onomat:'Gogogo Golem'})[kind]):null;
+ const pick=p=>{const candidates=p.kind==='choice'?p.candidates:p.kind==='input'?p.group.candidates:[];assert.ok(!candidates.some(c=>bad.some(b=>b.uid===c.uid)));return good?select(good.uid)(p):null;};
+ if(kind==='Galaxy'){
+  const s=put(e,0,'hand','Galaxy Soldier');trigger(e,()=>e.special(0,s.uid,{via:'effect'}),pick);
+ }else if(kind==='Junk'){
+  const s=fieldCard(e,0,'Jet Synchron'),m=fieldCard(e,0,'Battle Ox'),x=put(e,0,'extra','Ally of Justice Catastor');
+  trigger(e,()=>e.performSynchro(0,x.uid,[s.uid,m.uid]),pick);assert.equal(x.summonKind,'synchro');
+ }else{
+  const s=put(e,0,'hand','Onomatopaira');put(e,0,'hand','Battle Ox');
+  if(good)use(e,s,'cast',{},pick);else assert.ok(!e.actionsFor(s.uid).some(a=>a.key===s.id+'::cast'));
+ }
+ if(good)assert.equal(e.find(good.uid).zone,'hand');
+ for(const m of bad)assert.equal(e.find(m.uid).zone,'deck');
+});

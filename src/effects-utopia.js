@@ -1,7 +1,7 @@
 (function(root){ 'use strict'; const E=root.DuelEffects,D=root.DuelData,H=E.H;
 const {CARDS,isMonster,isFamily}=D;
 const {source,self,first,args,group,customGroup,deck,grave,hand,monsters,specialable,once}=H;
-const onomat=c=>['gagaga','gogogo','dododo','zubaba'].some(f=>D.inArchetype(CARDS[c.id],f));
+const onomat=c=>isMonster(CARDS[c.id])&&['gagaga','gogogo','dododo','zubaba'].some(f=>D.inArchetype(CARDS[c.id],f));
 E.register('gagaga-magician','level',{label:'宣言1—8星，改变等级',once:once('level','card'),
   inputs:()=>[customGroup('level','宣言我我我魔术师的等级',Array.from({length:8},(_,i)=>({uid:'level:'+(i+1),label:(i+1)+' 星',value:i+1})),1,1,{aiValues:()=>['level:4']})],
   resolve:(e,c)=>{const m=self(e,c);if(m)m.levelOverride={value:Number(first(c,'level').split(':')[1]),until:e.state.turn};},aiScore:(e,c)=>e.level(source(e,c).card)!==4?650:-100});

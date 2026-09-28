@@ -9,7 +9,7 @@ const key=node=>node?.name??node?.value;
 // references. Dynamic calls are resolved by their declared group tables and
 // by the live material metadata checked in archetype-registry.test.cjs.
 export function scanArchetypeReferences(source,file='fixture.js'){
-  const references=[],directFamilies=[];
+  const references=[],directFamilies=[],substringRules=[];
   const add=(node,kind)=>{const name=literal(node);if(name)references.push({name,file,line:node.loc.start.line,kind});};
   function walk(node){
     if(!node||typeof node!=='object')return;
@@ -17,6 +17,10 @@ export function scanArchetypeReferences(source,file='fixture.js'){
       const name=node.callee.name??key(node.callee.property);
       if(['series','inArchetype','named'].includes(name))add(node.arguments[1],name);
       if(name==='arch')add(node.arguments[0],name);
+      // Material archetype fields must not be fed to card-name string tests.
+      // Testing the key itself (e.g. tunerNameIncludes.startsWith('Nordic'))
+      // is distinct and remains valid.
+      if(['includes','startsWith','endsWith','indexOf','match','search','test'].includes(name)&&node.arguments.some(n=>n.type==='MemberExpression'&&scalarKeys.has(key(n.property))))substringRules.push({file,line:node.loc.start.line});
     }
     if(node.type==='Property'){
       const name=key(node.key);
@@ -30,7 +34,7 @@ export function scanArchetypeReferences(source,file='fixture.js'){
     for(const v of Object.values(node))if(Array.isArray(v))v.forEach(walk);else if(v&&typeof v==='object')walk(v);
   }
   walk(parse(source,{ecmaVersion:'latest',sourceType:'script',locations:true}));
-  return {references,directFamilies};
+  return {references,directFamilies,substringRules};
 }
 
 export function materialArchetypeReferences(cards){

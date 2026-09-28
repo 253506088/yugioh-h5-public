@@ -1,6 +1,7 @@
 (function(root){ 'use strict'; const E=root.DuelEffects,D=root.DuelData,H=E.H;
 const {CARDS,isMonster}=D;
 const {source,self,first,args,group,deck,grave,hand,monsters,specialable,once}=H;
+const junkMonster=c=>isMonster(CARDS[c.id])&&D.inArchetype(c,'Junk');
 E.trigger('junk-synchron','revive',{label:'废品同调士：复活2星以下怪兽',inputs:(e,c)=>[group(e,c,'target','选择墓地2星以下怪兽',specialable(e,c.owner,grave(e,c.owner,m=>isMonster(CARDS[m.id])&&CARDS[m.id].level<=2),'revive'),1,1,{role:'special'})],
   resolve:(e,c)=>{const f=e.find(first(c));if(f?.zone==='grave')e.special(c.owner,f.card.uid,{via:'revive',position:'defense',negated:true});}});
 E.register('junk-converter','search',{label:'丢弃转换者与调整，检索同调士',zones:['hand'],once:once('search'),
@@ -16,7 +17,7 @@ E.register('jet-synchron','revive',{label:'手牌送墓，复活喷气同调士'
   inputs:(e,c)=>[group(e,c,'cost','选择送去墓地的手牌',hand(e,c.owner,m=>H.canSendGY(e,m)),1,1,{role:'send-cost'})],
   condition:(e,c)=>e.canSpecial(c.owner,source(e,c).card)&&e.freeMain(c.owner)>0,
   cost:(e,c)=>H.sendCost(e,c,args(c,'cost')),resolve:(e,c)=>e.special(c.owner,c.uid,{via:'revive',banishOnLeave:true}),aiScore:800});
-E.trigger('jet-synchron','search',{label:'喷气同调士：检索废品怪兽',zones:['grave'],once:once('one-effect'),condition:(e,c)=>deck(e,c.owner,m=>!!D.inArchetype(CARDS[m.id],'Junk')).length>0,resolve:(e,c)=>H.searchChoice(e,c,m=>!!D.inArchetype(CARDS[m.id],'Junk'))});
+E.trigger('jet-synchron','search',{label:'喷气同调士：检索废品怪兽',zones:['grave'],once:once('one-effect'),condition:(e,c)=>deck(e,c.owner,junkMonster).length>0,resolve:(e,c)=>H.searchChoice(e,c,junkMonster)});
 E.register('quickdraw-synchron','special',{label:'手牌怪兽送墓，特殊召唤速攻同调士',zones:['hand'],inherent:true,condition:(e,c)=>e.canSpecial(c.owner,source(e,c).card)&&e.freeMain(c.owner)>0,
   inputs:(e,c)=>[group(e,c,'cost','选择送去墓地的其他怪兽',hand(e,c.owner,m=>m.uid!==c.uid&&isMonster(CARDS[m.id])&&H.canSendGY(e,m)),1,1,{role:'send-cost'})],
   cost:(e,c)=>H.sendCost(e,c,args(c,'cost')),resolve:(e,c)=>e.special(c.owner,c.uid,{via:'effect'}),aiScore:680});

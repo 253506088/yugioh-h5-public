@@ -25,12 +25,26 @@ test('all source and material references are registered, with no legacy family r
  const scans=files.map(file=>scanArchetypeReferences(fs.readFileSync(path.join(root,'src',file),'utf8'),file)),refs=[...scans.flatMap(s=>s.references),...materialArchetypeReferences(D.CARD_LIST)];
  assert.deepEqual(refs.filter(r=>!D.archetypeEntry(r.name)),[]);
  assert.deepEqual(scans.flatMap(s=>s.directFamilies).filter(r=>/^(effects-|advanced-|early-engine|chronicle-)/.test(r.file)),[]);
+ assert.deepEqual(scans.flatMap(s=>s.substringRules).filter(r=>/^(effects-|advanced-|early-engine|chronicle-)/.test(r.file)),[]);
  assert.ok(new Set(refs.map(r=>r.name)).size>240);
 });
 test('reference scanner understands escapes and static templates without reading comments or regexes',async()=>{
  const {scanArchetypeReferences}=await import('../scripts/lib/archetype-references.mjs');
  const source="// series(c,'fake')\nconst re=/arch('false')/; const s=\"series(c,'wrong')\"; series(c,`HERO`);arch('Gravekeeper\\'s');const groups={a:['label','Blackwing']};const m={series:'Worm',tunerFamily:'synchron'};";
  assert.deepEqual(scanArchetypeReferences(source).references.map(r=>r.name),['HERO',"Gravekeeper's",'Blackwing','Worm','synchron']);
+});
+test('reference scanner rejects substring matching of material archetype requirements',async()=>{
+ const {scanArchetypeReferences}=await import('../scripts/lib/archetype-references.mjs');
+ const source=[
+  'card.officialName.includes(spec.xyzNameIncludes);',
+  'card.officialName.toLowerCase().includes(spec.nameIncludes);',
+  'card.officialName.startsWith(spec.tunerNameIncludes);',
+  "spec.tunerNameIncludes.startsWith('Nordic');",
+  'D.inArchetype(card,spec.xyzNameIncludes);',
+  '// card.officialName.includes(spec.xyzNameIncludes);',
+  'const text="card.officialName.includes(spec.xyzNameIncludes)";'
+ ].join('\n');
+ assert.deepEqual(scanArchetypeReferences(source).substringRules.map(r=>r.line),[1,2,3]);
 });
 test('setcodes preserve four slots, signed values, aliases and authoritative empty membership',async()=>{
  const {splitSetcodes,setcodeReader}=await import('../scripts/lib/setcodes.mjs');

@@ -601,7 +601,7 @@
         const target=materials[0],d=CARDS[target.id];
         return !!(c.rankUpFrom?.includes(target.id)||(c.rankUpFamily&&D.inArchetype(d,c.rankUpFamily)&&d.rank===c.rankUpRank));
       }
-      return materials.length>=(c.xyzCount||2)&&materials.length<=(c.xyzMax||c.xyzCount||2)&&materials.every(m=>(this.xyzMaterialLevel?this.xyzMaterialLevel(m,extra):this.level(m))===c.rank&&(!c.xyzRace||this.race(m)===c.xyzRace)&&(!c.xyzAttribute||this.attribute(m)===c.xyzAttribute)&&(!c.xyzNormal||this.isNormalMonster(m))&&(!c.xyzNameIncludes||CARDS[m.id].officialName.includes(c.xyzNameIncludes)));
+      return materials.length>=(c.xyzCount||2)&&materials.length<=(c.xyzMax||c.xyzCount||2)&&materials.every(m=>(this.xyzMaterialLevel?this.xyzMaterialLevel(m,extra):this.level(m))===c.rank&&(!c.xyzRace||this.race(m)===c.xyzRace)&&(!c.xyzAttribute||this.attribute(m)===c.xyzAttribute)&&(!c.xyzNormal||this.isNormalMonster(m))&&(!c.xyzNameIncludes||D.inArchetype(m,c.xyzNameIncludes)));
     }
     xyzCombos(owner,extra){
       const pool=this.monsters(owner).filter(c=>c.faceUp&&!CARDS[c.id].cannotXyz&&CARDS[c.id].type!=='token'),out=[];

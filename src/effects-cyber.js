@@ -2,6 +2,7 @@
 const {CARDS,isMonster,isExtra}=D;
 const {source,self,first,args,group,deck,grave,hand,monsters,specialable,once}=H;
 const machine=c=>isMonster(CARDS[c.id])&&CARDS[c.id].race==='机械族';
+const galaxyMonster=c=>isMonster(CARDS[c.id])&&D.inArchetype(c,'Galaxy');
 const cyberSpell=c=>['spell','trap'].includes(CARDS[c.id].type)&&D.inArchetype(c,'Cyber');
 const namedCyber=(e,c,zone=null)=>e.cardNameId(c,zone)==='cyber-dragon';
 E.register('cyber-dragon','special',{label:'仅对方有怪兽，特殊召唤电子龙',zones:['hand'],inherent:true,
@@ -34,7 +35,7 @@ E.trigger('cyber-vier','special',{label:'四型：从手牌守备表示特殊召
 E.register('galaxy-soldier','special',{label:'光属性怪兽送墓，展开银河战士',zones:['hand'],condition:(e,c)=>e.canSpecial(c.owner,source(e,c).card)&&e.freeMain(c.owner)>0,
   inputs:(e,c)=>[group(e,c,'cost','选择送墓的其他光属性怪兽',hand(e,c.owner,m=>m.uid!==c.uid&&isMonster(CARDS[m.id])&&CARDS[m.id].attribute==='光'&&H.canSendGY(e,m)),1,1,{role:'send-cost'})],
   cost:(e,c)=>H.sendCost(e,c,args(c,'cost')),resolve:(e,c)=>e.special(c.owner,c.uid,{via:'effect',position:'defense'}),aiScore:950});
-E.trigger('galaxy-soldier','search',{label:'银河战士：检索银河怪兽',once:once('search'),condition:(e,c)=>deck(e,c.owner,m=>D.inArchetype(CARDS[m.id],'galaxy')).length>0,resolve:(e,c)=>H.searchChoice(e,c,m=>D.inArchetype(CARDS[m.id],'galaxy'))});
+E.trigger('galaxy-soldier','search',{label:'银河战士：检索银河怪兽',once:once('search'),condition:(e,c)=>deck(e,c.owner,galaxyMonster).length>0,resolve:(e,c)=>H.searchChoice(e,c,galaxyMonster)});
 E.spell('cyber-emergency',{label:'检索电子龙怪兽',once:once('activate'),onlyActivate:true,
   condition:(e,c)=>deck(e,c.owner,m=>H.cyber(m)||(machine(m)&&CARDS[m.id].attribute==='光'&&CARDS[m.id].noNormal)).length>0,
   resolve:(e,c)=>H.searchChoice(e,c,m=>H.cyber(m)||(machine(m)&&CARDS[m.id].attribute==='光'&&CARDS[m.id].noNormal)),aiScore:1300});
