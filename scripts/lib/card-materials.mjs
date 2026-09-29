@@ -1,6 +1,10 @@
 // Explicit material grammar for the preserved OCG snapshots. Unknown wording is
 // an import error, never an unrestricted material or a silently normal monster.
 export function parseFusion(name, text, {byName, norm, races, attributes}) {
+  // These qualifications belong to the selected physical material, not its
+  // printed card type. Preserve them for the engine's material validator.
+  if (name === 'Invoked Elysium') return {fusion: [{nameIncludes:'Invoked'}, {summonedFromExtra:true}]};
+  text = text.replace(/^(\d+) x "([^"]+)"$/, (_, n, card) => Array(Number(n)).fill('"'+card+'"').join(' + '));
   const legendary = text.match(/^Must be Special Summoned with "(The Claw of Hermos|The Fang of Critias)", using (?:a (.+?) monster|"([^"]+)")\./);
   if (legendary) {
     if (legendary[2] && !races[legendary[2]]) throw new Error('Unknown legendary Fusion material: ' + name);
@@ -20,9 +24,15 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
   for (const part of text.trim().split(/\s+\+\s+/)) {
     const named = part.match(/^(?:1\s+)?"([^"]+)"$/);
     if (named) { const id = byName.get(norm(named[1])); fusion.push(id ? {id} : {officialName: named[1]}); continue; }
-    const generic = part.match(/^(\d+)(\+| or more)?\s+(.+?)\s+monsters?$/i);
+    const maxATK = part.match(/^(\d+) monsters? with (\d+) or less ATK$/i);
+    if (maxATK) { fusion.push(...Array.from({length:Number(maxATK[1])},()=>({maxAtk:Number(maxATK[2])}))); continue; }
+    const originalLevel = part.match(/^(\d+) (DARK|LIGHT|EARTH|WATER|FIRE|WIND) monsters? whose original Level is (\d+) or higher$/);
+    if (originalLevel) { fusion.push(...Array.from({length:Number(originalLevel[1])},()=>({attribute:attributes[originalLevel[2]],originalMinLevel:Number(originalLevel[3])}))); continue; }
+    const fieldOnly = / on the field, except Tokens$/.test(part);
+    const generic = part.replace(/ on the field, except Tokens$/, '').match(/^(\d+)(\+| or more)?\s+(.+?)\s+monsters?$/i);
     if (!generic) throw new Error('Unparsed Fusion material: ' + name + ' / ' + part);
-    let body = generic[3].replace(/-Type\b/gi, ''), spec = {};
+    let body = generic[3].replace(/-Type\b/gi, ''), spec = fieldOnly ? {fieldOnly:true,noTokens:true} : {};
+    if (/ Effect$/i.test(body)) { spec.effect = true; body = body.replace(/ Effect$/i, ''); }
     const level = body.match(/^Level (\d+) or higher (.+)$/i);
     if (level) { spec.minLevel = Number(level[1]); body = level[2]; }
     const exactLevel = body.match(/^Level (\d+) (.+)$/i);
@@ -50,17 +60,20 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
 }
 
 export function parseSynchro(name, text, {byName, norm, races, attributes}) {
+  if (name === 'Phantasmal Lord Ultimitl Bishbaalkin') return {synchro:{noSummon:true},noNormal:true,specialOnly:'bishbaalkin'};
   if (name === 'Ultimaya Tzolkin') return {synchro: {noSummon: true}, noNormal: true, specialOnly: 'tzolkin'};
   const parts = text.trim().split(/\s+\+\s+/);
   if (parts.length < 2 || parts.length > 3) throw new Error('Unparsed Synchro materials: ' + name);
   const spec = {minTuners: 1, maxTuners: 1, minNon: 1};
-  const named = parts[0].match(/^"([^"]+)"$/), tuner = parts[0].match(/^(\d+)\s+(?:(.+?)\s+)?Tuners?( Synchro Monster)?$/i);
+  const variableTuners = /^(\d+) or more Tuners?$/.test(parts[0]);
+  const named = parts[0].match(/^"([^"]+)"$/), tuner = parts[0].replace(/^(\d+) or more Tuners?$/, '$1 Tuners').match(/^(\d+)\s+(?:(.+?)\s+)?Tuners?( Synchro Monster)?$/i);
   if (named) {
     spec.tunerId = byName.get(norm(named[1]));
     if (!spec.tunerId) throw new Error('Missing named Tuner: ' + name);
     if (/Synchron$/.test(named[1])) spec.namedSynchron = true;
   } else if (tuner) {
     spec.minTuners = spec.maxTuners = Number(tuner[1]);
+    if (variableTuners) spec.maxTuners = 6;
     if (tuner[3]) spec.tunerType = 'synchro';
     if (tuner[2]) {
       const body = tuner[2].replace(/-Type$/i, '');
@@ -102,10 +115,11 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
 }
 
 export function parseXyz(name, text, {races, attributes}) {
+  if (name === 'Number 100: Numeron Dragon') return {xyzCount:2,rank:1,xyzMaterialType:'xyz',xyzSameRank:true,xyzSameName:true,xyzNameIncludes:'Number'};
   if (name === 'Number F0: Utopic Future') return {xyzCount: 2, rank: 0, xyzMaterialType: 'xyz', xyzSameRank: true, xyzExcludeNameIncludes: 'Number'};
   if (name === 'Number S0: Utopic ZEXAL') return {xyzCount: 3, rank: 0, xyzMaterialType: 'xyz', xyzSameRank: true, xyzNameIncludes: 'Number'};
   if (name === 'Number 93: Utopia Kaiser') return {xyzCount: 2, xyzMax: 5, rank: 12, xyzMaterialType: 'xyz', xyzSameRank: true, xyzNameIncludes: 'Number', xyzRequireOverlay: true};
-  text = text.split(' / ')[0];
+  text = text.split(' / ')[0].replace(/^(\d+)\+ Level/, '$1 or more Level');
   const unlimited = /^(\d+) or more Level/.test(text);
   if (unlimited) text = text.replace(/^(\d+) or more Level/, '$1 or more (max. 7) Level');
   // YGOPRODeck prints Xyz materials in two orders: the long-standing
@@ -116,7 +130,8 @@ export function parseXyz(name, text, {races, attributes}) {
   if (!m) throw new Error('Unparsed Xyz materials: ' + name + ' / ' + text);
   const out = {xyzCount: Number(m[1]), rank: Number(levelFirst ? m[3] : m[4])};
   if (m[2]) out.xyzMax = Number(m[2]);
-  const body = (levelFirst ? m[4] : m[3])?.replace(/-Type$/i, '');
+  let body = (levelFirst ? m[4] : m[3])?.replace(/-Type$/i, '');
+  if (body && / Pendulum$/i.test(body)) { out.xyzPendulum=true; body=body.replace(/ Pendulum$/i,''); }
   if (body) {
     if (races[body]) out.xyzRace = races[body];
     else if (attributes[body]) out.xyzAttribute = attributes[body];
@@ -126,6 +141,7 @@ export function parseXyz(name, text, {races, attributes}) {
       out.xyzAttribute = attributes[attribute]; out.xyzRace = races[race];
     }
     else if (body === 'Normal') out.xyzNormal = true;
+    else if (body === 'Gemini') out.xyzGemini = true;
     else if (body === 'Pendulum') out.xyzPendulum = true;
     else if (/^".+"$/.test(body)) out.xyzNameIncludes = body.slice(1, -1);
     else throw new Error('Unknown Xyz material: ' + name + ' / ' + body);

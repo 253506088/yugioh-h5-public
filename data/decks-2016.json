@@ -1,0 +1,39 @@
+{
+  "scope": [2016],
+  "sources": [
+    {"id":"worlds-2016","url":"https://roadoftheking.com/yu-gi-oh-world-championship-2016/","title":"Yu-Gi-Oh! World Championship 2016","accessed":"2026-09-28","evidence":"Standings and complete deck images: champion Hiyama Shunsuke (Blue-Eyes), runner-up Erik Christensen (Blue-Eyes), third Kajihara Soichiro (Majespecter). Champion and third place transcribed; duplicate runner-up strategy replaced with year-end Zoodiac.","deckImages":["https://roadoftheking.com/wp-content/uploads/2016/08/WCS2016_1st.jpg","https://roadoftheking.com/wp-content/uploads/2016/08/WCS2016_3rd.jpg"]},
+    {"id":"ocg-2016-10","url":"https://roadoftheking.com/ocg-2016-10-metagame/","title":"OCG 2016.10 Metagame (1 Oct – 31 Dec 2016)","accessed":"2026-09-28","evidence":"668 top finishes across 101 tournaments; 264 Zoodiac. The article's 7th Tsudanuma CS winning list by みはら is transcribed, 41 main / 15 extra / 15 side. This is a local tournament champion, not a Worlds runner-up.","deckImages":["https://roadoftheking.com/wp-content/uploads/2017/01/OCG201610_Zoodiac.jpg"]}
+  ],
+  "decks": [
+    {
+      "id":"blue-eyes-2016","year":2016,"title":"世界冠军 · 青眼","en":"World Champion · Blue-Eyes","ja":"世界王者 · 青眼","ace":"Blue-Eyes Spirit Dragon","sourceKind":"historical-decklist","sourceRefs":["worlds-2016"],"playerName":"Hiyama Shunsuke","placement":1,
+      "description":"2016 世界冠军桧山俊介的 42 张主卡原构筑。贤士与太古白石展开，精灵龙封墓并换出苍眼银龙，福音持续复活，水晶翼与银河巨神响应控制。原表副卡保存在来源文件。",
+      "descriptionEn":"Hiyama Shunsuke’s 42-card 2016 Worlds champion list. Sage and Ancients develop Spirit Dragon, Azure-Eyes and Return of the Dragon Lords; Crystal Wing and Hope Harbinger provide disruption. The original side deck is preserved in the source file.",
+      "descriptionJa":"2016年世界王者・桧山俊介のメイン42枚。賢士と太古の白石から精霊龍・蒼眼の銀龍へ。復活の福音で継続し、クリスタルウィングとタイタニック・ギャラクシーで妨害。サイドは出典ファイルに保存。",
+      "combo":["贤士送墓效果怪兽并从卡组展开青眼","太古白石在结束阶段补充场面","精灵龙换出苍眼银龙，保护并复活龙族","银河巨神吸收魔法，水晶翼无效怪兽效果"],
+      "main":[["Blue-Eyes Alternative White Dragon",3],["Blue-Eyes White Dragon",3],["Dragon Spirit of White",1],["Sage with Eyes of Blue",3],["The White Stone of Ancients",3],["The White Stone of Legend",1],["Master with Eyes of Blue",2],["Maxx \"C\"",2],["Effect Veiler",2],["Dragon Shrine",3],["Return of the Dragon Lords",3],["The Melody of Awakening Dragon",3],["Trade-In",3],["Cards of Consonance",3],["Twin Twisters",2],["Soul Charge",1],["Vanity's Emptiness",1],["Solemn Warning",1],["Phoenix Wing Wind Blast",2]],
+      "extra":[["Blue-Eyes Spirit Dragon",2],["Azure-Eyes Silver Dragon",2],["Crystal Wing Synchro Dragon",1],["Stardust Spark Dragon",1],["Black Rose Moonlight Dragon",1],["Number 95: Galaxy-Eyes Dark Matter Dragon",1],["Galaxy-Eyes Full Armor Photon Dragon",1],["Number 62: Galaxy-Eyes Prime Photon Dragon",1],["Number 38: Hope Harbinger Dragon Titanic Galaxy",1],["Hieratic Sun Dragon Overlord of Heliopolis",1],["Alsei, the Sylvan High Protector",1],["Number 46: Dragluon",1],["Cyber Dragon Infinity",1]],
+      "side":[["Ally of Justice Cycle Reader",2],["The Fabled Catsith",1],["Forbidden Chalice",2],["Dark Hole",1],["Twin Twisters",1],["Magical Spring",2],["Xyz Universe",3],["Mask of Restrict",3]]
+    },
+    {
+      "id":"majespecter-2016","year":2016,"title":"世界季军 · 威风妖怪","en":"World Bronze · Majespecter","ja":"世界3位 · マジェスペクター","ace":"Majespecter Unicorn - Kirin","sourceKind":"historical-decklist","sourceRefs":["worlds-2016"],"playerName":"Kajihara Soichiro","placement":3,
+      "description":"2016 世界季军梶原宗一郎的 41 张主卡原构筑。威风妖怪检索魔法陷阱，麒麟回手控制，龙剑士与疾行机人提供灵摆、同调和超量路线。",
+      "descriptionEn":"Kajihara Soichiro’s 41-card third-place Worlds list. Majespecters search backrow, Kirin controls the field, and Dracoslayer and Speedroid engines offer Pendulum, Synchro and Xyz routes.",
+      "descriptionJa":"2016年世界3位・梶原宗一郎のメイン41枚。マジェスペクターのサーチとユニコーンのバウンスに、竜剣士とSRのシンクロ・エクシーズ展開を組み合わせる。",
+      "combo":["威风妖怪召唤后检索对应魔法陷阱","麒麟回收本家并弹回对方怪兽","龙剑士破坏刻度并进行灵摆展开","陀螺与竹蜻蜓通向图腾鸟或招来王"],
+      "main":[["Majespecter Unicorn - Kirin",3],["Majespecter Crow - Yata",2],["Majespecter Cat - Nekomata",3],["Majespecter Toad - Ogama",3],["Majespecter Fox - Kyubi",3],["Majespecter Raccoon - Bunbuku",3],["Odd-Eyes Pendulum Dragon",1],["Performapal Pendulum Sorcerer",1],["Luster Pendulum, the Dracoslayer",1],["Master Pendulum, the Dracoslayer",3],["Speedroid Terrortop",2],["Speedroid Taketomborg",1],["Majespecter Sonics",1],["Majesty's Pegasus",1],["Majespecter Storm",1],["Majespecter Cyclone",3],["Raigeki",1],["Terraforming",3],["Majespecter Tornado",2],["Majespecter Tempest",2],["Solemn Warning",1]],
+      "extra":[["Dinoster Power, the Mighty Dracoslayer",1],["Ignister Prominence, the Blasting Dracoslayer",2],["Majester Paladin, the Ascending Dracoslayer",1],["Totem Bird",1],["Lightning Chidori",1],["M-X-Saber Invoker",1],["Abyss Dweller",1],["Number 80: Rhapsody in Berserk",1],["Diamond Dire Wolf",2],["Castel, the Skyblaster Musketeer",1],["Dark Rebellion Xyz Dragon",1],["Number 39: Utopia",1],["Number S39: Utopia the Lightning",1]],
+      "side":[["Ally of Justice Cycle Reader",3],["Maxx \"C\"",2],["Effect Veiler",2],["Swords of Concealing Light",1],["Mystical Space Typhoon",3],["Dark Hole",1],["Anti-Spell Fragrance",3]]
+    },
+    {
+      "id":"zoodiac-2016","year":2016,"title":"年末上位 · 十二兽","en":"Year-End Winner · Zoodiac","ja":"年末優勝 · 十二獣","ace":"Zoodiac Drident","sourceKind":"historical-decklist","sourceRefs":["ocg-2016-10"],"playerName":"みはら","placement":1,"event":"7th Tsudanuma CS",
+      "description":"OCG 2016.10 环境总结刊载的第七届津田沼 CS 冠军みはら原表，41 张主卡。十二兽单体叠放、鼠骑展开与牛犄检索，龙枪在双方回合破坏表侧卡。替代与冠军同为青眼的世界亚军体系。",
+      "descriptionEn":"Mihara’s 41-card winning list from the 7th Tsudanuma CS, published in the OCG 2016.10 review. Ratpier, Broadbull and Drident demonstrate Zoodiac overlay routes. Selected for variety because both Worlds finalists used Blue-Eyes.",
+      "descriptionJa":"OCG 2016.10総括掲載、第7回津田沼CS優勝・みはらのメイン41枚。モルモラット、ブルホーン、ドランシアで十二獣の重ねるエクシーズを体験。世界大会決勝の青眼重複を避ける代表枠。",
+      "combo":["会局破坏自己的表侧卡并招募十二兽","鼠骑作为素材让兽战士族超量怪兽展开同名卡","牛犄检索蛇笞，蛇笞叠放增加攻守与战斗除外","龙枪提供快速破坏，次元障壁限制召唤"],
+      "main":[["Zoodiac Ratpier",3],["Zoodiac Whiptail",3],["Zoodiac Thoroughblade",2],["Speedroid Terrortop",3],["Speedroid Taketomborg",1],["Ghost Ogre & Snow Rabbit",2],["Maxx \"C\"",3],["Zoodiac Barrage",3],["Fire Formation - Tenki",3],["Book of Moon",3],["Cosmic Cyclone",3],["Dark Hole",1],["Harpie's Feather Duster",1],["Zoodiac Combo",1],["Dimensional Barrier",3],["Torrential Tribute",2],["Solemn Strike",3],["Solemn Judgment",1]],
+      "extra":[["M-X-Saber Invoker",1],["Diamond Dire Wolf",1],["Zoodiac Boarbow",2],["Zoodiac Tigermortar",2],["Zoodiac Broadbull",3],["Zoodiac Drident",2],["Daigusto Emeral",2],["Gagaga Samurai",1],["Number 80: Rhapsody in Berserk",1]],
+      "side":[["Jizukiru, the Star Destroying Kaiju",1],["Dogoran, the Mad Flame Kaiju",1],["Gameciel, the Sea Turtle Kaiju",1],["Radian, the Multidimensional Kaiju",1],["Artifact Lancea",3],["Interrupted Kaiju Slumber",3],["Anti-Spell Fragrance",3],["Imperial Iron Wall",2]]
+    }
+  ]
+}

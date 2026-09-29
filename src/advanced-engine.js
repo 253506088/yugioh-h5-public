@@ -622,7 +622,7 @@
       });
     }
     takeMaterial(uid,transfer=false,byEffect=false){
-      const f=this.find(uid);req(f&&(fieldMonster(f.zone)||byEffect&&['hand','grave','banished','spells','fieldSpell','overlays'].includes(f.zone)),'超量素材必须是场上的怪兽，或由效果指定的卡片。');
+      const f=this.find(uid);req(f&&(fieldMonster(f.zone)||byEffect&&['hand','deck','grave','banished','spells','fieldSpell','overlays'].includes(f.zone)),'超量素材必须是场上的怪兽，或由效果指定的卡片。');
       const card=f.card,snapshot=this.describe(card,f),under=[...(card.overlays||[])];
       if(!transfer)for(const m of under)this.move(m.uid,'grave',{kind:'rule-material',reason:'超量怪兽变为素材'});
       this.remove(uid);this.cleanupEquips(uid);card.overlays=[];card.mods=[];card.used={};card.banishOnLeave=false;card.effectNegated=false;card.granted={};card.qliReduced=false;card.levelOverride=null;card.attributeOverride=null;card.normalSummoned=false;card.summonKind=null;card.attacked=false;card.attacksMade=0;
@@ -630,7 +630,7 @@
     }
     attach(targetUid,materialUid,source=null){
       const host=this.find(targetUid),material=this.find(materialUid);
-      if(!host||!material||!fieldMonster(host.zone)||CARDS[host.card.id].type!=='xyz'||!['monsters','extraMonster','hand','grave','banished','spells','fieldSpell','overlays'].includes(material.zone)||CARDS[material.card.id].type==='token'||targetUid===materialUid||material.parentUid===targetUid||this.unaffected(material.card,source))return false;
+      if(!host||!material||!fieldMonster(host.zone)||CARDS[host.card.id].type!=='xyz'||!['monsters','extraMonster','hand','deck','grave','banished','spells','fieldSpell','overlays'].includes(material.zone)||CARDS[material.card.id].type==='token'||targetUid===materialUid||material.parentUid===targetUid||this.unaffected(material.card,source))return false;
       const taken=this.takeMaterial(materialUid,false,true);host.card.overlays.push(...taken.cards);
       this.log('overlay',CARDS[taken.cards[0].id].name+'成为「'+CARDS[host.card.id].name+'」的超量素材',host.owner,{cardId:host.card.id,uid:host.card.uid});return true;
     }
@@ -728,7 +728,11 @@
       this.state.players[owner].pendulumTurn=this.state.turn;
       const layout=this.pendulumLayout(owner,action.uids);
       const ordered=[...action.uids].sort((a,b)=>Number(this.find(b).zone==='extra')-Number(this.find(a).zone==='extra'));
-      for(const uid of ordered)this.special(owner,uid,{via:'pendulum',position:action.position||'attack',zone:layout[uid]});
+      // One Pendulum Summon may put several monsters on the field. Winda and
+      // other once-per-Special-Summon limits must see one simultaneous event.
+      const specialCount=this.state.players[owner].turnStats.special;
+      for(const uid of ordered){this.state.players[owner].turnStats.special=specialCount;this.special(owner,uid,{via:'pendulum',position:action.position||'attack',zone:layout[uid]});}
+      this.state.players[owner].turnStats.special=specialCount+1;
       const nextFrame={kind:'summon',owner,uid:ordered[0],uids:[...ordered],summonKind:'pendulum',summonGroup:ordered.slice(1).map(uid=>({owner,uid,kind:'pendulum'})),windowOffered:false};
       if(this.state.frame?.kind==='summon-attempt')this.state.frame.resumeFrame=nextFrame;else this.state.frame=nextFrame;
     }
@@ -1311,6 +1315,10 @@
     allActions(owner=this.state.active){
       if(this.state.pending||this.state.winner!==null||owner!==this.state.active)return [];
       const out=this.refs(owner,['hand','monsters','extraMonster','spells','fieldSpell','grave','banished']).flatMap(f=>this.actionsFor(f.card.uid,owner));
+      // Contact procedures live on the Extra Deck card itself. Ordinary Extra
+      // Deck monsters have no activatable Extra-zone ability; avoid repeating
+      // the full legality scan for every one of them in each AI projection.
+      for(const m of this.state.players[owner].extra)if((this.fx.byCard[m.id]||[]).some(a=>a.main&&a.zones.includes('extra')))out.push(...this.actionsFor(m.uid,owner));
       if(['main1','main2'].includes(this.state.phase)){
         for(const opt of this.extraOptions(owner))out.push({type:'extra-summon',uid:opt.card.uid,label:({synchro:'同调',xyz:'超量',link:'连接'}[opt.type])+'召唤',icon:opt.type});
         if(this.pendulumCandidates(owner).length)out.push({type:'pendulum-summon',label:'灵摆召唤',icon:'pendulum'});

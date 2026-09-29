@@ -1,0 +1,20 @@
+/* Ritual spells share the existing material menu and validate real zones. */
+(function(root){
+ 'use strict';const X=root.DuelChronicle,{D,E,H,C,I,is,A,Q,passive,mark,extend,card,def,field,monster,active,allF,allM,ownM,foeM,hand,deck,grave,first,args,self,src,g,choose,target,moved,destroy,onEntry,onMove,onEnd,watch,revive,search,specialChoice,series,effect,cast}=X;
+ const Y=X.year2016,{fm,live,limit,back,send,banish,canSend}=Y;
+ const spells=['Primal Cry','Chaos Form','Machine Angel Ritual',"Sprite's Blessing",'Machine Angel Absolute Ritual','Super Soldier Synthesis',"Shinobird's Calling"],custom=id=>['Chaos Form','Machine Angel Absolute Ritual','Super Soldier Synthesis',"Shinobird's Calling"].some(n=>is({id},n));
+ for(const n of spells)mark(n);for(const n of ['Chaos Form','Machine Angel Absolute Ritual',"Sprite's Blessing",'Super Soldier Synthesis'])C(n).ritualExact=true;
+ E.get(I('Super Soldier Synthesis')+'::cast').once=limit('synthesis');
+ extend('ritualPool',function(prior,p,m,id){
+  if(is({id},'Super Soldier Synthesis'))return [...hand(this,p),...deck(this,p)].filter(q=>q.uid!==m.uid&&monster(q)&&['光','暗'].includes(this.attribute(q))&&this.level(q)>0&&canSend(this,q));
+  const list=prior.call(this,p,m,id);if(!custom(id))return list;
+  const extra=grave(this,p,q=>q.uid!==m.uid&&monster(q)&&(is({id},'Chaos Form')?[I('Blue-Eyes White Dragon'),I('Dark Magician')].includes(this.cardNameId(q)):is({id},'Machine Angel Absolute Ritual')?['天使族','战士族'].includes(this.race(q)):!!def(q).spirit));
+  return [...new Map([...list,...extra].map(q=>[q.uid,q])).values()];
+ });
+ extend('ritualValid',function(prior,p,m,ms,id){if(!is({id},'Super Soldier Synthesis'))return prior.call(this,p,m,ms,id);const f=m&&this.find(m.uid),pool=this.ritualPool(p,m,id);return !!f&&f.owner===p&&['hand','grave'].includes(f.zone)&&this.ritualAccepts(id,m)&&this.canSpecial(p,m,{via:'ritual'})&&ms.length===2&&ms.every(q=>pool.some(a=>a.uid===q.uid))&&new Set(ms.map(q=>this.find(q.uid).zone)).size===2&&new Set(ms.map(q=>this.attribute(q))).size===2&&ms.reduce((n,q)=>n+this.level(q),0)===8&&this.freeZones(p,m).length>0;});
+ extend('ritualOptions',function(prior,p,id){return is({id},'Super Soldier Synthesis')?[...hand(this,p),...grave(this,p)].filter(m=>this.ritualAccepts(id,m)&&this.ritualCombos(p,m,id).length):prior.call(this,p,id);});
+ extend('performRitual',function(prior,p,u,us,id,s,z=null,pos='attack'){if(!custom(id))return prior.call(this,p,u,us,id,s,z,pos);const m=card(this,u),ms=us.map(v=>card(this,v));if(!this.ritualValid(p,m,ms,id))throw new root.DuelRuleError('仪式素材的区域、属性或等级不合法。');const snapshots=ms.map(q=>this.describe(q));for(const q of ms){const zone=this.find(q.uid).zone,to=zone==='grave'?(is({id},'Machine Angel Absolute Ritual')?'deck':'banished'):'grave',kind=is({id},'Super Soldier Synthesis')?'effect-ritual-material':zone==='grave'?(to==='deck'?'effect-return':'effect-ritual-banish'):'effect-ritual-tribute';this.move(q.uid,to,{kind,source:s,byOwner:p});}this.shuffle(this.state.players[p].deck);const r=this.special(p,u,{via:'ritual',position:pos,materials:snapshots,...(z===null?{}:{zone:z})});if(r){r.eraDjinnMaterials=snapshots.filter(q=>def(q).eraDjinn).map(q=>q.id);r.eraRitualSpell=id;r.eraRitualMaterials=us;this.emit({type:'era-ritual',owner:p,uid:u,id:m.id,spellId:id,source:s,materials:snapshots});}return r;});
+ onEnd('Primal Cry',{inputs:target('选择本回合从场上送墓的仪式怪兽',(e,c)=>grave(e,c.owner,m=>def(m).type==='ritual'&&fm(m.earlySent?.from)&&m.earlySent?.turn===e.state.turn),'special'),cost:(e,c)=>moved(e,c,[c.uid],'banished','cost-banish'),summons:true,resolve:(e,c)=>revive(e,c,first(c))},{zones:['grave']});
+ extend('destroy',function(prior,u,s,b=false,...a){const f=this.find(u),r=f&&fm(f.zone)&&this.attribute(f.card)==='光'&&grave(this,f.owner,m=>is(m,'Machine Angel Ritual'))[0];if(r){moved(this,{owner:f.owner,source:src(this,r)},[r.uid],'banished','effect-banish');if(this.find(r.uid)?.zone==='banished')return false;}return prior.call(this,u,s,b,...a);});
+ mark('Machine Angel Ritual','本作适配：墓地除外代替光属性怪兽破坏的可选效果自动适用。');
+})(globalThis);

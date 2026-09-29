@@ -9,7 +9,10 @@
   }
   const traceKeys=new Set(['log','chainHistory','startedAt','chainId','nextUid','nextLog','nextLink','nextTrigger','nextChain',
     'frame','pending','building','resolvingLink','chain','chainCleanup','chainResolving','tasks','triggers','earlyEvent','earlyWindowSummon','earlyLastSummon',
-    'used','usedTurn','duelUsed','lingering','nextLingering','actionsThisTurn','effectActivations','gxSpellTrapCount','gxNormals','gxSummonCounts','lpPaidByTurn','inputRoles','targetMeta','sourceUnavailableByNumber','effectNegatedByNumber','preventionState','deckSpec','earlySent']);
+    'used','usedTurn','duelUsed','lingering','nextLingering','actionsThisTurn','effectActivations','gxSpellTrapCount','gxNormals','gxSummonCounts','lpPaidByTurn','inputRoles','targetMeta','sourceUnavailableByNumber','effectNegatedByNumber','preventionState','deckSpec','earlySent',
+    // Activation/attack history enforces Caliga's limits; incrementing history
+    // alone is not an extra outcome that makes a repeated empty effect useful.
+    'y16MonsterEffects','y16Attackers']);
   const cardIdentity=new Set(['uid','id','originalOwner','faceUp','position','attacked','summonTurn','changedTurn','setTurn','generation',
     'properlySummoned','faceUpExtra','summonKind','pendingActivation','attacksMade','used','overlays']);
   function cloneEngine(engine){

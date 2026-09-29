@@ -123,7 +123,7 @@
       // All currently known groups must be satisfiable before offering an
       // activation. Dependent groups are returned once their earlier choice is
       // present, so a cost prompt cannot strand a player with no legal target.
-      if(inputGroups(e,ctx).some(g=>(g.max??1)<(g.min??1)||!Object.prototype.hasOwnProperty.call(ctx.args,g.key)&&(g.candidates||[]).length<(g.min??1)))return false;
+      if(inputGroups(e,ctx).some(g=>(g.max??1)<(g.min??1)||!Object.prototype.hasOwnProperty.call(ctx.args,g.key)&&((g.candidates||[]).length<(g.min??1)||g.validator==='early-y15-different'&&new Set((g.candidates||[]).map(o=>e.find(o.uid)?.card.id)).size<(g.min??1))))return false;
     }catch{return false;}
     return true;
   }
@@ -282,6 +282,6 @@
     require('./ai-marginal.js');
     require('./ai-tactics.js');
     require('./ai-planner.js');
-    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005','effects-2006','effects-2007','effects-2008','effects-year-final','effects-chronicle','effects-2009','effects-2010','effects-2011','effects-2012','effects-2013','effects-chronicle-contracts','chronicle-rules','effects-2014','effects-2015'])require('./'+file+'.js');
+    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005','effects-2006','effects-2007','effects-2008','effects-year-final','effects-chronicle','effects-2009','effects-2010','effects-2011','effects-2012','effects-2013','effects-chronicle-contracts','chronicle-rules','effects-2014','effects-2015','effects-2016'])require('./'+file+'.js');
   }
 })(typeof globalThis!=='undefined'?globalThis:this);

@@ -42,4 +42,25 @@ test('Odd-Eyes Rebellion is an Extra Deck Xyz, retains Rank and Pendulum text, a
 test('Majester requires Pendulum materials and Cyber Infinity retains both LIGHT and Machine restrictions',()=>{
  const e=fresh(),a=fieldCard(e,0,'Performage Plushfire'),b=fieldCard(e,0,'Battle Ox'),m=put(e,0,'extra','Majester Paladin, the Ascending Dracoslayer');assert.equal(e.xyzValid(0,m,[a,b]),false);const d=D.cardByName('Cyber Dragon Infinity');assert.equal(d.xyzAttribute,'光');assert.equal(d.xyzRace,'机械族');
 });
+test('Dinoster is unavailable with only one Pendulum, including the bot and PVP action list',()=>{
+ const e=fresh(),x=put(e,0,'extra','Dinoster Power, the Mighty Dracoslayer'),a=fieldCard(e,0,'Luster Pendulum, the Dracoslayer');
+ assert.equal(E.available(e,0,{kind:'main'}).some(q=>q.uid===x.uid),false);
+ assert.equal(e.allActions().some(q=>q.uid===x.uid),false);
+ assert.equal(e.find(a.uid).zone,'monsters');
+});
+test('Dinoster sequential material choices survive JSON restore and tribute two physical cards',()=>{
+ let e=fresh();const x=put(e,0,'extra','Dinoster Power, the Mighty Dracoslayer'),a=fieldCard(e,0,'Luster Pendulum, the Dracoslayer'),b=fieldCard(e,0,'Master Pendulum, the Dracoslayer');
+ assert.ok(e.allActions().some(q=>q.uid===x.uid));act(e,{type:'activate',uid:x.uid,key:x.id+'::y15-contact'});
+ assert.equal(e.state.pending.group.key,'slayer');act(e,{type:'choose',uids:[a.uid]});
+ assert.equal(e.state.pending.group.key,'pendulum');assert.deepEqual(e.state.pending.group.candidates.map(q=>q.uid),[b.uid]);
+ e=DuelEngine.restore(e.snapshot());act(e,{type:'choose',uids:[b.uid]});drain(e);
+ for(const m of [a,b]){assert.equal(e.find(m.uid).zone,'extra');assert.equal(e.find(m.uid).card.faceUpExtra,true);}
+ assert.ok(['monsters','extraMonster'].includes(e.find(x.uid).zone));assert.equal(e.find(x.uid).card.properlySummoned,true);assert.equal(e.state.players[0].turnStats.special,1);
+});
+test('Dinoster excludes material and summon locks before offering a contact procedure',()=>{
+ const e=fresh(),x=put(e,0,'extra','Dinoster Power, the Mighty Dracoslayer');fieldCard(e,0,'Luster Pendulum, the Dracoslayer');const b=fieldCard(e,0,'Master Pendulum, the Dracoslayer',{y15NoMaterial:'fusion'});
+ assert.equal(E.available(e,0,{kind:'main'}).some(q=>q.uid===x.uid),false);delete b.y15NoMaterial;
+ assert.ok(E.available(e,0,{kind:'main'}).some(q=>q.uid===x.uid));e.addLock(0,'no-special');
+ assert.equal(E.available(e,0,{kind:'main'}).some(q=>q.uid===x.uid),false);
+});
 module.exports={act,drain,use};

@@ -1,7 +1,7 @@
 import {parse} from 'acorn';
 
 const scalarKeys=new Set(['series','nameIncludes','xyzNameIncludes','tunerNameIncludes','nonNameIncludes','ritualSeries','tunerFamily','tributeFamily','rankUpFamily']);
-const listKeys=new Set(['nameIncludesAny']);
+const listKeys=new Set(['nameIncludesAny','ritualSeriesAny']);
 const literal=node=>node?.type==='Literal'&&typeof node.value==='string'?node.value:node?.type==='TemplateLiteral'&&!node.expressions.length?node.quasis[0].value.cooked:null;
 const key=node=>node?.name??node?.value;
 

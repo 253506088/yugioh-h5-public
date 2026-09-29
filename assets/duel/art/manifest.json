@@ -1869,6 +1869,30 @@
       "url": "https://images.ygoprodeck.com/images/cards_cropped/23720856.jpg",
       "path": "assets/duel/art/zubaba-gagagacoat.webp",
       "sha256": "ef1033e9aeb034353cdf5c3bba5221ae0d2cbf25c531507f9180f349330beefb"
+    },
+    {
+      "id": "early-59822133",
+      "imageId": 59822133,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/59822133.jpg",
+      "path": "assets/duel/art/early-59822133.webp",
+      "sha256": "b226e925fba6a547bdb7aeaa83aa8627227536325e14ca4847be5b5f44186dac",
+      "sourceSha256": "c888be5095e06c22314ec60df4f7c6deb86b2cd7a3034b0f9dcf4267e4af4458"
+    },
+    {
+      "id": "early-48905153",
+      "imageId": 48905153,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/48905153.jpg",
+      "path": "assets/duel/art/early-48905153.webp",
+      "sha256": "5b60bc0e023b3c33f9fd9a2b8642e32ba5d5dfed0fc53f9fd489eeab8ff98741",
+      "sourceSha256": "fc8221f5310eac281f07d8e6007667bf2e654d0c9c5ff12fda322695b8fabd70"
+    },
+    {
+      "id": "early-31178212",
+      "imageId": 31178212,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/31178212.jpg",
+      "path": "assets/duel/art/early-31178212.webp",
+      "sha256": "d42f99d626357ad8681e1ccaf2312b27e1d5788e8cb4bda759bc338f85a50e25",
+      "sourceSha256": "b5b9c1514bc6118a2d8389ef394dafed157bf70b633c91915de184b834c52c61"
     }
   ]
 }

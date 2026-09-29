@@ -14,3 +14,19 @@ test('accel Synchros require actual Synchro material types',()=>{const s=parseSy
 test('Xyz grammar retains Rank, race, archetype and a bounded variable material count',()=>{assert.deepEqual(parseXyz('Dinosaur','2 Level 4 Warrior-Type monsters',options),{xyzCount:2,rank:4,xyzRace:'战士族'});assert.equal(parseXyz('Archetype','2 Level 4 "lswarm" monsters',options).xyzNameIncludes,'lswarm');const variable=parseXyz('Hazy Flame Basiltrice','2 or more (max. 5) Level 6 EARTH monsters',options);assert.equal(variable.xyzMax,5);assert.equal(variable.xyzAttribute,'地');});
 test('Fusion grammar retains combined race/archetype and non-Effect Synchro requirements',()=>{const a=parseFusion('Barbaroid','5 Machine-Type "roid" monsters',options);assert.deepEqual(a.fusion[0],{race:'机械族',nameIncludes:'roid'});const o={...options,byName:new Map([...options.byName,['gaia knight, the force of earth','gaia']])},b=parseFusion('Gaia Drake','1 "Gaia Knight, the Force of Earth" + 1 non-Effect Synchro Monster',o);assert.deepEqual(b.fusion[1],{type:'synchro',normal:true});});
 test('an unknown Xyz material grammar is rejected rather than admitted as a generic Rank',()=>{assert.throws(()=>parseXyz('Bad','2 any cards',options),/Unparsed/);assert.throws(()=>parseXyz('Bad','2 Level 4 Quantum monsters',options),/Unknown/);});
+
+test('2016 material grammar preserves attack limits, field-only materials and original levels',()=>{
+ assert.deepEqual(parseFusion('Metalfoes Adamante','1 "Metalfoes" monster + 1 monster with 2500 or less ATK',options).fusion[1],{maxAtk:2500});
+ assert.deepEqual(parseFusion('Starving Venom Fusion Dragon','2 DARK monsters on the field, except Tokens',options).fusion[0],{fieldOnly:true,noTokens:true,attribute:'暗'});
+ assert.deepEqual(parseFusion('Greedy Venom Fusion Dragon','1 "Predaplant" monster + 1 DARK monster whose original Level is 8 or higher',options).fusion[1],{attribute:'暗',originalMinLevel:8});
+ assert.equal(parseFusion('Invoked Elysium','1 "Invoked" monster + 1 monster that was Special Summoned from the Extra Deck',options).fusion[1].summonedFromExtra,true);
+ assert.equal(parseFusion('Crimson Nova Trinity the Dark Cubic Lord','3 x "Crimson Nova the Dark Cubic Lord"',options).fusion.length,3);
+});
+test('2016 Xyz and Synchro grammar retains variable tuner counts and compound restrictions',()=>{
+ const s=parseSynchro('Crystron Quariongandrax','2 or more Tuners + 1 non-Tuner monster',options).synchro;assert.equal(s.minTuners,2);assert.equal(s.maxTuners,6);assert.equal(s.maxNon,1);
+ assert.deepEqual(parseXyz('Timestar Magician','2 Level 4 "Magician" Pendulum Monsters',options),{xyzCount:2,rank:4,xyzPendulum:true,xyzNameIncludes:'Magician'});
+ assert.equal(parseXyz('Vola-Chemicritter Methydraco','2 Level 8 Gemini monsters',options).xyzGemini,true);
+ assert.equal(parseXyz('Lyrilusc - Recital Starling','2+ Level 1 monsters',options).xyzMax,7);
+ assert.equal(parseXyz('Number 100: Numeron Dragon','2 "Number" Xyz Monsters with the same name and Rank',options).xyzSameName,true);
+ assert.equal(parseSynchro('Phantasmal Lord Ultimitl Bishbaalkin',"(This card's original Level is always treated as 12.)",options).synchro.noSummon,true);
+});

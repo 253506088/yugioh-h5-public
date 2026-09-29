@@ -1,0 +1,31 @@
+/* Authored integration fixtures, not historical tournament decklists or presets.
+ * Every case finishes, conserves cards and replays every recorded action. */
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const {DuelEngine}=require('../src/advanced-engine.js'),D=global.DuelData,K=global.DuelDecks;
+const expand=rows=>rows.flatMap(([name,n])=>{const c=D.cardByName(name);assert.ok(c,name);assert.notEqual(c.implementationStatus,'pending',name);assert.ok(c.releaseYear<=2016,name);return Array(n).fill(c.id);});
+const staples=[['Cosmic Cyclone',3],['Pot of Desires',2],['Raigeki',1],['Monster Reborn',1],['Book of Moon',3],['Solemn Strike',3],['Lost Wind',3],['Effect Veiler',3],['Mystical Space Typhoon',3]];
+const make=(name,main,extra=[])=>{const cards=expand(main);for(const id of expand(staples))if(cards.length<40&&cards.filter(c=>c===id).length<3)cards.push(id);const d={id:'custom-test-2016-'+name,name,player:name,custom:true,cards,extra:expand(extra),year:2016};assert.equal(K.analyze(d).valid,true,JSON.stringify(K.analyze(d)));return d;};
+const decks=[
+ make('abc',[['A-Assault Core',3],['B-Buster Drake',3],['C-Crush Wyvern',3],['Union Hangar',3],['Terraforming',3],['Gold Gadget',3],['Silver Gadget',3],['Union Scramble',2],['Heavy Mech Support Armor',1],['Torque Tune Gear',1]],[['ABC-Dragon Buster',3],['A-to-Z-Dragon Buster Cannon',1],['XYZ-Dragon Cannon',1],['Gear Gigant X',2],['Daigusto Emeral',2],['Castel, the Skyblaster Musketeer',1]]),
+ make('metalfoes',[['Metalfoes Silverd',3],['Metalfoes Goldriver',3],['Metalfoes Steelen',3],['Metalfoes Volflame',3],['Raremetalfoes Bismugear',3],['Metalfoes Fusion',2],['Fullmetalfoes Fusion',2],['Metalfoes Counter',3],['Metalfoes Combination',3],['Metamorformation',2],['Rescue Rabbit',2]],[['Metalfoes Orichalc',3],['Metalfoes Mithrilium',3],['Fullmetalfoes Alkahest',3]]),
+ make('invoked',[['Aleister the Invoker',3],['Invocation',3],['Magical Meltdown',3],['Terraforming',3],['The Book of the Law',2],['Omega Summon',2],['Shaddoll Dragon',3],['Shaddoll Squamata',3],['Effect Veiler',2],['Debris Dragon',2],['UFO Turtle',2]],[['Invoked Mechaba',3],['Invoked Raidjin',2],['Invoked Purgatrio',2],['Invoked Cocytus',2],['Invoked Caliga',2],['Invoked Elysium',2]]),
+ make('darklord',[['Darklord Ixchel',3],['Darklord Nasten',3],['Darklord Amdusc',3],['Darklord Tezcatlipoca',2],['Darklord Superbia',3],['Darklord Ukoback',3],['Darklord Morningstar',1],['Darklord Contact',3],['Banishment of the Darklords',3],['Darklord Rebellion',2],['Darklord Enchantment',2],['Trade-In',2],['Allure of Darkness',2]]),
+ make('lunalight',[['Lunalight Kaleido Chick',3],['Lunalight Black Sheep',3],['Lunalight Blue Cat',3],['Lunalight Tiger',3],['Lunalight Wolf',3],['Lunalight Purple Butterfly',2],['Lunalight White Rabbit',3],['Lunalight Crimson Fox',2],['Luna Light Perfume',3],['Polymerization',3],['Lunalight Reincarnation Dance',2]],[['Lunalight Cat Dancer',3],['Lunalight Panther Dancer',3],['Lunalight Leo Dancer',3]]),
+ make('kozmo',[['Kozmo Tincan',3],['Kozmo Farmgirl',3],['Kozmo Strawman',2],['Kozmo Soartroopers',2],['Kozmo Goodwitch',2],['Kozmoll Wickedwitch',2],['Kozmoll Dark Lady',2],['Kozmo Scaredy Lion',1],['Kozmo Dark Destroyer',3],['Kozmo Forerunner',2],['Kozmo Sliprider',2],['Kozmo Landwalker',1],['Kozmo DOG Fighter',1],['Kozmo Delta Shuttle',1],['Kozmo Dark Eclipser',1],['Kozmo Dark Planet',1],['Kozmotown',3],['Kozmojo',2],['Kozmourning',1],['Kozmo Lightsword',1]])
+];
+const shard=process.env.DUEL_SHARD===undefined?null:Number(process.env.DUEL_SHARD),shards=4;assert.ok(shard===null||Number.isInteger(shard)&&shard>=0&&shard<shards);
+const cases=decks.flatMap(d=>['blue-eyes-2016','zoodiac-2016'].flatMap(opponent=>[0,1].map(first=>({d,opponent,first,ruleMode:'off'}))));
+for(const [i,r] of global.DuelRuleModes.RULES.entries())cases.push({d:decks[i%decks.length],opponent:i%2?'blue-eyes-2016':'zoodiac-2016',first:i%2,ruleMode:r.id});
+const out=path.resolve(__dirname,'../output/rollout-2016/integration'+(process.env.DUEL_CASE?'-case-'+process.env.DUEL_CASE:shard===null?'':'-'+shard));fs.mkdirSync(out,{recursive:true});
+const report={cases:cases.length,shard,matches:[],errors:[],effects:{}};
+for(const [i,c] of cases.entries()){
+ if(shard!==null&&i%shards!==shard||process.env.DUEL_CASE&&i!==Number(process.env.DUEL_CASE))continue;
+ const seed=201609290+i;let e=new DuelEngine({deck:c.d.id,opponentDeck:c.opponent,deckSpecs:[c.d,D.DECKS[c.opponent]],first:c.first,seed,ruleMode:c.ruleMode}),start=e.snapshot(),actions=[],lastAction,lastTurn=-1;const repetitions=new Map();
+ try{
+  while(e.state.winner===null&&actions.length<3000){if(process.env.DUEL_DEBUG)console.log('STEP',i,actions.length,e.state.turn,e.state.phase,e.state.pending?.kind);lastAction=e.aiNext();assert.ok(lastAction);if(lastTurn!==e.state.turn){repetitions.clear();lastTurn=e.state.turn;}if(lastAction.type!=='pass'){const key=JSON.stringify(lastAction),n=(repetitions.get(key)||0)+1;repetitions.set(key,n);assert.ok(n<=40,'Repeated action without turn progress: '+key);}const result=e.act(lastAction);assert.equal(result.ok,true,JSON.stringify(lastAction)+' '+result.error);actions.push(lastAction);if(lastAction.key)report.effects[lastAction.key]=(report.effects[lastAction.key]||0)+1;e.assertState();if(actions.length===24){const copy=DuelEngine.restore(e.snapshot());assert.deepEqual(copy.snapshot(),e.snapshot());e=copy;}}
+  assert.notEqual(e.state.winner,null,'Match did not finish');const replay=DuelEngine.restore(start);for(const action of actions)assert.equal(replay.act(action).ok,true);assert.deepEqual(replay.snapshot(),e.snapshot());
+  report.matches.push({case:i,seed,deck:c.d.id,opponent:c.opponent,first:c.first,ruleMode:c.ruleMode,steps:actions.length,turns:e.state.turn,winner:e.state.winner,replay:true});console.log('OK',i,c.d.id,c.ruleMode,actions.length);
+ }catch(error){report.errors.push({case:i,seed,deck:c.d.id,ruleMode:c.ruleMode,error:error.stack});fs.writeFileSync(path.join(out,'failure-'+i+'.json'),JSON.stringify({lastAction,actions,start,snapshot:e.snapshot(),error:error.stack}));console.error('FAIL',i,c.d.id,error.message);}
+ fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));
+}
+if(report.errors.length)process.exitCode=1;

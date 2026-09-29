@@ -45,6 +45,7 @@
  }
  extend('materialMatches',function(prior,m,s,...a){return (!s.level||this.level(m)===s.level)&&prior.call(this,m,s,...a);});
  extend('earlyValidateInput',function(prior,c,g,uids){if(g.validator==='early-y15-different')return new Set(uids.map(u=>card(this,u)?.id)).size===uids.length||'请选择不同名的卡片。';return prior.call(this,c,g,uids);});
+ extend('chooseAI',function(prior,p){const action=prior.call(this,p);if(p.kind==='input'&&p.group?.validator==='early-y15-different'&&action.type==='choose'){const seen=new Set(),unique=[...(action.uids||[]),...p.group.candidates.map(o=>o.uid)].filter(u=>{const id=card(this,u)?.id;if(!id||seen.has(id))return false;seen.add(id);return true;}),n=Math.min(p.group.max??1,Math.max(p.group.min??1,action.uids?.length||0));if(unique.length>=(p.group.min??1))return {...action,uids:unique.slice(0,n)};if(p.cancelable)return {type:'choose',cancel:true};}return action;});
  extend('fusionValid',function(prior,p,m,ms,s){return (!def(m)?.fusionDifferentNames||new Set(ms.map(q=>this.cardNameId(q))).size===ms.length)&&prior.call(this,p,m,ms,s);});
  extend('fusionAllowed',function(prior,m,s){return !def(m)?.legendaryFusion&&prior.call(this,m,s);});
  extend('xyzValid',function(prior,p,m,ms,rankUp=false){

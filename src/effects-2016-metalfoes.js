@@ -1,0 +1,28 @@
+/* Metalfoes: Pendulum destruction, real Fusion materials and resource loops. */
+(function(root){
+ 'use strict';const X=root.DuelChronicle,{D,E,H,C,I,is,A,Q,passive,mark,extend,card,def,field,monster,active,allF,ownM,deck,grave,first,args,self,src,g,choose,target,moved,destroy,onMove,watch,revive,search,specialChoice,series,effect,cast,defer}=X;
+ const Y=X.year2016,{fm,pend,live,limit,back,ps,fusion}=Y,metal=m=>series(m,'Metalfoes'),metalMonster=m=>metal(m)&&monster(m),profile=c=>({year2016:'metalfoes',spellId:c.sourceId});
+ for(const n of ['Metalfoes Silverd','Metalfoes Goldriver','Metalfoes Steelen','Metalfoes Volflame','Raremetalfoes Bismugear'])ps(n,'y16-set',{condition:(e,c)=>deck(e,c.owner,m=>metal(m)&&!monster(m)).length>0,inputs:target('选择破坏的其他卡片',(e,c)=>e.field(c.owner).filter(m=>m.faceUp&&m.uid!==c.uid),'self-destroy'),resolve:(e,c)=>{if(e.destroy(first(c),c.source))choose(e,c,'选择盖放的魔法陷阱',deck(e,c.owner,m=>metal(m)&&!monster(m)),1,1,'y16-metal-set',{role:'search'});},aiScore:850});
+ E.op('y16-metal-set',(e,t)=>E.ops['gx-set'](e,t));
+ onMove('Raremetalfoes Bismugear','y16-end-search',{zones:['grave','banished','extra'],once:limit('bismugear'),resolve:(e,c)=>defer(e,c,'end',e.state.turn,'y16-metal-search',{anyOwner:true})},(e,v)=>field(v.from)&&['destroy','battle'].includes(v.kind));
+ E.op('y16-metal-search',(e,t)=>search(e,{owner:t.owner,source:t.context.source},deck(e,t.owner,metalMonster)));
+ extend('fusionAllowed',function(prior,m,p){return (p?.year2016!=='metalfoes'||metal(m))&&prior.call(this,m,p);});
+ for(const n of ['Metalfoes Fusion','Fullmetalfoes Fusion'])cast(n,null,(e,c)=>fusion(e,c,profile(c)),{summons:true,condition:(e,c)=>e.fusions(c.owner,profile(c)).length>0});
+ A('Metalfoes Fusion','y16-recycle',{zones:['grave'],effectType:'spell',once:limit('metalfoes-fusion'),resolve:(e,c)=>{back(e,c,[c.uid]);if(e.find(c.uid)?.zone==='deck')e.draw(c.owner,1);},aiScore:1000});
+ X.eventTrap('Metalfoes Counter','move',(e,v,p)=>v.owner===p&&field(v.from)&&['battle','destroy'].includes(v.kind),{summons:true,resolve:(e,c)=>specialChoice(e,c,deck(e,c.owner,metalMonster),{via:'effect',shuffle:true})});
+ Q('Metalfoes Counter','y16-recover',{zones:['grave'],effectType:'trap',condition:(e,c)=>card(e,c.uid)?.earlySent?.turn<e.state.turn,inputs:target('选择回收的灵摆怪兽',(e,c)=>e.state.players[c.owner].extra.filter(m=>m.faceUpExtra&&metal(m)&&pend(m)),'search'),cost:(e,c)=>moved(e,c,[c.uid],'banished','cost-banish'),resolve:(e,c)=>moved(e,c,args(c),'hand','effect-return'),aiScore:600,aiResponse:()=>600});
+ cast('Metalfoes Combination',null,()=>{});
+ watch('Metalfoes Combination','y16-revive','summon',(e,v)=>v.kind==='fusion',{effectType:'trap',once:H.once('y16-combination','card'),summons:true,inputs:target('选择复活的怪兽',(e,c)=>grave(e,c.owner,m=>metalMonster(m)&&e.level(m)<(c.event.level||def({id:c.event.id}).level)),'special'),resolve:(e,c)=>revive(e,c,first(c))},{zones:['spells']});
+ onMove('Metalfoes Combination','y16-search',{effectType:'trap',resolve:(e,c)=>search(e,c,deck(e,c.owner,metalMonster))},(e,v)=>field(v.from)&&v.to==='grave');
+ cast('Metamorformation',null,()=>{});passive('Metamorformation',{stat:(e,s,m)=>e.find(m.uid)?.owner===s.owner&&metalMonster(m)?300:0});
+ extend('unaffected',function(prior,m,s){const f=m&&this.find(m.uid);return !!f&&fm(f.zone)&&m.faceUp&&metalMonster(m)&&this.isNormalMonster(m)&&s?.owner!==f.owner&&live(this,'Metamorformation',f.owner).length>0&&this.scales(f.owner).some(q=>q&&metal(q.card))||prior.call(this,m,s);});
+ passive('Metalfoes Orichalc',{piercing:(e,s,m)=>e.find(m.uid)?.owner===s.owner&&metalMonster(m)});
+ extend('damage',function(prior,p,n,k,s,...a){const b=this.state.frame?.attack,af=b&&this.find(b.uid),df=b&&this.find(b.target);if(k==='战斗'&&af&&df&&df.owner===p&&df.card.position==='defense'&&metalMonster(af.card)&&live(this,'Metalfoes Orichalc',af.owner).some(f=>fm(f.zone)))n*=2;return prior.call(this,p,n,k,s,...a);});
+ onMove('Metalfoes Orichalc','y16-destroy',{inputs:target('选择破坏的卡片',allF),resolve:(e,c)=>destroy(e,c,args(c))},(e,v)=>field(v.from)&&v.to==='grave');
+ effect('Metalfoes Mithrilium',allF,(e,c)=>{const us=args(c,'recover');back(e,c,us);if(us.every(u=>['deck','extra'].includes(e.find(u)?.zone)))moved(e,c,args(c),'hand','effect-return');},{mode:'y16-return',once:limit('mithrilium'),inputs:(e,c)=>[g(e,c,'recover','选择回收的卡片',grave(e,c.owner,metal),2,2,'search'),g(e,c,'target','选择返回手牌的卡片',allF(e),1,1,'bounce')]});
+ onMove('Metalfoes Mithrilium','y16-revive',{summons:true,resolve:(e,c)=>specialChoice(e,c,[...grave(e,c.owner),...e.state.players[c.owner].extra.filter(m=>m.faceUpExtra)].filter(m=>metal(m)&&pend(m)),{via:'revive'})},(e,v)=>field(v.from)&&v.to==='grave');
+ Q('Fullmetalfoes Alkahest','y16-equip',{once:H.once('y16-alkahest','card'),main:false,condition:(e,c)=>e.state.active!==c.owner&&e.state.players[c.owner].spells.includes(null),inputs:target('选择装备的怪兽',e=>X.allM(e).filter(m=>m.faceUp&&!e.isNormalMonster(m))),resolve:(e,c)=>{if(self(e,c)&&e.equipMonster(first(c),c.uid,c.owner,c.source))card(e,first(c)).y16Alkahest=c.uid;},aiResponse:()=>1400});
+ passive('Fullmetalfoes Alkahest',{stat:(e,s,m,k)=>m.uid===s.card.uid&&k==='def'?e.activeEquip(m).filter(q=>q.y16Alkahest===m.uid).reduce((a,q)=>a+(def(q).atk||0),0):0});
+ extend('fusionPool',function(prior,p,s){const ms=prior.call(this,p,s),equips=this.spells(p).filter(m=>m.monsterEquip&&live(this,'Fullmetalfoes Alkahest',p).some(f=>f.card.uid===m.equipTarget));return [...new Map([...ms,...equips].map(m=>[m.uid,m])).values()];});
+ extend('fusionValid',function(prior,p,m,ms,s){return (!ms.some(q=>this.find(q.uid)?.zone==='spells')||metal(m))&&prior.call(this,p,m,ms,s);});
+})(globalThis);
