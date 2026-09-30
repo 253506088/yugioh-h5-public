@@ -44,9 +44,9 @@
     return result;
   }
   function decorate(raw) {
-    const all = [...raw.extra,...raw.cards], ace = all.find(id=>CARDS[id].exodiaPart==='head') || [...all].sort((a,b)=>(CARDS[b].atk||0)-(CARDS[a].atk||0))[0];
+    const all = [...raw.extra,...raw.cards].filter(id=>own(CARDS,id)), ace = all.find(id=>CARDS[id].exodiaPart==='head') || [...all].sort((a,b)=>(CARDS[b].atk||0)-(CARDS[a].atk||0))[0];
     const counts = {};
-    raw.cards.forEach(id => { const f=CARDS[id].family; if(f!=='generic') counts[f]=(counts[f]||0)+1; });
+    raw.cards.forEach(id => { const f=CARDS[id]?.family; if(f&&f!=='generic') counts[f]=(counts[f]||0)+1; });
     const family = Object.keys(counts).sort((a,b)=>counts[b]-counts[a])[0] || 'custom';
     return {...clone(raw),en:'YOUR OWN DESTINY',ace:ace||'blue-eyes',avatar:family,player:'你的决斗者',mechanic:'自建卡组',description:'由你亲手构筑的' + raw.cards.length + '张主卡组，包含' + raw.extra.length + '张额外卡组。',subtitle:'自己的战术，自己的命运。',preset:false,custom:true,combo:['点击手牌或场上怪兽查看可用效果。','额外召唤会列出满足素材条件的同调与超量怪兽。']};
   }
@@ -55,8 +55,15 @@
     try { if(recoverySource!==null)root.localStorage.setItem(STORAGE+'-recovery',recoverySource);root.localStorage.setItem(STORAGE,JSON.stringify(saved));recoverySource=null; }
     catch { throw new Error('浏览器未能保存卡组。请先导出卡组备份，再检查本地存储空间。'); }
   }
-  function save(input) {
-    const raw = clean({...input,updatedAt:Date.now()},input.id && saved.some(d=>d.id===input.id)?input.id:null), prior=clone(saved);
+  function cleanDraft(input,id=null){
+    if(!input||typeof input.name!=='string'||!input.name.trim()||input.name.trim().length>40)throw Error('卡组名称需要1—40个字符。');
+    for(const z of ['cards','extra','side']){const list=input[z]===undefined&&z==='side'?[]:input[z];if(!Array.isArray(list)||list.length>1200||list.some(id=>typeof id!=='string'||id.length>100))throw Error('卡牌列表格式无效。');}
+    const result={id:id||('custom-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7)),name:input.name.trim(),cards:[...input.cards],extra:[...input.extra],side:[...(input.side||[])],version:3,updatedAt:input.updatedAt||Date.now(),notes:typeof input.notes==='string'?input.notes.slice(0,16000):''};
+    if(!/^custom-[a-z0-9-]{1,70}$/.test(result.id))throw Error('自建卡组标识不合法。');
+    result.draft=!analyze(result).valid;return result;
+  }
+  function save(input,{allowDraft=false}={}) {
+    const raw = (allowDraft?cleanDraft:clean)({...input,updatedAt:Date.now()},input.id && saved.some(d=>d.id===input.id)?input.id:null), prior=clone(saved);
     const at=saved.findIndex(d=>d.id===raw.id); if(at<0)saved.push(raw);else saved[at]=raw;
     try { persist(); } catch(error) {saved=prior;throw error;}
     DECKS[raw.id]=decorate(raw); return clone(raw);
@@ -77,7 +84,7 @@
       if(!Array.isArray(input)||input.length>500)throw new Error('卡组存储格式无效，原数据已保留。');
       saved=[];
       for(const item of input) {
-        try {const raw=clean(item,item.id); saved.push(raw);DECKS[raw.id]=decorate(raw);}catch(error){diagnostics.push({name:item?.name||'',error:error.message,raw:clone(item)});}
+        try {const raw=(item?.draft===true?cleanDraft:clean)(item,item.id); saved.push(raw);DECKS[raw.id]=decorate(raw);}catch(error){diagnostics.push({name:item?.name||'',error:error.message,raw:clone(item)});}
       }
       if(current===null&&!diagnostics.length)persist();
       if(!diagnostics.length)recoverySource=null;
@@ -95,8 +102,9 @@
     const check=analyze(input);if(!check.valid)throw new Error(check.errors.join('\n'));
     return {name:input.name.trim().slice(0,40),cards:[...input.cards],extra:[...input.extra],side:[...(input.side||[])],...(typeof input.notes==='string'?{notes:input.notes.slice(0,16000)}:{})};
   }
-  function exportJSON(deck) {
-    const check=analyze(deck);if(!check.valid)throw new Error(check.errors.join('\n'));
+  function exportJSON(deck,{allowDraft=false}={}) {
+    if(allowDraft)deck=cleanDraft(deck);
+    const check=analyze(deck);if(!allowDraft&&!check.valid)throw new Error(check.errors.join('\n'));
     return JSON.stringify({format:'duel-sanctuary-deck',version:3,exportedAt:new Date().toISOString(),deck:{name:deck.name,cards:[...deck.cards],extra:[...deck.extra],side:[...(deck.side||[])],...(typeof deck.notes==='string'&&deck.notes?{notes:deck.notes.slice(0,16000)}:{})}},null,2);
   }
   function registerSnapshot(spec) {
@@ -107,7 +115,7 @@
     }
     return DECKS[spec.id];
   }
-  const api={analyze,identity,clean,save,remove,load,list,copy,parseJSON,exportJSON,registerSnapshot,getSaved:()=>clone(saved),getDiagnostics:()=>clone(diagnostics),STORAGE};
+  const api={analyze,identity,clean,cleanDraft,save,saveDraft:input=>save(input,{allowDraft:true}),remove,load,list,copy,parseJSON,exportJSON,registerSnapshot,getSaved:()=>clone(saved),getDiagnostics:()=>clone(diagnostics),STORAGE};
   root.DuelDecks=api;
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

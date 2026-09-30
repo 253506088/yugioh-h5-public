@@ -17,7 +17,7 @@ async function check(name,fn){await fn();report.checks.push(name);console.log('O
  await check('loser selects order and both get intermission with private editor',async()=>{
    await concede(b);await b.click('[data-action="pvp-match-first"][data-value="0"]');await Promise.all(pages.map(p=>p.waitForFunction(()=>duelApp.pvp.room.match.phase==='siding')));
    await a.click('[data-action="pvp-match-side"]');assert.equal(await a.locator('.ws-pile[data-zone="side"] .ws-deck-row').count(),15);assert.equal(await a.locator('.ws-collection').count(),0);
-   await a.locator('.ws-pile[data-zone="cards"] [data-action="ws-plan"]').first().click();await a.locator('.ws-pile[data-zone="side"] [data-action="ws-plan"]').first().click();await a.click('[data-action="ws-apply-plan"]');await a.click('#ws-save');
+   await a.locator('.ws-pile[data-zone="cards"] .ws-deck-card').first().dragTo(a.locator('#ws-zone-nav [data-ws-drop="side"]'));await a.click('#ws-save');assert.equal(room().match.round.ready[0],false);await a.reload();await a.waitForFunction(()=>duelApp.pvp.room?.match?.phase==='siding');await a.click('[data-action="pvp-match-side"]');assert.equal(await a.evaluate(()=>duelApp.workshopDraft.side.length),16);await a.locator('.ws-pile[data-zone="side"] .ws-deck-card').first().dragTo(a.locator('#ws-zone-nav [data-ws-drop="cards"]'));await a.click('#ws-save');
    await a.waitForFunction(()=>duelApp.pvp.room.match.round.ready[0]);await a.screenshot({path:path.join(out,'locked.png')});
    assert.equal(await b.evaluate(()=>duelApp.pvp.room.game.state.players[1].deckSpec.side),undefined);
  });

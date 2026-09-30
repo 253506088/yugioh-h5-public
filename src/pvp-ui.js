@@ -237,7 +237,7 @@
     function showSiding(){
       if(room?.match?.phase!=='siding'||!room.siding)return;
       const roundId=room.match.round.id,matchId=room.match.id,key='duel-pvp-side:'+roundId;let draft;
-      try{draft=JSON.parse(sessionStorage.getItem(key)||'null');if(draft&&!root.DuelDeckEditor.check(draft,room.siding.registered).valid)draft=null;}catch{}
+      try{draft=JSON.parse(sessionStorage.getItem(key)||'null');if(draft)draft=root.DuelDeckEditor.draft(draft,room.siding.registered);}catch{draft=null;}
       bridge.siding({roundId,baseline:room.siding.baseline,registered:room.siding.registered,draft:room.match.round.ready[0]?room.siding.deck:draft||room.siding.deck,locked:room.match.round.ready[0],
         change:d=>{try{sessionStorage.setItem(key,JSON.stringify(d));}catch{}},
         submit:async d=>{await connection.request('match-side',{matchId,roundId,deck:d});try{sessionStorage.removeItem(key);}catch{}if(room.status==='intermission')showMatch();}});

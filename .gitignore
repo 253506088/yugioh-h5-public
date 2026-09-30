@@ -17,6 +17,8 @@
 !/.env.example
 
 # ===== 构建与验证 =====
+# 工坊拖拽修订：提交正式交互、草稿校验边界、回归测试和文档；
+# output/workshop-drag/ 下的对照截图、CDP触摸现场、日志和诊断脚本不提交。
 # 2026-09-30 副卡组／BO3／工坊：提交 src/、server/、正式测试、生成器、
 # docs/side-deck-*、交接和重建的根目录 index.html。
 # 需求原文及参考截图继续留在 /需求文档/；output/side-matches/ 中的

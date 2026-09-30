@@ -142,7 +142,10 @@ async function geometry(page, label) {
       await page.selectOption('[data-t-field="run-pace"]', 'turbo');
       await page.selectOption('[data-t-field="run-concurrency"]', '8');
       await page.click('[data-t-action="toggle"]');
-      await page.waitForFunction(() => duelApp.tournament.current.status === 'completed' || duelApp.tournament.current.progress().errors > 0, null, {timeout:180000});
+      await page.waitForFunction(() => duelApp.tournament.current.status === 'completed' || duelApp.tournament.current.progress().errors > 0, null, {timeout:180000}).catch(async error=>{
+        report.timeoutState=await page.evaluate(()=>({status:duelApp.tournament.current.status,hidden:document.hidden,progress:duelApp.tournament.current.progress(),settings:duelApp.tournament.current.data.settings,matches:duelApp.tournament.current.matches.map(m=>({id:m.id,status:m.status,games:m.games.map(g=>({steps:g.steps.length,turn:g.snapshot?.state?.turn,error:g.error}))}))}));
+        console.error('TOURNAMENT TIMEOUT',JSON.stringify(report.timeoutState));throw error;
+      });
       const result = await page.evaluate(() => ({status:duelApp.tournament.current.status, progress:duelApp.tournament.current.progress(), errors:duelApp.tournament.current.matches.filter(m => m.status === 'error').map(m => ({id:m.id,reason:m.reason})), champion:duelApp.tournament.current.data.championId}));
       assert.equal(result.status, 'completed', JSON.stringify(result));
       assert.equal(result.progress.played, 15); assert.equal(result.progress.remaining, 1); assert.ok(result.champion);

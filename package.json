@@ -77,7 +77,8 @@
     "cards:coverage:2016": "node scripts/report-card-coverage.mjs --write-year 2016",
     "test:matches": "node --test tests/side-matches.test.cjs tests/pvp-matches.test.mjs",
     "test:matches:browser": "node tests/side-matches-browser.cjs && node tests/pvp-matches-browser.cjs",
-    "test:matches:simulation": "node tests/match-simulation.cjs"
+    "test:matches:simulation": "node tests/match-simulation.cjs",
+    "test:workshop-drag": "node --test tests/workshop-drag.test.cjs && node tests/workshop-drag-browser.cjs"
   },
   "engines": {
     "node": ">=22.13.0"

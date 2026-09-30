@@ -17,5 +17,22 @@
     const result=check(next,registered);if(strict&&!result.valid)throw Error(result.errors.join('\n'));return next;
   }
   function diff(before,after){const out=[];for(const z of zones){const counts=new Map();for(const id of before[z]||[])counts.set(id,(counts.get(id)||0)-1);for(const id of after[z]||[])counts.set(id,(counts.get(id)||0)+1);for(const [id,delta] of counts)if(delta)out.push({zone:z,id,delta});}return out;}
-  const api={zones,normalize,inventory,check,move,diff};root.DuelDeckEditor=api;if(typeof module!=='undefined')module.exports=api;
+  function draft(input,registered){const d=normalize(input);if(registered&&JSON.stringify(inventory(d))!==JSON.stringify(inventory(registered)))throw Error('换备必须保留报名时的全部卡片。');return d;}
+  // Editing is deliberately independent of tournament legality. Validate only when
+  // adopting a construction for a game; a 40/15/15 swap may pass through 39/15/16.
+  function transfer(input,source,target,{registered}={}){
+    const d=draft(input,registered),from=source?.zone,to=target?.zone;
+    if(![...zones,'library'].includes(from)||![...zones,'library'].includes(to))throw Error('卡片选择已失效。');
+    if(registered&&(from==='library'||to==='library'))throw Error('换备必须保留报名时的全部卡片。');
+    let id=source.id;
+    if(from==='library'){if(!Object.hasOwn(D.CARDS,id)||D.CARDS[id].notCollectible||D.CARDS[id].type==='token')throw Error('卡片选择已失效。');}
+    else if(!Number.isInteger(source.index)||source.index<0||source.index>=d[from].length||d[from][source.index]!==id)throw Error('卡片选择已失效。');
+    if(from==='library'&&to==='library')return d;
+    let at=target.index??(to==='library'?0:d[to].length);
+    if(to!=='library'&&(!Number.isInteger(at)||at<0||at>d[to].length))throw Error('卡片选择已失效。');
+    if(from!=='library'){d[from].splice(source.index,1);if(from===to&&source.index<at)at--;}
+    if(to!=='library')d[to].splice(at,0,id);
+    return draft(d,registered);
+  }
+  const api={zones,normalize,inventory,check,move,diff,draft,transfer};root.DuelDeckEditor=api;if(typeof module!=='undefined')module.exports=api;
 })(globalThis);

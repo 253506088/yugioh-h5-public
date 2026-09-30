@@ -563,8 +563,19 @@
       scheduleAI();
     };
   }
+  function validateGameDecks(options){
+    const ids=[options.deck||'blue',options.opponentDeck||((options.deck||'blue')==='blue'?'dark':'blue')];
+    const invalid=ids.map((id,seat)=>{const d=options.deckSpecs?.[seat]||window.DuelData.DECKS[id],check=DeckTools.analyze(d);return {d,id,seat,check};}).filter(item=>!item.check.valid);
+    if(!invalid.length)return true;
+    openModal('deck-check',MUI.tr('卡组不符合出战规则','Decks are not ready to play','デッキが対戦ルールを満たしていません'),'DECK CHECK',
+      invalid.map(({d,id,seat,check})=>'<section class="deck-start-errors"><h3>'+MUI.tr(seat?'对手':'我方',seat?'Opponent':'You',seat?'相手':'自分')+' · <span data-user-content>'+escape(d?.name||id)+'</span></h3><ul>'+check.errors.map(error=>'<li>'+escape(I.text(error))+'</li>').join('')+'</ul></section>').join(''),
+      '<button class="primary-button" data-action="close-modal">'+MUI.tr('返回修改','Back to editing','戻って修正')+'</button>');
+    return false;
+  }
+
   function startGame(options = {}, instantOpening = false) {
     if(engine?.remote){showPvp();showToast('请先离开联机房间，再开始其他对局。');return;}
+    if(!validateGameDecks(options))return false;
     leaveTournamentView();
     chainDirector.reset();peekState=null;setScreen('duel',true);
     aiEpoch++; clearTimeout(aiTimer); clearTimeout(cinematicTimer);
@@ -645,7 +656,7 @@
     void el.offsetWidth; el.classList.add('visible'); sound.play('phase');
     cinematicTimer = setTimeout(() => { el.classList.remove('visible'); callback(winner); }, prefs.reducedMotion ? 700 : 1900);
   }
-  function beginSpectate(options) { leaveTournamentView();if (modal.open) modal.close(); playRps(first => startGame({ ...options, mode: 'spectate', first, seed: Date.now() })); }
+  function beginSpectate(options) { if(!validateGameDecks(options))return;leaveTournamentView();if (modal.open) modal.close(); playRps(first => startGame({ ...options, mode: 'spectate', first, seed: Date.now() })); }
 
   function captureModal(){
     const events=['onclick','oninput','onchange','ondragover','ondragleave','ondrop','ondragstart','onkeydown'];
@@ -1285,7 +1296,7 @@
   let restored = false;
   if (stored) {
     try {
-      if(stored.match){localMatch=Match.restore(stored.match);matchDraft=stored.matchDraft;matchArchives=stored.matchArchives||[];matchOptions=stored.matchOptions||{};if(!Array.isArray(matchArchives)||matchArchives.length!==localMatch.games.length)throw Error('Match archive mismatch');if(matchDraft&&!window.DuelDeckEditor.check(matchDraft,localMatch.registered[0]).valid)throw Error('Match draft mismatch');if(stored.state.matchGameId!==localMatch.gameId)throw Error('Match game mismatch');for(const seat of [0,1])for(const z of ['cards','extra','side'])if(JSON.stringify(stored.state.players[seat].deckSpec[z]||[])!==JSON.stringify(localMatch.decks[seat][z]||[]))throw Error('Match deck mismatch');}
+      if(stored.match){localMatch=Match.restore(stored.match);matchDraft=stored.matchDraft;matchArchives=stored.matchArchives||[];matchOptions=stored.matchOptions||{};if(!Array.isArray(matchArchives)||matchArchives.length!==localMatch.games.length)throw Error('Match archive mismatch');if(matchDraft)matchDraft=window.DuelDeckEditor.draft(matchDraft,localMatch.registered[0]);if(stored.state.matchGameId!==localMatch.gameId)throw Error('Match game mismatch');for(const seat of [0,1])for(const z of ['cards','extra','side'])if(JSON.stringify(stored.state.players[seat].deckSpec[z]||[])!==JSON.stringify(localMatch.decks[seat][z]||[]))throw Error('Match deck mismatch');}
       engine = window.DuelEngine.restore(stored); previewId = engine.deckInfo(0).ace;
       bindEngine(); render(); scheduleAI(); restored = true;
       if (engine.state.winner !== null) finishGame();

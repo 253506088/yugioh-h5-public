@@ -39,7 +39,7 @@
       const base = deckName(source.data.decks[entrant.deckId]);
       return base + (entrant.copy ? tr(' ' + entrant.copy + '号', ' #' + entrant.copy, ' ' + entrant.copy + '号') : '');
     }
-    function available() { return Decks.list(); }
+    function available() { return Decks.list().filter(d=>Decks.analyze(d).valid); }
     function pool() { return available().filter(d => draft.pool === 'custom' ? d.custom : draft.pool === 'preset' ? d.preset : true); }
     function saveDraft() { try { localStorage.setItem('duel-sanctuary-tournament-setup-v1', JSON.stringify(draft)); } catch {} }
     function ensureRoster() {

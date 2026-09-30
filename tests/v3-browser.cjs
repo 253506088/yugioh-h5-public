@@ -46,8 +46,8 @@ async function check(name,fn){await fn();report.checks.push(name);console.log('O
   await check('deck workshop copies, edits, validates, saves, exports, imports, and starts a custom deck',async()=>{
     await page.click('[data-action="workshop"]');await page.selectOption('#ws-source','blackwing');await page.fill('#ws-name','黑羽 · 我的同调构筑');
     assert.equal(await page.locator('#ws-save').isEnabled(),true);
-    await page.locator('.ws-build [data-action="ws-remove"][data-id="bw-gale"]').click();assert.equal(await page.locator('#ws-save').isEnabled(),false);
-    await page.fill('#ws-search','黑羽－疾风');await page.locator('#ws-card-grid [data-action="ws-add"]').click();assert.equal(await page.locator('#ws-save').isEnabled(),true);
+    await page.locator('.ws-build [data-action="ws-remove"][data-id="bw-gale"]').click();assert.equal(await page.locator('#ws-save').isEnabled(),true);
+    await page.fill('#ws-search','黑羽－疾风');await page.locator('#ws-card-grid .ws-card-face').first().dragTo(page.locator('#ws-zone-nav [data-ws-drop="cards"]'));assert.equal(await page.locator('#ws-save').isEnabled(),true);
     await page.click('#ws-save');const saved=await page.evaluate(()=>DuelDecks.getSaved());assert.equal(saved.length,1);assert.equal(saved[0].cards.length,40);
     await screenshot('04-deck-workshop');
     const downloaded=page.waitForEvent('download');await page.click('[data-action="ws-export"]');const download=await downloaded;const file=await download.path();const exported=JSON.parse(await fs.readFile(file,'utf8'));assert.equal(exported.format,'duel-sanctuary-deck');

@@ -11,13 +11,12 @@ async function check(name,fn){await fn();report.checks.push(name);console.log('O
    await page.evaluate(()=>duelApp.showWorkshop('blue-eyes-2016'));assert.equal(await page.locator('.ws-pile[data-zone="side"] .ws-deck-row').count(),15);
    const boxes=await page.evaluate(()=>['.ws-inspector','.ws-build','.ws-collection'].map(s=>{const r=document.querySelector(s).getBoundingClientRect();return {x:r.x,w:r.width};}));assert.ok(boxes[0].x<boxes[1].x&&boxes[1].x<boxes[2].x);assert.ok(boxes[1].w>boxes[2].w);await page.screenshot({path:path.join(out,'desktop.png')});
  });
- await check('atomic main-side exchange, undo and redo preserve all copies',async()=>{
+ await check('drag main-side exchange, undo and redo preserve all copies',async()=>{
    const before=await page.evaluate(()=>duelApp.workshopDraft);
-   await page.locator('.ws-pile[data-zone="cards"] [data-action="ws-plan"]').first().click();await page.locator('.ws-pile[data-zone="side"] [data-action="ws-plan"]').first().press('Enter');
-   assert.equal(await page.locator('[data-action="ws-apply-plan"]').isEnabled(),true);await page.click('[data-action="ws-apply-plan"]');
+   await page.locator('.ws-pile[data-zone="cards"] .ws-deck-card').first().dragTo(page.locator('#ws-zone-nav [data-ws-drop="side"]'));await page.locator('.ws-pile[data-zone="side"] .ws-deck-card').first().dragTo(page.locator('#ws-zone-nav [data-ws-drop="cards"]'));
    const after=await page.evaluate(()=>duelApp.workshopDraft);assert.equal(after.cards.length,before.cards.length);assert.equal(after.side.length,before.side.length);assert.notDeepEqual(after.cards,before.cards);
-   await page.click('[data-action="ws-undo"]');assert.deepEqual((await page.evaluate(()=>duelApp.workshopDraft)).side,before.side);
-   await page.click('[data-action="ws-redo"]');assert.deepEqual((await page.evaluate(()=>duelApp.workshopDraft)).side,after.side);
+   await page.click('[data-action="ws-undo"]');await page.click('[data-action="ws-undo"]');assert.deepEqual((await page.evaluate(()=>duelApp.workshopDraft)).side,before.side);
+   await page.click('[data-action="ws-redo"]');await page.click('[data-action="ws-redo"]');assert.deepEqual((await page.evaluate(()=>duelApp.workshopDraft)).side,after.side);
  });
  await check('JSON export/import and reload retain side and custom name',async()=>{
    await page.fill('#ws-name','BO3 Browser Deck');await page.click('#ws-save');const promise=page.waitForEvent('download');await page.click('[data-action="ws-export"]');const download=await promise,raw=await fs.readFile(await download.path()),obj=JSON.parse(raw);assert.equal(obj.version,3);assert.equal(obj.deck.side.length,15);
@@ -42,7 +41,8 @@ async function check(name,fn){await fn();report.checks.push(name);console.log('O
    await page.click('[data-action="match-surrender"]');await page.click('[data-action="match-confirm-surrender"]');
    assert.deepEqual(await page.evaluate(()=>duelApp.match.score),[0,1]);assert.equal(await page.evaluate(()=>duelApp.match.phase),'choosing-first');
    await page.click('[data-action="match-first"][data-value="0"]');await page.click('[data-action="match-side"]');assert.equal(await page.locator('.ws-collection').count(),0);assert.equal(await page.locator('[data-action="ws-new"]').count(),0);
-   await page.reload();await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');await page.evaluate(()=>duelApp.enterDuel());await page.click('[data-action="match-side"]');await page.click('#ws-save');
+   await page.locator('.ws-pile[data-zone="cards"] .ws-deck-card').first().dragTo(page.locator('#ws-zone-nav [data-ws-drop="side"]'));await page.click('#ws-save');assert.equal(await page.evaluate(()=>duelApp.match.phase),'siding');
+   await page.reload();await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');await page.evaluate(()=>duelApp.enterDuel());await page.click('[data-action="match-side"]');assert.equal(await page.evaluate(()=>duelApp.workshopDraft.side.length),16);await page.locator('.ws-pile[data-zone="side"] .ws-deck-card').first().dragTo(page.locator('#ws-zone-nav [data-ws-drop="cards"]'));await page.click('#ws-save');
    assert.equal(await page.evaluate(()=>duelApp.match.gameIndex),2);assert.equal(await page.evaluate(()=>duelApp.engine.state.players[0].lp),8000);
    await page.click('[data-action="match-surrender"]');await page.click('[data-action="match-confirm-surrender"]');assert.equal(await page.evaluate(()=>duelApp.match.phase),'finished');assert.deepEqual(await page.evaluate(()=>duelApp.match.score),[0,2]);
    await page.screenshot({path:path.join(out,'match-result.png')});await page.locator('[data-action="match-journal"]').first().click();assert.ok(await page.locator('.match-journal p').count()>0);await page.reload();await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');assert.deepEqual(await page.evaluate(()=>duelApp.match.score),[0,2]);
