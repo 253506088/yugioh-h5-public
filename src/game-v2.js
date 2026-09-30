@@ -19,6 +19,8 @@
   const stats = Object.assign({ games: 0, wins: 0, bestDamage: 0, lastGame: '' }, readStorage('duel-sanctuary-stats-v1', {}));
   const sound = new window.DuelAudio(prefs);
   const modal = $('#modal');
+  const Match=window.DuelMatch,MUI=window.DuelMatchUI;
+  let localMatch=null,matchDraft=null,matchArchives=[],matchOptions={},recoveryFailed=false;
   let engine, selectedUid = null, previewId = 'blue-eyes', previewHidden = false, intent = null;
   let tournament = null, tournamentView = null, parkedDuel = null;
   let pvp = null, parkedOffline = null;
@@ -71,7 +73,7 @@
   function enterDuel(){
     leaveTournamentView();
     if(modal.open&&modalKind==='pending'){peekPending();return;}
-    dismissModal();setScreen('duel');render();scheduleAI();
+    dismissModal();setScreen('duel');render();scheduleAI();if(localMatch?.format==='bo3'&&localMatch.phase!=='playing')showMatch();
   }
   function leaveTournamentView(){
     tournament?.closeViewer();
@@ -96,7 +98,8 @@
   }
   function attachRemote(remote){
     leaveTournamentView();
-    if(!parkedOffline)parkedOffline={engine,previewId,resultShown};
+    if(!parkedOffline)parkedOffline={engine,previewId,resultShown,localMatch,matchDraft,matchArchives,matchOptions};
+    localMatch=null;matchDraft=null;matchArchives=[];workshop.exitSiding();
     aiEpoch++;clearTimeout(aiTimer);clearTimeout(cinematicTimer);chainDirector.reset();dismissModal();hidePopover();
     for(const timer of animationTimers)clearTimeout(timer);animationTimers=[];
     $('#cinematic').classList.remove('visible');$('#fx-layer').innerHTML='';
@@ -110,7 +113,7 @@
   function detachRemote(){
     if(!parkedOffline)return;
     aiEpoch++;clearTimeout(aiTimer);clearTimeout(cinematicTimer);chainDirector.reset();dismissModal();hidePopover();
-    engine=parkedOffline.engine;previewId=parkedOffline.previewId;resultShown=parkedOffline.resultShown;parkedOffline=null;
+    engine=parkedOffline.engine;previewId=parkedOffline.previewId;resultShown=parkedOffline.resultShown;({localMatch,matchDraft,matchArchives,matchOptions}=parkedOffline);parkedOffline=null;
     selectedUid=null;intent=null;peekState=null;previewHidden=false;pendingKey='';
     document.body.classList.remove('pvp-dueling','pvp-input-locked');$('#pvp-duel-bar').hidden=true;
     bindEngine();render();saveGame();
@@ -143,7 +146,7 @@
   function renderChrome(){
     if(!engine)return;
     const s=engine.state;
-    $('#screen-breadcrumb').textContent=currentScreen==='pvp'?'ONLINE / BEST OF ONE':engine.remote?'PVP / LIVE':currentScreen==='tournament'?'BOT ARENA':currentScreen==='home'?'DUEL SANCTUARY':tournamentView?(tournamentView.live?'TOURNAMENT / LIVE':'TOURNAMENT / REPLAY'):spectating()?'SPECTATOR':'DUEL FIELD';
+    $('#screen-breadcrumb').textContent=currentScreen==='pvp'?'ONLINE / BO1 · BO3':engine.remote?'PVP / LIVE':currentScreen==='tournament'?'BOT ARENA':currentScreen==='home'?'DUEL SANCTUARY':tournamentView?(tournamentView.live?'TOURNAMENT / LIVE':'TOURNAMENT / REPLAY'):spectating()?'SPECTATOR':'DUEL FIELD';
     $('#duel-turn-hud').innerHTML='<span class="turn-hud-number"><small>TURN</small><b>'+String(s.turn).padStart(2,'0')+'</b></span><span><strong>第 '+s.turn+' 回合</strong><small>'+(s.winner!==null?'决斗已结束':(spectating()?escape(robotName(s.active)):s.active===0?'我方':'对方')+' · '+(phaseNames[s.phase]||s.phase))+'</small></span>';
     $('#duel-turn-hud').classList.toggle('opponent-turn',s.active===1);
     $('#response-mode-switch').innerHTML=[['auto','AUTO','自动'],['on','ON','全部'],['off','OFF','关闭']].map(([id,name,label])=>'<button data-action="response-mode" data-value="'+id+'" class="'+(prefs.responseMode===id?'active':'')+'" aria-pressed="'+(prefs.responseMode===id)+'"><b>'+name+'</b><span>'+label+'</span></button>').join('');
@@ -384,6 +387,7 @@
     tool.innerHTML='◎'+(n?'<b>'+n+'</b>':'');tool.classList.toggle('active',n>0);
   }
   function render() {
+    renderMatchBanner();
     const s=engine.state,deck=I.deck(engine.deckInfo(0)),rival=I.deck(engine.deckInfo(1));
     $('#opponent-bar').innerHTML=avatarBar(1);$('#player-bar').innerHTML=avatarBar(0);
     for(const [owner,prefix] of [[0,'player'],[1,'opponent']])for(const zone of ['monsters','spells'])$('#'+prefix+'-'+zone).innerHTML=renderZone(owner,zone);
@@ -499,7 +503,8 @@
   function saveGame() {
     if(tournamentView)return;
     if(engine.remote){$('#save-status').innerHTML='<i></i>'+I.term('联机进度由服务器保存');return;}
-    savedAvailable=writeStorage('duel-sanctuary-save-v2',{...engine.snapshot(),savedAt:Date.now()});
+    if(recoveryFailed)return;
+    savedAvailable=writeStorage('duel-sanctuary-save-v2',{...engine.snapshot(),savedAt:Date.now(),match:localMatch,matchDraft,matchArchives,matchOptions});
     $('#save-status').innerHTML='<i></i>'+(savedAvailable?'对局已自动保存':'当前浏览器未开放本地存档');
   }
   function runAIStep() {
@@ -568,9 +573,13 @@
     $('#toast-stack').innerHTML = '';
     modalHistory=[];modalKind = ''; if (modal.open) modal.close(); hidePopover();
     intent = null; selectedUid = null; previewHidden = false; pendingKey = ''; resultShown = false; spectate.paused = false;
-    const { mode, ...engineOptions } = options;
+    recoveryFailed=options.preserveRecovery===true;
+    const { mode, continueMatch, matchFormat, ...engineOptions } = options;
+    workshop.exitSiding();
     engine = new window.DuelEngine(engineOptions); previewId = engine.deckInfo(0).ace;
     if (mode === 'spectate') engine.state.mode = 'spectate';
+    if(!continueMatch){localMatch=Match.create({decks:[engine.deckInfo(0),engine.deckInfo(1)],format:matchFormat||'bo1',first:engine.state.active,ruleMode:options.ruleMode||'off'});matchDraft=null;matchArchives=[];matchOptions={difficulty:engine.state.difficulty,mode,ruleMode:options.ruleMode||'off'};}
+    engine.state.matchGameId=localMatch?.gameId;
     if (instantOpening && !spectating() && engine.state.active === 1) {
       let steps = 0;
       while (engine.state.active === 1 && engine.state.winner === null && steps++ < 35 && !(engine.state.pending && engine.state.pending.responder === 0)) {
@@ -580,6 +589,52 @@
     bindEngine(); render(); saveGame(); scheduleAI();fate.reveal();
     if (!instantOpening) { sound.play('phase'); showToast(spectating() ? robotName(engine.state.active) + ' 先攻，观战开始。' : engine.state.active === 0 ? '决斗开始。你的先攻回合不能攻击。' : '决斗开始，对方先攻。'); }
   }
+
+  function renderMatchBanner(){
+    let node=$('#local-match-bar');if(!node){node=document.createElement('div');node.id='local-match-bar';node.className='match-banner';node.setAttribute('data-i18n-skip','');$('#pvp-duel-bar').after(node);}
+    node.hidden=!localMatch||engine?.remote||!!tournamentView||currentScreen!=='duel';
+    document.body.classList.toggle('local-matching',!node.hidden);
+    if(node.hidden)return;
+    node.innerHTML='<b>'+localMatch.format.toUpperCase()+' · '+localMatch.score.join(' : ')+'</b><span>'+MUI.tr('第','Game ','第')+localMatch.gameIndex+MUI.tr('局','','局')+'</span><button data-action="match-open">'+MUI.tr('比赛概览','Match overview','マッチ概要')+'</button>'+(localMatch.phase==='playing'&&!spectating()?'<button data-action="match-surrender">'+MUI.tr('认输本局','Concede game','この局を投了')+'</button>':'');
+  }
+  function prepareMatchBots(){
+    if(localMatch.phase!=='siding')return;
+    for(const seat of (spectating()?[0,1]:[1]))if(!localMatch.round.ready[seat])Match.submit(localMatch,seat,window.DuelMatchAI.plan(localMatch.decks[seat],engine.state.matchPublicSeen?.[seat]||[]));
+  }
+  function showMatch(){
+    if(engine.remote){pvp?.showResult();return;}if(!localMatch)return;
+    resultShown=true;const m=Match.publicView(localMatch),active=m.phase!=='finished';
+    openModal('match',MUI.title(m),m.format.toUpperCase()+' · '+m.id.slice(0,8),MUI.panel(m)+(spectating()&&m.phase==='siding'?'<button class="primary-button" data-action="match-next">'+MUI.tr('继续下一局','Next game','次のデュエル')+'</button>':''),
+      '<button class="secondary-button" data-action="close-modal">'+I.term('返回决斗')+'</button><button class="secondary-button" data-action="match-export">'+MUI.tr('导出比赛记录','Export match','マッチを出力')+'</button>'+(active?'<button class="secondary-button" data-action="match-abandon">'+MUI.tr('放弃整场','Concede match','マッチを投了')+'</button>':'<button class="secondary-button" data-action="match-save-deck">'+MUI.tr('当前构筑另存','Save current deck','現在のデッキを別名保存')+'</button><button class="primary-button" data-action="rematch">'+I.term('再来一场')+'</button>'));
+  }
+  function showMatchSiding(){
+    if(!localMatch||localMatch.phase!=='siding')return;
+    workshop.showSiding({roundId:localMatch.round.id,baseline:localMatch.decks[0],registered:localMatch.registered[0],draft:matchDraft,locked:localMatch.round.ready[0],
+      change:d=>{matchDraft=d;saveGame();},submit:d=>{Match.submit(localMatch,0,d);matchDraft=null;saveGame();nextLocalGame();}});
+  }
+  function nextLocalGame(){
+    if(!localMatch||localMatch.phase!=='siding'||!localMatch.round.ready.every(Boolean))return;
+    Match.next(localMatch);matchDraft=null;
+    startGame({...matchOptions,continueMatch:true,deck:localMatch.decks[0].id,opponentDeck:localMatch.decks[1].id,deckSpecs:localMatch.decks,first:localMatch.first,seed:Date.now()});
+  }
+  function confirmMatchSurrender(whole){
+    if(!localMatch||localMatch.phase==='finished')return;
+    openModal('match-confirm',whole?MUI.tr('放弃整场比赛？','Concede this match?','マッチを投了しますか？'):MUI.tr('认输本局？','Concede this game?','この局を投了しますか？'),'CONCEDE','<p>'+MUI.tr('对手将获得相应胜利。','Your opponent will be awarded the win.','相手の勝利になります。')+'</p>','<button class="secondary-button" data-action="close-modal">'+I.term('取消')+'</button><button class="primary-button" data-action="match-confirm-surrender" data-whole="'+whole+'">'+I.term('确认')+'</button>');
+  }
+  function endLocalGame(whole){
+    if(!localMatch||localMatch.phase==='finished')return;
+    clearTimeout(aiTimer);chainDirector.reset();dismissModal();
+    if(localMatch.phase==='playing'){
+      engine.state.winner=1;engine.state.pending=null;engine.state.outcome={kind:whole?'match-surrender':'surrender',winner:1,loser:0,turn:engine.state.turn};
+      engine.log('victory','决斗结束',1);finishGame();
+    }
+    if(whole&&localMatch.phase!=='finished'){Match.abandon(localMatch,0);if(!spectating()&&stats.lastMatch!==localMatch.id){stats.matches=(stats.matches||0)+1;stats.lastMatch=localMatch.id;writeStorage('duel-sanctuary-stats-v1',stats);}}
+    saveGame();render();showMatch();
+  }
+  function exportMatch(){
+    const value=recoveryFailed?stored:{format:'duel-sanctuary-match',version:1,match:localMatch,games:matchArchives,current:engine.snapshot()},url=URL.createObjectURL(new Blob([recoveryFailed?savedText:JSON.stringify(value,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='duel-match.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);
+  }
+
   const rpsHands = [['石头', '✊'], ['剪刀', '✌️'], ['布', '🖐️']];
   function playRps(callback) {
     let a, b, rounds = [];
@@ -768,7 +823,7 @@
     const filters='<div class="setup-deck-heading"><label class="setting-label" for="setup-deck-search">'+(spec?'机器人 A 的卡组':'我的卡组')+'</label><span id="setup-year-count" class="setup-result-count" role="status" aria-live="polite"></span></div><div class="setup-deck-filters">'+setupSearchHTML('setup-deck-search',setupOptions.query,'搜索我的卡组')+'<select id="setup-year" aria-label="按年度选择预设"><option value="all">全部年代</option>'+years.map(y=>'<option value="'+y+'"'+(String(y)===String(setupOptions.year)?' selected':'')+'>'+y+'</option>').join('')+'</select></div>';
     const opponent='<div class="setup-opponent"><div class="setup-deck-heading"><label class="setting-label" for="opponent-deck">'+(spec?'机器人 B 的卡组':'对手卡组')+'</label><span id="opponent-search-count" class="setup-result-count" role="status" aria-live="polite"></span></div>'+setupSearchHTML('opponent-deck-search',setupOptions.opponentQuery,'搜索对手卡组')+'<select id="opponent-deck" aria-describedby="opponent-search-empty"></select><p id="opponent-search-empty" class="setup-search-note" hidden>没有匹配的卡组，当前选择已保留。</p></div>';
     openModal('new-game',spec?'让两位机器人一决高下。':'选择与你共鸣的力量。','ALL GENERATIONS · ONE DESTINY',
-      '<div class="deck-select-intro"><p>跨越世代的决斗，从这里开始。<br><span>'+Object.values(DECKS).filter(d=>d.preset).length+'套预设，或一副亲手构筑的卡组。</span></p><button class="outline-button" data-action="workshop">＋ 组卡工坊</button></div>'+modeControl+fate.setup(setupOptions.ruleMode||'off')+
+      '<div class="deck-select-intro"><p>跨越世代的决斗，从这里开始。<br><span>'+Object.values(DECKS).filter(d=>d.preset).length+'套预设，或一副亲手构筑的卡组。</span></p><button class="outline-button" data-action="workshop">＋ 组卡工坊</button></div>'+modeControl+MUI.setup(setupOptions.matchFormat||'bo1')+fate.setup(setupOptions.ruleMode||'off')+
       '<div class="deck-select-layout"><section class="setup-deck-browser">'+filters+'<div class="deck-roster" id="setup-deck-roster"></div></section><aside class="selected-deck-showcase" id="setup-deck-showcase"></aside></div>'+
       '<div class="setup-options v2-setup">'+opponent+'<div><label class="setting-label">'+(spec?'机器人难度':'对手难度')+'</label>'+segment('choose-difficulty',setupOptions.difficulty,[['casual','休闲'],['standard','标准']])+'</div><div><label class="setting-label">出场顺序</label>'+(spec?'<p class="setup-order-note">✊ ✌️ 🖐️ 先后手由猜拳决定</p>':segment('choose-first',setupOptions.first,[[0,'我先攻'],[1,'我后攻']]))+'</div></div><p class="new-game-note">8000 LP · 随机起手 5 张 · 先攻首回合不抽卡、不攻击<br>开始新决斗会替换当前对局存档；保存的卡组与工坊草稿会保留。</p>',
       '<button class="secondary-button" data-action="close-modal">继续当前对局</button><button class="primary-button" data-action="begin-game">'+(spec?'开始观战 ':'开始决斗 ')+icon('arrow')+'</button>','new-game-modal v2-new-game');
@@ -778,7 +833,7 @@
   function showHelp() {
     if(I.language!=='zh-CN'){const guide=window.DuelUITranslations.help[I.language];openModal('help',guide.title,'THE DUELIST’S HANDBOOK',guide.body,'<button class="primary-button" data-action="close-modal">'+I.term('准备好了')+'</button>');return;}
     const rows=[['仪式召唤','仪式怪兽编入主卡组。发动对应仪式魔法，结算时选择手牌或场上的怪兽解放，等级合计达到要求且不能多解放无须使用的素材；仪式怪兽登场于主怪兽区。'],['通常召唤','每回合合计1次通常召唤或盖放。5—6星通常需1份祭品，7星以上2份；机壳等卡片有特别条件。'],['融合召唤','发动融合、奇迹融合、力量结合等效果。先选择融合怪兽，再按其名称、属性、种族要求选择素材。不同魔法使用的素材区域不同。'],['同调召唤','从「额外召唤」选择目标。表侧调整与非调整的等级合计必须精确等于同调怪兽等级，也须满足专用素材条件。白色卡面。'],['连接召唤','素材Link值必须精确满足目标。普通怪兽计1，Link怪兽计1或自身Link值，并满足最少素材数、属性与名称条件。只能表侧攻击，无等级、阶级与守备力。'],['箭头与区域','从额外连接召唤，须使用可用共享额外区或箭头指向的主区。计算的是素材离场后的箭头。两张Link互相指向才是互相连接；连通两个额外区的互相连接路径允许Extra Link。'],['珠泪送墓','珠泪人鱼被效果送墓才可发动融合。丢弃代价、连接／同调素材、移除素材与回合弃牌不算效果送墓。珠泪融合必须包含墓地触发卡；若该卡先被除外，融合不再进行。'],['超量召唤','同等级怪兽叠放，阶级与所需等级对应。素材保存在超量怪兽下方；发动相应效果时选择移除。升阶可以继承叠放素材。黑色卡面。'],['灵摆召唤','把灵摆卡放入最左和最右魔陷区作为刻度。每回合1次，同时特殊召唤等级严格介于两刻度之间的怪兽。手牌使用主怪兽区；表侧额外的灵摆只能使用可用的共享额外区或Link箭头指向的主区。'],['灵摆卡的去向','场上的灵摆卡将送墓时改为表侧额外卡组；从手牌丢弃或从超量素材移除则送墓。超量素材不视为场上的卡。'],['连锁与诱发','响应窗口可发动满足条件的快速效果、陷阱、反击陷阱。连锁从最后一环开始逆序结算。破坏效果来源并不自动无效该效果。多个同时诱发效果可以选择发动顺序。'],['艾克佐迪亚','手牌集齐被封印的五个不同部件，立即获得特殊胜利。场上、墓地、除外区中的部件不计入。']];
-    openModal('help','从第一次召唤，到无限可能。','THE DUELIST’S HANDBOOK','<p class="modal-lead">把对方生命值降到0，或让对方在需要抽卡时无卡可抽即可获胜。初始8000 LP，双方各5张手牌，抽卡与准备阶段自动处理。</p><div class="help-steps"><div class="help-step">'+icon('card')+'<h3>01 · 阅读行动</h3><p>点击卡片，菜单显示当前合法操作。墓地与除外区的卡也可能有可发动效果。</p></div><div class="help-step">'+icon('spark')+'<h3>02 · 组合素材</h3><p>额外召唤列出当前可用怪兽，素材选择会实时校验等级与条件。</p></div><div class="help-step">'+icon('bolt')+'<h3>03 · 把握时机</h3><p>每次效果与战斗都可能产生响应。检查连锁，再决定发动或保留。</p></div></div><table class="rules-table"><thead><tr><th>机制</th><th>实际操作与规则</th></tr></thead><tbody>'+rows.map(([a,b])=>'<tr><td>'+a+'</td><td>'+b+'</td></tr>').join('')+'</tbody></table><div class="help-section"><h3>战斗与表示</h3><p>攻击对攻击：较低攻击力怪兽破坏，其控制者受到差值伤害。攻击对守备：攻击力超过守备力则守备怪兽破坏，通常不造成伤害；攻击力不足则攻击方受到差值伤害。特殊贯穿、多次攻击、伤害减免按卡片效果处理。</p><p>新召唤的怪兽可以攻击，但先攻第1回合不能进入战斗阶段。怪兽召唤当回合、攻击后不能主动变更表示。盖放的陷阱与速攻魔法当回合不能发动。回合结束手牌上限6张。</p></div><div class="help-section"><h3>自己的卡组，自己的命运</h3><p>「组卡工坊」可从预设复制或空白新建。主卡组40—60张，额外最多15张，主卡组与额外合计同名最多3张。卡片已全部解锁，衍生物不能编入。工坊草稿自动保存；合法卡组保存后会出现在决斗选择中。支持撤销、复制与JSON导入导出。</p></div><div class="help-section"><h3>本作的规则范围</h3><p>这是致敬高桥和希的独立同人实现，围绕所收录的'+CARD_LIST.filter(c=>!c.notCollectible).length+'张卡实现仪式、融合、同调、超量、灵摆、连接与相应连锁。场地具有两个共享额外怪兽区，可经互相连接构成Extra Link。不采用赛事禁限卡表。1999—2008按本地首次OCG日期快照收录；逐卡实现状态在图鉴中标注，待实现卡不会作为无效果卡混入决斗。本作文字与官方完整裁定仍可能有差异。</p><p>卡图优先使用构建时内嵌的本地图片。也可在设置中开启「在线原版卡图」，为无图版本或缺失图片联网补图；关闭在线卡图、图片失败或断网都不影响决斗。界面、卡名与说明可在中文、English、日本語之间切换，偏好会自动保存。</p></div><div class="help-section"><h3>快捷键</h3><p><kbd>Space</kbd> 下一阶段　<kbd>E</kbd> 结束回合　<kbd>1</kbd>—<kbd>9</kbd> 选择手牌<br><kbd>Esc</kbd> 关闭窗口 / 取消未提交选择　<kbd>M</kbd> 音效　<kbd>F</kbd> 全屏</p></div>','<button class="primary-button" data-action="close-modal">准备好了 '+icon('swords')+'</button>');
+    openModal('help','从第一次召唤，到无限可能。','THE DUELIST’S HANDBOOK',MUI.help()+'<p class="modal-lead">把对方生命值降到0，或让对方在需要抽卡时无卡可抽即可获胜。初始8000 LP，双方各5张手牌，抽卡与准备阶段自动处理。</p><div class="help-steps"><div class="help-step">'+icon('card')+'<h3>01 · 阅读行动</h3><p>点击卡片，菜单显示当前合法操作。墓地与除外区的卡也可能有可发动效果。</p></div><div class="help-step">'+icon('spark')+'<h3>02 · 组合素材</h3><p>额外召唤列出当前可用怪兽，素材选择会实时校验等级与条件。</p></div><div class="help-step">'+icon('bolt')+'<h3>03 · 把握时机</h3><p>每次效果与战斗都可能产生响应。检查连锁，再决定发动或保留。</p></div></div><table class="rules-table"><thead><tr><th>机制</th><th>实际操作与规则</th></tr></thead><tbody>'+rows.map(([a,b])=>'<tr><td>'+a+'</td><td>'+b+'</td></tr>').join('')+'</tbody></table><div class="help-section"><h3>战斗与表示</h3><p>攻击对攻击：较低攻击力怪兽破坏，其控制者受到差值伤害。攻击对守备：攻击力超过守备力则守备怪兽破坏，通常不造成伤害；攻击力不足则攻击方受到差值伤害。特殊贯穿、多次攻击、伤害减免按卡片效果处理。</p><p>新召唤的怪兽可以攻击，但先攻第1回合不能进入战斗阶段。怪兽召唤当回合、攻击后不能主动变更表示。盖放的陷阱与速攻魔法当回合不能发动。回合结束手牌上限6张。</p></div><div class="help-section"><h3>自己的卡组，自己的命运</h3><p>「组卡工坊」可从预设复制或空白新建。主卡组40—60张，额外与副卡组各最多15张，三个分区同名合计最多3张。卡片已全部解锁，衍生物不能编入。工坊草稿自动保存；合法卡组保存后会出现在决斗选择中。支持撤销、复制与JSON导入导出。</p></div><div class="help-section"><h3>本作的规则范围</h3><p>这是致敬高桥和希的独立同人实现，围绕所收录的'+CARD_LIST.filter(c=>!c.notCollectible).length+'张卡实现仪式、融合、同调、超量、灵摆、连接与相应连锁。场地具有两个共享额外怪兽区，可经互相连接构成Extra Link。不采用赛事禁限卡表。1999—2008按本地首次OCG日期快照收录；逐卡实现状态在图鉴中标注，待实现卡不会作为无效果卡混入决斗。本作文字与官方完整裁定仍可能有差异。</p><p>卡图优先使用构建时内嵌的本地图片。也可在设置中开启「在线原版卡图」，为无图版本或缺失图片联网补图；关闭在线卡图、图片失败或断网都不影响决斗。界面、卡名与说明可在中文、English、日本語之间切换，偏好会自动保存。</p></div><div class="help-section"><h3>快捷键</h3><p><kbd>Space</kbd> 下一阶段　<kbd>E</kbd> 结束回合　<kbd>1</kbd>—<kbd>9</kbd> 选择手牌<br><kbd>Esc</kbd> 关闭窗口 / 取消未提交选择　<kbd>M</kbd> 音效　<kbd>F</kbd> 全屏</p></div>','<button class="primary-button" data-action="close-modal">准备好了 '+icon('swords')+'</button>');
   }
   function showSettings() {
     const toggle = (key, title, description) => '<div class="setting-row"><div><h3>' + title + '</h3><p>' + description + '</p></div><button class="toggle-button' + (prefs[key] ? ' on' : '') + '" data-action="toggle-pref" data-pref="' + key + '" role="switch" aria-checked="' + !!prefs[key] + '" aria-label="' + title + '"></button></div>';
@@ -791,6 +846,7 @@
       '<div class="setting-row"><div><h3>配乐音量 <span id="music-volume-label">'+Math.round(prefs.musicVolume*100)+'%</span></h3><p>与召唤、攻击等音效分别调整。</p></div><input class="volume-control" id="music-volume-control" type="range" min="0" max="100" value="'+Math.round(prefs.musicVolume*100)+'" aria-label="配乐音量"></div><details class="music-library" id="music-library"><summary>原声曲目 · '+sound.tracks.length+' 首</summary><div>'+sound.tracks.map(track=>'<div><span><small>'+({lobby:'战斗前',battle:'决斗中',library:'卡牌图鉴',workshop:'卡组工坊',help:'玩法指南'}[track.scene])+'</small><b data-i18n-skip>'+escape(track.title)+'</b></span><em>'+(track.src?'已就绪':'音源缺失')+'</em></div>').join('')+'</div></details>'+
       toggle('reducedMotion', '减少动态效果', '关闭粒子、震动和过渡动画。') +
       '<div class="setting-row"><div><h3>对手行动速度</h3><p>选择适合自己的决斗节奏。</p></div><div class="segmented-control">' + [['normal', '沉浸'], ['fast', '快速']].map(([id, label]) => '<button class="' + (prefs.speed === id ? 'active' : '') + '" data-action="set-speed" data-value="' + id + '">' + label + '</button>').join('') + '</div></div>' +
+      '<div class="settings-record"><div><b>'+(stats.matches||0)+'</b><small>'+MUI.tr('完成比赛','Matches','完了マッチ')+'</small></div><div><b>'+(stats.matchWins||0)+'</b><small>'+MUI.tr('整场胜利','Match wins','マッチ勝利')+'</small></div><div><b>'+(stats.matchDraws||0)+'</b><small>'+MUI.tr('整场平局','Match draws','マッチ引き分け')+'</small></div></div>'+
       '<div class="settings-record"><div><b>' + stats.games + '</b><small>完成对局</small></div><div><b>' + stats.wins + '</b><small>取得胜利</small></div><div><b>' + (stats.games ? Math.round(stats.wins / stats.games * 100) : 0) + '%</b><small>决斗胜率</small></div></div>'+
       '<section class="project-credit"><h3>项目与署名</h3><p><strong data-i18n-skip>不锈钢琴</strong></p><a href="https://github.com/253506088/yugioh-h5-public" target="_blank" rel="noopener noreferrer" data-i18n-skip>https://github.com/253506088/yugioh-h5-public</a></section>',
       '<button class="primary-button" data-action="close-modal">保存并返回</button>');
@@ -895,7 +951,14 @@
   }
   function finishGame() {
     if(tournamentView)return;
-    const id = String(engine.state.startedAt) + '-' + engine.state.players[0].deckId;
+    if(!engine.remote&&localMatch&&Match.record(localMatch,{winner:engine.state.winner,kind:engine.state.outcome?.kind||'special',turn:engine.state.turn})){
+      matchArchives.push(engine.snapshot());matchDraft=null;
+      if(localMatch.phase==='choosing-first'&&(localMatch.round.chooser===1||spectating()))Match.choose(localMatch,localMatch.round.chooser,localMatch.round.chooser);
+      if(localMatch.phase==='siding')prepareMatchBots();
+      if(localMatch.phase==='finished'&&!spectating()&&stats.lastMatch!==localMatch.id){if(localMatch.result.status!=='aborted'){stats.matches=(stats.matches||0)+1;stats.matchWins=(stats.matchWins||0)+(localMatch.result.winner===0?1:0);stats.matchDraws=(stats.matchDraws||0)+(localMatch.result.winner==='draw'?1:0);}stats.lastMatch=localMatch.id;writeStorage('duel-sanctuary-stats-v1',stats);}
+      saveGame();renderMatchBanner();
+    }
+    const id = engine.state.matchGameId || String(engine.state.startedAt) + '-' + engine.state.players[0].deckId;
     if (!engine.remote && !spectating() && stats.lastGame !== id) {
       stats.games++; stats.wins += engine.state.winner === 0 ? 1 : 0; stats.bestDamage = Math.max(stats.bestDamage, engine.state.damage[0]); stats.lastGame = id;
       writeStorage('duel-sanctuary-stats-v1', stats);
@@ -920,6 +983,7 @@
     if (engine.state.winner === null) return;
     clearTimeout(aiTimer); hidePopover(); resultShown = true; modalHistory=[];modalKind = 'result';
     if(engine.remote){pvp?.showResult();return;}
+    if(localMatch?.format==='bo3'){showMatch();return;}
     if (spectating()) { showSpectateResult(); return; }
     const win = engine.state.winner === 0, draw = engine.state.winner === 'draw';
     modal.className = 'modal';
@@ -1080,7 +1144,7 @@
       case 'new-fate-game':if(engine?.remote){showPvp();break;}showNewGame();setupOptions.ruleMode='random';renderNewGame();break;
       case 'choose-rule-mode':setupOptions.ruleMode=b.dataset.value==='random'?'random':'off';renderNewGame();break;
       case 'perform-rule':if(!spectating()){if(modalKind==='pending')dismissModal();dispatch({type:'rule-action',key:b.dataset.ruleKey});}break;
-      case 'workshop':workshop.show();break;
+      case 'workshop':workshop.exitSiding();workshop.show();break;
       case 'edit-current-deck':workshop.show(engine.state.players[Number(b.dataset.owner)||0].deckId);break;
       case 'edit-setup-deck':workshop.show(setupOptions.deck);break;
       case 'close-modal':closeModal();break;
@@ -1108,13 +1172,24 @@
       case 'library-filter':libraryFilter=b.dataset.filter;libraryPage=0;renderLibraryResults();break;
       case 'library-page':libraryPage+=Number(b.dataset.delta);renderLibraryResults();$('#modal .modal-body')?.scrollTo({top:0});break;
       case 'choose-deck':setupOptions.deck=b.dataset.deck;updateSetupDeck();break;
+      case 'choose-match-format':setupOptions.matchFormat=b.dataset.value;renderNewGame();break;
+      case 'match-open':showMatch();break;
+      case 'match-first':Match.choose(localMatch,0,Number(b.dataset.value));prepareMatchBots();saveGame();showMatch();break;
+      case 'match-side':showMatchSiding();break;
+      case 'match-next':nextLocalGame();break;
+      case 'match-surrender':confirmMatchSurrender(false);break;
+      case 'match-abandon':confirmMatchSurrender(true);break;
+      case 'match-confirm-surrender':endLocalGame(b.dataset.whole==='true');break;
+      case 'match-journal':{const index=localMatch?.games.findIndex(g=>g.id===b.dataset.gameId),snapshot=matchArchives[index];if(snapshot){const archived=window.DuelEngine.restore(snapshot);openModal('match-journal',MUI.tr('单局记录','Game journal','デュエル記録'),'GAME '+(index+1),'<div class="match-journal">'+snapshot.state.log.map(item=>'<p>'+escape(I.logEntry(item,archived).text)+'</p>').join('')+'</div>','<button class="secondary-button" data-action="close-modal">'+I.term('返回')+'</button>');}break;}
+      case 'match-export':exportMatch();break;
+      case 'match-save-deck':try{const d={...localMatch.decks[0]};delete d.id;DeckTools.save(d);showToast(I.term('卡组已保存。'));}catch(e){showToast(e.message,true);}break;
       case 'choose-first':updateSetupSegment(b,'first',Number(b.dataset.value));break;
       case 'choose-mode':if(b.dataset.value==='pvp'){showPvp();break;}if(b.dataset.value==='tournament'){showTournament();break;}setupOptions.mode=b.dataset.value==='spectate'?'spectate':'duel';renderNewGame();break;
       case 'choose-difficulty':updateSetupSegment(b,'difficulty',b.dataset.value);break;
       case 'clear-deck-search':{const input=document.getElementById(b.dataset.input);input.value='';input.dispatchEvent(new Event('input',{bubbles:true}));input.focus({preventScroll:true});break;}
       case 'reset-deck-filters':setupOptions.query='';setupOptions.year='all';$('#setup-deck-search').value='';$('#setup-year').value='all';renderSetupRoster(true);$('#setup-deck-search').focus({preventScroll:true});break;
       case 'begin-game':if(setupOptions.mode==='spectate')beginSpectate(setupOptions);else startGame({...setupOptions,seed:Date.now()});break;
-      case 'rematch':{const base={deck:engine.state.players[0].deckId,opponentDeck:engine.state.players[1].deckId,difficulty:engine.state.difficulty,ruleMode:engine.state.ruleMode?'random':'off'};if(spectating())beginSpectate(base);else startGame({...base,first:0,seed:Date.now()});break;}
+      case 'rematch':{const base={matchFormat:localMatch?.format||'bo1',deck:engine.state.players[0].deckId,opponentDeck:engine.state.players[1].deckId,difficulty:engine.state.difficulty,ruleMode:engine.state.ruleMode?'random':'off'};if(spectating())beginSpectate(base);else startGame({...base,first:0,seed:Date.now()});break;}
       case 'spectate-toggle':spectateToggle();break;
       case 'spectate-step':spectateStep();break;
       case 'spectate-speed':prefs.speed=b.dataset.value==='fast'?'fast':'normal';updatePrefs();render();scheduleAI();break;
@@ -1205,16 +1280,20 @@
     sound.update();
   });
 
+  const savedText=(()=>{try{return localStorage.getItem('duel-sanctuary-save-v2');}catch{return null;}})();
   const stored = readStorage('duel-sanctuary-save-v2', null) || readStorage('duel-sanctuary-save-v1', null);
   let restored = false;
   if (stored) {
     try {
+      if(stored.match){localMatch=Match.restore(stored.match);matchDraft=stored.matchDraft;matchArchives=stored.matchArchives||[];matchOptions=stored.matchOptions||{};if(!Array.isArray(matchArchives)||matchArchives.length!==localMatch.games.length)throw Error('Match archive mismatch');if(matchDraft&&!window.DuelDeckEditor.check(matchDraft,localMatch.registered[0]).valid)throw Error('Match draft mismatch');if(stored.state.matchGameId!==localMatch.gameId)throw Error('Match game mismatch');for(const seat of [0,1])for(const z of ['cards','extra','side'])if(JSON.stringify(stored.state.players[seat].deckSpec[z]||[])!==JSON.stringify(localMatch.decks[seat][z]||[]))throw Error('Match deck mismatch');}
       engine = window.DuelEngine.restore(stored); previewId = engine.deckInfo(0).ace;
       bindEngine(); render(); scheduleAI(); restored = true;
       if (engine.state.winner !== null) finishGame();
-    } catch { restored = false; }
+    } catch { restored = false;recoveryFailed=true;localMatch=null; }
   }
-  if (!restored) startGame({ deck: 'early-ritual', opponentDeck: 'early-fusion', first: 0, difficulty: 'standard', seed: 48 },true);
+  const preserveFailed=recoveryFailed||!!savedText&&!stored;
+  if (!restored) startGame({ preserveRecovery:preserveFailed, deck: 'early-ritual', opponentDeck: 'early-fusion', first: 0, difficulty: 'standard', seed: 48 },true);
+  if(preserveFailed){recoveryFailed=true;showToast(MUI.tr('存档校验失败，原数据已保留，请导出备份。','Save validation failed; original retained. Please export a backup.','セーブ検証失敗。元データを保持しました。バックアップしてください。'),true);}
   setupAmbient();
   showHome();
   writeStorage('duel-sanctuary-welcomed-v3', true);
@@ -1263,6 +1342,7 @@
       }
       if($('#pending-search')){$('#pending-search').value=search;filterPending(search);}
     }
+    else if(current==='match')showMatch();
     else if(current==='log')showLog();
     else if(current==='chain-log')showChainLog();
     else if(current==='result')showResult();
@@ -1275,6 +1355,7 @@
   // Small deterministic test interface. The shipped game uses the same actions.
   window.duelApp = Object.freeze({
     get engine() { return engine; },
+    get match(){return localMatch?JSON.parse(JSON.stringify(localMatch)):null;},showMatch,
     get preferences() { return { ...prefs }; },
     get intent() { return intent ? { ...intent } : null; },
     get modalKind() { return modalKind; },
@@ -1300,11 +1381,12 @@
       chainDirector.reset();peekState=null;setScreen('duel');
       aiEpoch++; clearTimeout(aiTimer); dismissModal(); intent = null; selectedUid = null; previewHidden = false; resultShown = false;
       clearTimeout(cinematicTimer); $('#cinematic').classList.remove('visible'); $('#fx-layer').innerHTML = ''; $('#toast-stack').innerHTML = '';
+      localMatch=null;matchDraft=null;matchArchives=[];workshop.exitSiding();
       engine = window.DuelEngine.restore(snapshot); previewId = engine.deckInfo(0).ace; bindEngine(); render(); saveGame(); scheduleAI();
     }
   });
   tournament=window.DuelTournamentUI.create({frame:showTournamentFrame,returnToArena:showTournament,toast:showToast,modalOpen:()=>modal.open||chainDirector.busy});
-  pvp=window.DuelPVP.create({show:showPvp,board:enterDuel,attach:attachRemote,detach:detachRemote,toast:showToast,modal:openModal,dismiss:dismissModal,refresh:()=>{if(engine?.remote){render();scheduleAI();}}});
+  pvp=window.DuelPVP.create({show:showPvp,board:enterDuel,attach:attachRemote,detach:detachRemote,toast:showToast,modal:openModal,dismiss:dismissModal,siding:config=>workshop.showSiding(config),exitSiding:()=>workshop.exitSiding(),refresh:()=>{if(engine?.remote){render();scheduleAI();}}});
   I.mount();document.documentElement.dataset.ready = 'true';
   if(location.hash==='#arena')showTournament();
   if(location.hash.startsWith('#pvp'))showPvp();

@@ -3,6 +3,7 @@ import { randomInt } from 'node:crypto';
 
 const require = createRequire(import.meta.url);
 const { DuelEngine } = require('../src/advanced-engine.js');
+export const Match = require('../src/match-core.js');
 export const Data = globalThis.DuelData;
 export const Decks = globalThis.DuelDecks;
 export const Lingering = globalThis.DuelLingering;
@@ -86,10 +87,10 @@ export function validateDeck(input) {
   if (input?.preset && typeof input.preset === 'string' && Object.hasOwn(Data.DECKS, input.preset) && Data.DECKS[input.preset].preset) {
     deck = structuredClone(Data.DECKS[input.preset]);
   } else {
-    if (!input || !Array.isArray(input.cards) || !Array.isArray(input.extra) || input.cards.length > 60 || input.extra.length > 15) {
+    if (!input || !Array.isArray(input.cards) || !Array.isArray(input.extra) || input.cards.length > 60 || input.extra.length > 15 || input.side !== undefined && (!Array.isArray(input.side) || input.side.length > 15)) {
       throw new Error('请选择一套预设卡组，或提交 40–60 张主卡组与至多 15 张额外卡组。');
     }
-    deck = { name: typeof input.name === 'string' ? input.name.trim() : '', cards: [...input.cards], extra: [...input.extra] };
+    deck = { name: typeof input.name === 'string' ? input.name.trim() : '', cards: [...input.cards], extra: [...input.extra], side: [...(input.side||[])] };
   }
   const check = Decks.analyze(deck);
   if (!check.valid) throw new Error(check.errors.slice(0, 4).join(' '));

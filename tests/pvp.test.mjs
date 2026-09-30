@@ -11,11 +11,12 @@ function setup(t, options = {}) {
   t.after(() => { store.close(); assert.deepEqual(errors, []); });
   function client(name, token) {
     const connection = { messages: [], send(data) { this.messages.push(structuredClone(data)); }, close(code) { this.closed = code; } };
-    service.handle(connection, { type: 'hello', version: 1, name, token });
+    service.handle(connection, { type: 'hello', version: 2, name, token });
     connection.token = connection.messages.find(m => m.type === 'welcome')?.token;
     return connection;
   }
   function send(connection, type, data = {}, expected = true) {
+    if(['act','validate','surrender'].includes(type)&&data.gameId===undefined){const session=service.sessions.get(connection.sessionId);data={...data,gameId:service.rooms.get(session?.roomCode)?.gameId};}
     const id = data.id || 'request_' + ++serial;
     service.handle(connection, { ...data, type, id });
     const response = connection.messages.filter(m => m.id === id).at(-1);
@@ -280,7 +281,7 @@ test('SQLite recovery retains state, clocks, capabilities, and idempotency recei
   const loaded = recovered.rooms.get(room.code); assert.deepEqual(loaded.engine.snapshot(), before); assert.deepEqual(loaded.remaining, room.remaining);
   assert.ok(loaded.seats.every(m => !m.connected));
   const connection = { messages: [], send(m) { this.messages.push(m); }, close() {} };
-  recovered.handle(connection, { type: 'hello', version: 1, token: s.clients[seat].token });
+  recovered.handle(connection, { type: 'hello', version: 2, token: s.clients[seat].token });
   recovered.handle(connection, { type: 'act', ...message });
   assert.ok(connection.messages.find(m => m.type === 'ack' && m.id === 'durable_action'));
   assert.deepEqual(loaded.engine.snapshot(), before);

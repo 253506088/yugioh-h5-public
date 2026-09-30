@@ -23,7 +23,7 @@
       clearTimeout(this.retryTimer); this.stopped = false;
       this.setStatus(this.attempt ? 'reconnecting' : 'connecting');
       const socket = this.socket = new WebSocket((root.location.protocol === 'https:' ? 'wss://' : 'ws://') + root.location.host + '/pvp/ws');
-      socket.onopen = () => socket.send(JSON.stringify({ type: 'hello', version: 1, name: this.name, token: this.session?.token }));
+      socket.onopen = () => socket.send(JSON.stringify({ type: 'hello', version: 2, name: this.name, token: this.session?.token }));
       socket.onmessage = event => {
         let data; try { data = JSON.parse(event.data); } catch { return; }
         if (data.type === 'welcome') {
@@ -72,7 +72,7 @@
           this.pending.delete(requestId); reject({ code: 'TIMEOUT', message: '未收到服务器确认，正在重新同步局面。' });
           this.socket?.close(4000, 'Resynchronize');
         }, 30_000);
-        this.pending.set(requestId, { message, resolve, reject, timer, retry: type === 'act' });
+        this.pending.set(requestId, { message, resolve, reject, timer, retry: ['act','match-first','match-side','match-abandon','surrender'].includes(type) });
         this.socket.send(JSON.stringify(message));
       });
     }
@@ -145,7 +145,7 @@
         this.queryKey = key; this.queryRevision = this.revision; clearTimeout(this.pickTimer);
         const revision = this.revision;
         this.pickTimer = setTimeout(() => {
-          this.connection.request('validate', { revision, uids: [...uids] }).then(result => {
+          this.connection.request('validate', { gameId:this.data.gameId, revision, uids: [...uids] }).then(result => {
             if (revision !== this.revision) return;
             this.pickCache.set(key, result); if (this.queryKey === key) this.onPickUpdate();
           }).catch(error => {
@@ -161,7 +161,7 @@
       const keys = ['type', 'uid', 'key', 'mode', 'noTribute', 'bloodPact', 'slot', 'target', 'position', 'zone', 'phase', 'cancel', 'uids'];
       const action = Object.fromEntries(keys.filter(key => input[key] !== undefined).map(key => [key, input[key]]));
       this.busy = true; this.pendingRevision = this.revision; this.onBusyUpdate();
-      this.connection.request('act', { revision: this.revision, action }).then(() => {
+      this.connection.request('act', { gameId:this.data.gameId, revision: this.revision, action }).then(() => {
         if(this.revision>this.pendingRevision){this.busy=false;this.onBusyUpdate();}
       }).catch(error => { this.busy=false;this.onError(error);this.onBusyUpdate(); });
       return { ok: true, pending: true };

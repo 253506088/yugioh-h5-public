@@ -42,7 +42,7 @@ export function project(room, viewer) {
     const p = s.players[owner], own = owner === viewer, deck = e.deckInfo(owner);
     const spec = own ? {
       ...pick(deck, ['id', 'name', 'ace', 'mechanic', 'description', 'subtitle', 'combo', 'preset']),
-      cards: [...deck.cards], extra: [...deck.extra], player: room.seats[owner]?.name || deck.player
+      cards: [...deck.cards], extra: [...deck.extra], side: [...(deck.side||[])], player: room.seats[owner]?.name || deck.player
     } : {
       id: 'pvp-opponent', name: '对手的卡组', player: room.seats[owner]?.name || deck.player,
       ace: 'dark-magician', mechanic: '真人决斗者', cards: [], extra: [], description: '对手的构筑在本局中保密。'

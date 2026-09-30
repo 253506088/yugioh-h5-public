@@ -17,6 +17,11 @@
 !/.env.example
 
 # ===== 构建与验证 =====
+# 2026-09-30 副卡组／BO3／工坊：提交 src/、server/、正式测试、生成器、
+# docs/side-deck-*、交接和重建的根目录 index.html。
+# 需求原文及参考截图继续留在 /需求文档/；output/side-matches/ 中的
+# 私人构筑、局间草稿、WebSocket现场、模拟快照、截图、性能数据、测试日志、
+# 临时诊断脚本及提交信息草稿均为本机产物，不提交。SQLite继续由上方规则排除。
 # 2026-09-30 验收收尾：accepted-audit.json、audit-final.cjs、运行日志、
 # 模拟分片和失败快照均属本机验收现场，继续由 /output/ 排除。
 # 正式效果、回归测试、年度来源、文档和 index.html 保留跟踪，按用户最新授权独立提交。

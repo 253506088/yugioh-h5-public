@@ -90,8 +90,9 @@ const check = async (name, fn) => { await fn(); checks.push(name); console.log('
       await page.setViewportSize({ width: 390, height: 844 });
       for (const language of ['zh-CN', 'en', 'ja']) {
         await page.selectOption('#modal .locale-select', language); await page.evaluate(() => document.documentElement.style.setProperty('--ui-scale', '1.5'));
+        await page.locator('#modal').evaluate(el=>Promise.all(el.getAnimations().map(a=>a.finished.catch(()=>{}))));
         const geometry = await page.evaluate(() => { const modal = document.querySelector('#modal'), footer = modal.querySelector('.modal-footer').getBoundingClientRect(); return { width: innerWidth, scroll: modal.scrollWidth, client: modal.clientWidth, bottom: footer.bottom }; });
-        assert.ok(geometry.scroll <= geometry.client + 2, JSON.stringify(geometry)); assert.ok(geometry.bottom <= 844);
+        assert.ok(geometry.scroll <= geometry.client + 2, JSON.stringify(geometry)); assert.ok(geometry.bottom <= 844,JSON.stringify(geometry));
         await page.screenshot({ path: path.join(output, 'mobile-' + language + '.png') });
       }
       await page.selectOption('#modal .locale-select', 'zh-CN'); await page.setViewportSize({ width: 1440, height: 1000 });

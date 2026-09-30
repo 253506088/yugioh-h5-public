@@ -156,18 +156,18 @@
       return result;
     }
     function draft(deck) {
-      const output = { name: deck.name.slice(0, 40), cards: [], extra: [], notes: '' }, counts = new Map(), warnings = [], omitted = [];
+      const output = { name: deck.name.slice(0, 40), cards: [], extra: [], side: [], notes: '' }, counts = new Map(), warnings = [], omitted = [];
       for (const zone of ['main', 'extra', 'side']) for (const entry of deck[zone]) {
-        if (zone === 'side' || entry.status !== 'playable') {
+        if (entry.status !== 'playable') {
           omitted.push('[' + zone + '/' + entry.status + '] ' + entry.original + ' ×' + entry.count +
             (entry.names ? ' — ' + Object.values(entry.names).filter(Boolean).join(' / ') : '') + (entry.password ? ' (' + entry.password.padStart(8, '0') + ')' : ''));
           continue;
         }
-        const card = cards[entry.id], identity = light(card.nameAlias || card.officialName || card.en || card.name);
-        const count = Math.min(entry.count, Math.max(0, 3 - (counts.get(identity) || 0)));
+        const card = cards[entry.id], identity = root.DuelDecks?.identity(entry.id)||light(card.nameAlias || card.officialName || card.en || card.name);
+        const count = entry.count;
         counts.set(identity, (counts.get(identity) || 0) + count);
-        if (count < entry.count) warnings.push({ code: 'copies', name: entry.names?.['zh-CN'] || entry.original });
-        output[zone === 'main' ? 'cards' : 'extra'].push(...Array(count).fill(entry.id));
+        if (counts.get(identity)>3) warnings.push({ code: 'copies', name: entry.names?.['zh-CN'] || entry.original });
+        output[zone === 'main' ? 'cards' : zone].push(...Array(count).fill(entry.id));
       }
       output.notes = [deck.notes, ...(deck.uncertain || []), ...omitted].filter(Boolean).join('\n').slice(0, 16000);
       return { deck: output, warnings, check: root.DuelDecks?.analyze(output) };

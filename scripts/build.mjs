@@ -62,6 +62,11 @@ scriptFiles.splice(scriptFiles.indexOf('workshop.js'),0,'deck-parse.js','card-re
 scriptFiles.splice(scriptFiles.indexOf('log-engine.js')+1,0,'rule-modes.js');
 scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'rule-modes-ui.js');
 styleFiles.push('rule-modes.css');
+scriptFiles.splice(scriptFiles.indexOf('deck-tools.js')+1,0,'deck-editor.js','match-core.js');
+scriptFiles.splice(scriptFiles.indexOf('pvp-ui.js'),0,'match-ui.js');
+scriptFiles.splice(scriptFiles.indexOf('game-v2.js'),0,'match-ai.js');
+styleFiles.push('workshop.css');
+scriptFiles.splice(scriptFiles.indexOf('i18n.js'),0,'i18n-matches.js');
 const styles = (await Promise.all(styleFiles.map(file => readFile(join(root, 'src', file), 'utf8')))).join('\n\n');
 const scripts = await Promise.all(scriptFiles.map(async file => (await readFile(join(root, 'src', file), 'utf8')).replace(/\r\n/g,'\n')));
 scripts.unshift('globalThis.DuelCardAliases='+JSON.stringify(JSON.parse(await readFile(join(root,'data/card-aliases.json'),'utf8'))).replace(/</g,'\\u003c')+';');

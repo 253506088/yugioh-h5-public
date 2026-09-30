@@ -31,19 +31,19 @@ async function client(t, endpoint, name = 'Duelist', token) {
   };
   let serial = 0;
   socket.request = async (type, data = {}) => {
-    const id = 'wire_' + ++serial; socket.send(JSON.stringify({ type, ...data, id }));
+    const id = 'wire_' + ++serial; socket.send(JSON.stringify({ type, gameId:socket.room?.gameId, ...data, id }));
     const response = await socket.wait(m => m.id === id && ['ack', 'error'].includes(m.type));
     return response;
   };
   t.after(() => socket.terminate());
-  await once(socket, 'open'); socket.send(JSON.stringify({ type: 'hello', version: 1, name, token }));
+  await once(socket, 'open'); socket.send(JSON.stringify({ type: 'hello', version: 2, name, token }));
   const welcome = await socket.wait(m => m.type === 'welcome'); socket.token = welcome.token; socket.messages = messages;
   return socket;
 }
 
 test('health endpoint, browser entry, security headers and a strict public file allowlist', async t => {
   const s = await server(t), health = await fetch(s.http + '/api/health');
-  assert.equal(health.status, 200); assert.equal((await health.json()).mode, 'best-of-one');
+  assert.equal(health.status, 200); assert.equal((await health.json()).mode, 'matches');
   const page = await fetch(s.http + '/', { method: 'HEAD' });
   assert.equal(page.status, 200); assert.match(page.headers.get('content-type'), /text\/html/);
   assert.equal(page.headers.get('x-content-type-options'), 'nosniff'); assert.match(page.headers.get('content-security-policy'), /frame-ancestors 'none'/);
@@ -71,7 +71,7 @@ test('cross-origin WebSocket upgrades are denied before authentication', async t
 test('an explicitly configured frontend origin can connect', async t => {
   const s = await server(t, { origins: ['https://duel.example.com'] });
   const socket = new WebSocket(s.ws, { origin: 'https://duel.example.com' }); socket.on('error', () => {}); t.after(() => socket.terminate());
-  await once(socket, 'open'); socket.send(JSON.stringify({ type: 'hello', version: 1, name: 'Allowed origin' }));
+  await once(socket, 'open'); socket.send(JSON.stringify({ type: 'hello', version: 2, name: 'Allowed origin' }));
   const [data] = await once(socket, 'message'); assert.equal(JSON.parse(data.toString()).type, 'welcome');
 });
 test('real WebSockets create, join, prepare, submit moves, reject outsiders, and reconnect', async t => {

@@ -1,10 +1,11 @@
 import { createHash, randomBytes, randomInt, randomUUID } from 'node:crypto';
-import { ServerEngine, Data, validateDeck } from './engine.mjs';
+import { ServerEngine, Data, validateDeck, Match } from './engine.mjs';
 import { project } from './projection.mjs';
 
-export const PROTOCOL = 1;
+export const PROTOCOL = 2;
 const hash = token => createHash('sha256').update(token).digest('hex');
 const requestId = /^[a-zA-Z0-9_-]{1,80}$/;
+const active = room => ['playing','intermission'].includes(room.status);
 const day = 86_400_000;
 class ClientError extends Error {
   constructor(code, message) { super(message); this.code = code; }
@@ -24,9 +25,10 @@ export class PvpService {
       const room = { ...data, engine: data.engine ? ServerEngine.restore(data.engine) : null, frames: new Map(), events: [] };
       for (const member of room.seats.filter(Boolean)) {
         member.disconnectRemaining ??= disconnectMs;
-        if(!member.connected&&member.disconnectedAt!==null&&room.status==='playing')member.disconnectRemaining=Math.max(0,member.disconnectRemaining-Math.max(0,Math.min(now(),room.clockAt)-member.disconnectedAt));
+        if(!member.connected&&member.disconnectedAt!==null&&active(room))member.disconnectRemaining=Math.max(0,member.disconnectRemaining-Math.max(0,Math.min(now(),room.clockAt)-member.disconnectedAt));
         member.connected = false; member.disconnectedAt = now();
       }
+      if(room.match)room.match=Match.restore(room.match);
       room.clockAt = now(); room.revision++;
       this.rooms.set(room.code, room);
     }
@@ -60,9 +62,9 @@ export class PvpService {
     return room;
   }
   actor(room) { return room.engine.state.pending?.responder ?? room.engine.state.active; }
-  paused(room) { return room.status === 'playing' && room.seats.some(m => !m?.connected); }
+  paused(room) { return active(room) && room.seats.some(m => !m?.connected); }
   clock(room) {
-    return { type: 'clock', code: room.code, serverTime: this.now(), remaining: [...room.remaining],
+    return { type: 'clock', code: room.code, serverTime: this.now(), intermissionMs:room.match?.round?.remainingMs??null, remaining: [...room.remaining],
       actor: room.engine && room.status === 'playing' ? this.actor(room) : null, paused: this.paused(room),
       reconnectUntil: room.seats.map(m => m && !m.connected && m.disconnectedAt !== null ? m.disconnectedAt + (m.disconnectRemaining??this.disconnectMs) : null) };
   }
@@ -70,7 +72,7 @@ export class PvpService {
   view(room, s) {
     const you = this.seat(room, s);
     return { type: 'room', code: room.code, title: room.title, visibility: room.visibility, status: room.status,
-      revision: room.revision, you, ruleMode:room.ruleMode||'off', clockSeconds: room.clockSeconds, incrementSeconds: 20,
+      revision: room.revision, you, matchFormat:room.matchFormat||'bo1', match:Match.publicView(room.match,you), siding:room.match?.round?{deck:structuredClone(room.match.round.submitted[you]||room.match.decks[you]),baseline:structuredClone(room.match.decks[you]),registered:structuredClone(room.match.registered[you])}:null, ruleMode:room.ruleMode||'off', clockSeconds: room.clockSeconds, incrementSeconds: 20,
       seats: room.seats.map((m, i) => m ? { name: m.name, connected: m.connected, ready: m.ready, hasDeck: !!m.deck,
         rematch: !!m.rematch, ...(i === you && m.deck ? { deckName: m.deck.name } : {}) } : null),
       gameId: room.gameId, result: room.result, clock: this.clock(room),
@@ -82,7 +84,7 @@ export class PvpService {
   lobby() {
     return { type: 'lobby', online: this.connections.size, playing: [...this.rooms.values()].filter(r => r.status === 'playing').length,
       queued: this.queue.size, rooms: [...this.rooms.values()].filter(r => r.visibility === 'public' && r.status === 'waiting' && r.seats.filter(Boolean).length === 1 && r.seats.some(m => m?.connected))
-        .sort((a, b) => b.createdAt - a.createdAt).slice(0, 50).map(r => ({ code: r.code, title: r.title, host: r.seats.find(Boolean).name, ruleMode:r.ruleMode||'off', clockSeconds: r.clockSeconds, createdAt: r.createdAt })) };
+        .sort((a, b) => b.createdAt - a.createdAt).slice(0, 50).map(r => ({ code: r.code, title: r.title, host: r.seats.find(Boolean).name, matchFormat:r.matchFormat||'bo1', ruleMode:r.ruleMode||'off', clockSeconds: r.clockSeconds, createdAt: r.createdAt })) };
   }
   broadcastLobby() { const data = this.lobby(); for (const connection of this.connections.values()) connection.send(data); }
 
@@ -109,7 +111,7 @@ export class PvpService {
     if (room) {
       this.settleClock(room, c);
       const member = room.seats[this.seat(room, s)];
-      if(room.status==='playing'&&!member.connected&&member.disconnectedAt!==null){
+      if(active(room)&&!member.connected&&member.disconnectedAt!==null){
         const elapsed=Math.max(0,this.now()-member.disconnectedAt),budget=member.disconnectRemaining??this.disconnectMs;
         if(elapsed>=budget){
           const otherSeat=1-this.seat(room,s),other=room.seats[otherSeat];
@@ -118,7 +120,7 @@ export class PvpService {
         }
         member.disconnectRemaining=Math.max(0,budget-elapsed);
       }
-      member.connected = true; member.disconnectedAt = null; room.clockAt = this.now(); this.touch(room, c);
+      member.connected = true; member.disconnectedAt = null; room.clockAt = this.now(); this.advanceMatch(room,c); this.touch(room, c);
     }
     this.save(c);
     connection.send({ type: 'welcome', version: PROTOCOL, token, name: s.name, resumed: !!message.token, serverTime: this.now(), disconnectSeconds: this.disconnectMs / 1000 });
@@ -158,6 +160,7 @@ export class PvpService {
       if (message.type === 'list') { connection.send(this.lobby()); connection.send({ type: 'ack', id: message.id, ok: true }); return; }
       const receipt = s.receipts.find(r => r.id === message.id);
       if (receipt) { connection.send(receipt.ack); const room = this.rooms.get(s.roomCode); if (room) this.sendRoom(room, s); return; }
+      this.tick();
       const c = changes();
       const data = this.command(s, message, c);
       const ack = { type: 'ack', id: message.id, ok: true, data };
@@ -172,7 +175,7 @@ export class PvpService {
       if (!(error instanceof ClientError)) this.onError(error);
       connection.send({ type: 'error', id: message?.id, code: error.code || 'INTERNAL', message: error instanceof ClientError ? error.message : '服务器未能完成本次操作，请重试或重新连接。' });
       const s = this.sessions.get(connection.sessionId), room = this.rooms.get(s?.roomCode);
-      if (room && ['STALE', 'PAUSED', 'NOT_YOUR_TURN', 'FINISHED'].includes(error.code)) this.sendRoom(room, s);
+      if (room && ['STALE', 'PAUSED', 'NOT_YOUR_TURN', 'FINISHED', 'MATCH'].includes(error.code)) this.sendRoom(room, s);
     }
   }
 
@@ -187,23 +190,26 @@ export class PvpService {
     need([180, 300, 600].includes(message.clockSeconds ?? 300), 'CLOCK', '请选择 3、5 或 10 分钟思考时间。');
     need(message.ruleMode===undefined||['off','random'].includes(message.ruleMode),'RULE_MODE','请选择经典规则或天命法则。');
     need(!message.visibility || ['public', 'private'].includes(message.visibility), 'VISIBILITY', '房间类型无效。');
+    need(message.matchFormat===undefined||['bo1','bo3'].includes(message.matchFormat),'FORMAT','赛制无效。');
     const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     let code; do { code = Array.from({ length: 6 }, () => alphabet[randomInt(alphabet.length)]).join(''); } while (this.rooms.has(code));
     const room = { code, secret: randomBytes(32).toString('hex'), title: nameOf(message.title) || `${s.name}的决斗房间`, visibility: message.visibility || 'public',
       status: 'waiting', revision: 1, createdAt: this.now(), updatedAt: this.now(), seats: [this.member(s), null],
-      ruleMode:message.ruleMode||'off', clockSeconds: message.clockSeconds ?? 300, remaining: [0, 0], clockAt: this.now(), gameId: null, result: null,
+      matchFormat:message.matchFormat||'bo1', ruleMode:message.ruleMode||'off', clockSeconds: message.clockSeconds ?? 300, remaining: [0, 0], clockAt: this.now(), gameId: null, result: null,
       engine: null, frames: new Map(), events: [], actions: 0 };
     this.rooms.set(code, room); s.roomCode = code; c.sessions.add(s); c.rooms.add(room);
     return room;
   }
 
-  start(room, decks) {
-    const gameId = randomUUID();
-    const specs = decks.map((deck, i) => ({ ...structuredClone(deck), id: deck.preset ? deck.id : `custom-pvp-${gameId}-${i}`,
+  start(room, decks, continuation=false) {
+    const matchId=continuation?room.match.id:randomUUID();
+    const specs = decks.map((deck, i) => ({ ...structuredClone(deck), id: deck.preset ? deck.id : `custom-pvp-${matchId}-${i}`,
       player: room.seats[i].name, ace: deck.ace || [...deck.extra, ...deck.cards].sort((a, b) => (Data.CARDS[b].atk || 0) - (Data.CARDS[a].atk || 0))[0],
       mechanic: deck.mechanic || '自由构筑', description: deck.description || '由决斗者亲手构筑的卡组。' }));
-    const engine = new ServerEngine({ deck: specs[0].id, opponentDeck: specs[1].id, deckSpecs: specs, first: randomInt(2), openingGuarantee: false, ruleMode:room.ruleMode });
-    return { engine, gameId, status: 'playing', startedAt: this.now(), clockAt: this.now(), remaining: [room.clockSeconds * 1000, room.clockSeconds * 1000], actions: 0, result: null };
+    const match=continuation?room.match:Match.create({decks:specs,id:matchId,format:room.matchFormat||'bo1',first:randomInt(2),ruleMode:room.ruleMode,now:this.now()});
+    const gameId=match.gameId;
+    const engine = new ServerEngine({ deck: specs[0].id, opponentDeck: specs[1].id, deckSpecs: specs, first: match.first, openingGuarantee: false, ruleMode:room.ruleMode });
+    return { engine, gameId, match, status: 'playing', startedAt: this.now(), clockAt: this.now(), remaining: [room.clockSeconds * 1000, room.clockSeconds * 1000], actions: 0, result: null };
   }
 
   command(s, m, c) {
@@ -222,10 +228,10 @@ export class PvpService {
       room.seats[seat] = this.member(s); s.roomCode = room.code; c.sessions.add(s); this.touch(room, c); return { code };
     }
     if (m.type === 'queue') {
-      this.requireFree(s); const deck = this.readDeck(m.deck);
-      const peer = [...this.queue.values()].find(q => this.connections.has(q.sessionId));
-      if (!peer) { this.queue.set(s.id, { sessionId: s.id, deck, joinedAt: this.now() }); return {}; }
-      const other = this.sessions.get(peer.sessionId), room = this.createRoom(other, { title: '快速匹配', visibility: 'private', clockSeconds: 300 }, c);
+      this.requireFree(s); const deck = this.readDeck(m.deck);need(m.matchFormat===undefined||['bo1','bo3'].includes(m.matchFormat),'FORMAT','赛制无效。');const matchFormat=m.matchFormat||'bo1';
+      const peer = [...this.queue.values()].find(q => this.connections.has(q.sessionId)&&(q.matchFormat||'bo1')===matchFormat);
+      if (!peer) { this.queue.set(s.id, { sessionId: s.id, deck, matchFormat, joinedAt: this.now() }); return {}; }
+      const other = this.sessions.get(peer.sessionId), room = this.createRoom(other, { title: '快速匹配', visibility: 'private', clockSeconds: 300, matchFormat }, c);
       room.seats[1] = this.member(s, deck); room.seats[0].deck = peer.deck;
       try { Object.assign(room, this.start(room, [peer.deck, deck])); }
       catch (error) { this.rooms.delete(room.code); other.roomCode = null; c.rooms.delete(room); throw error; }
@@ -236,6 +242,12 @@ export class PvpService {
     }
     if (m.type === 'cancel-queue') { this.queue.delete(s.id); return {}; }
     const room = this.roomFor(s), seat = this.seat(room, s), member = room.seats[seat];
+    if(m.type==='match-journal'){
+      need(room.match&&m.matchId===room.match.id&&(m.gameId===room.gameId||room.match.games.some(g=>g.id===m.gameId)),'MATCH','比赛记录不存在。');
+      const snapshot=m.gameId===room.gameId?room.engine.snapshot():this.store.game(m.gameId)?.snapshot;
+      need(snapshot,'MATCH','比赛记录不存在。');
+      return {gameId:m.gameId,log:snapshot.state.log.map(item=>item.pvpLog?.[seat]).filter(Boolean)};
+    }
     if (m.type === 'ready') {
       need(room.status === 'waiting', 'STARTED', '对局已开始，不能更换构筑。');
       need(typeof m.ready === 'boolean', 'READY', '准备状态无效。');
@@ -251,24 +263,26 @@ export class PvpService {
       if(room.engine&&room.engine.state.winner!==null)this.finish(room,room.engine.state.winner,room.engine.state.outcome?.kind||'special',c);
       return {};
     }
+    if(['match-first','match-side','match-abandon'].includes(m.type))return this.matchCommand(room,seat,m,c);
     if (m.type === 'act') return this.act(room, seat, m, c);
     if (m.type === 'surrender') {
       need(room.status === 'playing', 'FINISHED', '本局已经结束。');
+      need(m.gameId===room.gameId,'STALE','本局已经更新。');
       this.settleClock(room,c);
-      if(room.status==='finished'){this.touch(room,c);return {finished:true};}
+      if(room.status!=='playing'){this.touch(room,c);return {finished:true};}
       this.finish(room, 1 - seat, 'surrender', c); this.touch(room, c); return {};
     }
     if (m.type === 'rematch') {
       need(room.status === 'finished' && room.seats.every(p=>p?.connected), 'REMATCH', '请等待双方都连接到房间后申请再战。');
       member.rematch = true;
       if (room.seats.every(p => p.rematch && p.connected)) {
-        room.status = 'waiting'; room.engine = null; room.gameId = null; room.result = null;
+        room.status = 'waiting'; room.engine = null; room.gameId = null; room.result = null; room.match=null;
         for (const p of room.seats) { p.ready = false; p.rematch = false; }
       }
       this.touch(room, c); return {};
     }
     if (m.type === 'leave') {
-      need(room.status !== 'playing', 'ACTIVE_GAME', '对局进行中，请先认输再离开房间。');
+      need(!active(room), 'ACTIVE_GAME', '对局进行中，请先认输再离开房间。');
       this.removeMember(room, seat, c); return {};
     }
     throw new ClientError('UNKNOWN', '未知的联机请求。');
@@ -277,8 +291,49 @@ export class PvpService {
   current(room, seat, m) {
     need(room.status === 'playing', 'FINISHED', '本局已经结束。');
     need(!this.paused(room), 'PAUSED', '对手断线，对局已暂停，等待重新连接。');
+    need(m.gameId===room.gameId,'STALE','本局已经更新。');
     need(Number.isSafeInteger(m.revision) && m.revision === room.revision, 'STALE', '局面已经更新，已同步最新状态，请重新选择。');
     need(this.actor(room) === seat, 'NOT_YOUR_TURN', '现在不是你的行动或响应时机。');
+  }
+
+  matchCommand(room,seat,m,c) {
+    need(room.match&&m.matchId===room.match.id&&active(room),'MATCH','比赛状态已更新，请重新同步。');
+    if(m.type==='match-abandon'){this.endMatch(room,1-seat,'match-surrender',c);this.touch(room,c);return {};}
+    need(room.status==='intermission'&&m.roundId===room.match.round?.id,'MATCH','本轮换备已经结束。');
+    try {
+      if(m.type==='match-first')Match.choose(room.match,seat,m.first);
+      if(m.type==='match-side')Match.submit(room.match,seat,this.readDeck(m.deck));
+    } catch(error) {throw new ClientError('MATCH',error.message);}
+    room.clockAt=this.now();this.advanceMatch(room,c);this.touch(room,c);return {};
+  }
+
+  advanceMatch(room,c) {
+    if(room.status!=='intermission'||this.paused(room))return;
+    const m=room.match;
+    if(m.round.remainingMs<=0){
+      if(m.phase==='choosing-first')Match.choose(m,m.round.chooser,m.round.chooser);
+      else for(const seat of [0,1])if(!m.round.ready[seat])Match.submit(m,seat,m.decks[seat]);
+      this.touch(room,c);
+    }
+    if(m.phase==='siding'&&m.round.ready.every(Boolean)){
+      Match.next(m);Object.assign(room,this.start(room,m.decks,true));this.touch(room,c);
+      if(room.engine.state.winner!==null)this.finish(room,room.engine.state.winner,room.engine.state.outcome?.kind||'special',c);
+    }
+  }
+
+  endMatch(room,winner,kind,c) {
+    const m=room.match,e=room.engine,wasPlaying=room.status==='playing';
+    if(!m||m.phase==='finished')return;
+    if(wasPlaying&&e.state.winner===null){
+      e.state.winner=winner;e.state.pending=null;e.state.outcome={kind,winner,turn:e.state.turn};
+      e.log('victory','决斗结束',winner==='draw'?null:winner);
+    }
+    // An interrupted game is archived as such; no unplayed wins are fabricated.
+    Match.abandon(m,winner==='draw'?'draw':1-winner,kind,this.now());
+    room.status='finished';room.result={...m.result,gameId:room.gameId,turn:e.state.turn};
+    const archived=wasPlaying?{id:room.gameId,finishedAt:this.now(),result:{gameId:room.gameId,winner,kind,turn:e.state.turn,finishedAt:this.now()},players:room.seats.map(p=>({name:p.name,sessionId:p.sessionId})),snapshot:e.snapshot(),matchId:m.id,gameIndex:m.gameIndex}:c.games.find(g=>g.id===room.gameId)||this.store.game(room.gameId);
+    if(archived)c.games.push({...archived,match:Match.publicView(m)});
+    room.frames.clear();c.rooms.add(room);
   }
   decode(frame, uid) {
     need(typeof uid === 'string' && frame.refs.has(uid), 'CARD', '卡片或选项已经失效，请重新选择。');
@@ -346,6 +401,7 @@ export class PvpService {
   }
 
   settleClock(room, c) {
+    if(room.status==='intermission'){const elapsed=Math.max(0,this.now()-room.clockAt);room.clockAt=this.now();if(!this.paused(room)){room.match.round.remainingMs=Math.max(0,room.match.round.remainingMs-elapsed);this.advanceMatch(room,c);}return;}
     if (room.status !== 'playing') return;
     const at = this.now(), elapsed = Math.max(0, at - room.clockAt);
     if (!this.paused(room)) {
@@ -356,6 +412,8 @@ export class PvpService {
   }
   finish(room, winner, kind, c) {
     if (room.status === 'finished') return;
+    if(['disconnect','abandoned','match-surrender'].includes(kind)&&room.match){this.endMatch(room,winner,kind,c);return;}
+    if(room.status!=='playing')return;
     const e = room.engine;
     if (e.state.winner === null) {
       e.state.winner = winner; e.state.pending = null;
@@ -363,9 +421,11 @@ export class PvpService {
       e.log('victory', '决斗结束', winner === 'draw' ? null : winner);
       room.events.push(e.state.log[0]);
     }
-    room.status = 'finished'; room.result = { gameId: room.gameId, winner, kind, turn: e.state.turn, finishedAt: this.now() };
-    room.frames.clear(); c.rooms.add(room);
-    c.games.push({ id: room.gameId, finishedAt: this.now(), result: room.result, players: room.seats.map(m => ({ name: m.name, sessionId: m.sessionId })), snapshot: e.snapshot() });
+    if(room.match)Match.record(room.match,{winner,kind,turn:e.state.turn,now:this.now()});
+    room.status = room.match&&room.match.phase!=='finished'?'intermission':'finished'; room.result = { gameId: room.gameId, winner, kind, turn: e.state.turn, finishedAt: this.now() };
+    if(room.match?.result)room.result={...room.result,...room.match.result};
+    room.clockAt=this.now();room.frames.clear(); c.rooms.add(room);
+    c.games.push({ id: room.gameId, finishedAt: this.now(), result: room.result, players: room.seats.map(m => ({ name: m.name, sessionId: m.sessionId })), snapshot: e.snapshot(),matchId:room.match?.id,gameIndex:room.match?.gameIndex,match:room.match?Match.publicView(room.match):null });
   }
 
   removeMember(room, seat, c) {
@@ -382,7 +442,7 @@ export class PvpService {
     for (const room of this.rooms.values()) {
       const before = room.status; this.settleClock(room, c);
       const expired = room.seats.map(m => m && !m.connected && m.disconnectedAt !== null && at >= m.disconnectedAt + (m.disconnectRemaining??this.disconnectMs));
-      if (room.status === 'playing' && expired.some(Boolean)) {
+      if (active(room) && expired.some(Boolean)) {
         const connected = room.seats.map(m => m.connected);
         // Never award a disconnected participant a win when both players disappeared.
         if (connected.some(Boolean)) this.finish(room, connected[0] ? 0 : 1, 'disconnect', c);
@@ -395,7 +455,7 @@ export class PvpService {
         for (const m of room.seats.filter(Boolean)) { const s = this.sessions.get(m.sessionId); s.roomCode = null; c.sessions.add(s); this.connections.get(s.id)?.send({ type: 'left', expired: true }); }
         this.rooms.delete(room.code); c.rooms.delete(room); c.deleteRooms.push(room.code); lobbyChanged = true;
       }
-      if (this.rooms.has(room.code) && room.status === 'playing') {
+      if (this.rooms.has(room.code) && active(room)) {
         const clock = this.clock(room);
         for (const member of room.seats) this.connections.get(member.sessionId)?.send(clock);
         if (at - this.lastCheckpoint >= 5000) c.rooms.add(room);
@@ -420,7 +480,7 @@ export class PvpService {
     for (const room of this.rooms.values()) {
       this.settleClock(room, c);
       for (const m of room.seats.filter(Boolean)) {
-        if(!m.connected&&m.disconnectedAt!==null&&room.status==='playing')m.disconnectRemaining=Math.max(0,(m.disconnectRemaining??this.disconnectMs)-Math.max(0,this.now()-m.disconnectedAt));
+        if(!m.connected&&m.disconnectedAt!==null&&active(room))m.disconnectRemaining=Math.max(0,(m.disconnectRemaining??this.disconnectMs)-Math.max(0,this.now()-m.disconnectedAt));
         m.connected = false; m.disconnectedAt = this.now();
       }
       c.rooms.add(room);

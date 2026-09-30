@@ -74,7 +74,10 @@
     "test:2016": "node --test tests/chronicle-2016-core.test.cjs tests/chronicle-2016-engines.test.cjs tests/chronicle-2016-support.test.cjs tests/chronicle-2016-abc.test.cjs tests/chronicle-2016-fusion.test.cjs tests/chronicle-2016-themes.test.cjs tests/chronicle-2016-kozmo.test.cjs",
     "test:2016:browser": "node tests/chronicle-2016-browser.cjs",
     "test:2016:simulation": "node tests/chronicle-2016-simulation.cjs",
-    "cards:coverage:2016": "node scripts/report-card-coverage.mjs --write-year 2016"
+    "cards:coverage:2016": "node scripts/report-card-coverage.mjs --write-year 2016",
+    "test:matches": "node --test tests/side-matches.test.cjs tests/pvp-matches.test.mjs",
+    "test:matches:browser": "node tests/side-matches-browser.cjs && node tests/pvp-matches-browser.cjs",
+    "test:matches:simulation": "node tests/match-simulation.cjs"
   },
   "engines": {
     "node": ">=22.13.0"

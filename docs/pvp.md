@@ -1,4 +1,6 @@
-# 单局 PVP 服务
+# PVP 对战服务
+
+2026-09-30：支持 BO1 / BO3、三分区报名、败者选择先后攻、局间换备和整场结算，完整规则与验证见 [副卡组与比赛说明](side-deck-matches.md)。重连额度按整场累计。旧房间继续作为 BO1 恢复；客户端协议升级为 2。
 
 首页选择「联机对战」，即可与另一位玩家进行一场真实决斗。服务器运行项目现有的完整规则引擎，玩家的浏览器负责显示局面和提交选择。
 
@@ -56,7 +58,7 @@ GitHub Pages 或双击 HTML 继续支持离线游玩。它们不会自动产生 
 
 | 项目 | 行为 |
 | --- | --- |
-| 赛制 | BO1，一场独立决斗；不组建赛事、积分赛或三局两胜 |
+| 赛制 | 默认 BO1，可选 BO3。先两胜，平局补赛，连续三平结束；局间保持报名卡池守恒 |
 | 起始 | 双方 8000 LP，随机 5 张起手；无起手保障；先攻随机 |
 | 构筑 | 40–60 张主卡组、0–15 张额外、同名卡合计最多 3 张；服务端校验 |
 | 卡池 | 沿用现有引擎的 5,754 张可组卡卡片及 38 套预设，也支持本地自建构筑 |
@@ -140,7 +142,9 @@ flowchart LR
 | `src/pvp-ui.js` / `src/pvp.css` | 大厅、邀请、匹配、准备、时钟与结算界面 |
 | `src/game-v2.js` | 在既有战场中切换本地／服务器引擎，停用本地对手 AI |
 
-WebSocket 路径 `/pvp/ws`，第一条消息为 `{type:"hello", version:1, name}`，重连时附带 `token`。之后的请求附带唯一 `id`：`profile`、`list`、`create`、`join`、`ready`、`queue`、`cancel-queue`、`act`、`validate`、`surrender`、`rematch`、`leave`。`act` 和 `validate` 必须带当前 `revision`，选择只能使用当前玩家视图提供的句柄。`ping`／`pong` 用于延迟显示。
+WebSocket 路径 `/pvp/ws`，第一条消息为 `{type:"hello", version:2, name}`，重连时附带 `token`。之后的请求附带唯一 `id`：`profile`、`list`、`create`、`join`、`ready`、`queue`、`cancel-queue`、`act`、`validate`、`surrender`、`rematch`、`leave`。`act` 和 `validate` 必须带当前 `gameId` 与 `revision`，选择只能使用当前玩家视图提供的句柄。`surrender` 也绑定 `gameId`。`ping`／`pong` 用于延迟显示。
+
+`create` / `queue` 可带 `matchFormat: "bo1" | "bo3"`。`match-first` / `match-side` 携带 `matchId` 与 `roundId`，分别提交绝对席位 `first` 和三分区 `deck`；独立个人提交锁不会因对手同时准备而产生 revision 冲突。`match-abandon` 携带 `matchId`。`match-journal` 携带本场 `matchId/gameId`，只返回该席位的白名单日志，不能访问其他比赛或对手私密记录。
 
 服务器发送 `welcome`、`ack`、`error`、`lobby`、`room`、`clock`、`queue`、`left`、`replaced`。客户端以 `room` 的服务器局面为准，不做乐观规则结算；过期版本返回 `STALE` 并同步新局面。
 

@@ -1,5 +1,6 @@
 (function (root) {
   'use strict';
+  const MUI=root.DuelMatchUI;
   const { Connection, RemoteEngine } = root.DuelPVPClient;
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const tr = (zh, en, ja) => root.DuelI18n.language === 'en' ? en : root.DuelI18n.language === 'ja' ? ja : zh;
@@ -22,13 +23,13 @@
   function create(bridge) {
     const screen = document.querySelector('#pvp-screen'), bar = document.querySelector('#pvp-duel-bar');
     let room = null, remote = null, shown = false, layout = '', busy = false, queued = false, queueAt = 0;
-    let lobby = { online: 0, playing: 0, rooms: [] }, clockAt = 0, lastError = '', selected = 'blue', nickname = '', clockSeconds = 300;
+    let lobby = { online: 0, playing: 0, rooms: [] }, clockAt = 0, lastError = '', selected = 'blue', nickname = '', clockSeconds = 300, matchFormat='bo1';
     try { const saved = JSON.parse(localStorage.getItem('duel-pvp-profile-v1') || '{}'); nickname = saved.name || ''; selected = saved.deck || 'blue'; } catch {}
     if (!nickname) nickname = tr('决斗者', 'Duelist', 'デュエリスト') + ' ' + Math.random().toString(36).slice(2, 6).toUpperCase();
     const remember = () => { try { localStorage.setItem('duel-pvp-profile-v1', JSON.stringify({ name: nickname, deck: selected })); } catch {} };
     const availableDecks = () => root.DuelDecks.list().map(deck => root.DuelI18n.deck(deck));
     const deck = () => availableDecks().find(d => d.id === selected) || availableDecks()[0];
-    const deckInput = () => { const d = deck(); return d.preset ? { preset: d.id } : { name: d.name, cards: [...d.cards], extra: [...d.extra] }; };
+    const deckInput = () => { const d = deck(); return d.preset ? { preset: d.id } : { name: d.name, cards: [...d.cards], extra: [...d.extra],side:[...(d.side||[])] }; };
     const deckOptions = () => availableDecks().map(d => `<option value="${esc(d.id)}"${d.id === deck().id ? ' selected' : ''}>${esc(d.name)}${d.preset ? '' : ' · ' + tr('自建', 'Custom', '自作')}</option>`).join('');
 
     function peerNotice(data = room) {
@@ -81,7 +82,7 @@
       message(data) {
         if (data.type === 'lobby') { lobby = data; updateLobby(); updateStatus(); }
         if (data.type === 'queue') { queued = data.active; queueAt = data.joinedAt || queueAt; updateQueue(); }
-        if (data.type === 'clock' && room?.code === data.code) { const changed=room.clock.paused!==data.paused;room.clock = data; clockAt = Date.now(); if (remote) remote.blocked = data.paused; updateClocks(); if(changed)bridge.refresh?.(); }
+        if (data.type === 'clock' && room?.code === data.code) { const changed=room.clock.paused!==data.paused;room.clock = data; clockAt = Date.now(); if (remote) remote.blocked = data.paused||room.status==='intermission'; updateClocks(); if(changed)bridge.refresh?.(); }
         if (data.type === 'left') {
           room = null; remote = null; bridge.detach(); layout = ''; bridge.show();
           if (data.expired) showError({ message: tr('房间已过期，请创建或加入新的房间。', 'The room expired. Create or join a new one.', 'ルームの有効期限が切れました。') });
@@ -89,14 +90,16 @@
         if (data.type === 'room') {
           const prior = room; room = data; queued = false; clockAt = Date.now();
           if (data.game) {
-            const game = { ...data.game, revision: data.revision };
+            const game = { ...data.game, gameId:data.gameId, revision: data.revision };
             if (!remote || prior?.gameId !== data.gameId) {
-              remote = new RemoteEngine(game, connection, showError); remote.blocked = data.clock.paused;
+              remote = new RemoteEngine(game, connection, showError); remote.blocked = data.clock.paused||data.status==='intermission';
               bridge.attach(remote); layout = '';
             } else { remote.blocked = data.clock.paused; remote.update(game); }
           } else if (remote) { remote = null; bridge.detach(); bridge.show(); }
           if (shown) render(); renderBar(); updateStatus(); updateClocks();
           updatePeerNotice(prior);
+          if(data.match?.format==='bo3'&&(data.status==='intermission'||data.status==='finished')&&(prior?.match?.phase!==data.match.phase||!prior)){bridge.dismiss();showMatch();}
+          if(prior?.status==='intermission'&&data.status==='playing')bridge.exitSiding?.();
           if (!prior && !data.game) bridge.show();
         }
       }
@@ -129,7 +132,7 @@
       const key = room ? 'room:' + room.code : 'lobby';
       if (key !== layout || room) {
         const focus = document.activeElement?.id;
-        screen.innerHTML = `<div class="pvp-shell"><div class="pvp-topline"><span><i class="pvp-status-dot"></i> ONLINE DUELS <b>/</b> BEST OF ONE</span><button data-action="home">← ${tr('返回主界面', 'Home', 'ホーム')}</button></div><div class="pvp-error" id="pvp-error" role="alert"${lastError ? '' : ' hidden'}>${esc(lastError)}</div>${room ? roomHTML() : lobbyHTML()}<footer class="pvp-footer"><span>${icon('shield')}${tr('每个选择，都由服务器确认。', 'Every move is confirmed by the server.', 'すべての操作をサーバーが確認します。')}</span><span>8000 LP · BO1 · ${tr('现有卡池规则', 'Current card pool rules', '現在のカードプール')}</span></footer></div>`;
+        screen.innerHTML = `<div class="pvp-shell"><div class="pvp-topline"><span><i class="pvp-status-dot"></i> ONLINE DUELS <b>/</b> BO1 / BO3</span><button data-action="home">← ${tr('返回主界面', 'Home', 'ホーム')}</button></div><div class="pvp-error" id="pvp-error" role="alert"${lastError ? '' : ' hidden'}>${esc(lastError)}</div>${room ? roomHTML() : lobbyHTML()}<footer class="pvp-footer"><span>${icon('shield')}${tr('每个选择，都由服务器确认。', 'Every move is confirmed by the server.', 'すべての操作をサーバーが確認します。')}</span><span>8000 LP · BO1 / BO3 · ${tr('现有卡池规则', 'Current card pool rules', '現在のカードプール')}</span></footer></div>`;
         layout = key;
         if (focus && screen.querySelector('#' + focus)) screen.querySelector('#' + focus).focus({ preventScroll: true });
         root.DuelArt.refresh(screen);
@@ -138,7 +141,7 @@
     }
     function lobbyHTML() {
       const invite = root.location.hash.match(/^#pvp\/([A-Z2-9]{6})$/i)?.[1] || '';
-      return `<header class="pvp-hero"><div class="pvp-hero-copy"><span class="pvp-eyebrow">A REAL RIVAL. YOUR NEXT CHAPTER.</span><h1>${tr('这一局，<br>与你<span>交锋。</span>', 'One duel.<br>Make it <span>yours.</span>', 'この一戦で、<br>あなたと<span>決闘。</span>')}</h1><p>${tr('把熟悉的战术，交给未知的对手。<br>邀请好友，或遇见下一位决斗者。', 'Bring your best deck to a real opponent.<br>Invite a friend, or find your next rival.', '磨いた戦術で、まだ見ぬ相手へ。<br>友達を招待するか、新しい決闘者と出会おう。')}</p><div class="pvp-pills"><span>${tr('真人对战', 'REAL PLAYERS', 'プレイヤー対戦')}</span><span>${tr('单局决胜', 'SINGLE DUEL', 'シングル戦')}</span><span>${tr('断线可重连', 'RECONNECT & RESUME', '再接続に対応')}</span></div></div><div class="pvp-hero-art" aria-hidden="true"><div class="pvp-orbit"></div><div class="pvp-orbit inner"></div><div class="pvp-hero-card left"></div><div class="pvp-hero-card right"></div><span class="pvp-vs-mark">VS</span><small>THE NEXT MOVE IS YOURS</small><span class="pvp-art-corner a"></span><span class="pvp-art-corner b"></span></div></header>
+      return `<header class="pvp-hero"><div class="pvp-hero-copy"><span class="pvp-eyebrow">A REAL RIVAL. YOUR NEXT CHAPTER.</span><h1>${tr('这一局，<br>与你<span>交锋。</span>', 'One duel.<br>Make it <span>yours.</span>', 'この一戦で、<br>あなたと<span>決闘。</span>')}</h1><p>${tr('把熟悉的战术，交给未知的对手。<br>邀请好友，或遇见下一位决斗者。', 'Bring your best deck to a real opponent.<br>Invite a friend, or find your next rival.', '磨いた戦術で、まだ見ぬ相手へ。<br>友達を招待するか、新しい決闘者と出会おう。')}</p><div class="pvp-pills"><span>${tr('真人对战', 'REAL PLAYERS', 'プレイヤー対戦')}</span><span>${tr('BO1 / BO3', 'BO1 / BO3', 'BO1 / BO3')}</span><span>${tr('断线可重连', 'RECONNECT & RESUME', '再接続に対応')}</span></div></div><div class="pvp-hero-art" aria-hidden="true"><div class="pvp-orbit"></div><div class="pvp-orbit inner"></div><div class="pvp-hero-card left"></div><div class="pvp-hero-card right"></div><span class="pvp-vs-mark">VS</span><small>THE NEXT MOVE IS YOURS</small><span class="pvp-art-corner a"></span><span class="pvp-art-corner b"></span></div></header>
       <div class="pvp-server-strip"><div><i class="pvp-status-dot"></i><strong class="pvp-connection-label"></strong><span class="pvp-server-host">${esc(root.location.host || 'LOCAL FILE')}</span></div><span><b data-pvp-online>0</b> ${tr('在线', 'online', 'オンライン')}</span><span><b data-pvp-playing>0</b> ${tr('对局中', 'live duels', '対戦中')}</span><span class="pvp-latency">— ms</span></div>
       <div id="pvp-server-help" class="pvp-server-help" hidden><strong>${tr('通过联机服务器打开游戏', 'Open the game on a PVP server', '対戦サーバーでゲームを開く')}</strong><p>${tr('联机需要运行服务器。项目目录执行 npm run start:pvp，再访问下方地址；异地游玩可填写已部署的服务器地址。', 'Run npm run start:pvp in the project, then open the address below. For remote play, use your deployed server address.', 'プロジェクトで npm run start:pvp を実行し、下のアドレスを開いてください。')}</p><div><label class="pvp-sr" for="pvp-server-url">${tr('服务器地址', 'Server address', 'サーバーアドレス')}</label><input id="pvp-server-url" type="url" value="http://127.0.0.1:4173" placeholder="https://duel.example.com"><button class="pvp-button" data-pvp-action="open-server">${tr('打开服务器', 'Open server', 'サーバーを開く')} ↗</button><button class="pvp-text-button" data-pvp-action="reconnect">${tr('重新连接', 'Reconnect', '再接続')}</button></div></div>
       <div class="pvp-lobby-grid"><div class="pvp-main-column"><section class="pvp-panel pvp-preparation"><div class="pvp-section-title"><span>01</span><div><h2>${tr('以你的名字，出战。', 'Enter as yourself.', 'あなたの名前で、参戦。')}</h2><p>${tr('预设卡组或亲手构筑，选择你相信的力量。', 'A preset or your own creation. Choose a deck you trust.', 'プリセットか自作デッキ。信じる力を選ぼう。')}</p></div></div><div class="pvp-identity-row"><label for="pvp-name">${tr('决斗者昵称', 'Duelist name', 'プレイヤー名')}<input id="pvp-name" maxlength="20" autocomplete="nickname" value="${esc(nickname)}"></label><label for="pvp-deck">${tr('出战卡组', 'Deck', 'デッキ')}<select id="pvp-deck" data-pvp-deck>${deckOptions()}</select></label></div><div class="pvp-deck-preview" id="pvp-deck-preview">${artPreview()}</div><div class="pvp-quick-row" id="pvp-quick-row"></div></section>
@@ -148,14 +151,15 @@
     }
 
     function roomHTML() {
+      if(room.status==='intermission')return '<h1>'+MUI.title(room.match)+'</h1>'+MUI.panel(room.match,'pvp-match-')+'<button class="pvp-button" data-action="pvp-match-abandon">'+tr('放弃整场','Concede match','マッチを投了')+'</button>';
       const own = room.seats[room.you], opponent = room.seats[1 - room.you], finished = room.status === 'finished', playing = room.status === 'playing';
       const seatHTML = (member, self) => `<article class="pvp-seat ${self ? 'self' : 'rival'} ${(finished ? member?.rematch : member?.ready) ? 'ready' : ''}"><span class="pvp-seat-tag">${self ? 'YOU' : 'OPPONENT'}</span><div class="pvp-seat-avatar">${self ? root.DuelArt.html(deck().ace) : `<img src="${root.DUEL_ART['card-back']}" alt="">`}${(finished ? member?.rematch : member?.ready) ? '<b>' + icon('check') + '</b>' : ''}</div><h2 data-user-content>${member ? esc(member.name) : tr('等待对手入座', 'Waiting for a rival', '対戦相手を待っています')}</h2><p>${member ? self ? esc(own.deckName || deck().name) : tr('对手的构筑保密', 'Opponent’s deck is private', '相手の構築は非公開') : tr('分享房间码，邀请好友加入。', 'Share your code to invite a friend.', 'コードを共有して友達を招待。')}</p><span class="pvp-seat-status">${member ? !member.connected ? tr('暂时离线', 'Disconnected', '切断中') : playing ? tr('对局中', 'In duel', '対戦中') : finished ? member.rematch ? tr('已准备 · 等待再战', 'Ready for a rematch', '再戦を希望') : tr('本局结束', 'Duel complete', '対戦終了') : member.ready ? tr('已准备', 'Ready', '準備完了') : tr('正在选择卡组', 'Choosing a deck', 'デッキを選択中') : tr('空席', 'Open seat', '空席')}</span></article>`;
-      return `<header class="pvp-room-heading"><div><span class="pvp-eyebrow">${room.visibility === 'private' ? 'PRIVATE ROOM' : 'PUBLIC ROOM'} · ${room.ruleMode==='random'?'FATE DECREE':'CLASSIC'} · BEST OF ONE</span><h1 data-user-content>${esc(room.title)}</h1><p>${tr('两位决斗者，一场胜负。', 'Two duelists. One game.', '2人の決闘者、1回の勝負。')}</p></div><div class="pvp-code-ticket"><small>${tr('房间码', 'ROOM CODE', 'ルームコード')}</small><button data-pvp-action="copy-code" title="${tr('复制房间码', 'Copy room code', 'コードをコピー')}">${room.code}<span>⧉</span></button><button class="pvp-copy-link" data-pvp-action="copy-link">${tr('复制邀请链接', 'Copy invitation link', '招待リンクをコピー')} ↗</button></div></header>
+      return `<header class="pvp-room-heading"><div><span class="pvp-eyebrow">${room.visibility === 'private' ? 'PRIVATE ROOM' : 'PUBLIC ROOM'} · ${room.ruleMode==='random'?'FATE DECREE':'CLASSIC'} · ${(room.matchFormat||'bo1').toUpperCase()}</span><h1 data-user-content>${esc(room.title)}</h1><p>${tr('两位决斗者，一场胜负。', 'Two duelists. One game.', '2人の決闘者、1回の勝負。')}</p></div><div class="pvp-code-ticket"><small>${tr('房间码', 'ROOM CODE', 'ルームコード')}</small><button data-pvp-action="copy-code" title="${tr('复制房间码', 'Copy room code', 'コードをコピー')}">${room.code}<span>⧉</span></button><button class="pvp-copy-link" data-pvp-action="copy-link">${tr('复制邀请链接', 'Copy invitation link', '招待リンクをコピー')} ↗</button></div></header>
       <div class="pvp-room-progress"><span class="done"><b>01</b>${tr('进入房间', 'Join room', '入室')}</span><i></i><span class="${own?.ready ? 'done' : 'current'}"><b>02</b>${tr('确认卡组', 'Ready up', '準備')}</span><i></i><span class="${playing || finished ? 'done' : ''}"><b>03</b>${tr('开始决斗', 'Duel', 'デュエル')}</span></div>
       ${peerNoticeHTML()}
-      <div class="pvp-room-network" role="status" hidden></div><section class="pvp-matchup">${seatHTML(own, true)}<div class="pvp-room-versus"><small>SINGLE DUEL</small><b>VS</b><span>8000 <i>LP</i></span><div>${room.clockSeconds / 60} ${tr('分钟', 'MIN', '分')} + 20s</div></div>${seatHTML(opponent, false)}</section>
+      <div class="pvp-room-network" role="status" hidden></div><section class="pvp-matchup">${seatHTML(own, true)}<div class="pvp-room-versus"><small>${(room.matchFormat||'bo1').toUpperCase()}</small><b>VS</b><span>8000 <i>LP</i></span><div>${room.clockSeconds / 60} ${tr('分钟', 'MIN', '分')} + 20s</div></div>${seatHTML(opponent, false)}</section>
       ${finished ? `<section class="pvp-panel pvp-room-result"><span class="pvp-eyebrow">DUEL COMPLETE</span><h2>${resultTitle()}</h2><p>${resultReason()}</p><div><button class="pvp-button pvp-primary" data-pvp-action="rematch"${own?.rematch || !opponent ? ' disabled' : ''}>${own?.rematch ? tr('已准备，等待对手回应', 'Ready · waiting for opponent', '相手の同意を待っています') : opponent?.rematch ? tr('同意再战', 'Accept rematch', '再戦に同意') : tr('再战一局', 'Play again', 'もう一戦')}</button><button class="pvp-button" data-pvp-action="board">${tr('查看战场与记录', 'Board & journal', '盤面と記録')}</button></div></section>` : playing ? `<section class="pvp-panel pvp-resume-panel"><div><span class="pvp-eyebrow">DUEL IN PROGRESS</span><h2>${tr('战场正等待你的下一步。', 'Your next move awaits.', '次の一手を待っています。')}</h2></div><button class="pvp-button pvp-primary" data-pvp-action="board">${tr('进入战场', 'Enter duel', '対戦画面へ')} ${icon('arrow')}</button></section>` : `<section class="pvp-panel pvp-ready-panel"><div><label for="pvp-room-deck">${tr('确认你的出战卡组', 'Confirm your deck', '使用するデッキを確認')}<select id="pvp-room-deck" data-pvp-deck${own?.ready ? ' disabled' : ''}>${deckOptions()}</select></label><p>${tr('双方准备后自动开始，先后攻随机决定。', 'The duel begins when both players are ready. First turn is random.', '両者の準備完了で開始。先攻・後攻はランダムです。')}</p></div><button class="pvp-button ${own?.ready ? '' : 'pvp-primary'}" data-pvp-action="ready">${icon(own?.ready ? 'refresh' : 'check')}${own?.ready ? tr('取消准备', 'Unready', '準備を解除') : tr('准备决斗', 'Ready to duel', '準備完了')}</button></section>`}
-      <div class="pvp-room-bottom"><span>${finished ? icon('check') + tr('本局结果已保存', 'Duel result saved', '対戦結果を保存しました') : icon('clock') + tr('每人每局 60 秒重连额度 · 返回后继续当前选择', '60-second reconnection budget per duel · resume your decision', '各対戦で合計60秒間の再接続が可能です')}</span>${playing ? `<button class="pvp-text-button danger" data-pvp-action="surrender">${tr('认输', 'Surrender', 'サレンダー')}</button>` : leaveRoomButton()}</div>`;
+      <div class="pvp-room-bottom"><span>${finished ? icon('check') + tr('本局结果已保存', 'Duel result saved', '対戦結果を保存しました') : icon('clock') + tr('每人每场 60 秒重连额度 · 返回后继续当前选择', '60-second reconnection budget per match · resume your decision', '各マッチで合計60秒間の再接続が可能です')}</span>${playing ? `<button class="pvp-text-button danger" data-pvp-action="surrender">${tr('认输', 'Surrender', 'サレンダー')}</button>` : leaveRoomButton()}</div>`;
     }
     function resultTitle() { return room.result?.winner === 'draw' ? tr('决斗平局', 'A draw', '引き分け') : room.result?.winner === room.you ? tr('决斗胜利', 'Victory is yours', 'あなたの勝利') : tr('本局告负', 'Defeat this time', '今回の敗北'); }
     function resultReason() {
@@ -165,14 +169,15 @@
     function updateLobby() {
       const node = screen.querySelector('#pvp-public-list');
       if (node) {
-        node.innerHTML = lobby.rooms.length ? lobby.rooms.map(r => `<article class="pvp-public-room"><div class="pvp-room-glyph">${icon('swords')}</div><div class="pvp-public-info"><strong data-user-content>${esc(r.title)}</strong><span data-user-content>${esc(r.host)} <i>·</i> ${r.clockSeconds / 60} ${tr('分钟', 'MIN', '分')} + 20s</span></div><span class="pvp-open-seat"><i></i> 1 / 2</span><button class="pvp-button" data-pvp-action="join" data-code="${r.code}"${queued ? ' disabled' : ''}>${tr('入座', 'Join', '参加')} ↗</button></article>`).join('') : `<div class="pvp-empty-rooms"><span>${icon('swords')}</span><div><strong>${connection.connected ? tr('第一张战书，由你发出。', 'Be the first to issue a challenge.', '最初の挑戦状を出そう。') : tr('正在寻找决斗房间…', 'Finding duel rooms…', '対戦ルームを探しています…')}</strong><p>${tr('创建公开房间，等待一位对手；也可以快速匹配。', 'Create a public room or try quick match.', '公開ルームを作成するか、クイックマッチをご利用ください。')}</p></div></div>`;
+        node.innerHTML = lobby.rooms.length ? lobby.rooms.map(r => `<article class="pvp-public-room"><div class="pvp-room-glyph">${icon('swords')}</div><div class="pvp-public-info"><strong data-user-content>${esc(r.title)}</strong><span data-user-content>${esc(r.host)} <i>·</i> ${(r.matchFormat||'bo1').toUpperCase()} <i>·</i> ${r.clockSeconds / 60} ${tr('分钟', 'MIN', '分')} + 20s</span></div><span class="pvp-open-seat"><i></i> 1 / 2</span><button class="pvp-button" data-pvp-action="join" data-code="${r.code}"${queued ? ' disabled' : ''}>${tr('入座', 'Join', '参加')} ↗</button></article>`).join('') : `<div class="pvp-empty-rooms"><span>${icon('swords')}</span><div><strong>${connection.connected ? tr('第一张战书，由你发出。', 'Be the first to issue a challenge.', '最初の挑戦状を出そう。') : tr('正在寻找决斗房间…', 'Finding duel rooms…', '対戦ルームを探しています…')}</strong><p>${tr('创建公开房间，等待一位对手；也可以快速匹配。', 'Create a public room or try quick match.', '公開ルームを作成するか、クイックマッチをご利用ください。')}</p></div></div>`;
         screen.querySelector('#pvp-room-count').textContent = lobby.rooms.length;
       }
     }
     function updateQueue() {
+      if(!room&&!screen.querySelector('#pvp-format')){const el=screen.querySelector('.pvp-preparation');if(el)el.insertAdjacentHTML('beforeend','<label>'+tr('赛制','Match format','対戦形式')+'<select id="pvp-format"><option value="bo1">BO1</option><option value="bo3">BO3</option></select></label>');if(screen.querySelector('#pvp-format'))screen.querySelector('#pvp-format').value=matchFormat;}
       const node = screen.querySelector('#pvp-quick-row'); if (!node) return;
       node.innerHTML = queued ? `<div class="pvp-matching"><i></i><div><strong>${tr('正在寻找对手', 'Finding your opponent', '対戦相手を検索中')}</strong><span id="pvp-queue-time">00:00</span></div></div><button class="pvp-button" data-pvp-action="cancel-queue">${tr('取消匹配', 'Cancel', 'キャンセル')}</button>` : `<div><strong>${tr('让下一位对手，成为惊喜。', 'Meet your next rival.', '次のライバルと出会おう。')}</strong><span>${tr('快速匹配 · 5 分钟 + 每回合 20 秒', 'Quick match · 5 minutes + 20s per turn', 'クイックマッチ・5分＋毎ターン20秒')}</span></div><button class="pvp-button pvp-primary" data-pvp-action="quick">${icon('bolt')}${tr('快速匹配', 'Quick match', 'クイックマッチ')}</button>`;
-      for (const id of ['pvp-name', 'pvp-deck']) { const input = screen.querySelector('#' + id); if (input) input.disabled = queued; }
+      for (const id of ['pvp-name', 'pvp-deck','pvp-format']) { const input = screen.querySelector('#' + id); if (input) input.disabled = queued; }
     }
     function updateStatus() {
       const text = connection.status==='unavailable'?tr('未连接到联机服务','SERVER UNAVAILABLE','サーバーに接続できません'):connection.connected ? tr('联机服务已连接', 'CONNECTED', '接続済み') : connection.status === 'replaced' ? tr('席位已在另一页面打开', 'OPEN IN ANOTHER TAB', '別のタブで接続されています') : connection.status === 'reconnecting' ? tr('连接中断，正在重连', 'RECONNECTING', '再接続中') : tr('正在连接联机服务', 'CONNECTING', '接続中');
@@ -186,11 +191,12 @@
     function renderBar() {
       bar.hidden = !remote;
       if (!remote || !room) return;
-      bar.innerHTML = `<button class="pvp-back-room" data-pvp-action="room">← <span>${tr('联机房间', 'Room', 'ルーム')}</span><b>${room.code}</b></button><div class="pvp-board-clocks">${[room.you, 1 - room.you].map((seat, i) => `<div class="pvp-board-clock ${i ? 'rival' : 'self'}"><small>${i ? 'OPP' : 'YOU'}</small><b data-pvp-clock="${seat}">05:00</b></div>`).join('')}</div><span class="pvp-board-status"><i class="pvp-status-dot"></i><span class="pvp-connection-label"></span><small class="pvp-latency">— ms</small></span><button class="pvp-board-surrender${peerNotice() ? ' has-invitation' : ''}" data-pvp-action="${room.status === 'finished' ? 'result' : 'surrender'}">${room.status === 'finished' ? peerNotice() ? tr('再战邀请', 'Rematch', '再戦招待') : tr('结果', 'Result', '結果') : tr('认输', 'Surrender', 'サレンダー')}</button><div class="pvp-room-network pvp-board-network" role="status" hidden></div>`;
+      bar.innerHTML = `<button class="pvp-back-room" data-pvp-action="room">← <span>${tr('联机房间', 'Room', 'ルーム')}</span><b>${room.code} · ${room.match?.score.join(' : ')||'0 : 0'}</b></button><div class="pvp-board-clocks">${[room.you, 1 - room.you].map((seat, i) => `<div class="pvp-board-clock ${i ? 'rival' : 'self'}"><small>${i ? 'OPP' : 'YOU'}</small><b data-pvp-clock="${seat}">05:00</b></div>`).join('')}</div><span class="pvp-board-status"><i class="pvp-status-dot"></i><span class="pvp-connection-label"></span><small class="pvp-latency">— ms</small></span><button class="pvp-board-surrender${peerNotice() ? ' has-invitation' : ''}" data-pvp-action="${room.status === 'finished' ? 'result' : 'surrender'}">${room.status === 'finished' ? peerNotice() ? tr('再战邀请', 'Rematch', '再戦招待') : tr('结果', 'Result', '結果') : tr('认输', 'Surrender', 'サレンダー')}</button><div class="pvp-room-network pvp-board-network" role="status" hidden></div>`;
     }
     function updateClocks() {
       const q = screen.querySelector('#pvp-queue-time'); if (q) q.textContent = formatTime(Date.now() - queueAt);
       if (!room) return;
+      for(const el of document.querySelectorAll('[data-match-clock]'))if(room.status==='intermission')el.textContent=tr('剩余 ','Remaining ','残り ')+formatTime((room.clock.intermissionMs||0)-(room.clock.paused?0:Date.now()-clockAt));
       const clock = room.clock, paused = !connection.connected || clock.paused;
       for (const node of document.querySelectorAll('[data-pvp-clock]')) {
         const seat = Number(node.dataset.pvpClock), running = !paused && room.status === 'playing' && clock.actor === seat;
@@ -198,7 +204,7 @@
         node.textContent = formatTime(ms); node.classList.toggle('running', running); node.classList.toggle('low', ms < 30_000);
       }
       for (const node of document.querySelectorAll('.pvp-room-network')) {
-        node.hidden = room.status !== 'playing' || !paused;
+        node.hidden = !['playing','intermission'].includes(room.status) || !paused;
         if (node.hidden) continue;
         const deadline = clock.reconnectUntil.filter(Boolean).sort((a, b) => a - b)[0];
         const seconds = deadline ? Math.max(0, Math.ceil((deadline - clock.serverTime - (Date.now() - clockAt)) / 1000)) : 60;
@@ -207,6 +213,7 @@
       document.body.classList.toggle('pvp-input-locked', !!remote && (paused || remote.busy));
     }
     function showResult() {
+      if(room?.match?.format==='bo3'){showMatch();return;}
       if (!room?.result) return;
       const win = room.result.winner === room.you;
       bridge.modal('result', resultTitle(), room.result.winner === 'draw' ? 'A DUEL TO REMEMBER' : win ? 'VICTORY IS YOURS' : 'THE NEXT DUEL AWAITS',
@@ -218,6 +225,31 @@
         `<p class="modal-lead">${tr('认输后，对手将获得本局胜利。', 'Surrendering awards this duel to your opponent.', 'サレンダーすると相手の勝利になります。')}</p>`,
         `<button class="secondary-button" data-action="close-modal">${tr('继续决斗', 'Keep playing', '対戦を続ける')}</button><button class="primary-button" data-pvp-action="confirm-surrender">${tr('确认认输', 'Surrender', 'サレンダーする')}</button>`);
     }
+
+    function showMatch(){
+      if(!room?.match)return;
+      const m=room.match;
+      bridge.modal('match',MUI.title(m),m.format.toUpperCase(),MUI.panel(m,'pvp-match-'),
+        '<button class="secondary-button" data-pvp-action="room">'+tr('返回房间','Return to room','ルームへ')+'</button><button class="secondary-button" data-action="log">'+tr('本局记录','Game journal','この局の記録')+'</button>'+
+        (m.phase!=='finished'?'<button class="secondary-button" data-action="pvp-match-abandon">'+tr('放弃整场','Concede match','マッチを投了')+'</button>':leaveRoomButton()));
+      updateClocks();
+    }
+    function showSiding(){
+      if(room?.match?.phase!=='siding'||!room.siding)return;
+      const roundId=room.match.round.id,matchId=room.match.id,key='duel-pvp-side:'+roundId;let draft;
+      try{draft=JSON.parse(sessionStorage.getItem(key)||'null');if(draft&&!root.DuelDeckEditor.check(draft,room.siding.registered).valid)draft=null;}catch{}
+      bridge.siding({roundId,baseline:room.siding.baseline,registered:room.siding.registered,draft:room.match.round.ready[0]?room.siding.deck:draft||room.siding.deck,locked:room.match.round.ready[0],
+        change:d=>{try{sessionStorage.setItem(key,JSON.stringify(d));}catch{}},
+        submit:async d=>{await connection.request('match-side',{matchId,roundId,deck:d});try{sessionStorage.removeItem(key);}catch{}if(room.status==='intermission')showMatch();}});
+    }
+    document.addEventListener('click',event=>{
+      const b=event.target.closest('[data-action^="pvp-match-"]');if(!b||b.disabled)return;
+      const action=b.dataset.action;
+      if(action==='pvp-match-side'){showSiding();return;}
+      if(action==='pvp-match-abandon'){bridge.modal('match-confirm',tr('放弃整场比赛？','Concede this match?','マッチを投了しますか？'),'CONCEDE MATCH','<p>'+tr('对手获得整场胜利，保留实际比分。','Opponent wins the match; actual score is retained.','相手のマッチ勝利になります。実際のスコアを保持します。')+'</p>','<button class="secondary-button" data-action="close-modal">'+tr('取消','Cancel','キャンセル')+'</button><button class="primary-button" data-action="pvp-match-confirm">'+tr('确认弃权','Concede','投了する')+'</button>');return;}
+      run(async()=>{if(action==='pvp-match-journal'){const data=await connection.request('match-journal',{matchId:room.match.id,gameId:b.dataset.gameId});bridge.modal('match-journal',tr('单局记录','Game journal','デュエル記録'),'MATCH JOURNAL','<div class="match-journal">'+data.log.map(item=>'<p>'+esc(root.DuelI18n.logEntry(item,remote).text)+'</p>').join('')+'</div>','<button class="secondary-button" data-action="close-modal">'+tr('返回','Back','戻る')+'</button>');}if(action==='pvp-match-first')await connection.request('match-first',{matchId:room.match.id,roundId:room.match.round.id,first:Number(b.dataset.value)===0?room.you:1-room.you});if(action==='pvp-match-confirm')await connection.request('match-abandon',{matchId:room.match.id});});
+    });
+
     async function copy(value) {
       try { await navigator.clipboard.writeText(value); }
       catch { const input = document.createElement('textarea'); input.value = value; input.style.cssText = 'position:fixed;left:-9999px'; document.body.append(input); input.select(); const ok = document.execCommand('copy'); input.remove(); if (!ok) throw { message: tr('无法自动复制，请手动复制房间码：', 'Copy the room code manually: ', 'コードを手動でコピーしてください：') + room.code }; }
@@ -230,7 +262,7 @@
       if (action === 'room') { bridge.show(); return; }
       if (action === 'board') { bridge.board(); return; }
       if (action === 'result') { showResult(); return; }
-      if (action === 'surrender') { confirmSurrender(); return; }
+      if (action === 'surrender') {if(room.status==='intermission')showMatch();else confirmSurrender(); return; }
       if (action === 'reconnect') { connection.reset(); return; }
       if (action === 'open-server') {
         try { const url = new URL(screen.querySelector('#pvp-server-url').value); if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw Error(); url.hash = 'pvp'; root.location.assign(url.href); }
@@ -239,20 +271,21 @@
       }
       run(async () => {
         lastError = ''; const errorNode = screen.querySelector('#pvp-error'); if (errorNode) errorNode.hidden = true;
-        if (action === 'quick') { await identity(); await connection.request('queue', { deck: deckInput() }); }
+        if (action === 'quick') { await identity(); await connection.request('queue', { deck: deckInput(), matchFormat }); }
         if (action === 'cancel-queue') await connection.request('cancel-queue');
-        if (action === 'create') { await identity(); await connection.request('create', { title: screen.querySelector('#pvp-room-title').value, visibility: screen.querySelector('#pvp-visibility').value, ruleMode:screen.querySelector('#pvp-rule-mode').value, clockSeconds }); }
+        if (action === 'create') { await identity(); await connection.request('create', { title: screen.querySelector('#pvp-room-title').value, visibility: screen.querySelector('#pvp-visibility').value, ruleMode:screen.querySelector('#pvp-rule-mode').value, clockSeconds, matchFormat }); }
         if (action === 'join') { await identity(); await connection.request('join', { code: button.dataset.code }); }
         if (action === 'refresh') await connection.request('list');
         if (action === 'ready') await connection.request('ready', { ready: !room.seats[room.you].ready, deck: deckInput() });
         if (action === 'leave') await connection.request('leave');
         if (action === 'rematch') await connection.request('rematch');
-        if (action === 'confirm-surrender') { bridge.dismiss(); await connection.request('surrender'); }
+        if (action === 'confirm-surrender') { bridge.dismiss(); await connection.request('surrender',{gameId:room.gameId}); }
         if (action === 'copy-code') await copy(room.code);
         if (action === 'copy-link') { const url = new URL(root.location.href); url.search = ''; url.hash = 'pvp/' + room.code; await copy(url.href); }
       });
     });
     screen.addEventListener('change', event => {
+      if(event.target.id==='pvp-format')matchFormat=event.target.value;
       if (event.target.matches('[data-pvp-deck]')) {
         selected = event.target.value; remember(); const preview = screen.querySelector('#pvp-deck-preview'); if (preview) { preview.innerHTML = artPreview(); root.DuelArt.refresh(preview); }
       }
@@ -269,8 +302,8 @@
       show() { shown = true; render(); if (!connection.connected && !connection.stopped) connection.connect(nickname); },
       hide() { shown = false; },
       get room() { return room; }, get connected() { return connection.connected; }, get connection() { return connection; },
-      get active() { return room?.status === 'playing'; },
-      showResult, updateClocks
+      get active() { return ['playing','intermission'].includes(room?.status); },
+      showResult, showMatch, updateClocks
     };
   }
   root.DuelPVP = { create };

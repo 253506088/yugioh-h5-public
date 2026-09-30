@@ -46,7 +46,7 @@ export async function createPvpServer(options = {}) {
       if (!['GET', 'HEAD'].includes(request.method)) { response.writeHead(405, { ...headers, Allow: 'GET, HEAD' }); response.end(); return; }
       const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
       if (pathname === '/api/health' || pathname === '/api/pvp/info') {
-        const body = JSON.stringify({ ok: service.healthy, service: 'duel-sanctuary-pvp', protocol: PROTOCOL, mode: 'best-of-one',
+        const body = JSON.stringify({ ok: service.healthy, service: 'duel-sanctuary-pvp', protocol: PROTOCOL, mode: 'matches', formats:['bo1','bo3'], sidingSeconds:120, choosingSeconds:30,
           online: service.connections.size, rooms: service.rooms.size, disconnectSeconds: service.disconnectMs / 1000, clockSeconds: [180, 300, 600], incrementSeconds: 20 });
         response.writeHead(service.healthy ? 200 : 503, { ...headers, 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
         response.end(request.method === 'HEAD' ? undefined : body); return;

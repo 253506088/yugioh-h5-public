@@ -7,6 +7,8 @@ export class Store {
   constructor(filename) {
     if (filename !== ':memory:') mkdirSync(dirname(filename), { recursive: true, mode: 0o700 });
     this.db = new DatabaseSync(filename);
+    const version=this.db.prepare('PRAGMA user_version').get().user_version;
+    if(version>2)throw new Error('Unsupported future database version');
     this.db.exec(`
       PRAGMA journal_mode = WAL;
       PRAGMA synchronous = FULL;
@@ -20,7 +22,7 @@ export class Store {
       CREATE TABLE IF NOT EXISTS games (
         id TEXT PRIMARY KEY, finished_at INTEGER NOT NULL, data TEXT NOT NULL
       );
-      PRAGMA user_version = 1;
+      PRAGMA user_version = 2;
     `);
     this.writeSession = this.db.prepare('INSERT OR REPLACE INTO sessions VALUES (?, ?, ?)');
     this.writeRoom = this.db.prepare('INSERT OR REPLACE INTO rooms VALUES (?, ?)');
@@ -48,6 +50,8 @@ export class Store {
       throw error;
     }
   }
+
+  game(id) {const row=this.db.prepare('SELECT data FROM games WHERE id = ?').get(id);return row?JSON.parse(row.data):null;}
 
   pruneGames(before) {
     this.db.prepare('DELETE FROM games WHERE finished_at < ?').run(before);

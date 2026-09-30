@@ -1,0 +1,135 @@
+{
+  "decks": [
+    {
+      "id": "blackwing-2009",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "cat-gladiator-2009",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "cat-synchro-2009",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "frog-ftk-2010",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "blackwing-2010",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "herald-2010",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "agents-2011",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "junk-doppel-2011",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "six-samurai-2011",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "inzektor-2012",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "wind-up-2012",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "mermail-atlantean-2012",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "dragon-ruler-2013",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "spellbook-2013",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "evilswarm-2013",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "fire-fist-2013",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "bujin-2013",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "shaddoll-2014",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "qliphort-2014",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "nekroz-2014",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "tellarknight-2015",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "nekroz-2015",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "performapal-performage-2015",
+      "available": 0,
+      "source": 0
+    },
+    {
+      "id": "blue-eyes-2016",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "majespecter-2016",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "zoodiac-2016",
+      "available": 15,
+      "source": 15
+    }
+  ],
+  "excluded": []
+}
