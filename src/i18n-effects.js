@@ -3,6 +3,12 @@
  'use strict';
  const ui=root.DuelUITranslations||(typeof require==='function'?require('./i18n-data.js'):null);
  const rows=[
+ ['除外墓地场地：复制卡名与效果至回合结束','Banish a Field Spell from GY: copy its name and effects this turn','墓地のフィールド魔法を除外：このターン名前と効果をコピー'],
+ ['支付1000 LP：抽1张卡','Pay 1000 LP: draw 1 card','1000 LPを払い1枚ドロー'],
+ ['支付1000 LP：破坏此卡','Pay 1000 LP: destroy this card','1000 LPを払いこのカードを破壊'],
+ ['支付1000 LP：对方回复1000 LP','Pay 1000 LP: opponent gains 1000 LP','1000 LPを払い相手は1000 LP回復'],
+ ['对方的里侧怪兽','Opponent’s face-down monster','相手の裏側モンスター'],
+ ['对方的里侧魔法／陷阱','Opponent’s face-down Spell/Trap','相手の裏側魔法・罠'],
  ['移除3个魔力，呼唤黑魔术师','Tribute this card with 3 Spell Counters to summon Dark Magician','魔力カウンター3個を持つ自身をリリースしブラック・マジシャンを特殊召喚'],
  ['移除指示物，破坏魔法／陷阱','Remove a counter to destroy a Spell/Trap','カウンターを取り除き魔法・罠を破壊'],
  ['移除楔指示物，使对方攻守归零','Remove Wedge Counters to reduce opponent ATK/DEF to 0','楔カウンターを取り除き相手の攻守を0にする'],
@@ -227,6 +233,32 @@
  ['同盟解除 · 变回怪兽','Unequip this Union and Special Summon it as a monster','ユニオン解除・モンスターに戻る']
  ];
  Object.assign(ui.messages,Object.fromEntries(rows.map(([zh,en,ja])=>[zh,{en,ja}])));
+ // Captions for choices whose historical registration used only the card name.
+ // These describe the actual branch, rather than guessing a printed effect number.
+ ui.effectActions={
+  'Flint Lock':{'gx-effect':['将燧发装到自身','Equip Flint to this card','フリントを自身に装備'],'pass-flint':['将燧发转装给另一怪兽','Move Flint to another monster','フリントを別のモンスターに装備']},
+  'Cyber Valley':{'escape':['除外自身：抽1张并结束战斗阶段','Banish this card: draw 1 and end Battle Phase','自身を除外：1枚ドローしてバトル終了'],'gx-effect':['除外自身与另一怪兽：抽2张','Banish this and another monster: draw 2','自身と他のモンスターを除外：2枚ドロー'],'recover':['除外自身与手牌：墓地卡回卡组顶','Banish this and a hand card: GY card to Deck top','自身と手札を除外：墓地のカードをデッキトップへ']},
+  'Rainbow Neos':{'monsters':['送墓己方怪兽：对方怪兽全部回卡组','Send your monster: shuffle all opposing monsters into Deck','自分のモンスターを送り相手モンスターを全てデッキへ'],'spells':['送墓己方魔陷：对方魔陷全部回卡组','Send your Spell/Trap: shuffle all opposing Spells/Traps into Deck','自分の魔法・罠を送り相手の魔法・罠を全てデッキへ'],'grave':['卡组顶送墓：对方墓地全部回卡组','Mill your top card: shuffle opponent’s GY into Deck','デッキトップを送り相手の墓地を全てデッキへ']},
+  'Shutendoji':{'gx-effect':['除外墓地2只不死族：抽1张','Banish 2 Zombies from GY: draw 1','墓地のアンデット2体を除外：1枚ドロー'],'top':['除外的不死族回卡组顶','Return a banished Zombie to Deck top','除外されたアンデットをデッキトップへ']},
+  'Meklord Emperor Skiel':{'era-effect':['吸收对方同调怪兽作为装备','Absorb an opposing Synchro as equipment','相手のシンクロを吸収して装備'],'era-direct':['送墓装备怪兽：本回合直接攻击','Send equipped monster: attack directly this turn','装備モンスターを送る：このターン直接攻撃']},
+  'Symphonic Warrior Piaano':{'era-monsters':['场上效果：改变怪兽种族','Field effect: change monster Type','フィールド効果：種族変更'],'era-grave':['墓地除外自身：改变怪兽种族','Banish from GY: change monster Type','墓地から自身を除外：種族変更']},
+  'Symphonic Warrior Drumss':{'era-monsters':['场上效果：改变怪兽属性','Field effect: change Attribute','フィールド効果：属性変更'],'era-grave':['墓地除外自身：改变怪兽属性','Banish from GY: change Attribute','墓地から自身を除外：属性変更']},
+  'Symphonic Warrior Basses':{'era-monsters':['场上效果：按手牌数提升等级','Field effect: raise Level by hand size','フィールド効果：手札枚数分レベルアップ'],'era-grave':['墓地除外自身：按手牌数提升等级','Banish from GY: raise Level by hand size','墓地から自身を除外：手札枚数分レベルアップ']},
+  'Splendid Rose':{'era-effect':['对方怪兽攻击力减半','Halve an opposing monster’s ATK','相手モンスターの攻撃力を半分に'],'era-second':['自身攻击力减半：追加攻击','Halve own ATK: attack again','自身の攻撃力を半分にして追加攻撃']},
+  'Gem-Elephant':{'era-effect':['自身返回手牌','Return this card to hand','自身を手札に戻す'],'era-defense':['守备力上升1000','Gain 1000 DEF','守備力1000アップ']},
+  'Constellar Kaus':{'era-up':['等级上升1','Raise Level by 1','レベルを1上げる'],'era-down':['等级下降1','Lower Level by 1','レベルを1下げる']},
+  'Wind-Up Shark':{'era-up':['自身等级上升1','Raise own Level by 1','自身のレベルを1上げる'],'era-down':['自身等级下降1','Lower own Level by 1','自身のレベルを1下げる']},
+  'Evilswarm Ouroboros':{'era-hand':['随机丢弃对方1张手牌','Discard 1 random opponent hand card','相手の手札をランダムに1枚捨てる'],'era-grave':['除外对方墓地1张卡','Banish 1 card from opponent’s GY','相手の墓地のカード1枚を除外']},
+  'ZW - Leo Arms':{'era-effect':['检索ZW怪兽','Search a ZW monster','ZWモンスターをサーチ'],'era-second':['装备对象追加攻击','Equipped monster attacks again','装備モンスターが追加攻撃']},
+  'Alsei, the Sylvan High Protector':{'era-alsei':['宣言卡名并翻开卡组顶','Declare a card and excavate Deck top','カード名を宣言してデッキトップをめくる'],'era-alsei-place':['选择卡片放回卡组顶','Place a selected card on Deck top','選んだカードをデッキトップへ']},
+  'Hieratic Seal From the Ashes':{'era-seal-opp':['对方回合：卡组圣刻送墓','Opponent’s turn: send Hieratic from Deck to GY','相手ターン：デッキの聖刻を墓地へ'],'era-seal-own':['自己回合：除外圣刻返回墓地','Your turn: return banished Hieratic to GY','自分ターン：除外された聖刻を墓地へ']},
+  'Performapal Turn Toad':{'era2014-p-swap':['灵摆效果：交换攻守','Pendulum effect: swap ATK/DEF','P効果：攻守を入れ替える'],'era2014-m-swap':['怪兽效果：改变表示并交换攻守','Monster effect: change position and swap ATK/DEF','モンスター効果：表示形式と攻守を変更']},
+  'Artifact Durendal':{'era2014-rewrite':['将连锁效果改为破坏魔陷','Rewrite the Chain effect to destroy a Spell/Trap','チェーン効果を魔法・罠の破壊に書き換える'],'era2014-refresh':['双方手牌回卡组后重新抽卡','Both players shuffle hands back and redraw','双方の手札をデッキに戻して引き直す']},
+  'Gagaga Samurai':{'era2014-second':['赋予追加攻击','Grant another attack','追加攻撃を与える'],'era2014-cover':['变为守备并代替承受攻击','Change to Defense and redirect attack here','守備表示にして攻撃を引き受ける']},
+  'Performage Mirror Conductor':{'y15-scale-stat':['灵摆效果：攻守变为较低值','Pendulum effect: set ATK/DEF to the lower value','P効果：攻守を低い方の数値にする'],'y15-swap':['交换目标攻守，自己受到500伤害','Swap target ATK/DEF; take 500 damage','対象の攻守を入れ替え、自分に500ダメージ']},
+  'Dark Contract with the Yamimakai':{'y15-grave':['从墓地设置灵摆刻度','Place a Pendulum Scale from GY','墓地からPスケールを置く'],'y15-extra':['从额外卡组设置灵摆刻度','Place a Pendulum Scale from Extra Deck','EXデッキからPスケールを置く']},
+  'Superheavy Samurai Blowtorch':{'y15-hand':['手牌发动：改变攻击对象','Hand effect: redirect the attack','手札効果：攻撃対象を変更'],'y15-redirect':['场上发动：自身成为攻击对象','Field effect: take the attack','フィールド効果：自身が攻撃対象になる']}
+ };
  ui.effectLabels=true;
  if(typeof module!=='undefined')module.exports=ui;
 })(globalThis);

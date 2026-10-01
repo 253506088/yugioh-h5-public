@@ -82,6 +82,7 @@
   const at=language=>language==='en'?1:language==='ja'?2:0;
   const word=(key,language)=>(words[key]||[key,key,key])[at(language)];
   function category(entry){
+    if(entry.rule||entry.trace?.cause?.rule)return 'rule';
     if(['damage','heal','cost','lp-change'].includes(entry.kind)&&entry.amount!==undefined)return 'lp';
     if(['summon','special','fusion','synchro','xyz','link','ritual','pendulum'].includes(entry.kind))return 'summon';
     if(['move','destroy','discard','mill','search','draw','overlay','return','equip','control'].includes(entry.kind))return 'move';
@@ -94,6 +95,7 @@
     const result={text:fallback,cause:'',change:'',category:category(entry),phase:tr?.phase||'',cards:[]};
     if(!tr)return result;
     const actor=names[entry.owner]||'',c=tr.cause;
+    if(c?.rule&&root.DuelRuleModes)result.cause=root.DuelRuleModes.name(c.rule,language)+' · '+root.DuelRuleModes.summary(c.rule,language);
     const canSee=c=>!!c&&(c.public!==false||allVisible||c.owner===0);
     const name=c=>canSee(c)&&c.cardId?'「'+cardName(c.cardId)+'」':t('未公开卡片','an unrevealed card','非公開のカード');
     const affected=tr.card|| (entry.cardId?{cardId:entry.cardId,owner:entry.owner,public:true}:null);

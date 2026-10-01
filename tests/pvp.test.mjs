@@ -67,11 +67,19 @@ test('Fate rooms draw once on the server, share the rule and keep it through sto
   assert.equal(restored.rooms.get(room.code).ruleMode,'random');
 });
 test('Fate rule actions and Blood Offering are authoritative; no mode injection or lost LP on invalid requests',t=>{
-  const s=setup(t);assert.equal(s.send(s.clients[0],'create',{ruleMode:'bloodpact'},false).code,'RULE_MODE');
+  const s=setup(t);assert.equal(s.send(s.clients[0],'create',{ruleMode:'not-a-rule'},false).code,'RULE_MODE');
   const room=s.start(),e=fixture(room);globalThis.DuelRuleModes.install(e,'bloodpact');
   const m=put(e,0,'hand','Blue-Eyes White Dragon'),frame=s.service.frame(room,0),view=frame.data.actions.find(a=>a.bloodPact&&a.mode==='attack');
   assert.ok(view);s.act(room,0,view);assert.equal(e.state.players[0].lp,5600);assert.equal(e.find(m.uid).zone,'monsters');
   const b=fixture(room);globalThis.DuelRuleModes.install(b,'bitter');s.service.frame(room,0);s.act(room,0,{type:'rule-action',key:'bitter'});assert.equal(b.state.players[0].lp,4000);
+});
+
+test('selected Fate rooms retain the choice and project roulette dice with relative player seats',t=>{
+ const s=setup(t),created=s.send(s.clients[0],'create',{ruleMode:'roulette2'});
+ s.send(s.clients[1],'join',{code:created.data.code});s.send(s.clients[0],'ready',{ready:true,deck:{preset:'blue'}});s.send(s.clients[1],'ready',{ready:true,deck:{preset:'dark'}});
+ const room=s.service.rooms.get(created.data.code),roll=room.engine.state.ruleMode.lastRoll;
+ assert.equal(room.ruleMode,'roulette2');assert.equal(room.engine.state.ruleMode.source,'chosen');
+ for(const viewer of [0,1]){const view=project(room,viewer).data.state;assert.equal(view.ruleMode.lastRoll.roll,roll.roll);assert.equal(view.ruleMode.lastRoll.owner,roll.owner===viewer?0:1);assert.ok(view.players[1].hand.every(m=>m.hidden&&!m.id));}
 });
 
 test('room lifecycle: two verified decks, mutual readiness, 8000 LP, five-card opening and one game', t => {

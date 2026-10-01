@@ -32,7 +32,7 @@
   const journal=window.DuelLogUI.create({engine:()=>engine,names:()=>tournamentView?.names||[I.player(0,engine),I.player(1,engine)],open:openModal,card:showCardDetail});
   const spectate = { paused: false };
   const spectating = () => engine?.state.mode === 'spectate';
-  const fate=window.DuelRuleUI.create({engine:()=>engine,open:openModal,spectating,reducedMotion:()=>prefs.reducedMotion,attacking:()=>intent?.kind==='attack'?intent.uid:null});
+  const fate=window.DuelRuleUI.create({engine:()=>engine,open:openModal,spectating,reducedMotion:()=>prefs.reducedMotion,attacking:()=>intent?.kind==='attack'?intent.uid:null,resume:()=>scheduleAI()});
   const robotName = owner => tournamentView?.names[owner] || (owner === 0 ? '机器人 A' : '机器人 B');
   const workshop = window.DuelWorkshop.create({ aiImport:()=>aiImport.show(),open:(...args)=>openModal(...args),toast:(...args)=>showToast(...args),getPageSize:()=>prefs.workshopPageSize,setPageSize:value=>{prefs.workshopPageSize=Experience.pageSize(value);updatePrefs();},play:id=>{setupOptions={deck:id,opponentDeck:engine?.state.players[1].deckId||'blackwing',first:0,difficulty:'standard',mode:'duel'};renderNewGame();} });
   const aiImport = window.DuelAIImport.create({open:openModal,back:backModal,workshop:()=>workshop.show(),load:deck=>workshop.importDraft(deck),settings:showSettings});
@@ -515,7 +515,7 @@
     return ok;
   }
   function scheduleAI() {
-    clearTimeout(aiTimer);if(!engine||tournamentView||engine.state.winner!==null||intent||currentScreen!=='duel'||chainDirector.busy)return;
+    clearTimeout(aiTimer);if(!engine||tournamentView||engine.state.winner!==null||intent||currentScreen!=='duel'||chainDirector.busy||fate.busy)return;
     if(onlineLocked())return;
     const s=engine.state;
     if(spectating()){
@@ -569,7 +569,7 @@
     if(!invalid.length)return true;
     openModal('deck-check',MUI.tr('卡组不符合出战规则','Decks are not ready to play','デッキが対戦ルールを満たしていません'),'DECK CHECK',
       invalid.map(({d,id,seat,check})=>'<section class="deck-start-errors"><h3>'+MUI.tr(seat?'对手':'我方',seat?'Opponent':'You',seat?'相手':'自分')+' · <span data-user-content>'+escape(d?.name||id)+'</span></h3><ul>'+check.errors.map(error=>'<li>'+escape(I.text(error))+'</li>').join('')+'</ul></section>').join(''),
-      '<button class="primary-button" data-action="close-modal">'+MUI.tr('返回修改','Back to editing','戻って修正')+'</button>');
+      '<button class="secondary-button" data-action="close-modal">'+MUI.tr('返回上级','Back','戻る')+'</button>'+invalid.map(({id,seat})=>'<button class="primary-button" data-action="edit-invalid-deck" data-deck="'+escape(id)+'">'+MUI.tr('返回修改','Back to editing','戻って修正')+' · '+MUI.tr(seat?'对手':'我方',seat?'Opponent':'You',seat?'相手':'自分')+'</button>').join(''));
     return false;
   }
 
@@ -614,7 +614,7 @@
   }
   function showMatch(){
     if(engine.remote){pvp?.showResult();return;}if(!localMatch)return;
-    resultShown=true;const m=Match.publicView(localMatch),active=m.phase!=='finished';
+    resultShown=engine.state.winner!==null;const m=Match.publicView(localMatch),active=m.phase!=='finished';
     openModal('match',MUI.title(m),m.format.toUpperCase()+' · '+m.id.slice(0,8),MUI.panel(m)+(spectating()&&m.phase==='siding'?'<button class="primary-button" data-action="match-next">'+MUI.tr('继续下一局','Next game','次のデュエル')+'</button>':''),
       '<button class="secondary-button" data-action="close-modal">'+I.term('返回决斗')+'</button><button class="secondary-button" data-action="match-export">'+MUI.tr('导出比赛记录','Export match','マッチを出力')+'</button>'+(active?'<button class="secondary-button" data-action="match-abandon">'+MUI.tr('放弃整场','Concede match','マッチを投了')+'</button>':'<button class="secondary-button" data-action="match-save-deck">'+MUI.tr('当前构筑另存','Save current deck','現在のデッキを別名保存')+'</button><button class="primary-button" data-action="rematch">'+I.term('再来一场')+'</button>'));
   }
@@ -769,7 +769,7 @@
   function showNewGame() {
     if(engine?.remote){showPvp();return;}
     const own=engine?.state.players[0].deckId,rival=engine?.state.players[1].deckId,list=DeckTools.list();
-    setupOptions={deck:list.some(d=>d.id===own)?own:'hero',opponentDeck:list.some(d=>d.id===rival)?rival:'blackwing',first:0,difficulty:engine?.state.difficulty||'standard',mode:spectating()?'spectate':'duel',ruleMode:engine?.state.ruleMode?'random':'off'};renderNewGame();
+    setupOptions={deck:list.some(d=>d.id===own)?own:'hero',opponentDeck:list.some(d=>d.id===rival)?rival:'blackwing',first:0,difficulty:engine?.state.difficulty||'standard',mode:spectating()?'spectate':'duel',ruleMode:engine?.state.ruleMode?.source==='chosen'?engine.state.ruleMode.id:engine?.state.ruleMode?'random':'off'};renderNewGame();
   }
   let setupDeckIndex = new Map();
   const normalizeDeckQuery = value => String(value || '').normalize('NFKC').toLowerCase().replace(/[·・—–_-]/g, ' ');
@@ -975,7 +975,8 @@
       writeStorage('duel-sanctuary-stats-v1', stats);
     }
     const token = aiEpoch;
-    animationTimers.push(setTimeout(() => { if (token === aiEpoch && !modal.open && !resultShown&&!chainDirector.busy&&currentScreen==='duel') showResult(); }, prefs.reducedMotion ? 100 : engine.state.winKind === 'exodia' ? 3400 : 1400));
+    const revealResult=()=>{if(token!==aiEpoch||resultShown||engine.state.winner===null)return;if(currentScreen!=='duel'||chainDirector.busy||modal.open&&!['pending','match'].includes(modalKind)){animationTimers.push(setTimeout(revealResult,250));return;}if(modal.open)dismissModal();showResult();};
+    animationTimers.push(setTimeout(revealResult,prefs.reducedMotion?100:engine.state.winKind==='exodia'?3400:1400));
   }
   function showSpectateResult() {
     const s = engine.state, draw = s.winner === 'draw', winner = draw ? null : s.winner;
@@ -1153,7 +1154,9 @@
       case 'rule-gallery':fate.show();break;
       case 'rule-details':fate.showDetail();break;
       case 'new-fate-game':if(engine?.remote){showPvp();break;}showNewGame();setupOptions.ruleMode='random';renderNewGame();break;
-      case 'choose-rule-mode':setupOptions.ruleMode=b.dataset.value==='random'?'random':'off';renderNewGame();break;
+      case 'edit-invalid-deck':workshop.show(b.dataset.deck);break;
+      case 'new-chosen-fate':if(engine?.remote){showPvp();break;}showNewGame();setupOptions.ruleMode=b.dataset.value;renderNewGame();break;
+      case 'choose-rule-mode':setupOptions.ruleMode=b.dataset.value;renderNewGame();break;
       case 'perform-rule':if(!spectating()){if(modalKind==='pending')dismissModal();dispatch({type:'rule-action',key:b.dataset.ruleKey});}break;
       case 'workshop':workshop.exitSiding();workshop.show();break;
       case 'edit-current-deck':workshop.show(engine.state.players[Number(b.dataset.owner)||0].deckId);break;
@@ -1200,7 +1203,7 @@
       case 'clear-deck-search':{const input=document.getElementById(b.dataset.input);input.value='';input.dispatchEvent(new Event('input',{bubbles:true}));input.focus({preventScroll:true});break;}
       case 'reset-deck-filters':setupOptions.query='';setupOptions.year='all';$('#setup-deck-search').value='';$('#setup-year').value='all';renderSetupRoster(true);$('#setup-deck-search').focus({preventScroll:true});break;
       case 'begin-game':if(setupOptions.mode==='spectate')beginSpectate(setupOptions);else startGame({...setupOptions,seed:Date.now()});break;
-      case 'rematch':{const base={matchFormat:localMatch?.format||'bo1',deck:engine.state.players[0].deckId,opponentDeck:engine.state.players[1].deckId,difficulty:engine.state.difficulty,ruleMode:engine.state.ruleMode?'random':'off'};if(spectating())beginSpectate(base);else startGame({...base,first:0,seed:Date.now()});break;}
+      case 'rematch':{const base={matchFormat:localMatch?.format||'bo1',deck:engine.state.players[0].deckId,opponentDeck:engine.state.players[1].deckId,difficulty:engine.state.difficulty,ruleMode:engine.state.ruleMode?.source==='chosen'?engine.state.ruleMode.id:engine.state.ruleMode?'random':'off'};if(spectating())beginSpectate(base);else startGame({...base,first:0,seed:Date.now()});break;}
       case 'spectate-toggle':spectateToggle();break;
       case 'spectate-step':spectateStep();break;
       case 'spectate-speed':prefs.speed=b.dataset.value==='fast'?'fast':'normal';updatePrefs();render();scheduleAI();break;

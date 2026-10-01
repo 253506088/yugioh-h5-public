@@ -129,7 +129,7 @@ export function project(room, viewer) {
     if (s.outcome?.sourceId) state.outcome.sourceId = s.outcome.sourceId;
   }
   const legal = s.winner === null ? e.allActions(viewer) : [];
-  if(s.ruleMode)state.ruleMode={id:s.ruleMode.id,version:1,source:s.ruleMode.source,players:[viewer,1-viewer].map(p=>pick(s.ruleMode.players?.[p],['plannedAt','planned','bitterTurn','vacuumAt','extraNormalTurn']))};
+  if(s.ruleMode)state.ruleMode={id:s.ruleMode.id,version:1,source:s.ruleMode.source,...(s.ruleMode.lastRoll?{lastRoll:{...s.ruleMode.lastRoll,owner:s.ruleMode.lastRoll.owner===viewer?0:1}}:{}),players:[viewer,1-viewer].map(p=>pick(s.ruleMode.players?.[p],['plannedAt','planned','bitterTurn','vacuumAt','extraNormalTurn']))};
   const actions = legal.map(a => ({ ...pick(a, ['type', 'key', 'label', 'icon', 'mode', 'noTribute', 'slot', 'bloodPact', 'cost']), ...(a.uid ? { uid: handle(a.uid) } : {}) }));
   const attackTargets = {};
   for (const a of legal.filter(a => a.type === 'attack')) {

@@ -95,3 +95,16 @@
 @media(max-width:700px){.match-banner{left:8px;right:8px;grid-template-columns:auto 1fr 1fr}.match-banner>span{display:none}}
 .match-score{font-size:36px;font-weight:700;letter-spacing:.14em;text-align:center;padding:12px}.match-history{width:100%;border-collapse:collapse}.match-history td,.match-history th{padding:8px;border-bottom:1px solid #374840;text-align:left}
 .match-actions{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.match-actions button{padding:12px}
+
+/* Stable dragging: the source keeps its space while the floating card follows the pointer. */
+.workshop-modal .ws-drag-source{opacity:.22}
+.workshop-modal [data-drag-zone]{user-select:none;-webkit-user-drag:none}
+.workshop-modal .playing-card{animation:none}
+.workshop-modal .ws-source{display:flex;gap:4px;flex-direction:column}
+.workshop-modal .ws-source input{width:100%;min-width:0}
+.workshop-modal .ws-advanced{font-size:12px;padding:5px 0}
+.workshop-modal .ws-facet-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;max-height:210px;overflow:auto}
+.workshop-modal .ws-facet-grid label{display:flex;flex-direction:column;gap:3px}
+.workshop-modal .ws-facet-grid input{width:100%;min-width:0;padding:5px}
+
+.workshop-modal .ws-facet-grid input{border:1px solid #455448;border-radius:5px;background:#172b25;color:#e4eadf;font:inherit;min-height:30px}.workshop-modal .ws-facet-grid{padding:5px 2px}

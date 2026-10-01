@@ -188,7 +188,7 @@ export class PvpService {
   createRoom(s, message, c) {
     need(this.rooms.size < this.maxRooms, 'CAPACITY', '当前房间已满，请稍后重试。');
     need([180, 300, 600].includes(message.clockSeconds ?? 300), 'CLOCK', '请选择 3、5 或 10 分钟思考时间。');
-    need(message.ruleMode===undefined||['off','random'].includes(message.ruleMode),'RULE_MODE','请选择经典规则或天命法则。');
+    need(message.ruleMode===undefined||(['off','random'].includes(message.ruleMode)||!!globalThis.DuelRuleModes?.get(message.ruleMode)),'RULE_MODE','请选择经典规则或天命法则。');
     need(!message.visibility || ['public', 'private'].includes(message.visibility), 'VISIBILITY', '房间类型无效。');
     need(message.matchFormat===undefined||['bo1','bo3'].includes(message.matchFormat),'FORMAT','赛制无效。');
     const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';

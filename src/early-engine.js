@@ -4,7 +4,7 @@
  if(P.earlyRulesLoaded)return;P.earlyRulesLoaded=true;
  const old={};
  function wrap(name,fn){old[name]=P[name];P[name]=fn;}
- const names=(e,name)=>[0,1].flatMap(p=>e.field(p)).filter(m=>(CARDS[m.id].officialName===name||CARDS[m.id].nameAlias===name)&&m.faceUp&&!m.summonPending&&(fieldMonster(e.find(m.uid)?.zone)?!e.negated(m):e.activeSpell(m)));
+ const names=(e,name)=>[0,1].flatMap(p=>e.field(p)).filter(m=>(CARDS[m.pseudoSpace?.id||m.id].officialName===name||CARDS[m.pseudoSpace?.id||m.id].nameAlias===name)&&m.faceUp&&!m.summonPending&&(fieldMonster(e.find(m.uid)?.zone)?!e.negated(m):e.activeSpell(m)));
  P.hasEarly=function(name,owner=null){return names(this,name).some(c=>owner===null||this.find(c.uid).owner===owner);};
  P.race=function(card){if(card.raceOverride)return card.raceOverride;const dna=names(this,'DNA Surgery').at(-1);if(dna&&card.faceUp&&fieldMonster(this.find(card.uid)?.zone))return dna.declaredRace||CARDS[card.id].race;const equip=this.activeEquip(card).find(c=>c.raceChange);return equip?.raceChange||CARDS[card.id].race;};
  P.canTribute=function(card,owner=this.state.active,kind='effect'){return !!card&&!CARDS[card.id].cannotTribute&&!(kind==='normal'&&CARDS[card.id].cannotTributeSummon)&&!this.hasEarly('Mask of Restrict')&&(this.find(card.uid)?.owner===owner||card.soulExchangeOwner===owner&&card.soulExchangeTurn===this.state.turn);};

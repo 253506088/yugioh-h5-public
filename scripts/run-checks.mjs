@@ -17,7 +17,7 @@ files.push('tests/audio-lifecycle.test.cjs');
 files.push('tests/rule-modes.test.cjs','tests/archetype-membership.test.cjs','tests/archetype-registry.test.cjs','tests/archetype-interactions.test.cjs');
 files.push(...['pendulum','engines','themes','expansion','final'].map(n=>'tests/chronicle-2015-'+n+'.test.cjs'));
 files.push(...['core','engines','support','abc','fusion','themes','kozmo'].map(n=>'tests/chronicle-2016-'+n+'.test.cjs'));
-files.push('tests/workshop-drag.test.cjs','tests/side-matches.test.cjs','tests/pvp-matches.test.mjs');
+files.push('tests/optimization-project.test.cjs','tests/workshop-drag.test.cjs','tests/side-matches.test.cjs','tests/pvp-matches.test.mjs');
 files.push('tests/card-link.test.mjs','tests/link-materials.test.cjs');
 files.push('tests/chronicle-2017.test.cjs','tests/chronicle-2017-interactions.test.cjs');
 const concurrency=process.env.DUEL_TEST_CONCURRENCY;

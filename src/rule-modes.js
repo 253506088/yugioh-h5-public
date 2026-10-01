@@ -137,6 +137,8 @@
        'A card sent to the Graveyard returns to its owner\'s Deck and is shuffled in during the End Phase once 3 turns have passed (Extra Deck cards return to the Extra Deck).',
        '墓地へ送られたカードは3ターン経過後のエンドフェイズに持ち主のデッキに戻りシャッフルされる（EXデッキのカードはEXデッキへ）。')}
   ];
+  const roulette=RULES.find(r=>r.id==='roulette');
+  RULES.push({...roulette,id:'roulette2',name:L('命运轮盘2','Wheel of Fate II','運命のルーレット2'),summary:L('每次进入主要阶段1或2时掷骰。','Roll at the start of each Main Phase 1 and 2.','メインフェイズ1・2の開始時に振る。'),detail:L('在主要阶段1和主要阶段2开始时各掷骰一次（包含先攻第一回合，跳过的阶段不掷骰）。其余结果同命运轮盘。'+roulette.detail['zh-CN'],'Roll once at the start of Main Phase 1 and Main Phase 2, including turn 1; skipped phases do not roll. Results: '+roulette.detail.en,'先攻1ターン目を含め、メインフェイズ1・2の開始時に1回振る。スキップされたフェイズは振らない。結果：'+roulette.detail.ja)});
   const BY_ID=Object.fromEntries(RULES.map(r=>[r.id,r]));
   const MODE_NAME=L('天命法则','Fate Decree','天命の掟');
 
@@ -177,13 +179,14 @@
     const id=pick(engine,choice);if(!id)return null;
     engine.state.ruleMode={id,version:1,source:BY_ID[choice]?'chosen':'random',players:[{},{}],log:[]};
     engine.log('rule','天命法则 · '+BY_ID[id].name['zh-CN']+'：'+BY_ID[id].summary['zh-CN'],null,{rule:id,announce:true});
+    if(id==='roulette2'){engine.state.ruleMode.roulettePhase=engine.state.turn+':main1';engine.queue({op:'rule-roulette',owner:engine.state.active});engine.pump();}
     return id;
   }
 
   const P=root.ModernDuelEngine.prototype;
   function extend(name,fn){const prior=P[name];P[name]=function(...a){return fn.call(this,prior,...a);};}
-  P.ruleDamage=function(owner,amount){const p=this.state.players[owner],n=Math.max(0,Math.floor(amount));p.lp=Math.max(0,p.lp-n);this.state.damage[1-owner]+=n;this.log('damage','天命法则：'+this.name(owner)+'受到 '+n+' 点伤害',owner,{amount:n});this.checkWin();};
-  P.ruleHeal=function(owner,amount){this.state.players[owner].lp+=amount;this.log('heal','天命法则：'+this.name(owner)+'回复 '+amount+' LP',owner,{amount});};
+  P.ruleDamage=function(owner,amount){const p=this.state.players[owner],n=Math.max(0,Math.floor(amount)),before=p.lp;p.lp=Math.max(0,p.lp-n);this.state.damage[1-owner]+=n;note(this,'天命法则：'+this.name(owner)+'受到 '+n+' 点伤害，LP '+before+' → '+p.lp,owner,{amount:n,lpBefore:before,lpAfter:p.lp});this.checkWin();};
+  P.ruleHeal=function(owner,amount){const p=this.state.players[owner],before=p.lp;p.lp+=amount;note(this,'天命法则：'+this.name(owner)+'回复 '+amount+' LP，'+before+' → '+p.lp,owner,{amount,lpBefore:before,lpAfter:p.lp});};
   P.ruleReplacesDraw=function(){return ['escalation','overclock','angel'].includes(rule(this));};
 
   // ---- numbers ----------------------------------------------------------------
@@ -220,7 +223,7 @@
   // A card move must honour immunity too, including non-targeting banish/bounce.
   extend('move',function(prior,uid,to,o={}){
     const f=rule(this)&&o.source&&this.effectMove(o)&&!o.asCost?this.find(uid):null;
-    if(f&&fieldMonster(f.zone)&&this.unaffected(f.card,o.source))return {card:f.card,from:f.zone,to:f.zone,owner:f.owner,destroyed:false,prevented:true};
+    if(f&&fieldMonster(f.zone)&&this.unaffected(f.card,o.source)){if(this.ruleUnaffected(f.card,o.source))note(this,BY_ID[rule(this)].name['zh-CN']+'：「'+CARDS[f.card.id].name+'」不受此次效果影响，保留在场上',f.owner,{uid,cardId:f.card.id});return {card:f.card,from:f.zone,to:f.zone,owner:f.owner,destroyed:false,prevented:true};}
     return prior.call(this,uid,to,o);
   });
   extend('negated',function(prior,card){if(is(this,'legacy')&&card&&this.find(card.uid)?.zone==='grave'&&isMonster(CARDS[card.id]))return true;return prior.call(this,card);});
@@ -229,7 +232,7 @@
   extend('destroy',function(prior,uid,source=null,battle=false,extra={}){
     if(is(this,'hardline')){const f=this.find(uid);if(f&&fieldMonster(f.zone)){
       if(battle&&f.card.position==='attack'){note(this,'刚柔并济：攻击表示的「'+CARDS[f.card.id].name+'」不会被战斗破坏',f.owner,{uid});return false;}
-      if(!battle&&f.card.position==='defense')return false;
+      if(!battle&&f.card.position==='defense'){note(this,'刚柔并济：守备表示怪兽不会被效果破坏',f.owner,{uid});return false;}
     }}
     return prior.call(this,uid,source,battle,extra);
   });
@@ -248,7 +251,7 @@
       }
       return prior.call(this,uid,'banished',{...o,kind:'rule-echo',reason:'魔导回响：第二次使用后除外'});
     }
-    if(id==='liberation'&&f)return prior.call(this,uid,'banished',o);
+    if(id==='liberation'&&f){note(this,'灵魂解放：「'+c.name+'」原应送墓，改为除外',f.owner,{uid,cardId:c.id});return prior.call(this,uid,'banished',{...o,reason:'灵魂解放：送墓改为除外'});}
     return prior.call(this,uid,to,o);
   });
   extend('describe',function(prior,card,...a){const d=prior.call(this,card,...a);if(card){if(card.ruleWanted)d.ruleWanted=true;if(card.ruleStars)d.ruleStars=card.ruleStars;if(card.ruleEchoed)d.ruleEchoed=true;}return d;});
@@ -260,7 +263,7 @@
     const id=rule(this);
     if(id&&this.state.inDrawPhase&&amount===1&&!this._ruleDrawing){
       if(id==='escalation'){amount=Math.max(0,this.state.turn-1);if(amount>1)note(this,'多抽多补：第'+this.state.turn+'回合抽'+amount+'张',owner);if(!amount)return;}
-      else if(id==='overclock')amount=2;
+      else if(id==='overclock'){amount=2;note(this,'双核超频：通常抽卡由1张改为2张',owner,{count:2});}
       else if(id==='angel'&&this.state.players[owner].deck.length){angel(this,owner);return;}
     }
     const drawing=this._ruleDrawing;this._ruleDrawing=true;try{return prior.call(this,owner,amount,silent);}finally{this._ruleDrawing=drawing;}
@@ -357,7 +360,7 @@
   extend('commitPrepared',function(prior,ctx){
     const counting=is(this,'planned')&&!this.fx.get(ctx.key)?.inherent,owner=ctx.owner;
     const r=prior.call(this,ctx);
-    if(counting){const ps=pstate(this,owner);if(ps.plannedAt!==this.state.turn){ps.plannedAt=this.state.turn;ps.planned=0;}ps.planned++;if(ps.planned>=plannedLimit(this,owner))note(this,'计划经济：'+this.name(owner)+'本回合的发动次数已用完（'+ps.planned+'/'+plannedLimit(this,owner)+'）',owner);}
+    if(counting){const ps=pstate(this,owner);if(ps.plannedAt!==this.state.turn){ps.plannedAt=this.state.turn;ps.planned=0;}ps.planned++;note(this,'计划经济：'+this.name(owner)+'本回合发动次数 '+ps.planned+'/'+plannedLimit(this,owner),owner);}
     if(counting&&this.state.pending?.kind==='window'&&this.state.pending.responder===owner&&plannedUsed(this,owner)>=plannedLimit(this,owner)){const passes=this.state.pending.passes;this.state.pending=null;this.openWindow(owner,passes);}
     return r;
   });
@@ -397,12 +400,23 @@
     if(is(this,'roulette')&&this.state.winner===null&&this.state.frame?.kind==='standby'&&this.state.ruleMode.rouletteAt!==this.state.turn){this.state.ruleMode.rouletteAt=this.state.turn;this.queue({op:'rule-roulette',owner:this.state.active});}
     return r;
   });
+  extend('changePhase',function(prior,phase){const result=prior.call(this,phase);if(is(this,'roulette2')&&phase==='main2'){this.state.ruleMode.roulettePhase=this.state.turn+':main2';this.queue({op:'rule-roulette',owner:this.state.active});}return result;});
   const ROLL_TEXT=['','再抽1张并重掷','受到伤害','破坏场上1张卡','除外场上1张卡','回复基本分','墓地1张卡回到卡组'];
+  extend('settleFrame',function(prior){
+    const result=prior.call(this),s=this.state,key=s.turn+':'+s.phase;
+    if(is(this,'roulette2')&&s.winner===null&&s.frame?.kind==='main-open'&&['main1','main2'].includes(s.phase)&&s.ruleMode.roulettePhase!==key){s.ruleMode.roulettePhase=key;this.queue({op:'rule-roulette',owner:s.active});return true;}return result;
+  });
   E.op('rule-roulette',(e,t)=>{
+    if(e.state.winner!==null)return;
+    const roll=1+Math.floor(e.random()*6),r=e.state.ruleMode;
+    r.lastRoll={serial:(r.lastRoll?.serial||0)+1,roll,owner:t.owner,turn:e.state.turn,phase:e.state.phase};
+    note(e,BY_ID[rule(e)].name['zh-CN']+'：'+e.name(t.owner)+'掷出 '+roll+' · '+ROLL_TEXT[roll]+([2,5].includes(roll)?' '+e.state.turn*1000+' LP':''),t.owner,{roll});
+    e.queueChoice(t.owner,'命运轮盘 · 骰子 '+roll+' · '+ROLL_TEXT[roll]+([2,5].includes(roll)?' '+e.state.turn*1000+' LP':'')+' · 确认后结算',[],0,0,'rule-roulette-apply',{roll,rule:rule(e)});
+  });
+  E.op('rule-roulette-apply',(e,t)=>{
     const owner=t.owner;
     if(e.state.winner===null){
-      const roll=1+Math.floor(e.random()*6),turn=e.state.turn;
-      note(e,'命运轮盘：掷出 '+roll+' · '+ROLL_TEXT[roll],owner,{roll});
+      const roll=t.context.roll,turn=e.state.turn;
       if(roll===1){e.draw(owner,1);if(e.state.winner===null)e.queue({op:'rule-roulette',owner});return;}
       if(roll===2)e.ruleDamage(owner,turn*1000);
       else if(roll===5)e.ruleHeal(owner,turn*1000);
@@ -418,6 +432,7 @@
   });
   E.op('rule-roulette-pick',(e,t)=>{
     const uid=t.picks[0],f=e.find(uid);if(!f)return;
+    note(e,'命运轮盘：'+e.name(t.owner)+'选择'+(f.card.faceUp||!fieldMonster(f.zone)&&!['spells','fieldSpell'].includes(f.zone)?'「'+CARDS[f.card.id].name+'」':fieldMonster(f.zone)?'里侧怪兽':'里侧魔法／陷阱')+'，'+({destroy:'破坏',banish:'除外',return:'返回所有者卡组'})[t.context.mode],t.owner,{uid,mode:t.context.mode});
     if(t.context.mode==='destroy')e.move(uid,'grave',{kind:'destroy',byEffect:false,byOwner:t.owner,reason:'命运轮盘'});
     else if(t.context.mode==='banish')e.move(uid,'banished',{kind:'rule-roulette',byOwner:t.owner,reason:'命运轮盘'});
     else if(f.zone==='grave'){e.move(uid,'deck',{kind:'rule-roulette',byOwner:t.owner,reason:'命运轮盘'});e.shuffle(e.state.players[f.owner].deck);}
@@ -464,6 +479,20 @@
   });
 
   // ---- public API for UI / server ------------------------------------------------
+  // Describe continuous adjustments only when the public position changes, never
+  // from stat queries (AI evaluation and UI rendering call those frequently).
+  extend('pump',function(prior,...args){
+    const result=prior.apply(this,args),id=rule(this);
+    if(!id||this._aiMarginalProbe||!['equivalence','abyss','primal','unity','cannon','dulling','hierarchy'].includes(id))return result;
+    const r=this.state.ruleMode,seen=r.publicAdjustments||={},live=new Set();
+    for(const owner of [0,1])for(const m of this.monsters(owner).filter(m=>m.faceUp)){
+      const atk=this.attackValue(m),def=this.defenseValue(m),key=[atk,def,this.negated(m),rankStars(this,m)].join(':');live.add(m.uid);
+      if(seen[m.uid]===key)continue;seen[m.uid]=key;
+      note(this,BY_ID[id].name['zh-CN']+'：「'+CARDS[m.id].name+'」当前 ATK '+atk+' / DEF '+def+'；'+BY_ID[id].summary['zh-CN'],owner,{uid:m.uid,cardId:m.id,atk,def});
+    }
+    for(const uid of Object.keys(seen))if(!live.has(uid))delete seen[uid];return result;
+  });
+  extend('runTask',function(prior,task){const id=rule(this);return id&&task?.op?.startsWith('rule-')&&root.DuelLog?root.DuelLog.scope(this,{cause:{kind:'rule',rule:id}},()=>prior.call(this,task)):prior.call(this,task);});
   const text=(value,language='zh-CN')=>value?.[language]||value?.['zh-CN']||'';
   function status(engine,language='zh-CN'){
     const id=rule(engine)||engine?.state?.ruleMode?.id;if(!id)return [];const out=[],turn=engine.state.turn;

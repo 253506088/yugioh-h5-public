@@ -8,13 +8,13 @@ const root=path.resolve(__dirname,'..'),out=path.join(root,'output/rule-modes'),
     await page.addInitScript(()=>{localStorage.setItem('duel-sanctuary-welcomed-v3','true');localStorage.setItem('duel-sanctuary-online-art-v2','false');localStorage.setItem('duel-sanctuary-prefs-v1',JSON.stringify({sound:false,music:false,reducedMotion:true}));});
     await page.route('https://**/*',r=>r.abort());await page.goto(pathToFileURL(process.env.DUEL_TEST_HTML||path.join(out,'index.html')).href);await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');
     const check=async(name,fn)=>{await fn();checks.push(name);console.log('OK',name);};
-    await check('dedicated home entry, searchable 25-rule gallery, details and category filter',async()=>{
-      await page.click('.fate-home');assert.equal(await page.locator('.fate-card').count(),25);await page.screenshot({path:path.join(out,'gallery-desktop.png')});
+    await check('dedicated home entry, searchable 26-rule gallery, details and category filter',async()=>{
+      await page.click('.fate-home');assert.equal(await page.locator('.fate-card').count(),26);await page.screenshot({path:path.join(out,'gallery-desktop.png')});
       await page.click('[data-fate-filter="battle"]');assert.equal(await page.locator('.fate-card').count(),3);await page.click('[data-fate-filter="all"]');await page.fill('#fate-search','灵魂');assert.equal(await page.locator('.fate-card').count(),1);await page.fill('#fate-search','');
       await page.click('[data-fate-detail="element"]');assert.equal(await page.locator('.fate-elements').count(),1);await page.screenshot({path:path.join(out,'element-detail.png')});await page.keyboard.press('Escape');assert.equal(await page.evaluate(()=>duelApp.modalKind),'rule-gallery');
     });
     await check('three languages translate gallery and rule details',async()=>{
-      for(const language of ['en','ja','zh-CN']){await page.selectOption('#modal .locale-select',language);assert.equal(await page.locator('.fate-card').count(),25);const expected=await page.evaluate(()=>DuelRuleModes.name('element',DuelI18n.language));assert.ok((await page.locator('[data-fate-detail="element"]').innerText()).includes(expected));}
+      for(const language of ['en','ja','zh-CN']){await page.selectOption('#modal .locale-select',language);assert.equal(await page.locator('.fate-card').count(),26);const expected=await page.evaluate(()=>DuelRuleModes.name('element',DuelI18n.language));assert.ok((await page.locator('[data-fate-detail="element"]').innerText()).includes(expected));}
     });
     await check('new Fate duel selects random mode, reveals once and survives reload',async()=>{
       await page.click('[data-action="new-fate-game"]');assert.equal(await page.locator('[data-action="choose-rule-mode"][data-value="random"]').getAttribute('aria-pressed'),'true');await page.click('[data-action="begin-game"]');
@@ -26,7 +26,7 @@ const root=path.resolve(__dirname,'..'),out=path.join(root,'output/rule-modes'),
       await page.evaluate(()=>{while(duelApp.engine.state.pending&&duelApp.engine.state.pending.responder===0)duelApp.act({type:'pass'});});
     });
     await check('mobile gallery and duel HUD stay within viewport',async()=>{
-      await page.setViewportSize({width:390,height:844});await page.evaluate(()=>duelApp.newGame({deck:'blue',opponentDeck:'dark',first:0,seed:42,ruleMode:'element'}));await page.click('#fate-duel-bar [data-action="rule-details"]');await page.click('#modal [data-action="rule-gallery"]');assert.equal(await page.locator('.fate-card').count(),25);
+      await page.setViewportSize({width:390,height:844});await page.evaluate(()=>duelApp.newGame({deck:'blue',opponentDeck:'dark',first:0,seed:42,ruleMode:'element'}));await page.click('#fate-duel-bar [data-action="rule-details"]');await page.click('#modal [data-action="rule-gallery"]');assert.equal(await page.locator('.fate-card').count(),26);
       assert.ok(await page.locator('#modal').evaluate(n=>n.scrollWidth<=n.clientWidth+2));await page.screenshot({path:path.join(out,'gallery-mobile.png')});
       await page.evaluate(()=>{document.getElementById('modal').close();});await page.waitForSelector('#fate-reveal[hidden]',{state:'attached'});await page.screenshot({path:path.join(out,'duel-mobile.png')});assert.ok(await page.locator('#fate-duel-bar').evaluate(n=>n.getBoundingClientRect().right<=innerWidth+1));
     });

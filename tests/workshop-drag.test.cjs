@@ -7,11 +7,11 @@ test('dragging out of a forty-card main creates an editable 39-card draft, not a
  assert.throws(()=>new DuelEngine({deck:d.id,opponentDeck:'dark',deckSpecs:[n,D.DECKS.dark]}));
  const back=E.transfer(n,{zone:'side',index:0,id:n.side[0]},{zone:'cards'});assert.equal(T.analyze(back).valid,true);
 });
-test('copy, deletion, named copy identity, wrong-type drafts and in-zone ordering',()=>{
+test('copy, deletion, named copy identity, wrong-type rejection and in-zone ordering',()=>{
  let d=deck();const id=d.extra[0],before=d.extra.length;
  d=E.transfer(d,{zone:'library',id},{zone:'side'});assert.equal(d.extra.length,before);assert.equal(d.side[0],id);
- d=E.transfer(d,{zone:'side',index:0,id},{zone:'cards'});assert.equal(d.side.length,0);assert.equal(T.analyze(d).valid,false);
- d=E.transfer(d,{zone:'cards',index:d.cards.length-1,id},{zone:'library'});assert.equal(T.analyze(d).valid,true);
+ assert.throws(()=>E.transfer(d,{zone:'side',index:0,id},{zone:'cards'}));assert.equal(d.side.length,1);
+ d=E.transfer(d,{zone:'side',index:0,id},{zone:'library'});assert.equal(T.analyze(d).valid,true);
  const first=d.cards[0],old=d.cards[1];d=E.transfer(d,{zone:'cards',index:0,id:first},{zone:'cards',index:3});assert.equal(d.cards[0],old);assert.equal(d.cards[2],first);
  assert.throws(()=>E.transfer(d,{zone:'cards',index:0,id:'stale-id'},{zone:'side'}));assert.throws(()=>E.transfer(d,{zone:'library',id:'unknown'},{zone:'cards'}));
 });

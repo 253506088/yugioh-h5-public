@@ -54,7 +54,9 @@ test('all registered effect captions are translated without generic fallback',()
   for(const effect of Object.values(E.defs)){
    const translated=I.translated(effect.label);
    assert.equal(translated.untranslated,false,effect.key+' '+language+' '+effect.label);
-   assert.equal(I.effectLabel(effect),translated.text);
+   const peers=E.byCard[effect.id].filter(a=>!a.trigger&&a.label===effect.label);
+   if(globalThis.DuelUITranslations.effectActions?.[D.CARDS[effect.id]?.officialName]?.[effect.mode]){assert.ok(I.effectLabel(effect).length>3);continue;}
+   if(effect.trigger||peers.length<2)assert.equal(I.effectLabel(effect),translated.text);else {assert.ok(I.effectLabel(effect).length>0);assert.equal(new Set(peers.map(I.effectLabel)).size,peers.length,effect.key);}
   }
  }
  I.setLanguage('zh-CN');

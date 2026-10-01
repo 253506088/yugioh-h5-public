@@ -3,7 +3,7 @@
   const L=root.DuelLog,I=root.DuelI18n;
   const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const tr=(zh,en,ja)=>I.language==='en'?en:I.language==='ja'?ja:zh;
-  const labels=()=>({all:tr('全部事件','All events','すべて'),lp:tr('生命值','Life Points','LP'),summon:tr('召唤','Summons','召喚'),move:tr('卡片去向','Card movement','カードの移動'),effect:tr('发动与战斗','Effects & battle','効果・戦闘'),other:tr('阶段与结局','Phases & result','フェイズ・結果')});
+  const labels=()=>({rule:tr('天命法则','Fate decrees','天命の掟'),all:tr('全部事件','All events','すべて'),lp:tr('生命值','Life Points','LP'),summon:tr('召唤','Summons','召喚'),move:tr('卡片去向','Card movement','カードの移動'),effect:tr('发动与战斗','Effects & battle','効果・戦闘'),other:tr('阶段与结局','Phases & result','フェイズ・結果')});
   function create(host){
     let gameKey=null,turn=null,filter='all',query='',limit=100,returnScroll=null;
     const nodes=()=>({root:document.getElementById('duel-journal'),list:document.getElementById('journal-events')});

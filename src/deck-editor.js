@@ -28,6 +28,7 @@
     if(from==='library'){if(!Object.hasOwn(D.CARDS,id)||D.CARDS[id].notCollectible||D.CARDS[id].type==='token')throw Error('卡片选择已失效。');}
     else if(!Number.isInteger(source.index)||source.index<0||source.index>=d[from].length||d[from][source.index]!==id)throw Error('卡片选择已失效。');
     if(from==='library'&&to==='library')return d;
+    if(to!=='library'&&to!=='side'&&(!D.CARDS[id]||(D.isExtra(D.CARDS[id])?'extra':'cards')!==to))throw Error('卡片不能移入这个分区。');
     let at=target.index??(to==='library'?0:d[to].length);
     if(to!=='library'&&(!Number.isInteger(at)||at<0||at>d[to].length))throw Error('卡片选择已失效。');
     if(from!=='library'){d[from].splice(source.index,1);if(from===to&&source.index<at)at--;}

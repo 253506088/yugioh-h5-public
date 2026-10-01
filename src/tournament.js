@@ -44,7 +44,7 @@
       concurrency:integer(input.concurrency ?? 4, 1, 8, '同时对局数量'),
       pace:['normal', 'fast', 'turbo'].includes(input.pace) ? input.pace : 'fast',
       difficulty:input.difficulty === 'casual' ? 'casual' : 'standard',
-      ruleMode:input.ruleMode==='random'?'random':'off',
+      ruleMode:input.ruleMode==='random'||root.DuelRuleModes?.get(input.ruleMode)?input.ruleMode:'off',
       maxActions:LIMITS.actions, maxTurns:LIMITS.turns
     };
   }

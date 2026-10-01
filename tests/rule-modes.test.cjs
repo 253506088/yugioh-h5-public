@@ -6,8 +6,8 @@ const source=(owner=1,name='Raigeki')=>({id:D.cardByName(name).id,owner,effectTy
 const cast=(e,name='Sparks',owner=e.state.active)=>{const m=put(e,owner,'hand',name);run(e,{type:'activate',uid:m.uid,key:m.id+'::cast'});return m;};
 const flush=e=>{e.pump();settle(e);};
 
-test('25 unique, fully localized rules; seeded draw is stable and classic saves stay classic',()=>{
-  assert.equal(R.RULES.length,25);assert.equal(new Set(R.RULES.map(r=>r.id)).size,25);
+test('26 unique, fully localized rules; seeded draw is stable and classic saves stay classic',()=>{
+  assert.equal(R.RULES.length,26);assert.equal(new Set(R.RULES.map(r=>r.id)).size,26);
   for(const r of R.RULES)for(const lang of ['zh-CN','en','ja'])for(const field of ['name','summary','detail'])assert.ok(r[field][lang]);
   const a=new DuelEngine({seed:271,ruleMode:'random'}),b=new DuelEngine({seed:271,ruleMode:'random'});
   assert.equal(R.active(a),R.active(b));assert.ok(R.get(R.active(a)));
@@ -100,7 +100,7 @@ test('roulette: draw and reroll, direct rule damage ignores card damage shields'
   e.state.turn=2;e.runTask({op:'rule-roulette',owner:0});flush(e);assert.equal(e.state.players[0].hand.length,1);assert.equal(e.state.players[0].lp,6000);
 });
 test('roulette lethal damage ends immediately even with a card damage shield',()=>{
-  const e=mode('roulette');e.state.turn=10;e.state.players[0].preventDamageUntil=99;e.random=()=>.2;e.runTask({op:'rule-roulette',owner:0});assert.equal(e.state.players[0].lp,0);assert.equal(e.state.winner,1);
+  const e=mode('roulette');e.state.turn=10;e.state.players[0].preventDamageUntil=99;e.random=()=>.2;e.runTask({op:'rule-roulette',owner:0});assert.equal(e.state.players[0].lp,8000);flush(e);assert.equal(e.state.players[0].lp,0);assert.equal(e.state.winner,1);
 });
 test('vacuum ignores temporary hand staging of generated tokens',()=>{
   const e=mode('vacuum'),token=D.CARD_LIST.find(c=>c.type==='token');e.createTokens(0,token.id,1);flush(e);assert.equal(e.state.players[0].hand.length,0);
@@ -108,9 +108,9 @@ test('vacuum ignores temporary hand staging of generated tokens',()=>{
 test('roulette: choose destruction/banish/return, including indestructible and Extra Deck cards',()=>{
   for(const [roll,zone,expected] of [[3,'monsters','grave'],[4,'monsters','banished'],[6,'grave','extra']]){
     const e=mode('roulette'),m=put(e,1,zone,roll===6?'Flame Swordsman':'Dark Magician',{effectIndestructible:true});e.random=()=>((roll-1)+.1)/6;
-    e.runTask({op:'rule-roulette',owner:0});e.pump();assert.equal(e.state.pending.kind,'choice');run(e,{type:'choose',uids:[m.uid]});assert.equal(e.find(m.uid).zone,expected);
+    e.runTask({op:'rule-roulette',owner:0});e.pump();assert.equal(e.state.pending.operation,'rule-roulette-apply');act(e,{type:'choose',uids:[]});assert.equal(e.state.pending.kind,'choice');run(e,{type:'choose',uids:[m.uid]});assert.equal(e.find(m.uid).zone,expected);
   }
-  const e=mode('roulette');e.random=()=>.8;e.runTask({op:'rule-roulette',owner:0});assert.equal(e.state.players[0].lp,14000);
+  const e=mode('roulette');e.random=()=>.8;e.runTask({op:'rule-roulette',owner:0});flush(e);assert.equal(e.state.players[0].lp,14000);
 });
 test('carnival: real three-link chain heals each resolved controller and draws after the chain',()=>{
   const e=mode('carnival'),a=put(e,0,'spells','Jar of Greed',{faceUp:false}),b=put(e,1,'spells','Jar of Greed',{faceUp:false}),c=put(e,0,'spells','Jar of Greed',{faceUp:false});

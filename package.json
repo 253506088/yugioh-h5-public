@@ -83,7 +83,8 @@
     "test:2017:simulation": "node tests/chronicle-2017-simulation.cjs",
     "test:2017:browser": "node tests/chronicle-2017-browser.cjs",
     "cards:coverage:2017": "node scripts/report-card-coverage.mjs --write-year 2017",
-    "test:2017:tournament": "node tests/chronicle-2017-tournament.cjs"
+    "test:2017:tournament": "node tests/chronicle-2017-tournament.cjs",
+    "test:optimization-project": "node --test tests/optimization-project.test.cjs && node scripts/build.mjs --no-art --no-audio --out output/optimization/index.html && node tests/optimization-project-browser.cjs"
   },
   "engines": {
     "node": ">=22.13.0"

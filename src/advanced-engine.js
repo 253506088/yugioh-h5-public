@@ -742,7 +742,7 @@
     option(card,extra={}){
       const f=this.find(card.uid),c=CARDS[card.id];
       const viewer=extra.viewer??this.state.active;
-      if(f&&f.owner!==viewer&&!card.faceUp&&!extra.reveal&&(fieldMonster(f.zone)||['hand','spells','fieldSpell','extra'].includes(f.zone)))return {uid:card.uid,cardId:null,owner:f.owner,zone:f.zone,label:'对方的里侧卡牌',detail:'身份尚未公开',hidden:true,...extra};
+      if(f&&f.owner!==viewer&&!card.faceUp&&!extra.reveal&&(fieldMonster(f.zone)||['hand','spells','fieldSpell','extra'].includes(f.zone)))return {uid:card.uid,cardId:null,owner:f.owner,zone:f.zone,label:fieldMonster(f.zone)?'对方的里侧怪兽':['spells','fieldSpell'].includes(f.zone)?'对方的里侧魔法／陷阱':'对方的里侧卡牌',detail:'身份尚未公开',hidden:true,...extra};
       return {uid:card.uid,cardId:card.id,owner:f?.owner??card.originalOwner,zone:f?.zone,label:c.name,detail:c.type==='link'?'LINK-'+c.linkRating+' · 可计为1或'+c.linkRating:c.type==='xyz'?'阶级 '+c.rank+' · 素材 '+(card.overlays||[]).length:isMonster(c)?(this.isTuner(card)?'调整 · ':'')+'等级 '+this.level(card)+' · ATK '+this.attackValue(card):c.type==='trap'?'陷阱卡':'魔法卡',...extra};
     }
 

@@ -8,9 +8,15 @@ function create(host){
 let draft={name:I.term('我的新卡组'),cards:[],extra:[],side:[]},normalDraft=null,siding=null,draftRecovery=null,query='',family='all',year='all',type='all',page=0,focus='hero-sunrise',onlyIncluded=false,onlyPlayable=true,undo=[],redo=[],savedNote='',mobileView='build',deleteArmed=false,focusSource=null,dragState=null,dragFrame=null,touchHold=null,touchStart=null,menuSource=null,suppressClickUntil=0;
 try{const d=JSON.parse(localStorage.getItem(DRAFT)??localStorage.getItem('duel-sanctuary-workshop-draft-v2')??'null');if(d)draft=E.normalize(d);}catch{draftRecovery=localStorage.getItem(DRAFT);savedNote=tr('草稿读取失败，原数据已保留','Draft unreadable; original retained','下書きを読み込めません。元データは保存済み');}
 const $=s=>document.querySelector(s),count=id=>E.zones.flatMap(z=>draft[z]).filter(x=>T.identity(x)===T.identity(id)).length;
+let sourceQuery='',facets={};
+const arrowGlyph={TL:'↖',T:'↑',TR:'↗',L:'←',R:'→',BL:'↙',B:'↓',BR:'↘'};
+const facetFields=[['level','星级','Level','レベル'],['pendulumScale','刻度','Scale','スケール'],['rank','阶级','Rank','ランク'],['linkMarker','连接标记','Link arrow','リンクマーカー'],['race','种族','Type','種族'],['attribute','属性','Attribute','属性'],['atk','攻击力','ATK','攻撃力'],['def','守备力','DEF','守備力'],['spellKind','魔法类型','Spell type','魔法種類'],['trapKind','陷阱类型','Trap type','罠種類']];
+function facetValue(c,key){return key==='pendulumScale'?c.pendulumScale??c.scale:key==='linkMarker'?c.arrows:key==='spellKind'&&c.type==='spell'?c.spellKind||'normal':key==='trapKind'&&c.type==='trap'?c.trapKind||'normal':c[key];}
+function facetHTML(){return '<details class="ws-advanced"><summary>'+tr('精确筛选','Detailed filters','詳細フィルター')+'</summary><div class="ws-facet-grid">'+facetFields.map(([key,...labels])=>{const values=[...new Set(cards.flatMap(c=>facetValue(c,key)??[]))].sort((a,b)=>String(a).localeCompare(String(b),undefined,{numeric:true}));return '<label>'+tr(...labels)+'<input data-ws-facet="'+key+'" list="ws-values-'+key+'" value="'+esc(facets[key]||'')+'" placeholder="'+tr('不限','Any','指定なし')+'"><datalist id="ws-values-'+key+'">'+values.map(v=>'<option value="'+esc(key==='linkMarker'?arrowGlyph[v]||v:v)+'">'+I.term(({normal:'通常',continuous:'永续',quick:'速攻',counter:'反击',field:'场地',equip:'装备',ritual:'仪式'})[v]||String(v))+'</option>').join('')+'</datalist></label>';}).join('')+'</div></details>';}
+function renderSourceOptions(){const el=$('#ws-source');if(!el)return;const q=sourceQuery.trim().normalize('NFKC').toLowerCase();el.innerHTML='<option value="">'+I.term('选择预设 / 已保存卡组')+'</option>'+T.list().filter(d=>[d.name,I.deck(d).name,d.id,d.year].join(' ').normalize('NFKC').toLowerCase().includes(q)).map(d=>'<option '+(d.custom?'data-user-content ':'')+'value="'+d.id+'">'+esc(I.deck(d).name)+'</option>').join('');}
 function persist(){if(siding){siding.change?.(clone(draft));return;}try{if(draftRecovery!==null)localStorage.setItem(DRAFT+'-recovery',draftRecovery);localStorage.setItem(DRAFT,JSON.stringify(draft));draftRecovery=null;savedNote=I.term('草稿已自动保留');}catch{savedNote=I.term('草稿暂未保存，请导出备份');}}
 function remember(){undo.push(clone(draft));if(undo.length>80)undo.shift();redo=[];}
-function changes(){persist();renderBuild();renderCollection();renderToolbar();renderInspector();}
+function changes(){const scrolls=['.ws-build','.ws-card-grid','.workshop-layout'].map(s=>[$(s),$(s)?.scrollTop]);persist();renderBuild();if(onlyIncluded)renderCollection();else document.querySelectorAll('.ws-card').forEach(n=>{const id=n.dataset.id;n.querySelector('.ws-count-controls span').textContent=count(id);n.querySelector('.ws-card-name span').textContent=E.zones.map(z=>draft[z].filter(x=>x===id).length).join(' / ');});renderToolbar();renderInspector();for(const [el,top] of scrolls)if(el)el.scrollTop=top;}
 function show(id=null){
  stopDrag();closeMenu();
  if(id&&siding)exitSiding();
@@ -20,7 +26,7 @@ function show(id=null){
  (!siding?'<section class="ws-collection" data-ws-drop="library"><button class="ws-filter-toggle" id="ws-filter-toggle" data-action="ws-toggle-filters" aria-expanded="false"><span>'+I.term('筛选与搜索')+'</span><b id="ws-filter-result"></b></button><div class="ws-filter-content"><div class="ws-search"><label class="search-box"><input id="ws-search" type="search" placeholder="'+I.term('搜索卡名、效果或英文名…')+'" value="'+esc(query)+'" aria-label="'+I.term('搜索组卡牌库')+'"></label><select id="ws-family" aria-label="'+I.term('筛选卡片系列')+'">'+Object.entries(D.families).map(([id,label])=>'<option value="'+id+'"'+(family===id?' selected':'')+'>'+I.term(label)+'</option>').join('')+'</select><select id="ws-year" aria-label="'+I.term('组卡按发行年份筛选')+'">'+V.yearOptions(year)+'</select></div><div class="ws-filters" id="ws-filters"></div><div class="ws-collection-meta"><span id="ws-result-count"></span><label><input id="ws-included" type="checkbox"'+(onlyIncluded?' checked':'')+'>'+I.term('仅已编入')+'</label><label><input id="ws-playable" type="checkbox"'+(onlyPlayable?' checked':'')+'>'+I.term('仅可用于决斗')+'</label></div><button class="ws-filter-done" data-action="ws-toggle-filters">'+I.term('显示筛选结果')+'</button></div><div class="ws-card-grid" id="ws-card-grid"></div><div class="ws-pagination" id="ws-pagination"></div></section>':'')+'</div><input id="ws-import-file" type="file" accept=".json,.ydk,.txt,.ydke" hidden>';
  host.open('workshop',siding?tr('局间换备','Side decking','サイドチェンジ'):tr('卡组工坊','Deck workshop','デッキ工房'),'THE DECK ATELIER',body,
  '<span id="ws-draft-status" class="ws-footer-status"></span><button class="secondary-button" data-action="close-modal">'+I.term('返回决斗')+'</button><button class="secondary-button" data-action="ws-save" id="ws-save">'+(siding?tr('确认换备并准备','Confirm & ready','確定して準備'):I.term('保存卡组'))+'</button>'+(!siding?'<button class="primary-button" data-action="ws-play" id="ws-play">'+I.term('保存并出战')+'</button>':''),'workshop-modal');
- renderToolbar();renderBuild();renderCollection();renderInspector();wireDrag();
+ renderToolbar();renderBuild();renderCollection();renderInspector();if(!siding)$('#ws-filters').insertAdjacentHTML('afterend',facetHTML());wireDrag();
 }
 function renderToolbar(){
  const el=$('#ws-toolbar');if(!el)return;
@@ -30,6 +36,7 @@ function renderToolbar(){
  '<button class="ws-sort" data-action="ws-sort"'+(siding?.locked?' disabled':'')+'>'+tr('排序','Sort','並べ替え')+'</button><div class="ws-tools">'+(!siding?'<button data-action="ws-new">'+I.term('＋ 空白卡组')+'</button><button data-action="ws-clone">'+I.term('复制当前')+'</button>':'')+
  '<button data-action="ws-undo"'+(!undo.length||siding?.locked?' disabled':'')+'>↶ '+I.term('撤销')+'</button><button data-action="ws-redo"'+(!redo.length||siding?.locked?' disabled':'')+'>↷ '+I.term('重做')+'</button>'+
  (!siding?'<button data-action="ws-import">'+I.term('导入')+'</button><button data-action="ws-ai-import">✧ '+I.term('AI 导入')+'</button><button data-action="ws-export">'+I.term('导出')+'</button>'+(draft.id?'<button data-action="ws-delete">'+I.term(deleteArmed?'确认删除？':'删除')+'</button>':''):'<button data-action="ws-reset-siding"'+(siding.locked?' disabled':'')+'>'+tr('恢复本轮开始','Reset this round','このラウンドをリセット')+'</button>')+'</div>';
+ if(!siding){$('.ws-source').insertAdjacentHTML('afterbegin','<input id="ws-source-search" type="search" value="'+esc(sourceQuery)+'" placeholder="'+tr('搜索卡组名称…','Search decks…','デッキ名を検索…')+'" aria-label="'+tr('搜索卡组名称','Search deck names','デッキ名を検索')+'">');renderSourceOptions();}
  renderNav();
 }
 function renderNav(){
@@ -42,7 +49,7 @@ function renderInspector(){
  el.innerHTML='<button class="ws-mobile-close" data-action="ws-close-preview">'+I.term('关闭预览')+' ×</button><div class="ws-preview" draggable="'+canDrag+'" data-drag-zone="'+source.zone+'" data-id="'+c.id+'"'+(source.index!==undefined?' data-index="'+source.index+'"':'')+'>'+V.card(c.id)+'</div><div class="ws-card-details">'+V.details(c.id)+'</div>';
  el.querySelectorAll('img').forEach(img=>img.draggable=false);
 }
-function filtered(){const q=query.trim().normalize('NFKC').toLowerCase();return cards.filter(c=>V.yearMatch(c,year)&&(!onlyPlayable||c.implementationStatus!=='pending')&&(family==='all'||D.isFamily(c,family))&&(type==='all'||type==='monster'&&D.isMonster(c)||type==='tuner'&&c.tuner||c.type===type)&&(!onlyIncluded||count(c.id))&&(!q||I.searchText(c.id).includes(q)));}
+function filtered(){const q=query.trim().normalize('NFKC').toLowerCase();return cards.filter(c=>V.yearMatch(c,year)&&Object.entries(facets).every(([k,v])=>!v||[facetValue(c,k)].flat().some(x=>x!==undefined&&(String(x)===v||k==='linkMarker'&&arrowGlyph[x]===v||I.term(({normal:'通常',continuous:'永续',quick:'速攻',counter:'反击',field:'场地',equip:'装备',ritual:'仪式'})[x]||String(x))===v)))&&(!onlyPlayable||c.implementationStatus!=='pending')&&(family==='all'||D.isFamily(c,family))&&(type==='all'||type==='monster'&&D.isMonster(c)||type==='tuner'&&c.tuner||type==='pendulum'&&c.pendulum||c.type===type)&&(!onlyIncluded||count(c.id))&&(!q||I.searchText(c.id).includes(q)));}
 function renderCollection(){
  if(!$('#ws-card-grid'))return;const size=host.getPageSize?.()||24,list=filtered(),pages=Math.max(1,Math.ceil(list.length/size));page=Math.max(0,Math.min(page,pages-1));
  $('#ws-filters').innerHTML=types.map(([id,label])=>'<button data-action="ws-filter" data-filter="'+id+'" class="'+(type===id?'active':'')+'">'+I.term(label)+'</button>').join('');
@@ -56,7 +63,9 @@ function pile(zone){
 }
 function renderBuild(){
  if(!$('#ws-build-content'))return;
+ const reusable=new Map();$('#ws-build-content').querySelectorAll('.ws-deck-row').forEach(n=>{const list=reusable.get(n.dataset.id)||[];list.push(n);reusable.set(n.dataset.id,list);});
  $('#ws-build-content').innerHTML=E.zones.map(pile).join('');
+ $('#ws-build-content').querySelectorAll('.ws-deck-row').forEach(n=>{const old=reusable.get(n.dataset.id)?.shift();if(!old)return;old.dataset.zone=n.dataset.zone;old.dataset.dragZone=n.dataset.dragZone;old.dataset.index=n.dataset.index;old.draggable=n.draggable;old.querySelectorAll('[data-zone]').forEach(b=>{b.dataset.zone=n.dataset.zone;b.dataset.index=n.dataset.index;});n.replaceWith(old);});
  $('#ws-build-content').querySelectorAll('img').forEach(img=>img.draggable=false);
  $('#ws-draft-status').textContent=siding?.locked?tr('已确认，等待对手','Confirmed; waiting for opponent','確定済み・相手を待機'):savedNote;
  for(const id of ['ws-save','ws-play'])if($('#'+id))$('#'+id).disabled=!!siding?.locked;
@@ -77,7 +86,7 @@ async function save(play=false){
 function download(){try{const text=T.exportJSON(draft,{allowDraft:true}),url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=draft.name.replace(/[<>:"/\\|?*]/g,'_')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);}catch(e){host.toast(I.text(e.message),true);}}
 function handle(action,b){
  if(!action.startsWith('ws-'))return false;
- if(Date.now()<suppressClickUntil)return true;
+ if(Date.now()<suppressClickUntil&&action==='ws-inspect')return true;
  if(siding&&['ws-new','ws-clone','ws-import','ws-ai-import','ws-delete','ws-play','ws-remove'].includes(action))return true;
  if(siding?.locked&&['ws-sort','ws-undo','ws-redo','ws-reset-siding','ws-drop'].includes(action))return true;
  switch(action){
@@ -91,7 +100,7 @@ function handle(action,b){
  case 'ws-sort':remember();for(const z of E.zones)draft[z].sort((a,b)=>(CARDS[a]?.type||'').localeCompare(CARDS[b]?.type||'')||a.localeCompare(b));changes();break;
  case 'ws-reset-siding':if(siding){remember();draft=clone(siding.baseline);changes();}break;
  case 'ws-filter':type=b.dataset.filter;page=0;renderCollection();break;
- case 'ws-reset-filters':query='';family='all';year='all';type='all';onlyIncluded=false;onlyPlayable=true;page=0;show();break;
+ case 'ws-reset-filters':facets={};query='';family='all';year='all';type='all';onlyIncluded=false;onlyPlayable=true;page=0;show();break;
  case 'ws-page':page+=Number(b.dataset.delta);renderCollection();$('#ws-card-grid').scrollTop=0;break;
  case 'ws-new':remember();draft={name:I.term('我的新卡组'),cards:[],extra:[],side:[]};persist();show();break;
  case 'ws-clone':remember();draft={...clone(draft),name:(draft.name+' · '+I.term('副本')).slice(0,40)};delete draft.id;persist();show();break;
@@ -102,7 +111,7 @@ function handle(action,b){
  case 'ws-delete':if(draft.id){if(!deleteArmed){deleteArmed=true;renderToolbar();setTimeout(()=>{deleteArmed=false;renderToolbar();},4500);}else try{T.remove(draft.id);delete draft.id;deleteArmed=false;persist();renderToolbar();}catch(e){host.toast(e.message,true);}}break;
  }return true;
 }
-function input(el){if(el.id==='ws-search'){query=el.value;page=0;renderCollection();return true;}if(!siding&&el.id==='ws-name'){draft.name=el.value;persist();renderBuild();return true;}if(!siding&&el.id==='ws-notes'){draft.notes=el.value;persist();return true;}return false;}
+function input(el){if(el.id==='ws-source-search'){sourceQuery=el.value;renderSourceOptions();return true;}if(el.dataset.wsFacet){facets[el.dataset.wsFacet]=el.value.trim();page=0;renderCollection();return true;}if(el.id==='ws-search'){query=el.value;page=0;renderCollection();return true;}if(!siding&&el.id==='ws-name'){draft.name=el.value;persist();renderBuild();return true;}if(!siding&&el.id==='ws-notes'){draft.notes=el.value;persist();return true;}return false;}
 async function change(el){
  if(el.id==='ws-page-size'){host.setPageSize?.(el.value);page=0;}if(el.id==='ws-page-jump')page=Math.max(0,Math.floor(Number(el.value)||1)-1);
  if(el.id==='ws-year'){year=el.value;page=0;}if(el.id==='ws-family'){family=el.value;page=0;}if(el.id==='ws-playable'){onlyPlayable=el.checked;page=0;}if(el.id==='ws-included'){onlyIncluded=el.checked;page=0;}
@@ -119,21 +128,21 @@ function dropAt(x,y){
  return {zone,...(row&&row.dataset.zone===zone?{index:Number(row.dataset.index)}:{})};
 }
 function highlight(target){document.querySelectorAll('.ws-drag-over').forEach(n=>n.classList.remove('ws-drag-over'));if(target)document.querySelectorAll('[data-ws-drop="'+target.zone+'"]').forEach(n=>n.classList.add('ws-drag-over'));}
-function stopDrag(){clearTimeout(touchHold);cancelAnimationFrame(dragFrame);dragState?.ghost?.remove();dragState=null;touchStart=null;highlight(null);$('#modal')?.classList.remove('ws-dragging');}
+function stopDrag(){clearTimeout(touchHold);cancelAnimationFrame(dragFrame);dragState?.ghost?.remove();dragState?.node?.classList.remove('ws-drag-source');dragState=null;touchStart=null;highlight(null);$('#modal')?.classList.remove('ws-dragging');}
 function tickDrag(){
  if(!dragState||!$('#modal')?.open||!$('.workshop-layout')){stopDrag();return;}
- const {x,y}=dragState,hit=document.elementFromPoint(x,y),scroller=hit?.closest('.ws-build,.ws-card-grid,.workshop-layout');
+ const {x,y}=dragState,hit=document.elementFromPoint(x,y);let scroller=hit?.closest('.ws-build,.ws-card-grid,.workshop-layout');while(scroller&&scroller.scrollHeight<=scroller.clientHeight)scroller=scroller.parentElement?.closest('.ws-build,.ws-card-grid,.workshop-layout');
  if(scroller&&scroller.scrollHeight>scroller.clientHeight){const r=scroller.getBoundingClientRect(),edge=Math.min(50,r.height/4);if(y<r.top+edge)scroller.scrollTop-=10;else if(y>r.bottom-edge)scroller.scrollTop+=10;}
  dragFrame=requestAnimationFrame(tickDrag);
 }
 function beginDrag(source,node,x,y,touch=false){
- closeMenu();stopDrag();dragState={source,x,y};$('#modal').classList.add('ws-dragging');
+ closeMenu();stopDrag();dragState={source,node,x,y};node.classList.add('ws-drag-source');$('#modal').classList.add('ws-dragging');
  if(touch){const ghost=document.createElement('div');ghost.className='ws-drag-ghost';ghost.innerHTML=node.querySelector('.playing-card')?.outerHTML||esc(CARDS[source.id]?.name||source.id);$('#modal').append(ghost);dragState.ghost=ghost;}
  if(touch)$('#ws-inspector')?.classList.remove('mobile-open');
  pointDrag(x,y);tickDrag();
 }
 function pointDrag(x,y){if(!dragState)return;dragState.x=x;dragState.y=y;if(dragState.ghost)dragState.ghost.style.transform='translate('+(x+14)+'px,'+(y-35)+'px)';highlight(dropAt(x,y));}
-function finishDrag(x,y){const source=dragState?.source,target=dropAt(x,y),touch=!!dragState?.ghost&&!dragState?.customMouse;stopDrag();if(touch)suppressClickUntil=Date.now()+350;if(source&&target){$('#ws-inspector')?.classList.remove('mobile-open');transfer(source,target);}}
+function finishDrag(x,y){const source=dragState?.source,target=dropAt(x,y),touch=!!dragState?.ghost;stopDrag();if(touch)suppressClickUntil=Date.now()+350;if(source&&target){$('#ws-inspector')?.classList.remove('mobile-open');transfer(source,target);}}
 function closeMenu(){$('#ws-card-menu')?.remove();menuSource=null;}
 function menu(source,x,y){
  closeMenu();if(siding?.locked)return;menuSource=source;const n=document.createElement('div');n.id='ws-card-menu';n.className='ws-card-menu';n.setAttribute('role','menu');
@@ -146,13 +155,14 @@ function wireDrag(){
  // the same transfer command, so closing that overlay cannot cancel an HTML drag.
  let previewPointer=null;
  surface.onpointerdown=e=>{
-  const node=e.target.closest('.ws-preview'),source=node&&sourceOf(node);
+  if(e.target.closest('.ws-delete-card'))return;
+  const node=e.target.closest('[data-drag-zone]'),source=node&&sourceOf(node);
   if(e.pointerType!=='mouse'||e.button!==0||!source||siding?.locked)return;
-  e.preventDefault();surface.setPointerCapture(e.pointerId);previewPointer={source,node,x:e.clientX,y:e.clientY,id:e.pointerId};
+  previewPointer={source,node,x:e.clientX,y:e.clientY,id:e.pointerId};
  };
  surface.onpointermove=e=>{
   const p=previewPointer;if(!p||e.pointerId!==p.id)return;
-  if(!dragState&&Math.hypot(e.clientX-p.x,e.clientY-p.y)>6){beginDrag(p.source,p.node,e.clientX,e.clientY,true);dragState.customMouse=true;}
+  if(!dragState&&Math.hypot(e.clientX-p.x,e.clientY-p.y)>6){surface.setPointerCapture(e.pointerId);beginDrag(p.source,p.node,e.clientX,e.clientY,true);dragState.customMouse=true;}
   if(dragState){e.preventDefault();pointDrag(e.clientX,e.clientY);}
  };
  surface.onpointerup=e=>{
@@ -161,7 +171,7 @@ function wireDrag(){
   if(dragState)finishDrag(e.clientX,e.clientY);
  };
  surface.onpointercancel=e=>{if(previewPointer?.id===e.pointerId){previewPointer=null;stopDrag();}};
- surface.ondragstart=e=>{if(e.target.closest('.ws-delete-card,.ws-preview')||siding?.locked){e.preventDefault();return;}const source=sourceOf(e.target);if(!source){e.preventDefault();return;}const node=e.target.closest('[data-drag-zone]');e.dataTransfer.effectAllowed=source.zone==='library'?'copy':'move';e.dataTransfer.setData('application/x-duel-card',JSON.stringify(source));e.dataTransfer.setDragImage(node,Math.min(60,node.clientWidth/2),40);beginDrag(source,node,e.clientX,e.clientY);};
+ surface.ondragstart=e=>e.preventDefault();
  surface.ondragover=e=>{if(!dragState)return;pointDrag(e.clientX,e.clientY);const target=dropAt(e.clientX,e.clientY);if(target){e.preventDefault();e.dataTransfer.dropEffect=dragState.source.zone==='library'?'copy':'move';}};
  surface.ondrop=e=>{if(dragState){e.preventDefault();finishDrag(e.clientX,e.clientY);}};
  surface.ondragend=stopDrag;

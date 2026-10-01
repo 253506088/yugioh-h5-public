@@ -55,9 +55,15 @@
     try { if(recoverySource!==null)root.localStorage.setItem(STORAGE+'-recovery',recoverySource);root.localStorage.setItem(STORAGE,JSON.stringify(saved));recoverySource=null; }
     catch { throw new Error('浏览器未能保存卡组。请先导出卡组备份，再检查本地存储空间。'); }
   }
-  function cleanDraft(input,id=null){
+  function cleanDraft(input,id=null,{recover=false}={}){
     if(!input||typeof input.name!=='string'||!input.name.trim()||input.name.trim().length>40)throw Error('卡组名称需要1—40个字符。');
     for(const z of ['cards','extra','side']){const list=input[z]===undefined&&z==='side'?[]:input[z];if(!Array.isArray(list)||list.length>1200||list.some(id=>typeof id!=='string'||id.length>100))throw Error('卡牌列表格式无效。');}
+    const counts=new Map();
+    if(!recover)for(const z of ['cards','extra','side'])for(const id of input[z]||[]){
+      const c=CARDS[id];if(!c||c.notCollectible||c.type==='token')throw Error('存在不能编入卡组的卡牌：'+id);
+      if(z!=='side'&&(isExtra(c)?'extra':'cards')!==z)throw Error(c.name+'不能放入这个分区。');
+      const key=identity(id),n=(counts.get(key)||0)+1;counts.set(key,n);if(n>3)throw Error(c.name+'的同名卡合计最多3张。');
+    }
     const result={id:id||('custom-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7)),name:input.name.trim(),cards:[...input.cards],extra:[...input.extra],side:[...(input.side||[])],version:3,updatedAt:input.updatedAt||Date.now(),notes:typeof input.notes==='string'?input.notes.slice(0,16000):''};
     if(!/^custom-[a-z0-9-]{1,70}$/.test(result.id))throw Error('自建卡组标识不合法。');
     result.draft=!analyze(result).valid;return result;
@@ -84,7 +90,7 @@
       if(!Array.isArray(input)||input.length>500)throw new Error('卡组存储格式无效，原数据已保留。');
       saved=[];
       for(const item of input) {
-        try {const raw=(item?.draft===true?cleanDraft:clean)(item,item.id); saved.push(raw);DECKS[raw.id]=decorate(raw);}catch(error){diagnostics.push({name:item?.name||'',error:error.message,raw:clone(item)});}
+        try {const raw=(item?.draft===true?cleanDraft:clean)(item,item.id,{recover:true}); saved.push(raw);DECKS[raw.id]=decorate(raw);}catch(error){diagnostics.push({name:item?.name||'',error:error.message,raw:clone(item)});}
       }
       if(current===null&&!diagnostics.length)persist();
       if(!diagnostics.length)recoverySource=null;
