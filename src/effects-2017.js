@@ -25,5 +25,5 @@
  extend('linkValid',function(prior,p,m,ms,...a){const s=def(m)?.link||{};return ms.every(q=>(!s.maxLevel||this.level(q)>0&&this.level(q)<=s.maxLevel)&&(!s.flip||def(q).flip)&&(!s.races||s.races.includes(this.race(q)))&&(!s.summonedFromExtra||q.y16FromExtra))&&prior.call(this,p,m,ms,...a);});
  extend('describe',function(prior,m,...a){return {...prior.call(this,m,...a),...Object.fromEntries(Object.entries(m).filter(([k])=>k.startsWith('y17')))};});
  extend('move',function(prior,u,to,o={}){const f=this.find(u),m=f?.card,r=prior.call(this,u,to,o);if(m&&r&&r.from!==r.to&&field(f.zone))for(const k of Object.keys(m))if(k.startsWith('y17'))delete m[k];return r;});
- if(typeof module!=='undefined'){for(const part of ['dinosaur','draco','trickstar','spyral','links','support','final'])require('./effects-2017-'+part+'.js');module.exports=X;}
+ if(typeof module!=='undefined'){for(const part of ['dinosaur','draco','trickstar','spyral','links','support','expansion','final'])require('./effects-2017-'+part+'.js');module.exports=X;}
 })(globalThis);
