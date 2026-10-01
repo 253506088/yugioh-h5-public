@@ -35,17 +35,17 @@ test('passwords resolve aliases and cards that have no providerId', () => {
   assert.equal(r.resolve('7').id, 'early-67048711'); assert.equal(r.resolve({ name: '7', isPassword: true }).status, 'unknown');
 });
 test('catalog versus unknown, aliases, fuzzy thresholds and short Chinese OCR', () => {
-  const ash = r.resolve('灰流丽'); assert.equal(ash.status, 'not-in-pool'); assert.equal(ash.password, '14558127'); assert.equal(r.resolve('Ash').password, ash.password);
+  const ash = r.resolve('灰流丽'); assert.equal(ash.status, 'playable'); assert.equal(ash.password, '14558127'); assert.equal(r.resolve('Ash').password, ash.password);
   assert.equal(r.resolve('增 G').id, 'early-23434538'); assert.equal(r.resolve('青眼白龍').id, 'blue-eyes');
   const typo = r.resolve('青眼白尤'); assert.equal(typo.status, 'ambiguous'); assert.equal(typo.candidates[0].id, 'blue-eyes');
   const duality = r.resolve('Pot of Dualty'); assert.equal(duality.id, 'early-98645731'); assert.equal(duality.corrected, true);
   assert.equal(r.resolve('zzzzzzzzzzzz').status, 'unknown');
-  const outside = r.resolve('Ash Blossom & Joyous Sprin'); assert.equal(outside.status, 'not-in-pool'); assert.equal(outside.corrected, true);
+  const outside = r.resolve('Ash Blossom & Joyous Sprin'); assert.equal(outside.status, 'playable'); assert.equal(outside.corrected, true); assert.equal(r.resolve('Infinite Impermanence').status, 'not-in-pool');
 });
 test('pending, tokens, duplicate diagnostics across all sections, side retention and notes', () => {
   const cards = { a: { id: 'a', name: 'Alpha fixture', type: 'monster' }, p: { id: 'p', name: 'Pending fixture', implementationStatus: 'pending' }, token: { id: 'token', name: 'Token fixture', notCollectible: true } };
   const resolver = R.create({ cards, locales: {}, catalog: [], aliases: {} }); assert.equal(resolver.resolve('Pending fixture').status, 'pending'); assert.equal(resolver.resolve('Token fixture', { fuzzy: false }).status, 'unknown');
   const e = (name, count) => ({ name, count, language: 'en' });
-  const d = r.resolveDeck({ name: 'Test', main: [e('Blue-Eyes White Dragon', 3), e('青眼白龙', 2), e('灰流丽', 2)], extra: [], side: [e('Effect Veiler', 1)], uncertain: [] });
-  const output = r.draft(d); assert.deepEqual(output.deck.cards, Array(5).fill('blue-eyes')); assert.equal(output.warnings.length, 1); assert.match(output.deck.notes, /14558127/); assert.equal(output.deck.side.length,1);assert.doesNotMatch(output.deck.notes,/side/); assert.equal(output.check.valid, false);
+  const d = r.resolveDeck({ name: 'Test', main: [e('Blue-Eyes White Dragon', 3), e('青眼白龙', 2), e('Infinite Impermanence', 2)], extra: [], side: [e('Effect Veiler', 1)], uncertain: [] });
+  const output = r.draft(d); assert.deepEqual(output.deck.cards, Array(5).fill('blue-eyes')); assert.equal(output.warnings.length, 1); assert.match(output.deck.notes, /10045474/); assert.equal(output.deck.side.length,1);assert.doesNotMatch(output.deck.notes,/side/); assert.equal(output.check.valid, false);
 });

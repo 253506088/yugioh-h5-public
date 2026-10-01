@@ -129,6 +129,31 @@
       "id": "zoodiac-2016",
       "available": 15,
       "source": 15
+    },
+    {
+      "id": "dinosaur-2017",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "true-draco-2017",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "zoodiac-2017",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "trickstar-2017",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "spyral-2017",
+      "available": 15,
+      "source": 15
     }
   ],
   "excluded": []

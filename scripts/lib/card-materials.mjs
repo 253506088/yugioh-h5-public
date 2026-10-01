@@ -4,6 +4,10 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
   // These qualifications belong to the selected physical material, not its
   // printed card type. Preserve them for the engine's material validator.
   if (name === 'Invoked Elysium') return {fusion: [{nameIncludes:'Invoked'}, {summonedFromExtra:true}]};
+  if (name === 'Supreme King Z-ARC') return {fusion: ['fusion','synchro','xyz','pendulum'].map(type=>({race:races.Dragon,type})),fusionOnly:true};
+  if (name === 'Secret Six Samurai - Rihan') return {fusion:Array.from({length:3},()=>({nameIncludes:'Six Samurai'})),fusionDifferentAttributes:true};
+  if (name === 'Mudragon of the Swamp') return {fusion:[{},{}],fusionSameAttribute:true,fusionDifferentRaces:true};
+  if (name === 'Sea Monster of Theseus') return {fusion:[{tuner:true},{tuner:true}]};
   text = text.replace(/^(\d+) x "([^"]+)"$/, (_, n, card) => Array(Number(n)).fill('"'+card+'"').join(' + '));
   const legendary = text.match(/^Must be Special Summoned with "(The Claw of Hermos|The Fang of Critias)", using (?:a (.+?) monster|"([^"]+)")\./);
   if (legendary) {
@@ -32,7 +36,7 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
     const generic = part.replace(/ on the field, except Tokens$/, '').match(/^(\d+)(\+| or more)?\s+(.+?)\s+monsters?$/i);
     if (!generic) throw new Error('Unparsed Fusion material: ' + name + ' / ' + part);
     let body = generic[3].replace(/-Type\b/gi, ''), spec = fieldOnly ? {fieldOnly:true,noTokens:true} : {};
-    if (/ Effect$/i.test(body)) { spec.effect = true; body = body.replace(/ Effect$/i, ''); }
+    if (/(?:^| )Effect$/i.test(body)) { spec.effect = true; body = body.replace(/(?:^| )Effect$/i, ''); }
     const level = body.match(/^Level (\d+) or higher (.+)$/i);
     if (level) { spec.minLevel = Number(level[1]); body = level[2]; }
     const exactLevel = body.match(/^Level (\d+) (.+)$/i);
@@ -100,6 +104,7 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
   if (non[4]) {
     let body = non[4].replace(/-Type\b/gi, '');
     if (/ Synchro$/.test(body)) { spec.nonType = 'synchro'; body = body.replace(/ Synchro$/, ''); }
+    if (/ Pendulum$/.test(body)) { spec.nonType = 'pendulum'; body = body.replace(/ Pendulum$/, ''); }
     const combined = body.match(/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) (.+)$/);
     if (combined && races[combined[2]]) { spec.nonAttribute = attributes[combined[1]]; body = combined[2]; }
     if (attributes[body]) spec.nonAttribute = attributes[body];
@@ -116,7 +121,7 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
 
 export function parseXyz(name, text, {races, attributes}) {
   if (name === 'Number 100: Numeron Dragon') return {xyzCount:2,rank:1,xyzMaterialType:'xyz',xyzSameRank:true,xyzSameName:true,xyzNameIncludes:'Number'};
-  if (name === 'Number F0: Utopic Future') return {xyzCount: 2, rank: 0, xyzMaterialType: 'xyz', xyzSameRank: true, xyzExcludeNameIncludes: 'Number'};
+  if (['Number F0: Utopic Future','Number F0: Utopic Future Slash'].includes(name)) return {xyzCount: 2, rank: 0, xyzMaterialType: 'xyz', xyzSameRank: true, xyzExcludeNameIncludes: 'Number'};
   if (name === 'Number S0: Utopic ZEXAL') return {xyzCount: 3, rank: 0, xyzMaterialType: 'xyz', xyzSameRank: true, xyzNameIncludes: 'Number'};
   if (name === 'Number 93: Utopia Kaiser') return {xyzCount: 2, xyzMax: 5, rank: 12, xyzMaterialType: 'xyz', xyzSameRank: true, xyzNameIncludes: 'Number', xyzRequireOverlay: true};
   text = text.split(' / ')[0].replace(/^(\d+)\+ Level/, '$1 or more Level');

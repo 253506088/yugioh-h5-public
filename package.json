@@ -78,7 +78,12 @@
     "test:matches": "node --test tests/side-matches.test.cjs tests/pvp-matches.test.mjs",
     "test:matches:browser": "node tests/side-matches-browser.cjs && node tests/pvp-matches-browser.cjs",
     "test:matches:simulation": "node tests/match-simulation.cjs",
-    "test:workshop-drag": "node --test tests/workshop-drag.test.cjs && node tests/workshop-drag-browser.cjs"
+    "test:workshop-drag": "node --test tests/workshop-drag.test.cjs && node tests/workshop-drag-browser.cjs",
+    "test:2017": "node --test tests/chronicle-2017.test.cjs tests/chronicle-2017-interactions.test.cjs tests/card-link.test.mjs tests/link-materials.test.cjs",
+    "test:2017:simulation": "node tests/chronicle-2017-simulation.cjs",
+    "test:2017:browser": "node tests/chronicle-2017-browser.cjs",
+    "cards:coverage:2017": "node scripts/report-card-coverage.mjs --write-year 2017",
+    "test:2017:tournament": "node tests/chronicle-2017-tournament.cjs"
   },
   "engines": {
     "node": ">=22.13.0"

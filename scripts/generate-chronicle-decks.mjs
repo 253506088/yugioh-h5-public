@@ -1,15 +1,18 @@
-import {readFile,writeFile} from 'node:fs/promises';
+import {readFile,readdir} from 'node:fs/promises';
 import {createRequire} from 'node:module';
 import {fileURLToPath} from 'node:url';
 import {dirname,resolve,join} from 'node:path';
+import {writeAtomic} from './lib/io.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),require=createRequire(import.meta.url),D=require('../src/early-cards.js');
 require('../src/advanced-engine.js');
-const inputs=await Promise.all(['decks-2009-2012','decks-2013','decks-2014','decks-2015','decks-2016'].map(name=>readFile(join(root,'data',name+'.json'),'utf8').then(JSON.parse)));
+const sourceFiles=(await readdir(join(root,'data'))).filter(name=>name==='decks-2009-2012.json'||/^decks-\d{4}\.json$/.test(name)&&Number(name.slice(6,10))>=2013).sort();
+const inputs=await Promise.all(sourceFiles.map(name=>readFile(join(root,'data',name),'utf8').then(JSON.parse)));
 const input={scope:inputs.flatMap(i=>i.scope),decks:inputs.flatMap(i=>i.decks),sources:inputs.flatMap(i=>i.sources)};
 const sideReport=[];
 const decks=input.decks.map(row=>{
  const expand=(pairs,extra)=>pairs.flatMap(([name,count])=>{
   const card=D.cardByName(name);if(!card)throw Error('Unknown deck card: '+name);
+  if(card.implementationStatus==='pending')throw Error('Unimplemented deck card: '+row.id+' / '+name);
   if(!Number.isInteger(count)||count<1||count>3)throw Error('Invalid count: '+row.id+' / '+name);
   if(!card.releaseYear||card.releaseYear>row.year)throw Error('Future card: '+row.id+' / '+name);
   if(D.isExtra(card)!==extra)throw Error('Wrong deck zone: '+name);
@@ -19,14 +22,15 @@ const decks=input.decks.map(row=>{
  if((cards.length<40||cards.length>60)||extra.length>15||!ace)throw Error('Invalid deck size or ace: '+row.id);
  const counts=new Map();for(const id of [...cards,...extra])counts.set(id,(counts.get(id)||0)+1);if([...counts.values()].some(n=>n>3))throw Error('Combined copy limit: '+row.id);
  const side=[];for(const [name,n] of row.side||[]){const c=D.cardByName(name);let reason=!c?'unknown':c.implementationStatus==='pending'?'pending':!c.releaseYear||c.releaseYear>row.year?'future':null;const used=c?[...cards,...extra,...side].filter(id=>{const a=D.CARDS[id];return (a.nameAlias||a.officialName||a.en||a.name)===(c.nameAlias||c.officialName||c.en||c.name);}).length:0;if(!reason&&(used+n>3||side.length+n>15))reason='limit';if(reason)sideReport.push({deck:row.id,name,count:n,reason});else side.push(...Array(n).fill(c.id));}
+ if(row.year>=2017&&sideReport.some(r=>r.deck===row.id))throw Error('Unavailable or invalid side deck card: '+row.id);
  return {side,sideSourceCount:(row.side||[]).reduce((n,p)=>n+p[1],0),id:row.id,name:row.title+' · '+row.year,en:row.en.toUpperCase(),ace:ace.id,mechanic:row.year+' / '+row.title,description:row.description,player:row.title,avatar:'early',subtitle:'重返这一年的决斗现场。',preset:true,year:row.year,sourceKind:row.sourceKind,sourceRefs:row.sourceRefs,cards,extra,combo:row.combo};
 });
-// Each source file must contribute at least three decks per year it declares;
-// a year may carry more when a later batch adds further representative builds.
-for(const file of inputs)for(const year of file.scope)if(file.decks.filter(d=>d.year===year).length<3)throw Error('Expected at least three decks for '+year+' in one source file');
+// From the 2017 rollout onward the requested annual minimum is five distinct
+// representative builds. Earlier delivered years retain their existing tables.
+for(const file of inputs)for(const year of file.scope){const minimum=year>=2017?5:3;if(file.decks.filter(d=>d.year===year).length<minimum)throw Error('Expected at least '+minimum+' decks for '+year+' in one source file');}
 if(new Set(decks.map(d=>d.id)).size!==decks.length)throw Error('Duplicate annual deck id');
 const safe=v=>JSON.stringify(v).replace(/</g,'\\u003c');
-await writeFile(join(root,'src/chronicle-decks.js'),`/* Generated from the data/decks-*.json rollout tables. */\n(function(root){'use strict';const D=root.DuelData;if(D.chronicleDecksLoaded)return;for(const deck of ${safe(decks)})D.DECKS[deck.id]=deck;D.chronicleDecksLoaded=true;if(typeof module!=='undefined')module.exports=D;})(globalThis);\n`);
+await writeAtomic(join(root,'src/chronicle-decks.js'),`/* Generated from the data/decks-*.json rollout tables. */\n(function(root){'use strict';const D=root.DuelData;if(D.chronicleDecksLoaded)return;for(const deck of ${safe(decks)})D.DECKS[deck.id]=deck;D.chronicleDecksLoaded=true;if(typeof module!=='undefined')module.exports=D;})(globalThis);\n`);
 const names=Object.fromEntries(input.decks.map(d=>[d.id,[d.en+' · '+d.year,d.ja+' · '+d.year]]));
 // The 2009—2012 rows keep their translations here; newer rows carry descriptionEn /
 // descriptionJa beside the decklist so a new year stays self-contained.
@@ -46,6 +50,6 @@ const legacyDescriptions={
 };
 const descriptions=Object.fromEntries(input.decks.map(d=>[d.id,d.descriptionEn?[d.descriptionEn,d.descriptionJa]:legacyDescriptions[d.id]]));
 for(const [id,value] of Object.entries(descriptions))if(!value?.[0]||!value?.[1])throw Error('Missing localized description: '+id);
-await writeFile(join(root,'src/i18n-chronicle.js'),`/* Annual preset translations generated by generate-chronicle-decks.mjs. */\n(function(root){'use strict';const ui=root.DuelUITranslations;const names=${safe(names)},descriptions=${safe(descriptions)};for(const [id,labels] of Object.entries(names)){ui.deckNames[id]=labels;ui.deckDescriptions[id]=descriptions[id];const d=root.DuelData.DECKS[id];ui.messages[d.player]={en:labels[0].split(' · ')[0],ja:labels[1].split(' · ')[0]};ui.messages[d.mechanic]={en:labels[0].replace(' · ',' / '),ja:labels[1].replace(' · ',' / ')};}const chronicle=root.DuelData.families.early,lastYear=Math.max(...root.DuelData.earlyYears);ui.messages[chronicle]={en:'Card Chronicle · 1999–'+lastYear,ja:'カード年代記 · 1999–'+lastYear};})(globalThis);\n`);
-await writeFile(join(root,'docs/side-deck-availability.json'),JSON.stringify({decks:decks.map(d=>({id:d.id,available:d.side.length,source:d.sideSourceCount})),excluded:sideReport},null,2)+'\n');
+await writeAtomic(join(root,'src/i18n-chronicle.js'),`/* Annual preset translations generated by generate-chronicle-decks.mjs. */\n(function(root){'use strict';const ui=root.DuelUITranslations;const names=${safe(names)},descriptions=${safe(descriptions)};for(const [id,labels] of Object.entries(names)){ui.deckNames[id]=labels;ui.deckDescriptions[id]=descriptions[id];const d=root.DuelData.DECKS[id];ui.messages[d.player]={en:labels[0].split(' · ')[0],ja:labels[1].split(' · ')[0]};ui.messages[d.mechanic]={en:labels[0].replace(' · ',' / '),ja:labels[1].replace(' · ',' / ')};}const chronicle=root.DuelData.families.early,lastYear=Math.max(...root.DuelData.earlyYears);ui.messages[chronicle]={en:'Card Chronicle · 1999–'+lastYear,ja:'カード年代記 · 1999–'+lastYear};})(globalThis);\n`);
+await writeAtomic(join(root,'docs/side-deck-availability.json'),JSON.stringify({decks:decks.map(d=>({id:d.id,available:d.side.length,source:d.sideSourceCount})),excluded:sideReport},null,2)+'\n');
 console.log(`Generated ${decks.length} annual decks, all 40–60 cards and within their OCG candidate year.`);

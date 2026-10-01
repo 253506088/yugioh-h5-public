@@ -1,0 +1,1008 @@
+{
+  "scope": [
+    2017
+  ],
+  "sources": [
+    {
+      "id": "worlds-2017",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2017/",
+      "title": "Yu-Gi-Oh! World Championship 2017",
+      "accessed": "2026-09-30",
+      "evidence": "Champion Tsujimura Ryosuke and runner-up Milton Chua both used True King Yang Zing Dinosaur. Third place Marcello Barberi used Demise True Draco. Champion and third-place images transcribed, including all side cards.",
+      "deckImages": [
+        "https://roadoftheking.com/wp-content/uploads/2017/08/WCS2017_1st.jpg",
+        "https://roadoftheking.com/wp-content/uploads/2017/08/WCS2017_3rd.jpg"
+      ]
+    },
+    {
+      "id": "ocg-2017-01",
+      "url": "https://roadoftheking.com/ocg-2017-01-metagame/",
+      "title": "OCG 2017.01 Metagame",
+      "accessed": "2026-09-30",
+      "evidence": "337 of 537 top finishes were Zoodiac. Transcribed Kira’s winning Hatti CS x Oarashi Cup in Kitakyushu list, 40/15/15.",
+      "deckImages": [
+        "https://roadoftheking.com/wp-content/uploads/2017/04/OCG201701_Zoodiac.jpg"
+      ]
+    },
+    {
+      "id": "ocg-2017-07",
+      "url": "https://roadoftheking.com/ocg-2017-07-metagame/",
+      "title": "OCG 2017.07 Metagame",
+      "accessed": "2026-09-30",
+      "evidence": "19 Trickstar top finishes among 588 recorded decks. Used as evidence of popularity, not as an exact source for the authored representative Trickstar list."
+    },
+    {
+      "id": "ocg-2017-10",
+      "url": "https://roadoftheking.com/ocg-2017-10-metagame/",
+      "title": "OCG 2017.10 Metagame",
+      "accessed": "2026-09-30",
+      "evidence": "302 of 432 top finishes were SPYRAL. Transcribed Calvin Ang’s winning Asia Championship Winter 2018 Singapore qualifier list published in December 2017, 42/15/15.",
+      "deckImages": [
+        "https://roadoftheking.com/wp-content/uploads/2017/12/ACW2018Singapore_1st.jpg"
+      ]
+    }
+  ],
+  "decks": [
+    {
+      "id": "dinosaur-2017",
+      "year": 2017,
+      "title": "世界冠军 · 真龙皇龙星恐龙",
+      "en": "World Champion · True King Dinosaur",
+      "ja": "世界王者 · 真竜皇竜星恐竜",
+      "ace": "Ultimate Conductor Tyranno",
+      "sourceKind": "historical-decklist",
+      "sourceRefs": [
+        "worlds-2017"
+      ],
+      "description": "辻村涼介的2017世界冠军原表，40主卡／15额外／15副卡。小恐龙经效果破坏展开，源龙星衔接同调，究极传导恐兽压制战斗。",
+      "descriptionEn": "Tsujimura Ryosuke’s original 2017 Worlds champion list, 40 main / 15 extra / 15 side. Destroy baby Dinosaurs to develop Denglong, Synchros and Ultimate Conductor Tyranno.",
+      "descriptionJa": "2017年世界王者・辻村涼介の原表、メイン40／EX15／サイド15。恐竜の効果破壊から源竜星とシンクロを展開し、究極伝導恐獣で攻める。",
+      "combo": [
+        "破坏小恐龙，衔接源龙星与究极传导恐兽。",
+        "进化药的代价需要恐龙与非恐龙各一只。"
+      ],
+      "main": [
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          1
+        ],
+        [
+          "Souleating Oviraptor",
+          3
+        ],
+        [
+          "Miscellaneousaurus",
+          3
+        ],
+        [
+          "Babycerasaurus",
+          3
+        ],
+        [
+          "Petiteranodon",
+          2
+        ],
+        [
+          "True King Agnimazud, the Vanisher",
+          1
+        ],
+        [
+          "True King Lithosagym, the Disaster",
+          1
+        ],
+        [
+          "Mariamne, the True Dracophoenix",
+          2
+        ],
+        [
+          "Suanni, Fire of the Yang Zing",
+          1
+        ],
+        [
+          "Bi’an, Earth of the Yang Zing",
+          1
+        ],
+        [
+          "Ultimate Conductor Tyranno",
+          3
+        ],
+        [
+          "Giant Rex",
+          2
+        ],
+        [
+          "Jurrac Aeolo",
+          2
+        ],
+        [
+          "Terraforming",
+          2
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Lost World",
+          1
+        ],
+        [
+          "Dragonic Diagram",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Double Evolution Pill",
+          3
+        ],
+        [
+          "Nine Pillars of Yang Zing",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Denglong, First of the Yang Zing",
+          2
+        ],
+        [
+          "Herald of the Arc Light",
+          1
+        ],
+        [
+          "T.G. Hyper Librarian",
+          1
+        ],
+        [
+          "Yazi, Evil of the Yang Zing",
+          1
+        ],
+        [
+          "Metaphys Horus",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "PSY-Framelord Omega",
+          1
+        ],
+        [
+          "Crystal Wing Synchro Dragon",
+          1
+        ],
+        [
+          "Trishula, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Chaofeng, Phantom of the Yang Zing",
+          1
+        ],
+        [
+          "True King of All Calamities",
+          1
+        ],
+        [
+          "Evolzar Laggia",
+          1
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Tornado Dragon",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Gameciel, the Sea Turtle Kaiju",
+          2
+        ],
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Different Dimension Ground",
+          2
+        ],
+        [
+          "Heavy Storm Duster",
+          2
+        ],
+        [
+          "Solemn Strike",
+          2
+        ],
+        [
+          "Solemn Warning",
+          1
+        ]
+      ],
+      "playerName": "Tsujimura Ryosuke",
+      "placement": 1,
+      "event": "World Championship 2017"
+    },
+    {
+      "id": "true-draco-2017",
+      "year": 2017,
+      "title": "世界季军 · 真龙",
+      "en": "World Bronze · True Draco",
+      "ja": "世界3位 · 真竜",
+      "ace": "Master Peace, the True Dracoslaying King",
+      "sourceKind": "historical-decklist",
+      "sourceRefs": [
+        "worlds-2017"
+      ],
+      "description": "Marcello Barberi的2017世界季军原表，40／15／15。永续魔陷作为上级召唤祭品，离场破坏；真龙剑皇继承祭品卡种抗性。",
+      "descriptionEn": "Marcello Barberi’s original third-place 2017 Worlds list, 40/15/15. Tribute Continuous Spells and Traps, trigger their graveyard removal, and grant Master Peace immunity from the tributed card types.",
+      "descriptionJa": "2017年世界3位・Marcello Barberiの原表、40/15/15。永続魔法・罠をリリースし、墓地効果で除去。真竜剣皇はリリースしたカードの種類への耐性を得る。",
+      "combo": [
+        "永续魔法陷阱可用于表侧上级召唤。",
+        "真龙剑皇根据祭品的卡种取得抗性。"
+      ],
+      "main": [
+        [
+          "Master Peace, the True Dracoslaying King",
+          1
+        ],
+        [
+          "Dinomight Knight, the True Dracofighter",
+          3
+        ],
+        [
+          "Ignis Heat, the True Dracowarrior",
+          3
+        ],
+        [
+          "Majesty Maiden, the True Dracocaster",
+          1
+        ],
+        [
+          "Terraforming",
+          2
+        ],
+        [
+          "Dragonic Diagram",
+          1
+        ],
+        [
+          "True Draco Heritage",
+          3
+        ],
+        [
+          "Disciples of the True Dracophoenix",
+          3
+        ],
+        [
+          "Pot of Duality",
+          3
+        ],
+        [
+          "Pot of Desires",
+          3
+        ],
+        [
+          "Card of Demise",
+          2
+        ],
+        [
+          "Upstart Goblin",
+          1
+        ],
+        [
+          "Cosmic Cyclone",
+          2
+        ],
+        [
+          "The Monarchs Stormforth",
+          1
+        ],
+        [
+          "True King's Return",
+          3
+        ],
+        [
+          "True Draco Apocalypse",
+          3
+        ],
+        [
+          "Lose 1 Turn",
+          3
+        ],
+        [
+          "Skill Drain",
+          1
+        ],
+        [
+          "Solemn Warning",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Gaia Knight, the Force of Earth",
+          1
+        ],
+        [
+          "Scarlight Red Dragon Archfiend",
+          1
+        ],
+        [
+          "Scrap Dragon",
+          1
+        ],
+        [
+          "Gaia Dragon, the Thunder Charger",
+          1
+        ],
+        [
+          "Constellar Ptolemy M7",
+          1
+        ],
+        [
+          "Number 39: Utopia Beyond",
+          1
+        ],
+        [
+          "Photon Strike Bounzer",
+          1
+        ],
+        [
+          "Inzektor Exa-Beetle",
+          1
+        ],
+        [
+          "Gauntlet Launcher",
+          1
+        ],
+        [
+          "Number 21: Frozen Lady Justice",
+          1
+        ],
+        [
+          "Number 61: Volcasaurus",
+          1
+        ],
+        [
+          "Number 19: Freezadon",
+          1
+        ],
+        [
+          "Adreus, Keeper of Armageddon",
+          1
+        ],
+        [
+          "Tiras, Keeper of Genesis",
+          1
+        ],
+        [
+          "Gem-Knight Zirconia",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Ghost Ogre & Snow Rabbit",
+          2
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Vanity's Fiend",
+          2
+        ],
+        [
+          "Zaphion, the Timelord",
+          3
+        ],
+        [
+          "Kamion, the Timelord",
+          1
+        ],
+        [
+          "Time Maiden",
+          2
+        ],
+        [
+          "Cosmic Cyclone",
+          1
+        ],
+        [
+          "Imperial Order",
+          1
+        ]
+      ],
+      "playerName": "Marcello Barberi",
+      "placement": 3,
+      "event": "World Championship 2017"
+    },
+    {
+      "id": "zoodiac-2017",
+      "year": 2017,
+      "title": "年度上位 · 十二兽",
+      "en": "Tournament Winner · Zoodiac",
+      "ja": "大会優勝 · 十二獣",
+      "ace": "Zoodiac Chakanine",
+      "sourceKind": "historical-decklist",
+      "sourceRefs": [
+        "ocg-2017-01"
+      ],
+      "description": "北九州Hatti CS × 大嵐杯冠军キラ原表，40／15／15。狗环复活、龙枪快速破坏，灰流丽与幽鬼兔支撑十二兽内战。",
+      "descriptionEn": "Kira’s winning Hatti CS x Oarashi Cup in Kitakyushu list, 40/15/15. Chakanine revives Zoodiacs; Drident, Ash Blossom and Ghost Ogre control the mirror match.",
+      "descriptionJa": "北九州はっちCS×大嵐杯優勝・キラの原表、40/15/15。ライカで蘇生し、ドランシア・うらら・うさぎで相手を妨害。",
+      "combo": [
+        "狗环复活的怪兽当回合不能用作超量素材。",
+        "叠放十二兽时，每个名称的替代召唤一回合一次。"
+      ],
+      "main": [
+        [
+          "Zoodiac Ratpier",
+          3
+        ],
+        [
+          "Zoodiac Whiptail",
+          3
+        ],
+        [
+          "Zoodiac Thoroughblade",
+          3
+        ],
+        [
+          "Zoodiac Ramram",
+          2
+        ],
+        [
+          "Ghost Ogre & Snow Rabbit",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Zoodiac Barrage",
+          3
+        ],
+        [
+          "Fire Formation - Tenki",
+          1
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "My Body as a Shield",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Zoodiac Combo",
+          1
+        ],
+        [
+          "Dimensional Barrier",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Zoodiac Drident",
+          2
+        ],
+        [
+          "Zoodiac Chakanine",
+          2
+        ],
+        [
+          "Zoodiac Broadbull",
+          3
+        ],
+        [
+          "Zoodiac Hammerkong",
+          2
+        ],
+        [
+          "Zoodiac Boarbow",
+          2
+        ],
+        [
+          "Zoodiac Tigermortar",
+          1
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Daigusto Emeral",
+          1
+        ],
+        [
+          "Gagaga Samurai",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Jizukiru, the Star Destroying Kaiju",
+          1
+        ],
+        [
+          "Dogoran, the Mad Flame Kaiju",
+          1
+        ],
+        [
+          "Gameciel, the Sea Turtle Kaiju",
+          1
+        ],
+        [
+          "Flying \"C\"",
+          1
+        ],
+        [
+          "Interrupted Kaiju Slumber",
+          3
+        ],
+        [
+          "Enemy Controller",
+          3
+        ],
+        [
+          "Torrential Tribute",
+          2
+        ],
+        [
+          "Imperial Order",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ],
+        [
+          "Solemn Warning",
+          1
+        ]
+      ],
+      "playerName": "キラ",
+      "placement": 1,
+      "event": "Hatti CS x Oarashi Cup in Kitakyushu"
+    },
+    {
+      "id": "trickstar-2017",
+      "year": 2017,
+      "title": "年度热门 · 淘气仙星",
+      "en": "Yearly Favorites · Trickstar",
+      "ja": "年間人気 · トリックスター",
+      "ace": "Trickstar Holly Angel",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2017-07"
+      ],
+      "description": "根据2017年淘气仙星上位环境编制的代表构筑，40／15／15，并非冒用选手原表。曼珠诗华惩罚加手，康乃馨检索，转生与锁鸟形成手牌压制，连接怪兽打开进攻。",
+      "descriptionEn": "An authored 40/15/15 representative build based on the documented 2017 Trickstar metagame, not an attributed tournament list. Candina searches, Lycoris punishes added cards, and Reincarnation with Droll disrupts the hand.",
+      "descriptionJa": "2017年の入賞記録を参考に作成した代表構築、40/15/15。選手の原表ではない。キャンディナでサーチし、マンジュシカとリンカーネイション、ドロールで手札を牽制。",
+      "combo": [
+        "康乃馨检索本家，曼珠诗华惩罚对手加手。",
+        "淘气仙星的转生与锁鸟配合可阻止补充手牌。"
+      ],
+      "main": [
+        [
+          "Trickstar Candina",
+          3
+        ],
+        [
+          "Trickstar Lycoris",
+          3
+        ],
+        [
+          "Trickstar Lilybell",
+          2
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Ghost Ogre & Snow Rabbit",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Trickstar Light Stage",
+          3
+        ],
+        [
+          "Terraforming",
+          2
+        ],
+        [
+          "Pot of Desires",
+          2
+        ],
+        [
+          "Scapegoat",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          2
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Trickstar Reincarnation",
+          3
+        ],
+        [
+          "Solemn Strike",
+          3
+        ],
+        [
+          "Solemn Warning",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Trickstar Holly Angel",
+          3
+        ],
+        [
+          "Trickstar Crimson Heart",
+          1
+        ],
+        [
+          "Trickstar Black Catbat",
+          1
+        ],
+        [
+          "Link Spider",
+          2
+        ],
+        [
+          "Missus Radiant",
+          1
+        ],
+        [
+          "Proxy Dragon",
+          1
+        ],
+        [
+          "Decode Talker",
+          1
+        ],
+        [
+          "Gaia Saber, the Lightning Shadow",
+          1
+        ],
+        [
+          "Borreload Dragon",
+          1
+        ],
+        [
+          "Tornado Dragon",
+          1
+        ],
+        [
+          "Number 41: Bagooska the Terribly Tired Tapir",
+          1
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Lancea",
+          3
+        ],
+        [
+          "Gameciel, the Sea Turtle Kaiju",
+          2
+        ],
+        [
+          "Twin Twisters",
+          2
+        ],
+        [
+          "Dimensional Barrier",
+          3
+        ],
+        [
+          "Anti-Spell Fragrance",
+          3
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Cosmic Cyclone",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "spyral-2017",
+      "year": 2017,
+      "title": "年末冠军 · SPYRAL",
+      "en": "Year-End Winner · SPYRAL",
+      "ja": "年末優勝 · SPYRAL",
+      "ace": "SPYRAL Double Helix",
+      "sourceKind": "historical-decklist",
+      "sourceRefs": [
+        "ocg-2017-10"
+      ],
+      "description": "Calvin Ang的新加坡冬季亚洲赛资格赛冠军原表，42／15／15，刊于2017年末。无人机调整卡组顶，双螺旋展开，拷问巨人与连接怪兽构筑连续进攻。",
+      "descriptionEn": "Calvin Ang’s winning Singapore Winter Asia qualifier list published in late 2017, 42/15/15. Drone arranges the opponent’s deck, Double Helix develops SPYRAL, and Grinder Golem enables Link routes.",
+      "descriptionJa": "2017年末掲載、冬季アジア大会シンガポール予選優勝・Calvin Angの原表、42/15/15。ドローンとダブルヘリックスで展開し、トーチ・ゴーレムからリンクへ。",
+      "combo": [
+        "无人机调整卡顶，再用双螺旋宣言并展开。",
+        "装备最后的胜地，让沉睡者稳定破坏对方卡片。"
+      ],
+      "main": [
+        [
+          "SPYRAL GEAR - Drone",
+          3
+        ],
+        [
+          "SPYRAL Quik-Fix",
+          3
+        ],
+        [
+          "SPYRAL Super Agent",
+          1
+        ],
+        [
+          "SPYRAL Sleeper",
+          1
+        ],
+        [
+          "SPYRAL Master Plan",
+          1
+        ],
+        [
+          "SPYRAL GEAR - Last Resort",
+          1
+        ],
+        [
+          "Grinder Golem",
+          3
+        ],
+        [
+          "Blackwing - Gofu the Vague Shadow",
+          1
+        ],
+        [
+          "Destrudo the Lost Dragon's Frisson",
+          1
+        ],
+        [
+          "D.D. Crow",
+          1
+        ],
+        [
+          "Effect Veiler",
+          1
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Ghost Ogre & Snow Rabbit",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Set Rotation",
+          3
+        ],
+        [
+          "SPYRAL Resort",
+          3
+        ],
+        [
+          "Gateway to Chaos",
+          1
+        ],
+        [
+          "Oracle of Zefra",
+          1
+        ],
+        [
+          "Machine Duplication",
+          2
+        ],
+        [
+          "SPYRAL GEAR - Big Red",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "One for One",
+          1
+        ],
+        [
+          "Soul Charge",
+          1
+        ],
+        [
+          "SPYRAL GEAR - Utility Wire",
+          1
+        ],
+        [
+          "SPYRAL MISSION - Rescue",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Ancient Fairy Dragon",
+          1
+        ],
+        [
+          "Lyrilusc - Assembled Nightingale",
+          1
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Link Spider",
+          1
+        ],
+        [
+          "SPYRAL Double Helix",
+          2
+        ],
+        [
+          "Akashic Magician",
+          1
+        ],
+        [
+          "Proxy Dragon",
+          1
+        ],
+        [
+          "Security Dragon",
+          1
+        ],
+        [
+          "Decode Talker",
+          1
+        ],
+        [
+          "Ningirsu the World Chalice Warrior",
+          1
+        ],
+        [
+          "Tri-Gate Wizard",
+          1
+        ],
+        [
+          "Firewall Dragon",
+          2
+        ],
+        [
+          "Saryuja Skull Dread",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Effect Veiler",
+          1
+        ],
+        [
+          "Ghost Reaper & Winter Cherries",
+          2
+        ],
+        [
+          "Gameciel, the Sea Turtle Kaiju",
+          2
+        ],
+        [
+          "Dark Hole",
+          2
+        ],
+        [
+          "Twin Twisters",
+          2
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Evenly Matched",
+          2
+        ],
+        [
+          "Solemn Strike",
+          2
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ]
+      ],
+      "playerName": "Calvin Ang",
+      "placement": 1,
+      "event": "Asia Championship Winter 2018 Singapore Qualifier (2017 year-end source)"
+    }
+  ]
+}

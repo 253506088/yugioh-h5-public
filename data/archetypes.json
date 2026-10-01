@@ -2629,6 +2629,186 @@
         "match": "contains",
         "value": "Toon"
       }
+    },
+    {
+      "name": "Altergeist",
+      "kind": "setcode",
+      "code": "0x103",
+      "fallback": {
+        "match": "contains",
+        "value": "Altergeist"
+      }
+    },
+    {
+      "name": "Clear Wing",
+      "kind": "setcode",
+      "code": "0xff",
+      "fallback": {
+        "match": "contains",
+        "value": "Clear Wing"
+      }
+    },
+    {
+      "name": "Cyberdark",
+      "kind": "setcode",
+      "code": "0x4093",
+      "fallback": {
+        "match": "contains",
+        "value": "Cyberdark"
+      }
+    },
+    {
+      "name": "Gouki",
+      "kind": "setcode",
+      "code": "0xfc",
+      "fallback": {
+        "match": "contains",
+        "value": "Gouki"
+      }
+    },
+    {
+      "name": "Krawler",
+      "kind": "setcode",
+      "code": "0x104",
+      "fallback": {
+        "match": "contains",
+        "value": "Krawler"
+      }
+    },
+    {
+      "name": "Lyrilusc",
+      "kind": "setcode",
+      "code": "0xf7",
+      "fallback": {
+        "match": "contains",
+        "value": "Lyrilusc"
+      }
+    },
+    {
+      "name": "Mekk-Knight",
+      "kind": "setcode",
+      "code": "0x10c",
+      "fallback": {
+        "match": "contains",
+        "value": "Mekk-Knight"
+      }
+    },
+    {
+      "name": "Rokket",
+      "kind": "setcode",
+      "code": "0x102",
+      "fallback": {
+        "match": "contains",
+        "value": "Rokket"
+      }
+    },
+    {
+      "name": "SPYRAL",
+      "kind": "setcode",
+      "code": "0xee",
+      "fallback": {
+        "match": "contains",
+        "value": "SPYRAL"
+      }
+    },
+    {
+      "name": "SPYRAL GEAR",
+      "kind": "setcode",
+      "code": "0x10ee",
+      "fallback": {
+        "match": "contains",
+        "value": "SPYRAL GEAR"
+      }
+    },
+    {
+      "name": "SPYRAL MISSION",
+      "kind": "setcode",
+      "code": "0x20ee",
+      "fallback": {
+        "match": "contains",
+        "value": "SPYRAL MISSION"
+      }
+    },
+    {
+      "name": "Starving Venom",
+      "kind": "setcode",
+      "code": "0x1050",
+      "fallback": {
+        "match": "contains",
+        "value": "Starving Venom"
+      }
+    },
+    {
+      "name": "The Weather",
+      "kind": "setcode",
+      "code": "0x109",
+      "fallback": {
+        "match": "contains",
+        "value": "The Weather"
+      }
+    },
+    {
+      "name": "Timelord",
+      "kind": "setcode",
+      "code": "0x4a",
+      "fallback": {
+        "match": "contains",
+        "value": "Timelord"
+      }
+    },
+    {
+      "name": "Tindangle",
+      "kind": "setcode",
+      "code": "0x10b",
+      "fallback": {
+        "match": "contains",
+        "value": "Tindangle"
+      }
+    },
+    {
+      "name": "Trickstar",
+      "kind": "setcode",
+      "code": "0xfb",
+      "fallback": {
+        "match": "contains",
+        "value": "Trickstar"
+      }
+    },
+    {
+      "name": "True Draco",
+      "kind": "setcode",
+      "code": "0xf9",
+      "fallback": {
+        "match": "contains",
+        "value": "True Draco"
+      }
+    },
+    {
+      "name": "True King",
+      "kind": "setcode",
+      "code": "0xf9",
+      "fallback": {
+        "match": "contains",
+        "value": "True King"
+      }
+    },
+    {
+      "name": "Vendread",
+      "kind": "setcode",
+      "code": "0x106",
+      "fallback": {
+        "match": "contains",
+        "value": "Vendread"
+      }
+    },
+    {
+      "name": "World Chalice",
+      "kind": "setcode",
+      "code": "0xfd",
+      "fallback": {
+        "match": "contains",
+        "value": "World Chalice"
+      }
     }
   ]
 }

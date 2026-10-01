@@ -1,0 +1,8 @@
+/* A full bracket with every 2017 strategy represented; all finals replay. */
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const {DuelEngine}=require('../src/advanced-engine.js'),T=require('../src/tournament.js'),D=global.DuelData;
+const out=path.resolve(__dirname,'../output/rollout-2017/tournament');fs.mkdirSync(out,{recursive:true});
+const annual=Object.values(D.DECKS).filter(d=>d.year===2017).map(d=>d.id),pool=[...annual,'blue-eyes-2016','zoodiac-2016','majespecter-2016'];assert.equal(annual.length,5);
+const roster=Array.from({length:64},(_,i)=>pool[i%pool.length]),cup=T.create({deckIds:roster,seed:20171001,concurrency:8,pace:'turbo'});cup.resume();
+try{let steps=0;while(cup.status==='running'&&steps++<160000)cup.advance(1);assert.equal(cup.status,'completed',JSON.stringify(cup.matches.filter(m=>m.status==='error')));const games=cup.matches.flatMap(m=>m.games||[]);assert.equal(cup.progress().played,63);assert.equal(games.filter(g=>['limit','draw-limit'].includes(g.verdict?.kind)).length,0);const final=cup.matches.at(-1).games.at(-1),cursor=new T.ReplayCursor(final);while(cursor.next()){}assert.deepEqual(cursor.engine.snapshot(),final.final);const report={participants:64,roster,seed:20171001,played:63,status:cup.status,finalReplayMatches:true,protectionDecisions:0};fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));fs.writeFileSync(path.join(out,'tournament.json'),JSON.stringify(cup.snapshot()));console.log(JSON.stringify(report));}
+catch(e){fs.writeFileSync(path.join(out,'failure.json'),JSON.stringify({error:e.stack,snapshot:cup.snapshot()}));throw e;}

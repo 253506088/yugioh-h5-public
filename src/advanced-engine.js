@@ -204,7 +204,7 @@
       if((this.state.battleNegated||[]).includes(card.uid))return true;
       if(card.effectNegated||card.negatedUntil>=this.state.turn)return true;
       if(card.id==='qli-towers')return false;
-      return [0,1].some(p=>this.spells(p).some(c=>c.id==='skill-drain'&&this.activeSpell(c)));
+      return [0,1].some(p=>this.spells(p).some(c=>c.id==='skill-drain'&&this.activeSpell(c)&&this.skillDrainApplies?.(card,c)!==false));
     }
     level(card){const c=CARDS[card.id];if(['xyz','link'].includes(c.type))return 0;if(card.qliReduced&&!this.negated(card))return 4;return card.levelOverride&&(!card.levelOverride.until||card.levelOverride.until>=this.state.turn)?card.levelOverride.value:c.level||0;}
     attribute(card){return card.attributeOverride&&(card.attributeOverride.until==null||card.attributeOverride.until>=this.state.turn)?card.attributeOverride.value:CARDS[card.id].attribute;}
@@ -435,7 +435,7 @@
       const sets=this.tributeSets(card,!!action.noTribute,owner);req(sets.length,'祭品不足或没有可用的主怪兽区域。');
       const choices=action.tributes;
       if(!choices&&sets[0].length){
-        const pool=def.normalTributeEitherSide?[...new Set(sets.flat())].map(u=>this.find(u)?.card).filter(Boolean):this.monsters(owner).filter(c=>!CARDS[c.id].cannotTribute);
+        const pool=[...new Set(sets.flat())].map(u=>this.find(u)?.card).filter(Boolean);
         this.state.pending={kind:'materials',purpose:'tribute',responder:owner,owner,uid:card.uid,action:{...action},title:'选择上级召唤的祭品',min:1,max:this.tributeCount(card),candidates:pool.map(c=>this.option(c)),sets:sets.map(x=>[...x]),cancelable:true};return;
       }
       const chosen=choices||[];
@@ -582,7 +582,7 @@
         if(spec.tunerType&&d.type!==spec.tunerType)return false;
         if(spec.tunerRace&&this.race(m)!==spec.tunerRace)return false;
       }
-      for(const m of non){if(spec.nonId&&m.id!==spec.nonId)return false;if(spec.nonType&&CARDS[m.id].type!==spec.nonType)return false;if(spec.nonLevel&&this.level(m)!==spec.nonLevel)return false;if(spec.nonGemini&&!CARDS[m.id].gemini)return false;if(spec.nonNormal&&!this.isNormalMonster(m))return false;}
+      for(const m of non){if(spec.nonId&&m.id!==spec.nonId)return false;if(spec.nonType&&CARDS[m.id].type!==spec.nonType&&!(spec.nonType==='pendulum'&&CARDS[m.id].pendulum))return false;if(spec.nonLevel&&this.level(m)!==spec.nonLevel)return false;if(spec.nonGemini&&!CARDS[m.id].gemini)return false;if(spec.nonNormal&&!this.isNormalMonster(m))return false;}
       if(spec.requiredNonIds&&!spec.requiredNonIds.every(id=>non.some(m=>m.id===id)))return false;
       if(spec.additionalAttribute&&!tuners.some(t=>materials.every(m=>m===t||this.attribute(m)===spec.additionalAttribute)))return false;
       return options.virtual||this.freeZones(owner,extra,{materials:materials.map(m=>m.uid)}).length>0;
@@ -682,9 +682,12 @@
       if(!extra)return false;const c=CARDS[extra.id],spec=c.link;if(c.type!=='link'||!spec||!this.canSpecial(owner,extra,{via:'link'}))return false;
       if(materials.some(m=>!m)||materials.length<(spec.min||1)||materials.length>(spec.max||c.linkRating)||new Set(materials.map(m=>m.uid)).size!==materials.length)return false;
       if(requiredUid&&!materials.some(m=>m.uid===requiredUid))return false;
-      if(materials.some(m=>{const f=this.find(m.uid),d=CARDS[m.id];return !f||f.owner!==owner||!fieldMonster(f.zone)||!m.faceUp||d.cannotLinkMaterial||(spec.noTokens&&d.type==='token')||(spec.nonLink&&d.type==='link')||(spec.effect&&(!d.effect||m.asMonster?.normal))||(spec.level&&this.level(m)!==spec.level);}))return false;
+      if(materials.some(m=>{const f=this.find(m.uid),d=CARDS[m.id];return !f||f.owner!==owner||!fieldMonster(f.zone)||!m.faceUp||d.cannotLinkMaterial||(spec.noTokens&&d.type==='token')||(spec.nonLink&&d.type==='link')||(spec.effect&&(!d.effect||this.isNormalMonster(m)||m.asMonster?.normal))||(spec.normal&&d.type!=='token'&&(!this.isNormalMonster(m)||isExtra(d)))||(spec.level&&this.level(m)!==spec.level)||(spec.race&&this.race(m)!==spec.race)||(spec.allAttribute&&this.attribute(m)!==spec.allAttribute)||(spec.series&&!D.inArchetype(m,spec.series))||(spec.pendulum&&d.type!=='pendulum'&&!d.pendulum)||(spec.linkOnly&&d.type!=='link')||(spec.normalSummoned&&!m.normalSummoned);}))return false;
       if(spec.attribute&&!materials.some(m=>this.attribute(m)===spec.attribute))return false;
       if(spec.differentNames&&new Set(materials.map(m=>this.cardNameId(m))).size!==materials.length)return false;
+      if(spec.includingTuner&&!materials.some(m=>this.isTuner(m)))return false;
+      const races=new Set(materials.map(m=>this.race(m))),attributes=new Set(materials.map(m=>this.attribute(m)));
+      if(spec.sameRace&&races.size!==1||spec.differentRaces&&races.size!==materials.length||spec.sameAttribute&&attributes.size!==1||spec.differentAttributes&&attributes.size!==materials.length)return false;
       if(!LinkRules.ratingTotals(materials).has(c.linkRating))return false;
       return this.freeZones(owner,extra,{materials:materials.map(m=>m.uid)}).length>0;
     }

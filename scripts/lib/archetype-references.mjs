@@ -44,7 +44,7 @@ export function materialArchetypeReferences(cards){
     for(const [key,v] of Object.entries(value)){
       if(scalarKeys.has(key)||key==='family'&&material){if(typeof v==='string')references.push({name:v,file:'card:'+id,kind:key});}
       if(listKeys.has(key))for(const name of v||[])references.push({name,file:'card:'+id,kind:key});
-      if(['fusion','fusionMore','synchro','earlyRules','materials'].includes(key))visit(v,id,true);
+      if(['fusion','fusionMore','synchro','link','earlyRules','materials'].includes(key))visit(v,id,true);
       else if(Array.isArray(value))visit(v,id,material);
     }
   }

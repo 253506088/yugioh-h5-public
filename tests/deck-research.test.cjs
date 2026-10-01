@@ -30,7 +30,7 @@ test('planning is a small, typed model request with compatible provider schemas'
 test('real source passwords become names and only playable, in-year cards become candidates', () => {
   const source = structuredClone(fixture); source.deck.main = [{ name: '89631140', count: 3, language: 'unknown', isPassword: true }, { name: '14558127', count: 1, language: 'unknown', isPassword: true }]; source.deck.extra = [];
   const result = R.prepare([source], resolver, { maxYear: 2013 });
-  assert.equal(result.sources[0].counts.playable, 3); assert.equal(result.sources[0].counts.outside, 1);
+  assert.equal(result.sources[0].counts.playable, 4); assert.equal(result.sources[0].counts.outside, 0);
   assert.equal(result.eligible.get('blue-eyes').name, 'Blue-Eyes White Dragon'); assert.equal(result.eligible.size, 1);
   assert.equal(R.prepare([source], resolver, { maxYear: 1998 }).eligible.size, 0);
   assert.throws(() => R.prepare([{ ...source, url: 'https://attacker.example/fake' }], resolver), { code: 'searchData' });

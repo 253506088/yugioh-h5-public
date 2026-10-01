@@ -64,7 +64,7 @@
   wrap('damage',function(prior,owner,amount,type='战斗',source=null){
     const named=!['战斗','效果'].includes(type)?D.CARD_LIST.find(c=>c.name===type||c.officialName===type):null;
     const cause=type==='战斗'?battle(this):L.causeFor(this,source||(named?{id:named.id}:null));
-    return L.scope(this,{cause,details:{kinds:['damage'],owner,lpBefore:this.state.players[owner].lp,damageType:type==='战斗'?'battle':'effect'}},()=>prior.call(this,owner,amount,type));
+    return L.scope(this,{cause,details:{kinds:['damage'],owner,lpBefore:this.state.players[owner].lp,damageType:type==='战斗'?'battle':'effect'}},()=>prior.call(this,owner,amount,type,source));
   });
   for(const method of ['heal','payLP'])wrap(method,function(prior,owner,amount,source=null){
     const cause=L.causeFor(this,source,method==='payLP'?'cost':'effect');

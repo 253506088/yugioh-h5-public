@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 651 个身份：163 个可用（16 个复用），488 个待实现。来源和具体范围见 [批次交接](../交接/2016批次交接.md)。
+当前 651 个身份：169 个可用（16 个复用），482 个待实现。来源和具体范围见 [批次交接](../交接/2016批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2016`。
 
@@ -27,6 +27,7 @@
 | 8240199 | 青色眼睛的贤士 | Sage with Eyes of Blue | 已登记本作实现 |
 | 8267140 | 宇宙旋风 | Cosmic Cyclone | 已登记本作实现 |
 | 9032529 | 天使之泪 | Graceful Tear | 已登记本作实现 |
+| 9929398 | 黑羽-胧影之业风 | Blackwing - Gofu the Vague Shadow | 已登记本作实现 |
 | 11110587 | 邻家割草 | That Grass Looks Greener | 已登记本作实现 |
 | 11163040 | 坏兽的出现记录 | The Kaiju Files | 已登记本作实现 |
 | 11193246 | 月光轮回舞踊 | Lunalight Reincarnation Dance | 已登记本作实现 |
@@ -58,6 +59,7 @@
 | 29726552 | 黏丝坏兽 库莫古斯 | Kumongous, the Sticky String Kaiju | 已登记本作实现 |
 | 29838323 | 水晶机巧-紫晶龙 | Crystron Thystvern | 复用既有实现 |
 | 30012506 | A-突击核 | A-Assault Core | 已登记本作实现 |
+| 30539496 | 真龙皇 利托斯阿齐姆·灾祸 | True King Lithosagym, the Disaster | 已登记本作实现 |
 | 31061682 | 星际仙踪-多萝塞尔 | Kozmo Farmgirl | 已登记本作实现 |
 | 31755044 | 十二兽 蛇笞 | Zoodiac Whiptail | 已登记本作实现 |
 | 33256280 | 炼装勇士·金驰 | Metalfoes Goldriver | 已登记本作实现 |
@@ -68,6 +70,7 @@
 | 36956512 | 怪粉坏兽 加达拉 | Gadarla, the Mystery Dust Kaiju | 已登记本作实现 |
 | 37626500 | 精灵的祝福 | Sprite's Blessing | 已登记本作实现 |
 | 37679169 | 星际仙踪-德尔塔穿梭机 | Kozmo Delta Shuttle | 已登记本作实现 |
+| 38572779 | 幻创之混种恐龙 | Miscellaneousaurus | 已登记本作实现 |
 | 38891741 | 神之摄理 | Ultimate Providence | 已登记本作实现 |
 | 38955728 | 龙核的咒灵者 | Dragon Core Hexer | 已登记本作实现 |
 | 39564736 | 重炼装融合 | Fullmetalfoes Fusion | 已登记本作实现 |
@@ -113,6 +116,7 @@
 | 56119752 | 礼物卡 | Present Card | 已登记本作实现 |
 | 56532353 | 真青眼究极龙 | Neo Blue-Eyes Ultimate Dragon | 已登记本作实现 |
 | 56907986 | 星际仙踪-稻草人 | Kozmo Strawman | 已登记本作实现 |
+| 57831349 | 龙星的九支 | Nine Pillars of Yang Zing | 已登记本作实现 |
 | 59496924 | 星际仙踪-陆地步行机 | Kozmo Landwalker | 本作适配：破坏代替自动选择价值最低的其他Kozmo卡片。 |
 | 59822133 | 青眼精灵龙 | Blue-Eyes Spirit Dragon | 本作适配：同时特召限制覆盖灵摆、衍生物及公共多选特召；旧卡逐只结算的特召仍按各次召唤处理。 |
 | 60473572 | 炼装勇士·钢人 | Metalfoes Steelen | 已登记本作实现 |
@@ -123,6 +127,7 @@
 | 64063868 | 星际仙踪-达克日食者号 | Kozmo Dark Eclipser | 已登记本作实现 |
 | 64280356 | 星际仙踪-铁皮 | Kozmo Tincan | 已登记本作实现 |
 | 65172015 | AtoZ-神龙歼灭炮 | A-to-Z-Dragon Buster Cannon | 已登记本作实现 |
+| 65536818 | 源龙星-望天吼 | Denglong, First of the Yang Zing | 已登记本作实现 |
 | 66399653 | 同盟格纳库 | Union Hangar | 已登记本作实现 |
 | 66938505 | 水晶机巧-胶子黑晶 | Crystron Rion | 复用既有实现 |
 | 67050396 | 星际仙踪-格琳德尔 | Kozmo Goodwitch | 已登记本作实现 |
@@ -170,6 +175,7 @@
 | 93665266 | 水晶机巧-量子白晶 | Crystron Quan | 复用既有实现 |
 | 94454495 | 星际仙踪-魔鞋骑手 | Kozmo Sliprider | 已登记本作实现 |
 | 94919024 | 月光红狐 | Lunalight Crimson Fox | 已登记本作实现 |
+| 96746083 | 真龙皇 阿耆尼马兹德·消灭 | True King Agnimazud, the Vanisher | 已登记本作实现 |
 | 97165977 | 月光舞豹姬 | Lunalight Panther Dancer | 已登记本作实现 |
 | 99274184 | 水晶机巧冲击 | Crystron Impact | 复用既有实现 |
 | 99330325 | 遭受妨碍的坏兽安眠 | Interrupted Kaiju Slumber | 本作适配：依次选择的两只坏兽分别召唤到对方和自己场上，固定攻击表示；不强制玩家进入战斗阶段或宣言攻击。 |
@@ -226,7 +232,6 @@
 | 9336190 | 幻影骑士团 雾鸦爪 | The Phantom Knights of Mist Claws | pending |
 | 9553721 | 灵魂的据所 | Shinobird Power Spot | pending |
 | 9659580 | 方界业 | Cubic Karma | pending |
-| 9929398 | 黑羽-胧影之业风 | Blackwing - Gofu the Vague Shadow | pending |
 | 9989792 | 三形金字塔·大要塞 | Triamid Fortress | pending |
 | 10194329 | 急袭猛禽-复仇秃鹫 | Raidraptor - Avenge Vulture | pending |
 | 10441498 | 辉神鸟 贝努鸟 | Vennu, Bright Bird of Divinity | pending |
@@ -331,7 +336,6 @@
 | 30086349 | 流星龙 流星黑龙 | Meteor Black Comet Dragon | pending |
 | 30270176 | 暗黑方界神 深红之挪婆 | Crimson Nova the Dark Cubic Lord | pending |
 | 30426226 | 对调英雄 | Switcheroroo | pending |
-| 30539496 | 真龙皇 利托斯阿齐姆·灾祸 | True King Lithosagym, the Disaster | pending |
 | 30603688 | 幻想之见习魔导师 | Apprentice Illusion Magician | pending |
 | 30757127 | 命运英雄 绝命人 | Destiny HERO - Dangerous | pending |
 | 30786387 | 花积 | Flower Stacking | pending |
@@ -372,7 +376,6 @@
 | 38026562 | 超化合兽 甲醇双面兽 | Vola-Chemicritter Methydraco | pending |
 | 38148100 | 芳香炽天使-迷迭香 | Aromaseraphy Rosemary | pending |
 | 38491199 | 废品栗子球 | Junkuriboh | pending |
-| 38572779 | 幻创之混种恐龙 | Miscellaneousaurus | pending |
 | 38695361 | 混沌的使者 | Envoy of Chaos | pending |
 | 38761908 | 伯吉斯异兽·高足杯虫 | Paleozoic Dinomischus | pending |
 | 38848158 | 点火骑士团结 | Igknights Unite | pending |
@@ -460,7 +463,6 @@
 | 57261568 | 花札卫-牡丹上蝴蝶- | Flower Cardian Peony with Butterfly | pending |
 | 57314798 | No.100 源数龙 | Number 100: Numeron Dragon | pending |
 | 57354389 | 岩石番兵 | Sentry Soldier of Stone | pending |
-| 57831349 | 龙星的九支 | Nine Pillars of Yang Zing | pending |
 | 58330108 | 破坏龙 甘多拉-烈光闪 | Gigarays Gandora the Dragon of Destruction | pending |
 | 58383100 | 光波镜骑士 | Cipher Mirror Knight | pending |
 | 58600555 | 电子光虫-核心菜粉蝶 | Digital Bug Corebage | pending |
@@ -494,7 +496,6 @@
 | 65029288 | 娱乐伙伴 异色眼钢爪狼 | Performapal Odd-Eyes Metal Claw | pending |
 | 65193366 | 精灵兽使 薇茵妲 | Spiritual Beast Tamer Winda | pending |
 | 65236257 | 创星的因子 | Tellarknight Genesis | pending |
-| 65536818 | 源龙星-望天吼 | Denglong, First of the Yang Zing | pending |
 | 65612386 | 魔帝 安格玛 | Angmarl the Fiendish Monarch | pending |
 | 65959844 | 化合电界 | Catalyst Field | pending |
 | 66141736 | 红莲升龙 | Red Rising Dragon | pending |
@@ -654,7 +655,6 @@
 | 96157835 | 急袭猛禽-武库猎鹰 | Raidraptor - Arsenal Falcon | pending |
 | 96592102 | 急袭猛禽-火刃焚烧猎鹰 | Raidraptor - Blade Burner Falcon | pending |
 | 96622984 | 捕食植物 苍蝇地狱草 | Predaplant Flytrap | pending |
-| 96746083 | 真龙皇 阿耆尼马兹德·消灭 | True King Agnimazud, the Vanisher | pending |
 | 97001138 | 暗黑上级召唤 | Dark Advance | pending |
 | 98287529 | 虚龙魔王 无形矢·心灵 | Amorphactor Pain, the Imagination Dracoverlord | pending |
 | 98414735 | 伯吉斯异兽·加拿大虫 | Paleozoic Canadia | pending |
