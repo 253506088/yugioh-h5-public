@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "title": "OCG 2018—2018 年增量切片",
+  "createdOn": "2026-10-02",
+  "startYear": 2018,
+  "endYear": 2018,
+  "dateRegion": "ocg",
+  "dateField": "misc_info[].ocg_date",
+  "deduplicateBy": "provider card id; artwork bytes by SHA-256",
+  "collectImages": [
+    "cropped",
+    "full"
+  ],
+  "excludeTypes": [
+    "Skill Card",
+    "Token"
+  ],
+  "excludeRushDuel": true,
+  "catalogUrl": "https://db.ygoprodeck.com/api/v7/cardinfo.php?misc=yes&startdate=01%2F01%2F2018&enddate=12%2F31%2F2018&dateregion=ocg",
+  "catalogAuthority": "provider_candidate_requires_OCG_product_crosscheck",
+  "firstOCGYear": 1999,
+  "firstPackCandidate": "Vol.1",
+  "firstPackDateCandidate": "1999-02-04",
+  "historicalReferenceStatus": "known_history_not_live_verified_in_this_session",
+  "runtimeImagePolicyTarget": "fully_embedded_no_network_fetch",
+  "implementationIsSeparateFromCollection": true,
+  "excludedIdentities": [
+    {
+      "providerId": 662855,
+      "name": "Amatsu-Okami of the Divine Peaks",
+      "reason": "Non-Duel World Championship prize card; absent from the frozen three-language playable CDB. Retained in the original provider response, excluded from this gameplay rollout.",
+      "source": "https://ygoprodeck.com/card/amatsu-okami-of-the-divine-peaks-10173"
+    },
+    {
+      "providerId": 662857,
+      "name": "Iron Knight of Revolution",
+      "reason": "Non-Duel World Championship prize card; absent from the frozen three-language playable CDB. Retained in the original provider response, excluded from this gameplay rollout.",
+      "source": "https://ygoprodeck.com/card/iron-knight-of-revolution-8824"
+    },
+    {
+      "providerId": 662854,
+      "name": "Noritoshi in Darkest Rainment",
+      "reason": "Non-Duel World Championship prize card; absent from the frozen three-language playable CDB. Retained in the original provider response, excluded from this gameplay rollout.",
+      "source": "https://ygoprodeck.com/card/noritoshi-in-darkest-rainment-10172"
+    },
+    {
+      "providerId": 662853,
+      "name": "Sanctity of Dragon",
+      "reason": "Non-Duel World Championship prize card; absent from the frozen three-language playable CDB. Retained in the original provider response, excluded from this gameplay rollout.",
+      "source": "https://ygoprodeck.com/card/sanctity-of-dragon-8825"
+    }
+  ]
+}

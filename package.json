@@ -85,7 +85,12 @@
     "test:2017:browser": "node tests/chronicle-2017-browser.cjs",
     "cards:coverage:2017": "node scripts/report-card-coverage.mjs --write-year 2017",
     "test:2017:tournament": "node tests/chronicle-2017-tournament.cjs",
-    "test:optimization-project": "node --test tests/optimization-project.test.cjs && node scripts/build.mjs --no-art --no-audio --out output/optimization/index.html && node tests/optimization-project-browser.cjs"
+    "test:optimization-project": "node --test tests/optimization-project.test.cjs && node scripts/build.mjs --no-art --no-audio --out output/optimization/index.html && node tests/optimization-project-browser.cjs",
+    "test:2018": "node --test tests/chronicle-2018.test.cjs tests/chronicle-2018-interactions.test.cjs tests/card-link.test.mjs tests/link-materials.test.cjs",
+    "test:2018:simulation": "node tests/chronicle-2018-simulation.cjs",
+    "test:2018:browser": "node tests/chronicle-2018-browser.cjs",
+    "cards:coverage:2018": "node scripts/report-card-coverage.mjs --write-year 2018",
+    "test:2018:tournament": "node tests/chronicle-2018-tournament.cjs"
   },
   "engines": {
     "node": ">=22.13.0"

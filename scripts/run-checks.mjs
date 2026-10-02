@@ -20,6 +20,7 @@ files.push(...['core','engines','support','abc','fusion','themes','kozmo'].map(n
 files.push('tests/optimization-project.test.cjs','tests/workshop-drag.test.cjs','tests/side-matches.test.cjs','tests/pvp-matches.test.mjs');
 files.push('tests/card-link.test.mjs','tests/link-materials.test.cjs');
 files.push('tests/chronicle-2017.test.cjs','tests/chronicle-2017-interactions.test.cjs','tests/chronicle-2017-expansion.test.cjs');
+files.push('tests/chronicle-2018.test.cjs','tests/chronicle-2018-interactions.test.cjs');
 const concurrency=process.env.DUEL_TEST_CONCURRENCY;
 if(concurrency&&!/^[1-9]\d*$/.test(concurrency))throw new Error('DUEL_TEST_CONCURRENCY must be a positive integer');
 const result=spawnSync(process.execPath,['--test','--test-reporter=tap',...(concurrency?['--test-concurrency='+concurrency]:[]),...files],{cwd:root,encoding:'utf8',maxBuffer:20_000_000});

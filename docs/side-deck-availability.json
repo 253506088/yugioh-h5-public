@@ -154,6 +154,31 @@
       "id": "spyral-2017",
       "available": 15,
       "source": 15
+    },
+    {
+      "id": "trickstar-2018",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "altergeist-2018",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "gouki-2018",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "sky-striker-2018",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "thunder-dragon-2018",
+      "available": 15,
+      "source": 15
     }
   ],
   "excluded": []

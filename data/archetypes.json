@@ -2809,6 +2809,132 @@
         "match": "contains",
         "value": "World Chalice"
       }
+    },
+    {
+      "name": "Crusadia",
+      "kind": "setcode",
+      "code": "0x116",
+      "fallback": {
+        "match": "contains",
+        "value": "Crusadia"
+      }
+    },
+    {
+      "name": "Dinowrestler",
+      "kind": "setcode",
+      "code": "0x11a",
+      "fallback": {
+        "match": "contains",
+        "value": "Dinowrestler"
+      }
+    },
+    {
+      "name": "Fur Hire",
+      "kind": "setcode",
+      "code": "0x114",
+      "fallback": {
+        "match": "contains",
+        "value": "Fur Hire"
+      }
+    },
+    {
+      "name": "Impcantation",
+      "kind": "setcode",
+      "code": "0x117",
+      "fallback": {
+        "match": "contains",
+        "value": "Impcantation"
+      }
+    },
+    {
+      "name": "Knightmare",
+      "kind": "setcode",
+      "code": "0x112",
+      "fallback": {
+        "match": "contains",
+        "value": "Knightmare"
+      }
+    },
+    {
+      "name": "Magical Musket",
+      "kind": "setcode",
+      "code": "0x108",
+      "fallback": {
+        "match": "contains",
+        "value": "Magical Musket"
+      }
+    },
+    {
+      "name": "Mayakashi",
+      "kind": "setcode",
+      "code": "0x121",
+      "fallback": {
+        "match": "contains",
+        "value": "Mayakashi"
+      }
+    },
+    {
+      "name": "Nephthys",
+      "kind": "setcode",
+      "code": "0x11f",
+      "fallback": {
+        "match": "contains",
+        "value": "Nephthys"
+      }
+    },
+    {
+      "name": "Orcust",
+      "kind": "setcode",
+      "code": "0x11b",
+      "fallback": {
+        "match": "contains",
+        "value": "Orcust"
+      }
+    },
+    {
+      "name": "Prank-Kids",
+      "kind": "setcode",
+      "code": "0x120",
+      "fallback": {
+        "match": "contains",
+        "value": "Prank-Kids"
+      }
+    },
+    {
+      "name": "Salamangreat",
+      "kind": "setcode",
+      "code": "0x119",
+      "fallback": {
+        "match": "contains",
+        "value": "Salamangreat"
+      }
+    },
+    {
+      "name": "Sky Striker",
+      "kind": "setcode",
+      "code": "0x115",
+      "fallback": {
+        "match": "contains",
+        "value": "Sky Striker"
+      }
+    },
+    {
+      "name": "Sky Striker Ace",
+      "kind": "setcode",
+      "code": "0x1115",
+      "fallback": {
+        "match": "contains",
+        "value": "Sky Striker Ace"
+      }
+    },
+    {
+      "name": "Thunder Dragon",
+      "kind": "setcode",
+      "code": "0x11c",
+      "fallback": {
+        "match": "contains",
+        "value": "Thunder Dragon"
+      }
     }
   ]
 }

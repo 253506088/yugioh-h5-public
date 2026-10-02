@@ -8,6 +8,8 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
   if (name === 'Secret Six Samurai - Rihan') return {fusion:Array.from({length:3},()=>({nameIncludes:'Six Samurai'})),fusionDifferentAttributes:true};
   if (name === 'Mudragon of the Swamp') return {fusion:[{},{}],fusionSameAttribute:true,fusionDifferentRaces:true};
   if (name === 'Sea Monster of Theseus') return {fusion:[{tuner:true},{tuner:true}]};
+  if (name === 'Chimeratech Megafleet Dragon') return {fusion:[{nameIncludes:'Cyber Dragon'},{extraMonsterZone:true}],fusionMore:{extraMonsterZone:true},contactMegafleet:true};
+  if (name === 'Elemental HERO Cosmo Neos') return {fusion:[{id:byName.get(norm('Elemental HERO Neos'))},...Array.from({length:3},()=>({nameIncludes:'Neo-Spacian'}))],neoSpacianDifferentAttributes:true};
   text = text.replace(/^(\d+) x "([^"]+)"$/, (_, n, card) => Array(Number(n)).fill('"'+card+'"').join(' + '));
   const legendary = text.match(/^Must be Special Summoned with "(The Claw of Hermos|The Fang of Critias)", using (?:a (.+?) monster|"([^"]+)")\./);
   if (legendary) {
@@ -33,15 +35,15 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
     const originalLevel = part.match(/^(\d+) (DARK|LIGHT|EARTH|WATER|FIRE|WIND) monsters? whose original Level is (\d+) or higher$/);
     if (originalLevel) { fusion.push(...Array.from({length:Number(originalLevel[1])},()=>({attribute:attributes[originalLevel[2]],originalMinLevel:Number(originalLevel[3])}))); continue; }
     const fieldOnly = / on the field, except Tokens$/.test(part);
-    const generic = part.replace(/ on the field, except Tokens$/, '').match(/^(\d+)(\+| or more)?\s+(.+?)\s+monsters?$/i);
+    const generic = part.replace(/ on the field, except Tokens$/, '').match(/^(\d+)(\+| or more)?\s+(?:(.+?)\s+)?monsters?$/i);
     if (!generic) throw new Error('Unparsed Fusion material: ' + name + ' / ' + part);
-    let body = generic[3].replace(/-Type\b/gi, ''), spec = fieldOnly ? {fieldOnly:true,noTokens:true} : {};
+    let body = (generic[3]||'').replace(/-Type\b/gi, ''), spec = fieldOnly ? {fieldOnly:true,noTokens:true} : {};
     if (/(?:^| )Effect$/i.test(body)) { spec.effect = true; body = body.replace(/(?:^| )Effect$/i, ''); }
-    const level = body.match(/^Level (\d+) or higher (.+)$/i);
-    if (level) { spec.minLevel = Number(level[1]); body = level[2]; }
+    const level = body.match(/^Level (\d+) or (higher|lower)(?: (.+))?$/i);
+    if (level) { spec[level[2]==='higher'?'minLevel':'maxLevel'] = Number(level[1]); body = level[3]||''; }
     const exactLevel = body.match(/^Level (\d+) (.+)$/i);
     if (exactLevel) { spec.level = Number(exactLevel[1]); body = exactLevel[2]; }
-    const type = body.match(/^(.*?)\s*(Synchro|Fusion|Xyz|Pendulum)$/i);
+    const type = body.match(/^(.*?)\s*(Synchro|Fusion|Xyz|Pendulum|Link)$/i);
     if (type) { spec.type = type[2].toLowerCase(); body = type[1]; }
     if (/ Normal$/.test(body)) { spec.normal = true; body = body.replace(/ Normal$/, ''); }
     if (/^(?:non-Effect|Normal)$/i.test(body)) { spec.normal = true; body = ''; }
@@ -55,7 +57,7 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
     else if (races[body]) spec.race = races[body];
     else if (attributes[body]) spec.attribute = attributes[body];
     else if (body === 'Gemini') spec.gemini = true;
-    else if (body || !Object.keys(spec).length) throw new Error('Unknown Fusion material: ' + name + ' / ' + body);
+    else if (body) throw new Error('Unknown Fusion material: ' + name + ' / ' + body);
     fusion.push(...Array.from({length: Number(generic[1])}, () => ({...spec})));
     if (generic[2]) fusionMore = spec;
   }
@@ -64,6 +66,7 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
 }
 
 export function parseSynchro(name, text, {byName, norm, races, attributes}) {
+  text=text.split(' / ')[0];
   if (name === 'Phantasmal Lord Ultimitl Bishbaalkin') return {synchro:{noSummon:true},noNormal:true,specialOnly:'bishbaalkin'};
   if (name === 'Ultimaya Tzolkin') return {synchro: {noSummon: true}, noNormal: true, specialOnly: 'tzolkin'};
   const parts = text.trim().split(/\s+\+\s+/);

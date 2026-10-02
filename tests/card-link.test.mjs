@@ -44,3 +44,26 @@ test('2017 Link grammar preserves a level cap, Flip, Link, and extra-deck origin
  assert.equal(parse('1 Normal Monster, except a Token').link.noTokens,true);
  assert.equal(parse('2 monsters with different Types and different Attributes').link.differentAttributes,true);
 });
+
+test('2018 Link grammar preserves excluded names/attributes and composed qualifications',()=>{
+ assert.equal(parse('1 "Knightmare" monster, except "Knightmare Mermaid"').link.excludeName,'Knightmare Mermaid');
+ assert.deepEqual(parse('1 non-WATER "Sky Striker Ace" monster').link,{min:1,max:1,excludeAttribute:'水',series:'Sky Striker Ace'});
+ assert.deepEqual(parse('2 Warrior Effect Monsters').link,{min:2,max:2,effect:true,race:'战士族'});
+ assert.equal(parse('2 Level 2 or higher Cyberse monsters').link.minLevel,2);
+ assert.equal(parse('1 non-Link "Traptrix" monster').link.nonLink,true);
+});
+test('2018 included materials distinguish a specific card, a series and a card type',()=>{
+ assert.equal(parse('2 monsters, including "Cyber Dragon"').link.includingName,'Cyber Dragon');
+ assert.equal(parse('2 Effect Monsters, including a "Crusadia" monster').link.includingSeries,'Crusadia');
+ assert.equal(parse('2 Effect Monsters, including a "T.G." Tuner').link.includingSeriesTuner,true);
+ assert.equal(parse('2 monsters, including a Link Monster').link.includingType,'link');
+ assert.equal(parse('2 monsters, including a Token').link.includingToken,true);
+ assert.equal(parse('2 monsters, including a monster with 2000 or more ATK').link.includingMinAtk,2000);
+ assert.throws(()=>parse('2 monsters, including an unknown qualifier'),/Unknown/);
+});
+test('2018 compound race and group requirements do not erase Effect Monster restrictions',()=>{
+ const o={races:{Warrior:'战士族',Machine:'机械族'},attributes:{DARK:'暗'}};
+ assert.deepEqual(parse('2 Effect Monsters (Warrior and/or Machine), including a Tuner',o).link,{min:2,max:2,includingTuner:true,races:['战士族','机械族'],effect:true});
+ const d=parse('2 DARK Machine monsters',o).link;assert.equal(d.allAttribute,'暗');assert.equal(d.race,'机械族');
+ const s=parse('2+ Effect Monsters with the same Type and Attribute',o).link;assert.equal(s.effect,true);assert.equal(s.sameRace,true);assert.equal(s.sameAttribute,true);
+});

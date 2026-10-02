@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 651 个身份：169 个可用（16 个复用），482 个待实现。来源和具体范围见 [批次交接](../交接/2016批次交接.md)。
+当前 651 个身份：171 个可用（16 个复用），480 个待实现。来源和具体范围见 [批次交接](../交接/2016批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2016`。
 
@@ -73,6 +73,7 @@
 | 38572779 | 幻创之混种恐龙 | Miscellaneousaurus | 已登记本作实现 |
 | 38891741 | 神之摄理 | Ultimate Providence | 已登记本作实现 |
 | 38955728 | 龙核的咒灵者 | Dragon Core Hexer | 已登记本作实现 |
+| 39238953 | 天声的服从 | Lullaby of Obedience | 已登记本作实现 |
 | 39564736 | 重炼装融合 | Fullmetalfoes Fusion | 已登记本作实现 |
 | 39778366 | 同盟紧急出动 | Union Scramble | 已登记本作实现 |
 | 39890958 | 强化支援机械·重装铠甲 | Heavy Mech Support Armor | 已登记本作实现 |
@@ -122,6 +123,7 @@
 | 60473572 | 炼装勇士·钢人 | Metalfoes Steelen | 已登记本作实现 |
 | 62015408 | 浮幽樱 | Ghost Reaper & Winter Cherries | 已登记本作实现 |
 | 63767246 | No.38 希望魁龙 银河巨神 | Number 38: Hope Harbinger Dragon Titanic Galaxy | 已登记本作实现 |
+| 63845230 | 吞食百万的暴食兽 | Eater of Millions | 已登记本作实现 |
 | 63941210 | 坏星坏兽 席兹奇埃鲁 | Jizukiru, the Star Destroying Kaiju | 已登记本作实现 |
 | 64014615 | 大欲之壶 | Pot of Acquisitiveness | 已登记本作实现 |
 | 64063868 | 星际仙踪-达克日食者号 | Kozmo Dark Eclipser | 已登记本作实现 |
@@ -380,7 +382,6 @@
 | 38761908 | 伯吉斯异兽·高足杯虫 | Paleozoic Dinomischus | pending |
 | 38848158 | 点火骑士团结 | Igknights Unite | pending |
 | 39024589 | 魔界剧团-花花配角 | Abyss Actor - Trendy Understudy | pending |
-| 39238953 | 天声的服从 | Lullaby of Obedience | pending |
 | 39618799 | 电子化天使-荼吉尼- | Cyber Angel Dakini | pending |
 | 39817919 | 灵魂鸟-忍鸦 | Shinobird Crow | pending |
 | 40392714 | 方界帝 疾风之盖伊罗 | Geira Guile the Cubic King | pending |
@@ -484,7 +485,6 @@
 | 62893810 | 骰子独眼巨人 | Dicelops | pending |
 | 63362460 | 命运英雄 神性人 | Destiny HERO - Celestial | pending |
 | 63737050 | 龙大神 | Ryu Okami | pending |
-| 63845230 | 吞食百万的暴食兽 | Eater of Millions | pending |
 | 63992027 | 二重光波 | Double Cipher | pending |
 | 64184058 | 命运英雄 决意人 | Destiny HERO - Decider | pending |
 | 64207696 | 娱乐伙伴 金牙狼 | Performapal Gold Fang | pending |

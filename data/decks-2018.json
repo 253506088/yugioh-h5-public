@@ -1,0 +1,938 @@
+{
+  "scope": [
+    2018
+  ],
+  "sources": [
+    {
+      "id": "worlds-2018",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2018/",
+      "accessed": "2026-10-02",
+      "note": "Placings and four deck images transcribed and visually checked, including all side cards."
+    },
+    {
+      "id": "ocg-2018-07",
+      "url": "https://roadoftheking.com/ocg-2018-07-metagame/",
+      "accessed": "2026-10-02",
+      "note": "490 top-placing decks: Sky Striker 173, Altergeist 86, Gouki 52, Thunder Dragon 31. Thunder Dragon preset is a representative adaptation, not a named tournament list."
+    }
+  ],
+  "decks": [
+    {
+      "id": "trickstar-2018",
+      "year": 2018,
+      "title": "世界冠军 · 淘气仙星",
+      "en": "World Champion · Trickstar",
+      "ja": "世界王者・トリックスター",
+      "ace": "Trickstar Holly Angel",
+      "description": "王家慶世界冠军原表：淘气仙星检索与持续伤害，配合手坑、食百万和替罪羊连接展开。完整42／15／15。",
+      "descriptionEn": "Wang Chia-Ching’s original Worlds champion list: Trickstar searches and burn, Eater of Millions and Scapegoat Link plays. Full 42/15/15.",
+      "descriptionJa": "王家慶選手の世界優勝リスト。トリックスターのサーチとバーン、百万喰らい、スケープ・ゴートからのリンク。42／15／15。",
+      "sourceKind": "historical-decklist",
+      "sourceRefs": [
+        "worlds-2018"
+      ],
+      "sourceImage": "https://roadoftheking.com/wp-content/uploads/2018/08/WorldChampionship2018_1st.jpg",
+      "main": [
+        [
+          "Trickstar Candina",
+          3
+        ],
+        [
+          "Trickstar Lycoris",
+          2
+        ],
+        [
+          "Trickstar Lilybell",
+          1
+        ],
+        [
+          "Cyber Dragon",
+          1
+        ],
+        [
+          "Eater of Millions",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Ghost Reaper & Winter Cherries",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          2
+        ],
+        [
+          "Ghost Ogre & Snow Rabbit",
+          2
+        ],
+        [
+          "Ghost Belle & Haunted Mansion",
+          2
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Trickstar Light Stage",
+          3
+        ],
+        [
+          "Scapegoat",
+          2
+        ],
+        [
+          "Pot of Desires",
+          2
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Gozen Match",
+          3
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Solemn Strike",
+          2
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ],
+        [
+          "Solemn Warning",
+          1
+        ],
+        [
+          "Trickstar Reincarnation",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Chimeratech Megafleet Dragon",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Number S39: Utopia the Lightning",
+          1
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Link Spider",
+          1
+        ],
+        [
+          "Sky Striker Ace - Kagari",
+          1
+        ],
+        [
+          "Trickstar Holly Angel",
+          1
+        ],
+        [
+          "Missus Radiant",
+          1
+        ],
+        [
+          "Isolde, Two Tales of the Noble Knights",
+          1
+        ],
+        [
+          "Knightmare Goblin",
+          1
+        ],
+        [
+          "Knightmare Cerberus",
+          1
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Ningirsu the World Chalice Warrior",
+          1
+        ],
+        [
+          "Triple Burst Dragon",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Cyber Dragon",
+          1
+        ],
+        [
+          "Inspector Boarder",
+          3
+        ],
+        [
+          "Effect Veiler",
+          1
+        ],
+        [
+          "Mind Control",
+          2
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Shared Ride",
+          1
+        ],
+        [
+          "Evenly Matched",
+          2
+        ],
+        [
+          "Heavy Storm Duster",
+          2
+        ],
+        [
+          "Imperial Order",
+          1
+        ],
+        [
+          "Needle Ceiling",
+          1
+        ]
+      ],
+      "combo": [
+        "康乃馨检索资源，曼珠诗华持续压低对手基本分。",
+        "以替罪羊与食百万衔接连接怪兽，保留手坑应对展开。"
+      ],
+      "sourceImageSHA256": "8324daa7a886d61e1bafde9a6e2ebed0243f4846cb20a168c11cb1ba6f683483"
+    },
+    {
+      "id": "altergeist-2018",
+      "year": 2018,
+      "title": "世界亚军 · 幻变骚灵",
+      "en": "World Runner-up · Altergeist",
+      "ja": "世界準優勝・オルターガイスト",
+      "ace": "Altergeist Hexstia",
+      "description": "Bohdan Temnyk世界亚军原表：多功能诈骗者连锁陷阱展开，泛在羽衣精与查询昆提兰那克控制战场。完整40／15／15。",
+      "descriptionEn": "Bohdan Temnyk’s original Worlds runner-up list: traps trigger Multifaker, with Silquitous and Kunquery controlling the field. Full 40/15/15.",
+      "descriptionJa": "Bohdan Temnyk選手の世界準優勝リスト。罠からマルチフェイカー、シルキタスとクンティエリで盤面を制御。40／15／15。",
+      "sourceKind": "historical-decklist",
+      "sourceRefs": [
+        "worlds-2018"
+      ],
+      "sourceImage": "https://roadoftheking.com/wp-content/uploads/2018/08/WorldChampionship2018_2nd.jpg",
+      "main": [
+        [
+          "Altergeist Kunquery",
+          1
+        ],
+        [
+          "Altergeist Marionetter",
+          3
+        ],
+        [
+          "Altergeist Multifaker",
+          3
+        ],
+        [
+          "Altergeist Silquitous",
+          2
+        ],
+        [
+          "Altergeist Meluseek",
+          3
+        ],
+        [
+          "Ghost Reaper & Winter Cherries",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          2
+        ],
+        [
+          "Ghost Ogre & Snow Rabbit",
+          2
+        ],
+        [
+          "Ghost Belle & Haunted Mansion",
+          2
+        ],
+        [
+          "Pot of Desires",
+          2
+        ],
+        [
+          "Pot of Duality",
+          1
+        ],
+        [
+          "Personal Spoofing",
+          3
+        ],
+        [
+          "Altergeist Protocol",
+          2
+        ],
+        [
+          "Altergeist Manifestation",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Mind Crush",
+          3
+        ],
+        [
+          "Rivalry of Warlords",
+          3
+        ],
+        [
+          "Imperial Order",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Clara & Rushka, the Ventriloduo",
+          1
+        ],
+        [
+          "Knightmare Mermaid",
+          1
+        ],
+        [
+          "Sky Striker Ace - Kagari",
+          1
+        ],
+        [
+          "Sky Striker Ace - Shizuku",
+          1
+        ],
+        [
+          "Altergeist Hexstia",
+          2
+        ],
+        [
+          "Altergeist Kidolga",
+          1
+        ],
+        [
+          "Akashic Magician",
+          1
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Isolde, Two Tales of the Noble Knights",
+          1
+        ],
+        [
+          "Altergeist Primebanshee",
+          1
+        ],
+        [
+          "Ningirsu the World Chalice Warrior",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Firewall Dragon",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Thunder King Rai-Oh",
+          2
+        ],
+        [
+          "Ghost Ogre & Snow Rabbit",
+          1
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Shared Ride",
+          3
+        ],
+        [
+          "Lullaby of Obedience",
+          2
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm Duster",
+          3
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ]
+      ],
+      "combo": [
+        "先盖放陷阱，再用多功能诈骗者展开本家怪兽。",
+        "泛在羽衣精回收己方卡并弹回对方卡，赫克斯提亚保护连锁。"
+      ],
+      "sourceImageSHA256": "6b89651dbf768eca13cb0c068fb3441d32d71096cb35a298b90a1f93cd1c223d"
+    },
+    {
+      "id": "gouki-2018",
+      "year": 2018,
+      "title": "世界季军 · 刚鬼",
+      "en": "World Third Place · Gouki",
+      "ja": "世界3位・剛鬼",
+      "ace": "Gouki Suprex",
+      "description": "Francesco Simoncelli世界季军原表：刚鬼素材送墓检索，再战与伊索德衔接连接召唤。防火龙遵循本作现行勘误。完整40／15／15。",
+      "descriptionEn": "Francesco Simoncelli’s original third-place Worlds list: Gouki material searches, Re-Match and Isolde extend Link plays. Firewall uses its current errata. Full 40/15/15.",
+      "descriptionJa": "Francesco Simoncelli選手の世界3位リスト。剛鬼の素材サーチ、再戦、イゾルデでリンク展開。ファイアウォールは現行テキスト。40／15／15。",
+      "sourceKind": "historical-decklist",
+      "sourceRefs": [
+        "worlds-2018"
+      ],
+      "sourceImage": "https://roadoftheking.com/wp-content/uploads/2018/08/WorldChampionship2018_3rd.jpg",
+      "main": [
+        [
+          "Gouki Bearhug",
+          1
+        ],
+        [
+          "Gouki Riscorpio",
+          1
+        ],
+        [
+          "Gouki Suprex",
+          3
+        ],
+        [
+          "Gouki Twistcobra",
+          2
+        ],
+        [
+          "Gouki Headbatt",
+          1
+        ],
+        [
+          "Gouki Octostretch",
+          2
+        ],
+        [
+          "Junk Forward",
+          3
+        ],
+        [
+          "Marauding Captain",
+          3
+        ],
+        [
+          "Speedroid Terrortop",
+          1
+        ],
+        [
+          "Speedroid Taketomborg",
+          1
+        ],
+        [
+          "Knightmare Corruptor Iblee",
+          1
+        ],
+        [
+          "Ghost Ogre & Snow Rabbit",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          2
+        ],
+        [
+          "Called by the Grave",
+          3
+        ],
+        [
+          "Instant Fusion",
+          3
+        ],
+        [
+          "Gouki Re-Match",
+          2
+        ],
+        [
+          "Divine Sword - Phoenix Blade",
+          1
+        ],
+        [
+          "Autonomous Action Unit",
+          1
+        ],
+        [
+          "Reinforcement of the Army",
+          1
+        ],
+        [
+          "Soul Charge",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Imperial Order",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Dragoness the Wicked Knight",
+          1
+        ],
+        [
+          "M-X-Saber Invoker",
+          1
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Knightmare Mermaid",
+          1
+        ],
+        [
+          "Isolde, Two Tales of the Noble Knights",
+          2
+        ],
+        [
+          "Knightmare Goblin",
+          2
+        ],
+        [
+          "Knightmare Cerberus",
+          1
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Underclock Taker",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Ningirsu the World Chalice Warrior",
+          1
+        ],
+        [
+          "Tri-Gate Wizard",
+          1
+        ],
+        [
+          "Firewall Dragon",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Scythe",
+          1
+        ],
+        [
+          "Ghost Reaper & Winter Cherries",
+          3
+        ],
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Hey, Trunade!",
+          2
+        ],
+        [
+          "Artifact Sanctum",
+          3
+        ],
+        [
+          "Red Reboot",
+          3
+        ]
+      ],
+      "combo": [
+        "霸王龙通常召唤带出同伴，连接素材送墓后检索再战。",
+        "伊索德按送墓装备的数量展开，梦幻崩影提供不同的解场路线。"
+      ],
+      "sourceImageSHA256": "dbe50539e6ef52256d8975d0412c8461b62a33a045d040601cbb1da82c1ec1ec"
+    },
+    {
+      "id": "sky-striker-2018",
+      "year": 2018,
+      "title": "世界殿军 · 闪刀姬",
+      "en": "World Fourth Place · Sky Striker",
+      "ja": "世界4位・閃刀姫",
+      "ace": "Sky Striker Ace - Kagari",
+      "description": "Jung Seung-Chul世界殿军原表：保持主要怪兽区空置，以交闪、燎里和雫循环资源，三张墓地魔法解锁追加效果。完整40／15／15。",
+      "descriptionEn": "Jung Seung-Chul’s original fourth-place Worlds list: empty Main Monster Zones enable Sky Striker spells; Engage, Kagari and Shizuku recycle resources. Full 40/15/15.",
+      "descriptionJa": "Jung Seung-Chul選手の世界4位リスト。メインモンスターゾーンを空け、エンゲージ、カガリ、シズクで資源を循環。40／15／15。",
+      "sourceKind": "historical-decklist",
+      "sourceRefs": [
+        "worlds-2018"
+      ],
+      "sourceImage": "https://roadoftheking.com/wp-content/uploads/2018/08/WorldChampionship2018_4th.jpg",
+      "main": [
+        [
+          "Sky Striker Ace - Raye",
+          3
+        ],
+        [
+          "Ghost Belle & Haunted Mansion",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          2
+        ],
+        [
+          "Ghost Ogre & Snow Rabbit",
+          2
+        ],
+        [
+          "Effect Veiler",
+          1
+        ],
+        [
+          "Sky Striker Mobilize - Engage!",
+          3
+        ],
+        [
+          "Sky Striker Mecha - Widow Anchor",
+          3
+        ],
+        [
+          "Sky Striker Airspace - Area Zero",
+          3
+        ],
+        [
+          "Sky Striker Mecha Modules - Multirole",
+          2
+        ],
+        [
+          "Sky Striker Maneuver - Afterburners!",
+          1
+        ],
+        [
+          "Sky Striker Mecha - Shark Cannon",
+          1
+        ],
+        [
+          "Sky Striker Mecha - Hornet Drones",
+          1
+        ],
+        [
+          "Sky Striker Mecha - Eagle Booster",
+          1
+        ],
+        [
+          "Sky Striker Maneuver - Jamming Waves!",
+          1
+        ],
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Shared Ride",
+          2
+        ],
+        [
+          "Reinforcement of the Army",
+          1
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Number S39: Utopia the Lightning",
+          1
+        ],
+        [
+          "Sky Striker Ace - Kagari",
+          3
+        ],
+        [
+          "Sky Striker Ace - Shizuku",
+          3
+        ],
+        [
+          "Knightmare Mermaid",
+          1
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Ningirsu the World Chalice Warrior",
+          1
+        ],
+        [
+          "Triple Burst Dragon",
+          1
+        ],
+        [
+          "Topologic Trisbaena",
+          1
+        ],
+        [
+          "Borreload Dragon",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Retaliating \"C\"",
+          3
+        ],
+        [
+          "Inspector Boarder",
+          3
+        ],
+        [
+          "The Winged Dragon of Ra - Sphere Mode",
+          3
+        ],
+        [
+          "Mind Control",
+          2
+        ],
+        [
+          "Pot of Acquisitiveness",
+          2
+        ],
+        [
+          "Typhoon",
+          2
+        ]
+      ],
+      "combo": [
+        "保持主要怪兽区空置，交闪检索后用燎里回收。",
+        "墓地积累三张魔法解锁追加效果，雫与多任务战刀机继续补充资源。"
+      ],
+      "sourceImageSHA256": "09509a0e428bed710889db8f3776edad3c4ff1bc2befe085cacb6f13aaeff8bd"
+    },
+    {
+      "id": "thunder-dragon-2018",
+      "year": 2018,
+      "title": "年度热门 · 雷龙",
+      "en": "Annual Favorite · Thunder Dragon",
+      "ja": "年間人気・サンダー・ドラゴン",
+      "ace": "Thunder Dragon Colossus",
+      "description": "依据2018年7月环境报告编制的代表改编：手牌效果启动超雷龙，除外与送墓触发资源循环，雷龙融合与雷神龙提供突破。不冒称赛事原表。",
+      "descriptionEn": "A representative adaptation based on the July 2018 metagame: hand effects unlock Colossus; banishment and GY effects recycle resources for Thunder Dragon Fusion and Titan.",
+      "descriptionJa": "2018年7月環境を参考にした代表構築。手札効果から超雷龍、除外と墓地の循環から雷龍融合と雷神龍へ。大会原本ではない。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2018-07"
+      ],
+      "main": [
+        [
+          "Thunder Dragon",
+          3
+        ],
+        [
+          "Thunder Dragondark",
+          3
+        ],
+        [
+          "Thunder Dragonroar",
+          3
+        ],
+        [
+          "Thunder Dragonhawk",
+          3
+        ],
+        [
+          "Thunder Dragonmatrix",
+          3
+        ],
+        [
+          "Thunder Dragonduo",
+          2
+        ],
+        [
+          "Batteryman Solar",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Thunder Dragon Fusion",
+          3
+        ],
+        [
+          "Allure of Darkness",
+          3
+        ],
+        [
+          "Gold Sarcophagus",
+          3
+        ],
+        [
+          "Called by the Grave",
+          3
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Pot of Desires",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Thunder Dragon Colossus",
+          3
+        ],
+        [
+          "Thunder Dragon Titan",
+          3
+        ],
+        [
+          "Some Summer Summoner",
+          2
+        ],
+        [
+          "Kaminari Attack",
+          1
+        ],
+        [
+          "Borrelsword Dragon",
+          1
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Link Spider",
+          1
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Decode Talker",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Red Reboot",
+          3
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Ghost Belle & Haunted Mansion",
+          1
+        ]
+      ],
+      "combo": [
+        "手牌发动雷族效果后，将场上雷族解放为超雷龙。",
+        "用除外与送墓触发循环，再用雷龙融合叫出雷神龙。"
+      ]
+    }
+  ]
+}

@@ -24,6 +24,8 @@ export function normalizeCatalog(payload,scope,{existingCards=[]}={}){
   for(let index=0;index<payload.data.length;index++){
     const raw=payload.data[index];
     if(!raw||!Number.isSafeInteger(raw.id)||raw.id<=0||typeof raw.name!=='string'||!raw.name.trim()||typeof raw.type!=='string'){quarantine.push({index,cardId:raw?.id??null,reason:'invalid_card_identity'});continue;}
+    const exclusion=scope.excludedIdentities?.find(c=>c.providerId===raw.id);
+    if(exclusion){if(exclusion.name!==raw.name||!exclusion.reason)throw new Error('Invalid documented identity exclusion: '+raw.id);excluded.push({cardId:raw.id,name:raw.name,reason:exclusion.reason});continue;}
     const formats=(Array.isArray(raw.misc_info)?raw.misc_info:[]).flatMap(m=>Array.isArray(m.formats)?m.formats:[]);
     if((scope.excludeTypes||[]).includes(raw.type)||raw.frameType==='skill'||(scope.excludeRushDuel&&(/^rush/i.test(raw.frameType||'')||(formats.includes('Rush Duel')&&!formats.includes('OCG'))))){excluded.push({cardId:raw.id,type:raw.type,reason:'different_format_or_not_deck_collectible'});continue;}
     const misc=Array.isArray(raw.misc_info)?raw.misc_info:[],rawDates=misc.map(x=>x.ocg_date).filter(Boolean),dates=[...new Set(rawDates.map(strictDate).filter(Boolean))];

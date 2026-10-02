@@ -499,11 +499,67 @@
       "sha256": "d2291d50b186a7c17bdbce295e05369ef9e2992425df2ba65e9263e7b854b0c2"
     },
     {
+      "id": "early-10000080",
+      "imageId": 10000080,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/10000080.jpg",
+      "path": "assets/duel/art/early-10000080.webp",
+      "sha256": "80c5d7a627745320f6e3c959f8e8dfed911e3f644077e7b6e555a10820debc06"
+    },
+    {
+      "id": "early-10045474",
+      "imageId": 10045474,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/10045474.jpg",
+      "path": "assets/duel/art/early-10045474.webp",
+      "sha256": "1934c3933557184f7e998a51169879b1fbc629992418fa4a12785c30b075797e"
+    },
+    {
+      "id": "early-10158145",
+      "imageId": 10158145,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/10158145.jpg",
+      "path": "assets/duel/art/early-10158145.webp",
+      "sha256": "81bf420349b0affe222b5384845273f8d1eddb8a58ffea74cf01b31ee2b90bfe"
+    },
+    {
       "id": "early-102380",
       "imageId": 102380,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/102380.jpg",
       "path": "assets/duel/art/early-102380.webp",
       "sha256": "387c58b497391e85a2ac70c32d1e653828dc973269e4aa6a31099966ef75a839"
+    },
+    {
+      "id": "early-10552026",
+      "imageId": 10552026,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/10552026.jpg",
+      "path": "assets/duel/art/early-10552026.webp",
+      "sha256": "856df7edff1e604d663b4e46663a39f7e2c45be8a14fa84dba522c49a2dc5782"
+    },
+    {
+      "id": "early-11012154",
+      "imageId": 11012154,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/11012154.jpg",
+      "path": "assets/duel/art/early-11012154.webp",
+      "sha256": "3f100652a8b494d3c3d52620275b3c6afb18673ca5e5ffcb8ca6d3ece2a19aa1"
+    },
+    {
+      "id": "early-12097275",
+      "imageId": 12097275,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/12097275.jpg",
+      "path": "assets/duel/art/early-12097275.webp",
+      "sha256": "a038cc6e14bfa46bf41d747f02270ebc595116ea4f4003d4fc5c1e3a6b50d4ed"
+    },
+    {
+      "id": "early-12421694",
+      "imageId": 12421694,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/12421694.jpg",
+      "path": "assets/duel/art/early-12421694.webp",
+      "sha256": "212eaf1a4214a03f57dd143ff313fae737e4db249b4448990ad5d95a55fbe06f"
+    },
+    {
+      "id": "early-12444060",
+      "imageId": 12444060,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/12444060.jpg",
+      "path": "assets/duel/art/early-12444060.webp",
+      "sha256": "d540828d12514a0009e47db071e31d47abb9cc1e13ed5f664eba19fba2269ccd"
     },
     {
       "id": "early-13035077",
@@ -518,6 +574,13 @@
       "url": "https://images.ygoprodeck.com/images/cards_cropped/1322368.jpg",
       "path": "assets/duel/art/early-1322368.webp",
       "sha256": "77134f165eb21feb9a507eb06e07043dacc14901b00edb64cefa53ced58e7edd"
+    },
+    {
+      "id": "early-1372887",
+      "imageId": 1372887,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/1372887.jpg",
+      "path": "assets/duel/art/early-1372887.webp",
+      "sha256": "9a8bd86e6bccd19d777bce29b0840b17d915cb8b0577605dc42ab5416aec9a1d"
     },
     {
       "id": "early-14087893",
@@ -541,6 +604,27 @@
       "sha256": "4d5287a3947adead0f3187be22ef6afeebd6839035a0a9160905e6867ff9a791"
     },
     {
+      "id": "early-1475311",
+      "imageId": 1475311,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/1475311.jpg",
+      "path": "assets/duel/art/early-1475311.webp",
+      "sha256": "0bd31e36ca41ea945435b1d864893c7c0b1d8730db272a8b2f2b370b295c431a"
+    },
+    {
+      "id": "early-1482001",
+      "imageId": 1482001,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/1482001.jpg",
+      "path": "assets/duel/art/early-1482001.webp",
+      "sha256": "2fde716c423a01be291dfdf865e8e20c4ec4c2ea47ee67007e3230fa33b224be"
+    },
+    {
+      "id": "early-14883228",
+      "imageId": 14883228,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/14883228.jpg",
+      "path": "assets/duel/art/early-14883228.webp",
+      "sha256": "3aa4babae4f08f5792c378594be86709689625a961c4ac4a1788358d9432b90e"
+    },
+    {
       "id": "early-14970113",
       "imageId": 14970113,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/14970113.jpg",
@@ -548,11 +632,39 @@
       "sha256": "f5252f65357a09d0b1dc89f5a8e335a2e0da5ec0b8c430adb729d5193a94523e"
     },
     {
+      "id": "early-1508649",
+      "imageId": 1508649,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/1508649.jpg",
+      "path": "assets/duel/art/early-1508649.webp",
+      "sha256": "f010ec6830274113eaa75e0bc3e2469a877819edf998addc0e38b34fe2df7669"
+    },
+    {
+      "id": "early-15291624",
+      "imageId": 15291624,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/15291624.jpg",
+      "path": "assets/duel/art/early-15291624.webp",
+      "sha256": "723f167c5cb4410a1a01535feb9429e82f06670fbfa35f80109a417ce8654d52"
+    },
+    {
+      "id": "early-15397015",
+      "imageId": 15397015,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/15397015.jpg",
+      "path": "assets/duel/art/early-15397015.webp",
+      "sha256": "83a8c7e25d16129ac43ae4fcc9705f3cf7e088839ba20e7897853f60ec253542"
+    },
+    {
       "id": "early-15693423",
       "imageId": 15693423,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/15693423.jpg",
       "path": "assets/duel/art/early-15693423.webp",
       "sha256": "3d9be0c9e490830332ae2125c545f07d6f64ae56e8dbd09737bea5c363897cff"
+    },
+    {
+      "id": "early-15800838",
+      "imageId": 15800838,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/15800838.jpg",
+      "path": "assets/duel/art/early-15800838.webp",
+      "sha256": "50f613124fe6a7ecd9faea99985d3b81a4530e1f0c3c8ff81060f95b001be8a3"
     },
     {
       "id": "early-17228908",
@@ -569,6 +681,13 @@
       "sha256": "bc6a03a8998cb43492909294727b227575d016968df047cadbbf89bdfd494c82"
     },
     {
+      "id": "early-1845204",
+      "imageId": 1845204,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/1845204.jpg",
+      "path": "assets/duel/art/early-1845204.webp",
+      "sha256": "35130b1af31118f1e9f4f15b33b104889fe9be0737dcfb9e9f04cf44f582723e"
+    },
+    {
       "id": "early-1861629",
       "imageId": 1861629,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/1861629.jpg",
@@ -581,6 +700,27 @@
       "url": "https://images.ygoprodeck.com/images/cards_cropped/18940556.jpg",
       "path": "assets/duel/art/early-18940556.webp",
       "sha256": "e96c7b8235dad4da8e30c8078463bf12a2eea343fcc9a5933ecf2a4d20073d66"
+    },
+    {
+      "id": "early-20191720",
+      "imageId": 20191720,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/20191720.jpg",
+      "path": "assets/duel/art/early-20191720.webp",
+      "sha256": "b35b018a6c22168e281c3e01e736dbf1ef697b2faf3e3bab7557b2e3305c54bc"
+    },
+    {
+      "id": "early-20292186",
+      "imageId": 20292186,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/20292186.jpg",
+      "path": "assets/duel/art/early-20292186.webp",
+      "sha256": "7b5ec8cc2cba86cf9a1a2643c16a91cda01bb63b0cb1838680112e716fa6662f"
+    },
+    {
+      "id": "early-20318029",
+      "imageId": 20318029,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/20318029.jpg",
+      "path": "assets/duel/art/early-20318029.webp",
+      "sha256": "39e66ad71cd7ebaae0b8794e026a01770ac9b7e6bc4a929c6f29959e635fb69a"
     },
     {
       "id": "early-20663556",
@@ -632,11 +772,25 @@
       "sha256": "db46ddc798455d6dc831782d65dbe8f352e3a1e07bdba2d8e403eda5fc52abcf"
     },
     {
+      "id": "early-23002292",
+      "imageId": 23002292,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/23002292.jpg",
+      "path": "assets/duel/art/early-23002292.webp",
+      "sha256": "f38aadb1e035864aae768cf5843c5d8c3d58888f1bd11876fa5c53336176ccd3"
+    },
+    {
       "id": "early-23401839",
       "imageId": 23401839,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/23401839.jpg",
       "path": "assets/duel/art/early-23401839.webp",
       "sha256": "4a3027778844f5fefd365b1dcc6460b72bad961bcf6ec505bffd4db62c92cde1"
+    },
+    {
+      "id": "early-23434538",
+      "imageId": 23434538,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/23434538.jpg",
+      "path": "assets/duel/art/early-23434538.webp",
+      "sha256": "8da6046cde340681aca70b19a42ca0439855b1c077943ca8df6e78c32d6c6c78"
     },
     {
       "id": "early-23924608",
@@ -646,11 +800,46 @@
       "sha256": "1eb2a38f7b4321c8d9a06f2954112a8b20dfc4eb5ff00e84edbd1ee637191b97"
     },
     {
+      "id": "early-24010609",
+      "imageId": 24010609,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/24010609.jpg",
+      "path": "assets/duel/art/early-24010609.webp",
+      "sha256": "e1bb9343c35a19b693ce72e3713ef54c320e9c45afb5655f3e94050b09dd411d"
+    },
+    {
+      "id": "early-24073068",
+      "imageId": 24073068,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/24073068.jpg",
+      "path": "assets/duel/art/early-24073068.webp",
+      "sha256": "8528cfea24ccdcf0b37e1d074ebdab5b72019e1ff786392a1a25856f65468d18"
+    },
+    {
+      "id": "early-24154052",
+      "imageId": 24154052,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/24154052.jpg",
+      "path": "assets/duel/art/early-24154052.webp",
+      "sha256": "3579f2873d63ff7e1e4eac3dbf7aa1cdf1d6e40ee3f38d573f03ecb53db8728e"
+    },
+    {
+      "id": "early-24224830",
+      "imageId": 24224830,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/24224830.jpg",
+      "path": "assets/duel/art/early-24224830.webp",
+      "sha256": "e062f52c53a8801383bad09854335dac1149b291082c8dec7011f9f0dd1bb2db"
+    },
+    {
       "id": "early-24317029",
       "imageId": 24317029,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/24317029.jpg",
       "path": "assets/duel/art/early-24317029.webp",
       "sha256": "171685a81d900801627a7014ed5f082a0d0d543e2e1285bf9980757b1acc2007"
+    },
+    {
+      "id": "early-2460565",
+      "imageId": 2460565,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/2460565.jpg",
+      "path": "assets/duel/art/early-2460565.webp",
+      "sha256": "a086937e05781df6987410a07367da25ac6e84249510560702a17a892cfad97d"
     },
     {
       "id": "early-24623598",
@@ -667,11 +856,46 @@
       "sha256": "4fc076cecfdd7bfe0e5e9e814be6f8e4f848ed59b9045c1d729e3bfb6702b63e"
     },
     {
+      "id": "early-25533642",
+      "imageId": 25533642,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/25533642.jpg",
+      "path": "assets/duel/art/early-25533642.webp",
+      "sha256": "54021ac8595bd644b4cfce8835e5626d4d05cf396eee1c9b72eb24477f79ccb9"
+    },
+    {
+      "id": "early-25733157",
+      "imageId": 25733157,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/25733157.jpg",
+      "path": "assets/duel/art/early-25733157.webp",
+      "sha256": "a89c9ca2e8a79d5b6afab08f0b32e4667e24ca34abe4bc20841dd3bad11906df"
+    },
+    {
+      "id": "early-25955749",
+      "imageId": 25955749,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/25955749.jpg",
+      "path": "assets/duel/art/early-25955749.webp",
+      "sha256": "f92007b460d8432c1fe2c1597929768a35435a291e370347b3b06e60f5c71773"
+    },
+    {
+      "id": "early-26077387",
+      "imageId": 26077387,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/26077387.jpg",
+      "path": "assets/duel/art/early-26077387.webp",
+      "sha256": "d113ceff917446ec01963ec0bd2328f98033a5def3f380ea18a2986ac299a719"
+    },
+    {
       "id": "early-26205777",
       "imageId": 26205777,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/26205777.jpg",
       "path": "assets/duel/art/early-26205777.webp",
       "sha256": "71b5eb03f932b835864d0e50c70519af930067cf98002b8b2a6bd534985d8c7f"
+    },
+    {
+      "id": "early-26285557",
+      "imageId": 26285557,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/26285557.jpg",
+      "path": "assets/duel/art/early-26285557.webp",
+      "sha256": "ae64e4b9a14d4ab6a62f275f80f9b8f7b2025539280784797ae2092f6839aaa6"
     },
     {
       "id": "early-26902560",
@@ -686,6 +910,13 @@
       "url": "https://images.ygoprodeck.com/images/cards_cropped/27107590.jpg",
       "path": "assets/duel/art/early-27107590.webp",
       "sha256": "c2027ff9c13ded32f9e60f37681cdde41dbcf1ce5df04908c7b5edaf3ed65775"
+    },
+    {
+      "id": "early-27541563",
+      "imageId": 27541563,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/27541563.jpg",
+      "path": "assets/duel/art/early-27541563.webp",
+      "sha256": "ef116a21eadd97eb0308cd0789c173ec62a7e5f80feda0e94f180da2ec4b2f81"
     },
     {
       "id": "early-28776350",
@@ -709,6 +940,13 @@
       "sha256": "2b3db149cde9ec47a7954161cd969f914cc25758cfebe6f653a24ac8624e9fa4"
     },
     {
+      "id": "early-29596581",
+      "imageId": 29596581,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/29596581.jpg",
+      "path": "assets/duel/art/early-29596581.webp",
+      "sha256": "330275e80d11f0f72071b1fb5b5987e4cad3617cc81550875cadf5ed0f99c03a"
+    },
+    {
       "id": "early-29981921",
       "imageId": 29981921,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/29981921.jpg",
@@ -728,6 +966,13 @@
       "url": "https://images.ygoprodeck.com/images/cards_cropped/30208479.jpg",
       "path": "assets/duel/art/early-30208479.webp",
       "sha256": "d958b6c8787aca715f1b1df9e2e4ecede733de93cd629a0c0091c5a26cf06a95"
+    },
+    {
+      "id": "early-30286474",
+      "imageId": 30286474,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/30286474.jpg",
+      "path": "assets/duel/art/early-30286474.webp",
+      "sha256": "fb0d8533638e2fe4603b4020b83170cce96a82e867db21aafce7f605b18eef8d"
     },
     {
       "id": "early-30450531",
@@ -757,6 +1002,13 @@
       "path": "assets/duel/art/early-31178212.webp",
       "sha256": "d42f99d626357ad8681e1ccaf2312b27e1d5788e8cb4bda759bc338f85a50e25",
       "sourceSha256": "b5b9c1514bc6118a2d8389ef394dafed157bf70b633c91915de184b834c52c61"
+    },
+    {
+      "id": "early-31423101",
+      "imageId": 31423101,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/31423101.jpg",
+      "path": "assets/duel/art/early-31423101.webp",
+      "sha256": "76e06cd73282fb996782ea0559b7067cdcefc4cab1f529ed5857d0807ec90ce5"
     },
     {
       "id": "early-31833038",
@@ -801,11 +1053,25 @@
       "sha256": "f450696430303224dc2b096382c182657e2afc7d0f354b772ffa8e074e38cb28"
     },
     {
+      "id": "early-35146019",
+      "imageId": 35146019,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/35146019.jpg",
+      "path": "assets/duel/art/early-35146019.webp",
+      "sha256": "fc041593a91ec2efca56cdd9e62d741397d128a9e457289b1a2e212dc63df733"
+    },
+    {
       "id": "early-35199656",
       "imageId": 35199656,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/35199656.jpg",
       "path": "assets/duel/art/early-35199656.webp",
       "sha256": "f0aa36a86e31645e3ee406d49d7b2013480a79d64d0d89713b3bb4e6298ae112"
+    },
+    {
+      "id": "early-35261759",
+      "imageId": 35261759,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/35261759.jpg",
+      "path": "assets/duel/art/early-35261759.webp",
+      "sha256": "001d62df1701220d704eef3dde929ba28c61760db04885cfae8d22f0579d708c"
     },
     {
       "id": "early-35371948",
@@ -836,6 +1102,13 @@
       "sha256": "ea8aaf20ef010e47a9c8a4ea74710df49a726e00920dc1775506803bee7745fb"
     },
     {
+      "id": "early-3679218",
+      "imageId": 3679218,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/3679218.jpg",
+      "path": "assets/duel/art/early-3679218.webp",
+      "sha256": "8b8ba0c5b26231650aa0e71933ea9d0c2abdc37313c8bcbf75e4504ae9b0712b"
+    },
+    {
       "id": "early-37101832",
       "imageId": 37101832,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/37101832.jpg",
@@ -848,6 +1121,13 @@
       "url": "https://images.ygoprodeck.com/images/cards_cropped/37433748.jpg",
       "path": "assets/duel/art/early-37433748.webp",
       "sha256": "2b610fa498050df2043fcb985c391545632421794ccb64ee659e2c8ecfbe05bb"
+    },
+    {
+      "id": "early-37520316",
+      "imageId": 37520316,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/37520316.jpg",
+      "path": "assets/duel/art/early-37520316.webp",
+      "sha256": "54f9e1460e987aab9791ca826fd628b92bb65fe012ad0de4c3b3adbf6e39d44f"
     },
     {
       "id": "early-38179121",
@@ -871,6 +1151,20 @@
       "sha256": "2d914c1de6d9c044a8b4b3abf92dce6c7cd93fa778cc6e3eff99a28262130840"
     },
     {
+      "id": "early-38406364",
+      "imageId": 38406364,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/38406364.jpg",
+      "path": "assets/duel/art/early-38406364.webp",
+      "sha256": "f3bb01e8ddfb9e7dbbdba45cf808e92da3e2413c6e83e574146e6e416dd9d8d7"
+    },
+    {
+      "id": "early-38411870",
+      "imageId": 38411870,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/38411870.jpg",
+      "path": "assets/duel/art/early-38411870.webp",
+      "sha256": "fdd863fa0c487e8630aef7272351a317e28f050ba5f50784dc0424a0b22af85f"
+    },
+    {
       "id": "early-38572779",
       "imageId": 38572779,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/38572779.jpg",
@@ -878,11 +1172,32 @@
       "sha256": "bedf0cb3be8af00927d0679a12a91bf6f53761d92ff3d9ba07de143324c4746a"
     },
     {
+      "id": "early-39064822",
+      "imageId": 39064822,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/39064822.jpg",
+      "path": "assets/duel/art/early-39064822.webp",
+      "sha256": "3889e2ea1d492144c373594db763da95eafdd3a42f7f876d2c8bdee4e0e0b0f4"
+    },
+    {
+      "id": "early-39238953",
+      "imageId": 39238953,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/39238953.jpg",
+      "path": "assets/duel/art/early-39238953.webp",
+      "sha256": "c4fe93ee0007da5d253ad5708e31709a031235bb297ccb7b4e9e612c2c8a48ac"
+    },
+    {
       "id": "early-3987233",
       "imageId": 3987233,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/3987233.jpg",
       "path": "assets/duel/art/early-3987233.webp",
       "sha256": "d8753bb6d44641f91a6f8e27e3ced451c2083916d2905a5563ce0690a1e99ec6"
+    },
+    {
+      "id": "early-40605147",
+      "imageId": 40605147,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/40605147.jpg",
+      "path": "assets/duel/art/early-40605147.webp",
+      "sha256": "afb96027afffd2740d890ca76e19f016b8d27a229550e237d7a7eb35e6b4d500"
     },
     {
       "id": "early-40619825",
@@ -913,11 +1228,32 @@
       "sha256": "58edb3e1f48a82abdff16a9fcf2436ff311034a5a04819329a4c3ab043685d53"
     },
     {
+      "id": "early-41420027",
+      "imageId": 41420027,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/41420027.jpg",
+      "path": "assets/duel/art/early-41420027.webp",
+      "sha256": "7df1a3ca8cd91e5ad0c2b7468b0a533c9b2727eeb605c66394556d74d3e1bbd2"
+    },
+    {
       "id": "early-41426869",
       "imageId": 41426869,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/41426869.jpg",
       "path": "assets/duel/art/early-41426869.webp",
       "sha256": "ba001801321d30d997a6d2bb6563d2d1ee5f806e2314d76444aa7ed4fa209bf5"
+    },
+    {
+      "id": "early-4148264",
+      "imageId": 4148264,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/4148264.jpg",
+      "path": "assets/duel/art/early-4148264.webp",
+      "sha256": "536b495378d7ae0b2b18086f46d63d0db4d288b5a4a97b6b4ce9563567dcae59"
+    },
+    {
+      "id": "early-41685633",
+      "imageId": 41685633,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/41685633.jpg",
+      "path": "assets/duel/art/early-41685633.webp",
+      "sha256": "0802d1cdf9f42ac7aa5f5ac969a8dee5a01dfeadf5eceaa689849616ee6cc87d"
     },
     {
       "id": "early-4178474",
@@ -934,11 +1270,39 @@
       "sha256": "146f095f01af375bf598d9c10c8115dc9f0325f74c6e783ffd6d6faecbd2ffbb"
     },
     {
+      "id": "early-42790071",
+      "imageId": 42790071,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/42790071.jpg",
+      "path": "assets/duel/art/early-42790071.webp",
+      "sha256": "3b85e061de993d8907427d5f06f22dec51e6b384ce16b692c5e47f6dacef8133"
+    },
+    {
+      "id": "early-43898403",
+      "imageId": 43898403,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/43898403.jpg",
+      "path": "assets/duel/art/early-43898403.webp",
+      "sha256": "32346df97af8b5bdc387b37bd7357e4a9de8317199beb9f9a06198deca479e15"
+    },
+    {
+      "id": "early-4423206",
+      "imageId": 4423206,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/4423206.jpg",
+      "path": "assets/duel/art/early-4423206.webp",
+      "sha256": "c304f289d4d7e86da1bc84cdca70e717298f9bed04ecce460eddba84aeab6254"
+    },
+    {
       "id": "early-44335251",
       "imageId": 44335251,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/44335251.jpg",
       "path": "assets/duel/art/early-44335251.webp",
       "sha256": "2c424c3a68663a817c5719b66e89957734388061c2171578bd4bc70488cc3bb0"
+    },
+    {
+      "id": "early-44586426",
+      "imageId": 44586426,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/44586426.jpg",
+      "path": "assets/duel/art/early-44586426.webp",
+      "sha256": "d49f82358a940058c29f7d6d0754cc655be43f61be029ef78c5f61214f5911bd"
     },
     {
       "id": "early-44665365",
@@ -953,6 +1317,20 @@
       "url": "https://images.ygoprodeck.com/images/cards_cropped/4474060.jpg",
       "path": "assets/duel/art/early-4474060.webp",
       "sha256": "1ed73af115aeaa6eec61f360de035c6e9fd430242c82ca3f0460208956df60d1"
+    },
+    {
+      "id": "early-46502744",
+      "imageId": 46502744,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/46502744.jpg",
+      "path": "assets/duel/art/early-46502744.webp",
+      "sha256": "e83237ad22b271be9f294ceeb3ad17467beb0f9055a88ad18c4741ae03ea7cd2"
+    },
+    {
+      "id": "early-47226949",
+      "imageId": 47226949,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/47226949.jpg",
+      "path": "assets/duel/art/early-47226949.webp",
+      "sha256": "bec5e8a98a3cdac9e89c120311f67f290c7615e1002b4faad66b262646a892f3"
     },
     {
       "id": "early-47355498",
@@ -1005,6 +1383,20 @@
       "sha256": "f4c8d6fb5b3d46c52773ddcd58660c05f1b9118fccae14748801af608182f9ac"
     },
     {
+      "id": "early-49725936",
+      "imageId": 49725936,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/49725936.jpg",
+      "path": "assets/duel/art/early-49725936.webp",
+      "sha256": "6fdb3890c06de41805afad2818e2fb0b66c8f94f23953537a80a31ca36cfa640"
+    },
+    {
+      "id": "early-50005218",
+      "imageId": 50005218,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/50005218.jpg",
+      "path": "assets/duel/art/early-50005218.webp",
+      "sha256": "2000f8bb8affd5f8b93ecf84e8d6218e1330cd091d696e8de38ed228b5947b7d"
+    },
+    {
       "id": "early-5043010",
       "imageId": 5043010,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/5043010.jpg",
@@ -1026,11 +1418,32 @@
       "sha256": "f1b2371b00bdce4f08d2d75d0a8d7e12904397f64996eaed2bd9c9309fd8773a"
     },
     {
+      "id": "early-51227866",
+      "imageId": 51227866,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/51227866.jpg",
+      "path": "assets/duel/art/early-51227866.webp",
+      "sha256": "fc8a3fda169d51119dd97c8ee0364823f63cc22d4953258d7773589d9081c7cf"
+    },
+    {
       "id": "early-52068432",
       "imageId": 52068432,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/52068432.jpg",
       "path": "assets/duel/art/early-52068432.webp",
       "sha256": "0afd56910bb5e0569301763497e6c1cd865be9547ff174edb9cdf6802b0e78f6"
+    },
+    {
+      "id": "early-52340444",
+      "imageId": 52340444,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/52340444.jpg",
+      "path": "assets/duel/art/early-52340444.webp",
+      "sha256": "773e3b5a3219e9482a46f13ce22fce44b6955f49c6aafcd39b970467f9521abb"
+    },
+    {
+      "id": "early-52927340",
+      "imageId": 52927340,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/52927340.jpg",
+      "path": "assets/duel/art/early-52927340.webp",
+      "sha256": "d692adafc7a5f86455ac700748877973caabadb19dc71a66bb50af5bc01514a2"
     },
     {
       "id": "early-53046408",
@@ -1040,11 +1453,39 @@
       "sha256": "d3df0a49568b2b4c2db5c28b329af40ba2895fae33567ebc9b2746e7926bdd36"
     },
     {
+      "id": "early-53143898",
+      "imageId": 53143898,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/53143898.jpg",
+      "path": "assets/duel/art/early-53143898.webp",
+      "sha256": "02d651888575c95fb7712fa2eb1497adc79084f28c25e1b882b1cbc3016c0f06"
+    },
+    {
+      "id": "early-53334471",
+      "imageId": 53334471,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/53334471.jpg",
+      "path": "assets/duel/art/early-53334471.webp",
+      "sha256": "3c60ba965edd2d60b37979f911d1bf8b7736afa4c02ede31b43cae89ca777888"
+    },
+    {
       "id": "early-53582587",
       "imageId": 53582587,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/53582587.jpg",
       "path": "assets/duel/art/early-53582587.webp",
       "sha256": "ef79cf4953ab0ec36e3d4e2983e8f9c4270f9452e16884b32c01e39fd58a3de6"
+    },
+    {
+      "id": "early-53932291",
+      "imageId": 53932291,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/53932291.jpg",
+      "path": "assets/duel/art/early-53932291.webp",
+      "sha256": "619fd16e073020883616fcad1aeef0ab925f2f13e3670ea18e7e140020fe6a66"
+    },
+    {
+      "id": "early-53936268",
+      "imageId": 53936268,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/53936268.jpg",
+      "path": "assets/duel/art/early-53936268.webp",
+      "sha256": "c1b1b8c79805d99c96d6dd3d779d9d2f8274687666d6a6208e46de9994647a1c"
     },
     {
       "id": "early-53989821",
@@ -1061,6 +1502,27 @@
       "sha256": "e80f3167288edbd105325682c09fab774eb088e30b45cde16c8bfaf54f504571"
     },
     {
+      "id": "early-54088068",
+      "imageId": 54088068,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/54088068.jpg",
+      "path": "assets/duel/art/early-54088068.webp",
+      "sha256": "6a57d02aba3443aa6ec486d941c7d034d32925ab793f033cb24b25afa71b637b"
+    },
+    {
+      "id": "early-54112932",
+      "imageId": 54112932,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/54112932.jpg",
+      "path": "assets/duel/art/early-54112932.webp",
+      "sha256": "1ce30b76b9ba3131edf2a589b6feb9cba1d35644a56f9b206ddd411e90b6294d"
+    },
+    {
+      "id": "early-54447022",
+      "imageId": 54447022,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/54447022.jpg",
+      "path": "assets/duel/art/early-54447022.webp",
+      "sha256": "9f895f744fd7e65b1367347724d563774cb77436b472118cf61127f05422b739"
+    },
+    {
       "id": "early-54631665",
       "imageId": 54631665,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/54631665.jpg",
@@ -1073,6 +1535,13 @@
       "url": "https://images.ygoprodeck.com/images/cards_cropped/54652250.jpg",
       "path": "assets/duel/art/early-54652250.webp",
       "sha256": "65d7693b9ede93fb40b544562729d1f7f338fa97eb714a546bc37f8d005ff44a"
+    },
+    {
+      "id": "early-55591586",
+      "imageId": 55591586,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/55591586.jpg",
+      "path": "assets/duel/art/early-55591586.webp",
+      "sha256": "912b03a3c803ccd989385e1116e66e2713582fe8be740225c4afd970b18f8411"
     },
     {
       "id": "early-5560911",
@@ -1096,11 +1565,25 @@
       "sha256": "449055ee79ae79e1381b7c1629425dc1dffb35b4139718df2b4e10edc6f451e5"
     },
     {
+      "id": "early-56410040",
+      "imageId": 56410040,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/56410040.jpg",
+      "path": "assets/duel/art/early-56410040.webp",
+      "sha256": "b7cc423106e4da16c62e788f2a096e67e75ffaff5842d8877f21a5aee232fcea"
+    },
+    {
       "id": "early-56649609",
       "imageId": 56649609,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/56649609.jpg",
       "path": "assets/duel/art/early-56649609.webp",
       "sha256": "15879f4e31f75b49faba1ecca961eb29c7b745b07c8cac2780fccdd1ce0a3564"
+    },
+    {
+      "id": "early-56713174",
+      "imageId": 56713174,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/56713174.jpg",
+      "path": "assets/duel/art/early-56713174.webp",
+      "sha256": "96dc03cd075748cde41b0bcc3aad8f82a9806633b65f409fb4519e4c15303ab2"
     },
     {
       "id": "early-57617178",
@@ -1138,12 +1621,33 @@
       "sha256": "c205ed84212ab302dd6eef4117174caf6ba460235ed8ee97053d947bb8039f57"
     },
     {
+      "id": "early-59438930",
+      "imageId": 59438930,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/59438930.jpg",
+      "path": "assets/duel/art/early-59438930.webp",
+      "sha256": "de27cfa5bed84c4731c6d6072116307222f4af969a2e257d2fd721b48978f41b"
+    },
+    {
       "id": "early-59822133",
       "imageId": 59822133,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/59822133.jpg",
       "path": "assets/duel/art/early-59822133.webp",
       "sha256": "b226e925fba6a547bdb7aeaa83aa8627227536325e14ca4847be5b5f44186dac",
       "sourceSha256": "c888be5095e06c22314ec60df4f7c6deb86b2cd7a3034b0f9dcf4267e4af4458"
+    },
+    {
+      "id": "early-59934749",
+      "imageId": 59934749,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/59934749.jpg",
+      "path": "assets/duel/art/early-59934749.webp",
+      "sha256": "dbee95046ac1b2b605a416d16eb2bf374c5f04df2a5739025794b11d0a9a9b3c"
+    },
+    {
+      "id": "early-60461077",
+      "imageId": 60461077,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/60461077.jpg",
+      "path": "assets/duel/art/early-60461077.webp",
+      "sha256": "328f086f97dcdd1aaddfcfc41b66220eae3c7ef15452a7d8146bdeb0f628e983"
     },
     {
       "id": "early-61283655",
@@ -1167,6 +1671,20 @@
       "sha256": "97585ef2fd78fcad6f5fc366ea2ad3faf2067f158db3b4be676917f9012f517a"
     },
     {
+      "id": "early-62015408",
+      "imageId": 62015408,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/62015408.jpg",
+      "path": "assets/duel/art/early-62015408.webp",
+      "sha256": "7e51a4d52d24517be3621a6ad842d9250eed1ad717b9ee3ac446158041cc7b12"
+    },
+    {
+      "id": "early-62376646",
+      "imageId": 62376646,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/62376646.jpg",
+      "path": "assets/duel/art/early-62376646.webp",
+      "sha256": "1a7b047ca3714c975c34db871ead7692c17de4385adb3d2f7a4da42c4275bd9d"
+    },
+    {
       "id": "early-62473983",
       "imageId": 62473983,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/62473983.jpg",
@@ -1174,11 +1692,39 @@
       "sha256": "5c22a33003fde88212269bc59370dcf59b2cece732b3097626efc9474026d79b"
     },
     {
+      "id": "early-63166095",
+      "imageId": 63166095,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/63166095.jpg",
+      "path": "assets/duel/art/early-63166095.webp",
+      "sha256": "64507e3690b2767f198560c2ce1ed39b05abf2b8f2e78c0d674e7102366e3403"
+    },
+    {
+      "id": "early-63288573",
+      "imageId": 63288573,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/63288573.jpg",
+      "path": "assets/duel/art/early-63288573.webp",
+      "sha256": "179cb6e803e6845a311f2f297c1c2a3360c4f16183acadfafb1e2775fc4e31f8"
+    },
+    {
       "id": "early-63695531",
       "imageId": 63695531,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/63695531.jpg",
       "path": "assets/duel/art/early-63695531.webp",
       "sha256": "9fdbf77c3918e8618bf6744bed7938bb68d75a761e7bc6e5e252d6fca0ddbe2b"
+    },
+    {
+      "id": "early-63845230",
+      "imageId": 63845230,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/63845230.jpg",
+      "path": "assets/duel/art/early-63845230.webp",
+      "sha256": "dae387ee3ade418f83bf7ad365c2634696ae1ab969434ae43f878bc08ce342b8"
+    },
+    {
+      "id": "early-64014615",
+      "imageId": 64014615,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/64014615.jpg",
+      "path": "assets/duel/art/early-64014615.webp",
+      "sha256": "8de42e56784c1387a46e04c4ab45b990ae847082e023060e31ae19150d92bcc9"
     },
     {
       "id": "early-64631466",
@@ -1195,11 +1741,25 @@
       "sha256": "589ca3849f3cada04c7840a5bca503bf4d61bb88e804d4090a1ed2d0907bae28"
     },
     {
+      "id": "early-64697431",
+      "imageId": 64697431,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/64697431.jpg",
+      "path": "assets/duel/art/early-64697431.webp",
+      "sha256": "1b2ed29b31898b6018919cc27a038366fad277f3391f1c65c2ef0838328fea15"
+    },
+    {
       "id": "early-65192027",
       "imageId": 65192027,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/65192027.jpg",
       "path": "assets/duel/art/early-65192027.webp",
       "sha256": "67b818af30c6d64aac26d6a8ebc7946abc64ac782090f35f0909868c8b0dead9"
+    },
+    {
+      "id": "early-65330383",
+      "imageId": 65330383,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/65330383.jpg",
+      "path": "assets/duel/art/early-65330383.webp",
+      "sha256": "0da77d25633b0582be1ebce9699f576b02b7e0313e42e9b4cc60a2148359d33a"
     },
     {
       "id": "early-65536818",
@@ -1251,11 +1811,39 @@
       "sha256": "c543585e12e40b97850e4fa55ddfa2c52b8645750c8250d097536fe2cbd771c1"
     },
     {
+      "id": "early-70681994",
+      "imageId": 70681994,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/70681994.jpg",
+      "path": "assets/duel/art/early-70681994.webp",
+      "sha256": "bfd21ad1ae53a56f7d9f8a9c1bb335f35d1e95272c4c696fc695137dbce3ea26"
+    },
+    {
+      "id": "early-71453557",
+      "imageId": 71453557,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/71453557.jpg",
+      "path": "assets/duel/art/early-71453557.webp",
+      "sha256": "c0efdcf193ae1f37baf22e1e0e3c2d4b92167d94e49e8045ffde6b2b58145e5a"
+    },
+    {
+      "id": "early-71564252",
+      "imageId": 71564252,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/71564252.jpg",
+      "path": "assets/duel/art/early-71564252.webp",
+      "sha256": "4c44681b6d98efb1b0aac5e8b3ba90dc6c0e566b7a964c5bb29dfb6861fe8c83"
+    },
+    {
       "id": "early-72405967",
       "imageId": 72405967,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/72405967.jpg",
       "path": "assets/duel/art/early-72405967.webp",
       "sha256": "6335b3738799f582044092c5e4e8e4f9ad551447c1983226e34fb5e23af87f1d"
+    },
+    {
+      "id": "early-72529749",
+      "imageId": 72529749,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/72529749.jpg",
+      "path": "assets/duel/art/early-72529749.webp",
+      "sha256": "df469c4c40c7db7a7cc4896009b1e33459a5d5cd50f129a8b78f4879b115e62d"
     },
     {
       "id": "early-72989439",
@@ -1279,6 +1867,13 @@
       "sha256": "6cb7fe2bad428e305d8d9f3640c94b563be0a35d497da800ce48ec021f41023b"
     },
     {
+      "id": "early-73642296",
+      "imageId": 73642296,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/73642296.jpg",
+      "path": "assets/duel/art/early-73642296.webp",
+      "sha256": "e1fc6447016d8fa79679c1fb9fb04eb3fb4ba06c8adf040a3ddfef3e7695aa47"
+    },
+    {
       "id": "early-73915051",
       "imageId": 73915051,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/73915051.jpg",
@@ -1300,11 +1895,39 @@
       "sha256": "8fae60cbad9cc49c0703e429705d1a8976a17dffad2ef3448052ca4b9f68a2e5"
     },
     {
+      "id": "early-75452921",
+      "imageId": 75452921,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/75452921.jpg",
+      "path": "assets/duel/art/early-75452921.webp",
+      "sha256": "dc03805fbed38f48a08c8c4e1b4d8d70067a42cae63eda66019c96ded1583c87"
+    },
+    {
+      "id": "early-75500286",
+      "imageId": 75500286,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/75500286.jpg",
+      "path": "assets/duel/art/early-75500286.webp",
+      "sha256": "70c887d4a9d78d82943ac056ef31ef3281d71a3aa7fd63ab8558ee2058e81a5a"
+    },
+    {
+      "id": "early-76685519",
+      "imageId": 76685519,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/76685519.jpg",
+      "path": "assets/duel/art/early-76685519.webp",
+      "sha256": "d6ce02e1d6bb5bc57049c518f81ab07f40eb64295bd7d77717aa52a136a65ff1"
+    },
+    {
       "id": "early-76792184",
       "imageId": 76792184,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/76792184.jpg",
       "path": "assets/duel/art/early-76792184.webp",
       "sha256": "71e1c30fba918b66b11555d0aee77df8cd0599852b7c1c149456e60002546e3e"
+    },
+    {
+      "id": "early-77058170",
+      "imageId": 77058170,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/77058170.jpg",
+      "path": "assets/duel/art/early-77058170.webp",
+      "sha256": "d56d5b67e705d9b84cd0037ba2b02aa1ea50902fccd83ef95fcf0322e2cc8667"
     },
     {
       "id": "early-77414722",
@@ -1356,6 +1979,13 @@
       "sha256": "fc06d604c346fa78a43820f46db0f03a6b132c51cf897531c0b29ec2c51cf76e"
     },
     {
+      "id": "early-81275020",
+      "imageId": 81275020,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/81275020.jpg",
+      "path": "assets/duel/art/early-81275020.webp",
+      "sha256": "f7e4f2ed185ab619c009b37938beda120775ab88b089f253add9ec60e4d1c480"
+    },
+    {
       "id": "early-81823360",
       "imageId": 81823360,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/81823360.jpg",
@@ -1370,6 +2000,55 @@
       "sha256": "63b8f2179374c060e8abfc9fdea78dcb67c6db8590782e73efbb399375e2e7f8"
     },
     {
+      "id": "early-83107873",
+      "imageId": 83107873,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/83107873.jpg",
+      "path": "assets/duel/art/early-83107873.webp",
+      "sha256": "a2ef00195176921060bf0976eb194c63245fd3f72a1aacda34e392ddbd2c707c"
+    },
+    {
+      "id": "early-84749824",
+      "imageId": 84749824,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/84749824.jpg",
+      "path": "assets/duel/art/early-84749824.webp",
+      "sha256": "bb4f91838b5f206a77ffbdd612287bc9008bc7defebca86222fbf44d2bf063dd"
+    },
+    {
+      "id": "early-84754430",
+      "imageId": 84754430,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/84754430.jpg",
+      "path": "assets/duel/art/early-84754430.webp",
+      "sha256": "fa619822db13154478ac43579a7c09b0065823e90c0561de9ed633971fe777ac"
+    },
+    {
+      "id": "early-8491308",
+      "imageId": 8491308,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/8491308.jpg",
+      "path": "assets/duel/art/early-8491308.webp",
+      "sha256": "59610548fed656eb18d088a27a0bd2faf2ea634653bf24fe3a1673033ff4b467"
+    },
+    {
+      "id": "early-85008676",
+      "imageId": 85008676,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/85008676.jpg",
+      "path": "assets/duel/art/early-85008676.webp",
+      "sha256": "32a5da2620967115ed63a467f6c296c1c11b6b7e785e69eb11f3e5edcc725cd7"
+    },
+    {
+      "id": "early-85289965",
+      "imageId": 85289965,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/85289965.jpg",
+      "path": "assets/duel/art/early-85289965.webp",
+      "sha256": "e8b28039a52c48b26c7b37a11f304ccd6a8b200885814f016c6595fd572f1369"
+    },
+    {
+      "id": "early-87116928",
+      "imageId": 87116928,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/87116928.jpg",
+      "path": "assets/duel/art/early-87116928.webp",
+      "sha256": "eb2a71d5add401281f181d97b23f67f29f0deb045bf374540ab24fc3d15e2706"
+    },
+    {
       "id": "early-88581108",
       "imageId": 88581108,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/88581108.jpg",
@@ -1377,11 +2056,32 @@
       "sha256": "93ba700233ff5fe29c8477212ab99fbde2ede6f8c07437b7fd8ffc6d94627976"
     },
     {
+      "id": "early-89538537",
+      "imageId": 89538537,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/89538537.jpg",
+      "path": "assets/duel/art/early-89538537.webp",
+      "sha256": "06a499af933c10e797b96aae1d49b0c06fba5d541ed0beed43ad53dd4ce331c8"
+    },
+    {
       "id": "early-90590303",
       "imageId": 90590303,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/90590303.jpg",
       "path": "assets/duel/art/early-90590303.webp",
       "sha256": "37fccd66a9356f205592918540e40996a1c7284e7dc83598c8cb6b39527aabcb"
+    },
+    {
+      "id": "early-90673288",
+      "imageId": 90673288,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/90673288.jpg",
+      "path": "assets/duel/art/early-90673288.webp",
+      "sha256": "3496c091b593a3ef8091a41712acc4d318cb52bc4071feac39002d71c59bc734"
+    },
+    {
+      "id": "early-90846359",
+      "imageId": 90846359,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/90846359.jpg",
+      "path": "assets/duel/art/early-90846359.webp",
+      "sha256": "70ff892cb9c8cd0b1d480bda7ff6bb72849d6dd5520d163095eda6f3765ea72a"
     },
     {
       "id": "early-91258852",
@@ -1403,6 +2103,27 @@
       "url": "https://images.ygoprodeck.com/images/cards_cropped/9212051.jpg",
       "path": "assets/duel/art/early-9212051.webp",
       "sha256": "2a3c3c82487a010e6d648301255d13d51152a2ee36c5a450fd45b40cb20bac24"
+    },
+    {
+      "id": "early-93503294",
+      "imageId": 93503294,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/93503294.jpg",
+      "path": "assets/duel/art/early-93503294.webp",
+      "sha256": "3682db669f1fec9bc2acacea97d89d251cbdb265af34c13ae8e41cd78e4a5250"
+    },
+    {
+      "id": "early-93581434",
+      "imageId": 93581434,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/93581434.jpg",
+      "path": "assets/duel/art/early-93581434.webp",
+      "sha256": "45e722ffa18f8a68c460722a8800d6ea8db98eaa05b4cceca6a1b20fe7f3033e"
+    },
+    {
+      "id": "early-94145021",
+      "imageId": 94145021,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/94145021.jpg",
+      "path": "assets/duel/art/early-94145021.webp",
+      "sha256": "3c8667659e63048389b94875b4b8472b05c1bdba30afcb78d2c76e65173da298"
     },
     {
       "id": "early-94160895",
@@ -1433,6 +2154,13 @@
       "sha256": "1a9de95bf8284d6f09e144cfd0947899ff72150815605d69010fe5fd1b145af6"
     },
     {
+      "id": "early-95238394",
+      "imageId": 95238394,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/95238394.jpg",
+      "path": "assets/duel/art/early-95238394.webp",
+      "sha256": "5eb941fe81f8e4b1960993e813717c2043782d54dbc7313c3157b236e4e840d8"
+    },
+    {
       "id": "early-95511642",
       "imageId": 95511642,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/95511642.jpg",
@@ -1454,6 +2182,13 @@
       "sha256": "ef9205630b21f5965248c14595695535c5fdabd122bf2e811b2eb2a9c5561f27"
     },
     {
+      "id": "early-9653271",
+      "imageId": 9653271,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/9653271.jpg",
+      "path": "assets/duel/art/early-9653271.webp",
+      "sha256": "7a01cc1e93b0670551d8eee6db8d516f3dcad6a14ef8f05f15e3ad6a273c8a4f"
+    },
+    {
       "id": "early-96746083",
       "imageId": 96746083,
       "url": "https://images.ygoprodeck.com/images/cards_cropped/96746083.jpg",
@@ -1466,6 +2201,34 @@
       "url": "https://images.ygoprodeck.com/images/cards_cropped/97077563.jpg",
       "path": "assets/duel/art/early-97077563.webp",
       "sha256": "fe75b5e64148fe95d8483bfd9b947e65db630675ac7870f55f50e9becd4556b6"
+    },
+    {
+      "id": "early-97268402",
+      "imageId": 97268402,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/97268402.jpg",
+      "path": "assets/duel/art/early-97268402.webp",
+      "sha256": "4e90034ec11cc31f878a6ecb4e5423db22fe72ed8c13a28750c93e0ae8ea9a13"
+    },
+    {
+      "id": "early-97688360",
+      "imageId": 97688360,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/97688360.jpg",
+      "path": "assets/duel/art/early-97688360.webp",
+      "sha256": "858b72625253c44ddd1c7ef034a38ed29e740097895ecabc98fdf1864eba4bf3"
+    },
+    {
+      "id": "early-98338152",
+      "imageId": 98338152,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/98338152.jpg",
+      "path": "assets/duel/art/early-98338152.webp",
+      "sha256": "e1793823b5b96c22d1137fb04779a32a21e66d80b4a9fc53dfa48c6bf6eae49f"
+    },
+    {
+      "id": "early-98645731",
+      "imageId": 98645731,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/98645731.jpg",
+      "path": "assets/duel/art/early-98645731.webp",
+      "sha256": "5bae57e3f783402a5a4da868b33ba887bcdfc5c638a7eba45bb2d0f6c901e3f5"
     },
     {
       "id": "early-98700941",
@@ -1494,6 +2257,13 @@
       "url": "https://images.ygoprodeck.com/images/cards_cropped/9929398.jpg",
       "path": "assets/duel/art/early-9929398.webp",
       "sha256": "7aedd313492fdc36a0e7a4f1a4eb48449d9b68fb127c688d95f94143482f712f"
+    },
+    {
+      "id": "early-99550630",
+      "imageId": 99550630,
+      "url": "https://images.ygoprodeck.com/images/cards_cropped/99550630.jpg",
+      "path": "assets/duel/art/early-99550630.webp",
+      "sha256": "4e553589a17be737221aba0be71c61e9e5c41626bee53423a580b834f0df79a9"
     },
     {
       "id": "early-99690140",

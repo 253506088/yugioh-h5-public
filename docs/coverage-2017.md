@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 636 个身份：98 个可用（1 个复用），538 个待实现。来源和具体范围见 [批次交接](../交接/2017批次交接.md)。
+当前 636 个身份：117 个可用（1 个复用），519 个待实现。来源和具体范围见 [批次交接](../交接/2017批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2017`。
 
@@ -12,6 +12,8 @@
 | --- | --- | --- | --- |
 | 35699 | 秘旋谍-龙卷风 | SPYRAL Sleeper | 已登记本作实现 |
 | 1322368 | 秘旋谍-双螺旋特工 | SPYRAL Double Helix | 已登记本作实现 |
+| 1482001 | 副语术士克拉拉与洛希卡 | Clara & Rushka, the Ventriloduo | 已登记本作实现 |
+| 1508649 | 幻变骚灵·十六巫赫斯提 | Altergeist Hexstia | 已登记本作实现 |
 | 1861629 | 解码语者 | Decode Talker | 已登记本作实现 |
 | 3987233 | 金毛妇 | Missus Radiant | 已登记本作实现 |
 | 4474060 | 秘旋谍装备-无人机 | SPYRAL GEAR - Drone | 已登记本作实现 |
@@ -25,6 +27,7 @@
 | 14558127 | 灰流丽 | Ash Blossom & Joyous Spring | 已登记本作实现 |
 | 14575467 | 僵尸男孩 | Zombino | 已登记本作实现 |
 | 14970113 | 十二兽 猴槌 | Zoodiac Hammerkong | 已登记本作实现 |
+| 15397015 | 冲浪检察官 | Inspector Boarder | 已登记本作实现 |
 | 15693423 | 颉颃胜负 | Evenly Matched | 已登记本作实现 |
 | 17228908 | 失落世界 | Lost World | 本作适配：通常怪兽的破坏代替自动选择小恐龙优先、其次价值最低的恐龙。 |
 | 18789533 | 点阵图跳离士 | Dotscaper | 已登记本作实现 |
@@ -36,7 +39,10 @@
 | 22862454 | 代理龙 | Proxy Dragon | 本作适配：破坏代替自动选择箭头指向的己方最低价值怪兽。 |
 | 22916281 | 被星杯所选中者 | Chosen by the World Chalice | 已登记本作实现 |
 | 23924608 | 沙尘之大风暴 | Heavy Storm Duster | 已登记本作实现 |
+| 24073068 | 刚鬼 过肩摔霸王龙 | Gouki Suprex | 已登记本作实现 |
+| 25533642 | 幻变骚灵·寻道梅露辛 | Altergeist Meluseek | 已登记本作实现 |
 | 27107590 | 时械巫女 | Time Maiden | 已登记本作实现 |
+| 27541563 | 幻变骚灵协议 | Altergeist Protocol | 已登记本作实现 |
 | 28486799 | 补充部队 | Backup Squad | 已登记本作实现 |
 | 28776350 | 虚空俏丽魔术师 | Akashic Magician | 已登记本作实现 |
 | 28929131 | 时械神 亚法恩 | Zaphion, the Timelord | 已登记本作实现 |
@@ -47,6 +53,7 @@
 | 32448765 | 淘气仙星·霍莉安琪儿 | Trickstar Holly Angel | 已登记本作实现 |
 | 32617464 | 三栅极男巫 | Tri-Gate Wizard | 已登记本作实现 |
 | 35125879 | 真龙皇的复活 | True King's Return | 已登记本作实现 |
+| 35146019 | 幻变骚灵物化 | Altergeist Manifestation | 已登记本作实现 |
 | 35199656 | 淘气仙星·曼珠诗华 | Trickstar Lycoris | 已登记本作实现 |
 | 35371948 | 淘气仙星的灯光舞台 | Trickstar Light Stage | 本作适配：被封锁的盖卡在结束阶段仍未发动时自动送墓。 |
 | 35911108 | 启动炮司令官 | Launcher Commander | 已登记本作实现 |
@@ -61,18 +68,27 @@
 | 44956694 | ROM云雌羊 | ROM Cloudia | 已登记本作实现 |
 | 48608796 | 抒情歌鸲-聚集夜莺 | Lyrilusc - Assembled Nightingale | 已登记本作实现 |
 | 49430782 | 真龙的继承 | True Draco Heritage | 已登记本作实现 |
+| 49725936 | 三发点射龙 | Triple Burst Dragon | 已登记本作实现 |
 | 51011872 | 淘气仙星·布拉蒂玛丽 | Trickstar Crimson Heart | 已登记本作实现 |
+| 52927340 | 幻变骚灵·查询昆提兰那克 | Altergeist Kunquery | 已登记本作实现 |
+| 53143898 | 幻变骚灵·网络傀儡师 | Altergeist Marionetter | 已登记本作实现 |
 | 53413628 | 码语者 | Code Talker | 已登记本作实现 |
+| 53936268 | 个人欺骗攻击 | Personal Spoofing | 已登记本作实现 |
 | 53989821 | 秘旋谍装备-多用钩绳 | SPYRAL GEAR - Utility Wire | 已登记本作实现 |
+| 54088068 | 刚鬼 头锤蝙蝠 | Gouki Headbatt | 已登记本作实现 |
 | 54631665 | 秘旋谍的秘密胜地 | SPYRAL Resort | 已登记本作实现 |
 | 54635100 | 叮当铃连接星 | Linkerbell | 已登记本作实现 |
 | 55573346 | 误爆 | Oops! | 已登记本作实现 |
 | 56649609 | 幻煌龙 螺旋 | Phantasm Spiral Dragon | 已登记本作实现 |
 | 58400390 | 被星杯所劝诱者 | Beckoned by the World Chalice | 已登记本作实现 |
 | 58984738 | 真龙拳士 雾动轰·铁拳 | Dinomight Knight, the True Dracofighter | 已登记本作实现 |
+| 59644128 | 刚鬼 喷气食人魔 | Gouki Jet Ogre | 已登记本作实现 |
 | 59919307 | 战线复归 | Back to the Front | 已登记本作实现 |
+| 59934749 | 圣骑士的追想 伊索德 | Isolde, Two Tales of the Noble Knights | 已登记本作实现 |
+| 60461077 | 刚鬼 闪光斧踢蝎 | Gouki Riscorpio | 已登记本作实现 |
 | 61283655 | 淘气仙星·坎迪娜 | Trickstar Candina | 已登记本作实现 |
 | 61529473 | 真龙的默示录 | True Draco Apocalypse | 已登记本作实现 |
+| 62376646 | 刚鬼再战 | Gouki Re-Match | 已登记本作实现 |
 | 62706865 | 网络小龙 | Draconnet | 已登记本作实现 |
 | 63528891 | 备份秘书 | Backup Secretary | 已登记本作实现 |
 | 63945693 | 虹之桥梁 | Rainbow Bridge | 已登记本作实现 |
@@ -94,10 +110,12 @@
 | 81823360 | 巨噬者X | Megalosmasher X | 已登记本作实现 |
 | 82946847 | 小翼龙 | Petiteranodon | 已登记本作实现 |
 | 88581108 | 真龙皇 法·王·兽 | True King of All Calamities | 已登记本作实现 |
+| 89538537 | 幻变骚灵·泛在羽衣精 | Altergeist Silquitous | 已登记本作实现 |
 | 90590303 | No.41 泥睡魔兽 睡梦貘 | Number 41: Bagooska the Terribly Tired Tapir | 已登记本作实现 |
 | 91258852 | 秘旋谍-高雅女士 | SPYRAL Master Plan | 已登记本作实现 |
 | 91269402 | 电子界信标 | Cyberse Beacon | 已登记本作实现 |
 | 91712985 | 时械神 卡米恩 | Kamion, the Timelord | 已登记本作实现 |
+| 93503294 | 幻变骚灵·隐私王班西 | Altergeist Primebanshee | 已登记本作实现 |
 | 94160895 | 真龙凰 玛丽亚姆内 | Mariamne, the True Dracophoenix | 已登记本作实现 |
 | 94626871 | 淘气仙星·斯威特戴薇儿 | Trickstar Black Catbat | 已登记本作实现 |
 | 95004025 | 真龙导士 威风凛·少女 | Majesty Maiden, the True Dracocaster | 已登记本作实现 |
@@ -105,6 +123,7 @@
 | 96334243 | 忒修斯魔栖物 | Sea Monster of Theseus | 已登记本作实现 |
 | 96404912 | 无偿交换 | Recall | 已登记本作实现 |
 | 97466712 | 入侵蠕虫 | Hack Worm | 已登记本作实现 |
+| 97688360 | 刚鬼 固定眼镜蛇 | Gouki Twistcobra | 已登记本作实现 |
 | 98700941 | 淘气仙星·莉莉贝儿 | Trickstar Lilybell | 已登记本作实现 |
 | 98978921 | 连接蜘蛛 | Link Spider | 已登记本作实现 |
 | 99111753 | 安全龙 | Security Dragon | 已登记本作实现 |
@@ -125,8 +144,6 @@
 | 1151281 | 地中族邪界兽·爱奥荧冰精 | Subterror Behemoth Phospheroglacier | pending |
 | 1197847 | 幻煌龙的螺旋波 | Phantasm Spiral Wave | pending |
 | 1278431 | 古代的机械素体 | Ancient Gear Frame | pending |
-| 1482001 | 副语术士克拉拉与洛希卡 | Clara & Rushka, the Ventriloduo | pending |
-| 1508649 | 幻变骚灵·十六巫赫斯提 | Altergeist Hexstia | pending |
 | 2220237 | 安全守卫者 | Secure Gardna | pending |
 | 2390019 | 扰乱魔改造 | Ojamassimilation | pending |
 | 2414168 | 中断反抗军 | Interrupt Resistor | pending |
@@ -183,7 +200,6 @@
 | 15092394 | 急袭猛禽-异邦猎鹰 | Raidraptor - Stranger Falcon | pending |
 | 15173384 | 无脸幻想魔术师 | Illusionist Faceless Magician | pending |
 | 15327215 | 六武众的真影 | Legendary Secret of the Six Samurai | pending |
-| 15397015 | 冲浪检察官 | Inspector Boarder | pending |
 | 15419596 | 魅幽鸟 | Ghost Bird of Bewitchment | pending |
 | 15449853 | 珀耳修斯的神域 | The Sanctum of Parshath | pending |
 | 15627227 | 上弹龙 | Overburst Dragon | pending |
@@ -241,21 +257,18 @@
 | 23850421 | 劫持翼龙 | Jack Wyvern | pending |
 | 23971061 | 双字节龙 | Doublebyte Dragon | pending |
 | 24037702 | 暗之进军 | March of the Dark Brigade | pending |
-| 24073068 | 刚鬼 过肩摔霸王龙 | Gouki Suprex | pending |
 | 24094258 | 刚炼装勇士·银金公主 | Heavymetalfoes Electrumite | pending |
 | 24207889 | 千查万别 | There Can Be Only One | pending |
 | 24361622 | 天球之圣刻印 | Hieratic Seal of the Heavenly Spheres | pending |
 | 24429467 | 魔导变换 | Mythical Bestiamorph | pending |
 | 24484270 | 宝石骑士·幽晶原核 | Gem-Knight Phantom Quartz | pending |
 | 25472513 | 天轮之双星道士 | Celestial Double Star Shaman | pending |
-| 25533642 | 幻变骚灵·寻道梅露辛 | Altergeist Meluseek | pending |
 | 25614410 | 英雄的遗产 | Legacy of a HERO | pending |
 | 26194151 | 死灵式同调 | Necroid Synchro | pending |
 | 26655293 | 马格努姆弹丸龙 | Magnarokket Dragon | pending |
 | 27217742 | 雷电哥哥 | Brohunder | pending |
 | 27240101 | 耳边风风鸟 | Kikinagashi Fucho | pending |
 | 27354732 | 魔导兽 胡狼王 | Mythical Beast Jackal King | pending |
-| 27541563 | 幻变骚灵协议 | Altergeist Protocol | pending |
 | 27561302 | 雨之天气模样 | The Weather Rainy Canvas | pending |
 | 27642961 | 秘旋谍任务-强袭 | SPYRAL MISSION - Assault | pending |
 | 27664101 | 连接重启 | Link Restart | pending |
@@ -300,7 +313,6 @@
 | 34302287 | 幻煌龙的战涡 | Phantasm Spiral Battle | pending |
 | 34472920 | 蜜罐机器人 | Honeybot | pending |
 | 34550857 | 抒情歌鸲-钴尖晶雀 | Lyrilusc - Cobalt Sparrow | pending |
-| 35146019 | 幻变骚灵物化 | Altergeist Manifestation | pending |
 | 35259350 | 笑容宇宙 | Smile Universe | pending |
 | 35272499 | 捕食植物 蜂兰蝎 | Predaplant Ophrys Scorpio | pending |
 | 35494087 | 疾行机人 噗噗噔骷髅 | Speedroid Skull Marbles | pending |
@@ -373,7 +385,6 @@
 | 47556396 | 地中族邪界兽·埃琴磁魔神 | Subterror Behemoth Speleogeist | pending |
 | 48308134 | 幻煌龙的螺旋突 | Phantasm Spiral Crash | pending |
 | 49511705 | 铳炮击 | Proton Blast | pending |
-| 49725936 | 三发点射龙 | Triple Burst Dragon | pending |
 | 49820233 | 娱乐伙伴 机炮食尸鬼 | Performapal Gatlinghoul | pending |
 | 49847524 | 炎上框架管理员 | Flame Administrator | pending |
 | 49930315 | 白棘魟 | White Stingray | pending |
@@ -388,17 +399,13 @@
 | 52589809 | 风来王 野风 | Wandering King Wildwind | pending |
 | 52714670 | 玄化次元 | Metaphys Dimension | pending |
 | 52834429 | 极光之天气模样 | The Weather Auroral Canvas | pending |
-| 52927340 | 幻变骚灵·查询昆提兰那克 | Altergeist Kunquery | pending |
-| 53143898 | 幻变骚灵·网络傀儡师 | Altergeist Marionetter | pending |
 | 53266486 | 麻醉弹丸龙 | Anesthrokket Dragon | pending |
 | 53309998 | 存档海马 | Sea Archiver | pending |
 | 53620899 | 雀姐妹 | Mahjong Munia Maidens | pending |
 | 53666449 | 天空贤者 密涅瓦 | Minerva, Scholar of the Sky | pending |
 | 53701457 | No.28 巨神蛾 | Number 28: Titanic Moth | pending |
 | 53842431 | 魔导兽 刻耳柏洛斯尊主 | Mythical Beast Master Cerberus | pending |
-| 53936268 | 个人欺骗攻击 | Personal Spoofing | pending |
 | 53956001 | 阴之天气模样 | The Weather Cloudy Canvas | pending |
-| 54088068 | 刚鬼 头锤蝙蝠 | Gouki Headbatt | pending |
 | 54178659 | 虹天气 彩虹 | The Weather Painter Rainbow | pending |
 | 54191698 | No.29 招财猫人偶 | Number 29: Mannequin Cat | pending |
 | 54423935 | 急袭猛禽复制品 | Raidraptor Replica | pending |
@@ -433,12 +440,9 @@
 | 58811192 | 圣灵兽骑 山飞隼 | Ritual Beast Ulti-Kimunfalcos | pending |
 | 59123937 | DD 恶妖提丰 | D/D Vice Typhon | pending |
 | 59479050 | No.71 海异鲨 | Number 71: Rebarian Shark | pending |
-| 59644128 | 刚鬼 喷气食人魔 | Gouki Jet Ogre | pending |
 | 59687381 | 防守区域 | Defense Zone | pending |
-| 59934749 | 圣骑士的追想 伊索德 | Isolde, Two Tales of the Noble Knights | pending |
 | 60349525 | 破解龙 | Cracking Dragon | pending |
 | 60431417 | 黄昏之双龙 | Twilight Twin Dragons | pending |
-| 60461077 | 刚鬼 闪光斧踢蝎 | Gouki Riscorpio | pending |
 | 60675348 | 雾动机龙咆哮 | Dinomists Howling | pending |
 | 60832978 | 双头共鸣者 | Double Resonator | pending |
 | 60954556 | 抒情歌鸲-青玉燕 | Lyrilusc - Sapphire Swallow | pending |
@@ -451,7 +455,6 @@
 | 61888819 | 侵入魔鬼基源 | Steelswarm Origin | pending |
 | 62000467 | 剑斗兽 德拉伽塞斯 | Gladiator Beast Dragases | pending |
 | 62306203 | 抢救代理驱动员 | Salvagent Driver | pending |
-| 62376646 | 刚鬼再战 | Gouki Re-Match | pending |
 | 62530723 | 星遗物的低语 | World Legacy Whispers | pending |
 | 62645025 | 幻影骑士团 失常磁环 | The Phantom Knights of Wrong Magnetring | pending |
 | 62753201 | 枪管冷却 | Borrel Cooling | pending |
@@ -591,7 +594,6 @@
 | 89238128 | 电子界加速人 | Cyberse Accelerator | pending |
 | 89320376 | 星遗物的傀儡 | World Legacy Pawns | pending |
 | 89355716 | 晴之天气模样 | The Weather Sunny Canvas | pending |
-| 89538537 | 幻变骚灵·泛在羽衣精 | Altergeist Silquitous | pending |
 | 89571015 | 风暴密码人 | Storm Cipher | pending |
 | 89785779 | 千年眼幻想师 | Millennium-Eyes Illusionist | pending |
 | 89907227 | 白斗气双头神龙 | White Aura Bihamut | pending |
@@ -619,7 +621,6 @@
 | 93236220 | 围绕着星遗物的战斗 | World Legacy Clash | pending |
 | 93356623 | 魔弹-交叉统治者 | Magical Musket - Cross-Domination | pending |
 | 93449450 | 方程式运动员 声速侧挂骑手 | F.A. Hang On Mach | pending |
-| 93503294 | 幻变骚灵·隐私王班西 | Altergeist Primebanshee | pending |
 | 93657021 | 命运英雄 暮托邦人 | Destiny HERO - Dusktopia | pending |
 | 94096018 | 秘女郎-雾美人 | SPYGAL Misty | pending |
 | 94142993 | 廷达魔三角之侵入者 | Tindangle Intruder | pending |
@@ -639,7 +640,6 @@
 | 96857854 | 钻尘妖 | Diamond Duston | pending |
 | 97273514 | 甲虫装机 皮可蛾 | Inzektor Picofalena | pending |
 | 97648103 | 星遗物的加护 | World Legacy's Heart | pending |
-| 97688360 | 刚鬼 固定眼镜蛇 | Gouki Twistcobra | pending |
 | 97795930 | 幻煌龙的天涡 | Phantasm Spiral Assault | pending |
 | 97803170 | 恶魔的呼声 | Call of the Archfiend | pending |
 | 97926515 | 紧急救急救命救援 | Emerging Emergency Rescute Rescue | pending |
