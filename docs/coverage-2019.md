@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 741 个身份：41 个可用（8 个复用），700 个待实现。来源和具体范围见 [批次交接](../交接/2019批次交接.md)。
+当前 741 个身份：43 个可用（8 个复用），698 个待实现。来源和具体范围见 [批次交接](../交接/2019批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2019`。
 
@@ -24,12 +24,14 @@
 | 31313405 | 转生炎兽 火凤凰 | Salamangreat Pyro Phoenix | 已登记本作实现 |
 | 32476603 | 银色弹丸龙 | Silverrokket Dragon | 已登记本作实现 |
 | 32519092 | 天威之拳僧 | Monk of the Tenyi | 已登记本作实现 |
+| 32530043 | 御影志士 | Gallant Granite | 已登记本作实现 |
 | 37351133 | 闪刀姬-露世 | Sky Striker Ace - Roze | 已登记本作实现 |
 | 38943357 | 魔力统辖 | Spell Power Mastery | 已登记本作实现 |
 | 39000945 | 恩底弥翁的皇后 | Reflection of Endymion | 已登记本作实现 |
 | 45819647 | 神圣魔皇后 塞勒涅 | Selene, Queen of the Master Magicians | 已登记本作实现 |
 | 46271408 | 闪刀术式-剪斗交刃 | Sky Striker Maneuver - Scissors Cross | 已登记本作实现 |
 | 50277355 | 交织绵羊 | Cross-Sheep | 复用既有实现 |
+| 50907446 | 神影依·七贤巨鲲魔 | El Shaddoll Apkallone | 已登记本作实现 |
 | 54529134 | 转生炎兽的超转生 | Salamangreat Transcendence | 已登记本作实现 |
 | 54693926 | 冥王结界波 | Dark Ruler No More | 已登记本作实现 |
 | 57160136 | 电脑网挖矿 | Cynet Mining | 已登记本作实现 |
@@ -288,7 +290,6 @@
 | 32120116 | 阎魔的裁决 | Enma's Judgment | pending |
 | 32176662 | 触发器冻结妖 | Flip Frozen | pending |
 | 32305461 | 占卜魔女 小炎 | Fortune Fairy En | pending |
-| 32530043 | 御影志士 | Gallant Granite | pending |
 | 32875265 | 傀儡葬仪-傀儡大游行 | Puppet Parade | pending |
 | 33022867 | 魔兽皇帝 加泽特 | Emperor Maju Garzett | pending |
 | 33298291 | 兽血奔腾 | Dances with Beasts | pending |
@@ -412,7 +413,6 @@
 | 49941059 | 奇迹之魔术门 | Magic Gate of Miracles | pending |
 | 50237654 | 超魔导师-黑魔术师徒 | The Dark Magicians | pending |
 | 50820852 | 雏神鸟 斯摩夫 | Simorgh, Bird of Beginning | pending |
-| 50907446 | 神影依·七贤巨鲲魔 | El Shaddoll Apkallone | pending |
 | 50947142 | 废铁信号灯 | Scrap-Iron Signal | pending |
 | 51023024 | 影灵之翼 文蒂 | Reeshaddoll Wendi | pending |
 | 51225407 | 魔妖坏劫 | Mayakashi Winter | pending |

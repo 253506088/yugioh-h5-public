@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 636 个身份：128 个可用（1 个复用），508 个待实现。来源和具体范围见 [批次交接](../交接/2017批次交接.md)。
+当前 636 个身份：129 个可用（1 个复用），507 个待实现。来源和具体范围见 [批次交接](../交接/2017批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2017`。
 
@@ -77,6 +77,7 @@
 | 48608796 | 抒情歌鸲-聚集夜莺 | Lyrilusc - Assembled Nightingale | 已登记本作实现 |
 | 49430782 | 真龙的继承 | True Draco Heritage | 已登记本作实现 |
 | 49725936 | 三发点射龙 | Triple Burst Dragon | 已登记本作实现 |
+| 50588353 | 水晶机巧-继承玻纤 | Crystron Halqifibrax | 已登记本作实现 |
 | 51011872 | 淘气仙星·布拉蒂玛丽 | Trickstar Crimson Heart | 已登记本作实现 |
 | 52927340 | 幻变骚灵·查询昆提兰那克 | Altergeist Kunquery | 已登记本作实现 |
 | 53143898 | 幻变骚灵·网络傀儡师 | Altergeist Marionetter | 已登记本作实现 |
@@ -392,7 +393,6 @@
 | 49847524 | 炎上框架管理员 | Flame Administrator | pending |
 | 49930315 | 白棘魟 | White Stingray | pending |
 | 50366775 | 格式弹涂鱼 | Formud Skipper | pending |
-| 50588353 | 水晶机巧-继承玻纤 | Crystron Halqifibrax | pending |
 | 50696588 | 粗人舞导 | Dai Dance | pending |
 | 50756327 | 魔导原典 克劳利 | Crowley, the First Propheseer | pending |
 | 51091138 | 导爆线 | Fuse Line | pending |

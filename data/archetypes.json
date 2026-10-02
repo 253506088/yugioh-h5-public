@@ -43,6 +43,15 @@
       }
     },
     {
+      "name": "Adamancipator",
+      "kind": "setcode",
+      "code": "0x140",
+      "fallback": {
+        "match": "contains",
+        "value": "Adamancipator"
+      }
+    },
+    {
       "name": "Aesir",
       "kind": "setcode",
       "code": "0x4b",
@@ -124,6 +133,24 @@
       "fallback": {
         "match": "contains",
         "value": "Ancient Gear"
+      }
+    },
+    {
+      "name": "Ancient Warriors",
+      "kind": "setcode",
+      "code": "0x137",
+      "fallback": {
+        "match": "contains",
+        "value": "Ancient Warriors"
+      }
+    },
+    {
+      "name": "Appliancer",
+      "kind": "setcode",
+      "code": "0x14b",
+      "fallback": {
+        "match": "contains",
+        "value": "Appliancer"
       }
     },
     {
@@ -429,6 +456,15 @@
       "reason": "旧环境卡名分组，没有独立的OCG Coach系列码。"
     },
     {
+      "name": "Codebreaker",
+      "kind": "setcode",
+      "code": "0x13c",
+      "fallback": {
+        "match": "contains",
+        "value": "Codebreaker"
+      }
+    },
+    {
       "name": "Constellar",
       "kind": "setcode",
       "code": "0x53",
@@ -672,6 +708,15 @@
       }
     },
     {
+      "name": "Dogmatika",
+      "kind": "setcode",
+      "code": "0x145",
+      "fallback": {
+        "match": "contains",
+        "value": "Dogmatika"
+      }
+    },
+    {
       "name": "Dracoslayer",
       "kind": "setcode",
       "code": "0xc7",
@@ -726,6 +771,15 @@
       }
     },
     {
+      "name": "Dual Avatar",
+      "kind": "setcode",
+      "code": "0x14f",
+      "fallback": {
+        "match": "contains",
+        "value": "Dual Avatar"
+      }
+    },
+    {
       "name": "Duston",
       "kind": "setcode",
       "code": "0x80",
@@ -750,6 +804,24 @@
       "fallback": {
         "match": "contains",
         "value": "Edge Imp"
+      }
+    },
+    {
+      "name": "Eldlich",
+      "kind": "setcode",
+      "code": "0x1142",
+      "fallback": {
+        "match": "contains",
+        "value": "Eldlich"
+      }
+    },
+    {
+      "name": "Eldlixir",
+      "kind": "setcode",
+      "code": "0x2142",
+      "fallback": {
+        "match": "contains",
+        "value": "Eldlixir"
       }
     },
     {
@@ -1161,6 +1233,15 @@
       }
     },
     {
+      "name": "Golden Land",
+      "kind": "setcode",
+      "code": "0x143",
+      "fallback": {
+        "match": "contains",
+        "value": "Golden Land"
+      }
+    },
+    {
       "name": "Gorgonic",
       "kind": "name-fragment",
       "match": "prefix",
@@ -1471,6 +1552,15 @@
       }
     },
     {
+      "name": "Ki-sikil",
+      "kind": "setcode",
+      "code": "0x152",
+      "fallback": {
+        "match": "contains",
+        "value": "Ki-sikil"
+      }
+    },
+    {
       "name": "Knightmare",
       "kind": "setcode",
       "code": "0x112",
@@ -1561,6 +1651,15 @@
       }
     },
     {
+      "name": "Lil-la",
+      "kind": "setcode",
+      "code": "0x153",
+      "fallback": {
+        "match": "contains",
+        "value": "Lil-la"
+      }
+    },
+    {
       "name": "lswarm",
       "kind": "setcode",
       "code": "0xa",
@@ -1639,6 +1738,15 @@
       "fallback": {
         "match": "contains",
         "value": "Magician Girl"
+      }
+    },
+    {
+      "name": "Magistus",
+      "kind": "setcode",
+      "code": "0x150",
+      "fallback": {
+        "match": "contains",
+        "value": "Magistus"
       }
     },
     {
@@ -2144,6 +2252,15 @@
       }
     },
     {
+      "name": "Plunder Patroll",
+      "kind": "setcode",
+      "code": "0x13f",
+      "fallback": {
+        "match": "contains",
+        "value": "Plunder Patroll"
+      }
+    },
+    {
       "name": "Polymerization",
       "kind": "setcode",
       "code": "0x46",
@@ -2351,6 +2468,15 @@
       }
     },
     {
+      "name": "S-Force",
+      "kind": "setcode",
+      "code": "0x156",
+      "fallback": {
+        "match": "contains",
+        "value": "S-Force"
+      }
+    },
+    {
       "name": "Saber",
       "kind": "setcode",
       "code": "0xd",
@@ -2553,6 +2679,15 @@
       "fallback": {
         "match": "contains",
         "value": "Stellarknight"
+      }
+    },
+    {
+      "name": "Sunavalon",
+      "kind": "setcode",
+      "code": "0x2158",
+      "fallback": {
+        "match": "contains",
+        "value": "Sunavalon"
       }
     },
     {
@@ -2859,6 +2994,24 @@
       "fallback": {
         "match": "contains",
         "value": "Venom"
+      }
+    },
+    {
+      "name": "Virtual World",
+      "kind": "setcode",
+      "code": "0x14e",
+      "fallback": {
+        "match": "contains",
+        "value": "Virtual World"
+      }
+    },
+    {
+      "name": "Virtual World Gate",
+      "kind": "setcode",
+      "code": "0x114e",
+      "fallback": {
+        "match": "contains",
+        "value": "Virtual World Gate"
       }
     },
     {

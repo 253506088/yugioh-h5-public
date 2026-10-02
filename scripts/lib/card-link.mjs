@@ -22,8 +22,10 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
     else if(value==='Ritual Monster')link.includingType='ritual';
     else if(value==='Synchro Monster')link.includingType='synchro';
     else if(value==='Ritual, Fusion, Synchro, or Xyz Monster')link.includingTypes=['ritual','fusion','synchro','xyz'];
+    else if(/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) "[^"]+" monster$/.test(value)){const m=value.match(/^(\w+) "([^"]+)"/);link.includingSeries=m[2];link.includingSeriesAttribute=attributes[m[1]];}
     else if(races[value.replace(/ monster$/i,'')])link.includingRace=races[value.replace(/ monster$/i,'')];
     else if(/^"[^"]+"$/.test(value))link.includingName=value.slice(1,-1);
+    else if(/^"[^"]+" Link Monster$/.test(value)){link.includingSeries=value.match(/"([^"]+)"/)[1];link.includingSeriesLink=true;}
     else if(/^"[^"]+" (?:monster|Tuner)$/i.test(value)){link.includingSeries=value.match(/"([^"]+)"/)[1];if(/Tuner$/i.test(value))link.includingSeriesTuner=true;}
     else if(/^monster with \d+ or more ATK$/i.test(value))link.includingMinAtk=Number(value.match(/\d+/)[0]);
     else if(attributes[value.replace(/ monster$/i,'')])link.attribute=attributes[value.replace(/ monster$/i,'')];
@@ -52,6 +54,7 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
   if(nonAttribute){link.excludeAttribute=attributes[nonAttribute[1]];if(!link.excludeAttribute)throw new Error('Unknown Link attribute: '+name);body=nonAttribute[2];}
   if(/^non-Link(?: |$)/i.test(body)){link.nonLink=true;body=body.replace(/^non-Link(?: |$)/i,'');}
   if(/ Effect$/i.test(body)){link.effect=true;body=body.replace(/ Effect$/i,'');}
+  if(/ Normal$/i.test(body)){link.normal=true;body=body.replace(/ Normal$/i,'');}
   const attributeRace=body.match(/^(FIRE|WATER|WIND|EARTH|LIGHT|DARK) (.+)$/);
   if(attributeRace&&races[attributeRace[2]]){link.allAttribute=attributes[attributeRace[1]];body=attributeRace[2];}
   if(/ Link$/i.test(body)){link.linkOnly=true;body=body.replace(/ Link$/i,'');}
@@ -61,6 +64,7 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
   else if (body === 'Effect') link.effect = true;
   else if (body === 'Pendulum') link.pendulum = true;
   else if (body === 'Link') link.linkOnly = true;
+  else if (/^Link-\d+ or higher$/.test(body)) { link.linkOnly=true; link.minLinkRating=Number(body.match(/\d+/)[0]); }
   else if (body === 'Xyz') link.xyzOnly = true;
   else if (body === 'Flip') link.flip = true;
   else if (/^Level \d+$/.test(body)) link.level = Number(body.slice(6));

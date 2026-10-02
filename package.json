@@ -95,7 +95,12 @@
     "test:2019:simulation": "node tests/chronicle-2019-simulation.cjs",
     "test:2019:tournament": "node tests/chronicle-2019-tournament.cjs",
     "test:2019:browser": "node tests/chronicle-2019-browser.cjs",
-    "cards:coverage:2019": "node scripts/report-card-coverage.mjs --write-year 2019"
+    "cards:coverage:2019": "node scripts/report-card-coverage.mjs --write-year 2019",
+    "test:2020": "node --test tests/chronicle-2020.test.cjs tests/chronicle-2020-interactions.test.cjs",
+    "test:2020:simulation": "node tests/chronicle-2020-simulation.cjs",
+    "test:2020:tournament": "node tests/chronicle-2020-tournament.cjs",
+    "test:2020:browser": "node tests/chronicle-2020-browser.cjs",
+    "cards:coverage:2020": "node scripts/report-card-coverage.mjs --write-year 2020"
   },
   "engines": {
     "node": ">=22.13.0"

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "title": "OCG 2020—2020 年增量切片",
+  "createdOn": "2026-10-02",
+  "startYear": 2020,
+  "endYear": 2020,
+  "dateRegion": "ocg",
+  "dateField": "misc_info[].ocg_date",
+  "deduplicateBy": "provider card id; artwork bytes by SHA-256",
+  "collectImages": [
+    "cropped",
+    "full"
+  ],
+  "excludeTypes": [
+    "Skill Card",
+    "Token"
+  ],
+  "excludeRushDuel": true,
+  "catalogUrl": "https://db.ygoprodeck.com/api/v7/cardinfo.php?misc=yes&startdate=01%2F01%2F2020&enddate=12%2F31%2F2020&dateregion=ocg",
+  "catalogAuthority": "provider_candidate_requires_OCG_product_crosscheck",
+  "firstOCGYear": 1999,
+  "firstPackCandidate": "Vol.1",
+  "firstPackDateCandidate": "1999-02-04",
+  "historicalReferenceStatus": "known_history_not_live_verified_in_this_session",
+  "runtimeImagePolicyTarget": "fully_embedded_no_network_fetch",
+  "implementationIsSeparateFromCollection": true,
+  "excludedIdentities": [
+    {
+      "providerId": 88264979,
+      "name": "Red-Eyes Darkness Metal Dragon",
+      "reason": "Alternate-art identity; fixed Japanese CDB datas.alias points to 88264978, already preserved in the 2007 snapshot. Not a new 2020 card; preserve the original game identity and first OCG year."
+    }
+  ]
+}

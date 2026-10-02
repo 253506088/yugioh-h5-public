@@ -1,0 +1,840 @@
+{
+  "scope": [
+    2020
+  ],
+  "historicalContext": {
+    "worldChampionship": "cancelled",
+    "note": "No world podium placements are asserted. Five distinct representative annual adaptations use the project’s unified deck rules and current card text, not one quarter’s Forbidden/Limited List."
+  },
+  "sources": [
+    {
+      "id": "worlds-cancelled",
+      "url": "https://www.dicebreaker.com/games/yu-gi-oh-tcg/news/yu-gi-oh-world-championship-cancelled",
+      "accessed": "2026-10-02",
+      "note": "Contemporary report dated 2020-04-08: Worlds scheduled for August 22–23 was cancelled because of COVID-19.",
+      "retrievedContentSHA256": "5cac1b3948aa037c9854573c67b683ac74a0e5d03626da33bdd89f3c6a7af141",
+      "evidenceSummary": "Published 2020-04-08: the World Championship scheduled for August 22–23, 2020 was cancelled because of COVID-19."
+    },
+    {
+      "id": "ocg-2020-04",
+      "url": "https://roadoftheking.com/ocg-2020-04-metagame/",
+      "accessed": "2026-10-02",
+      "note": "Contemporary OCG metagame reference. Presets are project-authored representative adaptations, not attributed player lists.",
+      "retrievedContentSHA256": "6407ac9df1313b5b3cfa48e362c013df672a3966deb8632467ae9c8f7fe9ecf6",
+      "evidenceSummary": "52 top-placing decks from 12 tournaments: 11 Dogmatika Invoked, 6 Eldlich, 2 Adamancipator. Small pandemic-era sample; no conclusive ranking claimed."
+    },
+    {
+      "id": "ocg-2020-07",
+      "url": "https://roadoftheking.com/ocg-2020-07-metagame/",
+      "accessed": "2026-10-02",
+      "note": "Contemporary OCG metagame reference. Presets are project-authored representative adaptations, not attributed player lists.",
+      "retrievedContentSHA256": "aaad503190f149269b3afb24ed088131cb5ed3e45d08d4c3fc8d5d46e37bd149",
+      "evidenceSummary": "515 top-placing decks from 94 tournaments: 55 Dogmatika Invoked, 48 Eldlich, 36 Zoodiac, 9 Virtual World, 8 Adamancipator."
+    },
+    {
+      "id": "ocg-2020-10",
+      "url": "https://roadoftheking.com/ocg-2020-10-metagame/",
+      "accessed": "2026-10-02",
+      "note": "Contemporary OCG metagame reference. Presets are project-authored representative adaptations, not attributed player lists.",
+      "retrievedContentSHA256": "b1af2a35eb907e68386ce8725524f5f2590d614b2bd777b11663ababf8538dcd",
+      "evidenceSummary": "811 top-placing decks from 145 tournaments: 110 Virtual World, 103 Eldlich, 65 Dogmatika Invoked, 65 Zoodiac, 7 Adamancipator."
+    }
+  ],
+  "decks": [
+    {
+      "id": "eldlich-2020",
+      "year": 2020,
+      "title": "年度热门 · 黄金国",
+      "en": "Annual Metagame · Eldlich",
+      "ja": "年間環境・エルドリッチ",
+      "ace": "Eldlich the Golden Lord",
+      "description": "黄金卿送墓解场，黄金乡陷阱与黄金药交替循环，以陷阱控制支撑高打点终结。",
+      "descriptionEn": "Golden Lord sends threats to the GY; Golden Land traps and Eldlixirs alternate to sustain control and finish with large monsters.",
+      "descriptionJa": "黄金卿で墓地へ送り、黄金郷罠とエルドリクシルを循環。罠で制圧し高打点で勝負を決める。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2020-07",
+        "ocg-2020-10"
+      ],
+      "main": [
+        [
+          "Eldlich the Golden Lord",
+          3
+        ],
+        [
+          "Eldlixir of Scarlet Sanguine",
+          3
+        ],
+        [
+          "Eldlixir of Black Awakening",
+          2
+        ],
+        [
+          "Eldlixir of White Destiny",
+          1
+        ],
+        [
+          "Cursed Eldland",
+          3
+        ],
+        [
+          "Conquistador of the Golden Land",
+          3
+        ],
+        [
+          "Huaquero of the Golden Land",
+          2
+        ],
+        [
+          "Guardian of the Golden Land",
+          1
+        ],
+        [
+          "Golden Land Forever!",
+          1
+        ],
+        [
+          "Skill Drain",
+          3
+        ],
+        [
+          "Torrential Tribute",
+          3
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Dogmatika Punishment",
+          3
+        ],
+        [
+          "Pot of Desires",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Elder Entity N'tss",
+          3
+        ],
+        [
+          "Titaniklad the Ash Dragon",
+          2
+        ],
+        [
+          "PSY-Framelord Omega",
+          1
+        ],
+        [
+          "Link Spider",
+          1
+        ],
+        [
+          "Constellar Pleiades",
+          1
+        ],
+        [
+          "Superdreadnought Rail Cannon Gustav Max",
+          2
+        ],
+        [
+          "Number 81: Superdreadnought Rail Cannon Super Dora",
+          2
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          1
+        ],
+        [
+          "Gaia Dragon, the Thunder Charger",
+          1
+        ],
+        [
+          "Number 61: Volcasaurus",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Lancea",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Nibiru, the Primal Being",
+          2
+        ],
+        [
+          "Red Reboot",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "dogmatika-invoked-2020",
+      "year": 2020,
+      "title": "年度热门 · 教导召唤兽",
+      "en": "Annual Metagame · Dogmatika Invoked",
+      "ja": "年間環境・ドラグマ召喚獣",
+      "ace": "Dogmatika Fleurdelis, the Knighted",
+      "description": "阿莱斯特融合先行，再以天底的使徒与教导送墓额外资源，影依的伪典在对方回合融合。",
+      "descriptionEn": "Fuse with Aleister first, then turn Extra Deck sends into Dogmatika resources. Shaddoll Schism enables Fusion plays on the opponent’s turn.",
+      "descriptionJa": "先にアレイスターで融合し、天底の使徒とドラグマでEXデッキを墓地資源へ。影依の偽典で相手ターンにも融合。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2020-04",
+        "ocg-2020-07",
+        "ocg-2020-10"
+      ],
+      "main": [
+        [
+          "Dogmatika Ecclesia, the Virtuous",
+          3
+        ],
+        [
+          "Dogmatika Fleurdelis, the Knighted",
+          2
+        ],
+        [
+          "Dogmatika Maximus",
+          1
+        ],
+        [
+          "Aleister the Invoker",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Ghost Belle & Haunted Mansion",
+          3
+        ],
+        [
+          "Nadir Servant",
+          3
+        ],
+        [
+          "Magical Meltdown",
+          3
+        ],
+        [
+          "Invocation",
+          2
+        ],
+        [
+          "Shaddoll Schism",
+          1
+        ],
+        [
+          "Dogmatika Punishment",
+          3
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Pot of Desires",
+          2
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Super Polymerization",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Invoked Mechaba",
+          2
+        ],
+        [
+          "Invoked Purgatrio",
+          1
+        ],
+        [
+          "Invoked Raidjin",
+          1
+        ],
+        [
+          "Invoked Cocytus",
+          1
+        ],
+        [
+          "Invoked Caliga",
+          1
+        ],
+        [
+          "El Shaddoll Winda",
+          2
+        ],
+        [
+          "El Shaddoll Construct",
+          1
+        ],
+        [
+          "El Shaddoll Apkallone",
+          1
+        ],
+        [
+          "Elder Entity N'tss",
+          2
+        ],
+        [
+          "Titaniklad the Ash Dragon",
+          1
+        ],
+        [
+          "Artemis, the Magistus Moon Maiden",
+          1
+        ],
+        [
+          "Salamangreat Almiraj",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Lancea",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Nibiru, the Primal Being",
+          2
+        ],
+        [
+          "Red Reboot",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "virtual-world-2020",
+      "year": 2020,
+      "title": "年度热门 · 电脑堺",
+      "en": "Annual Metagame · Virtual World",
+      "ja": "年間環境・電脳堺",
+      "ace": "Virtual World Kyubi - Shenshen",
+      "description": "以不同种类的本家卡送墓展开，青龙、朱雀、玄武循环资源，3／6／9星同调与超量衔接。",
+      "descriptionEn": "Send a different Virtual World card type to develop the field. Qinglong, Chuche and Xuanwu recycle resources into Level 3/6/9 Synchro and Xyz lines.",
+      "descriptionJa": "異なる種類の電脳堺カードを墓地へ送り展開。青龍・朱雀・玄武を循環し、レベル3・6・9のシンクロとエクシーズへ。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2020-10"
+      ],
+      "main": [
+        [
+          "Virtual World Mai-Hime - Lulu",
+          3
+        ],
+        [
+          "Virtual World Xiezhi - Jiji",
+          3
+        ],
+        [
+          "Virtual World Kirin - Lili",
+          3
+        ],
+        [
+          "Virtual World Roshi - Laolao",
+          3
+        ],
+        [
+          "Virtual World Hime - Nyannyan",
+          2
+        ],
+        [
+          "Virtual World Oto-Hime - Toutou",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Virtual World City - Kauwloon",
+          3
+        ],
+        [
+          "Virtual World Gate - Qinglong",
+          3
+        ],
+        [
+          "Virtual World Gate - Chuche",
+          2
+        ],
+        [
+          "Virtual World Gate - Xuanwu",
+          1
+        ],
+        [
+          "Pot of Desires",
+          3
+        ],
+        [
+          "Emergency Teleport",
+          3
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Upstart Goblin",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Virtual World Kyubi - Shenshen",
+          2
+        ],
+        [
+          "Virtual World Beast - Jiujiu",
+          2
+        ],
+        [
+          "Virtual World Dragon - Longlong",
+          1
+        ],
+        [
+          "Virtual World Phoenix - Fanfan",
+          1
+        ],
+        [
+          "Virtual World Shell - Jaja",
+          1
+        ],
+        [
+          "True King of All Calamities",
+          1
+        ],
+        [
+          "Cloudcastle",
+          1
+        ],
+        [
+          "Stardust Charge Warrior",
+          1
+        ],
+        [
+          "Coral Dragon",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Constellar Ptolemy M7",
+          1
+        ],
+        [
+          "Beatrice, Lady of the Eternal",
+          1
+        ],
+        [
+          "The Phantom Knights of Break Sword",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Lancea",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Nibiru, the Primal Being",
+          2
+        ],
+        [
+          "Red Reboot",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "adamancipator-2020",
+      "year": 2020,
+      "title": "年度热门 · 魔救",
+      "en": "Annual Metagame · Adamancipator",
+      "ja": "年間環境・アダマシア",
+      "ace": "Adamancipator Risen - Dragite",
+      "description": "岩石族翻牌展开，积木龙回收等级合计8的资源，巨龙晶石与水晶翼衔接压制。采用纯岩石核心的代表改编。",
+      "descriptionEn": "Excavate Rocks, rebuild with Block Dragon’s Level-8 search, and develop Dragite and Crystal Wing. A representative adaptation centered on the Rock engine.",
+      "descriptionJa": "岩石族をめくって展開し、ブロックドラゴンでレベル合計8を確保。ドラガイトとクリスタルウィングにつなぐ岩石軸の代表アレンジ。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2020-04",
+        "ocg-2020-07",
+        "ocg-2020-10"
+      ],
+      "main": [
+        [
+          "Adamancipator Researcher",
+          3
+        ],
+        [
+          "Adamancipator Seeker",
+          3
+        ],
+        [
+          "Adamancipator Analyzer",
+          3
+        ],
+        [
+          "Doki Doki",
+          3
+        ],
+        [
+          "Koa'ki Meiru Guardian",
+          3
+        ],
+        [
+          "Block Dragon",
+          2
+        ],
+        [
+          "Adamancipator Crystal - Dragite",
+          3
+        ],
+        [
+          "Adamancipator Crystal - Leonite",
+          1
+        ],
+        [
+          "Adamancipator Crystal - Raptite",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Adamancipator Signs",
+          3
+        ],
+        [
+          "Adamancipator Laputite",
+          2
+        ],
+        [
+          "Adamancipator Friends",
+          1
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Pot of Desires",
+          1
+        ],
+        [
+          "Terraforming",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Adamancipator Risen - Dragite",
+          2
+        ],
+        [
+          "Adamancipator Risen - Raptite",
+          2
+        ],
+        [
+          "Adamancipator Risen - Leonite",
+          1
+        ],
+        [
+          "Borreload Savage Dragon",
+          1
+        ],
+        [
+          "Crystal Wing Synchro Dragon",
+          1
+        ],
+        [
+          "Herald of the Arc Light",
+          1
+        ],
+        [
+          "Coral Dragon",
+          1
+        ],
+        [
+          "Naturia Beast",
+          1
+        ],
+        [
+          "Gallant Granite",
+          1
+        ],
+        [
+          "Crystron Halqifibrax",
+          1
+        ],
+        [
+          "Apollousa, Bow of the Goddess",
+          1
+        ],
+        [
+          "Accesscode Talker",
+          1
+        ],
+        [
+          "I:P Masquerena",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Lancea",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Nibiru, the Primal Being",
+          2
+        ],
+        [
+          "Red Reboot",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "zoodiac-2020",
+      "year": 2020,
+      "title": "年度热门 · 十二兽・天霆号",
+      "en": "Annual Metagame · Zoodiac ZEUS",
+      "ja": "年間環境・十二獣アーゼウス",
+      "ace": "Divine Arsenal AA-ZEUS - Sky Thunder",
+      "description": "十二兽以单卡叠放积累素材，猪弓完成战斗后转为天霆号，把素材转化为全场送墓。",
+      "descriptionEn": "Stack Zoodiac materials from one starter. After Boarbow battles, overlay ZEUS and convert materials into field-wide GY removal.",
+      "descriptionJa": "十二獣1枚から素材を重ね、ワイルドボウの戦闘後にアーゼウスへ。素材を全体墓地送りに変える。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2020-07",
+        "ocg-2020-10"
+      ],
+      "main": [
+        [
+          "Zoodiac Thoroughblade",
+          3
+        ],
+        [
+          "Zoodiac Whiptail",
+          3
+        ],
+        [
+          "Zoodiac Ramram",
+          3
+        ],
+        [
+          "Zoodiac Ratpier",
+          1
+        ],
+        [
+          "Zoodiac Bunnyblast",
+          2
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Effect Veiler",
+          3
+        ],
+        [
+          "Nibiru, the Primal Being",
+          2
+        ],
+        [
+          "Ghost Belle & Haunted Mansion",
+          2
+        ],
+        [
+          "Zoodiac Barrage",
+          3
+        ],
+        [
+          "Fire Formation - Tenki",
+          3
+        ],
+        [
+          "Pot of Desires",
+          2
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Forbidden Droplet",
+          2
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Zoodiac Boarbow",
+          3
+        ],
+        [
+          "Zoodiac Tigermortar",
+          3
+        ],
+        [
+          "Zoodiac Chakanine",
+          3
+        ],
+        [
+          "Zoodiac Drident",
+          2
+        ],
+        [
+          "Zoodiac Broadbull",
+          1
+        ],
+        [
+          "Zoodiac Hammerkong",
+          1
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          2
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Lancea",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          2
+        ],
+        [
+          "Red Reboot",
+          1
+        ]
+      ]
+    }
+  ]
+}

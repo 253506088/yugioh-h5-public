@@ -32,6 +32,7 @@ for(const year of years){
  sources.push({year,count:data.cards.length,sha256:createHash('sha256').update(bytes).digest('hex'),path:`data/yearly/${year}/cards.json`});rows.push(...data.cards);
 }
 const seen=new Set();for(const r of rows){if(seen.has(r.providerId))throw new Error('Duplicate provider identity '+r.providerId);seen.add(r.providerId);if(!byName.has(norm(r.name)))byName.set(norm(r.name),'early-'+r.providerId);}
+const seenNames=new Map();for(const r of rows){const key=norm(r.name),previous=seenNames.get(key);if(previous)throw new Error('Duplicate annual card name: '+r.name+' ('+previous.providerId+' / '+r.providerId+'). Verify and document alternate-art aliases in the annual scope.');seenNames.set(key,r);}
 const cards=rows.map(r=>{
  const pendulum=parsePendulum(r),existing=base.CARDS[byName.get(norm(r.name))],type=/Link/.test(r.providerType)?'link':/XYZ/.test(r.providerType)?'xyz':/Fusion/.test(r.providerType)?'fusion':/Synchro/.test(r.providerType)?'synchro':pendulum?'pendulum':/Ritual/.test(r.providerType)?'ritual':r.providerType==='Spell Card'?'spell':r.providerType==='Trap Card'?'trap':'monster';
  const normal=pendulum?.normal||/^Normal (?:Tuner )?Monster$/.test(r.providerType),monsterDescription=pendulum?.description||r.description,fusionText=monsterDescription.split(/[\r\n]+/)[0];

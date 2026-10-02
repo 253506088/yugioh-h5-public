@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 651 个身份：172 个可用（16 个复用），479 个待实现。来源和具体范围见 [批次交接](../交接/2016批次交接.md)。
+当前 651 个身份：176 个可用（16 个复用），475 个待实现。来源和具体范围见 [批次交接](../交接/2016批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2016`。
 
@@ -80,6 +80,8 @@
 | 39964797 | 水晶机巧-量子刚玉白晶 | Crystron Quandax | 复用既有实现 |
 | 39996157 | 机械天使的仪式 | Machine Angel Ritual | 本作适配：墓地除外代替光属性怪兽破坏的可选效果自动适用。 |
 | 41209827 | 凶饿毒融合龙 | Starving Venom Fusion Dragon | 本作适配：复制目标原名及已登记的主动／快速怪兽效果，不复制独立诱发、持续或递归复制器；原有登场及破坏效果保留。 |
+| 42143067 | 怒气土器 | Doki Doki | 已登记本作实现 |
+| 42566602 | 瑚之龙 | Coral Dragon | 已登记本作实现 |
 | 43845801 | 究极爆风弹 | Neutron Blast | 已登记本作实现 |
 | 45467446 | 白色灵龙 | Dragon Spirit of White | 已登记本作实现 |
 | 45644898 | 青色眼睛的祭司 | Master with Eyes of Blue | 已登记本作实现 |
@@ -129,6 +131,7 @@
 | 64014615 | 大欲之壶 | Pot of Acquisitiveness | 已登记本作实现 |
 | 64063868 | 星际仙踪-达克日食者号 | Kozmo Dark Eclipser | 已登记本作实现 |
 | 64280356 | 星际仙踪-铁皮 | Kozmo Tincan | 已登记本作实现 |
+| 64880894 | 星尘充能战士 | Stardust Charge Warrior | 已登记本作实现 |
 | 65172015 | AtoZ-神龙歼灭炮 | A-to-Z-Dragon Buster Cannon | 已登记本作实现 |
 | 65536818 | 源龙星-望天吼 | Denglong, First of the Yang Zing | 已登记本作实现 |
 | 66399653 | 同盟格纳库 | Union Hangar | 已登记本作实现 |
@@ -177,6 +180,7 @@
 | 93332803 | 怒炎坏兽 多哥兰 | Dogoran, the Mad Flame Kaiju | 已登记本作实现 |
 | 93665266 | 水晶机巧-量子白晶 | Crystron Quan | 复用既有实现 |
 | 94454495 | 星际仙踪-魔鞋骑手 | Kozmo Sliprider | 已登记本作实现 |
+| 94689206 | 积木龙 | Block Dragon | 已登记本作实现 |
 | 94919024 | 月光红狐 | Lunalight Crimson Fox | 已登记本作实现 |
 | 96746083 | 真龙皇 阿耆尼马兹德·消灭 | True King Agnimazud, the Vanisher | 已登记本作实现 |
 | 97165977 | 月光舞豹姬 | Lunalight Panther Dancer | 已登记本作实现 |
@@ -392,10 +396,8 @@
 | 41175645 | 沉默魔术师 | Silent Magician | pending |
 | 41735184 | 黑魔术的继承 | Dark Magic Inheritance | pending |
 | 42023223 | 电磁石战士α | Alpha The Electromagnet Warrior | pending |
-| 42143067 | 怒气土器 | Doki Doki | pending |
 | 42237854 | 机动要塞 铁堡垒 | Metalhold the Moving Blockade | pending |
 | 42291297 | 花札卫-雨四光- | Flower Cardian Lightshower | pending |
-| 42566602 | 瑚之龙 | Coral Dragon | pending |
 | 42600274 | 电子化芭蕾练习裙 | Cyber Tutubon | pending |
 | 42878636 | 古代的机械猎犬 | Ancient Gear Hunting Hound | pending |
 | 42901635 | 电磁石战士 电磁狂神 | Berserkion the Electromagna Warrior | pending |
@@ -491,7 +493,6 @@
 | 64414267 | 炼狱之骑士 多禄某 | Darktellarknight Batlamyus | pending |
 | 64450427 | 娱乐伙伴 妙想魔女 | Performapal Whim Witch | pending |
 | 64765016 | 伯吉斯异兽·马尔三叶形虫 | Paleozoic Marrella | pending |
-| 64880894 | 星尘充能战士 | Stardust Charge Warrior | pending |
 | 64977888 | 见习魔笛使 | Apprentice Piper | pending |
 | 65029288 | 娱乐伙伴 异色眼钢爪狼 | Performapal Odd-Eyes Metal Claw | pending |
 | 65193366 | 精灵兽使 薇茵妲 | Spiritual Beast Tamer Winda | pending |
@@ -642,7 +643,6 @@
 | 94388754 | 花札卫-萩间猪- | Flower Cardian Clover with Boar | pending |
 | 94535485 | 携手魔人 | Hand-Holding Genie | pending |
 | 94561645 | 反击之门 | Counter Gate | pending |
-| 94689206 | 积木龙 | Block Dragon | pending |
 | 94801854 | 不知火的隐者 | Shiranui Solitaire | pending |
 | 94861297 | 检问 | The Forceful Checkpoint | pending |
 | 95083785 | 过早的归还 | Premature Return | pending |

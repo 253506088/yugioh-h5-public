@@ -204,6 +204,31 @@
       "id": "endymion-2019",
       "available": 15,
       "source": 15
+    },
+    {
+      "id": "eldlich-2020",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "dogmatika-invoked-2020",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "virtual-world-2020",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "adamancipator-2020",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "zoodiac-2020",
+      "available": 15,
+      "source": 15
     }
   ],
   "excluded": []

@@ -31,18 +31,27 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
     fusionDiversity: [['Neos', 'Neo Space'], ['Neo-Spacian'], ['HERO']], fusionOnly: true
   };
   const fusion = []; let fusionMore;
-  for (const part of text.trim().split(/\s+\+\s+/)) {
+  for (let part of text.trim().split(/\s+\+\s+/)) {
+    const summonedThisTurn=/ Special Summoned this turn$/.test(part);
+    part=part.replace(/ Special Summoned this turn$/,'');
+    const graveOwner=part.match(/ in (your opponent's|your|either) GY$/)?.[1];
+    part=part.replace(/ in (?:your opponent's|your|either) GY$/,'');
     const named = part.match(/^(?:1\s+)?"([^"]+)"$/);
     if (named) { const id = byName.get(norm(named[1])); fusion.push(id ? {id} : {officialName: named[1]}); continue; }
     const maxATK = part.match(/^(\d+) monsters? with (\d+) or less ATK$/i);
     if (maxATK) { fusion.push(...Array.from({length:Number(maxATK[1])},()=>({maxAtk:Number(maxATK[2])}))); continue; }
+    const minATK = part.match(/^(\d+) monsters? with (\d+) or more ATK$/i);
+    if (minATK) { fusion.push(...Array.from({length:Number(minATK[1])},()=>({minAtk:Number(minATK[2])}))); continue; }
     const originalLevel = part.match(/^(\d+) (DARK|LIGHT|EARTH|WATER|FIRE|WIND) monsters? whose original Level is (\d+) or higher$/);
     if (originalLevel) { fusion.push(...Array.from({length:Number(originalLevel[1])},()=>({attribute:attributes[originalLevel[2]],originalMinLevel:Number(originalLevel[3])}))); continue; }
     const fieldOnly = / on the field(?:, except Tokens)?$/.test(part);
     const generic = part.replace(/ on the field(?:, except Tokens)?$/, '').match(/^(\d+)(\+| or more)?\s+(?:(.+?)\s+)?monsters?$/i);
     if (!generic) throw new Error('Unparsed Fusion material: ' + name + ' / ' + part);
-    let body = (generic[3]||'').replace(/-Type\b/gi, ''), spec = fieldOnly ? {fieldOnly:true,...(/except Tokens$/.test(part)?{noTokens:true}:{})} : {};
+    let body = (generic[3]||'').replace(/-Type\b/gi, ''), spec = {...(fieldOnly ? {fieldOnly:true,...(/except Tokens$/.test(part)?{noTokens:true}:{})} : {}),...(graveOwner?{graveOnly:true,graveOpponent:graveOwner==="your opponent's",graveOwn:graveOwner==='your'}:{})};
     if (/(?:^| )Effect$/i.test(body)) { spec.effect = true; body = body.replace(/(?:^| )Effect$/i, ''); }
+    if(summonedThisTurn)spec.specialSummonedThisTurn=true;
+    const levels=body.match(/^Level (\d+) or (\d+)(?: (.+))?$/i);
+    if(levels){spec.levels=[Number(levels[1]),Number(levels[2])];body=levels[3]||'';}
     const level = body.match(/^Level (\d+) or (higher|lower)(?: (.+))?$/i);
     if (level) { spec[level[2]==='higher'?'minLevel':'maxLevel'] = Number(level[1]); body = level[3]||''; }
     const exactLevel = body.match(/^Level (\d+)(?: (.+))?$/i);
@@ -129,6 +138,7 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
 }
 
 export function parseXyz(name, text, {races, attributes}) {
+  if (/ with the same Type and Attribute$/.test(text)) return {...parseXyz(name,text.replace(/ with the same Type and Attribute$/,''),{races,attributes}),xyzSameRace:true,xyzSameAttribute:true};
   if(name==='Number F0: Utopic Draco Future')return {xyzCount:3,rank:1,xyzMaterialType:'xyz',xyzSameRank:true,xyzExcludeNameIncludes:'Number'};
   if (name === 'Number 100: Numeron Dragon') return {xyzCount:2,rank:1,xyzMaterialType:'xyz',xyzSameRank:true,xyzSameName:true,xyzNameIncludes:'Number'};
   if (['Number F0: Utopic Future','Number F0: Utopic Future Slash'].includes(name)) return {xyzCount: 2, rank: 0, xyzMaterialType: 'xyz', xyzSameRank: true, xyzExcludeNameIncludes: 'Number'};

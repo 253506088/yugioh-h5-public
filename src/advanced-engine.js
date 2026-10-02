@@ -138,6 +138,8 @@
       const before=this.find(uid);req(before,'卡片已经离开原来的位置。');
       const card=before.card,c=CARDS[card.id],snapshot=this.describe(card,before),wasField=fieldMonster(before.zone)||['spells','fieldSpell'].includes(before.zone);
       let dest=destination,owner=options.owner??card.originalOwner;
+      const spellSlot=dest==='spells'?(options.slot??this.state.players[owner].spells.indexOf(null)):null;
+      if(dest==='spells')req(['spell','trap'].includes(c.type)&&Number.isInteger(spellSlot)&&spellSlot>=0&&spellSlot<5&&!this.state.players[owner].spells[spellSlot],'没有可用的魔法陷阱区域。');
       if(fieldMonster(before.zone)&&card.banishOnLeave&&dest!=='overlays'&&!options.ignoreLeaveReplacement)dest='banished';
       if(dest==='grave'&&!options.ignoreReplacement){
         if(this.monsters(1-card.originalOwner).some(m=>m.faceUp&&m.id==='masked-dark-law'&&!this.negated(m)))dest='banished';
@@ -168,7 +170,8 @@
       card.faceUp=true;card.faceUpExtra=dest==='extra-up';card.sentTurn=this.state.turn;
       if(dest==='extra-down'){card.faceUp=false;card.properlySummoned=false;}
       if(['hand','deck'].includes(dest))card.properlySummoned=false;
-      if(dest==='extra-up'||dest==='extra-down')this.state.players[owner].extra.push(card);
+      if(dest==='spells'){card.faceUp=options.faceUp!==false;card.setTurn=card.faceUp?-1:this.state.turn;this.state.players[owner].spells[spellSlot]=card;}
+      else if(dest==='extra-up'||dest==='extra-down')this.state.players[owner].extra.push(card);
       else {req(['hand','deck','grave','banished'].includes(dest),'无效的移动区域。');this.state.players[owner][dest].push(card);}
       if(wasField)this.cleanupEquips(uid,{uid,id:c.id,owner:before.owner,from:before.zone,to:dest,kind:options.kind,atk:snapshot.atk,originalAtk:snapshot.originalAtk??c.atk??0,originalDef:snapshot.originalDef??c.def??0});
       if(options.log!==false){
@@ -774,7 +777,8 @@
         const extra=this.find(pending.uid)?.card,materials=uids.map(uid=>this.find(uid)?.card);
         if(!extra||!materials.every(Boolean)||!this.fusionValid(pending.owner,extra,materials,pending.spellId))return {valid:false,message:'融合素材的名称、属性或数量不满足这只怪兽的条件。'};
       }
-      if(pending.sets&&!pending.sets.some(set=>set.length===uids.length&&set.every(uid=>uids.includes(uid))))return {valid:false,message:'等级、素材类别或祭品数量不符合要求。'};
+      const legalSets=pending.sets||pending.group?.sets;
+      if(legalSets&&!legalSets.some(set=>set.length===uids.length&&set.every(uid=>uids.includes(uid))))return {valid:false,message:'等级、素材类别或祭品数量不符合要求。'};
       if(pending.kind==='order'&&pending.candidates.some(c=>c.mandatory&&!uids.includes(c.uid)))return {valid:false,message:'必须包含强制发动的效果。'};
       const distinct=pending.group?.distinct||pending.context?.distinct;
       if(distinct){
