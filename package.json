@@ -90,7 +90,12 @@
     "test:2018:simulation": "node tests/chronicle-2018-simulation.cjs",
     "test:2018:browser": "node tests/chronicle-2018-browser.cjs",
     "cards:coverage:2018": "node scripts/report-card-coverage.mjs --write-year 2018",
-    "test:2018:tournament": "node tests/chronicle-2018-tournament.cjs"
+    "test:2018:tournament": "node tests/chronicle-2018-tournament.cjs",
+    "test:2019": "node --test tests/chronicle-2019.test.cjs tests/chronicle-2019-interactions.test.cjs tests/card-link.test.mjs tests/link-materials.test.cjs",
+    "test:2019:simulation": "node tests/chronicle-2019-simulation.cjs",
+    "test:2019:tournament": "node tests/chronicle-2019-tournament.cjs",
+    "test:2019:browser": "node tests/chronicle-2019-browser.cjs",
+    "cards:coverage:2019": "node scripts/report-card-coverage.mjs --write-year 2019"
   },
   "engines": {
     "node": ">=22.13.0"

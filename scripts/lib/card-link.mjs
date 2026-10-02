@@ -14,12 +14,15 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
   const exceptName=body.match(/, except "([^"]+)"$/);
   if(exceptName){link.excludeName=exceptName[1];body=body.slice(0,exceptName.index);}
   take(/, including a Tuner$/i, 'includingTuner');
-  const including=body.match(/, including (?:(?:a|an) )?(.+)$/i);
+  const including=body.match(/,? including (?:(?:a|an) )?(.+)$/i);
   if(including){
     let value=including[1];body=body.slice(0,including.index);
     if(value==='Token')link.includingToken=true;
     else if(value==='Link Monster')link.includingType='link';
     else if(value==='Ritual Monster')link.includingType='ritual';
+    else if(value==='Synchro Monster')link.includingType='synchro';
+    else if(value==='Ritual, Fusion, Synchro, or Xyz Monster')link.includingTypes=['ritual','fusion','synchro','xyz'];
+    else if(races[value.replace(/ monster$/i,'')])link.includingRace=races[value.replace(/ monster$/i,'')];
     else if(/^"[^"]+"$/.test(value))link.includingName=value.slice(1,-1);
     else if(/^"[^"]+" (?:monster|Tuner)$/i.test(value)){link.includingSeries=value.match(/"([^"]+)"/)[1];if(/Tuner$/i.test(value))link.includingSeriesTuner=true;}
     else if(/^monster with \d+ or more ATK$/i.test(value))link.includingMinAtk=Number(value.match(/\d+/)[0]);
@@ -27,6 +30,13 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
     else throw new Error('Unknown included Link material: '+name+' / '+value);
   }
   take(/ with different names$/i, 'differentNames');
+  take(/ with different Levels$/i, 'differentLevels');
+  take(/ with the same Level$/i, 'sameLevel');
+  take(/ with different Attributes$/i, 'differentAttributes');
+  take(/ with the same Type or Attribute$/i, 'sameRaceOrAttribute');
+  take(/ in an Extra Monster Zone$/i, 'extraMonsterZone');
+  const normalAtk=body.match(/^Normal Summoned monster with (\d+) or less ATK$/i);
+  if(normalAtk){link.normalSummoned=true;link.maxAtk=Number(normalAtk[1]);body='monster';}
   take(/ Special Summoned from the Extra Deck$/i, 'summonedFromExtra');
   if (/ with different Types and (?:different )?Attributes$/i.test(body)) { link.differentRaces = true; link.differentAttributes = true; body = body.replace(/ with different Types and (?:different )?Attributes$/i, ''); }
   if (/ with the same Attribute but different Types$/i.test(body)) { link.sameAttribute = true; link.differentRaces = true; body = body.replace(/ with the same Attribute but different Types$/i, ''); }
@@ -36,20 +46,22 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
   const parenthetical=body.match(/ \(([^)]+)\)$/);
   if(parenthetical){const values=parenthetical[1].split(' and/or ');if(values.some(v=>!races[v]))throw new Error('Unknown Link races: '+name);link.races=values.map(v=>races[v]);body=body.slice(0,parenthetical.index);}
   body = body.replace(/monsters?$/i, '').trim().replace(/-Type\b/gi, '');
-  const levelBound=body.match(/^Level (\d+) or (lower|higher) (.+)$/i);
-  if(levelBound){link[levelBound[2]==='lower'?'maxLevel':'minLevel']=Number(levelBound[1]);body=levelBound[3];}
+  const levelBound=body.match(/^Level (\d+) or (lower|higher)(?: (.+))?$/i);
+  if(levelBound){link[levelBound[2]==='lower'?'maxLevel':'minLevel']=Number(levelBound[1]);body=levelBound[3]||'';}
   const nonAttribute=body.match(/^non-(FIRE|WATER|WIND|EARTH|LIGHT|DARK) (.+)$/);
   if(nonAttribute){link.excludeAttribute=attributes[nonAttribute[1]];if(!link.excludeAttribute)throw new Error('Unknown Link attribute: '+name);body=nonAttribute[2];}
-  if(/^non-Link /i.test(body)){link.nonLink=true;body=body.replace(/^non-Link /i,'');}
+  if(/^non-Link(?: |$)/i.test(body)){link.nonLink=true;body=body.replace(/^non-Link(?: |$)/i,'');}
   if(/ Effect$/i.test(body)){link.effect=true;body=body.replace(/ Effect$/i,'');}
   const attributeRace=body.match(/^(FIRE|WATER|WIND|EARTH|LIGHT|DARK) (.+)$/);
   if(attributeRace&&races[attributeRace[2]]){link.allAttribute=attributes[attributeRace[1]];body=attributeRace[2];}
   if(/ Link$/i.test(body)){link.linkOnly=true;body=body.replace(/ Link$/i,'');}
+  if(/ Pendulum$/i.test(body)){link.pendulum=true;body=body.replace(/ Pendulum$/i,'');}
   if (body === 'Normal Summoned/Set') link.normalSummoned = true;
   else if (body === 'Normal') link.normal = true;
   else if (body === 'Effect') link.effect = true;
   else if (body === 'Pendulum') link.pendulum = true;
   else if (body === 'Link') link.linkOnly = true;
+  else if (body === 'Xyz') link.xyzOnly = true;
   else if (body === 'Flip') link.flip = true;
   else if (/^Level \d+$/.test(body)) link.level = Number(body.slice(6));
   else if (/^"[^"]+"$/.test(body)) link.series = body.slice(1,-1);

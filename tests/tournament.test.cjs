@@ -37,7 +37,7 @@ test('random rosters are reproducible and duplicates work even when the pool is 
   const sample = T.randomRoster(pool, 10, 11, true);
   assert.ok(new Set(sample).size < sample.length);
   assert.equal(new Set(T.randomRoster(pool, 10, 11, false)).size, 10);
-  assert.throws(() => T.randomRoster(pool, 64, 11, false));
+  assert.throws(() => T.randomRoster(pool.slice(0, 12), 16, 11, false));
   assert.throws(() => T.randomRoster([], 16, 11));
   for (const n of [0, 1, 2.5, 65, NaN]) assert.throws(() => T.create({count:n}));
 });

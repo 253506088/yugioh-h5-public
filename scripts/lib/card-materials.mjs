@@ -1,6 +1,10 @@
 // Explicit material grammar for the preserved OCG snapshots. Unknown wording is
 // an import error, never an unrestricted material or a silently normal monster.
 export function parseFusion(name, text, {byName, norm, races, attributes}) {
+  if(name==='The Dark Magicians')return {fusion:[{anyOf:[{id:byName.get(norm('Dark Magician'))},{id:byName.get(norm('Dark Magician Girl'))}]},{race:races.Spellcaster}]};
+  if(name==='Red-Eyes Dark Dragoon')return {fusion:[{id:byName.get(norm('Dark Magician'))},{anyOf:[{id:byName.get(norm('Red-Eyes Black Dragon'))},{race:races.Dragon,effect:true}]}]};
+  const differentAttributes=/ monsters with different Attributes$/.test(text);
+  if(differentAttributes){const out=parseFusion(name,text.replace(/ with different Attributes$/,''),{byName,norm,races,attributes});return {...out,fusionDifferentAttributes:true};}
   // These qualifications belong to the selected physical material, not its
   // printed card type. Preserve them for the engine's material validator.
   if (name === 'Invoked Elysium') return {fusion: [{nameIncludes:'Invoked'}, {summonedFromExtra:true}]};
@@ -34,15 +38,15 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
     if (maxATK) { fusion.push(...Array.from({length:Number(maxATK[1])},()=>({maxAtk:Number(maxATK[2])}))); continue; }
     const originalLevel = part.match(/^(\d+) (DARK|LIGHT|EARTH|WATER|FIRE|WIND) monsters? whose original Level is (\d+) or higher$/);
     if (originalLevel) { fusion.push(...Array.from({length:Number(originalLevel[1])},()=>({attribute:attributes[originalLevel[2]],originalMinLevel:Number(originalLevel[3])}))); continue; }
-    const fieldOnly = / on the field, except Tokens$/.test(part);
-    const generic = part.replace(/ on the field, except Tokens$/, '').match(/^(\d+)(\+| or more)?\s+(?:(.+?)\s+)?monsters?$/i);
+    const fieldOnly = / on the field(?:, except Tokens)?$/.test(part);
+    const generic = part.replace(/ on the field(?:, except Tokens)?$/, '').match(/^(\d+)(\+| or more)?\s+(?:(.+?)\s+)?monsters?$/i);
     if (!generic) throw new Error('Unparsed Fusion material: ' + name + ' / ' + part);
-    let body = (generic[3]||'').replace(/-Type\b/gi, ''), spec = fieldOnly ? {fieldOnly:true,noTokens:true} : {};
+    let body = (generic[3]||'').replace(/-Type\b/gi, ''), spec = fieldOnly ? {fieldOnly:true,...(/except Tokens$/.test(part)?{noTokens:true}:{})} : {};
     if (/(?:^| )Effect$/i.test(body)) { spec.effect = true; body = body.replace(/(?:^| )Effect$/i, ''); }
     const level = body.match(/^Level (\d+) or (higher|lower)(?: (.+))?$/i);
     if (level) { spec[level[2]==='higher'?'minLevel':'maxLevel'] = Number(level[1]); body = level[3]||''; }
-    const exactLevel = body.match(/^Level (\d+) (.+)$/i);
-    if (exactLevel) { spec.level = Number(exactLevel[1]); body = exactLevel[2]; }
+    const exactLevel = body.match(/^Level (\d+)(?: (.+))?$/i);
+    if (exactLevel) { spec.level = Number(exactLevel[1]); body = exactLevel[2]||''; }
     const type = body.match(/^(.*?)\s*(Synchro|Fusion|Xyz|Pendulum|Link)$/i);
     if (type) { spec.type = type[2].toLowerCase(); body = type[1]; }
     if (/ Normal$/.test(body)) { spec.normal = true; body = body.replace(/ Normal$/, ''); }
@@ -83,7 +87,9 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
     if (variableTuners) spec.maxTuners = 6;
     if (tuner[3]) spec.tunerType = 'synchro';
     if (tuner[2]) {
-      const body = tuner[2].replace(/-Type$/i, '');
+      let body = tuner[2].replace(/-Type$/i, '');
+      const combined=body.match(/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) (.+)$/);
+      if(combined&&races[combined[2]]){spec.tunerAttribute=attributes[combined[1]];body=combined[2];}
       if (attributes[body]) spec.tunerAttribute = attributes[body];
       else if (races[body]) spec.tunerRace = races[body];
       else if (/^".+"$/.test(body)) spec.tunerNameIncludes = body.slice(1, -1);
@@ -123,6 +129,7 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
 }
 
 export function parseXyz(name, text, {races, attributes}) {
+  if(name==='Number F0: Utopic Draco Future')return {xyzCount:3,rank:1,xyzMaterialType:'xyz',xyzSameRank:true,xyzExcludeNameIncludes:'Number'};
   if (name === 'Number 100: Numeron Dragon') return {xyzCount:2,rank:1,xyzMaterialType:'xyz',xyzSameRank:true,xyzSameName:true,xyzNameIncludes:'Number'};
   if (['Number F0: Utopic Future','Number F0: Utopic Future Slash'].includes(name)) return {xyzCount: 2, rank: 0, xyzMaterialType: 'xyz', xyzSameRank: true, xyzExcludeNameIncludes: 'Number'};
   if (name === 'Number S0: Utopic ZEXAL') return {xyzCount: 3, rank: 0, xyzMaterialType: 'xyz', xyzSameRank: true, xyzNameIncludes: 'Number'};

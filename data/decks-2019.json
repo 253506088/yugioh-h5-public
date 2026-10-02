@@ -1,0 +1,935 @@
+{
+  "scope": [
+    2019
+  ],
+  "sources": [
+    {
+      "id": "worlds-2019",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2019/",
+      "accessed": "2026-10-02",
+      "note": "Champion image visually checked and transcribed in full. All three podium decks were Salamangreat, so only the champion is retained."
+    },
+    {
+      "id": "ocg-2019-04",
+      "url": "https://roadoftheking.com/ocg-2019-04-metagame/",
+      "accessed": "2026-10-02",
+      "note": "Contemporaneous metagame reference; the four non-Worlds presets are representative adaptations, not attributed player lists."
+    },
+    {
+      "id": "ocg-2019-07",
+      "url": "https://roadoftheking.com/ocg-2019-07-metagame/",
+      "accessed": "2026-10-02",
+      "note": "Contemporaneous metagame reference; the four non-Worlds presets are representative adaptations, not attributed player lists."
+    },
+    {
+      "id": "ocg-2019-10",
+      "url": "https://roadoftheking.com/ocg-2019-10-metagame/",
+      "accessed": "2026-10-02",
+      "note": "Contemporaneous metagame reference; the four non-Worlds presets are representative adaptations, not attributed player lists."
+    }
+  ],
+  "decks": [
+    {
+      "id": "salamangreat-2019",
+      "year": 2019,
+      "title": "世界冠军 · 转生炎兽",
+      "en": "World Champion · Salamangreat",
+      "ja": "世界王者・サラマングレイト",
+      "ace": "Salamangreat Sunlight Wolf",
+      "description": "小坂光辉世界冠军原表。羚羊堆墓，日光狼转生连接回收咆哮，完整41／15／15。",
+      "descriptionEn": "Kosaka Kouki’s original Worlds champion list. Gazelle loads the GY; reincarnated Sunlight Wolf recovers Roar. Full 41/15/15.",
+      "descriptionJa": "小坂光輝選手の世界優勝リスト。ガゼルで墓地を整え、転生リンクのサンライトウルフでロアーを回収。41／15／15。",
+      "sourceKind": "historical-decklist",
+      "sourceRefs": [
+        "worlds-2019"
+      ],
+      "main": [
+        [
+          "Salamangreat Jack Jaguar",
+          2
+        ],
+        [
+          "Salamangreat Falco",
+          1
+        ],
+        [
+          "Salamangreat Spinny",
+          3
+        ],
+        [
+          "Salamangreat Foxy",
+          3
+        ],
+        [
+          "Salamangreat Gazelle",
+          1
+        ],
+        [
+          "Flame Bufferlo",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          2
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Salamangreat Circle",
+          3
+        ],
+        [
+          "Will of the Salamangreat",
+          2
+        ],
+        [
+          "Salamangreat Sanctuary",
+          1
+        ],
+        [
+          "Cynet Mining",
+          3
+        ],
+        [
+          "Mind Control",
+          3
+        ],
+        [
+          "Pot of Desires",
+          2
+        ],
+        [
+          "Twin Twisters",
+          2
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Salamangreat Roar",
+          3
+        ],
+        [
+          "Salamangreat Rage",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Salamangreat Miragestallio",
+          2
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Number 41: Bagooska the Terribly Tired Tapir",
+          1
+        ],
+        [
+          "Salamangreat Balelynx",
+          3
+        ],
+        [
+          "Salamangreat Sunlight Wolf",
+          3
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Hiita the Fire Charmer, Ablaze",
+          1
+        ],
+        [
+          "Salamangreat Heatleo",
+          2
+        ],
+        [
+          "Borreload Dragon",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Gameciel, the Sea Turtle Kaiju",
+          2
+        ],
+        [
+          "Dinowrestler Pankratops",
+          2
+        ],
+        [
+          "Lady Debug",
+          1
+        ],
+        [
+          "Ghost Belle & Haunted Mansion",
+          3
+        ],
+        [
+          "Salamangreat Violet Chimera",
+          1
+        ],
+        [
+          "Starving Venom Fusion Dragon",
+          1
+        ],
+        [
+          "Super Polymerization",
+          2
+        ],
+        [
+          "Twin Twisters",
+          1
+        ],
+        [
+          "Dimensional Barrier",
+          1
+        ],
+        [
+          "Imperial Order",
+          1
+        ]
+      ],
+      "combo": [
+        "羚羊送墓咆哮或转转，美洲豹与猎鹰循环资源。",
+        "圣域以同名怪兽完成转生连接，让日光狼回收本家魔陷。"
+      ],
+      "sourceImage": "https://roadoftheking.com/wp-content/uploads/2019/09/WorldChampionship2019_1st.jpg",
+      "sourceImageSHA256": "96cfd96c3181c6b7750309570b21c7040eb8650b66e6d74266ac8b7bd8137a56"
+    },
+    {
+      "id": "orcust-2019",
+      "year": 2019,
+      "title": "年度热门 · 自奏圣乐",
+      "en": "Annual Favorite · Orcust",
+      "ja": "年間人気・オルフェゴール",
+      "ace": "Dingirsu, the Orcust of the Evening Star",
+      "description": "2019上位体系代表改编。废铁堆墓、巴别塔快速效果、伽拉忒亚回收与宵星之机神送墓。",
+      "descriptionEn": "A representative 2019 build: Scrap milling, Babel quick effects, Galatea recycling and Dingirsu removal.",
+      "descriptionJa": "2019年の代表構築。スクラップの墓地送り、バベルによるクイック効果、ガラテアの回収とディンギルスの除去。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2019-04",
+        "ocg-2019-10"
+      ],
+      "main": [
+        [
+          "Scrap Recycler",
+          3
+        ],
+        [
+          "Scrap Golem",
+          1
+        ],
+        [
+          "Orcust Harp Horror",
+          3
+        ],
+        [
+          "Orcust Knightmare",
+          2
+        ],
+        [
+          "Orcust Cymbal Skeleton",
+          2
+        ],
+        [
+          "Orcust Brass Bombard",
+          1
+        ],
+        [
+          "World Legacy - \"World Wand\"",
+          1
+        ],
+        [
+          "Gizmek Orochi, the Serpentron Sky Slasher",
+          1
+        ],
+        [
+          "Armageddon Knight",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Orcustrated Babel",
+          1
+        ],
+        [
+          "Orcustrated Return",
+          3
+        ],
+        [
+          "Called by the Grave",
+          3
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Allure of Darkness",
+          2
+        ],
+        [
+          "Twin Twisters",
+          2
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Orcust Crescendo",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Galatea, the Orcust Automaton",
+          3
+        ],
+        [
+          "Dingirsu, the Orcust of the Evening Star",
+          2
+        ],
+        [
+          "Longirsu, the Orcust Orchestrator",
+          1
+        ],
+        [
+          "Orcustrion",
+          1
+        ],
+        [
+          "Scrap Wyvern",
+          1
+        ],
+        [
+          "I:P Masquerena",
+          1
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Borrelsword Dragon",
+          1
+        ],
+        [
+          "Salamangreat Almiraj",
+          1
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Apollousa, Bow of the Goddess",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          2
+        ],
+        [
+          "Twin Twisters",
+          1
+        ]
+      ],
+      "combo": [
+        "废铁回收员将嬉游曲恶魔送墓，再通过除外发动本家展开。",
+        "伽拉忒亚洗回机械族并盖放反击陷阱，宵星之机神可叠在本家连接怪兽上。"
+      ]
+    },
+    {
+      "id": "dragon-link-2019",
+      "year": 2019,
+      "title": "年度热门 · 龙连接",
+      "en": "Annual Favorite · Dragon Link",
+      "ja": "年間人気・ドラゴンリンク",
+      "ace": "Borreload Savage Dragon",
+      "description": "2019龙连接代表改编。曳光弹、辉光龙和守护龙依赖真实连接箭头展开，枪管装填狞猛龙承担终场干扰。",
+      "descriptionEn": "A representative 2019 Dragon Link build. Tracer, Seyfert and Guardragons use actual Link zones to build Savage Dragon interaction.",
+      "descriptionJa": "2019年ドラゴンリンクの代表構築。トレーサー、セイファート、守護竜が実際のリンク先を使い、サベージの妨害へつなぐ。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2019-07"
+      ],
+      "main": [
+        [
+          "Rokket Tracer",
+          3
+        ],
+        [
+          "Rokket Recharger",
+          2
+        ],
+        [
+          "Silverrokket Dragon",
+          1
+        ],
+        [
+          "Rokket Synchron",
+          2
+        ],
+        [
+          "Absorouter Dragon",
+          2
+        ],
+        [
+          "Starliege Seyfert",
+          3
+        ],
+        [
+          "White Dragon Wyverburster",
+          1
+        ],
+        [
+          "Black Dragon Collapserpent",
+          1
+        ],
+        [
+          "Red-Eyes Darkness Metal Dragon",
+          1
+        ],
+        [
+          "Destrudo the Lost Dragon's Frisson",
+          1
+        ],
+        [
+          "Chaos Dragon Levianeer",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Quick Launch",
+          3
+        ],
+        [
+          "Boot Sector Launch",
+          2
+        ],
+        [
+          "World Legacy Guardragon",
+          3
+        ],
+        [
+          "Dragon Ravine",
+          1
+        ],
+        [
+          "Dragon Shrine",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Called by the Grave",
+          3
+        ],
+        [
+          "One for One",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Striker Dragon",
+          2
+        ],
+        [
+          "Guardragon Elpy",
+          1
+        ],
+        [
+          "Guardragon Pisty",
+          1
+        ],
+        [
+          "Guardragon Agarpain",
+          1
+        ],
+        [
+          "Dragunity Knight - Romulus",
+          1
+        ],
+        [
+          "Hieratic Seal of the Heavenly Spheres",
+          1
+        ],
+        [
+          "Saryuja Skull Dread",
+          1
+        ],
+        [
+          "Borreload Savage Dragon",
+          1
+        ],
+        [
+          "Hot Red Dragon Archfiend Abyss",
+          1
+        ],
+        [
+          "Borrelsword Dragon",
+          1
+        ],
+        [
+          "Borreload Dragon",
+          1
+        ],
+        [
+          "Apollousa, Bow of the Goddess",
+          1
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Red Reboot",
+          2
+        ],
+        [
+          "Dinowrestler Pankratops",
+          1
+        ]
+      ],
+      "combo": [
+        "击针龙检索旋转引导扇区，曳光弹破坏己方表侧卡展开。",
+        "守护龙只向至少两个连接箭头共同指向的区域特殊召唤；素材离场后重新检查区域。"
+      ]
+    },
+    {
+      "id": "sky-striker-2019",
+      "year": 2019,
+      "title": "年度热门 · 闪刀姬",
+      "en": "Annual Favorite · Sky Striker",
+      "ja": "年間人気・閃刀姫",
+      "ace": "Sky Striker Ace - Zeke",
+      "description": "2019闪刀代表改编，加入露世与吉克；依靠空主要怪兽区发动魔法，用魔钟洞和手坑争取资源循环。",
+      "descriptionEn": "A representative 2019 Sky Striker list with Roze and Zeke. Empty Main Monster Zones enable spells; Mystic Mine and hand traps buy time for resource loops.",
+      "descriptionJa": "ロゼとジークを加えた2019年の閃刀姫代表構築。メインモンスターゾーンを空け、魔鍾洞と手札誘発でリソース循環を支える。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2019-07",
+        "ocg-2019-10"
+      ],
+      "main": [
+        [
+          "Sky Striker Ace - Raye",
+          3
+        ],
+        [
+          "Sky Striker Ace - Roze",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Sky Striker Mobilize - Engage!",
+          3
+        ],
+        [
+          "Sky Striker Mecha - Widow Anchor",
+          3
+        ],
+        [
+          "Sky Striker Mecha - Shark Cannon",
+          2
+        ],
+        [
+          "Sky Striker Mecha - Hornet Drones",
+          1
+        ],
+        [
+          "Sky Striker Mecha - Eagle Booster",
+          1
+        ],
+        [
+          "Sky Striker Maneuver - Afterburners!",
+          1
+        ],
+        [
+          "Sky Striker Maneuver - Jamming Waves!",
+          1
+        ],
+        [
+          "Sky Striker Maneuver - Scissors Cross",
+          1
+        ],
+        [
+          "Sky Striker Mecha Modules - Multirole",
+          1
+        ],
+        [
+          "Sky Striker Airspace - Area Zero",
+          2
+        ],
+        [
+          "Mystic Mine",
+          2
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Reinforcement of the Army",
+          1
+        ],
+        [
+          "Upstart Goblin",
+          1
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Metaverse",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Pot of Desires",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Sky Striker Ace - Kagari",
+          3
+        ],
+        [
+          "Sky Striker Ace - Shizuku",
+          3
+        ],
+        [
+          "Sky Striker Ace - Hayate",
+          3
+        ],
+        [
+          "Sky Striker Ace - Kaina",
+          1
+        ],
+        [
+          "Sky Striker Ace - Zeke",
+          2
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Borrelsword Dragon",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          2
+        ],
+        [
+          "Dinowrestler Pankratops",
+          1
+        ]
+      ],
+      "combo": [
+        "保持主要怪兽区空置，先用交闪和多任务战刀机积累魔法。",
+        "露世补充连接素材，吉克暂时除外怪兽并通过送墓清空己方区域。"
+      ]
+    },
+    {
+      "id": "endymion-2019",
+      "year": 2019,
+      "title": "年度热门 · 恩底弥翁",
+      "en": "Annual Favorite · Endymion",
+      "ja": "年間人気・エンディミオン",
+      "ace": "Endymion, the Mighty Master of Magic",
+      "description": "2019魔力指示物体系代表改编。仆从从灵摆区展开，胡狼王和创圣魔导王消耗真实指示物干扰，神圣魔皇后接续。",
+      "descriptionEn": "A representative 2019 Spell Counter build. Servant expands from a scale; Jackal King and Endymion spend real counters, with Selene extending the field.",
+      "descriptionJa": "2019年の魔力カウンター代表構築。サーヴァントの展開、キングジャッカルと創聖魔導王の妨害、セレーネの展開補助。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2019-07",
+        "ocg-2019-10"
+      ],
+      "main": [
+        [
+          "Servant of Endymion",
+          3
+        ],
+        [
+          "Endymion, the Mighty Master of Magic",
+          3
+        ],
+        [
+          "Magister of Endymion",
+          2
+        ],
+        [
+          "Reflection of Endymion",
+          1
+        ],
+        [
+          "Mythical Beast Master Cerberus",
+          3
+        ],
+        [
+          "Mythical Beast Jackal King",
+          2
+        ],
+        [
+          "Mythical Beast Jackal",
+          1
+        ],
+        [
+          "Mythical Beast Garuda",
+          1
+        ],
+        [
+          "Magical Abductor",
+          3
+        ],
+        [
+          "Spellbook Magician of Prophecy",
+          1
+        ],
+        [
+          "Spell Power Mastery",
+          3
+        ],
+        [
+          "Spell Power Grasp",
+          2
+        ],
+        [
+          "Magical Citadel of Endymion",
+          1
+        ],
+        [
+          "Endymion's Lab",
+          1
+        ],
+        [
+          "Mythical Institution",
+          1
+        ],
+        [
+          "Upstart Goblin",
+          3
+        ],
+        [
+          "Into the Void",
+          3
+        ],
+        [
+          "Spellbook of Secrets",
+          2
+        ],
+        [
+          "Spellbook of Knowledge",
+          1
+        ],
+        [
+          "Pot of Desires",
+          2
+        ],
+        [
+          "Terraforming",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Heavymetalfoes Electrumite",
+          1
+        ],
+        [
+          "Selene, Queen of the Master Magicians",
+          2
+        ],
+        [
+          "Day-Breaker the Shining Magical Warrior",
+          2
+        ],
+        [
+          "Apollousa, Bow of the Goddess",
+          1
+        ],
+        [
+          "I:P Masquerena",
+          1
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Borrelsword Dragon",
+          1
+        ],
+        [
+          "Decode Talker",
+          1
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Odd-Eyes Absolute Dragon",
+          1
+        ],
+        [
+          "Odd-Eyes Vortex Dragon",
+          1
+        ],
+        [
+          "Number 41: Bagooska the Terribly Tired Tapir",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Called by the Grave",
+          3
+        ],
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ]
+      ],
+      "combo": [
+        "魔法结算给灵摆区仆从累积指示物；移除三个后同时展开自身与牌库怪兽。",
+        "保留场上的指示物供胡狼王无效；创圣魔导王回收带指示物的卡并转移资源。"
+      ]
+    }
+  ]
+}

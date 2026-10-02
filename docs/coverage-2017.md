@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 636 个身份：117 个可用（1 个复用），519 个待实现。来源和具体范围见 [批次交接](../交接/2017批次交接.md)。
+当前 636 个身份：128 个可用（1 个复用），508 个待实现。来源和具体范围见 [批次交接](../交接/2017批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2017`。
 
@@ -29,6 +29,7 @@
 | 14970113 | 十二兽 猴槌 | Zoodiac Hammerkong | 已登记本作实现 |
 | 15397015 | 冲浪检察官 | Inspector Boarder | 已登记本作实现 |
 | 15693423 | 颉颃胜负 | Evenly Matched | 已登记本作实现 |
+| 16188701 | 调试瓢虫女郎 | Lady Debug | 已登记本作实现 |
 | 17228908 | 失落世界 | Lost World | 本作适配：通常怪兽的破坏代替自动选择小恐龙优先、其次价值最低的恐龙。 |
 | 18789533 | 点阵图跳离士 | Dotscaper | 已登记本作实现 |
 | 18837926 | 怒气冲冲的队长 | Motivating Captain | 已登记本作实现 |
@@ -38,16 +39,22 @@
 | 22499034 | 真龙战士 点火烈·炽热 | Ignis Heat, the True Dracowarrior | 已登记本作实现 |
 | 22862454 | 代理龙 | Proxy Dragon | 本作适配：破坏代替自动选择箭头指向的己方最低价值怪兽。 |
 | 22916281 | 被星杯所选中者 | Chosen by the World Chalice | 已登记本作实现 |
+| 23314220 | 冰火之魔导书 | Spellbook of Knowledge | 已登记本作实现 |
 | 23924608 | 沙尘之大风暴 | Heavy Storm Duster | 已登记本作实现 |
 | 24073068 | 刚鬼 过肩摔霸王龙 | Gouki Suprex | 已登记本作实现 |
+| 24094258 | 刚炼装勇士·银金公主 | Heavymetalfoes Electrumite | 已登记本作实现 |
+| 24361622 | 天球之圣刻印 | Hieratic Seal of the Heavenly Spheres | 已登记本作实现 |
 | 25533642 | 幻变骚灵·寻道梅露辛 | Altergeist Meluseek | 已登记本作实现 |
 | 27107590 | 时械巫女 | Time Maiden | 已登记本作实现 |
+| 27354732 | 魔导兽 胡狼王 | Mythical Beast Jackal King | 已登记本作实现 |
 | 27541563 | 幻变骚灵协议 | Altergeist Protocol | 已登记本作实现 |
 | 28486799 | 补充部队 | Backup Squad | 已登记本作实现 |
+| 28570310 | 魔导兽 迦楼罗 | Mythical Beast Garuda | 已登记本作实现 |
 | 28776350 | 虚空俏丽魔术师 | Akashic Magician | 已登记本作实现 |
 | 28929131 | 时械神 亚法恩 | Zaphion, the Timelord | 已登记本作实现 |
 | 30194529 | 星杯战士 宁吉尔苏 | Ningirsu the World Chalice Warrior | 已登记本作实现 |
 | 30979619 | 秘旋谍装备-大红跑车 | SPYRAL GEAR - Big Red | 已登记本作实现 |
+| 31443476 | 速攻旋转 | Quick Launch | 已登记本作实现 |
 | 31833038 | 装弹枪管龙 | Borreload Dragon | 已登记本作实现 |
 | 32295838 | 数字机灵 | Digitron | 已登记本作实现 |
 | 32448765 | 淘气仙星·霍莉安琪儿 | Trickstar Holly Angel | 已登记本作实现 |
@@ -58,6 +65,7 @@
 | 35371948 | 淘气仙星的灯光舞台 | Trickstar Light Stage | 本作适配：被封锁的盖卡在结束阶段仍未发动时自动送墓。 |
 | 35911108 | 启动炮司令官 | Launcher Commander | 已登记本作实现 |
 | 36211150 | 比特机灵 | Bitron | 已登记本作实现 |
+| 36668118 | 旋转引导扇区 | Boot Sector Launch | 已登记本作实现 |
 | 37433748 | 秘旋谍装备-绝地胜机 | SPYRAL GEAR - Last Resort | 已登记本作实现 |
 | 38179121 | 究极进化药 | Double Evolution Pill | 已登记本作实现 |
 | 41091257 | 秘旋谍-花公子 | SPYRAL Super Agent | 已登记本作实现 |
@@ -73,6 +81,7 @@
 | 52927340 | 幻变骚灵·查询昆提兰那克 | Altergeist Kunquery | 已登记本作实现 |
 | 53143898 | 幻变骚灵·网络傀儡师 | Altergeist Marionetter | 已登记本作实现 |
 | 53413628 | 码语者 | Code Talker | 已登记本作实现 |
+| 53842431 | 魔导兽 刻耳柏洛斯尊主 | Mythical Beast Master Cerberus | 已登记本作实现 |
 | 53936268 | 个人欺骗攻击 | Personal Spoofing | 已登记本作实现 |
 | 53989821 | 秘旋谍装备-多用钩绳 | SPYRAL GEAR - Utility Wire | 已登记本作实现 |
 | 54088068 | 刚鬼 头锤蝙蝠 | Gouki Headbatt | 已登记本作实现 |
@@ -110,8 +119,10 @@
 | 81823360 | 巨噬者X | Megalosmasher X | 已登记本作实现 |
 | 82946847 | 小翼龙 | Petiteranodon | 已登记本作实现 |
 | 88581108 | 真龙皇 法·王·兽 | True King of All Calamities | 已登记本作实现 |
+| 89208725 | 虚拟世界 | Metaverse | 本作适配：直接发动场地魔法时适用其持续效果，不结算该场地的发动时可选效果。 |
 | 89538537 | 幻变骚灵·泛在羽衣精 | Altergeist Silquitous | 已登记本作实现 |
 | 90590303 | No.41 泥睡魔兽 睡梦貘 | Number 41: Bagooska the Terribly Tired Tapir | 已登记本作实现 |
+| 91182675 | 魔导兽 胡狼 | Mythical Beast Jackal | 已登记本作实现 |
 | 91258852 | 秘旋谍-高雅女士 | SPYRAL Master Plan | 已登记本作实现 |
 | 91269402 | 电子界信标 | Cyberse Beacon | 已登记本作实现 |
 | 91712985 | 时械神 卡米恩 | Kamion, the Timelord | 已登记本作实现 |
@@ -206,7 +217,6 @@
 | 15710054 | 机怪虫·轴突虫 | Krawler Axon | pending |
 | 15844566 | 力码语者 | Powercode Talker | pending |
 | 16006416 | DDD 烈火大王 决策铁木真 | D/D/D Flame High King Genghis | pending |
-| 16188701 | 调试瓢虫女郎 | Lady Debug | pending |
 | 16261341 | 天空圣骑士 阿克珀耳修斯 | Sacred Arch-Airknight Parshath | pending |
 | 16306932 | 超天新龙 异色眼革命龙 | Odd-Eyes Revolution Dragon | pending |
 | 16329071 | 蠢动于星遗物的陷阱 | World Legacy Trap Globe | pending |
@@ -252,14 +262,11 @@
 | 22829942 | 融合再生机构 | Fusion Recycling Plant | pending |
 | 23068051 | 幽丽的幻泷 | Waterfall of Dragon Souls | pending |
 | 23085002 | No.68 魔天牢 桑达尔丰 | Number 68: Sanaphond the Sky Prison | pending |
-| 23314220 | 冰火之魔导书 | Spellbook of Knowledge | pending |
 | 23545031 | 水精鳞-萨拉深渊后 | Mermail Abyssalacia | pending |
 | 23850421 | 劫持翼龙 | Jack Wyvern | pending |
 | 23971061 | 双字节龙 | Doublebyte Dragon | pending |
 | 24037702 | 暗之进军 | March of the Dark Brigade | pending |
-| 24094258 | 刚炼装勇士·银金公主 | Heavymetalfoes Electrumite | pending |
 | 24207889 | 千查万别 | There Can Be Only One | pending |
-| 24361622 | 天球之圣刻印 | Hieratic Seal of the Heavenly Spheres | pending |
 | 24429467 | 魔导变换 | Mythical Bestiamorph | pending |
 | 24484270 | 宝石骑士·幽晶原核 | Gem-Knight Phantom Quartz | pending |
 | 25472513 | 天轮之双星道士 | Celestial Double Star Shaman | pending |
@@ -268,7 +275,6 @@
 | 26655293 | 马格努姆弹丸龙 | Magnarokket Dragon | pending |
 | 27217742 | 雷电哥哥 | Brohunder | pending |
 | 27240101 | 耳边风风鸟 | Kikinagashi Fucho | pending |
-| 27354732 | 魔导兽 胡狼王 | Mythical Beast Jackal King | pending |
 | 27561302 | 雨之天气模样 | The Weather Rainy Canvas | pending |
 | 27642961 | 秘旋谍任务-强袭 | SPYRAL MISSION - Assault | pending |
 | 27664101 | 连接重启 | Link Restart | pending |
@@ -280,7 +286,6 @@
 | 28151978 | 疾行机人 多米诺蝴蝶 | Speedroid Dominobutterfly | pending |
 | 28363749 | 火蛋白石头龙头领 | Fire Opal Head | pending |
 | 28369508 | 地中族邪界兽的潜伏 | Subterror Behemoth Burrowing | pending |
-| 28570310 | 魔导兽 迦楼罗 | Mythical Beast Garuda | pending |
 | 28593329 | 暗黑安琪儿 | Dark Angel | pending |
 | 28692962 | 紫宵之机界骑士 | Mekk-Knight Purple Nightfall | pending |
 | 28806532 | 昙天气 糸紫 | The Weather Painter Cloud | pending |
@@ -296,7 +301,6 @@
 | 30907810 | 魔弹恶魔 萨米尔 | Magical Musket Mastermind Zakiel | pending |
 | 31102447 | 亚马逊斥候 | Amazoness Spy | pending |
 | 31226177 | 星杯龙 伊姆杜克 | Imduk the World Chalice Dragon | pending |
-| 31443476 | 速攻旋转 | Quick Launch | pending |
 | 31629407 | 魔弹射手 斯塔尔 | Magical Musketeer Starfire | pending |
 | 31759689 | 廷达魔三角之猎犬 | Tindangle Hound | pending |
 | 31772684 | 复仇死者·归来者 | Vendread Revenants | pending |
@@ -324,7 +328,6 @@
 | 36328300 | 究极宝玉阵 | Ultimate Crystal Magic | pending |
 | 36368606 | 电脑网刷新 | Cynet Refresh | pending |
 | 36527535 | 娱乐伙伴 时事秀舞者 | Performapal Revue Dancer | pending |
-| 36668118 | 旋转引导扇区 | Boot Sector Launch | pending |
 | 36694815 | 比特骑兵 | Bitrooper | pending |
 | 37256334 | 娱乐伙伴 纸牌守卫者 | Performapal Card Gardna | pending |
 | 37310367 | 封锁守卫者 | Lockout Gardna | pending |
@@ -404,7 +407,6 @@
 | 53620899 | 雀姐妹 | Mahjong Munia Maidens | pending |
 | 53666449 | 天空贤者 密涅瓦 | Minerva, Scholar of the Sky | pending |
 | 53701457 | No.28 巨神蛾 | Number 28: Titanic Moth | pending |
-| 53842431 | 魔导兽 刻耳柏洛斯尊主 | Mythical Beast Master Cerberus | pending |
 | 53956001 | 阴之天气模样 | The Weather Cloudy Canvas | pending |
 | 54178659 | 虹天气 彩虹 | The Weather Painter Rainbow | pending |
 | 54191698 | No.29 招财猫人偶 | Number 29: Mannequin Cat | pending |
@@ -590,7 +592,6 @@
 | 88406570 | 刚鬼 毁灭食人魔 | Gouki Destroy Ogre | pending |
 | 89015998 | 异次元的探求者 | D.D. Seeker | pending |
 | 89055154 | 力天使 女武神 | Power Angel Valkyria | pending |
-| 89208725 | 虚拟世界 | Metaverse | pending |
 | 89238128 | 电子界加速人 | Cyberse Accelerator | pending |
 | 89320376 | 星遗物的傀儡 | World Legacy Pawns | pending |
 | 89355716 | 晴之天气模样 | The Weather Sunny Canvas | pending |
@@ -600,7 +601,6 @@
 | 89974904 | 同调呼唤 | Synchro Call | pending |
 | 90812044 | 连锁召唤 | Chain Summon | pending |
 | 91034681 | 魔玩具·冒失鬼 | Frightfur Daredevil | pending |
-| 91182675 | 魔导兽 胡狼 | Mythical Beast Jackal | pending |
 | 91299846 | 雷天气 姜黄 | The Weather Painter Thunder | pending |
 | 91482773 | 关口龙 | Gateway Dragon | pending |
 | 91505214 | 淘气仙星·那耳姬丝 | Trickstar Narkissus | pending |

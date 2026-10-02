@@ -179,6 +179,31 @@
       "id": "thunder-dragon-2018",
       "available": 15,
       "source": 15
+    },
+    {
+      "id": "salamangreat-2019",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "orcust-2019",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "dragon-link-2019",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "sky-striker-2019",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "endymion-2019",
+      "available": 15,
+      "source": 15
     }
   ],
   "excluded": []

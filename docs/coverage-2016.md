@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 651 个身份：171 个可用（16 个复用），480 个待实现。来源和具体范围见 [批次交接](../交接/2016批次交接.md)。
+当前 651 个身份：172 个可用（16 个复用），479 个待实现。来源和具体范围见 [批次交接](../交接/2016批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2016`。
 
@@ -79,6 +79,7 @@
 | 39890958 | 强化支援机械·重装铠甲 | Heavy Mech Support Armor | 已登记本作实现 |
 | 39964797 | 水晶机巧-量子刚玉白晶 | Crystron Quandax | 复用既有实现 |
 | 39996157 | 机械天使的仪式 | Machine Angel Ritual | 本作适配：墓地除外代替光属性怪兽破坏的可选效果自动适用。 |
+| 41209827 | 凶饿毒融合龙 | Starving Venom Fusion Dragon | 本作适配：复制目标原名及已登记的主动／快速怪兽效果，不复制独立诱发、持续或递归复制器；原有登场及破坏效果保留。 |
 | 43845801 | 究极爆风弹 | Neutron Blast | 已登记本作实现 |
 | 45467446 | 白色灵龙 | Dragon Spirit of White | 已登记本作实现 |
 | 45644898 | 青色眼睛的祭司 | Master with Eyes of Blue | 已登记本作实现 |
@@ -389,7 +390,6 @@
 | 40636712 | 魔玩具·钩乌贼 | Frightfur Kraken | pending |
 | 41114306 | 方界兽 暗黑之甘尼克斯 | Dark Garnex the Cubic Beast | pending |
 | 41175645 | 沉默魔术师 | Silent Magician | pending |
-| 41209827 | 凶饿毒融合龙 | Starving Venom Fusion Dragon | pending |
 | 41735184 | 黑魔术的继承 | Dark Magic Inheritance | pending |
 | 42023223 | 电磁石战士α | Alpha The Electromagnet Warrior | pending |
 | 42143067 | 怒气土器 | Doki Doki | pending |

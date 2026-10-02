@@ -67,3 +67,16 @@ test('2018 compound race and group requirements do not erase Effect Monster rest
  const d=parse('2 DARK Machine monsters',o).link;assert.equal(d.allAttribute,'暗');assert.equal(d.race,'机械族');
  const s=parse('2+ Effect Monsters with the same Type and Attribute',o).link;assert.equal(s.effect,true);assert.equal(s.sameRace,true);assert.equal(s.sameAttribute,true);
 });
+
+test('2019 Link grammar preserves level groups, Almiraj, included races and alternative categories',()=>{
+ assert.equal(parse('3 Level 5 or higher monsters',{linkRating:3,linkMarkers:['Bottom-Left','Bottom','Bottom-Right']}).link.minLevel,5);
+ assert.deepEqual(parse('1 Normal Summoned monster with 1000 or less ATK').link,{min:1,max:1,normalSummoned:true,maxAtk:1000});
+ assert.equal(parse('2 non-Link Monsters').link.nonLink,true);
+ assert.equal(parse('2 monsters with different Levels').link.differentLevels,true);
+ assert.equal(parse('2 monsters with the same Level').link.sameLevel,true);
+ assert.equal(parse('2 monsters with the same Type or Attribute').link.sameRaceOrAttribute,true);
+ assert.equal(parse('1 non-Link Monster in an Extra Monster Zone').link.extraMonsterZone,true);
+ assert.deepEqual(parse('2 monsters including a Ritual, Fusion, Synchro, or Xyz Monster').link.includingTypes,['ritual','fusion','synchro','xyz']);
+ assert.equal(parse('2 monsters including a Spellcaster monster',{races:{Spellcaster:'魔法师族'}}).link.includingRace,'魔法师族');
+ assert.throws(()=>parse('2 monsters including an unspecified monster'),/Unknown/);
+});
