@@ -1,6 +1,7 @@
 // Explicit material grammar for the preserved OCG snapshots. Unknown wording is
 // an import error, never an unrestricted material or a silently normal monster.
 export function parseFusion(name, text, {byName, norm, races, attributes}) {
+  if(name==='Ultimate Flagship Ursatron'&&text==='(This card is always treated as an "Ursarctic" and "Drytron" card.)')return {fusion:[],fusionProhibited:true,requiredSummonCard:'Ursarctic Drytron'};
   if(name==='The Dark Magicians')return {fusion:[{anyOf:[{id:byName.get(norm('Dark Magician'))},{id:byName.get(norm('Dark Magician Girl'))}]},{race:races.Spellcaster}]};
   if(name==='Red-Eyes Dark Dragoon')return {fusion:[{id:byName.get(norm('Dark Magician'))},{anyOf:[{id:byName.get(norm('Red-Eyes Black Dragon'))},{race:races.Dragon,effect:true}]}]};
   const differentAttributes=/ monsters with different Attributes$/.test(text);
@@ -32,6 +33,10 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
   };
   const fusion = []; let fusionMore;
   for (let part of text.trim().split(/\s+\+\s+/)) {
+    const noToken=/, except a Token$/i.test(part);part=part.replace(/, except a Token$/i,'');
+    const eitherSeries=part.match(/^1 "([^"]+)" or "([^"]+)" Ritual Monster$/i);
+    if(eitherSeries){fusion.push({type:'ritual',nameIncludesAny:[eitherSeries[1],eitherSeries[2]]});continue;}
+    if(part==='1 Fusion, Synchro, Xyz, or Link Monster'){fusion.push({types:['fusion','synchro','xyz','link']});continue;}
     const summonedThisTurn=/ Special Summoned this turn$/.test(part);
     part=part.replace(/ Special Summoned this turn$/,'');
     const graveOwner=part.match(/ in (your opponent's|your|either) GY$/)?.[1];
@@ -47,7 +52,8 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
     const fieldOnly = / on the field(?:, except Tokens)?$/.test(part);
     const generic = part.replace(/ on the field(?:, except Tokens)?$/, '').match(/^(\d+)(\+| or more)?\s+(?:(.+?)\s+)?monsters?$/i);
     if (!generic) throw new Error('Unparsed Fusion material: ' + name + ' / ' + part);
-    let body = (generic[3]||'').replace(/-Type\b/gi, ''), spec = {...(fieldOnly ? {fieldOnly:true,...(/except Tokens$/.test(part)?{noTokens:true}:{})} : {}),...(graveOwner?{graveOnly:true,graveOpponent:graveOwner==="your opponent's",graveOwn:graveOwner==='your'}:{})};
+    let body = (generic[3]||'').replace(/-Type\b/gi, ''), spec = {...(noToken?{noTokens:true}:{}),...(fieldOnly ? {fieldOnly:true,...(/except Tokens$/.test(part)?{noTokens:true}:{})} : {}),...(graveOwner?{graveOnly:true,graveOpponent:graveOwner==="your opponent's",graveOwn:graveOwner==='your'}:{})};
+    if(body==='LIGHT or DARK'){spec.anyOf=[{attribute:attributes.LIGHT},{attribute:attributes.DARK}];body='';}
     if (/(?:^| )Effect$/i.test(body)) { spec.effect = true; body = body.replace(/(?:^| )Effect$/i, ''); }
     if(summonedThisTurn)spec.specialSummonedThisTurn=true;
     const levels=body.match(/^Level (\d+) or (\d+)(?: (.+))?$/i);
@@ -79,6 +85,9 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
 }
 
 export function parseSynchro(name, text, {byName, norm, races, attributes}) {
+  const difference=text.match(/^Cannot be Synchro Summoned\. Must be Special Summoned \(from your Extra Deck\) by sending 2 monsters you control with a Level difference of (1|7) to the GY \(1 (Level 8 or higher )?Tuner and 1 non-Tuner( Synchro Monster)?\)\./);
+  if(difference)return {synchro:{cannotSummon:true},levelDifferenceSummon:{difference:Number(difference[1]),minTunerLevel:difference[2]?8:1,nonType:difference[3]?'synchro':null}};
+  if(/, including a Dragon Synchro Monster$/.test(text)){const out=parseSynchro(name,text.replace(/, including a Dragon Synchro Monster$/,''),{byName,norm,races,attributes});out.synchro.includingNon={race:races.Dragon,type:'synchro'};return out;}
   text=text.split(' / ')[0];
   if (name === 'Phantasmal Lord Ultimitl Bishbaalkin') return {synchro:{noSummon:true},noNormal:true,specialOnly:'bishbaalkin'};
   if (name === 'Ultimaya Tzolkin') return {synchro: {noSummon: true}, noNormal: true, specialOnly: 'tzolkin'};
@@ -138,6 +147,7 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
 }
 
 export function parseXyz(name, text, {races, attributes}) {
+  if (/ with different Attributes$/.test(text)) return {...parseXyz(name,text.replace(/ with different Attributes$/,''),{races,attributes}),xyzDifferentAttributes:true};
   if (/ with the same Type and Attribute$/.test(text)) return {...parseXyz(name,text.replace(/ with the same Type and Attribute$/,''),{races,attributes}),xyzSameRace:true,xyzSameAttribute:true};
   if(name==='Number F0: Utopic Draco Future')return {xyzCount:3,rank:1,xyzMaterialType:'xyz',xyzSameRank:true,xyzExcludeNameIncludes:'Number'};
   if (name === 'Number 100: Numeron Dragon') return {xyzCount:2,rank:1,xyzMaterialType:'xyz',xyzSameRank:true,xyzSameName:true,xyzNameIncludes:'Number'};

@@ -1,0 +1,565 @@
+{
+  "scope": [
+    2021
+  ],
+  "historicalContext": {
+    "worldChampionship": "cancelled",
+    "note": "2021 Worlds was cancelled due to COVID-19. Three distinct annual representative adaptations use current card text and the project’s unified deck rules, not player original lists or a single quarter’s Forbidden/Limited List."
+  },
+  "sources": [
+    {
+      "id": "worlds-cancelled",
+      "url": "https://comicbook.com/gaming/news/yugioh-world-championship-2021-konami-cancelled/",
+      "accessed": "2026-10-02",
+      "retrievedContentSHA256": "73c0f59f9f84eaf3fef7acad65b15d15947fc461c25804e20ef73f7e987621ab",
+      "evidenceSummary": "Contemporary report dated 2021-04-05 quotes Konami’s cancellation of the 2021 World Championship due to COVID-19."
+    },
+    {
+      "id": "ocg-2021-01",
+      "url": "https://roadoftheking.com/ocg-2021-01-metagame/",
+      "accessed": "2026-10-02",
+      "retrievedContentSHA256": "69bf5f9eb95235e602b61f69bdd8151ad155ef77a1f8ce372d269fc2670f386f",
+      "evidenceSummary": "29 Tri-Brigade builds, including 8 Zoodiac Tri-Brigade.",
+      "note": "Contemporary OCG environment evidence. Project-authored annual representative adaptation, not a player’s exact list or a claimed podium placement."
+    },
+    {
+      "id": "ocg-2021-04",
+      "url": "https://roadoftheking.com/ocg-2021-04-metagame/",
+      "accessed": "2026-10-02",
+      "retrievedContentSHA256": "bd55813f816fd97125aeb02e92860ebf14af02ee99ac1222be56322c9e0ccf7b",
+      "evidenceSummary": "175 Tri-Brigade builds, including 151 Zoodiac Tri-Brigade; Bearbrumm enables consistent Revolt access.",
+      "note": "Contemporary OCG environment evidence. Project-authored annual representative adaptation, not a player’s exact list or a claimed podium placement."
+    },
+    {
+      "id": "ocg-2021-07",
+      "url": "https://roadoftheking.com/ocg-2021-07-metagame/",
+      "accessed": "2026-10-02",
+      "retrievedContentSHA256": "1b37768ae5c42c43dc05447177c78c59f9423e95dff36afabe131c29f144da62",
+      "evidenceSummary": "100 Swordsoul builds (19 Tenyi and 9 Destiny HERO Tenyi); 57 Tri-Brigade; 20 Floowandereeze.",
+      "note": "Contemporary OCG environment evidence. Project-authored annual representative adaptation, not a player’s exact list or a claimed podium placement."
+    },
+    {
+      "id": "ocg-2021-10",
+      "url": "https://roadoftheking.com/ocg-2021-10-metagame/",
+      "accessed": "2026-10-02",
+      "retrievedContentSHA256": "599e0dde98e84df7115bab1a27c25097aea3b9a30be12fa9e3b0ca65e9a59e8a",
+      "evidenceSummary": "81 Swordsoul (24 Tenyi and 18 Destiny HERO Tenyi), 58 Floowandereeze, 40 Tri-Brigade.",
+      "note": "Contemporary OCG environment evidence. Project-authored annual representative adaptation, not a player’s exact list or a claimed podium placement."
+    }
+  ],
+  "decks": [
+    {
+      "id": "swordsoul-tenyi-2021",
+      "year": 2021,
+      "title": "年度热门 · 相剑天威",
+      "en": "Annual Metagame · Swordsoul Tenyi",
+      "ja": "年間環境・相剣天威",
+      "ace": "Swordsoul Supreme Sovereign - Chengying",
+      "description": "以天威调配幻龙族资源，相剑衍生物连接8星与10星同调，赤霄、鲜花女男爵和承影接力压制。",
+      "descriptionEn": "Tenyi recycles Wyrm resources; Swordsoul Tokens enable Level 8 and 10 Synchros, with Chixiao, Baronne and Chengying providing interaction.",
+      "descriptionJa": "天威で幻竜族の資源を循環し、相剣トークンからレベル8・10のシンクロへ。赤霄、バロネス、承影で相手を制する。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2021-07",
+        "ocg-2021-10"
+      ],
+      "main": [
+        [
+          "Swordsoul of Mo Ye",
+          3
+        ],
+        [
+          "Swordsoul of Taia",
+          2
+        ],
+        [
+          "Swordsoul Strategist Longyuan",
+          3
+        ],
+        [
+          "Incredible Ecclesia, the Virtuous",
+          3
+        ],
+        [
+          "Tenyi Spirit - Ashuna",
+          3
+        ],
+        [
+          "Tenyi Spirit - Vishuda",
+          2
+        ],
+        [
+          "Tenyi Spirit - Adhara",
+          2
+        ],
+        [
+          "Tenyi Spirit - Shthana",
+          1
+        ],
+        [
+          "Archnemeses Protos",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Swordsoul Emergence",
+          3
+        ],
+        [
+          "Vessel for the Dragon Cycle",
+          2
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Crossout Designator",
+          2
+        ],
+        [
+          "Swordsoul Blackout",
+          2
+        ],
+        [
+          "Pot of Desires",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Swordsoul Grandmaster - Chixiao",
+          2
+        ],
+        [
+          "Swordsoul Supreme Sovereign - Chengying",
+          1
+        ],
+        [
+          "Swordsoul Sinister Sovereign - Qixing Longyuan",
+          1
+        ],
+        [
+          "Baronne de Fleur",
+          1
+        ],
+        [
+          "Baxia, Brightness of the Yang Zing",
+          2
+        ],
+        [
+          "Yazi, Evil of the Yang Zing",
+          1
+        ],
+        [
+          "Chaofeng, Phantom of the Yang Zing",
+          1
+        ],
+        [
+          "Draco Berserker of the Tenyi",
+          1
+        ],
+        [
+          "Monk of the Tenyi",
+          3
+        ],
+        [
+          "Shaman of the Tenyi",
+          1
+        ],
+        [
+          "Ruddy Rose Dragon",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Evenly Matched",
+          2
+        ]
+      ],
+      "combo": [
+        "天威先展开，再用相剑衍生物同调；衍生物在场时只能从额外同调召唤。",
+        "赤霄的检索与无效共用同名次数；龙渊的1200伤害在成为同调素材后触发。",
+        "灰流丽等手坑配合抹杀之指名者；天威之龙仙女限制额外怪兽发动效果，天威龙-宽恕蟠龙限制后续特殊召唤的种族。"
+      ]
+    },
+    {
+      "id": "zoodiac-tri-brigade-2021",
+      "year": 2021,
+      "title": "年度热门 · 十二兽铁兽",
+      "en": "Annual Metagame · Zoodiac Tri-Brigade",
+      "ja": "年間環境・十二獣鉄獣戦線",
+      "ace": "Tri-Brigade Shuraig the Ominous Omen",
+      "description": "人马、姬特和纳贝尔堆积兽族资源，块击熊检索抗战，十二兽战斗后叠放天霆号。",
+      "descriptionEn": "Fraktall, Kitt and Nervall stock the GY. Bearbrumm finds Revolt, while Zoodiac converts a battle into an AA-ZEUS board clear.",
+      "descriptionJa": "フラクトール、キット、ナーベルで墓地を準備。ベアブルムから抗戦へつなぎ、十二獣の戦闘後にアーゼウスを重ねる。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2021-01",
+        "ocg-2021-04"
+      ],
+      "main": [
+        [
+          "Tri-Brigade Fraktall",
+          3
+        ],
+        [
+          "Tri-Brigade Kerass",
+          2
+        ],
+        [
+          "Tri-Brigade Nervall",
+          3
+        ],
+        [
+          "Tri-Brigade Kitt",
+          3
+        ],
+        [
+          "Zoodiac Thoroughblade",
+          3
+        ],
+        [
+          "Zoodiac Whiptail",
+          1
+        ],
+        [
+          "Zoodiac Ramram",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "PSY-Framegear Gamma",
+          3
+        ],
+        [
+          "PSY-Frame Driver",
+          1
+        ],
+        [
+          "Fire Formation - Tenki",
+          3
+        ],
+        [
+          "Pot of Desires",
+          2
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Crossout Designator",
+          2
+        ],
+        [
+          "Tri-Brigade Revolt",
+          3
+        ],
+        [
+          "Infinite Impermanence",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Tri-Brigade Shuraig the Ominous Omen",
+          2
+        ],
+        [
+          "Tri-Brigade Ferrijit the Barren Blossom",
+          1
+        ],
+        [
+          "Tri-Brigade Bearbrumm the Rampant Rampager",
+          1
+        ],
+        [
+          "Tri-Brigade Rugal the Silver Sheller",
+          1
+        ],
+        [
+          "Ancient Warriors Oath - Double Dragon Lords",
+          1
+        ],
+        [
+          "Apollousa, Bow of the Goddess",
+          1
+        ],
+        [
+          "Accesscode Talker",
+          1
+        ],
+        [
+          "Salamangreat Almiraj",
+          1
+        ],
+        [
+          "Hraesvelgr, the Desperate Doom Eagle",
+          1
+        ],
+        [
+          "Zoodiac Boarbow",
+          1
+        ],
+        [
+          "Zoodiac Chakanine",
+          1
+        ],
+        [
+          "Zoodiac Tigermortar",
+          1
+        ],
+        [
+          "Zoodiac Drident",
+          1
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Evenly Matched",
+          2
+        ]
+      ],
+      "combo": [
+        "人马送姬特，姬特送纳贝尔，纳贝尔补手；再除外墓地兽族资源呼出连接怪兽。",
+        "块击熊检索抗战后只可特殊召唤铁兽；提前完成十二兽和通用连接路线。",
+        "抗战只可复活能合法特殊召唤的素材；被本家效果直接叫出的额外怪兽不能直接苏生。"
+      ]
+    },
+    {
+      "id": "floowandereeze-2021",
+      "year": 2021,
+      "title": "年度热门 · 随风旅鸟",
+      "en": "Annual Metagame · Floowandereeze",
+      "ja": "年間環境・ふわんだりぃず",
+      "ace": "Floowandereeze & Empen",
+      "description": "知更鸟与白头鹰接力通常召唤，帝企和巨神鸟建立压制，地图与梦之町让鸟群在对方回合再次启程。",
+      "descriptionEn": "Robina and Eglen chain Normal Summons into Empen and Apex Avian. Map and Dreaming Town repeat the route during the opponent’s turn.",
+      "descriptionJa": "ろびーなといぐるんから連続で通常召喚し、えんぺんと巨神鳥へ。地図と夢の町で相手ターンにも展開する。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2021-07",
+        "ocg-2021-10"
+      ],
+      "main": [
+        [
+          "Floowandereeze & Robina",
+          3
+        ],
+        [
+          "Floowandereeze & Eglen",
+          3
+        ],
+        [
+          "Floowandereeze & Stri",
+          1
+        ],
+        [
+          "Floowandereeze & Toccan",
+          1
+        ],
+        [
+          "Floowandereeze & Empen",
+          2
+        ],
+        [
+          "Floowandereeze & Snowl",
+          1
+        ],
+        [
+          "Mist Valley Apex Avian",
+          1
+        ],
+        [
+          "Raiza the Mega Monarch",
+          1
+        ],
+        [
+          "Barrier Statue of the Stormwinds",
+          1
+        ],
+        [
+          "Dimension Shifter",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Floowandereeze and the Magnificent Map",
+          3
+        ],
+        [
+          "Floowandereeze and the Advent of Adventure",
+          3
+        ],
+        [
+          "Floowandereeze and the Unexplored Winds",
+          1
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Pot of Prosperity",
+          3
+        ],
+        [
+          "Pot of Duality",
+          3
+        ],
+        [
+          "Book of Moon",
+          3
+        ],
+        [
+          "Floowandereeze and the Dreaming Town",
+          2
+        ],
+        [
+          "Floowandereeze and the Scary Sea",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Lyrilusc - Assembled Nightingale",
+          3
+        ],
+        [
+          "Downerd Magician",
+          2
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          2
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Knightmare Cerberus",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Relinquished Anima",
+          1
+        ],
+        [
+          "Salamangreat Almiraj",
+          1
+        ],
+        [
+          "Accesscode Talker",
+          1
+        ],
+        [
+          "Apollousa, Bow of the Goddess",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Twin Twisters",
+          2
+        ]
+      ],
+      "combo": [
+        "先发动强欲而谦虚之壶或金满而谦虚之壶，再用知更鸟找白头鹰接力召唤。",
+        "小鸟效果发动过的整个回合不能特殊召唤；额外主要用于金满代价，特殊召唤路线须另选回合。",
+        "未知之风用己方怪兽和对方卡片送墓替代二祭品；官方FAQ允许在次元吸引者下适用，卡片会被除外，魔法免疫仍不可选。"
+      ]
+    }
+  ]
+}

@@ -7,6 +7,15 @@
   },
   "entries": [
     {
+      "name": "@Ignister",
+      "kind": "setcode",
+      "code": "0x135",
+      "fallback": {
+        "match": "contains",
+        "value": "@Ignister"
+      }
+    },
+    {
       "name": "/Assault Mode",
       "kind": "setcode",
       "code": "0x104f",
@@ -654,6 +663,15 @@
       }
     },
     {
+      "name": "Despia",
+      "kind": "setcode",
+      "code": "0x164",
+      "fallback": {
+        "match": "contains",
+        "value": "Despia"
+      }
+    },
+    {
       "name": "Destiny HERO",
       "kind": "setcode",
       "code": "0xc008",
@@ -678,6 +696,15 @@
       "fallback": {
         "match": "contains",
         "value": "Dinomist"
+      }
+    },
+    {
+      "name": "Dinomorphia",
+      "kind": "setcode",
+      "code": "0x173",
+      "fallback": {
+        "match": "contains",
+        "value": "Dinomorphia"
       }
     },
     {
@@ -768,6 +795,15 @@
       "fallback": {
         "match": "contains",
         "value": "Dream Mirror"
+      }
+    },
+    {
+      "name": "Drytron",
+      "kind": "setcode",
+      "code": "0x154",
+      "fallback": {
+        "match": "contains",
+        "value": "Drytron"
       }
     },
     {
@@ -870,6 +906,15 @@
       "fallback": {
         "match": "contains",
         "value": "Evil HERO"
+      }
+    },
+    {
+      "name": "Evil★Twin",
+      "kind": "setcode",
+      "code": "0x2151",
+      "fallback": {
+        "match": "contains",
+        "value": "Evil★Twin"
       }
     },
     {
@@ -996,6 +1041,15 @@
       "fallback": {
         "match": "contains",
         "value": "Flamvell"
+      }
+    },
+    {
+      "name": "Floowandereeze",
+      "kind": "setcode",
+      "code": "0x16d",
+      "fallback": {
+        "match": "contains",
+        "value": "Floowandereeze"
       }
     },
     {
@@ -1741,6 +1795,15 @@
       }
     },
     {
+      "name": "Magikey",
+      "kind": "setcode",
+      "code": "0x165",
+      "fallback": {
+        "match": "contains",
+        "value": "Magikey"
+      }
+    },
+    {
       "name": "Magistus",
       "kind": "setcode",
       "code": "0x150",
@@ -1961,6 +2024,15 @@
       }
     },
     {
+      "name": "Myutant",
+      "kind": "setcode",
+      "code": "0x157",
+      "fallback": {
+        "match": "contains",
+        "value": "Myutant"
+      }
+    },
+    {
       "name": "Naturia",
       "kind": "setcode",
       "code": "0x2a",
@@ -2168,6 +2240,15 @@
       "fallback": {
         "match": "contains",
         "value": "Outer Entity"
+      }
+    },
+    {
+      "name": "P.U.N.K.",
+      "kind": "setcode",
+      "code": "0x171",
+      "fallback": {
+        "match": "contains",
+        "value": "P.U.N.K."
       }
     },
     {
@@ -2736,6 +2817,15 @@
       }
     },
     {
+      "name": "Swordsoul",
+      "kind": "setcode",
+      "code": "0x16b",
+      "fallback": {
+        "match": "contains",
+        "value": "Swordsoul"
+      }
+    },
+    {
       "name": "Sylvan",
       "kind": "setcode",
       "code": "0x90",
@@ -2880,6 +2970,15 @@
       }
     },
     {
+      "name": "Tri-Brigade",
+      "kind": "setcode",
+      "code": "0x14d",
+      "fallback": {
+        "match": "contains",
+        "value": "Tri-Brigade"
+      }
+    },
+    {
       "name": "Triamid",
       "kind": "setcode",
       "code": "0xe2",
@@ -2949,6 +3048,15 @@
       "fallback": {
         "match": "contains",
         "value": "Unchained Soul"
+      }
+    },
+    {
+      "name": "Ursarctic",
+      "kind": "setcode",
+      "code": "0x163",
+      "fallback": {
+        "match": "contains",
+        "value": "Ursarctic"
       }
     },
     {
@@ -3084,6 +3192,15 @@
       "fallback": {
         "match": "contains",
         "value": "Winged Kuriboh"
+      }
+    },
+    {
+      "name": "Witchcrafter",
+      "kind": "setcode",
+      "code": "0x128",
+      "fallback": {
+        "match": "contains",
+        "value": "Witchcrafter"
       }
     },
     {

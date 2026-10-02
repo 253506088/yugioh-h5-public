@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 741 个身份：43 个可用（8 个复用），698 个待实现。来源和具体范围见 [批次交接](../交接/2019批次交接.md)。
+当前 741 个身份：53 个可用（8 个复用），688 个待实现。来源和具体范围见 [批次交接](../交接/2019批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2019`。
 
@@ -13,13 +13,16 @@
 | 703897 | 自奏圣乐之阶 | Orcust Crescendo | 已登记本作实现 |
 | 3611830 | 创圣魔导王 恩底弥翁 | Endymion, the Mighty Master of Magic | 已登记本作实现 |
 | 4280258 | 召命之神弓-阿波罗萨 | Apollousa, Bow of the Goddess | 复用既有实现 |
+| 5041348 | 天威之龙鬼神 | Draco Berserker of the Tenyi | 已登记本作实现 |
 | 5402805 | 天威之鬼神 | Berserker of the Tenyi | 已登记本作实现 |
 | 5969957 | 弹丸重填龙 | Rokket Recharger | 已登记本作实现 |
 | 11069680 | 废品转换者 | Junk Converter | 复用既有实现 |
 | 15381421 | 辉光龙 赛弗特龙 | Starliege Seyfert | 已登记本作实现 |
 | 21251800 | 带来光明的使者 路西法 | Light Bringer Lucifer | 已登记本作实现 |
 | 22908820 | 元素英雄 日出侠 | Elemental HERO Sunrise | 复用既有实现 |
+| 23431858 | 天威龙-大同蟠龙 | Tenyi Spirit - Vishuda | 已登记本作实现 |
 | 23720856 | 刷拉拉番长-我我我外套 | Zubababancho Gagagacoat | 复用既有实现 |
+| 24557335 | 天威龙-真知蟠龙 | Tenyi Spirit - Shthana | 已登记本作实现 |
 | 27204311 | 原始生命态 尼比鲁 | Nibiru, the Primal Being | 已登记本作实现 |
 | 31313405 | 转生炎兽 火凤凰 | Salamangreat Pyro Phoenix | 已登记本作实现 |
 | 32476603 | 银色弹丸龙 | Silverrokket Dragon | 已登记本作实现 |
@@ -30,6 +33,7 @@
 | 39000945 | 恩底弥翁的皇后 | Reflection of Endymion | 已登记本作实现 |
 | 45819647 | 神圣魔皇后 塞勒涅 | Selene, Queen of the Master Magicians | 已登记本作实现 |
 | 46271408 | 闪刀术式-剪斗交刃 | Sky Striker Maneuver - Scissors Cross | 已登记本作实现 |
+| 49105782 | 死翼之虎钳巨鹰 | Hraesvelgr, the Desperate Doom Eagle | 已登记本作实现 |
 | 50277355 | 交织绵羊 | Cross-Sheep | 复用既有实现 |
 | 50907446 | 神影依·七贤巨鲲魔 | El Shaddoll Apkallone | 已登记本作实现 |
 | 54529134 | 转生炎兽的超转生 | Salamangreat Transcendence | 已登记本作实现 |
@@ -38,7 +42,9 @@
 | 59392529 | 元素英雄 液态侠 | Elemental HERO Liquid Soldier | 复用既有实现 |
 | 59724555 | 怒怒怒矮人-隆隆隆手套 | Dodododwarf Gogogoglove | 复用既有实现 |
 | 60303245 | 转生炎兽 独角兔 | Salamangreat Almiraj | 已登记本作实现 |
+| 65124425 | 虚空之龙轮 | Vessel for the Dragon Cycle | 已登记本作实现 |
 | 65342096 | 魔法都市的实验设施 | Endymion's Lab | 已登记本作实现 |
+| 65681983 | 抹杀之指名者 | Crossout Designator | 已登记本作实现 |
 | 65741786 | I：P百变莱娜 | I:P Masquerena | 复用既有实现 |
 | 66104644 | 恩底弥翁的统领 | Magister of Endymion | 已登记本作实现 |
 | 67748760 | 绝对路由龙 | Absorouter Dragon | 已登记本作实现 |
@@ -47,12 +53,16 @@
 | 73539069 | 主动撞针龙 | Striker Dragon | 已登记本作实现 |
 | 75147529 | 闪刀姬-泽克 | Sky Striker Ace - Zeke | 已登记本作实现 |
 | 76375976 | 魔钟洞 | Mystic Mine | 已登记本作实现 |
+| 78917791 | 天威之龙仙女 | Shaman of the Tenyi | 已登记本作实现 |
 | 83554231 | 转生炎兽的再起 | Salamangreat Recureance | 已登记本作实现 |
+| 87052196 | 天威龙-宽恕蟠龙 | Tenyi Spirit - Ashuna | 已登记本作实现 |
 | 91336701 | 魔导耀士 破晓者 | Day-Breaker the Shining Magical Warrior | 已登记本作实现 |
+| 91800273 | 次元吸引者 | Dimension Shifter | 已登记本作实现 |
 | 92176681 | 抑制压缩对撞员 | Suppression Collider | 已登记本作实现 |
 | 92559258 | 恩底弥翁的仆从 | Servant of Endymion | 已登记本作实现 |
 | 93854893 | 宵星之机神 丁吉尔苏 | Dingirsu, the Orcust of the Evening Star | 本作适配：可选破坏代替自动移除最先叠放的素材。 |
 | 94677445 | 星杯的神子 夏娃 | Ib the World Chalice Justiciar | 已登记本作实现 |
+| 98159737 | 天威龙-纯真蟠龙 | Tenyi Spirit - Adhara | 已登记本作实现 |
 
 ## 待实现身份
 
@@ -95,7 +105,6 @@
 | 4550066 | 重建鹿 | Rebuildeer | pending |
 | 4810585 | 战华史略-长坂之雄 | Ancient Warriors Saga - Defense of Changban | pending |
 | 5008836 | 守护神 艾克佐迪亚 | Exodia, the Legendary Defender | pending |
-| 5041348 | 天威之龙鬼神 | Draco Berserker of the Tenyi | pending |
 | 5259518 | 捕食植物 卷瓶子草喙嘴龙 | Predaplant Heliamphorhynchus | pending |
 | 5298175 | 占卜魔女 小水 | Fortune Fairy Swee | pending |
 | 5329790 | 协议守卫者 | Protocol Gardna | pending |
@@ -220,7 +229,6 @@
 | 22933016 | “艾”闲者苏生 | A.I.dle Reborn | pending |
 | 23020408 | 魂之仆人 | Soul Servant | pending |
 | 23213239 | 激动的未界域 | Danger! Disturbance! Disorder! | pending |
-| 23431858 | 天威龙-大同蟠龙 | Tenyi Spirit - Vishuda | pending |
 | 23442438 | 同调追逐 | Synchro Chase | pending |
 | 23619206 | 死神鸟 斯摩夫 | Simorgh, Bird of Calamity | pending |
 | 23656668 | 重力控制者 | Gravity Controller | pending |
@@ -232,7 +240,6 @@
 | 24027078 | 阿瓦隆的魔女 摩根 | Morgan, the Enchantress of Avalon | pending |
 | 24158464 | 廷达魔三角之结界石 | Tindangle Jhrelth | pending |
 | 24181936 | 暗味锅派对 | Yaminabe Party | pending |
-| 24557335 | 天威龙-真知蟠龙 | Tenyi Spirit - Shthana | pending |
 | 24635329 | 神圣之影 商神杖灵 | Qadshaddoll Keios | pending |
 | 24701066 | 无限起动 大河式风击龙 | Infinitrack River Stormer | pending |
 | 24721709 | 救魔之标 | Dwimmered Path | pending |
@@ -404,7 +411,6 @@
 | 48829461 | 罪 矛盾齿轮 | Malefic Paradox Gear | pending |
 | 49082032 | 再起超量 | Resurgam Xyz | pending |
 | 49094491 | 转生炎兽 阔耳狐 | Salamangreat Fennec | pending |
-| 49105782 | 死翼之虎钳巨鹰 | Hraesvelgr, the Desperate Doom Eagle | pending |
 | 49154689 | 替身演员 | Stand In | pending |
 | 49275969 | 冰界王战 尼德霍格王 | Nidhogg, Generaider Boss of Ice | pending |
 | 49296203 | 机巧法师 九七六三 | Karakuri Bonze mdl 9763 "Kunamzan" | pending |
@@ -524,8 +530,6 @@
 | 64749612 | 黄衣忍者 | Yellow Ninja | pending |
 | 64756282 | 魔女术工匠·万能杰妮 | Witchcrafter Genni | pending |
 | 64961254 | 女神薇儿丹蒂的引导 | Goddess Verdande's Guidance | pending |
-| 65124425 | 虚空之龙轮 | Vessel for the Dragon Cycle | pending |
-| 65681983 | 抹杀之指名者 | Crossout Designator | pending |
 | 65687442 | 女武神的骑行 | Ride of the Valkyries | pending |
 | 65899613 | 蜂军-必中之大头针蜂 | Battlewasp - Pin the Bullseye | pending |
 | 66011101 | No.60 刻不知之杜加雷斯 | Number 60: Dugares the Timeless | pending |
@@ -603,7 +607,6 @@
 | 78543464 | 九字切咒符 | Kuji-Kiri Curse | pending |
 | 78751195 | 沉沉妖@火灵天星 | Doshin @Ignister | pending |
 | 78876707 | 神圣骑士王 康尼厄斯 | Sacred Noble Knight of King Custennin | pending |
-| 78917791 | 天威之龙仙女 | Shaman of the Tenyi | pending |
 | 79086452 | 机关傀儡-素瓷人偶 | Gimmick Puppet Bisque Doll | pending |
 | 79130389 | 海晶少女 奶嘴海葵 | Marincess Coral Anemone | pending |
 | 79383919 | 断罪之咒眼 | Evil Eye Retribution | pending |
@@ -665,7 +668,6 @@
 | 86449372 | “艾”打式袭击 | TA.I. Strike | pending |
 | 86509711 | 魔术师的配合 | Magicians' Combination | pending |
 | 86605184 | 防火守护者 | Firewall Guardian | pending |
-| 87052196 | 天威龙-宽恕蟠龙 | Tenyi Spirit - Ashuna | pending |
 | 87497553 | 圣像骑士的圣约 | Crusadia Testament | pending |
 | 87800375 | 圣剑引导的未来 | Until Noble Arms are Needed Once Again | pending |
 | 87804365 | 斩机超阶乘 | Mathmech Superfactorial | pending |
@@ -698,7 +700,6 @@
 | 91392974 | 出幻 | Apparition | pending |
 | 91407982 | 命运视界 | Fortune Vision | pending |
 | 91740879 | 隐居者的大釜 | Cauldron of the Old Man | pending |
-| 91800273 | 次元吸引者 | Dimension Shifter | pending |
 | 91953000 | 海晶少女 蓝倒吊 | Marincess Blue Tang | pending |
 | 91969909 | 女神乌尔德的裁断 | Goddess Urd's Verdict | pending |
 | 92015800 | No.76 谐调光师 渐变天乐斗士 | Number 76: Harmonizer Gradielle | pending |
@@ -739,7 +740,6 @@
 | 97637162 | 让步小快马 | Handigallop | pending |
 | 97661969 | 崔嵬之地灵使 奥丝 | Aussa the Earth Charmer, Immovable | pending |
 | 97854941 | 女武神·希格露恩 | Valkyrie Sigrun | pending |
-| 98159737 | 天威龙-纯真蟠龙 | Tenyi Spirit - Adhara | pending |
 | 98371278 | DMZ龙 | DMZ Dragon | pending |
 | 98439949 | 无限起动 巨蟹式起重机 | Infinitrack Crab Crane | pending |
 | 98452268 | 霸王黑龙 异色眼叛逆龙-霸王 | Odd-Eyes Rebellion Dragon Overlord | pending |

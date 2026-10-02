@@ -14,6 +14,20 @@ test('accel Synchros require actual Synchro material types',()=>{const s=parseSy
 test('Xyz grammar retains Rank, race, archetype and a bounded variable material count',()=>{assert.deepEqual(parseXyz('Dinosaur','2 Level 4 Warrior-Type monsters',options),{xyzCount:2,rank:4,xyzRace:'战士族'});assert.equal(parseXyz('Archetype','2 Level 4 "lswarm" monsters',options).xyzNameIncludes,'lswarm');const variable=parseXyz('Hazy Flame Basiltrice','2 or more (max. 5) Level 6 EARTH monsters',options);assert.equal(variable.xyzMax,5);assert.equal(variable.xyzAttribute,'地');});
 test('Fusion grammar retains combined race/archetype and non-Effect Synchro requirements',()=>{const a=parseFusion('Barbaroid','5 Machine-Type "roid" monsters',options);assert.deepEqual(a.fusion[0],{race:'机械族',nameIncludes:'roid'});const o={...options,byName:new Map([...options.byName,['gaia knight, the force of earth','gaia']])},b=parseFusion('Gaia Drake','1 "Gaia Knight, the Force of Earth" + 1 non-Effect Synchro Monster',o);assert.deepEqual(b.fusion[1],{type:'synchro',normal:true});});
 test('an unknown Xyz material grammar is rejected rather than admitted as a generic Rank',()=>{assert.throws(()=>parseXyz('Bad','2 any cards',options),/Unparsed/);assert.throws(()=>parseXyz('Bad','2 Level 4 Quantum monsters',options),/Unknown/);});
+test('2021 materials preserve Token exclusions, alternative series and required Extra Deck types',()=>{
+ assert.deepEqual(parseFusion('Magikey Beast - Ansyalabolas','1 "Magikey" monster + 1 Normal Monster, except a Token',options).fusion[1],{noTokens:true,normal:true});
+ const o={...options,byName:new Map([...options.byName,['dark magician','dm'],['fallen of albaz','albaz']])};
+ assert.deepEqual(parseFusion('Master of Chaos','"Dark Magician" + 1 "Chaos" or "Black Luster Soldier" Ritual Monster',o).fusion[1],{type:'ritual',nameIncludesAny:['Chaos','Black Luster Soldier']});
+ assert.deepEqual(parseFusion('Despian Quaeritis','1 "Despia" monster + 1 LIGHT or DARK monster',o).fusion[1],{anyOf:[{attribute:'光'},{attribute:'暗'}]});
+ assert.deepEqual(parseFusion('Mirrorjade the Iceblade Dragon','"Fallen of Albaz" + 1 Fusion, Synchro, Xyz, or Link Monster',o).fusion[1],{types:['fusion','synchro','xyz','link']});
+ assert.equal(parseFusion('Ultimate Flagship Ursatron','(This card is always treated as an "Ursarctic" and "Drytron" card.)',options).fusionProhibited,true);
+});
+test('2021 Synchro procedures and different-Attribute Xyz remain explicit',()=>{
+ assert.deepEqual(parseSynchro('Crystal Clear Wing Synchro Dragon','1 Tuner + 1+ non-Tuner monsters, including a Dragon Synchro Monster',options).synchro.includingNon,{race:'龙族',type:'synchro'});
+ const s=parseSynchro('Ursarctic Polari','Cannot be Synchro Summoned. Must be Special Summoned (from your Extra Deck) by sending 2 monsters you control with a Level difference of 1 to the GY (1 Tuner and 1 non-Tuner).',options);
+ assert.equal(s.synchro.cannotSummon,true);assert.equal(s.levelDifferenceSummon.difference,1);
+ assert.equal(parseXyz('Rilliona','2 Level 4 monsters with different Attributes',options).xyzDifferentAttributes,true);
+});
 
 test('2016 material grammar preserves attack limits, field-only materials and original levels',()=>{
  assert.deepEqual(parseFusion('Metalfoes Adamante','1 "Metalfoes" monster + 1 monster with 2500 or less ATK',options).fusion[1],{maxAtk:2500});

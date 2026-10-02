@@ -259,6 +259,8 @@
   P.preferredNormalSlot=function(owner){const m=this.state.players[owner].monsters;return is(this,'cannon')&&!m[2]?2:m.indexOf(null);};
 
   // ---- draws --------------------------------------------------------------------
+  // Rule rewards are not card effects, including rewards outside a task.
+  P.ruleDraw=function(owner,amount=1){const prior=this._ruleRewardDraw;this._ruleRewardDraw=true;try{return this.draw(owner,amount);}finally{this._ruleRewardDraw=prior;}};
   extend('draw',function(prior,owner,amount=1,silent=false){
     const id=rule(this);
     if(id&&this.state.inDrawPhase&&amount===1&&!this._ruleDrawing){
@@ -328,7 +330,7 @@
     const available=this.ruleActions(owner).find(a=>a.key===action.key);if(!available)throw new root.DuelRuleError('现在不能进行这个规则行动。');
     pstate(this,owner).bitterTurn=this.state.turn;this.payLP(owner,available.cost);
     note(this,'苦肉：支付 '+available.cost+' LP，抽1张卡',owner,{amount:available.cost});
-    this.draw(owner,1);
+    this.ruleDraw(owner,1);
     if(pending){this.state.pending=null;this.openWindow(owner,pending.passes);}else this.state.frame={kind:'main-open',owner,windowOffered:false};
   };
   extend('chooseAI',function(prior,p){const action=p.kind==='window'&&this.ruleActions(p.responder)[0];if(action&&this.actionScore({...action,owner:p.responder})>0)return action;return prior.call(this,p);});
@@ -380,7 +382,7 @@
   });
   extend('emit',function(prior,event){
     const r=prior.call(this,event);
-    if(event?.type==='chain-complete'&&is(this,'carnival')){const c=this.state.ruleMode.carnival;if(c&&c.chainId===event.chainId){delete this.state.ruleMode.carnival;if(c.total>=3)for(const owner of [this.state.active,1-this.state.active])if(c.draws[owner]&&this.state.winner===null){note(this,'狂欢连锁：'+c.total+'连锁结束，抽'+c.draws[owner]+'张',owner);this.draw(owner,c.draws[owner]);}}}
+    if(event?.type==='chain-complete'&&is(this,'carnival')){const c=this.state.ruleMode.carnival;if(c&&c.chainId===event.chainId){delete this.state.ruleMode.carnival;if(c.total>=3)for(const owner of [this.state.active,1-this.state.active])if(c.draws[owner]&&this.state.winner===null){note(this,'狂欢连锁：'+c.total+'连锁结束，抽'+c.draws[owner]+'张',owner);this.ruleDraw(owner,c.draws[owner]);}}}
     return r;
   });
 
@@ -392,7 +394,7 @@
     }
     return r;
   });
-  E.op('rule-vacuum',(e,t)=>{const ps=pstate(e,t.owner);delete ps.vacuumQueued;if(!is(e,'vacuum')||ps.vacuumAt===e.state.turn)return;ps.vacuumAt=e.state.turn;note(e,'厌恶真空：手牌变为0，抽2张卡',t.owner);e.draw(t.owner,2);});
+  E.op('rule-vacuum',(e,t)=>{const ps=pstate(e,t.owner);delete ps.vacuumQueued;if(!is(e,'vacuum')||ps.vacuumAt===e.state.turn)return;ps.vacuumAt=e.state.turn;note(e,'厌恶真空：手牌变为0，抽2张卡',t.owner);e.ruleDraw(t.owner,2);});
 
   // ---- turn structure -----------------------------------------------------------
   extend('beginNextTurn',function(prior){
@@ -417,7 +419,7 @@
     const owner=t.owner;
     if(e.state.winner===null){
       const roll=t.context.roll,turn=e.state.turn;
-      if(roll===1){e.draw(owner,1);if(e.state.winner===null)e.queue({op:'rule-roulette',owner});return;}
+      if(roll===1){e.ruleDraw(owner,1);if(e.state.winner===null)e.queue({op:'rule-roulette',owner});return;}
       if(roll===2)e.ruleDamage(owner,turn*1000);
       else if(roll===5)e.ruleHeal(owner,turn*1000);
       else{
@@ -449,8 +451,8 @@
     if(id==='bounty'&&v.previous?.ruleWanted&&destroyed&&[0,1].includes(by))e.queue({op:'rule-bounty',owner:by});
     if(id==='legacy'&&v.to==='grave'&&destroyed&&v.previous?.faceUp&&[0,1].includes(by)&&by!==v.owner)e.queue({op:'rule-legacy',owner:v.owner});
   });
-  E.op('rule-bounty',(e,t)=>{if(e.state.winner!==null)return;note(e,'悬赏令：击破通缉犯，回复2000并抽1张',t.owner);e.ruleHeal(t.owner,2000);e.draw(t.owner,1);});
-  E.op('rule-legacy',(e,t)=>{if(e.state.winner!==null)return;note(e,'遗产馈赠：怪兽被对方破坏，抽1张卡',t.owner);e.draw(t.owner,1);});
+  E.op('rule-bounty',(e,t)=>{if(e.state.winner!==null)return;note(e,'悬赏令：击破通缉犯，回复2000并抽1张',t.owner);e.ruleHeal(t.owner,2000);e.ruleDraw(t.owner,1);});
+  E.op('rule-legacy',(e,t)=>{if(e.state.winner!==null)return;note(e,'遗产馈赠：怪兽被对方破坏，抽1张卡',t.owner);e.ruleDraw(t.owner,1);});
   root.DuelEffects.on('summon',(e,v)=>{
     const id=rule(e);if(!id)return;const f=e.find(v.uid);if(!f)return;
     if(id==='hierarchy'&&['xyz','link'].includes(CARDS[v.id]?.type)&&v.materials?.length)f.card.ruleStars=v.materials.reduce((n,m)=>n+materialStars(m),0)||undefined;

@@ -1170,6 +1170,13 @@
       "providerId": 74983882,
       "setcodes": [],
       "setcodeSourceId": 74983882
+    },
+    "y21-swordsoul-token": {
+      "providerId": 20001444,
+      "setcodes": [
+        363
+      ],
+      "setcodeSourceId": 20001444
     }
   }
 }

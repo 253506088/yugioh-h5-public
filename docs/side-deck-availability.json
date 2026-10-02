@@ -229,6 +229,21 @@
       "id": "zoodiac-2020",
       "available": 15,
       "source": 15
+    },
+    {
+      "id": "swordsoul-tenyi-2021",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "zoodiac-tri-brigade-2021",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "floowandereeze-2021",
+      "available": 15,
+      "source": 15
     }
   ],
   "excluded": []

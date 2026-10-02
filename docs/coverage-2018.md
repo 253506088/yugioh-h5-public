@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 672 个身份：103 个可用（13 个复用），569 个待实现。来源和具体范围见 [批次交接](../交接/2018批次交接.md)。
+当前 672 个身份：104 个可用（13 个复用），568 个待实现。来源和具体范围见 [批次交接](../交接/2018批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2018`。
 
@@ -108,6 +108,7 @@
 | 93581434 | 刚鬼 地狱教练 | Gouki Ringtrainer | 已登记本作实现 |
 | 93920420 | 星遗物-『星杖』 | World Legacy - "World Wand" | 已登记本作实现 |
 | 94046012 | 自奏圣乐·卡农曲大炮 | Orcust Brass Bombard | 已登记本作实现 |
+| 94259633 | 纳祭之魔·阿尼玛 | Relinquished Anima | 已登记本作实现 |
 | 94599451 | 魔导研究所 | Mythical Institution | 本作适配：可选破坏代替自动移除自身一个魔力指示物。 |
 | 94620082 | 转生炎兽 狐狸 | Salamangreat Foxy | 已登记本作实现 |
 | 95238394 | 雷龙融合 | Thunder Dragon Fusion | 已登记本作实现 |
@@ -661,7 +662,6 @@
 | 93850652 | 空牙团的剑士 比特 | Beat, Bladesman Fur Hire | pending |
 | 94016752 | 深渊的宣告者 | Herald of the Abyss | pending |
 | 94073244 | 空牙团的击手 砰帕 | Donpa, Marksman Fur Hire | pending |
-| 94259633 | 纳祭之魔·阿尼玛 | Relinquished Anima | pending |
 | 94446564 | 情侣装 | Matching Outfits | pending |
 | 94703021 | 集群拥塞器 | Cluster Congester | pending |
 | 95372220 | 枪口焰龙 | Flash Charge Dragon | pending |

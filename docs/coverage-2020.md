@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 663 个身份：59 个可用（2 个复用），604 个待实现。来源和具体范围见 [批次交接](../交接/2020批次交接.md)。
+当前 663 个身份：72 个可用（2 个复用），591 个待实现。来源和具体范围见 [批次交接](../交接/2020批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2020`。
 
@@ -11,6 +11,7 @@
 | 密码 | 中文名 | 英文名 | 状态 / 适配说明 |
 | --- | --- | --- | --- |
 | 1984618 | 天底的使徒 | Nadir Servant | 已登记本作实现 |
+| 6728559 | 大星义初始龙 | Archnemeses Protos | 已登记本作实现 |
 | 8736823 | 电脑堺姬-娘娘 | Virtual World Hime - Nyannyan | 已登记本作实现 |
 | 9341993 | 魔救之救碎 | Adamancipator Relief | 已登记本作实现 |
 | 9464441 | 魔救之奇迹-巨龙晶石 | Adamancipator Risen - Dragite | 已登记本作实现 |
@@ -19,6 +20,7 @@
 | 12571621 | 电脑堺豸-豸豸 | Virtual World Xiezhi - Jiji | 已登记本作实现 |
 | 13364097 | 电脑堺门-朱雀 | Virtual World Gate - Chuche | 已登记本作实现 |
 | 13694209 | 教导的神徒 | Dogmatika Ashiyan | 已登记本作实现 |
+| 14816857 | 铁兽战线 纳贝尔 | Tri-Brigade Nervall | 已登记本作实现 |
 | 14886190 | 电脑堺都-九龙 | Virtual World City - Kauwloon | 已登记本作实现 |
 | 18106132 | 人偶怪兽 熊仔 | Doll Monster Bear-Bear | 已登记本作实现 |
 | 18249921 | 电脑堺门-玄武 | Virtual World Gate - Xuanwu | 已登记本作实现 |
@@ -28,6 +30,7 @@
 | 20799347 | 电脑堺嫦-兔兔 | Virtual World Oto-Hime - Toutou | 已登记本作实现 |
 | 21011044 | 影依的伪典 | Shaddoll Schism | 已登记本作实现 |
 | 24299458 | 禁忌的一滴 | Forbidden Droplet | 已登记本作实现 |
+| 26847978 | 铁兽战线 徒花之费莉吉特 | Tri-Brigade Ferrijit the Barren Blossom | 已登记本作实现 |
 | 27069566 | 电脑堺凰-凰凰 | Virtual World Phoenix - Fanfan | 已登记本作实现 |
 | 27520594 | 圣种之地灵 | Sunseed Genius Loci | 已登记本作实现 |
 | 29354228 | 教导的遭遇 | Dogmatika Encounter | 已登记本作实现 |
@@ -35,6 +38,7 @@
 | 33296432 | 教导的天启 阿东 | Dogmatika Adin, the Enlightened | 已登记本作实现 |
 | 34755994 | 圣魔之少女 阿耳特弥斯 | Artemis, the Magistus Moon Maiden | 已登记本作实现 |
 | 35252119 | 电脑堺兽-鹫鹫 | Virtual World Beast - Jiujiu | 已登记本作实现 |
+| 40975243 | 铁兽的抗战 | Tri-Brigade Revolt | 已登记本作实现 |
 | 41373230 | 灰烬龙 落胤龙 | Titaniklad the Ash Dragon | 已登记本作实现 |
 | 45730592 | 魔救共振击 | Adamancipator Resonance | 已登记本作实现 |
 | 46552140 | 魔救之勒皮他晶石 | Adamancipator Laputite | 已登记本作实现 |
@@ -44,9 +48,14 @@
 | 49088914 | 电脑堺媛-瑞瑞 | Virtual World Mai-Hime - Lulu | 已登记本作实现 |
 | 49966326 | 电脑堺麟-麟麟 | Virtual World Kirin - Lili | 已登记本作实现 |
 | 50275295 | 电脑堺门-青龙 | Virtual World Gate - Qinglong | 已登记本作实现 |
+| 50810455 | 铁兽战线 克拉斯 | Tri-Brigade Kerass | 已登记本作实现 |
+| 51097887 | 铁兽的凶袭 | Tri-Brigade Airborne Assault | 已登记本作实现 |
+| 52331012 | 铁兽战线 银弹之卢加鲁 | Tri-Brigade Rugal the Silver Sheller | 已登记本作实现 |
+| 56196385 | 铁兽战线 姬特 | Tri-Brigade Kitt | 已登记本作实现 |
 | 56984514 | 永久辉煌的黄金乡 | Golden Land Forever! | 已登记本作实现 |
 | 60303688 | 教导的圣女 艾克莉西娅 | Dogmatika Ecclesia, the Virtuous | 已登记本作实现 |
 | 61641818 | 电脑堺龙-龙龙 | Virtual World Dragon - Longlong | 已登记本作实现 |
+| 65711558 | 战华盟将-双龙 | Ancient Warriors Oath - Double Dragon Lords | 已登记本作实现 |
 | 67007102 | 黄金乡的守护者 | Guardian of the Golden Land | 已登记本作实现 |
 | 68468459 | 阿不思的落胤 | Fallen of Albaz | 已登记本作实现 |
 | 68829754 | 黑化觉醒之黄金国永生药 | Eldlixir of Black Awakening | 已登记本作实现 |
@@ -57,9 +66,11 @@
 | 73309655 | 清冽之水灵使 艾莉娅 | Eria the Water Charmer, Gentle | 复用既有实现 |
 | 74891384 | 魔救之奇石-猛禽晶石 | Adamancipator Crystal - Raptite | 已登记本作实现 |
 | 82956214 | 教导的惩罚 | Dogmatika Punishment | 已登记本作实现 |
+| 84211599 | 金满而谦虚之壶 | Pot of Prosperity | 已登记本作实现 |
 | 85914562 | 魔救之探索者 | Adamancipator Researcher | 已登记本作实现 |
 | 86066372 | 访问码语者 | Accesscode Talker | 复用既有实现 |
 | 86483512 | 电脑堺悟-老老 | Virtual World Roshi - Laolao | 已登记本作实现 |
+| 87209160 | 铁兽战线 弗拉克杜尔 | Tri-Brigade Fraktall | 已登记本作实现 |
 | 90448279 | 天霆号 阿宙斯 | Divine Arsenal AA-ZEUS - Sky Thunder | 已登记本作实现 |
 | 90664857 | 电脑堺甲-甲甲 | Virtual World Shell - Jaja | 已登记本作实现 |
 | 92519087 | 电脑堺狐-仙仙 | Virtual World Kyubi - Shenshen | 已登记本作实现 |
@@ -67,7 +78,9 @@
 | 94224458 | 白化宿命之黄金国永生药 | Eldlixir of White Destiny | 已登记本作实现 |
 | 95440946 | 黄金卿 黄金国巫妖 | Eldlich the Golden Lord | 已登记本作实现 |
 | 95679145 | 教导的大神祇官 | Dogmatika Maximus | 已登记本作实现 |
+| 96378317 | 铁兽的邂逅 | Tri-Brigade Rendezvous | 本作适配：满足条件时自动使用墓地的破坏代替。 |
 | 96891787 | 教导的铁锤 特奥 | Dogmatika Theo, the Iron Punch | 已登记本作实现 |
+| 99726621 | 铁兽战线 凶鸟之施莱格 | Tri-Brigade Shuraig the Ominous Omen | 已登记本作实现 |
 | 99927991 | 魔救之奇缘 | Adamancipator Friends | 已登记本作实现 |
 
 ## 待实现身份
@@ -107,7 +120,6 @@
 | 6438003 | 战华之诡-贾文 | Ancient Warriors - Deceptive Jia Wen | pending |
 | 6498706 | 融合派兵 | Fusion Deployment | pending |
 | 6568731 | 极冰兽 冰山一角鲸 | Glacial Beast Iceberg Narwhal | pending |
-| 6728559 | 大星义初始龙 | Archnemeses Protos | pending |
 | 7150545 | 切割鲨 | Buzzsaw Shark | pending |
 | 7337976 | 炼狱的灾天 | Void Apocalypse | pending |
 | 7373632 | 神之进化 | Divine Evolution | pending |
@@ -159,7 +171,6 @@
 | 13486638 | 急袭猛禽-幻影爪 | Raidraptor's Phantom Knights Claw | pending |
 | 13764602 | 阿吽呼吸 | Perfect Sync - A-Un | pending |
 | 14602126 | 超量输入 | Xyz Import | pending |
-| 14816857 | 铁兽战线 纳贝尔 | Tri-Brigade Nervall | pending |
 | 15232745 | No.1 源数之门-壹 | Number 1: Numeron Gate Ekam | pending |
 | 15462014 | 龙马踬图 | Hollow Giants | pending |
 | 15771991 | 守护者史莱姆 | Guardian Slime | pending |
@@ -235,7 +246,6 @@
 | 26273196 | 时间魔导士 | Time Wizard of Tomorrow | pending |
 | 26534688 | 深海之都 墨瓦腊泥加 | Magellanica, the Deep Sea City | pending |
 | 26577155 | 龙骑兵团-双始龙 | Dragunity Remus | pending |
-| 26847978 | 铁兽战线 徒花之费莉吉特 | Tri-Brigade Ferrijit the Barren Blossom | pending |
 | 26866984 | 三位圣统者 | Trias Hierarchia | pending |
 | 26873574 | 混沌泰达路斯 | Chaos Daedalus | pending |
 | 27439792 | 混沌之召唤神 | Chaos Summoning Beast | pending |
@@ -320,7 +330,6 @@
 | 39880350 | 圣天树之精灵 | Sunavalon Dryades | pending |
 | 39987731 | 威胁的人造人-念力震慑者 | Jinzo the Machine Menace | pending |
 | 40251688 | 焰圣骑士导-罗兰 | Infernoble Knight Captain Roland | pending |
-| 40975243 | 铁兽的抗战 | Tri-Brigade Revolt | pending |
 | 41044418 | 千年的启示 | Millennium Revelation | pending |
 | 41418852 | 源数网络 | Numeron Network | pending |
 | 41830887 | 复写机块 复印小矮人 | Appliancer Copybokkle | pending |
@@ -378,9 +387,7 @@
 | 49936169 | 超级运动员更衣室 | U.A. Locker Room | pending |
 | 50354944 | 暗黑骑士 盖亚本源 | Gaia the Fierce Knight Origin | pending |
 | 50793215 | 深海姬 首席女歌手 | Deep Sea Prima Donna | pending |
-| 50810455 | 铁兽战线 克拉斯 | Tri-Brigade Kerass | pending |
 | 50863093 | 机甲放射兵 | Machina Irradiator | pending |
-| 51097887 | 铁兽的凶袭 | Tri-Brigade Airborne Assault | pending |
 | 51684157 | 天幻之龙轮 | Heavenly Dragon Circle | pending |
 | 51697825 | 吓人手中盒 | Jack-In-The-Hand | pending |
 | 51706604 | 雪暴 | Blizzard | pending |
@@ -390,7 +397,6 @@
 | 52038441 | 朔夜时雨 | Ghost Mourner & Moonlit Chill | pending |
 | 52119435 | 转晶之矿物协调者 | Geonator Transverser | pending |
 | 52159691 | 袭击队飞翼 | Raider's Wing | pending |
-| 52331012 | 铁兽战线 银弹之卢加鲁 | Tri-Brigade Rugal the Silver Sheller | pending |
 | 52962804 | 龙骑兵团征兵 | Dragunity Draft | pending |
 | 53054164 | 兴奋童话动物家族 | Joyous Melffys | pending |
 | 53094821 | 卡通恐怖 | Toon Terror | pending |
@@ -410,7 +416,6 @@
 | 55766177 | 弑逆的魔轰神 | Fabled Treason | pending |
 | 55976207 | 契约遂行 | Execution of the Contract | pending |
 | 56161953 | 隐藏脚本氪灯人 | Scrypton | pending |
-| 56196385 | 铁兽战线 姬特 | Tri-Brigade Kitt | pending |
 | 56198785 | 背护卫 | Guard Ghost | pending |
 | 56294501 | 垃圾睡眠 | Junk Sleep | pending |
 | 56401775 | 童话动物·小马 | Melffy Pony | pending |
@@ -477,7 +482,6 @@
 | 65471349 | 魔镜导士 念界反弹者 | Psychic Bounder | pending |
 | 65563871 | 圣蔓之治愈者 | Sunvine Healer | pending |
 | 65589010 | 教导国家 教导龙国 | Dogmatika Nation | pending |
-| 65711558 | 战华盟将-双龙 | Ancient Warriors Oath - Double Dragon Lords | pending |
 | 65953423 | 妖精传姬-罗奇卡 | Fairy Tail - Rochka | pending |
 | 66380357 | 机块测试 | Appliancer Test | pending |
 | 66407907 | 圣种之天双芽 | Sunseed Twin | pending |
@@ -583,7 +587,6 @@
 | 83656563 | 中生代化石机动车 骷髅旅行车 | Fossil Machine Skull Wagon | pending |
 | 83682209 | 海灵贼 | Piwraithe the Ghost Pirate | pending |
 | 84121193 | 代码破坏者·病毒剑士 | Codebreaker Virus Swordsman | pending |
-| 84211599 | 金满而谦虚之壶 | Pot of Prosperity | pending |
 | 84335863 | 白蔷薇回廊 | White Rose Cloister | pending |
 | 84404797 | 可回收瓶 | Redeemable Jar | pending |
 | 84425220 | 武装龙 LV10-白 | Armed Dragon LV10 White | pending |
@@ -607,7 +610,6 @@
 | 87074380 | 机甲上校 | Machina Citadel | pending |
 | 87091930 | 袭击队不破铁意 | Raider's Unbreakable Mind | pending |
 | 87188910 | 饥鳄龙 古鱼龙 | Ravenous Crocodragon Archethys | pending |
-| 87209160 | 铁兽战线 弗拉克杜尔 | Tri-Brigade Fraktall | pending |
 | 87321742 | 急袭猛禽-扼杀伯劳 | Raidraptor - Strangle Lanius | pending |
 | 87481592 | 教导神理 | Dogmatikacism | pending |
 | 87669904 | 双天招来 | Dual Avatar Invitation | pending |
@@ -662,7 +664,6 @@
 | 96162588 | 六花的风花 | Rikka Flurries | pending |
 | 96239878 | 集束之力 | Strength in Unity | pending |
 | 96352326 | 太阳之魔术师 埃达 | Eda the Sun Magician | pending |
-| 96378317 | 铁兽的邂逅 | Tri-Brigade Rendezvous | pending |
 | 96897184 | 古生代化石骑士 骷髅国王 | Fossil Warrior Skull King | pending |
 | 96945958 | 疾行机人 涡轮歌牌 | Speedroid CarTurbo | pending |
 | 97091969 | 武装龙的震霆 | Armed Dragon Lightning | pending |
@@ -677,4 +678,3 @@
 | 99249638 | 同盟驾驶员 | Union Driver | pending |
 | 99266988 | 混沌领域 | Chaos Space | pending |
 | 99666430 | 人造人-念力层叠者 | Jinzo - Layered | pending |
-| 99726621 | 铁兽战线 凶鸟之施莱格 | Tri-Brigade Shuraig the Ominous Omen | pending |

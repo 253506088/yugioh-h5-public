@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "references": [
+    {
+      "id": "winds-20731",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?ope=5&fid=20731&request_locale=ja",
+      "accessed": "2026-10-02",
+      "sha256": "ac10300556b1764dc4b8c8abf2314c6b00b5516cbda3792a75415a62c8652bcc",
+      "summary": "Unexplored Winds can send Tokens, monsters that would be banished, and untributable monsters. Macro Cosmos does not prevent its use. Spell-immune monsters cannot be selected."
+    },
+    {
+      "id": "winds-23342",
+      "url": "https://www.db.yugioh-card.com/yugiohdb/faq_search.action?ope=5&fid=23342&request_locale=ja",
+      "accessed": "2026-10-02",
+      "sha256": "6dc6b80ec7dfe7b3be6a66ec19899b043ef9559aaa092ee3aa519bf365126442",
+      "summary": "Cards sent for an Unexplored Winds Tribute Summon are sent by its Spell effect. Their effect-send triggers may activate."
+    }
+  ]
+}
