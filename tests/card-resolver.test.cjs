@@ -40,12 +40,12 @@ test('catalog versus unknown, aliases, fuzzy thresholds and short Chinese OCR', 
   const typo = r.resolve('青眼白尤'); assert.equal(typo.status, 'ambiguous'); assert.equal(typo.candidates[0].id, 'blue-eyes');
   const duality = r.resolve('Pot of Dualty'); assert.equal(duality.id, 'early-98645731'); assert.equal(duality.corrected, true);
   assert.equal(r.resolve('zzzzzzzzzzzz').status, 'unknown');
-  const outside = r.resolve('Ash Blossom & Joyous Sprin'); assert.equal(outside.status, 'playable'); assert.equal(outside.corrected, true); assert.equal(r.resolve('Infinite Impermanence').status, 'playable'); assert.equal(r.resolve('Spright Blue').status, 'not-in-pool');
+  const outside = r.resolve('Ash Blossom & Joyous Sprin'); assert.equal(outside.status, 'playable'); assert.equal(outside.corrected, true); assert.equal(r.resolve('Infinite Impermanence').status, 'playable'); assert.equal(r.resolve('Snake-Eye Ash').status, 'not-in-pool');
 });
 test('pending, tokens, duplicate diagnostics across all sections, side retention and notes', () => {
   const cards = { a: { id: 'a', name: 'Alpha fixture', type: 'monster' }, p: { id: 'p', name: 'Pending fixture', implementationStatus: 'pending' }, token: { id: 'token', name: 'Token fixture', notCollectible: true } };
   const resolver = R.create({ cards, locales: {}, catalog: [], aliases: {} }); assert.equal(resolver.resolve('Pending fixture').status, 'pending'); assert.equal(resolver.resolve('Token fixture', { fuzzy: false }).status, 'unknown');
   const e = (name, count) => ({ name, count, language: 'en' });
-  const d = r.resolveDeck({ name: 'Test', main: [e('Blue-Eyes White Dragon', 3), e('青眼白龙', 2), e('Spright Blue', 2)], extra: [], side: [e('Effect Veiler', 1)], uncertain: [] });
-  const output = r.draft(d); assert.deepEqual(output.deck.cards, Array(5).fill('blue-eyes')); assert.equal(output.warnings.length, 1); assert.match(output.deck.notes, /76145933/); assert.equal(output.deck.side.length,1);assert.doesNotMatch(output.deck.notes,/side/); assert.equal(output.check.valid, false);
+  const d = r.resolveDeck({ name: 'Test', main: [e('Blue-Eyes White Dragon', 3), e('青眼白龙', 2), e('Snake-Eye Ash', 2)], extra: [], side: [e('Effect Veiler', 1)], uncertain: [] });
+  const output = r.draft(d); assert.deepEqual(output.deck.cards, Array(5).fill('blue-eyes')); assert.equal(output.warnings.length, 1); assert.match(output.deck.notes, /09674034/); assert.equal(output.deck.side.length,1);assert.doesNotMatch(output.deck.notes,/side/); assert.equal(output.check.valid, false);
 });

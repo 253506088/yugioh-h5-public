@@ -1,0 +1,17 @@
+/* Older prerequisites are counted separately from 2022 collection/reuse. */
+(function(root){
+ 'use strict';const X=root.DuelChronicle,{D,E,H,C,I,is,Q,card,def,monster,ownM,hand,deck,grave,first,args,g,choose,target,moved,onMove,watch,revive,series}=X;
+ const Y=X.year2022,{choiceContext,canSend,limit}=Y,toad='Toadally Awesome';
+ watch(toad,'y22-standby','standby',()=>true,{once:H.once('toad-standby','card'),summons:true,condition:(e,c)=>e.freeMain(c.owner)>0&&deck(e,c.owner,m=>monster(m)&&series(m,'Frog')&&e.canSpecial(c.owner,m,{via:'effect'})).length>0,inputs:(e,c)=>[H.detachInput(e,c,1)],cost:(e,c)=>e.detach(c.uid,args(c,'cost')),resolve:(e,c)=>X.specialChoice(e,c,deck(e,c.owner,m=>monster(m)&&series(m,'Frog')),{via:'effect',shuffle:true}),aiTrigger:()=>true});
+ Q(toad,'y22-negate',{main:false,damageStep:true,once:H.once('toad-negate','card'),condition:(e,c)=>{const l=c.event.window?.chainLast;return l?.owner===1-c.owner&&(l.source.effectType==='monster'||E.get(l.key)?.cardActivation);},inputs:(e,c)=>[g(e,c,'cost','选择送墓的水族怪兽',[...hand(e,c.owner),...ownM(e,c).filter(m=>m.faceUp)].filter(m=>monster(m)&&e.race(m)==='水族'&&canSend(e,m)),1,1,'cost')],cost:(e,c)=>H.sendCost(e,c,args(c,'cost')),resolve:(e,c)=>{const l=e.state.chain.find(l=>l.id===c.responseTo),m=l&&card(e,l.uid);if(!l||!e.negateLink(c.responseTo,c.source,true,false))return;if(m&&e.destroy(m.uid,c.source,false,{negatedActivation:!!l.cardActivation})&&e.find(m.uid)?.zone==='grave')choose(e,c,'可以盖放被破坏的卡片',[m],0,1,'y22-toad-set',{role:'special'});},aiResponse:()=>2300});
+ E.op('y22-toad-set',(e,t)=>{const m=card(e,t.picks[0]);if(!m||e.find(m.uid)?.zone!=='grave')return;if(monster(m))revive(e,choiceContext(t),m.uid,{via:'revive',faceDown:true,position:'defense'});else Y.set(e,choiceContext(t),m.uid);});
+ onMove(toad,'y22-recover',{inputs:target('选择回收的水属性怪兽',(e,c)=>grave(e,c.owner,m=>monster(m)&&e.attribute(m)==='水'),'search'),resolve:(e,c)=>moved(e,c,args(c),'hand','effect-return')},(e,v)=>v.to==='grave');
+ const mud='Mudragon of the Swamp';
+ Q(mud,'y22-attribute',{once:H.once('mudragon','card'),inputs:()=>[H.customGroup('attribute','选择属性',['暗','光','地','水','炎','风','神'].map(uid=>({uid,label:uid})))],resolve:(e,c)=>{const m=card(e,c.uid);if(m)m.attributeOverride={value:first(c,'attribute'),until:e.state.turn};},aiScore:-100,aiResponse:()=>400});
+ X.extend('canTarget',function(prior,m,s){if(s&&Y.live(this,mud,1-s.owner).some(f=>(f.card.uid===m.uid||this.attribute(f.card)===this.attribute(m))&&!this.unaffected(m,X.src(this,f.card,f.owner))))return false;return prior.call(this,m,s);});
+ const drago='Predaplant Dragostapelia';
+ Q(drago,'y22-counter',{once:H.once('dragostapelia','card'),inputs:target('选择放置捕食指示物的怪兽',(e,c)=>e.monsters(1-c.owner).filter(m=>m.faceUp)),resolve:(e,c)=>{const f=H.legalTarget(e,c,first(c));if(f){f.card.y22Predator=(f.card.y22Predator||0)+1;if(e.level(f.card)>=2)f.card.y22PredatorLevel=true;}},aiScore:1100,aiResponse:()=>1800});
+ X.extend('level',function(prior,m,...a){return m?.y22Predator&&m.y22PredatorLevel?1:prior.call(this,m,...a);});
+ X.extend('earlyNegatesLink',function(prior,l,...a){const f=this.find(l.uid);return !!(l.source.effectType==='monster'&&f&&Y.fm(f.zone)&&f.card.y22Predator&&Y.live(this,drago,1-l.owner).some(s=>!this.unaffected(f.card,X.src(this,s.card,s.owner))))||prior.call(this,l,...a);});
+ X.extend('setPosition',function(prior,u,pos,s,down=false){const r=prior.call(this,u,pos,s,down);if(r&&down){const m=card(this,u);delete m.y22Predator;delete m.y22PredatorLevel;}return r;});
+})(globalThis);

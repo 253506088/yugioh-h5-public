@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 636 个身份：129 个可用（1 个复用），507 个待实现。来源和具体范围见 [批次交接](../交接/2017批次交接.md)。
+当前 636 个身份：130 个可用（1 个复用），506 个待实现。来源和具体范围见 [批次交接](../交接/2017批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2017`。
 
@@ -88,6 +88,7 @@
 | 54088068 | 刚鬼 头锤蝙蝠 | Gouki Headbatt | 已登记本作实现 |
 | 54631665 | 秘旋谍的秘密胜地 | SPYRAL Resort | 已登记本作实现 |
 | 54635100 | 叮当铃连接星 | Linkerbell | 已登记本作实现 |
+| 54757758 | 沼地的泥龙王 | Mudragon of the Swamp | 已登记本作实现 |
 | 55573346 | 误爆 | Oops! | 已登记本作实现 |
 | 56649609 | 幻煌龙 螺旋 | Phantasm Spiral Dragon | 已登记本作实现 |
 | 58400390 | 被星杯所劝诱者 | Beckoned by the World Chalice | 已登记本作实现 |
@@ -413,7 +414,6 @@
 | 54423935 | 急袭猛禽复制品 | Raidraptor Replica | pending |
 | 54458867 | 爆竹弹抽卡 | Squib Draw | pending |
 | 54658815 | 远程苏生 | Remote Rebirth | pending |
-| 54757758 | 沼地的泥龙王 | Mudragon of the Swamp | pending |
 | 54895237 | 晴天气 锈红 | The Weather Painter Sun | pending |
 | 54965929 | 魔导兽 美杜莎水母 | Mythical Beast Medusa | pending |
 | 55705473 | 狒狒面包树 | Baobaboon | pending |

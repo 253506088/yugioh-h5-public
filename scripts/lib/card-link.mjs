@@ -1,6 +1,7 @@
 // Import-time Link grammar. Unknown material text or arrows must fail closed.
 // `attribute` in the legacy engine means "including"; `allAttribute` means all.
 export function parseLink(name, text, {races, attributes, linkRating, linkMarkers}) {
+  if(text==='1 "Scareclaw" monster or 1 "Visas Starfrost"')return {...parseLink(name,'1 monster',{races,attributes,linkRating,linkMarkers}),link:{min:1,max:1,materialAnyOf:[{series:'Scareclaw'},{name:'Visas Starfrost'}]}};
   if (!Number.isInteger(linkRating) || linkRating < 1 || linkRating > 6) throw new Error('Invalid Link rating: ' + name);
   const directions = {'Top-Left':'TL',Top:'T','Top-Right':'TR',Left:'L',Right:'R','Bottom-Left':'BL',Bottom:'B','Bottom-Right':'BR'};
   const arrows = (linkMarkers || []).map(marker => directions[marker]);
@@ -21,6 +22,9 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
     else if(value==='Link Monster')link.includingType='link';
     else if(value==='Ritual Monster')link.includingType='ritual';
     else if(value==='Synchro Monster')link.includingType='synchro';
+    else if(value==='Pendulum Monster')link.includingPendulum=true;
+    else if(value==='Level/Rank/Link 2 monster')link.includingTwo=true;
+    else if(value==='Insect or Plant monster')link.includingRaces=[races.Insect,races.Plant];
     else if(value==='Ritual, Fusion, Synchro, or Xyz Monster')link.includingTypes=['ritual','fusion','synchro','xyz'];
     else if(/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) "[^"]+" monster$/.test(value)){const m=value.match(/^(\w+) "([^"]+)"/);link.includingSeries=m[2];link.includingSeriesAttribute=attributes[m[1]];}
     else if(races[value.replace(/ monster$/i,'')])link.includingRace=races[value.replace(/ monster$/i,'')];
@@ -70,7 +74,7 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
   else if (/^Level \d+$/.test(body)) link.level = Number(body.slice(6));
   else if (/^"[^"]+"$/.test(body)) link.series = body.slice(1,-1);
   else if (races[body]) link.race = races[body];
-  else if (body.includes(' and/or ')||body.includes(', and/or ')){const names=body.split(/, | and\/or /).map(s=>s.replace(/^and\/or /,''));if(names.some(r=>!races[r]))throw new Error('Unknown Link races: '+name+' / '+body);link.races=names.map(r=>races[r]);}
+  else if (body.includes(' and/or ')||body.includes(', and/or ')){const names=body.split(/, | and\/or /).map(s=>s.replace(/^and\/or /,''));if(names.every(n=>attributes[n]))link.attributes=names.map(n=>attributes[n]);else{if(names.some(r=>!races[r]))throw new Error('Unknown Link races: '+name+' / '+body);link.races=names.map(r=>races[r]);}}
   else if (attributes[body]) link.allAttribute = attributes[body];
   else if (body) throw new Error('Unknown Link material: ' + name + ' / ' + body);
   if (link.min < 1 || link.max < link.min || link.max > linkRating) throw new Error('Invalid Link material count: ' + name);

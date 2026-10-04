@@ -1,6 +1,8 @@
 // Explicit material grammar for the preserved OCG snapshots. Unknown wording is
 // an import error, never an unrestricted material or a silently normal monster.
 export function parseFusion(name, text, {byName, norm, races, attributes}) {
+  if(text==='2+ monsters you control, Special Summoned from the Extra Deck')return {fusion:[{fieldOnly:true,summonedFromExtra:true},{fieldOnly:true,summonedFromExtra:true}],fusionMore:{fieldOnly:true,summonedFromExtra:true}};
+  if(/ monsters with different Types$/.test(text))return {...parseFusion(name,text.replace(/ with different Types$/,''),{byName,norm,races,attributes}),fusionDifferentRaces:true};
   if(name==='Ultimate Flagship Ursatron'&&text==='(This card is always treated as an "Ursarctic" and "Drytron" card.)')return {fusion:[],fusionProhibited:true,requiredSummonCard:'Ursarctic Drytron'};
   if(name==='The Dark Magicians')return {fusion:[{anyOf:[{id:byName.get(norm('Dark Magician'))},{id:byName.get(norm('Dark Magician Girl'))}]},{race:races.Spellcaster}]};
   if(name==='Red-Eyes Dark Dragoon')return {fusion:[{id:byName.get(norm('Dark Magician'))},{anyOf:[{id:byName.get(norm('Red-Eyes Black Dragon'))},{race:races.Dragon,effect:true}]}]};
@@ -74,6 +76,7 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
     if (/^"[^"]+"(?: and\/or "[^"]+")+$/.test(body)) spec.nameIncludesAny = [...body.matchAll(/"([^"]+)"/g)].map(m=>m[1]);
     else if (series) spec.nameIncludes = series[1];
     else if (races[body]) spec.race = races[body];
+    else if(body.includes(' or ')&&body.split(/, (?:or )?| or /).every(r=>races[r]))spec.anyOf=body.split(/, (?:or )?| or /).map(r=>({race:races[r]}));
     else if (attributes[body]) spec.attribute = attributes[body];
     else if (body === 'Gemini') spec.gemini = true;
     else if (body) throw new Error('Unknown Fusion material: ' + name + ' / ' + body);
@@ -147,6 +150,7 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
 }
 
 export function parseXyz(name, text, {races, attributes}) {
+  if(name==='Exosisters Magnifica'&&text==='2 Rank 4 "Exosister" Xyz Monsters')return {xyzCount:2,rank:8,xyzMaterialType:'xyz',xyzMaterialRank:4,xyzNameIncludes:'Exosister'};
   if (/ with different Attributes$/.test(text)) return {...parseXyz(name,text.replace(/ with different Attributes$/,''),{races,attributes}),xyzDifferentAttributes:true};
   if (/ with the same Type and Attribute$/.test(text)) return {...parseXyz(name,text.replace(/ with the same Type and Attribute$/,''),{races,attributes}),xyzSameRace:true,xyzSameAttribute:true};
   if(name==='Number F0: Utopic Draco Future')return {xyzCount:3,rank:1,xyzMaterialType:'xyz',xyzSameRank:true,xyzExcludeNameIncludes:'Number'};

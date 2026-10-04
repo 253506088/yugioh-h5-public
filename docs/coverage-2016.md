@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 651 个身份：176 个可用（16 个复用），475 个待实现。来源和具体范围见 [批次交接](../交接/2016批次交接.md)。
+当前 651 个身份：178 个可用（16 个复用），473 个待实现。来源和具体范围见 [批次交接](../交接/2016批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2016`。
 
@@ -141,6 +141,7 @@
 | 67820935 | 肥大化 | Massivemorph | 已登记本作实现 |
 | 69351984 | 炼装勇士·钨火 | Metalfoes Volflame | 已登记本作实现 |
 | 69711728 | 炼装联合 | Metalfoes Combination | 已登记本作实现 |
+| 69946549 | 捕食植物 犀角龙 | Predaplant Dragostapelia | 已登记本作实现 |
 | 71039903 | 太古的白石 | The White Stone of Ancients | 已登记本作实现 |
 | 72855441 | 青色眼睛的护人 | Protector with Eyes of Blue | 已登记本作实现 |
 | 73055622 | 灵魂的降神 | Shinobird's Calling | 已登记本作实现 |
@@ -175,6 +176,7 @@
 | 87990236 | 魅惑的堕天使 | Darklord Enchantment | 已登记本作实现 |
 | 88234365 | 堕天使 特斯卡特利波卡 | Darklord Tezcatlipoca | 本作适配：丢弃自身代替堕天使怪兽破坏的可选效果自动适用。 |
 | 90452877 | 星际仙踪-能术 | Kozmojo | 已登记本作实现 |
+| 90809975 | 饼蛙 | Toadally Awesome | 已登记本作实现 |
 | 92807548 | 堕天使 乌科巴克 | Darklord Ukoback | 已登记本作实现 |
 | 93302695 | 星际仙踪-达克·萝丝 | Kozmoll Wickedwitch | 已登记本作实现 |
 | 93332803 | 怒炎坏兽 多哥兰 | Dogoran, the Mad Flame Kaiju | 已登记本作实现 |
@@ -518,7 +520,6 @@
 | 69529337 | 三形金字塔的舞者 | Triamid Dancer | pending |
 | 69599136 | 无底的落穴 | Floodgate Trap Hole | pending |
 | 69868555 | 巨神龙的遗迹 | Ruins of the Divine Dragon Lords | pending |
-| 69946549 | 捕食植物 犀角龙 | Predaplant Dragostapelia | pending |
 | 70117860 | 风魔女-雪铃 | Windwitch - Snow Bell | pending |
 | 70147689 | 古代的机械要塞 | Ancient Gear Fortress | pending |
 | 70917315 | 无形噬体·色欲 | Amorphage Lechery | pending |
@@ -622,7 +623,6 @@
 | 90365482 | 河伯 | Hebo, Lord of the River | pending |
 | 90519313 | 检疫 | Quarantine | pending |
 | 90579153 | 命运英雄 敌托邦人 | Destiny HERO - Dystopia | pending |
-| 90809975 | 饼蛙 | Toadally Awesome | pending |
 | 90884403 | 究极幻神 奥特美特尔·比希巴尔金 | Phantasmal Lord Ultimitl Bishbaalkin | pending |
 | 91231901 | 「A」细胞重组装置 | "A" Cell Recombination Device | pending |
 | 91449532 | 娱乐伙伴 合掩河马 | Performapal Flip Hippo | pending |

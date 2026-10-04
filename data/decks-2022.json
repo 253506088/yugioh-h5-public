@@ -1,0 +1,570 @@
+{
+  "scope": [
+    2022
+  ],
+  "historicalContext": {
+    "worldChampionship": "not-held",
+    "note": "KONAMI confirms 2023 was the first Worlds since 2019. Annual adaptations use the full OCG candidate year and current card text; they do not claim legality under one historical quarterly list."
+  },
+  "sources": [
+    {
+      "id": "worlds-not-held",
+      "url": "https://www.yugioh-card.com/en/news/world-championship-2023/",
+      "accessed": "2026-10-02",
+      "retrievedContentSHA256": "581663805ab44dde4224aecbbadb520a419c446d6de74cfab7e24903d469e1ec",
+      "evidenceSummary": "Official KONAMI news dated 2023-02-02 says the 2023 tournament will be the first held since 2019. Therefore there were no 2022 Worlds podium lists."
+    },
+    {
+      "id": "ocg-2022-04",
+      "url": "https://roadoftheking.com/ocg-2022-04-metagame/",
+      "accessed": "2026-10-02",
+      "retrievedContentSHA256": "8c409b973be25e2669bbb31286f4f8b09ec0f2c8fbc191dcc857651b87f2672e",
+      "note": "Contemporary OCG top-placing samples; project-authored annual adaptation, not a player original list or a World Championship placement.",
+      "evidenceSummary": "852 samples: 357 Spright, 108 Tearlaments (41 Ishizu), 27 Floowandereeze. Frog Spright is the dominant build."
+    },
+    {
+      "id": "ocg-2022-07",
+      "url": "https://roadoftheking.com/ocg-2022-07-metagame/",
+      "accessed": "2026-10-02",
+      "retrievedContentSHA256": "592642a19889950b5be2f291cf844369bd366dac061751cd5adb291e97075f28",
+      "note": "Contemporary OCG top-placing samples; project-authored annual adaptation, not a player original list or a World Championship placement.",
+      "evidenceSummary": "665 samples: 285 Tearlaments (255 Ishizu), 144 Spright; discusses Sprind and Nimble Angler."
+    },
+    {
+      "id": "ocg-2022-10",
+      "url": "https://roadoftheking.com/ocg-2022-10-metagame/",
+      "accessed": "2026-10-02",
+      "retrievedContentSHA256": "7923e7db648228c98d537a0bfd8275bd574688b95941730e0b684181104cb833",
+      "note": "Contemporary OCG top-placing samples; project-authored annual adaptation, not a player original list or a World Championship placement.",
+      "evidenceSummary": "542 samples: 299 Tearlaments, 9 Floowandereeze. Quarter-specific restrictions differ."
+    }
+  ],
+  "decks": [
+    {
+      "id": "spright-frog-2022",
+      "year": 2022,
+      "title": "年度热门 · 雷精蛙",
+      "en": "Annual Metagame · Spright Frog",
+      "ja": "年間環境・ガエルスプライト",
+      "ace": "Gigantic Spright",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2022-04",
+        "ocg-2022-07"
+      ],
+      "description": "雷精与蛙、迅捷怪兽组成二星资源，巨大喷流连接卡组，淘气精灵复活，红色与萝卜提供交互。",
+      "descriptionEn": "Spright, Frog and Nimble monsters build Level 2 resources. Gigantic recruits, Elf revives, and Red and Carrot interrupt the opponent.",
+      "descriptionJa": "スプライト、ガエル、素早いでレベル2を展開。ギガンティックのリクルート、エルフの蘇生、レッドとキャロットの妨害を使い分ける。",
+      "main": [
+        [
+          "Spright Blue",
+          3
+        ],
+        [
+          "Spright Jet",
+          3
+        ],
+        [
+          "Spright Red",
+          2
+        ],
+        [
+          "Spright Carrot",
+          1
+        ],
+        [
+          "Spright Pixies",
+          1
+        ],
+        [
+          "Swap Frog",
+          3
+        ],
+        [
+          "Ronintoadin",
+          1
+        ],
+        [
+          "Nimble Beaver",
+          3
+        ],
+        [
+          "Nimble Angler",
+          1
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Spright Starter",
+          3
+        ],
+        [
+          "Spright Smashers",
+          1
+        ],
+        [
+          "Spright Gamma Burst",
+          1
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Crossout Designator",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Spright Double Cross",
+          1
+        ],
+        [
+          "Enemy Controller",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Gigantic Spright",
+          2
+        ],
+        [
+          "Spright Elf",
+          2
+        ],
+        [
+          "Spright Sprind",
+          2
+        ],
+        [
+          "Toadally Awesome",
+          1
+        ],
+        [
+          "Cat Shark",
+          1
+        ],
+        [
+          "Daigusto Phoenix",
+          1
+        ],
+        [
+          "Downerd Magician",
+          1
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          1
+        ],
+        [
+          "I:P Masquerena",
+          1
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Accesscode Talker",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Evenly Matched",
+          2
+        ]
+      ],
+      "combo": [
+        "先以二星怪兽满足雷精的特殊召唤手续；红色和萝卜的条件接受连接二，蓝色、喷流与皮克西接受二阶。",
+        "巨大喷流的移除素材在结算时处理，成功后本回合双方只能特殊召唤等级／阶级／连接二怪兽。",
+        "连接召唤的淘气精灵与迅妖本回合不能再当连接素材。雷精启动会失去生命值，不能当成支付代价或效果伤害。"
+      ]
+    },
+    {
+      "id": "ishizu-tearlaments-2022",
+      "year": 2022,
+      "title": "年度热门 · 伊西丝珠泪",
+      "en": "Annual Metagame · Ishizu Tearlaments",
+      "ja": "年間環境・イシズティアラメンツ",
+      "ace": "Tearlaments Rulkallos",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2022-04",
+        "ocg-2022-07"
+      ],
+      "description": "伊西丝天使族送墓并干扰墓地，珠泪返回真实素材进行融合，用水仙、鲁莎卡和卡雷多调配资源。",
+      "descriptionEn": "Ishizu Fairies mill and disrupt the GY. Tearlaments return actual materials to Fusion Summon Kitkallos, Rulkallos and Kaleido-Heart.",
+      "descriptionJa": "イシズの天使族で墓地を肥やし、相手の墓地利用を妨害。実際の素材を戻してキトカロス、ルルカロス、カレイドハートへ融合する。",
+      "main": [
+        [
+          "Tearlaments Reinoheart",
+          3
+        ],
+        [
+          "Tearlaments Scheiren",
+          3
+        ],
+        [
+          "Tearlaments Havnis",
+          3
+        ],
+        [
+          "Tearlaments Merrli",
+          3
+        ],
+        [
+          "Kelbek the Ancient Vanguard",
+          3
+        ],
+        [
+          "Agido the Ancient Sentinel",
+          2
+        ],
+        [
+          "Keldo the Sacred Protector",
+          2
+        ],
+        [
+          "Mudora the Sword Oracle",
+          2
+        ],
+        [
+          "Primeval Planet Perlereino",
+          3
+        ],
+        [
+          "Tearlaments Scream",
+          2
+        ],
+        [
+          "Tearlaments Heartbeat",
+          1
+        ],
+        [
+          "Tearlaments Cryme",
+          1
+        ],
+        [
+          "Tearlaments Sulliek",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Instant Fusion",
+          1
+        ],
+        [
+          "Called by the Grave",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Tearlaments Kitkallos",
+          2
+        ],
+        [
+          "Tearlaments Rulkallos",
+          2
+        ],
+        [
+          "Tearlaments Kaleido-Heart",
+          1
+        ],
+        [
+          "Mudragon of the Swamp",
+          1
+        ],
+        [
+          "Predaplant Dragostapelia",
+          1
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          1
+        ],
+        [
+          "Spright Elf",
+          1
+        ],
+        [
+          "I:P Masquerena",
+          1
+        ],
+        [
+          "Dharc the Dark Charmer, Gloomy",
+          1
+        ],
+        [
+          "Cross-Sheep",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Accesscode Talker",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Evenly Matched",
+          2
+        ]
+      ],
+      "combo": [
+        "阿基多与凯尔柏克从手牌或卡组送墓后使双方堆墓，不把代价送墓误写成珠泪可触发的效果送墓。",
+        "珠泪融合必须包含发动效果的墓地实体；凯尔多和姆多拉洗回素材可以阻断对方的融合。",
+        "水仙的检索与送墓、水仙拉梅洛后的堆墓均走可保存的真实选择；泥龙王与捕食植物提供融合支援。"
+      ]
+    },
+    {
+      "id": "floowandereeze-2022",
+      "year": 2022,
+      "title": "年度热门 · 随风旅鸟",
+      "en": "Annual Metagame · Floowandereeze",
+      "ja": "年間環境・ふわんだりぃず",
+      "ace": "Floowandereeze & Empen",
+      "description": "面对墓地与特殊召唤环境，以次元吸引者、连续通常召唤和帝企建立另一条资源路线。",
+      "descriptionEn": "Dimension Shifter and consecutive Normal Summons offer a different route against graveyard and Special Summon strategies.",
+      "descriptionJa": "ディメンション・アトラクターと連続通常召喚で、墓地と特殊召喚を中心とした環境に対抗する。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "ocg-2022-04",
+        "ocg-2022-10"
+      ],
+      "main": [
+        [
+          "Floowandereeze & Robina",
+          3
+        ],
+        [
+          "Floowandereeze & Eglen",
+          3
+        ],
+        [
+          "Floowandereeze & Stri",
+          1
+        ],
+        [
+          "Floowandereeze & Toccan",
+          1
+        ],
+        [
+          "Floowandereeze & Empen",
+          2
+        ],
+        [
+          "Mist Valley Apex Avian",
+          1
+        ],
+        [
+          "Raiza the Mega Monarch",
+          1
+        ],
+        [
+          "Barrier Statue of the Stormwinds",
+          1
+        ],
+        [
+          "Dimension Shifter",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Floowandereeze and the Magnificent Map",
+          3
+        ],
+        [
+          "Floowandereeze and the Advent of Adventure",
+          3
+        ],
+        [
+          "Floowandereeze and the Unexplored Winds",
+          1
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Pot of Prosperity",
+          3
+        ],
+        [
+          "Pot of Duality",
+          3
+        ],
+        [
+          "Book of Moon",
+          3
+        ],
+        [
+          "Floowandereeze and the Dreaming Town",
+          2
+        ],
+        [
+          "Called by the Grave",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Lyrilusc - Assembled Nightingale",
+          3
+        ],
+        [
+          "Downerd Magician",
+          2
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          2
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Knightmare Cerberus",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Relinquished Anima",
+          1
+        ],
+        [
+          "Salamangreat Almiraj",
+          1
+        ],
+        [
+          "Accesscode Talker",
+          1
+        ],
+        [
+          "Apollousa, Bow of the Goddess",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Twin Twisters",
+          2
+        ]
+      ],
+      "combo": [
+        "先发动强欲而谦虚之壶或金满而谦虚之壶，再用知更鸟找白头鹰接力召唤。",
+        "小鸟效果发动过的整个回合不能特殊召唤；额外主要用于金满代价，特殊召唤路线须另选回合。",
+        "未知之风用己方怪兽和对方卡片送墓替代二祭品；官方FAQ允许在次元吸引者下适用，卡片会被除外，魔法免疫仍不可选。",
+        "2022代表改编沿用已实现旅鸟核心，投入墓穴指名者应对手坑；不是重新计数为本年度新增效果。"
+      ]
+    }
+  ]
+}

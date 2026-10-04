@@ -152,6 +152,9 @@
         for(const material of detached)this.move(material.uid,'grave',{reason:'超量素材随主体离场',kind:'rule-material',ignoreLeaveReplacement:true});
       }
       this.remove(uid);
+      // A spell/trap which leaves the field is no longer the activation that
+      // must be sent away at Chain end, even if this same UID is Set again.
+      if(wasField)this.state.chainCleanup=this.state.chainCleanup.filter(u=>u!==uid);
       if(c.type==='token'){
         this.log('destroy',c.name+'离场并消失',before.owner,{cardId:c.id,uid});
         this.cleanupEquips(uid,{uid,id:c.id,owner:before.owner,from:before.zone,to:'vanished',kind:options.kind,atk:snapshot.atk,originalAtk:snapshot.originalAtk??c.atk??0,originalDef:snapshot.originalDef??c.def??0});this.emit({type:'move',uid,id:c.id,owner:before.owner,from:before.zone,to:'vanished',previous:snapshot,...options});

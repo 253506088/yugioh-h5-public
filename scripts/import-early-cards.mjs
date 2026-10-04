@@ -40,7 +40,7 @@ const cards=rows.map(r=>{
  const ritualSpell=type==='spell'&&r.race==='Ritual',ritualText=ritualSpell?r.description.split(/\.\s/)[0]:'';
  const ritualRace=ritualSpell?races[ritualText.match(/Ritual Summon any (.+?)(?:-Type)? Ritual Monster/i)?.[1]]:undefined;
  const ritualSeriesAny=ritualText.match(/any ((?:"[^"]+" or )+"[^"]+") Ritual Monster/)?.[1].match(/"[^"]+"/g).map(n=>n.slice(1,-1));
- const ritualSeries=ritualText.match(/(?:any|any number of) "([^"]+)" Ritual Monster/)?.[1];
+ const ritualSeries=(r.name==='Ravenous Vendread'?r.description:ritualText).match(/(?:any(?: 1)?|any number of) "([^"]+)" Ritual Monster/)?.[1];
  const ritualNames=ritualSeries||ritualSeriesAny?[]:[...ritualText.matchAll(/"([^"]+)"/g)].map(m=>m[1]),ritualIds=ritualNames.map(n=>byName.get(norm(n)));
  const ritualTarget=ritualIds.length===1?ritualIds[0]:undefined,ritualTargets=ritualIds.length>1?ritualIds:undefined;
  const ritualAttribute=attributes[ritualText.match(/any (DARK|LIGHT|EARTH|WATER|FIRE|WIND) Ritual Monster/)?.[1]],ritualAny=ritualSpell&&/any 1 Ritual Monster/.test(ritualText),ritualAnyTarget=ritualSpell&&/any (?:1 )?Ritual Monster/.test(ritualText),ritualExact=ritualSpell&&(/total Levels (?:exactly equal|equal exactly|equal the Level)/.test(r.description)||/any 1 Ritual Monster/.test(ritualText));

@@ -202,6 +202,15 @@
       }
     },
     {
+      "name": "Armed Dragon",
+      "kind": "setcode",
+      "code": "0x111",
+      "fallback": {
+        "match": "contains",
+        "value": "Armed Dragon"
+      }
+    },
+    {
       "name": "Aroma",
       "kind": "setcode",
       "code": "0xc9",
@@ -969,6 +978,15 @@
       "fallback": {
         "match": "contains",
         "value": "Exodia"
+      }
+    },
+    {
+      "name": "Exosister",
+      "kind": "setcode",
+      "code": "0x172",
+      "fallback": {
+        "match": "contains",
+        "value": "Exosister"
       }
     },
     {
@@ -1981,6 +1999,15 @@
       }
     },
     {
+      "name": "Mikanko",
+      "kind": "setcode",
+      "code": "0x18d",
+      "fallback": {
+        "match": "contains",
+        "value": "Mikanko"
+      }
+    },
+    {
       "name": "Mist Valley",
       "kind": "setcode",
       "code": "0x37",
@@ -2549,6 +2576,15 @@
       }
     },
     {
+      "name": "Runick",
+      "kind": "setcode",
+      "code": "0x17f",
+      "fallback": {
+        "match": "contains",
+        "value": "Runick"
+      }
+    },
+    {
       "name": "S-Force",
       "kind": "setcode",
       "code": "0x156",
@@ -2573,6 +2609,15 @@
       "fallback": {
         "match": "contains",
         "value": "Salamangreat"
+      }
+    },
+    {
+      "name": "Scareclaw",
+      "kind": "setcode",
+      "code": "0x17a",
+      "fallback": {
+        "match": "contains",
+        "value": "Scareclaw"
       }
     },
     {
@@ -2679,6 +2724,24 @@
       "fallback": {
         "match": "contains",
         "value": "Spiritual Beast"
+      }
+    },
+    {
+      "name": "Spright",
+      "kind": "setcode",
+      "code": "0x180",
+      "fallback": {
+        "match": "contains",
+        "value": "Spright"
+      }
+    },
+    {
+      "name": "Springans",
+      "kind": "setcode",
+      "code": "0x155",
+      "fallback": {
+        "match": "contains",
+        "value": "Springans"
       }
     },
     {
@@ -2916,6 +2979,15 @@
       }
     },
     {
+      "name": "Therion",
+      "kind": "setcode",
+      "code": "0x179",
+      "fallback": {
+        "match": "contains",
+        "value": "Therion"
+      }
+    },
+    {
       "name": "Thunder Dragon",
       "kind": "setcode",
       "code": "0x11c",
@@ -3078,6 +3150,15 @@
       }
     },
     {
+      "name": "Vaylantz",
+      "kind": "setcode",
+      "code": "0x17d",
+      "fallback": {
+        "match": "contains",
+        "value": "Vaylantz"
+      }
+    },
+    {
       "name": "Vehicroid",
       "kind": "setcode",
       "code": "0x1016",
@@ -3192,6 +3273,15 @@
       "fallback": {
         "match": "contains",
         "value": "Winged Kuriboh"
+      }
+    },
+    {
+      "name": "Wingman",
+      "kind": "setcode",
+      "code": "0x184",
+      "fallback": {
+        "match": "contains",
+        "value": "Wingman"
       }
     },
     {
