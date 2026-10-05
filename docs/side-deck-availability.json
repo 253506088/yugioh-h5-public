@@ -259,6 +259,31 @@
       "id": "floowandereeze-2022",
       "available": 15,
       "source": 15
+    },
+    {
+      "id": "bystial-dragon-link-2023",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "swordsoul-tenyi-2023",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "vanquish-soul-2023",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "purrely-2023",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "rescue-ace-2023",
+      "available": 15,
+      "source": 15
     }
   ],
   "excluded": []

@@ -65,7 +65,7 @@
   function quick(id,mode,definition){return register(id,mode,{speed:2,...definition});}
   function spell(id,definition={}){
     const c=CARDS[id],quickPlay=c.spellKind==='quick';
-    return register(id,'cast',{zones:['hand','spells'],cardActivation:true,effectType:'spell',speed:quickPlay?2:1,quickPlay,requiresField:['continuous','equip','field'].includes(c.spellKind),...definition});
+    return register(id,'cast',{zones:c.spellKind==='field'?['hand','spells','fieldSpell']:['hand','spells'],cardActivation:true,effectType:'spell',speed:quickPlay?2:1,quickPlay,requiresField:['continuous','equip','field'].includes(c.spellKind),...definition});
   }
   function trap(id,definition={}){
     return register(id,'cast',{zones:['spells'],cardActivation:true,effectType:'trap',speed:CARDS[id].trapKind==='counter'?3:2,requiresField:CARDS[id].trapKind==='continuous',...definition});
@@ -109,10 +109,10 @@
     if(a.cardActivation){
       if(d.type==='trap'){
         const temple=e.hasEarly?.('Temple of the Kings',ctx.owner)&&!e.wasUsed(ctx.owner,{id:D.cardByName('Temple of the Kings').id},'same-turn-trap','name');
-        if(!f||(!handTrap&&(f.zone!=='spells'||c.faceUp||c.setTurn>=e.state.turn&&c.effectSetActivationTurn!==e.state.turn&&!e.ruleAllowsSetActivation?.(c)&&!temple&&!(e.hasEarly?.('Night Wing Sorceress',ctx.owner)&&c.id===D.cardByName('Assault Mode Activate')?.id)&&!ctx.event.forcedTrap)))return false;
-      }else if(f?.zone==='spells'){
+        if(!f||(!handTrap&&(f.zone!=='spells'||c.faceUp||c.setTurn>=e.state.turn&&c.effectSetActivationTurn!==e.state.turn&&!e.cardAllowsSetActivation?.(c)&&!e.ruleAllowsSetActivation?.(c)&&!temple&&!(e.hasEarly?.('Night Wing Sorceress',ctx.owner)&&c.id===D.cardByName('Assault Mode Activate')?.id)&&!ctx.event.forcedTrap)))return false;
+      }else if(['spells','fieldSpell'].includes(f?.zone)){
         if(c.faceUp)return false;
-        if((a.quickPlay||a.speed===2)&&c.setTurn>=e.state.turn&&!e.ruleAllowsSetActivation?.(c))return false;
+        if((a.quickPlay||a.speed===2)&&c.setTurn>=e.state.turn&&!e.cardAllowsSetActivation?.(c)&&!e.ruleAllowsSetActivation?.(c))return false;
       }
       if(f?.zone==='hand'&&d.spellKind!=='field'&&!a.pendulum&&!e.state.players[ctx.owner].spells.includes(null))return false;
     }
@@ -123,13 +123,18 @@
       // All currently known groups must be satisfiable before offering an
       // activation. Dependent groups are returned once their earlier choice is
       // present, so a cost prompt cannot strand a player with no legal target.
-      if(inputGroups(e,ctx).some(g=>(g.max??1)<(g.min??1)||!Object.prototype.hasOwnProperty.call(ctx.args,g.key)&&((g.candidates||[]).length<(g.min??1)||g.validator==='early-y15-different'&&new Set((g.candidates||[]).map(o=>e.find(o.uid)?.card.id)).size<(g.min??1))))return false;
+      if(inputGroups(e,ctx).some(g=>(g.max??1)<(g.min??1)||!Object.prototype.hasOwnProperty.call(ctx.args,g.key)&&((g.candidates||[]).length<(g.min??1)||g.sets&&!g.sets.length||g.validator==='early-y15-different'&&new Set((g.candidates||[]).map(o=>e.find(o.uid)?.card.id)).size<(g.min??1))))return false;
     }catch{return false;}
     return true;
   }
   function inputGroups(e,ctx){
     const a=get(ctx.key),groups=a.inputs?a.inputs(e,ctx):[];
-    for(const group of groups)if(e.canTarget&&!['cost','discard','send-cost','search','special','send-deck'].includes(group.role)&&group.key!=='cost')group.candidates=group.candidates.filter(o=>{const f=e.find(o.uid);return !f||!fieldZone(f.zone)||e.canTarget(f.card,ctx.source);});
+    for(const group of groups){
+      if(e.canTarget&&!['cost','discard','send-cost','search','special','send-deck'].includes(group.role)&&group.key!=='cost')group.candidates=group.candidates.filter(o=>{const f=e.find(o.uid);return !f||!fieldZone(f.zone)||e.canTarget(f.card,ctx.source);});
+      // Composite choices must use the same post-protection candidate set as
+      // the UI and validator. Otherwise the bot can select a removed target.
+      if(group.sets){const legal=new Set(group.candidates.map(o=>o.uid));group.sets=group.sets.filter(us=>us.every(u=>legal.has(u)));const used=new Set(group.sets.flat());group.candidates=group.candidates.filter(o=>used.has(o.uid));}
+    }
     return groups;
   }
   function nextInput(e,ctx){return inputGroups(e,ctx).find(g=>!Object.prototype.hasOwnProperty.call(ctx.args,g.key))||null;}
@@ -282,6 +287,6 @@
     require('./ai-marginal.js');
     require('./ai-tactics.js');
     require('./ai-planner.js');
-    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005','effects-2006','effects-2007','effects-2008','effects-year-final','effects-chronicle','effects-2009','effects-2010','effects-2011','effects-2012','effects-2013','effects-chronicle-contracts','chronicle-rules','effects-2014','effects-2015','effects-2016','effects-2017','effects-2018','effects-2019','effects-2020','effects-2021','effects-2022','field-copies'])require('./'+file+'.js');
+    for(const file of ['effects-classic','effects-hero','effects-blackwing','effects-synchron','effects-utopia','effects-qliphort','effects-exodia','effects-cyber','effects-crystron','effects-tearlaments','effects-link','effects-early','effects-early-complex','effects-early-advanced','effects-2002','effects-2003','effects-2004','effects-2005','effects-2006','effects-2007','effects-2008','effects-year-final','effects-chronicle','effects-2009','effects-2010','effects-2011','effects-2012','effects-2013','effects-chronicle-contracts','chronicle-rules','effects-2014','effects-2015','effects-2016','effects-2017','effects-2018','effects-2019','effects-2020','effects-2021','effects-2022','effects-2023','field-copies'])require('./'+file+'.js');
   }
 })(typeof globalThis!=='undefined'?globalThis:this);

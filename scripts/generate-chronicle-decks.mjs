@@ -25,9 +25,8 @@ const decks=input.decks.map(row=>{
  if(row.year>=2017&&sideReport.some(r=>r.deck===row.id))throw Error('Unavailable or invalid side deck card: '+row.id);
  return {side,sideSourceCount:(row.side||[]).reduce((n,p)=>n+p[1],0),id:row.id,name:row.title+' · '+row.year,en:row.en.toUpperCase(),ace:ace.id,mechanic:row.year+' / '+row.title,description:row.description,player:row.title,avatar:'early',subtitle:'重返这一年的决斗现场。',preset:true,year:row.year,sourceKind:row.sourceKind,sourceRefs:row.sourceRefs,cards,extra,combo:row.combo};
 });
-// The current 2021 request specifies three distinct complete builds.
-// Preserve the five-deck requirement for the already delivered 2017–2020 batches.
-for(const file of inputs)for(const year of file.scope){const minimum=year>=2017&&year<=2020?5:3;if(file.decks.filter(d=>d.year===year).length<minimum)throw Error('Expected at least '+minimum+' decks for '+year+' in one source file');}
+// 2021–2022 retain their delivered scope; 2023 onward requires five distinct builds.
+for(const file of inputs)for(const year of file.scope){const minimum=year>=2023||year>=2017&&year<=2020?5:3;if(file.decks.filter(d=>d.year===year).length<minimum)throw Error('Expected at least '+minimum+' decks for '+year+' in one source file');}
 if(new Set(decks.map(d=>d.id)).size!==decks.length)throw Error('Duplicate annual deck id');
 const safe=v=>JSON.stringify(v).replace(/</g,'\\u003c');
 await writeAtomic(join(root,'src/chronicle-decks.js'),`/* Generated from the data/decks-*.json rollout tables. */\n(function(root){'use strict';const D=root.DuelData;if(D.chronicleDecksLoaded)return;for(const deck of ${safe(decks)})D.DECKS[deck.id]=deck;D.chronicleDecksLoaded=true;if(typeof module!=='undefined')module.exports=D;})(globalThis);\n`);

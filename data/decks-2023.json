@@ -1,0 +1,965 @@
+{
+  "scope": [
+    2023
+  ],
+  "historicalContext": {
+    "worldChampionship": "held",
+    "dates": "2023-08-05/2023-08-06",
+    "note": "Three distinct Worlds podium/semifinal strategies plus two annual popular strategies. All lists are explicit project adaptations; no invented separate third-place winner."
+  },
+  "sources": [
+    {
+      "id": "worlds",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2023/",
+      "accessed": "2026-10-04",
+      "retrievedContentSHA256": "a5937c9c1322968f1c865b0e1279150e9a0b1e5bc1c626e8a188f3c6e68fdc7a",
+      "evidenceSummary": "Worlds: Paul Stephen Aronson 1st Bystial Dragon Link; Juan Mateo Augusto Renteria Pastor 2nd Tenyi Swordsoul; Jeremy Taeron Mitchell 3rd–4th Vanquish Soul. The other semifinalist also used Bystial Dragon Link."
+    },
+    {
+      "id": "q1",
+      "url": "https://roadoftheking.com/ocg-2023-01-metagame/",
+      "accessed": "2026-10-04",
+      "retrievedContentSHA256": "0527ba34935b8cef27659c34f39dc7340e643d77e83015be4aeed7dd21eb4e5c",
+      "evidenceSummary": "1404 top-placing samples: 94 Purrely, 47 Dragon Link. Purrelyly and Sleepy Memory propel Purrely into competitive play."
+    },
+    {
+      "id": "q2",
+      "url": "https://roadoftheking.com/ocg-2023-04-metagame/",
+      "accessed": "2026-10-04",
+      "retrievedContentSHA256": "36c6830e39cce7ddaff91623b9c014a2debe729aaac14f97ac6b4e5f2b3dfa9c",
+      "evidenceSummary": "Diverse quarterly field; Purrely leads, new Epurrely Noir adds bounce and trap access. Rescue-ACE rises later in the quarter; Vanquish Soul wins multiple Duelist Cups."
+    },
+    {
+      "id": "q3",
+      "url": "https://roadoftheking.com/ocg-2023-07-metagame/",
+      "accessed": "2026-10-04",
+      "retrievedContentSHA256": "8f6e45aa79aa0cff7a6258615066055ca3007f6686b7402509c590c605d6559d",
+      "evidenceSummary": "Sinful Spoils provides Level 1 FIRE access for Rescue-ACE. Rescue-ACE, Tearlaments and Purrely lead discussion; S:P Little Knight appears in Age of Overlord."
+    },
+    {
+      "id": "q4",
+      "url": "https://roadoftheking.com/ocg-2023-10-metagame/",
+      "accessed": "2026-10-04",
+      "retrievedContentSHA256": "c14cd3fe71e712d418f60100db6e5992b00d5ca4ecf741593170548129b9ba33",
+      "evidenceSummary": "Rescue-ACE and Snake-Eye Fire King dominate this quarterly sample. These statistics establish popularity, not a full-year official ranking."
+    }
+  ],
+  "decks": [
+    {
+      "id": "bystial-dragon-link-2023",
+      "title": "世界冠军路线 · 深渊兽龙连接",
+      "en": "World Champion Strategy · Bystial Dragon Link",
+      "ja": "世界王者の戦略・ビーステッドドラゴンリンク",
+      "ace": "Borrelend Dragon",
+      "sourceRefs": [
+        "worlds",
+        "q1"
+      ],
+      "inspiration": {
+        "player": "Paul Stephen Aronson",
+        "placement": "1st",
+        "event": "World Championship 2023"
+      },
+      "description": "参考2023世界冠军路线的全年代表改编。深渊兽调配双方墓地，弹丸与混沌领域连接展开，枪管终焉龙、深渊之神兽及烙印形成多层交互。",
+      "descriptionEn": "An annual adaptation of the 2023 world champion strategy. Bystials contest both GYs; Rokkets and Chaos Space develop Borrelend, Dis Pater and Branded interaction.",
+      "descriptionJa": "2023年世界王者の戦略を参考にした年間アレンジ。ビーステッドで墓地に干渉し、ヴァレットと混沌領域からヴァレルエンド、ディス・パテル、烙印へつなぐ。",
+      "main": [
+        [
+          "Rokket Tracer",
+          3
+        ],
+        [
+          "Rokket Recharger",
+          1
+        ],
+        [
+          "Rokket Synchron",
+          1
+        ],
+        [
+          "Absorouter Dragon",
+          1
+        ],
+        [
+          "Starliege Seyfert",
+          3
+        ],
+        [
+          "Black Metal Dragon",
+          1
+        ],
+        [
+          "Red-Eyes Darkness Metal Dragon",
+          1
+        ],
+        [
+          "Black Dragon Collapserpent",
+          1
+        ],
+        [
+          "White Dragon Wyverburster",
+          1
+        ],
+        [
+          "Bystial Magnamhut",
+          1
+        ],
+        [
+          "Bystial Druiswurm",
+          1
+        ],
+        [
+          "Bystial Saronir",
+          2
+        ],
+        [
+          "Bystial Baldrake",
+          1
+        ],
+        [
+          "The Bystial Lubellion",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Quick Launch",
+          3
+        ],
+        [
+          "Chaos Space",
+          3
+        ],
+        [
+          "Boot Sector Launch",
+          1
+        ],
+        [
+          "Dragon Ravine",
+          1
+        ],
+        [
+          "Branded Regained",
+          1
+        ],
+        [
+          "Branded Beast",
+          1
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Infinite Impermanence",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Borrelend Dragon",
+          1
+        ],
+        [
+          "Borreload Savage Dragon",
+          1
+        ],
+        [
+          "Bystial Dis Pater",
+          1
+        ],
+        [
+          "Baronne de Fleur",
+          1
+        ],
+        [
+          "Chaos Angel",
+          1
+        ],
+        [
+          "Striker Dragon",
+          2
+        ],
+        [
+          "Dragunity Knight - Romulus",
+          1
+        ],
+        [
+          "Guardragon Pisty",
+          1
+        ],
+        [
+          "Triple Burst Dragon",
+          1
+        ],
+        [
+          "Borrelsword Dragon",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Hieratic Seal of the Heavenly Spheres",
+          1
+        ],
+        [
+          "I:P Masquerena",
+          1
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Evenly Matched",
+          2
+        ]
+      ],
+      "combo": [
+        "深渊兽先除外真实光暗墓地实体，再特殊召唤；对方有怪兽时可在响应窗口使用。",
+        "混沌领域支付送墓代价；复烙印回收除外资源，烙印之兽解放龙族破坏。",
+        "弹丸曳光龙的暗属性额外限制会影响鲜花与S:P，先规划召唤顺序。"
+      ],
+      "year": 2023,
+      "sourceKind": "representative-adaptation",
+      "adaptationNote": "Project-authored full-year OCG adaptation using current card text and project deck rules; not a verbatim player list or a single historical Forbidden/Limited List."
+    },
+    {
+      "id": "swordsoul-tenyi-2023",
+      "year": 2023,
+      "title": "世界亚军路线 · 天威相剑",
+      "en": "World Runner-up Strategy · Tenyi Swordsoul",
+      "ja": "世界準優勝の戦略・天威相剣",
+      "ace": "Swordsoul Supreme Sovereign - Chengying",
+      "description": "参考2023世界亚军天威相剑路线的全年代表改编。相剑与天威利用通常召唤、衍生物和墓地资源，组合赤霄、承影及鲜花的同调交互。",
+      "descriptionEn": "An annual adaptation of the 2023 runner-up strategy. Swordsoul and Tenyi use Normal Summons, Tokens and GY resources to develop Chixiao, Chengying and Baronne.",
+      "descriptionJa": "2023年世界準優勝の天威相剣を参考にした年間アレンジ。通常召喚、トークン、墓地資源を使い、赤霄・承影・バロネスの妨害を組み合わせる。",
+      "sourceKind": "representative-adaptation",
+      "sourceRefs": [
+        "worlds"
+      ],
+      "main": [
+        [
+          "Swordsoul of Mo Ye",
+          3
+        ],
+        [
+          "Swordsoul of Taia",
+          2
+        ],
+        [
+          "Swordsoul Strategist Longyuan",
+          3
+        ],
+        [
+          "Incredible Ecclesia, the Virtuous",
+          3
+        ],
+        [
+          "Tenyi Spirit - Ashuna",
+          3
+        ],
+        [
+          "Tenyi Spirit - Vishuda",
+          2
+        ],
+        [
+          "Tenyi Spirit - Adhara",
+          2
+        ],
+        [
+          "Tenyi Spirit - Shthana",
+          1
+        ],
+        [
+          "Archnemeses Protos",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Swordsoul Emergence",
+          3
+        ],
+        [
+          "Vessel for the Dragon Cycle",
+          2
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Crossout Designator",
+          2
+        ],
+        [
+          "Swordsoul Blackout",
+          2
+        ],
+        [
+          "Pot of Desires",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Swordsoul Grandmaster - Chixiao",
+          2
+        ],
+        [
+          "Swordsoul Supreme Sovereign - Chengying",
+          1
+        ],
+        [
+          "Swordsoul Sinister Sovereign - Qixing Longyuan",
+          1
+        ],
+        [
+          "Baronne de Fleur",
+          1
+        ],
+        [
+          "Baxia, Brightness of the Yang Zing",
+          2
+        ],
+        [
+          "Yazi, Evil of the Yang Zing",
+          1
+        ],
+        [
+          "Chaofeng, Phantom of the Yang Zing",
+          1
+        ],
+        [
+          "Draco Berserker of the Tenyi",
+          1
+        ],
+        [
+          "Monk of the Tenyi",
+          3
+        ],
+        [
+          "Shaman of the Tenyi",
+          1
+        ],
+        [
+          "Ruddy Rose Dragon",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Evenly Matched",
+          2
+        ]
+      ],
+      "combo": [
+        "天威先展开，再用相剑衍生物同调；衍生物在场时只能从额外同调召唤。",
+        "赤霄的检索与无效共用同名次数；龙渊的1200伤害在成为同调素材后触发。",
+        "灰流丽等手坑配合抹杀之指名者；天威之龙仙女限制额外怪兽发动效果，天威龙-宽恕蟠龙限制后续特殊召唤的种族。"
+      ],
+      "inspiration": {
+        "player": "Juan Mateo Augusto Renteria Pastor",
+        "placement": "2nd",
+        "event": "World Championship 2023"
+      },
+      "adaptationNote": "Project-authored full-year OCG adaptation using current card text and project deck rules; not a verbatim player list or a single historical Forbidden/Limited List."
+    },
+    {
+      "id": "vanquish-soul-2023",
+      "title": "世界四强路线 · VS",
+      "en": "World Semifinalist Strategy · Vanquish Soul",
+      "ja": "世界ベスト4の戦略・VS",
+      "ace": "Vanquish Soul Caesar Valius",
+      "sourceRefs": [
+        "worlds",
+        "q2"
+      ],
+      "inspiration": {
+        "player": "Jeremy Taeron Mitchell",
+        "placement": "3rd–4th (semifinalist; no separate third-place claim)",
+        "event": "World Championship 2023"
+      },
+      "description": "参考世界四强VS路线，加入年内支援蛟龙。展示地、炎、暗属性手牌发动不同效果，重型电子人与龙帝换位，斗神的虚像维持循环。",
+      "descriptionEn": "Inspired by the Worlds semifinalist, with the later 2023 Jiaolong support. Reveal EARTH, FIRE and DARK cards, tag into Borger or Valius, and recycle through Rock.",
+      "descriptionJa": "世界ベスト4のVSを基に、年内登場の蛟龍を採用。地・炎・闇の手札を見せて効果を使い分け、ヘヴィ・ボーガーとヴァリウスを交代し、闘神の虚像で循環する。",
+      "main": [
+        [
+          "Vanquish Soul Razen",
+          3
+        ],
+        [
+          "Vanquish Soul Dr. Mad Love",
+          3
+        ],
+        [
+          "Vanquish Soul Heavy Borger",
+          3
+        ],
+        [
+          "Vanquish Soul Caesar Valius",
+          2
+        ],
+        [
+          "Vanquish Soul Pantera",
+          1
+        ],
+        [
+          "Vanquish Soul Jiaolong",
+          2
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "Stake your Soul!",
+          3
+        ],
+        [
+          "Vanquish Soul - Continue?",
+          1
+        ],
+        [
+          "Vanquish Soul Dust Devil",
+          1
+        ],
+        [
+          "Vanquish Soul Snow Devil",
+          1
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Crossout Designator",
+          1
+        ],
+        [
+          "Pot of Prosperity",
+          3
+        ],
+        [
+          "Triple Tactics Talent",
+          2
+        ],
+        [
+          "Triple Tactics Thrust",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Rock of the Vanquisher",
+          3
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ],
+        [
+          "I:P Masquerena",
+          1
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Accesscode Talker",
+          1
+        ],
+        [
+          "Borrelsword Dragon",
+          1
+        ],
+        [
+          "Apollousa, Bow of the Goddess",
+          1
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Number 41: Bagooska the Terribly Tired Tapir",
+          1
+        ],
+        [
+          "Tornado Dragon",
+          1
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          1
+        ],
+        [
+          "Knightmare Cerberus",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Evenly Matched",
+          2
+        ]
+      ],
+      "combo": [
+        "展示是发动代价，手牌不会因此送墓；两张炎属性必须是不同实体。",
+        "VS怪兽同一连锁只能发动一个效果；先检索再在下一条连锁换位。",
+        "金满而谦虚之壶会封锁重型电子人的效果抽卡，注意使用顺序。"
+      ],
+      "year": 2023,
+      "sourceKind": "representative-adaptation",
+      "adaptationNote": "Project-authored full-year OCG adaptation using current card text and project deck rules; not a verbatim player list or a single historical Forbidden/Limited List."
+    },
+    {
+      "id": "purrely-2023",
+      "title": "年度热门 · 纯爱妖精",
+      "en": "Annual Metagame · Purrely",
+      "ja": "年間環境・ピュアリィ",
+      "ace": "Expurrely Noir",
+      "sourceRefs": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "description": "黑白小兽与速攻记忆组成超量资源。把记忆作为真实素材，获得抽卡、吸附和攻守提升；幸福与黑暗妖精负责战斗和回收。",
+      "descriptionEn": "Purrely and Purrelyly turn Quick-Play Memories into real Xyz materials. Gain draws, removal and stats, then choose Happiness pressure or Noir control.",
+      "descriptionJa": "ピュアリィとリリィで速攻魔法を実際のX素材に変え、ドロー・除去・攻守強化を得る。ハピネスの戦闘とノアールの制圧を使い分ける。",
+      "main": [
+        [
+          "Purrely",
+          3
+        ],
+        [
+          "Purrelyly",
+          3
+        ],
+        [
+          "My Friend Purrely",
+          3
+        ],
+        [
+          "Stray Purrely Street",
+          1
+        ],
+        [
+          "Purrely Happy Memory",
+          3
+        ],
+        [
+          "Purrely Delicious Memory",
+          3
+        ],
+        [
+          "Purrely Pretty Memory",
+          3
+        ],
+        [
+          "Purrely Sleepy Memory",
+          3
+        ],
+        [
+          "Purrelyeap!?",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Crossout Designator",
+          1
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Triple Tactics Talent",
+          2
+        ],
+        [
+          "Infinite Impermanence",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Epurrely Happiness",
+          2
+        ],
+        [
+          "Epurrely Beauty",
+          2
+        ],
+        [
+          "Epurrely Plump",
+          2
+        ],
+        [
+          "Epurrely Noir",
+          2
+        ],
+        [
+          "Expurrely Noir",
+          2
+        ],
+        [
+          "Expurrely Happiness",
+          1
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          1
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "I:P Masquerena",
+          1
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Effect Veiler",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ]
+      ],
+      "combo": [
+        "速攻记忆的丢弃属于效果处理，可选择不丢弃；每次使用均追踪真实卡片。",
+        "胖胖妖精吸附墓地魔陷，五素材二阶可以叠放七阶，所有素材转移保留。",
+        "瞌睡记忆逐张赋予准备阶段抽卡；跃跃妖精变换新的超量宿主后可再次使用。"
+      ],
+      "year": 2023,
+      "sourceKind": "representative-adaptation",
+      "adaptationNote": "Project-authored full-year OCG adaptation using current card text and project deck rules; not a verbatim player list or a single historical Forbidden/Limited List."
+    },
+    {
+      "id": "rescue-ace-2023",
+      "title": "年度热门 · 罪宝救援王牌",
+      "en": "Annual Metagame · Sinful Spoils Rescue-ACE",
+      "ja": "年間環境・罪宝R-ACE",
+      "ace": "Rescue-ACE Turbulence",
+      "sourceRefs": [
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "description": "救援王牌结合罪宝的一星炎属性路线。消防栓检索，湍流盖放四种救援卡，防火者、紧急出动与罪宝持续调配资源。",
+      "descriptionEn": "Rescue-ACE combines with the Sinful Spoils Level 1 FIRE engine. Hydrant searches, Turbulence sets four rescue cards, and Preventer, EMERGENCY! and Diabellstar maintain resources.",
+      "descriptionJa": "罪宝のレベル1炎属性展開をR-ACEに組み込む。ハイドラントでサーチ、タービュランスで4種類をセットし、プリベンターとEMERGENCY!で資源をつなぐ。",
+      "main": [
+        [
+          "Rescue-ACE Hydrant",
+          3
+        ],
+        [
+          "Rescue-ACE Air Lifter",
+          3
+        ],
+        [
+          "Rescue-ACE Impulse",
+          2
+        ],
+        [
+          "Rescue-ACE Fire Attacker",
+          1
+        ],
+        [
+          "Rescue-ACE Fire Engine",
+          1
+        ],
+        [
+          "Rescue-ACE Turbulence",
+          2
+        ],
+        [
+          "Rescue-ACE Preventer",
+          2
+        ],
+        [
+          "Diabellstar the Black Witch",
+          2
+        ],
+        [
+          "WANTED: Seeker of Sinful Spoils",
+          3
+        ],
+        [
+          "Original Sinful Spoils - Snake-Eye",
+          1
+        ],
+        [
+          "EMERGENCY!",
+          3
+        ],
+        [
+          "ALERT!",
+          1
+        ],
+        [
+          "RESCUE!",
+          1
+        ],
+        [
+          "CONTAIN!",
+          1
+        ],
+        [
+          "EXTINGUISH!",
+          1
+        ],
+        [
+          "REINFORCE!",
+          1
+        ],
+        [
+          "Rescue-ACE HQ",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Crossout Designator",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "S:P Little Knight",
+          2
+        ],
+        [
+          "I:P Masquerena",
+          1
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Relinquished Anima",
+          1
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ],
+        [
+          "Accesscode Talker",
+          1
+        ],
+        [
+          "Apollousa, Bow of the Goddess",
+          1
+        ],
+        [
+          "Borrelsword Dragon",
+          1
+        ],
+        [
+          "Knightmare Cerberus",
+          1
+        ],
+        [
+          "Baronne de Fleur",
+          1
+        ],
+        [
+          "Chaos Angel",
+          1
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Evenly Matched",
+          2
+        ]
+      ],
+      "combo": [
+        "消防栓每回合允许一张由救援效果盖放的速攻魔法或陷阱当回合发动，不会让四张都立即可用。",
+        "紧急出动先从卡组特殊召唤，再选择实际解放的救援王牌；可以解放刚召唤的怪兽。",
+        "原罪宝要送墓另一张表侧卡；迪亚贝尔斯塔尔的手牌特殊召唤同样要支付真实送墓代价。"
+      ],
+      "year": 2023,
+      "sourceKind": "representative-adaptation",
+      "adaptationNote": "Project-authored full-year OCG adaptation using current card text and project deck rules; not a verbatim player list or a single historical Forbidden/Limited List."
+    }
+  ]
+}

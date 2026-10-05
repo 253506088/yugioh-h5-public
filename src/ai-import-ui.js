@@ -318,7 +318,7 @@
         if (name === 'file') $('#ai-list-file').click();
         if (name === 'images') $('#ai-image-files').click();
         if (name === 'remove-image') { images.splice(Number(b.dataset.index), 1); renderInput(); }
-        if (name === 'sample') { text = '主卡组\n3 强欲而谦虚之壶\n2 效果遮蒙者\n1 增殖的G\n2 Snake-Eye Ash\n1 青眼白尤\n1 雷 鸣\n\n额外卡组\n1 No.39 希望皇 霍普'; error = null; renderInput(); }
+        if (name === 'sample') { text = '主卡组\n3 强欲而谦虚之壶\n2 效果遮蒙者\n1 增殖的G\n2 Tenpai Dragon Paidra\n1 青眼白尤\n1 雷 鸣\n\n额外卡组\n1 No.39 希望皇 霍普'; error = null; renderInput(); }
         if (name === 'research-example') { request = t('requestPlaceholder'); error = null; renderInput(); }
         if (name === 'run') await run();
         if (name === 'cancel') { cancel(); view = 'input'; error = new P.ProviderError('cancelled'); renderInput(); }

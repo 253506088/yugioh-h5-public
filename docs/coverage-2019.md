@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 741 个身份：53 个可用（8 个复用），688 个待实现。来源和具体范围见 [批次交接](../交接/2019批次交接.md)。
+当前 741 个身份：54 个可用（42 个效果实现、4 个基础规则、8 个复用），687 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2019批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2019`。
 
@@ -10,59 +10,60 @@
 
 | 密码 | 中文名 | 英文名 | 状态 / 适配说明 |
 | --- | --- | --- | --- |
-| 703897 | 自奏圣乐之阶 | Orcust Crescendo | 已登记本作实现 |
-| 3611830 | 创圣魔导王 恩底弥翁 | Endymion, the Mighty Master of Magic | 已登记本作实现 |
+| 703897 | 自奏圣乐之阶 | Orcust Crescendo | 已登记本作效果实现 |
+| 3611830 | 创圣魔导王 恩底弥翁 | Endymion, the Mighty Master of Magic | 已登记本作效果实现 |
 | 4280258 | 召命之神弓-阿波罗萨 | Apollousa, Bow of the Goddess | 复用既有实现 |
-| 5041348 | 天威之龙鬼神 | Draco Berserker of the Tenyi | 已登记本作实现 |
-| 5402805 | 天威之鬼神 | Berserker of the Tenyi | 已登记本作实现 |
-| 5969957 | 弹丸重填龙 | Rokket Recharger | 已登记本作实现 |
+| 5041348 | 天威之龙鬼神 | Draco Berserker of the Tenyi | 已登记本作效果实现 |
+| 5402805 | 天威之鬼神 | Berserker of the Tenyi | 基础规则（无卡片效果） |
+| 5969957 | 弹丸重填龙 | Rokket Recharger | 已登记本作效果实现 |
 | 11069680 | 废品转换者 | Junk Converter | 复用既有实现 |
-| 15381421 | 辉光龙 赛弗特龙 | Starliege Seyfert | 已登记本作实现 |
-| 21251800 | 带来光明的使者 路西法 | Light Bringer Lucifer | 已登记本作实现 |
+| 15381421 | 辉光龙 赛弗特龙 | Starliege Seyfert | 已登记本作效果实现 |
+| 21251800 | 带来光明的使者 路西法 | Light Bringer Lucifer | 基础规则（无卡片效果） |
 | 22908820 | 元素英雄 日出侠 | Elemental HERO Sunrise | 复用既有实现 |
-| 23431858 | 天威龙-大同蟠龙 | Tenyi Spirit - Vishuda | 已登记本作实现 |
+| 23431858 | 天威龙-大同蟠龙 | Tenyi Spirit - Vishuda | 已登记本作效果实现 |
 | 23720856 | 刷拉拉番长-我我我外套 | Zubababancho Gagagacoat | 复用既有实现 |
-| 24557335 | 天威龙-真知蟠龙 | Tenyi Spirit - Shthana | 已登记本作实现 |
-| 27204311 | 原始生命态 尼比鲁 | Nibiru, the Primal Being | 已登记本作实现 |
-| 31313405 | 转生炎兽 火凤凰 | Salamangreat Pyro Phoenix | 已登记本作实现 |
-| 32476603 | 银色弹丸龙 | Silverrokket Dragon | 已登记本作实现 |
-| 32519092 | 天威之拳僧 | Monk of the Tenyi | 已登记本作实现 |
-| 32530043 | 御影志士 | Gallant Granite | 已登记本作实现 |
-| 37351133 | 闪刀姬-露世 | Sky Striker Ace - Roze | 已登记本作实现 |
-| 38943357 | 魔力统辖 | Spell Power Mastery | 已登记本作实现 |
-| 39000945 | 恩底弥翁的皇后 | Reflection of Endymion | 已登记本作实现 |
-| 45819647 | 神圣魔皇后 塞勒涅 | Selene, Queen of the Master Magicians | 已登记本作实现 |
-| 46271408 | 闪刀术式-剪斗交刃 | Sky Striker Maneuver - Scissors Cross | 已登记本作实现 |
-| 49105782 | 死翼之虎钳巨鹰 | Hraesvelgr, the Desperate Doom Eagle | 已登记本作实现 |
+| 24557335 | 天威龙-真知蟠龙 | Tenyi Spirit - Shthana | 已登记本作效果实现 |
+| 27204311 | 原始生命态 尼比鲁 | Nibiru, the Primal Being | 已登记本作效果实现 |
+| 31313405 | 转生炎兽 火凤凰 | Salamangreat Pyro Phoenix | 已登记本作效果实现 |
+| 32476603 | 银色弹丸龙 | Silverrokket Dragon | 已登记本作效果实现 |
+| 32519092 | 天威之拳僧 | Monk of the Tenyi | 基础规则（无卡片效果） |
+| 32530043 | 御影志士 | Gallant Granite | 已登记本作效果实现 |
+| 37351133 | 闪刀姬-露世 | Sky Striker Ace - Roze | 已登记本作效果实现 |
+| 38943357 | 魔力统辖 | Spell Power Mastery | 已登记本作效果实现 |
+| 39000945 | 恩底弥翁的皇后 | Reflection of Endymion | 已登记本作效果实现 |
+| 45819647 | 神圣魔皇后 塞勒涅 | Selene, Queen of the Master Magicians | 已登记本作效果实现 |
+| 46271408 | 闪刀术式-剪斗交刃 | Sky Striker Maneuver - Scissors Cross | 已登记本作效果实现 |
+| 49105782 | 死翼之虎钳巨鹰 | Hraesvelgr, the Desperate Doom Eagle | 已登记本作效果实现 |
 | 50277355 | 交织绵羊 | Cross-Sheep | 复用既有实现 |
-| 50907446 | 神影依·七贤巨鲲魔 | El Shaddoll Apkallone | 已登记本作实现 |
-| 54529134 | 转生炎兽的超转生 | Salamangreat Transcendence | 已登记本作实现 |
-| 54693926 | 冥王结界波 | Dark Ruler No More | 已登记本作实现 |
-| 57160136 | 电脑网挖矿 | Cynet Mining | 已登记本作实现 |
+| 50907446 | 神影依·七贤巨鲲魔 | El Shaddoll Apkallone | 已登记本作效果实现 |
+| 54529134 | 转生炎兽的超转生 | Salamangreat Transcendence | 已登记本作效果实现 |
+| 54693926 | 冥王结界波 | Dark Ruler No More | 已登记本作效果实现 |
+| 57160136 | 电脑网挖矿 | Cynet Mining | 已登记本作效果实现 |
 | 59392529 | 元素英雄 液态侠 | Elemental HERO Liquid Soldier | 复用既有实现 |
 | 59724555 | 怒怒怒矮人-隆隆隆手套 | Dodododwarf Gogogoglove | 复用既有实现 |
-| 60303245 | 转生炎兽 独角兔 | Salamangreat Almiraj | 已登记本作实现 |
-| 65124425 | 虚空之龙轮 | Vessel for the Dragon Cycle | 已登记本作实现 |
-| 65342096 | 魔法都市的实验设施 | Endymion's Lab | 已登记本作实现 |
-| 65681983 | 抹杀之指名者 | Crossout Designator | 已登记本作实现 |
+| 60303245 | 转生炎兽 独角兔 | Salamangreat Almiraj | 已登记本作效果实现 |
+| 65124425 | 虚空之龙轮 | Vessel for the Dragon Cycle | 已登记本作效果实现 |
+| 65342096 | 魔法都市的实验设施 | Endymion's Lab | 已登记本作效果实现 |
+| 65681983 | 抹杀之指名者 | Crossout Designator | 已登记本作效果实现 |
 | 65741786 | I：P百变莱娜 | I:P Masquerena | 复用既有实现 |
-| 66104644 | 恩底弥翁的统领 | Magister of Endymion | 已登记本作实现 |
-| 67748760 | 绝对路由龙 | Absorouter Dragon | 已登记本作实现 |
-| 68464358 | 弹丸曳光龙 | Rokket Tracer | 已登记本作实现 |
-| 71197066 | 机巧蛇-丛云远吕智 | Gizmek Orochi, the Serpentron Sky Slasher | 已登记本作实现 |
-| 73539069 | 主动撞针龙 | Striker Dragon | 已登记本作实现 |
-| 75147529 | 闪刀姬-泽克 | Sky Striker Ace - Zeke | 已登记本作实现 |
-| 76375976 | 魔钟洞 | Mystic Mine | 已登记本作实现 |
-| 78917791 | 天威之龙仙女 | Shaman of the Tenyi | 已登记本作实现 |
-| 83554231 | 转生炎兽的再起 | Salamangreat Recureance | 已登记本作实现 |
-| 87052196 | 天威龙-宽恕蟠龙 | Tenyi Spirit - Ashuna | 已登记本作实现 |
-| 91336701 | 魔导耀士 破晓者 | Day-Breaker the Shining Magical Warrior | 已登记本作实现 |
-| 91800273 | 次元吸引者 | Dimension Shifter | 已登记本作实现 |
-| 92176681 | 抑制压缩对撞员 | Suppression Collider | 已登记本作实现 |
-| 92559258 | 恩底弥翁的仆从 | Servant of Endymion | 已登记本作实现 |
+| 66104644 | 恩底弥翁的统领 | Magister of Endymion | 已登记本作效果实现 |
+| 67748760 | 绝对路由龙 | Absorouter Dragon | 已登记本作效果实现 |
+| 68464358 | 弹丸曳光龙 | Rokket Tracer | 已登记本作效果实现 |
+| 71197066 | 机巧蛇-丛云远吕智 | Gizmek Orochi, the Serpentron Sky Slasher | 已登记本作效果实现 |
+| 73539069 | 主动撞针龙 | Striker Dragon | 已登记本作效果实现 |
+| 75147529 | 闪刀姬-泽克 | Sky Striker Ace - Zeke | 已登记本作效果实现 |
+| 76375976 | 魔钟洞 | Mystic Mine | 已登记本作效果实现 |
+| 78917791 | 天威之龙仙女 | Shaman of the Tenyi | 已登记本作效果实现 |
+| 83554231 | 转生炎兽的再起 | Salamangreat Recureance | 已登记本作效果实现 |
+| 87052196 | 天威龙-宽恕蟠龙 | Tenyi Spirit - Ashuna | 已登记本作效果实现 |
+| 91336701 | 魔导耀士 破晓者 | Day-Breaker the Shining Magical Warrior | 已登记本作效果实现 |
+| 91800273 | 次元吸引者 | Dimension Shifter | 已登记本作效果实现 |
+| 92176681 | 抑制压缩对撞员 | Suppression Collider | 基础规则（无卡片效果） |
+| 92559258 | 恩底弥翁的仆从 | Servant of Endymion | 已登记本作效果实现 |
 | 93854893 | 宵星之机神 丁吉尔苏 | Dingirsu, the Orcust of the Evening Star | 本作适配：可选破坏代替自动移除最先叠放的素材。 |
-| 94677445 | 星杯的神子 夏娃 | Ib the World Chalice Justiciar | 已登记本作实现 |
-| 98159737 | 天威龙-纯真蟠龙 | Tenyi Spirit - Adhara | 已登记本作实现 |
+| 94677445 | 星杯的神子 夏娃 | Ib the World Chalice Justiciar | 已登记本作效果实现 |
+| 98159737 | 天威龙-纯真蟠龙 | Tenyi Spirit - Adhara | 已登记本作效果实现 |
+| 98630720 | 前托枪管龙 | Borrelend Dragon | 已登记本作效果实现 |
 
 ## 待实现身份
 
@@ -746,7 +747,6 @@
 | 98506199 | 风飞马@火灵天星 | Wind Pegasus @Ignister | pending |
 | 98570539 | 混沌之梦魔镜 | Dream Mirror of Chaos | pending |
 | 98596596 | 灵魂游荡的墓场 | Graveyard of Wandering Souls | pending |
-| 98630720 | 前托枪管龙 | Borrelend Dragon | pending |
 | 98642179 | 刚炎之剑士 | Ferocious Flame Swordsman | pending |
 | 98753320 | 幻变骚灵的故障转移 | Altergeist Failover | pending |
 | 98806751 | 执爱之化卢普 | Obsessive Uvualoop | pending |

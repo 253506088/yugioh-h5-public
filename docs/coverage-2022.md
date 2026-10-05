@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 572 个身份：34 个可用（17 个效果实现、1 个基础规则、16 个复用），538 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2022批次交接.md)。
+当前 572 个身份：66 个可用（49 个效果实现、1 个基础规则、16 个复用），506 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2022批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2022`。
 
@@ -14,36 +14,68 @@
 | 1329620 | 壹世坏清澈的残响 | Tearlaments Cryme | 复用既有实现 |
 | 2311090 | 卫星闪灵·萝卜精灵 | Spright Carrot | 已登记本作效果实现 |
 | 4928565 | 珠泪哀歌族型俱舍怒威族 | Tearlaments Kashtira | 复用既有实现 |
+| 6637331 | 深渊之兽 德鲁伊鳞虫 | Bystial Druiswurm | 已登记本作效果实现 |
 | 6767771 | 劈穿壹世坏的弦声 | Tearlaments Scream | 复用既有实现 |
 | 13533678 | 卫星闪灵·喷流灵 | Spright Jet | 已登记本作效果实现 |
 | 15443125 | 卫星闪灵启辉器 | Spright Starter | 已登记本作效果实现 |
+| 20212491 | 流浪纯爱妖精街道 | Stray Purrely Street | 已登记本作效果实现 |
+| 24434049 | 亲历纯爱妖精·丰满妖精 | Epurrely Plump | 已登记本作效果实现 |
+| 25550531 | 纯爱妖精 | Purrely | 已登记本作效果实现 |
 | 25926710 | 古尖兵 凯尔柏克 | Kelbek the Ancient Vanguard | 已登记本作效果实现 |
+| 26372118 | A警报！ | ALERT! | 已登记本作效果实现 |
 | 27381364 | 卫星闪灵·淘气精灵 | Spright Elf | 已登记本作效果实现 |
 | 28226490 | 珠泪哀歌族·卡雷多哈特 | Tearlaments Kaleido-Heart | 复用既有实现 |
+| 29599813 | 纯爱妖精可爱回忆 | Purrely Pretty Memory | 已登记本作效果实现 |
 | 31259606 | 绝海之马雷 | Supreme Sea Mare | 复用既有实现 |
+| 32731036 | 深渊之兽 赫界龙 | The Bystial Lubellion | 已登记本作效果实现 |
+| 32756828 | 烙印之兽 | Branded Beast | 已登记本作效果实现 |
+| 33854624 | 深渊之兽 玛格巨龙 | Bystial Magnamhut | 已登记本作效果实现 |
 | 33878367 | 壹世坏涡旋的反响 | Tearlaments Grief | 复用既有实现 |
+| 34090915 | 复烙印 | Branded Regained | 已登记本作效果实现 |
+| 35269904 | 三战之号 | Triple Tactics Thrust | 已登记本作效果实现 |
+| 37495766 | 救援ACE队 涡轮湍流消防战车 | Rescue-ACE Turbulence | 已登记本作效果实现 |
+| 37617348 | 救援ACE队 消防栓 | Rescue-ACE Hydrant | 已登记本作效果实现 |
 | 37961969 | 珠泪哀歌族·小美人鱼 | Tearlaments Havnis | 复用既有实现 |
+| 38339996 | 救援ACE队 脉冲灭火员 | Rescue-ACE Impulse | 已登记本作效果实现 |
 | 38436986 | 壹世坏摩擦的爪音 | Tearlaments Metanoise | 复用既有实现 |
 | 42431833 | 卫星闪灵伽马暴 | Spright Gamma Burst | 已登记本作效果实现 |
 | 49858495 | 力量棒球女郎三姐妹 | Power Pro Lady Sisters | 基础规则（无卡片效果） |
 | 49928686 | 卫星闪灵·皮克精队 | Spright Pixies | 已登记本作效果实现 |
 | 51208877 | 命运怀抱的爆弹 | Blast Held by Destiny | 已登记本作效果实现 |
+| 51822687 | 历练纯爱妖精·幸福妖精 | Expurrely Happiness | 已登记本作效果实现 |
+| 52645235 | 亲历纯爱妖精·幸福妖精 | Epurrely Happiness | 已登记本作效果实现 |
 | 54498517 | 巨大喷流卫星闪灵 | Gigantic Spright | 已登记本作效果实现 |
+| 55584558 | 纯爱妖精美味回忆 | Purrely Delicious Memory | 已登记本作效果实现 |
+| 56700100 | 我的纯爱妖精朋友 | My Friend Purrely | 已登记本作效果实现 |
+| 60242223 | 深渊之兽 萨隆魔龙 | Bystial Saronir | 已登记本作效果实现 |
 | 60362066 | 摇撼壹世坏的鼓动 | Tearlaments Heartbeat | 复用既有实现 |
 | 62320425 | 古卫兵 阿基多 | Agido the Ancient Sentinel | 已登记本作效果实现 |
+| 62777823 | C控制！ | CONTAIN! | 已登记本作效果实现 |
 | 63542003 | 宿神像 凯尔多 | Keldo the Sacred Protector | 已登记本作效果实现 |
+| 63899465 | 救援ACE队总部 | Rescue-ACE HQ | 已登记本作效果实现 |
+| 64612053 | 救援ACE队 空中灭火机 | Rescue-ACE Fire Attacker | 已登记本作效果实现 |
+| 65734501 | 救援ACE队 空中起吊员 | Rescue-ACE Air Lifter | 已登记本作效果实现 |
 | 68250822 | 卫星闪灵双人交叉金臂勾 | Spright Double Cross | 已登记本作效果实现 |
 | 72329844 | 卫星闪灵迅妖龙炮 | Spright Sprind | 已登记本作效果实现 |
+| 72656408 | 深渊之兽 巴尔德鸟龙兽 | Bystial Baldrake | 已登记本作效果实现 |
 | 73956664 | 珠泪哀歌族·雷诺哈特 | Tearlaments Reinoheart | 复用既有实现 |
 | 74078255 | 珠泪哀歌族·梅洛人鱼 | Tearlaments Merrli | 复用既有实现 |
 | 74920585 | 壹世坏奏响的哀唱 | Tearlaments Sulliek | 复用既有实现 |
 | 75922381 | 卫星闪灵·红色精灵 | Spright Red | 已登记本作效果实现 |
 | 76145933 | 卫星闪灵·蓝色喷流灵 | Spright Blue | 已登记本作效果实现 |
 | 77103950 | 壹世坏-珍珠世界 | Primeval Planet Perlereino | 复用既有实现 |
+| 82105704 | 纯爱妖精快乐回忆 | Purrely Happy Memory | 已登记本作效果实现 |
+| 82983267 | 纯爱妖精跳越！？ | Purrelyeap!? | 已登记本作效果实现 |
+| 83827392 | 历练纯爱妖精·黑暗妖精 | Expurrely Noir | 已登记本作效果实现 |
 | 84330567 | 珠泪哀歌族·鲁莎卡人鱼 | Tearlaments Rulkallos | 复用既有实现 |
 | 88836438 | 卫星闪灵粉碎者群集 | Spright Smashers | 已登记本作效果实现 |
+| 90000652 | 救援ACE队 消防战车人 | Rescue-ACE Fire Engine | 已登记本作效果实现 |
+| 91222209 | 救援ACE队 双脉冲炮灭火员 | Rescue-ACE Monitor | 已登记本作效果实现 |
 | 92731385 | 珠泪哀歌族·水仙女人鱼 | Tearlaments Kitkallos | 复用既有实现 |
+| 98049934 | 亲历纯爱妖精·美丽妖精 | Epurrely Beauty | 已登记本作效果实现 |
+| 99162522 | E扑灭！ | EXTINGUISH! | 已登记本作效果实现 |
 | 99937011 | 剑神官 姆多拉 | Mudora the Sword Oracle | 已登记本作效果实现 |
+| 99984170 | R救援！ | RESCUE! | 已登记本作效果实现 |
 
 ## 待实现身份
 
@@ -92,7 +124,6 @@
 | 6556909 | 真红之魂 | Red-Eyes Soul | pending |
 | 6589707 | 地中界的灾厄 | Terrors in the Hidden City | pending |
 | 6609736 | 能朋克 鹿角仙符 | Noh-P.U.N.K. Deer Note | pending |
-| 6637331 | 深渊之兽 德鲁伊鳞虫 | Bystial Druiswurm | pending |
 | 6763530 | 烙印追放 | Branded Banishment | pending |
 | 7206349 | 春化精的花盛 | Vernusylph in Full Bloom | pending |
 | 7236721 | 界放的肆世坏 | Scareclaw Defanging | pending |
@@ -163,7 +194,6 @@
 | 19942835 | 不死苏生 | Zombie Reborn | pending |
 | 19963185 | 高等宝玉兽 紫晶猫 | Advanced Crystal Beast Amethyst Cat | pending |
 | 20065259 | 铳之忍者-火光 | Kagero the Cannon Ninja | pending |
-| 20212491 | 流浪纯爱妖精街道 | Stray Purrely Street | pending |
 | 20417688 | 星逢的天河 | Stars Align across the Milky Way | pending |
 | 20560620 | 代狸大人的代算样 | Emperor Tanuki's Critter Count | pending |
 | 20618850 | 黄金之雫的神碑 | Runick Golden Droplet | pending |
@@ -181,16 +211,13 @@
 | 24070330 | 音响战士 摇滚乐队 | Symphonic Warrior Rockks | pending |
 | 24087580 | 亚马逊银剑使 | Amazoness Silver Sword Master | pending |
 | 24151924 | G石人·无效支石墓 | G Golem Invalid Dolmen | pending |
-| 24434049 | 亲历纯爱妖精·丰满妖精 | Epurrely Plump | pending |
 | 24915933 | 赫焉龙 大木偶剧场龙 | Granguignol the Dusk Dragon | pending |
 | 25137581 | 潜伏的G | Sneaky "C" | pending |
 | 25209168 | 绝望与希望的逆转 | Exchange of Despair and Hope | pending |
 | 25273572 | G石人·卵石斗牛犬 | G Golem Pebble Dog | pending |
 | 25396150 | 亚马逊拜谒间 | Amazoness Hall | pending |
-| 25550531 | 纯爱妖精 | Purrely | pending |
 | 26050548 | 外毒多头蛇 | Extox Hydra | pending |
 | 26259179 | 圣杯情侣双A | Couple of Aces | pending |
-| 26372118 | A警报！ | ALERT! | pending |
 | 26988374 | 魔键凭神-阿斯塔尔图 | Magikey Deity - Ashtartu | pending |
 | 27012717 | 猛虎 | Fierce Tiger Monghu | pending |
 | 27104921 | 命运的囚人 | Forge a New Future | pending |
@@ -204,7 +231,6 @@
 | 28827503 | 进入境智网！ | Link into the VRAINS! | pending |
 | 29348048 | 复仇死者·噬腐鬼 | Vendread Scavenger | pending |
 | 29595202 | 神碑的欺诳 | Runick Allure | pending |
-| 29599813 | 纯爱妖精可爱回忆 | Purrely Pretty Memory | pending |
 | 29942771 | 自然山茶 | Naturia Camellia | pending |
 | 30037118 | 死制棺 石棺 | Devouring Sarcoughagus | pending |
 | 30095833 | 霸王黑龙 异色眼叛逆超量龙 | Odd-Eyes Rebellion Xyz Dragon | pending |
@@ -228,8 +254,6 @@
 | 32335697 | 不死的祟灵 | Haunted Zombies | pending |
 | 32453837 | No.2 蚊学忍者 影蚊 | Number 2: Ninja Shadow Mosquito | pending |
 | 32549749 | 武装再生 | Arms Regeneration | pending |
-| 32731036 | 深渊之兽 赫界龙 | The Bystial Lubellion | pending |
-| 32756828 | 烙印之兽 | Branded Beast | pending |
 | 32785578 | 拉比林斯迷宫欢迎欢送 | Farewelcome Labrynth | pending |
 | 32828466 | 唤醒你沉睡的元素英雄 | Wake Up Your Elemental HERO | pending |
 | 32909498 | 俱舍怒威族·芬里尔狼 | Kashtira Fenrir | pending |
@@ -239,11 +263,9 @@
 | 33407125 | 白银之迷宫城 | Labrynth Labyrinth | pending |
 | 33503878 | 魔界台本「戏剧性故事」 | Abyss Script - Dramatic Story | pending |
 | 33578406 | 真刀竹光 | Original Bamboo Sword | pending |
-| 33854624 | 深渊之兽 玛格巨龙 | Bystial Magnamhut | pending |
 | 33925864 | 六世坏根清净 | Kashtira Big Bang | pending |
 | 34034150 | 分裂的蛛母蜘蛛 | Mother Spider Splitter | pending |
 | 34047456 | 巨大喷流雷霆交叉合击 | Gigantic Thundercross | pending |
-| 34090915 | 复烙印 | Branded Regained | pending |
 | 34225426 | 袅袅涟歌姬的壹世坏 | Tearlaments Perlegia | pending |
 | 34447918 | 六世坏他化自在天 | Kashtiratheosis | pending |
 | 34456146 | 慈爱之贤者-西埃拉 | Sage of Benevolence - Ciela | pending |
@@ -251,7 +273,6 @@
 | 34800281 | 童话动物·小海豹 | Melffy Pinny | pending |
 | 34813545 | 自然的春风 | Naturia Blessing | pending |
 | 34976176 | 黑羽-雪击之奇努克 | Blackwing - Chinook the Snow Blast | pending |
-| 35269904 | 三战之号 | Triple Tactics Thrust | pending |
 | 35283277 | 炎兽使 埃卡 | Eka the Flame Buddy | pending |
 | 35405755 | 俱利伽罗天童 | Kurikara Divincarnate | pending |
 | 35479109 | 沙尘之大飓风 | Double Dust Tornado Twins | pending |
@@ -267,15 +288,12 @@
 | 37260946 | 变形斗士·耳机 | Morphtronic Earfon | pending |
 | 37313338 | 春化精的历替 | Vernusylph and the Changing Season | pending |
 | 37343995 | 救祓少女·马尔法 | Exosister Martha | pending |
-| 37495766 | 救援ACE队 涡轮湍流消防战车 | Rescue-ACE Turbulence | pending |
-| 37617348 | 救援ACE队 消防栓 | Rescue-ACE Hydrant | pending |
 | 37629703 | 白银之城的龙饰灯 | Labrynth Chandraglier | pending |
 | 37683547 | 灰烬之阿不思 | Albaz the Ashen | pending |
 | 37930737 | 重力均衡 | Gravity Balance | pending |
 | 38082437 | 变形斗士·电话 | Morphtronic Telefon | pending |
 | 38105306 | 逐渐削减的生命 | Life Shaver | pending |
 | 38192988 | 真红眼不死龙皇 | Red-Eyes Zombie Dragon Lord | pending |
-| 38339996 | 救援ACE队 脉冲灭火员 | Rescue-ACE Impulse | pending |
 | 38356857 | 冷酷遗式术师 | Gishki Grimness | pending |
 | 39049051 | 歌冰丽月 | Kahyoreigetsu | pending |
 | 39078434 | 巨蚁地狱救世主 | Infinite Antlion | pending |
@@ -338,12 +356,10 @@
 | 50699850 | 恶魔娘 萝莉丝 | Loris, Lady of Lament | pending |
 | 51409648 | 击铁龙 蓝迅龙 | Rindbrumm the Striking Dragon | pending |
 | 51522296 | 凶导的白天底 | Dogmatika Alba Zoa | pending |
-| 51822687 | 历练纯爱妖精·幸福妖精 | Expurrely Happiness | pending |
 | 52253888 | 光之法理灵媒 | Light Law Medium | pending |
 | 52254878 | 次元同异体 多变人 | Dimensional Allotrope Varis | pending |
 | 52445243 | 三刃大师 | Tri-Edge Master | pending |
 | 52553471 | 融合超涡 | Over Fusion | pending |
-| 52645235 | 亲历纯爱妖精·幸福妖精 | Epurrely Happiness | pending |
 | 53154400 | 念力流浪者 | Psychic Rover | pending |
 | 53270092 | 弓道魂 范士 | Han-Shi Kyudo Spirit | pending |
 | 53416326 | 圆唤师 仙女 | Fairyant the Circular Sorcerer | pending |
@@ -354,13 +370,11 @@
 | 54862960 | 镜之御巫 迩迩 | Ni-Ni the Mirror Mikanko | pending |
 | 54878729 | 年代记女巫 | Chronicle Sorceress | pending |
 | 55125728 | 春化精的女神 春 | Vera the Vernusylph Goddess | pending |
-| 55584558 | 纯爱妖精美味回忆 | Purrely Delicious Memory | pending |
 | 55610199 | 宝石骑士女郎·玫钻 | Gem-Knight Lady Rose Diamond | pending |
 | 55990317 | 神碑之翼 胡基 | Hugin the Runick Wings | pending |
 | 56063182 | 肆世坏-恐惧世界 | Primitive Planet Reichphobia | pending |
 | 56099748 | 维萨斯-斯塔弗罗斯特 | Visas Starfrost | pending |
 | 56347375 | 龙剑士 点火烈·凤凰 | Ignis Phoenix, the Dracoslayer | pending |
-| 56700100 | 我的纯爱妖精朋友 | My Friend Purrely | pending |
 | 56733747 | 元素英雄 闪光新宇翼侠 | Elemental HERO Shining Neos Wingman | pending |
 | 57111330 | 兽带斗神“公爵”竺域星 | Therion "Duke" Yul | pending |
 | 57285770 | 兽带斗神突击 | Therion Charge | pending |
@@ -374,7 +388,6 @@
 | 59494222 | 守墓的刻印 | Gravekeeper's Inscription | pending |
 | 60023855 | 小蜘蛛 | Baby Spider | pending |
 | 60095092 | 群豪觉醒-单人激活 | Vaylantz Wakening - Solo Activation | pending |
-| 60242223 | 深渊之兽 萨隆魔龙 | Bystial Saronir | pending |
 | 60306277 | 同调区域 | Synchro Zone | pending |
 | 60329973 | 混沌变幻 | Chaos Phantasm | pending |
 | 60442460 | 被引导的烙印 | Branded Befallen | pending |
@@ -389,7 +402,6 @@
 | 62133026 | 花与原野的春化精 | Vernusylph of the Flowering Fields | pending |
 | 62480168 | 亚马逊的秘汤 | Amazoness Hot Spring | pending |
 | 62503746 | 天雷星 闪光 | Senko the Skybolt Star | pending |
-| 62777823 | C控制！ | CONTAIN! | pending |
 | 62803464 | 地灵媒师 奥丝 | Aussa the Earth Channeler | pending |
 | 62967433 | 神羊树 植物羊魔 | Baromet the Sacred Sheep Shrub | pending |
 | 63086455 | 现世离 | Terrors of the Overroot | pending |
@@ -397,19 +409,16 @@
 | 63526052 | 机怪虫·胞体虫 | Krawler Soma | pending |
 | 63708033 | 春化精与花蕾 | Vernusylph and the Flower Buds | pending |
 | 63748694 | 赤舍利军贯 | Gunkan Suship Shari Red | pending |
-| 63899465 | 救援ACE队总部 | Rescue-ACE HQ | pending |
 | 64211118 | 防火龙·暗流体-新电磁泄密风 | Firewall Dragon Darkfluid - Neo Tempest Terahertz | pending |
 | 64475743 | 森之圣兽 红毛苋小猫 | Kittytail, Mystical Beast of the Forest | pending |
 | 64487132 | 工具游戏本 | Gadget Gamer | pending |
 | 64538914 | 震天之蝎尾狮 | Manticore of Smashing | pending |
 | 64583600 | 祈愿龙 | Wish Dragon | pending |
-| 64612053 | 救援ACE队 空中灭火机 | Rescue-ACE Fire Attacker | pending |
 | 65107325 | 赤醋的道口 | Sour Scheduling - Red Vinegar Vamoose | pending |
 | 65187687 | 巨骸龙 闪耀 | Skeletal Dragon Felgrand | pending |
 | 65351555 | 咒眼之眷属 巴西利科克 | Basiltrice, Familiar of the Evil Eye | pending |
 | 65433790 | 大混战模式-加入 | Battle Royal Mode - Joining | pending |
 | 65477143 | 魔界剧团-自由剧作家 | Abyss Actor - Liberty Dramatist | pending |
-| 65734501 | 救援ACE队 空中起吊员 | Rescue-ACE Air Lifter | pending |
 | 65938950 | 纲引犬会 | Don't Slip, the Dogs of War | pending |
 | 66069967 | 占术姬 书本缪斯 | Prediction Princess Bibliomuse | pending |
 | 66156348 | 龙皇神话 | Saga of the Dragon Emperor | pending |
@@ -453,7 +462,6 @@
 | 72233469 | 璃拉说唱 | Lil-la Rap | pending |
 | 72386290 | 仪水镜的集光 | Focused Aquamirror | pending |
 | 72554664 | 烙印之光 | Light of the Branded | pending |
-| 72656408 | 深渊之兽 巴尔德鸟龙兽 | Bystial Baldrake | pending |
 | 72776252 | 冰水大剑现 | Icejade Manifestation | pending |
 | 72843899 | 高等宝玉兽 黄玉虎 | Advanced Crystal Beast Topaz Tiger | pending |
 | 73218989 | 黑翼强袭龙 | Black-Winged Assault Dragon | pending |
@@ -504,16 +512,13 @@
 | 81497285 | 迷宫城的白银姬 | Lady Labrynth of the Silver Castle | pending |
 | 81519836 | 苗与霞的春化精 | Vernusylph of the Misting Seedlings | pending |
 | 81613061 | 战吼灵媒 | War Rock Medium | pending |
-| 82105704 | 纯爱妖精快乐回忆 | Purrely Happy Memory | pending |
 | 82361809 | 恐吓爪牙族·莱希哈特 | Scareclaw Reichheart | pending |
 | 82735249 | 彩排 | Generalprobe | pending |
-| 82983267 | 纯爱妖精跳越！？ | Purrelyeap!? | pending |
 | 83488497 | 恐吓爪牙族·雷电恐惧兽 | Scareclaw Astra | pending |
 | 83558891 | 肆世坏的新星 | Scareclaw Arrival | pending |
 | 83575471 | 高等宝玉兽 红玉兽 | Advanced Crystal Beast Ruby Carbuncle | pending |
 | 83610035 | 兽带斗神“百合”胃宿二 | Therion "Lily" Borea | pending |
 | 83670388 | 冰水咒缚 | Icejade Curse | pending |
-| 83827392 | 历练纯爱妖精·黑暗妖精 | Expurrely Noir | pending |
 | 84332527 | 兽带斗神“公牛”毕宿一 | Therion "Bull" Ain | pending |
 | 84544192 | 究极宝玉神 虹龙 超越 | Ultimate Crystal Rainbow Dragon Overdrive | pending |
 | 84792926 | 圆盘斗技场 兽带斗神环形擂台 | Therion Discolosseum | pending |
@@ -533,10 +538,8 @@
 | 88926295 | 邪遗式心意海仙女 | Evigishki Neremanas | pending |
 | 89058026 | EN波动 | EN Wave | pending |
 | 89552119 | 精灵冥骑-急还马 | Cucumber Horse | pending |
-| 90000652 | 救援ACE队 消防战车人 | Rescue-ACE Fire Engine | pending |
 | 90027012 | 兆手神 | Choju of the Trillion Hands | pending |
 | 90659259 | 变形斗士·变换装置 | Morphtronic Converter | pending |
-| 91222209 | 救援ACE队 双脉冲炮灭火员 | Rescue-ACE Monitor | pending |
 | 91262474 | 星尘亚龙 | Stardust Wurm | pending |
 | 91575236 | 不朽之龙 | Immortal Dragon | pending |
 | 91592030 | 威迫矿石-迫选召唤石 | Intimidating Ore - Summonite | pending |
@@ -575,15 +578,12 @@
 | 97692972 | 亚马逊金鞭使 | Amazoness Golden Whip Master | pending |
 | 97870394 | 亚马逊灵术师 | Amazoness Spiritualist | pending |
 | 97946536 | 虫装三轮车-红黄 | Zektrike Kou-ou | pending |
-| 98049934 | 亲历纯爱妖精·美丽妖精 | Epurrely Beauty | pending |
 | 98416533 | 童话动物·小小袋鼠 | Melffy Wally | pending |
 | 98462037 | 闪刀姬-阿泽莉娅 | Sky Striker Ace - Azalea | pending |
 | 98715423 | 守墓的陷阱 | Gravekeeper's Trap | pending |
 | 98875863 | G石人·岩锤手 | G Golem Rock Hammer | pending |
 | 98898163 | 巨牙龙 | Grandtusk Dragon | pending |
-| 99162522 | E扑灭！ | EXTINGUISH! | pending |
 | 99748883 | 流星连打-白黑机人 | Meteor Rush - Monochroid | pending |
 | 99801464 | 银翼之斧式配饰-莎莉 | Sari of the Silverwing Axe | pending |
 | 99910751 | 落单悠悠 | Mokey Mokey Adrift | pending |
-| 99984170 | R救援！ | RESCUE! | pending |
 | 99991455 | 霸雷星 雷神 | Raijin the Breakbolt Star | pending |

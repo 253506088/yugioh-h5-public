@@ -286,6 +286,15 @@
       }
     },
     {
+      "name": "Beetrooper",
+      "kind": "setcode",
+      "code": "0x170",
+      "fallback": {
+        "match": "contains",
+        "value": "Beetrooper"
+      }
+    },
+    {
       "name": "Black Luster Soldier",
       "kind": "setcode",
       "code": "0x10cf",
@@ -334,6 +343,15 @@
       }
     },
     {
+      "name": "Branded",
+      "kind": "setcode",
+      "code": "0x15d",
+      "fallback": {
+        "match": "contains",
+        "value": "Branded"
+      }
+    },
+    {
       "name": "Bujin",
       "kind": "setcode",
       "code": "0x88",
@@ -374,6 +392,24 @@
       "fallback": {
         "match": "contains",
         "value": "Butterspy"
+      }
+    },
+    {
+      "name": "Bystial",
+      "kind": "setcode",
+      "code": "0x188",
+      "fallback": {
+        "match": "contains",
+        "value": "Bystial"
+      }
+    },
+    {
+      "name": "Centur-Ion",
+      "kind": "setcode",
+      "code": "0x1a2",
+      "fallback": {
+        "match": "contains",
+        "value": "Centur-Ion"
       }
     },
     {
@@ -699,6 +735,15 @@
       }
     },
     {
+      "name": "Diabellstar",
+      "kind": "setcode",
+      "code": "0x119b",
+      "fallback": {
+        "match": "contains",
+        "value": "Diabellstar"
+      }
+    },
+    {
       "name": "Dinomist",
       "kind": "setcode",
       "code": "0xd8",
@@ -831,6 +876,15 @@
       "fallback": {
         "match": "contains",
         "value": "Duston"
+      }
+    },
+    {
+      "name": "Earthbound",
+      "kind": "setcode",
+      "code": "0x21",
+      "fallback": {
+        "match": "contains",
+        "value": "Earthbound"
       }
     },
     {
@@ -1516,6 +1570,15 @@
       }
     },
     {
+      "name": "Infernoble Knight",
+      "kind": "setcode",
+      "code": "0x507a",
+      "fallback": {
+        "match": "contains",
+        "value": "Infernoble Knight"
+      }
+    },
+    {
       "name": "Infernoid",
       "kind": "setcode",
       "code": "0xbb",
@@ -1885,6 +1948,15 @@
       }
     },
     {
+      "name": "Mannadium",
+      "kind": "setcode",
+      "code": "0x190",
+      "fallback": {
+        "match": "contains",
+        "value": "Mannadium"
+      }
+    },
+    {
       "name": "Marincess",
       "kind": "setcode",
       "code": "0x12b",
@@ -1978,6 +2050,15 @@
       "fallback": {
         "match": "contains",
         "value": "Melodious Maestra"
+      }
+    },
+    {
+      "name": "Memento",
+      "kind": "setcode",
+      "code": "0x1a1",
+      "fallback": {
+        "match": "contains",
+        "value": "Memento"
       }
     },
     {
@@ -2218,6 +2299,15 @@
       }
     },
     {
+      "name": "Nouvelles",
+      "kind": "setcode",
+      "code": "0x196",
+      "fallback": {
+        "match": "contains",
+        "value": "Nouvelles"
+      }
+    },
+    {
       "name": "Number",
       "kind": "setcode",
       "code": "0x48",
@@ -2447,6 +2537,15 @@
       "reason": "旧编辑器的念动力族分组，不是OCG系列。"
     },
     {
+      "name": "Purrely",
+      "kind": "setcode",
+      "code": "0x18c",
+      "fallback": {
+        "match": "contains",
+        "value": "Purrely"
+      }
+    },
+    {
       "name": "Qli",
       "kind": "setcode",
       "code": "0xaa",
@@ -2519,6 +2618,15 @@
       "fallback": {
         "match": "contains",
         "value": "Reptilianne"
+      }
+    },
+    {
+      "name": "Rescue-ACE",
+      "kind": "setcode",
+      "code": "0x18b",
+      "fallback": {
+        "match": "contains",
+        "value": "Rescue-ACE"
       }
     },
     {
@@ -2657,6 +2765,15 @@
       }
     },
     {
+      "name": "Sinful Spoils",
+      "kind": "setcode",
+      "code": "0x19e",
+      "fallback": {
+        "match": "contains",
+        "value": "Sinful Spoils"
+      }
+    },
+    {
       "name": "Six Samurai",
       "kind": "setcode",
       "code": "0x103d",
@@ -2681,6 +2798,15 @@
       "fallback": {
         "match": "contains",
         "value": "Sky Striker Ace"
+      }
+    },
+    {
+      "name": "Snake-Eye",
+      "kind": "setcode",
+      "code": "0x19c",
+      "fallback": {
+        "match": "contains",
+        "value": "Snake-Eye"
       }
     },
     {
@@ -3141,12 +3267,30 @@
       }
     },
     {
+      "name": "Vaalmonica",
+      "kind": "setcode",
+      "code": "0x1a3",
+      "fallback": {
+        "match": "contains",
+        "value": "Vaalmonica"
+      }
+    },
+    {
       "name": "Vampire",
       "kind": "setcode",
       "code": "0x8e",
       "fallback": {
         "match": "contains",
         "value": "Vampire"
+      }
+    },
+    {
+      "name": "Vanquish Soul",
+      "kind": "setcode",
+      "code": "0x195",
+      "fallback": {
+        "match": "contains",
+        "value": "Vanquish Soul"
       }
     },
     {
@@ -3357,6 +3501,15 @@
       "fallback": {
         "match": "contains",
         "value": "Yosenju"
+      }
+    },
+    {
+      "name": "Yubel",
+      "kind": "setcode",
+      "code": "0x1a5",
+      "fallback": {
+        "match": "contains",
+        "value": "Yubel"
       }
     },
     {

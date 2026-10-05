@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 663 个身份：72 个可用（2 个复用），591 个待实现。来源和具体范围见 [批次交接](../交接/2020批次交接.md)。
+当前 663 个身份：74 个可用（68 个效果实现、4 个基础规则、2 个复用），589 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2020批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2020`。
 
@@ -10,78 +10,80 @@
 
 | 密码 | 中文名 | 英文名 | 状态 / 适配说明 |
 | --- | --- | --- | --- |
-| 1984618 | 天底的使徒 | Nadir Servant | 已登记本作实现 |
-| 6728559 | 大星义初始龙 | Archnemeses Protos | 已登记本作实现 |
-| 8736823 | 电脑堺姬-娘娘 | Virtual World Hime - Nyannyan | 已登记本作实现 |
-| 9341993 | 魔救之救碎 | Adamancipator Relief | 已登记本作实现 |
-| 9464441 | 魔救之奇迹-巨龙晶石 | Adamancipator Risen - Dragite | 已登记本作实现 |
-| 10286023 | 魔救之奇石-巨龙晶石 | Adamancipator Crystal - Dragite | 已登记本作实现 |
-| 11302671 | 魔救之分析者 | Adamancipator Analyzer | 已登记本作实现 |
-| 12571621 | 电脑堺豸-豸豸 | Virtual World Xiezhi - Jiji | 已登记本作实现 |
-| 13364097 | 电脑堺门-朱雀 | Virtual World Gate - Chuche | 已登记本作实现 |
-| 13694209 | 教导的神徒 | Dogmatika Ashiyan | 已登记本作实现 |
-| 14816857 | 铁兽战线 纳贝尔 | Tri-Brigade Nervall | 已登记本作实现 |
-| 14886190 | 电脑堺都-九龙 | Virtual World City - Kauwloon | 已登记本作实现 |
-| 18106132 | 人偶怪兽 熊仔 | Doll Monster Bear-Bear | 已登记本作实现 |
-| 18249921 | 电脑堺门-玄武 | Virtual World Gate - Xuanwu | 已登记本作实现 |
-| 20129614 | 童话动物·小兔子 | Melffy Rabby | 已登记本作实现 |
-| 20590515 | 黄金乡的征服者 | Conquistador of the Golden Land | 已登记本作实现 |
-| 20612097 | 红化血染之黄金国永生药 | Eldlixir of Scarlet Sanguine | 已登记本作实现 |
-| 20799347 | 电脑堺嫦-兔兔 | Virtual World Oto-Hime - Toutou | 已登记本作实现 |
-| 21011044 | 影依的伪典 | Shaddoll Schism | 已登记本作实现 |
-| 24299458 | 禁忌的一滴 | Forbidden Droplet | 已登记本作实现 |
-| 26847978 | 铁兽战线 徒花之费莉吉特 | Tri-Brigade Ferrijit the Barren Blossom | 已登记本作实现 |
-| 27069566 | 电脑堺凰-凰凰 | Virtual World Phoenix - Fanfan | 已登记本作实现 |
-| 27520594 | 圣种之地灵 | Sunseed Genius Loci | 已登记本作实现 |
-| 29354228 | 教导的遭遇 | Dogmatika Encounter | 已登记本作实现 |
-| 31434645 | 被诅咒的黄金国度 | Cursed Eldland | 已登记本作实现 |
-| 33296432 | 教导的天启 阿东 | Dogmatika Adin, the Enlightened | 已登记本作实现 |
-| 34755994 | 圣魔之少女 阿耳特弥斯 | Artemis, the Magistus Moon Maiden | 已登记本作实现 |
-| 35252119 | 电脑堺兽-鹫鹫 | Virtual World Beast - Jiujiu | 已登记本作实现 |
-| 40975243 | 铁兽的抗战 | Tri-Brigade Revolt | 已登记本作实现 |
-| 41373230 | 灰烬龙 落胤龙 | Titaniklad the Ash Dragon | 已登记本作实现 |
-| 45730592 | 魔救共振击 | Adamancipator Resonance | 已登记本作实现 |
-| 46552140 | 魔救之勒皮他晶石 | Adamancipator Laputite | 已登记本作实现 |
-| 47674738 | 魔救之奇迹-狮子晶石 | Adamancipator Risen - Leonite | 已登记本作实现 |
-| 47897376 | 魔救之奇石-狮子晶石 | Adamancipator Crystal - Leonite | 已登记本作实现 |
-| 48519867 | 魔救之追求者 | Adamancipator Seeker | 已登记本作实现 |
-| 49088914 | 电脑堺媛-瑞瑞 | Virtual World Mai-Hime - Lulu | 已登记本作实现 |
-| 49966326 | 电脑堺麟-麟麟 | Virtual World Kirin - Lili | 已登记本作实现 |
-| 50275295 | 电脑堺门-青龙 | Virtual World Gate - Qinglong | 已登记本作实现 |
-| 50810455 | 铁兽战线 克拉斯 | Tri-Brigade Kerass | 已登记本作实现 |
-| 51097887 | 铁兽的凶袭 | Tri-Brigade Airborne Assault | 已登记本作实现 |
-| 52331012 | 铁兽战线 银弹之卢加鲁 | Tri-Brigade Rugal the Silver Sheller | 已登记本作实现 |
-| 56196385 | 铁兽战线 姬特 | Tri-Brigade Kitt | 已登记本作实现 |
-| 56984514 | 永久辉煌的黄金乡 | Golden Land Forever! | 已登记本作实现 |
-| 60303688 | 教导的圣女 艾克莉西娅 | Dogmatika Ecclesia, the Virtuous | 已登记本作实现 |
-| 61641818 | 电脑堺龙-龙龙 | Virtual World Dragon - Longlong | 已登记本作实现 |
-| 65711558 | 战华盟将-双龙 | Ancient Warriors Oath - Double Dragon Lords | 已登记本作实现 |
-| 67007102 | 黄金乡的守护者 | Guardian of the Golden Land | 已登记本作实现 |
-| 68468459 | 阿不思的落胤 | Fallen of Albaz | 已登记本作实现 |
-| 68829754 | 黑化觉醒之黄金国永生药 | Eldlixir of Black Awakening | 已登记本作实现 |
-| 69680031 | 教导的骑士 弗勒德莉丝 | Dogmatika Fleurdelis, the Knighted | 已登记本作实现 |
-| 72717433 | 人偶怪兽 小姑娘 | Doll Monster Miss Mädchen | 已登记本作实现 |
-| 72957245 | 魔救之息吹 | Adamancipator Signs | 已登记本作实现 |
-| 73079836 | 魔救之奇迹-猛禽晶石 | Adamancipator Risen - Raptite | 已登记本作实现 |
+| 1984618 | 天底的使徒 | Nadir Servant | 已登记本作效果实现 |
+| 6728559 | 大星义初始龙 | Archnemeses Protos | 已登记本作效果实现 |
+| 8736823 | 电脑堺姬-娘娘 | Virtual World Hime - Nyannyan | 已登记本作效果实现 |
+| 9341993 | 魔救之救碎 | Adamancipator Relief | 已登记本作效果实现 |
+| 9464441 | 魔救之奇迹-巨龙晶石 | Adamancipator Risen - Dragite | 已登记本作效果实现 |
+| 10286023 | 魔救之奇石-巨龙晶石 | Adamancipator Crystal - Dragite | 已登记本作效果实现 |
+| 11302671 | 魔救之分析者 | Adamancipator Analyzer | 已登记本作效果实现 |
+| 12571621 | 电脑堺豸-豸豸 | Virtual World Xiezhi - Jiji | 已登记本作效果实现 |
+| 13364097 | 电脑堺门-朱雀 | Virtual World Gate - Chuche | 已登记本作效果实现 |
+| 13694209 | 教导的神徒 | Dogmatika Ashiyan | 已登记本作效果实现 |
+| 14816857 | 铁兽战线 纳贝尔 | Tri-Brigade Nervall | 已登记本作效果实现 |
+| 14886190 | 电脑堺都-九龙 | Virtual World City - Kauwloon | 已登记本作效果实现 |
+| 18106132 | 人偶怪兽 熊仔 | Doll Monster Bear-Bear | 基础规则（无卡片效果） |
+| 18249921 | 电脑堺门-玄武 | Virtual World Gate - Xuanwu | 已登记本作效果实现 |
+| 20129614 | 童话动物·小兔子 | Melffy Rabby | 基础规则（无卡片效果） |
+| 20590515 | 黄金乡的征服者 | Conquistador of the Golden Land | 已登记本作效果实现 |
+| 20612097 | 红化血染之黄金国永生药 | Eldlixir of Scarlet Sanguine | 已登记本作效果实现 |
+| 20799347 | 电脑堺嫦-兔兔 | Virtual World Oto-Hime - Toutou | 已登记本作效果实现 |
+| 21011044 | 影依的伪典 | Shaddoll Schism | 已登记本作效果实现 |
+| 24299458 | 禁忌的一滴 | Forbidden Droplet | 已登记本作效果实现 |
+| 25311006 | 三战之才 | Triple Tactics Talent | 已登记本作效果实现 |
+| 26847978 | 铁兽战线 徒花之费莉吉特 | Tri-Brigade Ferrijit the Barren Blossom | 已登记本作效果实现 |
+| 27069566 | 电脑堺凰-凰凰 | Virtual World Phoenix - Fanfan | 已登记本作效果实现 |
+| 27520594 | 圣种之地灵 | Sunseed Genius Loci | 基础规则（无卡片效果） |
+| 29354228 | 教导的遭遇 | Dogmatika Encounter | 已登记本作效果实现 |
+| 31434645 | 被诅咒的黄金国度 | Cursed Eldland | 已登记本作效果实现 |
+| 33296432 | 教导的天启 阿东 | Dogmatika Adin, the Enlightened | 已登记本作效果实现 |
+| 34755994 | 圣魔之少女 阿耳特弥斯 | Artemis, the Magistus Moon Maiden | 已登记本作效果实现 |
+| 35252119 | 电脑堺兽-鹫鹫 | Virtual World Beast - Jiujiu | 已登记本作效果实现 |
+| 40975243 | 铁兽的抗战 | Tri-Brigade Revolt | 已登记本作效果实现 |
+| 41373230 | 灰烬龙 落胤龙 | Titaniklad the Ash Dragon | 已登记本作效果实现 |
+| 45730592 | 魔救共振击 | Adamancipator Resonance | 已登记本作效果实现 |
+| 46552140 | 魔救之勒皮他晶石 | Adamancipator Laputite | 已登记本作效果实现 |
+| 47674738 | 魔救之奇迹-狮子晶石 | Adamancipator Risen - Leonite | 已登记本作效果实现 |
+| 47897376 | 魔救之奇石-狮子晶石 | Adamancipator Crystal - Leonite | 已登记本作效果实现 |
+| 48519867 | 魔救之追求者 | Adamancipator Seeker | 已登记本作效果实现 |
+| 49088914 | 电脑堺媛-瑞瑞 | Virtual World Mai-Hime - Lulu | 已登记本作效果实现 |
+| 49966326 | 电脑堺麟-麟麟 | Virtual World Kirin - Lili | 已登记本作效果实现 |
+| 50275295 | 电脑堺门-青龙 | Virtual World Gate - Qinglong | 已登记本作效果实现 |
+| 50810455 | 铁兽战线 克拉斯 | Tri-Brigade Kerass | 已登记本作效果实现 |
+| 51097887 | 铁兽的凶袭 | Tri-Brigade Airborne Assault | 已登记本作效果实现 |
+| 52331012 | 铁兽战线 银弹之卢加鲁 | Tri-Brigade Rugal the Silver Sheller | 已登记本作效果实现 |
+| 56196385 | 铁兽战线 姬特 | Tri-Brigade Kitt | 已登记本作效果实现 |
+| 56984514 | 永久辉煌的黄金乡 | Golden Land Forever! | 已登记本作效果实现 |
+| 60303688 | 教导的圣女 艾克莉西娅 | Dogmatika Ecclesia, the Virtuous | 已登记本作效果实现 |
+| 61641818 | 电脑堺龙-龙龙 | Virtual World Dragon - Longlong | 已登记本作效果实现 |
+| 65711558 | 战华盟将-双龙 | Ancient Warriors Oath - Double Dragon Lords | 已登记本作效果实现 |
+| 67007102 | 黄金乡的守护者 | Guardian of the Golden Land | 已登记本作效果实现 |
+| 68468459 | 阿不思的落胤 | Fallen of Albaz | 已登记本作效果实现 |
+| 68829754 | 黑化觉醒之黄金国永生药 | Eldlixir of Black Awakening | 已登记本作效果实现 |
+| 69680031 | 教导的骑士 弗勒德莉丝 | Dogmatika Fleurdelis, the Knighted | 已登记本作效果实现 |
+| 72717433 | 人偶怪兽 小姑娘 | Doll Monster Miss Mädchen | 基础规则（无卡片效果） |
+| 72957245 | 魔救之息吹 | Adamancipator Signs | 已登记本作效果实现 |
+| 73079836 | 魔救之奇迹-猛禽晶石 | Adamancipator Risen - Raptite | 已登记本作效果实现 |
 | 73309655 | 清冽之水灵使 艾莉娅 | Eria the Water Charmer, Gentle | 复用既有实现 |
-| 74891384 | 魔救之奇石-猛禽晶石 | Adamancipator Crystal - Raptite | 已登记本作实现 |
-| 82956214 | 教导的惩罚 | Dogmatika Punishment | 已登记本作实现 |
-| 84211599 | 金满而谦虚之壶 | Pot of Prosperity | 已登记本作实现 |
-| 85914562 | 魔救之探索者 | Adamancipator Researcher | 已登记本作实现 |
+| 74891384 | 魔救之奇石-猛禽晶石 | Adamancipator Crystal - Raptite | 已登记本作效果实现 |
+| 82956214 | 教导的惩罚 | Dogmatika Punishment | 已登记本作效果实现 |
+| 84211599 | 金满而谦虚之壶 | Pot of Prosperity | 已登记本作效果实现 |
+| 85914562 | 魔救之探索者 | Adamancipator Researcher | 已登记本作效果实现 |
 | 86066372 | 访问码语者 | Accesscode Talker | 复用既有实现 |
-| 86483512 | 电脑堺悟-老老 | Virtual World Roshi - Laolao | 已登记本作实现 |
-| 87209160 | 铁兽战线 弗拉克杜尔 | Tri-Brigade Fraktall | 已登记本作实现 |
-| 90448279 | 天霆号 阿宙斯 | Divine Arsenal AA-ZEUS - Sky Thunder | 已登记本作实现 |
-| 90664857 | 电脑堺甲-甲甲 | Virtual World Shell - Jaja | 已登记本作实现 |
-| 92519087 | 电脑堺狐-仙仙 | Virtual World Kyubi - Shenshen | 已登记本作实现 |
-| 93191801 | 黄金乡的盗墓者 | Huaquero of the Golden Land | 已登记本作实现 |
-| 94224458 | 白化宿命之黄金国永生药 | Eldlixir of White Destiny | 已登记本作实现 |
-| 95440946 | 黄金卿 黄金国巫妖 | Eldlich the Golden Lord | 已登记本作实现 |
-| 95679145 | 教导的大神祇官 | Dogmatika Maximus | 已登记本作实现 |
+| 86483512 | 电脑堺悟-老老 | Virtual World Roshi - Laolao | 已登记本作效果实现 |
+| 87209160 | 铁兽战线 弗拉克杜尔 | Tri-Brigade Fraktall | 已登记本作效果实现 |
+| 90448279 | 天霆号 阿宙斯 | Divine Arsenal AA-ZEUS - Sky Thunder | 已登记本作效果实现 |
+| 90664857 | 电脑堺甲-甲甲 | Virtual World Shell - Jaja | 已登记本作效果实现 |
+| 92519087 | 电脑堺狐-仙仙 | Virtual World Kyubi - Shenshen | 已登记本作效果实现 |
+| 93191801 | 黄金乡的盗墓者 | Huaquero of the Golden Land | 已登记本作效果实现 |
+| 94224458 | 白化宿命之黄金国永生药 | Eldlixir of White Destiny | 已登记本作效果实现 |
+| 95440946 | 黄金卿 黄金国巫妖 | Eldlich the Golden Lord | 已登记本作效果实现 |
+| 95679145 | 教导的大神祇官 | Dogmatika Maximus | 已登记本作效果实现 |
 | 96378317 | 铁兽的邂逅 | Tri-Brigade Rendezvous | 本作适配：满足条件时自动使用墓地的破坏代替。 |
-| 96891787 | 教导的铁锤 特奥 | Dogmatika Theo, the Iron Punch | 已登记本作实现 |
-| 99726621 | 铁兽战线 凶鸟之施莱格 | Tri-Brigade Shuraig the Ominous Omen | 已登记本作实现 |
-| 99927991 | 魔救之奇缘 | Adamancipator Friends | 已登记本作实现 |
+| 96891787 | 教导的铁锤 特奥 | Dogmatika Theo, the Iron Punch | 已登记本作效果实现 |
+| 99266988 | 混沌领域 | Chaos Space | 已登记本作效果实现 |
+| 99726621 | 铁兽战线 凶鸟之施莱格 | Tri-Brigade Shuraig the Ominous Omen | 已登记本作效果实现 |
+| 99927991 | 魔救之奇缘 | Adamancipator Friends | 已登记本作效果实现 |
 
 ## 待实现身份
 
@@ -236,7 +238,6 @@
 | 23790299 | 幻变骚灵·存储姬摩莉甘 | Altergeist Memorygant | pending |
 | 24521754 | 百景战都 金发姑娘城 | Goldilocks the Battle Landscaper | pending |
 | 24799107 | 半龙女仆·耀光龙女 | Dragonmaid Sheou | pending |
-| 25311006 | 三战之才 | Triple Tactics Talent | pending |
 | 25538345 | 幻影骑士团 破洞鳞甲 | The Phantom Knights of Torn Scales | pending |
 | 25643346 | 恶魔娘 玛莉丝 | Malice, Lady of Lament | pending |
 | 25725326 | 调皮宝贝喵喵猫 | Prank-Kids Meow-Meow-Mu | pending |
@@ -676,5 +677,4 @@
 | 98804359 | 海龙神的激昂 | Fury of Kairyu-Shin | pending |
 | 99049589 | 魔玩具修复 | Frightfur Repair | pending |
 | 99249638 | 同盟驾驶员 | Union Driver | pending |
-| 99266988 | 混沌领域 | Chaos Space | pending |
 | 99666430 | 人造人-念力层叠者 | Jinzo - Layered | pending |

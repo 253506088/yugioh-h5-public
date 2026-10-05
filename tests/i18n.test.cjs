@@ -3,7 +3,7 @@ const {DuelEngine}=require('../src/advanced-engine.js');
 const D=globalThis.DuelData,E=globalThis.DuelEffects,I=require('../src/i18n.js'),root=path.resolve(__dirname,'..');
 const all=D.CARD_LIST.filter(c=>!c.notCollectible),languages=['zh-CN','en','ja'];
 test('every collectible card has three local names and complete descriptions',()=>{
- assert.equal(all.length,12003);
+ assert.equal(all.length,12522);
  for(const c of all)for(const language of languages){
   const text=I.references[c.id]?.locales[language];
   assert.ok(text?.name?.trim(),c.id+' '+language+' name');
@@ -62,7 +62,9 @@ test('all registered effect captions are translated without generic fallback',()
  I.setLanguage('zh-CN');
 });
 test('every encyclopedia URL is a specific validated card page, independent of pictures',()=>{
- for(const c of all){const url=new URL(I.references[c.id].encyclopediaUrl);assert.equal(url.origin,'https://ygoprodeck.com');assert.match(url.pathname,/^\/card\/[a-z0-9-]+\/?$/i);assert.equal(url.search,'');}
+ // The provider's verified Ace★Spades canonical slug contains Unicode letters.
+ // Match the importer's decoded-path contract while retaining the origin guard.
+ for(const c of all){const url=new URL(I.references[c.id].encyclopediaUrl);assert.equal(url.origin,'https://ygoprodeck.com');assert.match(decodeURIComponent(url.pathname),/^\/card\/[\p{L}\p{N}-]+\/?$/u);assert.equal(url.search,'');assert.equal(url.hash,'');assert.equal(url.username,'');assert.equal(url.password,'');}
  assert.equal(I.references['tear-rulkallos'].encyclopediaUrl,'https://ygoprodeck.com/card/tearlaments-rulkallos-13300');
  const barrel=I.references[D.cardByName('Barrel Dragon').id];assert.equal(barrel.providerId,81480461);assert.equal(barrel.textId,81480460);assert.equal(barrel.imageId,81480461);
 });

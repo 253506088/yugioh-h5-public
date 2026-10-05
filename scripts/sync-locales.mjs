@@ -13,7 +13,7 @@ const readJSON=async(file,fallback)=>{try{return JSON.parse(await readFile(file,
 const {CARD_LIST}=require('../src/early-cards.js'),cards=CARD_LIST.filter(c=>!c.notCollectible);
 const identities=await readJSON(join(root,'data/providers/game-art-identities.json'),{cards:{}});
 const normalize=v=>String(v||'').normalize('NFKC').toLowerCase().replace(/[’‘]/g,"'").replace(/\s+/g,' ').trim();
-const validPage=value=>{try{const u=new URL(value);return u.protocol==='https:'&&u.hostname==='ygoprodeck.com'&&!u.username&&!u.password&&!u.search&&!u.hash&&/^\/card\/[a-z0-9-]+\/?$/i.test(u.pathname)?u.href:null;}catch{return null;}};
+const validPage=value=>{try{const u=new URL(value);return u.protocol==='https:'&&u.hostname==='ygoprodeck.com'&&!u.username&&!u.password&&!u.search&&!u.hash&&/^\/card\/[\p{L}\p{N}-]+\/?$/u.test(decodeURIComponent(u.pathname))?u.href:null;}catch{return null;}};
 async function get(url){const response=await fetch(url,{signal:AbortSignal.timeout(45000),headers:{'User-Agent':'Duel-Sanctuary-localization'},redirect:'error'});if(!response.ok)throw new Error('HTTP '+response.status+' '+url);return Buffer.from(await response.arrayBuffer());}
 await mkdir(directory,{recursive:true});
 let manifest=await readJSON(join(directory,'source-manifest.json'),null);

@@ -110,7 +110,12 @@
     "test:2022:simulation": "node tests/chronicle-2022-simulation.cjs",
     "test:2022:tournament": "node tests/chronicle-2022-tournament.cjs",
     "test:2022:browser": "node tests/chronicle-2022-browser.cjs",
-    "cards:coverage:2022": "node scripts/report-card-coverage.mjs --write-year 2022"
+    "cards:coverage:2022": "node scripts/report-card-coverage.mjs --write-year 2022",
+    "test:2023": "node --test tests/chronicle-2023.test.cjs tests/chronicle-2023-interactions.test.cjs tests/chronicle-2023-materials.test.cjs",
+    "test:2023:simulation": "node tests/chronicle-2023-simulation.cjs",
+    "test:2023:tournament": "node tests/chronicle-2023-tournament.cjs",
+    "test:2023:browser": "node tests/chronicle-2023-browser.cjs",
+    "cards:coverage:2023": "node scripts/report-card-coverage.mjs --write-year 2023"
   },
   "engines": {
     "node": ">=22.13.0"

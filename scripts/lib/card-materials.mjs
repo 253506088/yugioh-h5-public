@@ -1,6 +1,13 @@
 // Explicit material grammar for the preserved OCG snapshots. Unknown wording is
 // an import error, never an unrestricted material or a silently normal monster.
 export function parseFusion(name, text, {byName, norm, races, attributes}) {
+  if(name==='Dragon Master Magia')return {fusion:[{id:byName.get(norm('Blue-Eyes Ultimate Dragon'))},{type:'ritual',nameIncludesAny:['Chaos','Black Luster Soldier']}],fusionAlternatives:[[{nameIncludes:'Blue-Eyes'},{nameIncludes:'Blue-Eyes'},{nameIncludes:'Blue-Eyes'},{type:'ritual',nameIncludesAny:['Chaos','Black Luster Soldier']}]]};
+  if(name==='Berfomet the Mythical King of Phantom Beasts')return {fusion:[{races:[races.Beast,races.Fiend,races.Illusion]},{races:[races.Beast,races.Fiend,races.Illusion]}],fusionDifferentRaces:true};
+  if(name==='Vicious Astraloud')return {fusion:[{id:byName.get(norm('Visas Starfrost'))},{atk:1500,def:2100}],fusionProhibited:true};
+  if(name==='Ace★Spades Speculation')return {fusion:[{minAtk:2500},{faceDown:true,position:'defense',maxDef:2500,fieldOnly:true}]};
+  if(name==='Gaia Prominence, the Fierce Force')return {fusion:[{id:byName.get(norm('Gaia Blaze, the Force of the Sun'))},{fieldOnly:true,faceUp:true,own:true}]};
+  if(name==='Magnum the Reliever')return {fusion:[{summonedFromExtra:true},{handOnly:true}]};
+  if(name==='Cyberse Desavewurm')return {fusion:[{race:races.Cyberse,types:['ritual','fusion','synchro','xyz','link']},{race:races.Cyberse}]};
   if(text==='2+ monsters you control, Special Summoned from the Extra Deck')return {fusion:[{fieldOnly:true,summonedFromExtra:true},{fieldOnly:true,summonedFromExtra:true}],fusionMore:{fieldOnly:true,summonedFromExtra:true}};
   if(/ monsters with different Types$/.test(text))return {...parseFusion(name,text.replace(/ with different Types$/,''),{byName,norm,races,attributes}),fusionDifferentRaces:true};
   if(name==='Ultimate Flagship Ursatron'&&text==='(This card is always treated as an "Ursarctic" and "Drytron" card.)')return {fusion:[],fusionProhibited:true,requiredSummonCard:'Ursarctic Drytron'};
@@ -11,7 +18,7 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
   // These qualifications belong to the selected physical material, not its
   // printed card type. Preserve them for the engine's material validator.
   if (name === 'Invoked Elysium') return {fusion: [{nameIncludes:'Invoked'}, {summonedFromExtra:true}]};
-  if (name === 'Supreme King Z-ARC') return {fusion: ['fusion','synchro','xyz','pendulum'].map(type=>({race:races.Dragon,type})),fusionOnly:true};
+  if (['Supreme King Z-ARC','Odd-Eyes Arcray Dragon'].includes(name)) return {fusion: ['fusion','synchro','xyz','pendulum'].map(type=>({race:races.Dragon,type})),fusionOnly:true};
   if (name === 'Secret Six Samurai - Rihan') return {fusion:Array.from({length:3},()=>({nameIncludes:'Six Samurai'})),fusionDifferentAttributes:true};
   if (name === 'Mudragon of the Swamp') return {fusion:[{},{}],fusionSameAttribute:true,fusionDifferentRaces:true};
   if (name === 'Sea Monster of Theseus') return {fusion:[{tuner:true},{tuner:true}]};
@@ -97,8 +104,8 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
   const parts = text.trim().split(/\s+\+\s+/);
   if (parts.length < 2 || parts.length > 3) throw new Error('Unparsed Synchro materials: ' + name);
   const spec = {minTuners: 1, maxTuners: 1, minNon: 1};
-  const variableTuners = /^(\d+) or more Tuners?$/.test(parts[0]);
-  const named = parts[0].match(/^"([^"]+)"$/), tuner = parts[0].replace(/^(\d+) or more Tuners?$/, '$1 Tuners').match(/^(\d+)\s+(?:(.+?)\s+)?Tuners?( Synchro Monster)?$/i);
+  const variableTuners = /^(\d+)(?:\+| or more) Tuners?$/.test(parts[0]);
+  const named = parts[0].match(/^"([^"]+)"$/), tuner = parts[0].replace(/^(\d+)(?:\+| or more) Tuners?$/, '$1 Tuners').match(/^(\d+)\s+(?:(.+?)\s+)?Tuners?( Synchro Monster)?$/i);
   if (named) {
     spec.tunerId = byName.get(norm(named[1]));
     if (!spec.tunerId) throw new Error('Missing named Tuner: ' + name);
@@ -111,7 +118,8 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
       let body = tuner[2].replace(/-Type$/i, '');
       const combined=body.match(/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) (.+)$/);
       if(combined&&races[combined[2]]){spec.tunerAttribute=attributes[combined[1]];body=combined[2];}
-      if (attributes[body]) spec.tunerAttribute = attributes[body];
+      if (/^Level \d+$/.test(body)) spec.tunerLevel = Number(body.slice(6));
+      else if (attributes[body]) spec.tunerAttribute = attributes[body];
       else if (races[body]) spec.tunerRace = races[body];
       else if (/^".+"$/.test(body)) spec.tunerNameIncludes = body.slice(1, -1);
       else throw new Error('Unknown Tuner requirement: ' + name);
@@ -124,6 +132,7 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
     if (parts.length === 2) { spec.nonId = id; spec.maxNon = 1; return {synchro: spec}; }
     spec.requiredNonIds = [id]; spec.minNon = 2; spec.maxNon = 2;
   } else if (parts.length !== 2) throw new Error('Unparsed Synchro materials: ' + name);
+  if(parts[1]==='1 LIGHT monster'&&variableTuners)return {synchro:{...spec,minNon:0,maxNon:1,finalMaterialAttribute:attributes.LIGHT}};
   // Gottoms explicitly allows EARTH Tuners in its additional material slots.
   if (name === 'XX-Saber Gottoms' && parts[1] === '1 or more EARTH monsters') return {synchro: {...spec, maxTuners: 6, minNon: 0, additionalAttribute: attributes.EARTH}};
   const non = parts.at(-1).match(/^(\d+)(\+| or more)?\s+(?:Level (\d+) )?non-Tuner(?:\s+(.+?))?\s+monsters?$/i);
@@ -137,7 +146,8 @@ export function parseSynchro(name, text, {byName, norm, races, attributes}) {
     if (/ Pendulum$/.test(body)) { spec.nonType = 'pendulum'; body = body.replace(/ Pendulum$/, ''); }
     const combined = body.match(/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) (.+)$/);
     if (combined && races[combined[2]]) { spec.nonAttribute = attributes[combined[1]]; body = combined[2]; }
-    if (attributes[body]) spec.nonAttribute = attributes[body];
+    if (/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) or (DARK|LIGHT|EARTH|WIND|WATER|FIRE)$/.test(body)) spec.nonAttributes = body.split(' or ').map(a=>attributes[a]);
+    else if (attributes[body]) spec.nonAttribute = attributes[body];
     else if (races[body]) spec.nonRace = races[body];
     else if (/^".+"$/.test(body)) spec.nonNameIncludes = body.slice(1, -1);
     else if (body === 'Normal') spec.nonNormal = true;

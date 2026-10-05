@@ -1,6 +1,7 @@
 // Import-time Link grammar. Unknown material text or arrows must fail closed.
 // `attribute` in the legacy engine means "including"; `allAttribute` means all.
 export function parseLink(name, text, {races, attributes, linkRating, linkMarkers}) {
+  if(name==='Emperor Charles the Great'&&text==='1 Level 9 "Infernoble Knight Emperor Charles" equipped with an Equip Card(s)')return {...parseLink(name,'1 monster',{races,attributes,linkRating,linkMarkers}),link:{min:1,max:1,level:9,materialName:'Infernoble Knight Emperor Charles',equipped:true}};
   if(text==='1 "Scareclaw" monster or 1 "Visas Starfrost"')return {...parseLink(name,'1 monster',{races,attributes,linkRating,linkMarkers}),link:{min:1,max:1,materialAnyOf:[{series:'Scareclaw'},{name:'Visas Starfrost'}]}};
   if (!Number.isInteger(linkRating) || linkRating < 1 || linkRating > 6) throw new Error('Invalid Link rating: ' + name);
   const directions = {'Top-Left':'TL',Top:'T','Top-Right':'TR',Left:'L',Right:'R','Bottom-Left':'BL',Bottom:'B','Bottom-Right':'BR'};
@@ -24,6 +25,7 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
     else if(value==='Synchro Monster')link.includingType='synchro';
     else if(value==='Pendulum Monster')link.includingPendulum=true;
     else if(value==='Level/Rank/Link 2 monster')link.includingTwo=true;
+    else if(/^Level \d+ or higher monster$/.test(value))link.includingMinLevel=Number(value.match(/\d+/)[0]);
     else if(value==='Insect or Plant monster')link.includingRaces=[races.Insect,races.Plant];
     else if(value==='Ritual, Fusion, Synchro, or Xyz Monster')link.includingTypes=['ritual','fusion','synchro','xyz'];
     else if(/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) "[^"]+" monster$/.test(value)){const m=value.match(/^(\w+) "([^"]+)"/);link.includingSeries=m[2];link.includingSeriesAttribute=attributes[m[1]];}
@@ -63,6 +65,7 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
   if(attributeRace&&races[attributeRace[2]]){link.allAttribute=attributes[attributeRace[1]];body=attributeRace[2];}
   if(/ Link$/i.test(body)){link.linkOnly=true;body=body.replace(/ Link$/i,'');}
   if(/ Pendulum$/i.test(body)){link.pendulum=true;body=body.replace(/ Pendulum$/i,'');}
+  if(/^non-Link /.test(body)){link.nonLink=true;body=body.slice(9);}
   if (body === 'Normal Summoned/Set') link.normalSummoned = true;
   else if (body === 'Normal') link.normal = true;
   else if (body === 'Effect') link.effect = true;
