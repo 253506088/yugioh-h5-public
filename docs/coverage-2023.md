@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 519 个身份：28 个可用（24 个效果实现、4 个基础规则、0 个复用），491 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2023批次交接.md)。
+当前 519 个身份：40 个可用（36 个效果实现、4 个基础规则、0 个复用），479 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2023批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2023`。
 
@@ -10,7 +10,10 @@
 
 | 密码 | 中文名 | 英文名 | 状态 / 适配说明 |
 | --- | --- | --- | --- |
+| 2772337 | 赐炎之咎姬 | Promethean Princess, Bestower of Flames | 已登记本作效果实现 |
 | 9091064 | 征服斗魂 蛟龙 | Vanquish Soul Jiaolong | 已登记本作效果实现 |
+| 9674034 | 蛇眼梣树灵 | Snake-Eye Ash | 已登记本作效果实现 |
+| 12058741 | 蛇眼桦树灵 | Snake-Eye Birch | 已登记本作效果实现 |
 | 21347668 | 纯爱妖精瞌睡回忆 | Purrely Sleepy Memory | 已登记本作效果实现 |
 | 22850702 | 混沌之双翼 | Chaos Angel | 已登记本作效果实现 |
 | 23923758 | 包烤蒸骑-汉堡排 | Steam Knight - Hamburk | 基础规则（无卡片效果） |
@@ -22,19 +25,28 @@
 | 29301450 | S：P小夜骑士 | S:P Little Knight | 已登记本作效果实现 |
 | 29302858 | 征服斗魂 螺禅 | Vanquish Soul Razen | 已登记本作效果实现 |
 | 41443249 | 救援ACE队 火灾防控者 | Rescue-ACE Preventer | 已登记本作效果实现 |
+| 45663742 | 蛇眼橡树灵 | Snake-Eye Oak | 已登记本作效果实现 |
 | 47894537 | 街头眼艺幻术师 | Jongleur-Ghoul Illusionist | 基础规则（无卡片效果） |
+| 48452496 | 蛇眼炎龙 | Snake-Eyes Flamberge Dragon | 已登记本作效果实现 |
+| 53639887 | 蛇眼神殿 | Divine Temple of the Snake-Eye | 已登记本作效果实现 |
 | 54562327 | 赌上你的灵魂！ | Stake your Soul! | 已登记本作效果实现 |
 | 55688914 | 征服斗魂 普鲁同HG | Vanquish Soul Pluton HG | 已登记本作效果实现 |
+| 57134592 | 转生炎兽 烈火凤凰 | Salamangreat Raging Phoenix | 已登记本作效果实现 |
 | 60883493 | 征服斗魂 里螺旋流雪风 | Vanquish Soul Snow Devil | 已登记本作效果实现 |
 | 61292243 | E紧急！ | EMERGENCY! | 已登记本作效果实现 |
+| 62318994 | 献祭魔界莲 | Samsara D Lotus | 已登记本作效果实现 |
 | 62592805 | 亲历纯爱妖精·黑暗妖精 | Epurrely Noir | 已登记本作效果实现 |
+| 65261141 | 噩梦之苦痛 | Nightmare Pain | 已登记本作效果实现 |
 | 66401502 | 征服斗魂 潘特拉 | Vanquish Soul Pantera | 已登记本作效果实现 |
 | 68075840 | 球骑士三人娘 | Power Pro Knight Sisters | 基础规则（无卡片效果） |
 | 71948047 | R增强！ | REINFORCE! | 已登记本作效果实现 |
 | 72270339 | 黑魔女 迪亚贝尔斯塔尔 | Diabellstar the Black Witch | 已登记本作效果实现 |
 | 79933029 | 纯爱妖精·夜妖精 | Purrelyly | 已登记本作效果实现 |
 | 80845034 | “罪宝狩猎之恶魔” | WANTED: Seeker of Sinful Spoils | 已登记本作效果实现 |
+| 85106525 | 篝火 | Bonfire | 已登记本作效果实现 |
 | 89023486 | 原罪宝-蛇眼 | Original Sinful Spoils - Snake-Eye | 已登记本作效果实现 |
+| 90241276 | 蛇眼炎磷 | Snake-Eyes Poplar | 已登记本作效果实现 |
+| 90829280 | 于贝尔精灵 | Spirit of Yubel | 已登记本作效果实现 |
 | 91073013 | 征服斗魂 龙帝 瓦利乌斯 | Vanquish Soul Caesar Valius | 已登记本作效果实现 |
 | 91951471 | 征服斗魂 螺旋流辻风 | Vanquish Soul Dust Devil | 已登记本作效果实现 |
 | 92895501 | 征服斗魂 重型电子人 | Vanquish Soul Heavy Borger | 已登记本作效果实现 |
@@ -52,7 +64,6 @@
 | 2116237 | 世坏轮回 | Loka Samsara | pending |
 | 2339825 | 科技属-封锁 | T.G. Close | pending |
 | 2526224 | 炎王神兽 麒麟 | Fire King High Avatar Kirin | pending |
-| 2772337 | 赐炎之咎姬 | Promethean Princess, Bestower of Flames | pending |
 | 2815176 | 异响鸣之神异-风暴恶魔 | Zebufera, Vaalmonican Hallow Heathen | pending |
 | 2992467 | 小滴答与小回声 | Click & Echo | pending |
 | 3048768 | 天使之声 | Angello Vaalmonica | pending |
@@ -86,7 +97,6 @@
 | 9275482 | 幻日灯火 | UFOLight | pending |
 | 9396662 | 冰结界的镜魔师 | Mirror Mage of the Ice Barrier | pending |
 | 9551692 | HAM之主 | Master of Ham | pending |
-| 9674034 | 蛇眼梣树灵 | Snake-Eye Ash | pending |
 | 9709452 | 烈日之骑士 盖亚烈焰 | Gaia Blaze, the Force of the Sun | pending |
 | 9839115 | 月胧龙 巴库那瓦 | Vagnawa the Moon-Eating Dragon | pending |
 | 10113611 | 电气黄鳍金枪鱼 | Wattuna | pending |
@@ -106,7 +116,6 @@
 | 11654067 | 火焰喷射 | Fire Ejection | pending |
 | 11802691 | 查理史诗 | The Continuing Epic of Charles | pending |
 | 11962031 | 炽焰转生炎兽小妖 | Salamangreat of Fire | pending |
-| 12058741 | 蛇眼桦树灵 | Snake-Eye Birch | pending |
 | 12381100 | 究极龙魔导师 | Dragon Master Magia | pending |
 | 12501230 | 战斗车轮 | Combat Wheel | pending |
 | 12612470 | 童妖 茶壶 | Procession of the Tea Jar | pending |
@@ -273,7 +282,6 @@
 | 44843954 | 寝姬的甜美梦 | Sweet Dreams, Nemleria | pending |
 | 45005708 | 深渊之兽 阿鲁伯 | The Bystial Aluber | pending |
 | 45065541 | 伍世坏摘心 | Mannadium Abscission | pending |
-| 45663742 | 蛇眼橡树灵 | Snake-Eye Oak | pending |
 | 45675980 | 烙印的即凶剧 | Etude of the Branded | pending |
 | 45716579 | 地缚戒隶 地画乌贼 | Earthbound Servant Geo Kraken | pending |
 | 45883110 | 引导的圣女 奎姆 | Guiding Quem, the Virtuous | pending |
@@ -293,7 +301,6 @@
 | 47921178 | 燃烧拳击手 第一助手 | Battlin' Boxer Chief Second | pending |
 | 48017189 | EM：P猫型手雷 | EM:P Meowmine | pending |
 | 48386462 | 欲闻其鸣杜鹃 | The Cuckoo Commanded to Croon | pending |
-| 48452496 | 蛇眼炎龙 | Snake-Eyes Flamberge Dragon | pending |
 | 48486809 | 羽翼栗子球 LV6 | Winged Kuriboh LV6 | pending |
 | 48654267 | 霸王龙 扎克-同调宇宙 | Supreme King Z-ARC - Synchro Universe | pending |
 | 49109013 | 魔星之忧流迦天狗 | Doomstar Ulka | pending |
@@ -321,7 +328,6 @@
 | 53330789 | 征服斗魂 三一爆发 | Vanquish Soul Trinity Burst | pending |
 | 53404966 | 焰圣骑士-里恰尔代托 | Infernoble Knight Ricciardetto | pending |
 | 53618197 | 新式魔厨的油封佛拉斯 | Confiras de Nouvelles | pending |
-| 53639887 | 蛇眼神殿 | Divine Temple of the Snake-Eye | pending |
 | 53971455 | 赫圣之妖骑士 | Despian Luluwalilith | pending |
 | 54126514 | 幻变骚灵·渗透佩里 | Altergeist Peritrator | pending |
 | 54550967 | 莫忘天魔女 | Mementotlan Angwitch | pending |
@@ -336,7 +342,6 @@
 | 56741506 | 闪刀姬-阿泽莉娅·节制 | Sky Striker Ace - Azalea Temperance | pending |
 | 56787189 | 开放的大地 | New Frontier | pending |
 | 56818742 | 超越龙 艾可萨盗龙 | Transcendosaurus Exaraptor | pending |
-| 57134592 | 转生炎兽 烈火凤凰 | Salamangreat Raging Phoenix | pending |
 | 57296396 | 妮穆蕾莉娅的起床 | Nemleria Louve | pending |
 | 57357130 | 转生炎兽 鼬鼠 | Salamangreat Weasel | pending |
 | 57736667 | 御巫舞踊-迷惑鸟 | Mikanko Dance - Mayowashidori | pending |
@@ -360,7 +365,6 @@
 | 61470213 | 幻变骚灵·管理提泰妮娅 | Altergeist Adminia | pending |
 | 61775475 | 次世代兵器 还零 | Arms of Genex Return Zero | pending |
 | 62314831 | 新世坏-阿密哩多罗 | New World - Amritara | pending |
-| 62318994 | 献祭魔界莲 | Samsara D Lotus | pending |
 | 62714453 | 北极天熊-北极星 | Ursarctic Polar Star | pending |
 | 62991792 | 灵魂共鸣者 | Soul Resonator | pending |
 | 63013339 | 闪刀姬-卡米丽娅 | Sky Striker Ace - Camellia | pending |
@@ -372,7 +376,6 @@
 | 64257161 | 百鬼罗刹 冷血米安德 | Goblin Biker Mean Merciless | pending |
 | 64327901 | 百鬼罗刹大集会 | Goblin Biker Grand Bash | pending |
 | 65037172 | 电子界贤者 | Cyberse Sage | pending |
-| 65261141 | 噩梦之苦痛 | Nightmare Pain | pending |
 | 65305978 | 炎王的圣域 | Fire King Sanctuary | pending |
 | 65504487 | 玩具士兵 | Toy Soldier | pending |
 | 65815684 | 维舍斯-阿修特罗德 | Vicious Astraloud | pending |
@@ -463,7 +466,6 @@
 | 84521924 | 大钢琴之七音服·库莉娅 | GranSolfachord Coolia | pending |
 | 84755744 | 转生炎兽 老虎 | Salamangreat Tiger | pending |
 | 84941194 | 荷鲁斯的荣光-伊姆塞特 | Imsety, Glory of Horus | pending |
-| 85106525 | 篝火 | Bonfire | pending |
 | 85123771 | 哥布林降下部队 | Goblin Freefall Squad | pending |
 | 85250352 | 火山烈焰加农炮 | Volcanic Blaze Accelerator | pending |
 | 85401123 | 毛茸茸海獭 | Mokomoko | pending |
@@ -489,12 +491,10 @@
 | 89776023 | 进化虫·棱角鳞鳄 | Evoltile Pholis | pending |
 | 89809665 | 焰圣骑士-杜平 | Infernoble Knight Turpin | pending |
 | 89974735 | 魔法妖精 勃艮第 | Burgundy the Magic Elf | pending |
-| 90241276 | 蛇眼炎磷 | Snake-Eyes Poplar | pending |
 | 90465153 | 末那愚子族·普莱姆哈特 | Mannadium Prime-Heart | pending |
 | 90587641 | 超重神将 遮那王-O | Superheavy Samurai Commander Shanawo | pending |
 | 90681088 | 真炎王 凤凰不死鸟 | Legendary Fire King Ponix | pending |
 | 90711610 | 百鬼罗刹大参上 | Goblin Biker Grand Entrance | pending |
-| 90829280 | 于贝尔精灵 | Spirit of Yubel | pending |
 | 91300233 | 骑甲虫 残酷撒旦独角仙 | Beetrooper Cruel Saturnas | pending |
 | 91434208 | 白之轮回 | White Reincarnation | pending |
 | 91703676 | 炎王神天烧 | Fire King Sky Burn | pending |

@@ -27,6 +27,10 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
     else if(value==='Level/Rank/Link 2 monster')link.includingTwo=true;
     else if(/^Level \d+ or higher monster$/.test(value))link.includingMinLevel=Number(value.match(/\d+/)[0]);
     else if(value==='Insect or Plant monster')link.includingRaces=[races.Insect,races.Plant];
+    else if(value==='Insect, Plant, or Reptile monster')link.includingRaces=[races.Insect,races.Plant,races.Reptile];
+    else if(value==='Fish, Sea Serpent, or Aqua monster')link.includingRaces=[races.Fish,races['Sea Serpent'],races.Aqua];
+    else if(value==='LIGHT Fiend monster')link.includingMaterial={attribute:attributes.LIGHT,race:races.Fiend};
+    else if(value==='Level 4 Spellcaster monster')link.includingMaterial={level:4,race:races.Spellcaster};
     else if(value==='Ritual, Fusion, Synchro, or Xyz Monster')link.includingTypes=['ritual','fusion','synchro','xyz'];
     else if(/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) "[^"]+" monster$/.test(value)){const m=value.match(/^(\w+) "([^"]+)"/);link.includingSeries=m[2];link.includingSeriesAttribute=attributes[m[1]];}
     else if(races[value.replace(/ monster$/i,'')])link.includingRace=races[value.replace(/ monster$/i,'')];
@@ -49,6 +53,8 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
   if (/ with different Types and (?:different )?Attributes$/i.test(body)) { link.differentRaces = true; link.differentAttributes = true; body = body.replace(/ with different Types and (?:different )?Attributes$/i, ''); }
   if (/ with the same Attribute but different Types$/i.test(body)) { link.sameAttribute = true; link.differentRaces = true; body = body.replace(/ with the same Attribute but different Types$/i, ''); }
   take(/ with the same Type$/i, 'sameRace');
+  const originalAtk=body.match(/ with (\d+) or less original ATK$/);
+  if(originalAtk){link.maxOriginalAtk=Number(originalAtk[1]);body=body.slice(0,originalAtk.index);}
   if(/ with the same Type and Attribute$/i.test(body)){link.sameRace=true;link.sameAttribute=true;body=body.replace(/ with the same Type and Attribute$/i,'');}
   take(/ with different Types$/i,'differentRaces');
   const parenthetical=body.match(/ \(([^)]+)\)$/);
@@ -75,7 +81,9 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
   else if (body === 'Xyz') link.xyzOnly = true;
   else if (body === 'Flip') link.flip = true;
   else if (/^Level \d+$/.test(body)) link.level = Number(body.slice(6));
+  else if (/^"[^"]+" or "[^"]+"$/.test(body)) link.materialAnyOf=[...body.matchAll(/"([^"]+)"/g)].map(m=>({series:m[1]}));
   else if (/^"[^"]+"$/.test(body)) link.series = body.slice(1,-1);
+  else if(body.includes(' or ')&&body.split(' or ').every(r=>races[r]))link.races=body.split(' or ').map(r=>races[r]);
   else if (races[body]) link.race = races[body];
   else if (body.includes(' and/or ')||body.includes(', and/or ')){const names=body.split(/, | and\/or /).map(s=>s.replace(/^and\/or /,''));if(names.every(n=>attributes[n]))link.attributes=names.map(n=>attributes[n]);else{if(names.some(r=>!races[r]))throw new Error('Unknown Link races: '+name+' / '+body);link.races=names.map(r=>races[r]);}}
   else if (attributes[body]) link.allAttribute = attributes[body];

@@ -247,6 +247,15 @@
       }
     },
     {
+      "name": "Azamina",
+      "kind": "setcode",
+      "code": "0x1bc",
+      "fallback": {
+        "match": "contains",
+        "value": "Azamina"
+      }
+    },
+    {
       "name": "B.E.S.",
       "kind": "setcode",
       "code": "0x15",
@@ -1059,6 +1068,15 @@
       "fallback": {
         "match": "contains",
         "value": "Familiar-Possessed"
+      }
+    },
+    {
+      "name": "Fiendsmith",
+      "kind": "setcode",
+      "code": "0x1b0",
+      "fallback": {
+        "match": "contains",
+        "value": "Fiendsmith"
       }
     },
     {
@@ -1948,6 +1966,15 @@
       }
     },
     {
+      "name": "Maliss",
+      "kind": "setcode",
+      "code": "0x1bf",
+      "fallback": {
+        "match": "contains",
+        "value": "Maliss"
+      }
+    },
+    {
       "name": "Mannadium",
       "kind": "setcode",
       "code": "0x190",
@@ -2567,6 +2594,15 @@
       }
     },
     {
+      "name": "Ragnaraika",
+      "kind": "setcode",
+      "code": "0x1ab",
+      "fallback": {
+        "match": "contains",
+        "value": "Ragnaraika"
+      }
+    },
+    {
       "name": "Raidraptor",
       "kind": "setcode",
       "code": "0xba",
@@ -2693,6 +2729,15 @@
       }
     },
     {
+      "name": "Ryzeal",
+      "kind": "setcode",
+      "code": "0x1be",
+      "fallback": {
+        "match": "contains",
+        "value": "Ryzeal"
+      }
+    },
+    {
       "name": "S-Force",
       "kind": "setcode",
       "code": "0x156",
@@ -2717,6 +2762,15 @@
       "fallback": {
         "match": "contains",
         "value": "Salamangreat"
+      }
+    },
+    {
+      "name": "Sangen",
+      "kind": "setcode",
+      "code": "0x1a9",
+      "fallback": {
+        "match": "contains",
+        "value": "Sangen"
       }
     },
     {
@@ -3066,6 +3120,15 @@
       "fallback": {
         "match": "contains",
         "value": "tellarknight"
+      }
+    },
+    {
+      "name": "Tenpai Dragon",
+      "kind": "setcode",
+      "code": "0x1aa",
+      "fallback": {
+        "match": "contains",
+        "value": "Tenpai Dragon"
       }
     },
     {

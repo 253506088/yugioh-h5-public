@@ -1,6 +1,12 @@
 // Explicit material grammar for the preserved OCG snapshots. Unknown wording is
 // an import error, never an unrestricted material or a silently normal monster.
 export function parseFusion(name, text, {byName, norm, races, attributes}) {
+  if(name==='Phantom of Yubel')return {fusion:[{nameIncludes:'Yubel'},{race:races.Fiend,atk:0,def:0}],fusionProhibited:true};
+  if(name==='Ultimate Dragon of Pride and Soul')return {fusion:Array.from({length:3},()=>({originalAtk:2500,originalDef:2500}))};
+  if(name==='Alba System Dogmatikalamity')return {fusion:[{id:byName.get(norm('Fallen of Albaz'))},...Array.from({length:6},()=>({graveOnly:true,graveOwn:true}))],fusionUniqueGraveNames:true};
+  if(name==='Evil HERO Neos Lord')return {fusion:[{anyOf:[{id:byName.get(norm('Elemental HERO Neos'))},{type:'fusion',mentionsName:'Elemental HERO Neos'}]},{effect:true,fieldOnly:true}]};
+  if(name==='Saint Azamina')return {fusion:[{type:'fusion',minLevel:6},{type:'synchro',minLevel:6}]};
+  if(name==="Lady's Dragonmaid")return {fusion:[{nameIncludes:'Dragonmaid'},{nameIncludes:'Dragonmaid'}],fusionSameAttribute:true,fusionDifferentLevels:true};
   if(name==='Dragon Master Magia')return {fusion:[{id:byName.get(norm('Blue-Eyes Ultimate Dragon'))},{type:'ritual',nameIncludesAny:['Chaos','Black Luster Soldier']}],fusionAlternatives:[[{nameIncludes:'Blue-Eyes'},{nameIncludes:'Blue-Eyes'},{nameIncludes:'Blue-Eyes'},{type:'ritual',nameIncludesAny:['Chaos','Black Luster Soldier']}]]};
   if(name==='Berfomet the Mythical King of Phantom Beasts')return {fusion:[{races:[races.Beast,races.Fiend,races.Illusion]},{races:[races.Beast,races.Fiend,races.Illusion]}],fusionDifferentRaces:true};
   if(name==='Vicious Astraloud')return {fusion:[{id:byName.get(norm('Visas Starfrost'))},{atk:1500,def:2100}],fusionProhibited:true};
@@ -42,6 +48,8 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
   };
   const fusion = []; let fusionMore;
   for (let part of text.trim().split(/\s+\+\s+/)) {
+    if(/^"[^"]+" or "[^"]+"$/.test(part)){fusion.push({anyOf:[...part.matchAll(/"([^"]+)"/g)].map(m=>({id:byName.get(norm(m[1]))}))});continue;}
+    if(part==='1 Fusion or Link Monster'){fusion.push({types:['fusion','link']});continue;}
     const noToken=/, except a Token$/i.test(part);part=part.replace(/, except a Token$/i,'');
     const eitherSeries=part.match(/^1 "([^"]+)" or "([^"]+)" Ritual Monster$/i);
     if(eitherSeries){fusion.push({type:'ritual',nameIncludesAny:[eitherSeries[1],eitherSeries[2]]});continue;}
@@ -63,6 +71,8 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
     if (!generic) throw new Error('Unparsed Fusion material: ' + name + ' / ' + part);
     let body = (generic[3]||'').replace(/-Type\b/gi, ''), spec = {...(noToken?{noTokens:true}:{}),...(fieldOnly ? {fieldOnly:true,...(/except Tokens$/.test(part)?{noTokens:true}:{})} : {}),...(graveOwner?{graveOnly:true,graveOpponent:graveOwner==="your opponent's",graveOwn:graveOwner==='your'}:{})};
     if(body==='LIGHT or DARK'){spec.anyOf=[{attribute:attributes.LIGHT},{attribute:attributes.DARK}];body='';}
+    if(body==='LIGHT or DARK Dragon'){spec.anyOf=[{attribute:attributes.LIGHT},{attribute:attributes.DARK}];spec.race=races.Dragon;body='';}
+    if(body==='Fiend and/or Zombie'){spec.races=[races.Fiend,races.Zombie];body='';}
     if (/(?:^| )Effect$/i.test(body)) { spec.effect = true; body = body.replace(/(?:^| )Effect$/i, ''); }
     if(summonedThisTurn)spec.specialSummonedThisTurn=true;
     const levels=body.match(/^Level (\d+) or (\d+)(?: (.+))?$/i);
@@ -95,6 +105,8 @@ export function parseFusion(name, text, {byName, norm, races, attributes}) {
 }
 
 export function parseSynchro(name, text, {byName, norm, races, attributes}) {
+  if(name==='Crystal Clear Wing Over Synchro Dragon')return {synchro:{minTuners:2,maxTuners:6,minNon:1,maxNon:1,nonId:byName.get(norm('Clear Wing Synchro Dragon'))},synchroAlternatives:[{minTuners:1,maxTuners:1,tunerType:'synchro',minNon:1,maxNon:1,nonId:byName.get(norm('Clear Wing Synchro Dragon'))}]};
+  if(name==='Paladins of Bonds and Unity')return {synchro:{minTuners:1,maxTuners:1,minNon:1,nonOriginalAtk:2500,nonOriginalDef:2500}};
   const difference=text.match(/^Cannot be Synchro Summoned\. Must be Special Summoned \(from your Extra Deck\) by sending 2 monsters you control with a Level difference of (1|7) to the GY \(1 (Level 8 or higher )?Tuner and 1 non-Tuner( Synchro Monster)?\)\./);
   if(difference)return {synchro:{cannotSummon:true},levelDifferenceSummon:{difference:Number(difference[1]),minTunerLevel:difference[2]?8:1,nonType:difference[3]?'synchro':null}};
   if(/, including a Dragon Synchro Monster$/.test(text)){const out=parseSynchro(name,text.replace(/, including a Dragon Synchro Monster$/,''),{byName,norm,races,attributes});out.synchro.includingNon={race:races.Dragon,type:'synchro'};return out;}

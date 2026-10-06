@@ -139,7 +139,7 @@
       const card=before.card,c=CARDS[card.id],snapshot=this.describe(card,before),wasField=fieldMonster(before.zone)||['spells','fieldSpell'].includes(before.zone);
       let dest=destination,owner=options.owner??card.originalOwner;
       const spellSlot=dest==='spells'?(options.slot??this.state.players[owner].spells.indexOf(null)):null;
-      if(dest==='spells')req(['spell','trap'].includes(c.type)&&Number.isInteger(spellSlot)&&spellSlot>=0&&spellSlot<5&&!this.state.players[owner].spells[spellSlot],'没有可用的魔法陷阱区域。');
+      if(dest==='spells')req((['spell','trap'].includes(c.type)||options.asContinuousSpell&&isMonster(c))&&Number.isInteger(spellSlot)&&spellSlot>=0&&spellSlot<5&&!this.state.players[owner].spells[spellSlot],'没有可用的魔法陷阱区域。');
       if(dest==='fieldSpell'){
         req(c.type==='spell'&&c.spellKind==='field','只有场地魔法可以进入场地区域。');
         const priorField=this.state.players[owner].fieldSpell;
@@ -178,7 +178,7 @@
       card.faceUp=true;card.faceUpExtra=dest==='extra-up';card.sentTurn=this.state.turn;
       if(dest==='extra-down'){card.faceUp=false;card.properlySummoned=false;}
       if(['hand','deck'].includes(dest))card.properlySummoned=false;
-      if(dest==='spells'){card.faceUp=options.faceUp!==false;card.setTurn=card.faceUp?-1:this.state.turn;this.state.players[owner].spells[spellSlot]=card;}
+      if(dest==='spells'){card.faceUp=options.faceUp!==false;card.setTurn=card.faceUp?-1:this.state.turn;if(options.asContinuousSpell)card.y24Continuous=true;this.state.players[owner].spells[spellSlot]=card;}
       else if(dest==='fieldSpell'){card.faceUp=options.faceUp!==false;card.setTurn=card.faceUp?-1:this.state.turn;this.state.players[owner].fieldSpell=card;}
       else if(dest==='extra-up'||dest==='extra-down')this.state.players[owner].extra.push(card);
       else {req(['hand','deck','grave','banished'].includes(dest),'无效的移动区域。');this.state.players[owner][dest].push(card);}
@@ -1518,8 +1518,8 @@
           if(fieldMonster(f.zone)&&!isMonster(c)&&!card.asMonster)throw new Error('Non-monster in monster zone');
           if(fieldMonster(f.zone)&&c.type==='link'&&(!card.faceUp||card.position!=='attack'))throw new Error('Link monster must be face-up in attack position');
           if(f.zone==='extraMonster'){if(![0,1].includes(card.extraSlot)||extraOccupied.has(card.extraSlot))throw new Error('Invalid or shared extra monster zone collision');extraOccupied.add(card.extraSlot);}
-          if(f.zone==='spells'&&!['spell','trap','pendulum'].includes(c.type)&&!c.pendulum&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell)throw new Error('Invalid back-row card');
-          if(f.zone==='spells'&&(c.type==='pendulum'||c.pendulum)&&![0,4].includes(f.index)&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell)throw new Error('Pendulum card outside pendulum zone');
+          if(f.zone==='spells'&&!['spell','trap','pendulum'].includes(c.type)&&!c.pendulum&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell&&!card.y24Continuous)throw new Error('Invalid back-row card');
+          if(f.zone==='spells'&&(c.type==='pendulum'||c.pendulum)&&![0,4].includes(f.index)&&!card.monsterEquip&&!card.crystalSpell&&!card.gxSetSpell&&!card.y24Continuous)throw new Error('Pendulum card outside pendulum zone');
           if(f.zone==='fieldSpell'&&(c.type!=='spell'||c.spellKind!=='field'))throw new Error('Invalid field spell');
           if(c.type==='token'&&!fieldMonster(f.zone))throw new Error('Token outside field');
           for(const material of card.overlays||[]){

@@ -26,6 +26,7 @@ files.push('tests/chronicle-2020.test.cjs','tests/chronicle-2020-interactions.te
 files.push('tests/chronicle-2021.test.cjs','tests/chronicle-2021-interactions.test.cjs');
 files.push('tests/chronicle-2022.test.cjs','tests/chronicle-2022-interactions.test.cjs');
 files.push('tests/chronicle-2023.test.cjs','tests/chronicle-2023-interactions.test.cjs','tests/chronicle-2023-materials.test.cjs');
+files.push('tests/chronicle-2024.test.cjs','tests/chronicle-2024-interactions.test.cjs','tests/chronicle-2024-materials.test.cjs');
 const concurrency=process.env.DUEL_TEST_CONCURRENCY;
 if(concurrency&&!/^[1-9]\d*$/.test(concurrency))throw new Error('DUEL_TEST_CONCURRENCY must be a positive integer');
 const result=spawnSync(process.execPath,['--test','--test-reporter=tap',...(concurrency?['--test-concurrency='+concurrency]:[]),...files],{cwd:root,encoding:'utf8',maxBuffer:20_000_000});

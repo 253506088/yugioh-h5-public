@@ -284,6 +284,21 @@
       "id": "rescue-ace-2023",
       "available": 15,
       "source": 15
+    },
+    {
+      "id": "fiendsmith-yubel-2024",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "fiendsmith-snake-eye-2024",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "tenpai-dragon-2024",
+      "available": 15,
+      "source": 15
     }
   ],
   "excluded": []

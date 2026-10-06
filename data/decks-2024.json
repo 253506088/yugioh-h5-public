@@ -1,0 +1,647 @@
+{
+  "scope": [
+    2024
+  ],
+  "historicalContext": {
+    "worldChampionship": "held",
+    "dates": "2024-09-07/2024-09-08",
+    "note": "Champion and finalist routes plus a different Top 8/annual popular strategy. The two semifinalists are tied; Tenpai is not presented as a separate third-place winner."
+  },
+  "sources": [
+    {
+      "id": "worlds",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2024/",
+      "accessed": "2026-10-05",
+      "retrievedContentSHA256": "beb18958c137915cea2f3498327c5845b57c5674fc7e3b0393e12b613790ad19",
+      "evidenceSummary": "Ruben Andres Penaranda: 1st Fiendsmith Yubel; Mark Solis: 2nd Fiendsmith Snake-Eye; tied semifinalists use Snake-Eye variants. Zhang Jiawei: tied 5th–8th Tenpai Dragon."
+    },
+    {
+      "id": "official",
+      "url": "https://www.konami.com/yugioh/worldchampionship/2024/en/",
+      "accessed": "2026-10-05",
+      "retrievedContentSHA256": "be6b41affe0ceaeafbccd021c3c489a9e75ec3a4f7e2551e65d741f449df69f1",
+      "evidenceSummary": "Official championship portal lists Mark Solis and Ruben Penaranda as TCG finalists with deck recipes."
+    },
+    {
+      "id": "q2",
+      "url": "https://roadoftheking.com/ocg-2024-04-metagame/",
+      "accessed": "2026-10-05",
+      "retrievedContentSHA256": "e545ea8ac15771ade31a14d5e6c49c9e677a204901dd368653f23cae8edf5de2",
+      "evidenceSummary": "1446 top-placing samples: 247 Tenpai Dragon, 219 Snake-Eye and 169 Yubel. Documents Fiendsmith synergy, Genroku and Samurai Destroyer."
+    }
+  ],
+  "decks": [
+    {
+      "id": "fiendsmith-yubel-2024",
+      "title": "世界冠军路线 · 魔锻尤贝尔",
+      "en": "World Champion Strategy · Fiendsmith Yubel",
+      "ja": "世界王者の戦略・デモンスミスユベル",
+      "ace": "Phantom of Yubel",
+      "inspiration": {
+        "player": "Ruben Andres Penaranda",
+        "placement": "1st",
+        "event": "World Championship 2024"
+      },
+      "description": "参考2024世界冠军的全年代表改编。莲与噩梦王座展开尤贝尔，幻影改写对方怪兽效果，魔锻将墓地资源转为融合与装备压制。",
+      "descriptionEn": "An annual adaptation of the 2024 world champion strategy. Lotus and Throne develop Yubel; Phantom rewrites opposing monster effects while Fiendsmith recycles GY materials into Fusion and Equip interaction.",
+      "descriptionJa": "2024年世界王者の戦略を参考にした年間アレンジ。ロータスとナイトメア・スローンからユベルを展開し、ファントムの効果書き換えとデモンスミスの融合・装備で戦う。",
+      "main": [
+        [
+          "Samsara D Lotus",
+          3
+        ],
+        [
+          "Spirit of Yubel",
+          3
+        ],
+        [
+          "Yubel",
+          1
+        ],
+        [
+          "Yubel - Terror Incarnate",
+          1
+        ],
+        [
+          "Fiendsmith Engraver",
+          3
+        ],
+        [
+          "Fabled Lurrie",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Effect Veiler",
+          3
+        ],
+        [
+          "Nibiru, the Primal Being",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Nightmare Throne",
+          3
+        ],
+        [
+          "Nightmare Pain",
+          2
+        ],
+        [
+          "Fiendsmith's Tract",
+          2
+        ],
+        [
+          "One for One",
+          1
+        ],
+        [
+          "Triple Tactics Talent",
+          1
+        ],
+        [
+          "Called by the Grave",
+          1
+        ],
+        [
+          "Crossout Designator",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Pot of Prosperity",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Terraforming",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Phantom of Yubel",
+          3
+        ],
+        [
+          "Fiendsmith's Desirae",
+          1
+        ],
+        [
+          "Fiendsmith's Lacrima",
+          2
+        ],
+        [
+          "Fiendsmith's Requiem",
+          1
+        ],
+        [
+          "Fiendsmith's Sequence",
+          2
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ],
+        [
+          "I:P Masquerena",
+          1
+        ],
+        [
+          "Accesscode Talker",
+          1
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Knightmare Unicorn",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Forbidden Droplet",
+          3
+        ],
+        [
+          "Dimension Shifter",
+          2
+        ],
+        [
+          "Dark Ruler No More",
+          2
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Lightning Storm",
+          1
+        ]
+      ],
+      "combo": [
+        "Samsara D Lotus",
+        "Spirit of Yubel",
+        "Nightmare Pain",
+        "Phantom of Yubel",
+        "Fiendsmith Engraver"
+      ],
+      "adaptation": "40-card core adaptation of the champion's 50-card list. Removes the Sacred Beast and Unchained packages and changes hand-trap/side ratios. Three Phantom and two Lacrima/Sequence emphasize the implemented Yubel and Fiendsmith loops; this is not the player's original recipe.",
+      "year": 2024,
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds",
+        "official",
+        "q2"
+      ],
+      "sourceDeckImage": {
+        "url": "https://roadoftheking.com/wp-content/uploads/2024/09/WorldChampionship2024_1.jpg",
+        "sha256": "6a8f13fd73be61e4b56f69d9bbe0b8871705aea075ce00d536bcaf3db3acbaa4"
+      }
+    },
+    {
+      "id": "fiendsmith-snake-eye-2024",
+      "title": "世界亚军路线 · 魔锻蛇眼",
+      "en": "World Finalist Strategy · Fiendsmith Snake-Eye",
+      "ja": "世界準優勝の戦略・デモンスミススネークアイ",
+      "ace": "Snake-Eyes Flamberge Dragon",
+      "inspiration": {
+        "player": "Mark Solis",
+        "placement": "2nd",
+        "event": "World Championship 2024"
+      },
+      "description": "参考2024世界亚军的全年代表改编。蛇眼检索、送墓和永续魔法区相互转换，炎龙续接墓地，咎姬与魔锻提供不同方向的干扰。",
+      "descriptionEn": "An annual adaptation of the 2024 world finalist strategy. Snake-Eye trades searches and sends for Continuous Spell placement; Flamberge, Promethean Princess and Fiendsmith sustain layered interaction.",
+      "descriptionJa": "2024年世界準優勝の戦略を参考にした年間アレンジ。スネークアイのサーチと墓地送り、永続魔法化を循環させ、フランベルジュ、咎姫、デモンスミスで干渉する。",
+      "main": [
+        [
+          "Snake-Eye Ash",
+          3
+        ],
+        [
+          "Snake-Eye Oak",
+          1
+        ],
+        [
+          "Snake-Eye Birch",
+          1
+        ],
+        [
+          "Snake-Eyes Poplar",
+          2
+        ],
+        [
+          "Snake-Eyes Flamberge Dragon",
+          2
+        ],
+        [
+          "Diabellstar the Black Witch",
+          3
+        ],
+        [
+          "Fiendsmith Engraver",
+          3
+        ],
+        [
+          "Fabled Lurrie",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Effect Veiler",
+          3
+        ],
+        [
+          "Nibiru, the Primal Being",
+          2
+        ],
+        [
+          "WANTED: Seeker of Sinful Spoils",
+          1
+        ],
+        [
+          "Original Sinful Spoils - Snake-Eye",
+          1
+        ],
+        [
+          "Divine Temple of the Snake-Eye",
+          1
+        ],
+        [
+          "Fiendsmith's Tract",
+          1
+        ],
+        [
+          "Bonfire",
+          2
+        ],
+        [
+          "Forbidden Droplet",
+          3
+        ],
+        [
+          "Triple Tactics Talent",
+          1
+        ],
+        [
+          "Called by the Grave",
+          1
+        ],
+        [
+          "Crossout Designator",
+          1
+        ],
+        [
+          "One for One",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Fiendsmith's Lacrima",
+          1
+        ],
+        [
+          "Fiendsmith's Desirae",
+          1
+        ],
+        [
+          "Fiendsmith's Requiem",
+          1
+        ],
+        [
+          "Fiendsmith's Sequence",
+          1
+        ],
+        [
+          "Beatrice, Lady of the Eternal",
+          1
+        ],
+        [
+          "I:P Masquerena",
+          1
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ],
+        [
+          "Hiita the Fire Charmer, Ablaze",
+          1
+        ],
+        [
+          "Knightmare Phoenix",
+          1
+        ],
+        [
+          "Promethean Princess, Bestower of Flames",
+          1
+        ],
+        [
+          "Amphibious Swarmship Amblowhale",
+          1
+        ],
+        [
+          "Salamangreat Raging Phoenix",
+          1
+        ],
+        [
+          "Accesscode Talker",
+          1
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Relinquished Anima",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Dimension Shifter",
+          2
+        ],
+        [
+          "Dark Ruler No More",
+          2
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Lightning Storm",
+          1
+        ]
+      ],
+      "combo": [
+        "Snake-Eye Ash",
+        "Snake-Eyes Poplar",
+        "Original Sinful Spoils - Snake-Eye",
+        "Snake-Eyes Flamberge Dragon",
+        "Promethean Princess, Bestower of Flames"
+      ],
+      "adaptation": "40-card annual core adaptation of the finalist's 41-card Worlds recipe. Removes Snake-Eyes Diabellstar and the Bystial package, increases Ash/Flamberge and includes Birch; changes Extra and Side slots. It does not claim the Worlds shared Forbidden/Limited list.",
+      "year": 2024,
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds",
+        "official",
+        "q2"
+      ],
+      "sourceDeckImage": {
+        "url": "https://roadoftheking.com/wp-content/uploads/2024/09/WorldChampionship2024_2.jpg",
+        "sha256": "788ec4617fd7a39208288ae9124726a8e05b15724995c7848304abdd99382ffd"
+      }
+    },
+    {
+      "id": "tenpai-dragon-2024",
+      "title": "世界八强与年度热门 · 天杯龙",
+      "en": "World Top 8 and Annual Favorite · Tenpai Dragon",
+      "ja": "世界ベスト8・年間人気の天盃龍",
+      "ace": "Sangenpai Transcendent Dragion",
+      "inspiration": {
+        "player": "Zhang Jiawei",
+        "placement": "5th–8th (tied quarterfinalists)",
+        "event": "World Championship 2024"
+      },
+      "description": "参考世界八强及2024第二季度热门路线的代表改编。后攻解场后以灿幻开门展开，天杯龙在战斗阶段连续同调，三次攻击后让灿幻庄龙归来。",
+      "descriptionEn": "An adaptation of the Worlds Top 8 and a leading 2024 second-quarter strategy. Clear the board going second, use Kaimen, and Synchro Summon through the Battle Phase; three attacks unlock Sangenpai revival.",
+      "descriptionJa": "世界ベスト8と2024年4月期の人気構築を参考にしたアレンジ。後攻で盤面を崩し、開門からバトルフェイズの連続S召喚へ。3回攻撃で燦幻龍を蘇生する。",
+      "main": [
+        [
+          "Tenpai Dragon Chundra",
+          3
+        ],
+        [
+          "Tenpai Dragon Paidra",
+          3
+        ],
+        [
+          "Tenpai Dragon Fadra",
+          1
+        ],
+        [
+          "Tenpai Dragon Genroku",
+          2
+        ],
+        [
+          "Dora Dora",
+          2
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Nibiru, the Primal Being",
+          2
+        ],
+        [
+          "Dimension Shifter",
+          2
+        ],
+        [
+          "Sangen Kaimen",
+          3
+        ],
+        [
+          "Sangen Summoning",
+          2
+        ],
+        [
+          "Forbidden Droplet",
+          3
+        ],
+        [
+          "Triple Tactics Thrust",
+          2
+        ],
+        [
+          "Dark Hole",
+          2
+        ],
+        [
+          "Raigeki",
+          2
+        ],
+        [
+          "Lightning Storm",
+          1
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Change of Heart",
+          1
+        ],
+        [
+          "Pot of Prosperity",
+          1
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Sangenpai Bident Dragion",
+          2
+        ],
+        [
+          "Sangenpai Transcendent Dragion",
+          2
+        ],
+        [
+          "Trident Dragion",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Black Rose Moonlight Dragon",
+          1
+        ],
+        [
+          "Odd-Eyes Meteorburst Dragon",
+          1
+        ],
+        [
+          "Bystial Dis Pater",
+          1
+        ],
+        [
+          "Samurai Destroyer",
+          1
+        ],
+        [
+          "Herald of the Arc Light",
+          1
+        ],
+        [
+          "Hiita the Fire Charmer, Ablaze",
+          1
+        ],
+        [
+          "Promethean Princess, Bestower of Flames",
+          1
+        ],
+        [
+          "Amphibious Swarmship Amblowhale",
+          1
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Ghost Ogre & Snow Rabbit",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Heat Wave",
+          3
+        ],
+        [
+          "Threatening Roar",
+          1
+        ],
+        [
+          "Rivalry of Warlords",
+          1
+        ],
+        [
+          "Called by the Grave",
+          1
+        ]
+      ],
+      "combo": [
+        "Tenpai Dragon Paidra",
+        "Sangen Kaimen",
+        "Tenpai Dragon Chundra",
+        "Sangenpai Bident Dragion",
+        "Sangenpai Transcendent Dragion"
+      ],
+      "adaptation": "40-card annual adaptation of Zhang Jiawei's quarterfinal strategy, with more engine copies and changed board-breaker/hand-trap ratios. Extra and Side are adapted, including Samurai Destroyer discussed in the quarterly report. Not a separate third-place finisher or original player recipe.",
+      "year": 2024,
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds",
+        "official",
+        "q2"
+      ],
+      "sourceDeckImage": {
+        "url": "https://roadoftheking.com/wp-content/uploads/2024/09/WorldChampionship2024_5.jpg",
+        "sha256": "a84e86053cdca2ced4705f88a0f4be439e738a5e847b0da5d879f6b2f3e7ed2c"
+      }
+    }
+  ]
+}

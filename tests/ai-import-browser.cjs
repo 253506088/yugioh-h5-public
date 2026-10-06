@@ -41,7 +41,7 @@ const check = async (name, fn) => { await fn(); checks.push(name); console.log('
       await page.selectOption('[data-ai-candidate="main-4"]', '0'); await page.selectOption('[data-ai-candidate="main-5"]', '0');
       await click('wish'); assert.equal(await page.locator('[data-ai-action="wish"]').isDisabled(), true);
       await click('load'); const draft = await page.evaluate(() => duelApp.workshopDraft);
-      assert.equal(draft.cards.length, 8); assert.equal(draft.extra.length, 1); assert.match(draft.notes, /Tenpai Dragon Paidra.*39931513/); assert.equal(draft.cards.includes('blue-eyes'), true);
+      assert.equal(draft.cards.length, 8); assert.equal(draft.extra.length, 1); assert.match(draft.notes, /Ame no Murakumo no Mitsurugi.*19899073/); assert.equal(draft.cards.includes('blue-eyes'), true);
       await page.click('[data-action="ws-undo"]'); assert.equal((await page.evaluate(() => duelApp.workshopDraft)).cards.length, 0);
       await page.click('[data-action="ws-redo"]'); assert.equal((await page.evaluate(() => duelApp.workshopDraft)).cards.length, 8);
     });

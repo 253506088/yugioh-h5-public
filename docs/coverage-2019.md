@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 741 个身份：54 个可用（42 个效果实现、4 个基础规则、8 个复用），687 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2019批次交接.md)。
+当前 741 个身份：56 个可用（44 个效果实现、4 个基础规则、8 个复用），685 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2019批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2019`。
 
@@ -17,7 +17,9 @@
 | 5402805 | 天威之鬼神 | Berserker of the Tenyi | 基础规则（无卡片效果） |
 | 5969957 | 弹丸重填龙 | Rokket Recharger | 已登记本作效果实现 |
 | 11069680 | 废品转换者 | Junk Converter | 复用既有实现 |
+| 14532163 | 闪电风暴 | Lightning Storm | 已登记本作效果实现 |
 | 15381421 | 辉光龙 赛弗特龙 | Starliege Seyfert | 已登记本作效果实现 |
+| 20665527 | 登陆群舰 游走巨鲸 | Amphibious Swarmship Amblowhale | 已登记本作效果实现 |
 | 21251800 | 带来光明的使者 路西法 | Light Bringer Lucifer | 基础规则（无卡片效果） |
 | 22908820 | 元素英雄 日出侠 | Elemental HERO Sunrise | 复用既有实现 |
 | 23431858 | 天威龙-大同蟠龙 | Tenyi Spirit - Vishuda | 已登记本作效果实现 |
@@ -164,7 +166,6 @@
 | 14386013 | 暗黑神秘学 | Dark Spirit's Mastery | pending |
 | 14393464 | 斩机归纳法 | Mathmech Induction | pending |
 | 14509651 | 诅咒人偶 妮可罗菲娅 | Curse Necrofear | pending |
-| 14532163 | 闪电风暴 | Lightning Storm | pending |
 | 14604710 | 星遗物的胎导 | World Legacy Monstrosity | pending |
 | 14625090 | 半龙女仆的迎接 | Dragonmaid Welcome | pending |
 | 14839621 | 嘣床 | Boompoline!! | pending |
@@ -209,7 +210,6 @@
 | 20201255 | 再起的剑斗兽 | Gladiator Beast's Comeback | pending |
 | 20343502 | 魔偶甜点教师·眼镜蛋奶酥 | Madolche Teacher Glassouffle | pending |
 | 20419926 | 枪侠死刑弹 | Execute Protocols | pending |
-| 20665527 | 登陆群舰 游走巨鲸 | Amphibious Swarmship Amblowhale | pending |
 | 20735371 | 倍倍伤害 | Bye Bye Damage | pending |
 | 21065189 | 防火超限龙 | Firewall eXceed Dragon | pending |
 | 21187631 | 幻变骚灵·拖拽山妪 | Altergeist Dragvirion | pending |

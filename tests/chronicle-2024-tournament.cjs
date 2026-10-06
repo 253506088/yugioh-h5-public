@@ -1,0 +1,8 @@
+/* A full bracket with every 2024 strategy represented; every game replays. */
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const {DuelEngine}=require('../src/advanced-engine.js'),T=require('../src/tournament.js'),D=global.DuelData;
+const out=path.resolve(__dirname,'../output/rollout-2024/tournament');fs.mkdirSync(out,{recursive:true});
+const annual=Object.values(D.DECKS).filter(d=>d.year===2024).map(d=>d.id),pool=[...annual,'blue-eyes-2016','zoodiac-2016','majespecter-2016'];assert.equal(annual.length,3);
+const roster=Array.from({length:64},(_,i)=>pool[i%pool.length]),cup=T.create({deckIds:roster,seed:20241001,concurrency:8,pace:'turbo'});cup.resume();
+(async()=>{try{const replays=await require('./tournament-parallel-helper.cjs')(cup,(c,n)=>{console.log('OK bracket',c.progress().played,'/ 63; replays',n);fs.writeFileSync(path.join(out,'checkpoint.json'),JSON.stringify(c.snapshot()));});assert.equal(cup.status,'completed');const games=cup.matches.flatMap(m=>m.games||[]);assert.equal(cup.progress().played,63);assert.equal(games.filter(g=>['limit','draw-limit'].includes(g.verdict?.kind)).length,0);assert.equal(replays,games.length);assert.equal(T.Tournament.restore(cup.snapshot()).status,'completed');const report={participants:64,roster,seed:20241001,played:63,status:cup.status,allGameReplays:replays,finalReplayMatches:true,protectionDecisions:0};fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2));fs.writeFileSync(path.join(out,'tournament.json'),JSON.stringify(cup.snapshot()));console.log(JSON.stringify(report));}
+catch(e){fs.writeFileSync(path.join(out,'failure.json'),JSON.stringify({error:e.stack,snapshot:cup.snapshot()}));console.error(e);process.exitCode=1;}})();
