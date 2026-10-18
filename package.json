@@ -120,7 +120,17 @@
     "test:2024:simulation": "node tests/chronicle-2024-simulation.cjs",
     "test:2024:tournament": "node tests/chronicle-2024-tournament.cjs",
     "test:2024:browser": "node tests/chronicle-2024-browser.cjs",
-    "cards:coverage:2024": "node scripts/report-card-coverage.mjs --write-year 2024"
+    "cards:coverage:2024": "node scripts/report-card-coverage.mjs --write-year 2024",
+    "cards:snapshot": "node scripts/rebuild-year-snapshot.mjs",
+    "test:annual-decks": "node --test tests/annual-decks.test.cjs tests/annual-decks-interactions.test.cjs",
+    "test:2025": "node --test tests/chronicle-2025.test.cjs tests/chronicle-2025-interactions.test.cjs tests/chronicle-2025-materials.test.cjs tests/chronicle-2025-destiny.test.cjs",
+    "test:2025:simulation": "node tests/chronicle-2025-simulation.cjs",
+    "test:2025:tournament": "node tests/chronicle-2025-tournament.cjs",
+    "test:2025:browser": "node tests/chronicle-2025-browser.cjs",
+    "cards:coverage:2025": "node scripts/report-card-coverage.mjs --write-year 2025",
+    "decks:report": "node scripts/report-annual-decks.mjs",
+    "art:optimize": "node scripts/optimize-duel-art.mjs",
+    "test:annual-decks:simulation": "node tests/annual-decks-simulation.cjs"
   },
   "engines": {
     "node": ">=22.13.0"

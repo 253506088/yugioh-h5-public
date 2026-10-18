@@ -1,0 +1,7441 @@
+{
+  "scope": [
+    1999,
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008
+  ],
+  "policy": "Five different strategies per OCG candidate year. Pre-2003 builds are period-pool adaptations: complete contemporary competitive deck records were not established, so no player placement or popularity is claimed. Historical extra-deck sizes are retained; all newly adapted Side Decks have 15 cards for the game’s Match mode.",
+  "sources": [
+    {
+      "id": "pool-1999",
+      "path": "data/yearly/1999/cards.json",
+      "sha256": "b92e66f1aa80ed2ce4ef9446316886b4f25577355eaee2b6282c5767304f2cf1",
+      "evidenceSummary": "Preserved first-OCG-date candidates bound the available period pool; not evidence of a tournament ranking or a full official product census."
+    },
+    {
+      "id": "pool-2000",
+      "path": "data/yearly/2000/cards.json",
+      "sha256": "b5dacfd6e9178b9f55fc5cda86788c41033b1a8ebeb49d5bb2c7e1e4bb37bdca",
+      "evidenceSummary": "Preserved first-OCG-date candidates bound the available period pool; not evidence of a tournament ranking or a full official product census."
+    },
+    {
+      "id": "pool-2001",
+      "path": "data/yearly/2001/cards.json",
+      "sha256": "aef9de88889676f778221547cf67eedd6bb281d982b7bf87e2a4c71dad2c5a87",
+      "evidenceSummary": "Preserved first-OCG-date candidates bound the available period pool; not evidence of a tournament ranking or a full official product census."
+    },
+    {
+      "id": "pool-2002",
+      "path": "data/yearly/2002/cards.json",
+      "sha256": "22edd6d6a4d5f64a863b2f687db0c432729dee91ffafcb9b1d1b6269e2665803",
+      "evidenceSummary": "Preserved first-OCG-date candidates bound the available period pool; not evidence of a tournament ranking or a full official product census."
+    },
+    {
+      "id": "pool-2003",
+      "path": "data/yearly/2003/cards.json",
+      "sha256": "bc4a81d0a1783b9926c0e729d4acea92bd4d4fcce85b62860df16f616d6ec9d7",
+      "evidenceSummary": "Preserved first-OCG-date candidates bound the available period pool; not evidence of a tournament ranking or a full official product census."
+    },
+    {
+      "id": "worlds-2003",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2003/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "20435de8bad92c4858cca533e15a937cf191e18051245f22e35c8b0cd445f417",
+      "evidenceSummary": "Tournament results and deck strategy labels retained as historical references. New game builds are explicitly adapted, not transcriptions of incomplete player lists."
+    },
+    {
+      "id": "pool-2004",
+      "path": "data/yearly/2004/cards.json",
+      "sha256": "fed22547408c946604fd8b39e9dba77580b178d7716b6fdda0708cbe32c391f2",
+      "evidenceSummary": "Preserved first-OCG-date candidates bound the available period pool; not evidence of a tournament ranking or a full official product census."
+    },
+    {
+      "id": "worlds-2004",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2004/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "f1303bc81edd6dd84f1c07d868e70d2f50b158ce6bb1dc680aa9a88bb212eefb",
+      "evidenceSummary": "Tournament results and deck strategy labels retained as historical references. New game builds are explicitly adapted, not transcriptions of incomplete player lists."
+    },
+    {
+      "id": "pool-2005",
+      "path": "data/yearly/2005/cards.json",
+      "sha256": "77cfdaef97e4583eb2d374ba4487549b03cf33c73fbcd30ee3e7482ef8d6fdb0",
+      "evidenceSummary": "Preserved first-OCG-date candidates bound the available period pool; not evidence of a tournament ranking or a full official product census."
+    },
+    {
+      "id": "worlds-2005",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2005/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "4de60b89b22b9a890f792bcb3d0017e29e2820646fdd132eac430cc2bdfd0e86",
+      "evidenceSummary": "Tournament results and deck strategy labels retained as historical references. New game builds are explicitly adapted, not transcriptions of incomplete player lists."
+    },
+    {
+      "id": "pool-2006",
+      "path": "data/yearly/2006/cards.json",
+      "sha256": "6c2fc4e58e1dad6652dc15a40a1dbaf9da469f5c4afaf192343edfba46cae094",
+      "evidenceSummary": "Preserved first-OCG-date candidates bound the available period pool; not evidence of a tournament ranking or a full official product census."
+    },
+    {
+      "id": "worlds-2006",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2006/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "f86ade07eac25b9d3959c4a0d712a9422c7aac780a983256c6c54f48fc433cb7",
+      "evidenceSummary": "Tournament results and deck strategy labels retained as historical references. New game builds are explicitly adapted, not transcriptions of incomplete player lists."
+    },
+    {
+      "id": "pool-2007",
+      "path": "data/yearly/2007/cards.json",
+      "sha256": "7336c81707eaa23276478fac18218479ee8cab4f3e8f9a3f1272b41446d02b7b",
+      "evidenceSummary": "Preserved first-OCG-date candidates bound the available period pool; not evidence of a tournament ranking or a full official product census."
+    },
+    {
+      "id": "worlds-2007",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2007/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "3a3f74c205f2e24a61068a0d10bc3c6487991d96856fb9cbd34bdfc738bbf536",
+      "evidenceSummary": "Tournament results and deck strategy labels retained as historical references. New game builds are explicitly adapted, not transcriptions of incomplete player lists."
+    },
+    {
+      "id": "pool-2008",
+      "path": "data/yearly/2008/cards.json",
+      "sha256": "c7a46f7d65badb8517fea68caafe1cc7382ef85f3edb9b8462fc4889d48270e9",
+      "evidenceSummary": "Preserved first-OCG-date candidates bound the available period pool; not evidence of a tournament ranking or a full official product census."
+    },
+    {
+      "id": "worlds-2008",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2008/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "2039f0fa879fe0e7b9d8685d239ee0ffd6ebb755c789f61779a419304193f46e",
+      "evidenceSummary": "Tournament results and deck strategy labels retained as historical references. New game builds are explicitly adapted, not transcriptions of incomplete player lists."
+    }
+  ],
+  "decks": [
+    {
+      "id": "gravekeeper-2002",
+      "year": 2002,
+      "title": "守墓",
+      "en": "Gravekeeper",
+      "ja": "墓守",
+      "ace": "Gravekeeper's Chief",
+      "description": "王家长眠之谷让全体守墓+500攻守并封锁墓地移动。间谍与守卫以反转展开，首领解放召唤复活同伴，灵魂的仪式无视山谷直接苏生。",
+      "descriptionEn": "A 2002 adaptation: Gravekeeper. Gravekeeper's Chief leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2002年のカードプールを使った墓守のアレンジ。墓守's Chiefを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Gravekeeper's Chief",
+          2
+        ],
+        [
+          "Gravekeeper's Assailant",
+          2
+        ],
+        [
+          "Gravekeeper's Spy",
+          3
+        ],
+        [
+          "Gravekeeper's Guard",
+          2
+        ],
+        [
+          "Gravekeeper's Spear Soldier",
+          2
+        ],
+        [
+          "Gravekeeper's Cannonholder",
+          2
+        ],
+        [
+          "Gravekeeper's Curse",
+          1
+        ],
+        [
+          "Gravekeeper's Vassal",
+          1
+        ],
+        [
+          "Necrovalley",
+          3
+        ],
+        [
+          "Royal Tribute",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Dark Core",
+          1
+        ],
+        [
+          "Scapegoat",
+          1
+        ],
+        [
+          "Rite of Spirit",
+          3
+        ],
+        [
+          "Coffin Seller",
+          2
+        ],
+        [
+          "Bottomless Trap Hole",
+          2
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Needle Wall",
+          2
+        ],
+        [
+          "Trap Dustshoot",
+          1
+        ],
+        [
+          "Raigeki Break",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ]
+      ],
+      "combo": [
+        "Gravekeeper's Chief",
+        "Gravekeeper's Assailant",
+        "Gravekeeper's Spy",
+        "Gravekeeper's Guard",
+        "Gravekeeper's Spear Soldier"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2002"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it. Retains the existing game Main/Extra quantities and stable preset ID.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "chaos-2003",
+      "year": 2003,
+      "title": "混沌",
+      "en": "Chaos",
+      "ja": "カオス",
+      "ace": "Black Luster Soldier - Envoy of the Beginning",
+      "description": "用光与暗的怪兽积累墓地资源，混沌巫师与开辟的使者除外登场。反转与回收支撑中盘，保留防御牌等待反击。",
+      "descriptionEn": "A 2003 adaptation: Chaos. Black Luster Soldier - Envoy of the Beginning leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2003年のカードプールを使ったカオスのアレンジ。カオス・ソルジャー －開闢の使者－を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Black Luster Soldier - Envoy of the Beginning",
+          2
+        ],
+        [
+          "Chaos Sorcerer",
+          2
+        ],
+        [
+          "Thunder Dragon",
+          3
+        ],
+        [
+          "Shining Angel",
+          3
+        ],
+        [
+          "Mystic Tomato",
+          3
+        ],
+        [
+          "Breaker the Magical Warrior",
+          2
+        ],
+        [
+          "Magician of Faith",
+          2
+        ],
+        [
+          "Tsukuyomi",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Spirit Reaper",
+          1
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          2
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Snatch Steal",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Sakuretsu Armor",
+          2
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Compulsory Evacuation Device",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          2
+        ]
+      ],
+      "combo": [
+        "Black Luster Soldier - Envoy of the Beginning",
+        "Chaos Sorcerer",
+        "Thunder Dragon",
+        "Shining Angel",
+        "Mystic Tomato"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2003",
+        "worlds-2003"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it. Retains the existing game Main/Extra quantities and stable preset ID.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "level-2004",
+      "year": 2004,
+      "title": "LV",
+      "en": "LV Dragons",
+      "ja": "LVドラゴン",
+      "ace": "Horus the Black Flame Dragon LV8",
+      "description": "武装龙在准备阶段升级，荷鲁斯在战斗破坏后进化。等级上升加速展开，沉默与反击保护成长中的怪兽。",
+      "descriptionEn": "A 2004 adaptation: LV Dragons. Horus the Black Flame Dragon LV8 leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2004年のカードプールを使ったLVドラゴンのアレンジ。ホルスの黒炎竜 ＬＶ８を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Horus the Black Flame Dragon LV4",
+          3
+        ],
+        [
+          "Horus the Black Flame Dragon LV6",
+          2
+        ],
+        [
+          "Horus the Black Flame Dragon LV8",
+          1
+        ],
+        [
+          "Armed Dragon LV3",
+          3
+        ],
+        [
+          "Armed Dragon LV5",
+          2
+        ],
+        [
+          "Armed Dragon LV7",
+          1
+        ],
+        [
+          "Masked Dragon",
+          3
+        ],
+        [
+          "Mirage Dragon",
+          2
+        ],
+        [
+          "Dekoichi the Battlechanted Locomotive",
+          2
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Level Up!",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "The Graveyard in the Fourth Dimension",
+          1
+        ],
+        [
+          "Swords of Revealing Light",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Sakuretsu Armor",
+          2
+        ],
+        [
+          "Divine Wrath",
+          2
+        ],
+        [
+          "Call of the Haunted",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          2
+        ]
+      ],
+      "combo": [
+        "Horus the Black Flame Dragon LV4",
+        "Horus the Black Flame Dragon LV6",
+        "Horus the Black Flame Dragon LV8",
+        "Armed Dragon LV3",
+        "Armed Dragon LV5"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2004",
+        "worlds-2004"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it. Retains the existing game Main/Extra quantities and stable preset ID.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "darkworld-2005",
+      "year": 2005,
+      "title": "暗黑界",
+      "en": "Dark World",
+      "ja": "暗黒界",
+      "ace": "Goldd, Wu-Lord of Dark World",
+      "description": "天使的施舍与暗黑界之雷以效果丢弃怪兽，武神与军神从墓地返回。暗之取引会把对方法术改写为弃牌，激活更强的追加效果。",
+      "descriptionEn": "A 2005 adaptation: Dark World. Goldd, Wu-Lord of Dark World leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2005年のカードプールを使った暗黒界のアレンジ。Goldd, Wu-Lord of 暗黒界を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Goldd, Wu-Lord of Dark World",
+          3
+        ],
+        [
+          "Sillva, Warlord of Dark World",
+          3
+        ],
+        [
+          "Beiige, Vanguard of Dark World",
+          3
+        ],
+        [
+          "Broww, Huntsman of Dark World",
+          3
+        ],
+        [
+          "Brron, Mad King of Dark World",
+          2
+        ],
+        [
+          "Scarr, Scout of Dark World",
+          2
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Dekoichi the Battlechanted Locomotive",
+          2
+        ],
+        [
+          "Des Wombat",
+          1
+        ],
+        [
+          "Graceful Charity",
+          3
+        ],
+        [
+          "Dark World Lightning",
+          3
+        ],
+        [
+          "Gateway to Dark World",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Card Destruction",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Dark Deal",
+          2
+        ],
+        [
+          "Divine Wrath",
+          2
+        ],
+        [
+          "Karma Cut",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ]
+      ],
+      "combo": [
+        "Goldd, Wu-Lord of Dark World",
+        "Sillva, Warlord of Dark World",
+        "Beiige, Vanguard of Dark World",
+        "Broww, Huntsman of Dark World",
+        "Brron, Mad King of Dark World"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2005",
+        "worlds-2005"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it. Retains the existing game Main/Extra quantities and stable preset ID.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "chaos-return-2006",
+      "year": 2006,
+      "title": "混沌回归",
+      "en": "CHAOS RETURN",
+      "ja": "カオスリターン",
+      "ace": "Chaos Sorcerer",
+      "description": "2006 世界赛前三均围绕混沌展开。用光暗墓地和异次元归还组织反击，保留除外资源完成最后一击。",
+      "descriptionEn": "A 2006 adaptation: CHAOS RETURN. Chaos Sorcerer leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2006年のカードプールを使ったカオスリターンのアレンジ。カオス・ソーサラーを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Chaos Sorcerer",
+          3
+        ],
+        [
+          "Cyber Dragon",
+          2
+        ],
+        [
+          "Jinzo",
+          1
+        ],
+        [
+          "Airknight Parshath",
+          1
+        ],
+        [
+          "Dark Magician of Chaos",
+          1
+        ],
+        [
+          "Dekoichi the Battlechanted Locomotive",
+          3
+        ],
+        [
+          "Magician of Faith",
+          2
+        ],
+        [
+          "Shining Angel",
+          2
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Spirit Reaper",
+          1
+        ],
+        [
+          "Gravekeeper's Spy",
+          2
+        ],
+        [
+          "Tsukuyomi",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Nobleman of Crossout",
+          1
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Snatch Steal",
+          1
+        ],
+        [
+          "Premature Burial",
+          1
+        ],
+        [
+          "Scapegoat",
+          1
+        ],
+        [
+          "Enemy Controller",
+          2
+        ],
+        [
+          "Pot of Avarice",
+          1
+        ],
+        [
+          "Smashing Ground",
+          1
+        ],
+        [
+          "Return from the Different Dimension",
+          2
+        ],
+        [
+          "Sakuretsu Armor",
+          2
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Call of the Haunted",
+          1
+        ],
+        [
+          "Bottomless Trap Hole",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ]
+      ],
+      "combo": [
+        "Chaos Sorcerer",
+        "Cyber Dragon",
+        "Jinzo",
+        "Airknight Parshath",
+        "Dark Magician of Chaos"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2006",
+        "worlds-2006"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it. Retains the existing game Main/Extra quantities and stable preset ID.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "frog-monarch-2006",
+      "year": 2006,
+      "title": "黄泉帝",
+      "en": "FROG MONARCH",
+      "ja": "黄泉帝",
+      "ace": "Thestalos the Firestorm Monarch",
+      "description": "以树黄泉提供解放资源，炎帝、雷帝与冰帝分别处理手牌、怪兽和后场。与混沌、融合两套构筑形成不同节奏。",
+      "descriptionEn": "A 2006 adaptation: FROG MONARCH. Thestalos the Firestorm Monarch leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2006年のカードプールを使った黄泉帝のアレンジ。炎帝テスタロスを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Thestalos the Firestorm Monarch",
+          3
+        ],
+        [
+          "Zaborg the Thunder Monarch",
+          2
+        ],
+        [
+          "Mobius the Frost Monarch",
+          1
+        ],
+        [
+          "Cyber Dragon",
+          2
+        ],
+        [
+          "Treeborn Frog",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Apprentice Magician",
+          2
+        ],
+        [
+          "Old Vindictive Magician",
+          1
+        ],
+        [
+          "Magician of Faith",
+          1
+        ],
+        [
+          "Dekoichi the Battlechanted Locomotive",
+          3
+        ],
+        [
+          "Spirit Reaper",
+          1
+        ],
+        [
+          "Gravekeeper's Spy",
+          2
+        ],
+        [
+          "Brain Control",
+          2
+        ],
+        [
+          "Soul Exchange",
+          2
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Nobleman of Crossout",
+          1
+        ],
+        [
+          "Premature Burial",
+          1
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Snatch Steal",
+          1
+        ],
+        [
+          "Sakuretsu Armor",
+          2
+        ],
+        [
+          "Bottomless Trap Hole",
+          2
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Call of the Haunted",
+          1
+        ],
+        [
+          "Raigeki Break",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ]
+      ],
+      "combo": [
+        "Thestalos the Firestorm Monarch",
+        "Zaborg the Thunder Monarch",
+        "Mobius the Frost Monarch",
+        "Cyber Dragon",
+        "Treeborn Frog"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2006",
+        "worlds-2006"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it. Retains the existing game Main/Extra quantities and stable preset ID.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "chimeratech-2006",
+      "year": 2006,
+      "title": "嵌合超载",
+      "en": "CHIMERATECH OVERLOAD",
+      "ja": "キメラテック・オーバーロード",
+      "ace": "Chimeratech Overdragon",
+      "description": "机械族积累墓地，超载融合将电子龙和机械素材除外。力量焊接提供另一条融合路线，需要计算结束阶段的生命值代价。",
+      "descriptionEn": "A 2006 adaptation: CHIMERATECH OVERLOAD. Chimeratech Overdragon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2006年のカードプールを使ったキメラテック・オーバーロードのアレンジ。キメラテック・オーバー・ドラゴンを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Cyber Dragon",
+          3
+        ],
+        [
+          "Proto-Cyber Dragon",
+          3
+        ],
+        [
+          "Dekoichi the Battlechanted Locomotive",
+          3
+        ],
+        [
+          "Blowback Dragon",
+          2
+        ],
+        [
+          "Cyber Phoenix",
+          2
+        ],
+        [
+          "Drillroid",
+          2
+        ],
+        [
+          "Card Trooper",
+          2
+        ],
+        [
+          "Cyber-Stein",
+          1
+        ],
+        [
+          "Magician of Faith",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Power Bond",
+          2
+        ],
+        [
+          "Overload Fusion",
+          2
+        ],
+        [
+          "Future Fusion",
+          1
+        ],
+        [
+          "Limiter Removal",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Giant Trunade",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Scapegoat",
+          1
+        ],
+        [
+          "Premature Burial",
+          1
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Call of the Haunted",
+          1
+        ],
+        [
+          "Sakuretsu Armor",
+          2
+        ],
+        [
+          "Threatening Roar",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Chimeratech Overdragon",
+          3
+        ],
+        [
+          "Cyber Twin Dragon",
+          2
+        ],
+        [
+          "Cyber End Dragon",
+          2
+        ],
+        [
+          "Gatling Dragon",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ]
+      ],
+      "combo": [
+        "Cyber Dragon",
+        "Proto-Cyber Dragon",
+        "Dekoichi the Battlechanted Locomotive",
+        "Blowback Dragon",
+        "Cyber Phoenix"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2006",
+        "worlds-2006"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it. Retains the existing game Main/Extra quantities and stable preset ID.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "trooper-monarch-2007",
+      "year": 2007,
+      "title": "卡炮帝",
+      "en": "TROOPER MONARCH",
+      "ja": "トルーパーモナーク",
+      "ace": "Raiza the Storm Monarch",
+      "description": "参考 2007 世界冠军 Andres Toro 的卡炮帝思路改编。炮击士、黄泉和夺取控制权的魔法支撑帝的解放召唤。",
+      "descriptionEn": "A 2007 adaptation: TROOPER MONARCH. Raiza the Storm Monarch leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2007年のカードプールを使ったトルーパーモナークのアレンジ。風帝ライザーを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Raiza the Storm Monarch",
+          3
+        ],
+        [
+          "Thestalos the Firestorm Monarch",
+          2
+        ],
+        [
+          "Mobius the Frost Monarch",
+          1
+        ],
+        [
+          "Cyber Dragon",
+          3
+        ],
+        [
+          "Card Trooper",
+          3
+        ],
+        [
+          "Treeborn Frog",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Dekoichi the Battlechanted Locomotive",
+          2
+        ],
+        [
+          "Gravekeeper's Spy",
+          2
+        ],
+        [
+          "Spirit Reaper",
+          1
+        ],
+        [
+          "Magician of Faith",
+          1
+        ],
+        [
+          "Brain Control",
+          3
+        ],
+        [
+          "Soul Exchange",
+          2
+        ],
+        [
+          "Pot of Avarice",
+          2
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Premature Burial",
+          1
+        ],
+        [
+          "Enemy Controller",
+          1
+        ],
+        [
+          "Snatch Steal",
+          1
+        ],
+        [
+          "Sakuretsu Armor",
+          2
+        ],
+        [
+          "Bottomless Trap Hole",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Call of the Haunted",
+          1
+        ],
+        [
+          "Trap Dustshoot",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ]
+      ],
+      "combo": [
+        "Raiza the Storm Monarch",
+        "Thestalos the Firestorm Monarch",
+        "Mobius the Frost Monarch",
+        "Cyber Dragon",
+        "Card Trooper"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2007",
+        "worlds-2007"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it. Retains the existing game Main/Extra quantities and stable preset ID.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "machine-gadget-2007",
+      "year": 2007,
+      "title": "机械齿轮",
+      "en": "MACHINE GADGET",
+      "ja": "マシンガジェット",
+      "ace": "Cyber Dragon",
+      "description": "参考 2007 世界亚军机械强攻与当年八强齿轮构筑。三色齿轮持续检索，机械复制术和限制解除制造进攻窗口。",
+      "descriptionEn": "A 2007 adaptation: MACHINE GADGET. Cyber Dragon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2007年のカードプールを使ったマシンガジェットのアレンジ。サイバー・ドラゴンを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Green Gadget",
+          2
+        ],
+        [
+          "Red Gadget",
+          2
+        ],
+        [
+          "Yellow Gadget",
+          2
+        ],
+        [
+          "Cyber Dragon",
+          3
+        ],
+        [
+          "Card Trooper",
+          3
+        ],
+        [
+          "Dekoichi the Battlechanted Locomotive",
+          3
+        ],
+        [
+          "Cyber Phoenix",
+          2
+        ],
+        [
+          "Drillroid",
+          2
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Machine Duplication",
+          3
+        ],
+        [
+          "Shrink",
+          3
+        ],
+        [
+          "Limiter Removal",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Brain Control",
+          1
+        ],
+        [
+          "Pot of Avarice",
+          1
+        ],
+        [
+          "Overload Fusion",
+          1
+        ],
+        [
+          "Sakuretsu Armor",
+          2
+        ],
+        [
+          "Bottomless Trap Hole",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Call of the Haunted",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Chimeratech Overdragon",
+          2
+        ],
+        [
+          "Chimeratech Fortress Dragon",
+          2
+        ]
+      ],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ]
+      ],
+      "combo": [
+        "Green Gadget",
+        "Red Gadget",
+        "Yellow Gadget",
+        "Cyber Dragon",
+        "Card Trooper"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2007",
+        "worlds-2007"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it. Retains the existing game Main/Extra quantities and stable preset ID.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "burn-2007",
+      "year": 2007,
+      "title": "连锁削血",
+      "en": "CHAIN BURN",
+      "ja": "チェーンバーン",
+      "ace": "Lava Golem",
+      "description": "参考 2007 世界季军 Adam Corn 的削血路线改编。熔岩魔神处理双怪，隐形鸟和波动加农炮施压，防御陷阱争取回合。",
+      "descriptionEn": "A 2007 adaptation: CHAIN BURN. Lava Golem leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2007年のカードプールを使ったチェーンバーンのアレンジ。溶岩魔神ラヴァ・ゴーレムを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Lava Golem",
+          2
+        ],
+        [
+          "Stealth Bird",
+          3
+        ],
+        [
+          "Des Koala",
+          3
+        ],
+        [
+          "Outstanding Dog Marron",
+          1
+        ],
+        [
+          "Spirit Reaper",
+          1
+        ],
+        [
+          "Marshmallon",
+          1
+        ],
+        [
+          "Magician of Faith",
+          1
+        ],
+        [
+          "Mask of Darkness",
+          1
+        ],
+        [
+          "D.D. Crow",
+          1
+        ],
+        [
+          "Cyber Dragon",
+          1
+        ],
+        [
+          "Level Limit - Area B",
+          1
+        ],
+        [
+          "Wave-Motion Cannon",
+          3
+        ],
+        [
+          "Messenger of Peace",
+          2
+        ],
+        [
+          "Book of Moon",
+          1
+        ],
+        [
+          "Swords of Revealing Light",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Chain Strike",
+          1
+        ],
+        [
+          "Secret Barrel",
+          3
+        ],
+        [
+          "Just Desserts",
+          3
+        ],
+        [
+          "Threatening Roar",
+          3
+        ],
+        [
+          "Reckless Greed",
+          2
+        ],
+        [
+          "Gravity Bind",
+          1
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Accumulated Fortune",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ]
+      ],
+      "combo": [
+        "Lava Golem",
+        "Stealth Bird",
+        "Des Koala",
+        "Outstanding Dog Marron",
+        "Spirit Reaper"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2007",
+        "worlds-2007"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it. Retains the existing game Main/Extra quantities and stable preset ID.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "gladiator-2008",
+      "year": 2008,
+      "title": "剑斗凯旋",
+      "en": "GLADIATOR BEAST",
+      "ja": "剣闘獣",
+      "ace": "Gladiator Beast Gyzarus",
+      "description": "2008世界冠亚军都是剑斗兽，因此保留一套剑斗兽路线。战后换人与凯撒接触融合是核心，配合光道、念动力暗武、次元强攻和守墓伤害形成五种年度玩法。",
+      "descriptionEn": "A 2008 adaptation: GLADIATOR BEAST. Gladiator Beast Gyzarus leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2008年のカードプールを使った剣闘獣のアレンジ。剣闘獣ガイザレスを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Gladiator Beast Laquari",
+          3
+        ],
+        [
+          "Gladiator Beast Bestiari",
+          2
+        ],
+        [
+          "Gladiator Beast Equeste",
+          2
+        ],
+        [
+          "Gladiator Beast Darius",
+          2
+        ],
+        [
+          "Gladiator Beast Murmillo",
+          1
+        ],
+        [
+          "Gladiator Beast Hoplomus",
+          1
+        ],
+        [
+          "Gladiator Beast Secutor",
+          1
+        ],
+        [
+          "Test Tiger",
+          3
+        ],
+        [
+          "Elemental HERO Prisma",
+          2
+        ],
+        [
+          "Rescue Cat",
+          1
+        ],
+        [
+          "Gladiator Beast Samnite",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Gladiator Proving Ground",
+          3
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Smashing Ground",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Cold Wave",
+          2
+        ],
+        [
+          "Enemy Controller",
+          1
+        ],
+        [
+          "Gladiator Beast War Chariot",
+          3
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Gladiator Beast Gyzarus",
+          3
+        ],
+        [
+          "Gladiator Beast Heraklinos",
+          2
+        ],
+        [
+          "Gladiator Beast Gaiodiaz",
+          1
+        ],
+        [
+          "Chimeratech Fortress Dragon",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ]
+      ],
+      "combo": [
+        "Gladiator Beast Laquari",
+        "Gladiator Beast Bestiari",
+        "Gladiator Beast Equeste",
+        "Gladiator Beast Darius",
+        "Gladiator Beast Murmillo"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2008",
+        "worlds-2008"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it. Retains the existing game Main/Extra quantities and stable preset ID.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "lightsworn-2008",
+      "year": 2008,
+      "title": "光道审判",
+      "en": "LIGHTSWORN",
+      "ja": "ライトロード",
+      "ace": "Judgment Dragon",
+      "description": "参考 2008 世界季军光道与当年主流构筑。太阳交换与结束阶段送墓积累四种光道，审判之龙清场。",
+      "descriptionEn": "A 2008 adaptation: LIGHTSWORN. Judgment Dragon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2008年のカードプールを使ったライトロードのアレンジ。裁きの龍を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Judgment Dragon",
+          2
+        ],
+        [
+          "Lumina, Lightsworn Summoner",
+          3
+        ],
+        [
+          "Lyla, Lightsworn Sorceress",
+          3
+        ],
+        [
+          "Ryko, Lightsworn Hunter",
+          2
+        ],
+        [
+          "Wulf, Lightsworn Beast",
+          3
+        ],
+        [
+          "Garoth, Lightsworn Warrior",
+          2
+        ],
+        [
+          "Jain, Lightsworn Paladin",
+          2
+        ],
+        [
+          "Celestia, Lightsworn Angel",
+          2
+        ],
+        [
+          "Honest",
+          3
+        ],
+        [
+          "Necro Gardna",
+          3
+        ],
+        [
+          "Plaguespreader Zombie",
+          1
+        ],
+        [
+          "Card Trooper",
+          1
+        ],
+        [
+          "Solar Recharge",
+          3
+        ],
+        [
+          "Monster Reincarnation",
+          2
+        ],
+        [
+          "Card Destruction",
+          1
+        ],
+        [
+          "Foolish Burial",
+          2
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Beckoning Light",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Stardust Dragon",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Colossal Fighter",
+          1
+        ],
+        [
+          "Thought Ruler Archfiend",
+          1
+        ],
+        [
+          "Magical Android",
+          1
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ]
+      ],
+      "combo": [
+        "Judgment Dragon",
+        "Lumina, Lightsworn Summoner",
+        "Lyla, Lightsworn Sorceress",
+        "Ryko, Lightsworn Hunter",
+        "Wulf, Lightsworn Beast"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2008",
+        "worlds-2008"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it. Retains the existing game Main/Extra quantities and stable preset ID.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "teledad-2008",
+      "year": 2008,
+      "title": "念动力暗武",
+      "en": "TELE-DAD",
+      "ja": "テレポート・ダーク・アームド",
+      "ace": "Dark Armed Dragon",
+      "description": "2008 下半年的 TeleDAD 代表构筑：命运抽卡、紧急瞬间移动和恶意人连接同调路线，暗黑武装龙要求墓地恰好三只暗属性怪兽。",
+      "descriptionEn": "A 2008 adaptation: TELE-DAD. Dark Armed Dragon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2008年のカードプールを使ったテレポート・ダーク・アームドのアレンジ。ダーク・アームド・ドラゴンを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Dark Armed Dragon",
+          2
+        ],
+        [
+          "Destiny HERO - Malicious",
+          3
+        ],
+        [
+          "Elemental HERO Stratos",
+          1
+        ],
+        [
+          "Destiny HERO - Diamond Dude",
+          1
+        ],
+        [
+          "Dark Grepher",
+          2
+        ],
+        [
+          "Armageddon Knight",
+          2
+        ],
+        [
+          "Krebons",
+          3
+        ],
+        [
+          "Plaguespreader Zombie",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "D.D. Crow",
+          1
+        ],
+        [
+          "Tragoedia",
+          1
+        ],
+        [
+          "The Dark Creator",
+          1
+        ],
+        [
+          "Breaker the Magical Warrior",
+          1
+        ],
+        [
+          "Destiny Draw",
+          3
+        ],
+        [
+          "Allure of Darkness",
+          3
+        ],
+        [
+          "Emergency Teleport",
+          3
+        ],
+        [
+          "Reinforcement of the Army",
+          2
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Brain Control",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Pot of Avarice",
+          1
+        ],
+        [
+          "Crush Card Virus",
+          1
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Stardust Dragon",
+          2
+        ],
+        [
+          "Colossal Fighter",
+          2
+        ],
+        [
+          "Thought Ruler Archfiend",
+          1
+        ],
+        [
+          "Red Dragon Archfiend",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Goyo Guardian",
+          1
+        ],
+        [
+          "Magical Android",
+          1
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Gaia Knight, the Force of Earth",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ]
+      ],
+      "combo": [
+        "Dark Armed Dragon",
+        "Destiny HERO - Malicious",
+        "Elemental HERO Stratos",
+        "Destiny HERO - Diamond Dude",
+        "Dark Grepher"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2008",
+        "worlds-2008"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it. Retains the existing game Main/Extra quantities and stable preset ID.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "beatdown-1999",
+      "year": 1999,
+      "title": "初代强攻",
+      "en": "Early Beatdown",
+      "ja": "初期ビートダウン",
+      "ace": "Summoned Skull",
+      "description": "以高攻击力通常怪兽和单解放怪兽为核心的1999卡池构筑。反转怪兽与装备、除去支援战斗；不声明为某场未核实赛事原表。",
+      "descriptionEn": "A 1999 adaptation: Early Beatdown. Summoned Skull leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "1999年のカードプールを使った初期ビートダウンのアレンジ。デーモンの召喚を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Summoned Skull",
+          3
+        ],
+        [
+          "La Jinn the Mystical Genie of the Lamp",
+          3
+        ],
+        [
+          "Mechanicalchaser",
+          3
+        ],
+        [
+          "Battle Ox",
+          3
+        ],
+        [
+          "Man-Eater Bug",
+          3
+        ],
+        [
+          "Penguin Soldier",
+          2
+        ],
+        [
+          "Dark Energy",
+          2
+        ],
+        [
+          "Sword of Dark Destruction",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ],
+        [
+          "Change of Heart",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Witch of the Black Forest",
+          1
+        ],
+        [
+          "Magician of Faith",
+          2
+        ],
+        [
+          "Solemn Judgment",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ],
+        [
+          "Royal Decree",
+          3
+        ],
+        [
+          "Soul Release",
+          3
+        ]
+      ],
+      "combo": [
+        "Summoned Skull",
+        "La Jinn the Mystical Genie of the Lamp",
+        "Mechanicalchaser",
+        "Battle Ox",
+        "Penguin Soldier"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-1999"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "fusion-1999",
+      "year": 1999,
+      "title": "初代融合",
+      "en": "Early Fusion",
+      "ja": "初期融合",
+      "ace": "Black Skull Dragon",
+      "description": "融合贤者寻找融合，以青眼、真红眼和恶魔召唤等具名素材提供不同进攻选择。",
+      "descriptionEn": "A 1999 adaptation: Early Fusion. Black Skull Dragon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "1999年のカードプールを使った初期融合のアレンジ。ブラック・デーモンズ・ドラゴンを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Blue-Eyes White Dragon",
+          3
+        ],
+        [
+          "Red-Eyes Black Dragon",
+          3
+        ],
+        [
+          "Summoned Skull",
+          3
+        ],
+        [
+          "Gaia the Fierce Knight",
+          3
+        ],
+        [
+          "Curse of Dragon",
+          3
+        ],
+        [
+          "Polymerization",
+          3
+        ],
+        [
+          "Fusion Sage",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ],
+        [
+          "Change of Heart",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Witch of the Black Forest",
+          1
+        ],
+        [
+          "Man-Eater Bug",
+          2
+        ],
+        [
+          "Magician of Faith",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Blue-Eyes Ultimate Dragon",
+          3
+        ],
+        [
+          "Black Skull Dragon",
+          3
+        ],
+        [
+          "Gaia the Dragon Champion",
+          3
+        ]
+      ],
+      "side": [
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Royal Decree",
+          3
+        ],
+        [
+          "Soul Release",
+          1
+        ]
+      ],
+      "combo": [
+        "Blue-Eyes White Dragon",
+        "Red-Eyes Black Dragon",
+        "Summoned Skull",
+        "Gaia the Fierce Knight",
+        "Curse of Dragon"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-1999"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "ritual-1999",
+      "year": 1999,
+      "title": "初代仪式",
+      "en": "Early Ritual",
+      "ja": "初期儀式",
+      "ace": "Black Luster Soldier",
+      "description": "1999尚无千手神和音速鸟，本构筑以抽换与高等级手牌准备混沌战士和混沌黑魔术师的仪式解放。",
+      "descriptionEn": "A 1999 adaptation: Early Ritual. Black Luster Soldier leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "1999年のカードプールを使った初期儀式のアレンジ。カオス・ソルジャーを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Black Luster Soldier",
+          3
+        ],
+        [
+          "Black Luster Ritual",
+          3
+        ],
+        [
+          "Magician of Black Chaos",
+          2
+        ],
+        [
+          "Black Magic Ritual",
+          2
+        ],
+        [
+          "Blue-Eyes White Dragon",
+          3
+        ],
+        [
+          "Dark Magician",
+          3
+        ],
+        [
+          "Summoned Skull",
+          3
+        ],
+        [
+          "Witch of the Black Forest",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ],
+        [
+          "Change of Heart",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Man-Eater Bug",
+          2
+        ],
+        [
+          "Magician of Faith",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Royal Decree",
+          3
+        ],
+        [
+          "Soul Release",
+          1
+        ]
+      ],
+      "combo": [
+        "Black Luster Soldier",
+        "Black Luster Ritual",
+        "Magician of Black Chaos",
+        "Black Magic Ritual",
+        "Blue-Eyes White Dragon"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-1999"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "exodia-1999",
+      "year": 1999,
+      "title": "封印集结",
+      "en": "Forbidden One",
+      "ja": "封印されし者",
+      "ace": "Exodia the Forbidden One",
+      "description": "通过三眼怪、黑森林的魔女与反转抽卡收齐封印五部分；这是基于1999候选卡池的年代构筑。",
+      "descriptionEn": "A 1999 adaptation: Forbidden One. Exodia the Forbidden One leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "1999年のカードプールを使った封印されし者のアレンジ。Exodia the 封印されし者を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Exodia the Forbidden One",
+          1
+        ],
+        [
+          "Right Arm of the Forbidden One",
+          1
+        ],
+        [
+          "Left Arm of the Forbidden One",
+          1
+        ],
+        [
+          "Right Leg of the Forbidden One",
+          1
+        ],
+        [
+          "Left Leg of the Forbidden One",
+          1
+        ],
+        [
+          "Sangan",
+          3
+        ],
+        [
+          "Witch of the Black Forest",
+          3
+        ],
+        [
+          "Skelengel",
+          3
+        ],
+        [
+          "Magician of Faith",
+          3
+        ],
+        [
+          "Morphing Jar",
+          1
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ],
+        [
+          "Change of Heart",
+          1
+        ],
+        [
+          "Man-Eater Bug",
+          2
+        ],
+        [
+          "Solemn Judgment",
+          2
+        ],
+        [
+          "Fissure",
+          3
+        ],
+        [
+          "Reinforcements",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ],
+        [
+          "Royal Decree",
+          3
+        ],
+        [
+          "Soul Release",
+          3
+        ]
+      ],
+      "combo": [
+        "Exodia the Forbidden One",
+        "Right Arm of the Forbidden One",
+        "Left Arm of the Forbidden One",
+        "Right Leg of the Forbidden One",
+        "Left Leg of the Forbidden One"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-1999"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "burn-1999",
+      "year": 1999,
+      "title": "火焰与反转",
+      "en": "Flame and Flip",
+      "ja": "炎とリバース",
+      "ace": "Magician of Faith",
+      "description": "火焰魔法累积伤害，圣魔术师回收魔法，企鹅士兵与反转防御争取回合。保留直接攻击作为终结手段。",
+      "descriptionEn": "A 1999 adaptation: Flame and Flip. Magician of Faith leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "1999年のカードプールを使った炎とリバースのアレンジ。聖なる魔術師を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Ookazi",
+          3
+        ],
+        [
+          "Final Flame",
+          3
+        ],
+        [
+          "Hinotama",
+          3
+        ],
+        [
+          "Sparks",
+          3
+        ],
+        [
+          "Magician of Faith",
+          3
+        ],
+        [
+          "Mask of Darkness",
+          3
+        ],
+        [
+          "Penguin Soldier",
+          3
+        ],
+        [
+          "Wall of Illusion",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ],
+        [
+          "Change of Heart",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Witch of the Black Forest",
+          1
+        ],
+        [
+          "Man-Eater Bug",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Royal Decree",
+          3
+        ],
+        [
+          "Soul Release",
+          1
+        ]
+      ],
+      "combo": [
+        "Ookazi",
+        "Final Flame",
+        "Hinotama",
+        "Sparks",
+        "Mask of Darkness"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-1999"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "relinquished-2000",
+      "year": 2000,
+      "title": "纳祭仪式",
+      "en": "Relinquished Ritual",
+      "ja": "サクリファイス儀式",
+      "ace": "Relinquished",
+      "description": "千手神和音速鸟补齐仪式两半。纳祭之魔吸收真实怪兽取得攻守，以低星素材维持循环。",
+      "descriptionEn": "A 2000 adaptation: Relinquished Ritual. Relinquished leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2000年のカードプールを使ったサクリファイス儀式のアレンジ。サクリファイスを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Relinquished",
+          3
+        ],
+        [
+          "Black Illusion Ritual",
+          3
+        ],
+        [
+          "Senju of the Thousand Hands",
+          3
+        ],
+        [
+          "Sonic Bird",
+          3
+        ],
+        [
+          "Sangan",
+          3
+        ],
+        [
+          "Witch of the Black Forest",
+          3
+        ],
+        [
+          "Penguin Soldier",
+          3
+        ],
+        [
+          "Spear Cretin",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ],
+        [
+          "Change of Heart",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Relinquished",
+        "Black Illusion Ritual",
+        "Senju of the Thousand Hands",
+        "Sonic Bird",
+        "Penguin Soldier"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2000"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "toon-2000",
+      "year": 2000,
+      "title": "卡通舞台",
+      "en": "Toon World",
+      "ja": "トゥーンワールド",
+      "ace": "Blue-Eyes Toon Dragon",
+      "description": "卡通世界开启直接攻击路线，卡通怪兽与防御魔陷维持场面；选择当年可用的早期卡通机制。",
+      "descriptionEn": "A 2000 adaptation: Toon World. Blue-Eyes Toon Dragon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2000年のカードプールを使ったトゥーンワールドのアレンジ。ブルーアイズ・トゥーン・ドラゴンを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Toon World",
+          3
+        ],
+        [
+          "Blue-Eyes Toon Dragon",
+          3
+        ],
+        [
+          "Toon Summoned Skull",
+          3
+        ],
+        [
+          "Toon Mermaid",
+          3
+        ],
+        [
+          "Manga Ryu-Ran",
+          3
+        ],
+        [
+          "Giant Germ",
+          3
+        ],
+        [
+          "Nimble Momonga",
+          3
+        ],
+        [
+          "Sangan",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ],
+        [
+          "Change of Heart",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Toon World",
+        "Blue-Eyes Toon Dragon",
+        "Toon Summoned Skull",
+        "Toon Mermaid",
+        "Manga Ryu-Ran"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2000"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "fusion-2000",
+      "year": 2000,
+      "title": "融合与机械",
+      "en": "Fusion and Machines",
+      "ja": "融合と機械",
+      "ace": "Blue-Eyes Ultimate Dragon",
+      "description": "2000年的融合路线保留双头雷龙与青眼究极龙，电子科学怪人用生命值提供另一条额外召唤路线。",
+      "descriptionEn": "A 2000 adaptation: Fusion and Machines. Cyber Twin Dragon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2000年のカードプールを使った融合と機械のアレンジ。Cyber Twin Dragonを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Blue-Eyes White Dragon",
+          3
+        ],
+        [
+          "Thunder Dragon",
+          3
+        ],
+        [
+          "Battle Ox",
+          3
+        ],
+        [
+          "Mystic Horseman",
+          3
+        ],
+        [
+          "Gaia the Fierce Knight",
+          2
+        ],
+        [
+          "Curse of Dragon",
+          2
+        ],
+        [
+          "Polymerization",
+          3
+        ],
+        [
+          "Fusion Sage",
+          3
+        ],
+        [
+          "Cyber-Stein",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Blue-Eyes Ultimate Dragon",
+          3
+        ],
+        [
+          "Twin-Headed Thunder Dragon",
+          3
+        ],
+        [
+          "Rabid Horseman",
+          3
+        ],
+        [
+          "Gaia the Dragon Champion",
+          3
+        ]
+      ],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Blue-Eyes White Dragon",
+        "Thunder Dragon",
+        "Battle Ox",
+        "Mystic Horseman",
+        "Gaia the Fierce Knight"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2000"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "exodia-2000",
+      "year": 2000,
+      "title": "壶与封印",
+      "en": "Jars and the Forbidden One",
+      "ja": "壺と封印されし者",
+      "ace": "Exodia the Forbidden One",
+      "description": "在封印五部分之外加入手牌抹杀与壶的抽换。此为年代卡池改编，不虚构早期世界赛名次。",
+      "descriptionEn": "A 2000 adaptation: Jars and the Forbidden One. Exodia the Forbidden One leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2000年のカードプールを使った壺と封印されし者のアレンジ。封印されしエクゾディアを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Exodia the Forbidden One",
+          1
+        ],
+        [
+          "Right Arm of the Forbidden One",
+          1
+        ],
+        [
+          "Left Arm of the Forbidden One",
+          1
+        ],
+        [
+          "Right Leg of the Forbidden One",
+          1
+        ],
+        [
+          "Left Leg of the Forbidden One",
+          1
+        ],
+        [
+          "Sangan",
+          3
+        ],
+        [
+          "Witch of the Black Forest",
+          3
+        ],
+        [
+          "Skelengel",
+          3
+        ],
+        [
+          "Magician of Faith",
+          3
+        ],
+        [
+          "Morphing Jar",
+          1
+        ],
+        [
+          "Cyber Jar",
+          1
+        ],
+        [
+          "Card Destruction",
+          1
+        ],
+        [
+          "Upstart Goblin",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ],
+        [
+          "Change of Heart",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Exodia the Forbidden One",
+        "Right Arm of the Forbidden One",
+        "Left Arm of the Forbidden One",
+        "Right Leg of the Forbidden One",
+        "Left Leg of the Forbidden One"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2000"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "princess-burn-2000",
+      "year": 2000,
+      "title": "火焰回收",
+      "en": "Flame Recycling",
+      "ja": "炎の回収",
+      "ace": "Tremendous Fire",
+      "description": "用圣魔术师回收火焰魔法，以神之恩惠与素早的鼯鼠补充生命。反转与防御维持伤害路线。",
+      "descriptionEn": "A 2000 adaptation: Flame Recycling. Tremendous Fire leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2000年のカードプールを使った炎の回収のアレンジ。火炎地獄を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Magician of Faith",
+          3
+        ],
+        [
+          "Solemn Wishes",
+          3
+        ],
+        [
+          "Penguin Soldier",
+          3
+        ],
+        [
+          "Dian Keto the Cure Master",
+          3
+        ],
+        [
+          "Nimble Momonga",
+          3
+        ],
+        [
+          "Giant Germ",
+          3
+        ],
+        [
+          "Tremendous Fire",
+          3
+        ],
+        [
+          "Ookazi",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ],
+        [
+          "Change of Heart",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Solemn Wishes",
+        "Penguin Soldier",
+        "Dian Keto the Cure Master",
+        "Nimble Momonga",
+        "Giant Germ"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2000"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "necrofear-2001",
+      "year": 2001,
+      "title": "暗黑恋尸魔",
+      "en": "Dark Necrofear",
+      "ja": "ダーク・ネクロフィア",
+      "ace": "Dark Necrofear",
+      "description": "小恶魔和检索怪兽积累墓地恶魔族，再支付真实除外代价召唤暗黑人偶；结束阶段的控制效果保留实体关系。",
+      "descriptionEn": "A 2001 adaptation: Dark Necrofear. Dark Necrofear leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2001年のカードプールを使ったダーク・ネクロフィアのアレンジ。ダーク・ネクロフィアを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Dark Necrofear",
+          3
+        ],
+        [
+          "Giant Germ",
+          3
+        ],
+        [
+          "Sangan",
+          3
+        ],
+        [
+          "Mystic Tomato",
+          3
+        ],
+        [
+          "Kuriboh",
+          3
+        ],
+        [
+          "Wall of Illusion",
+          3
+        ],
+        [
+          "Summoned Skull",
+          2
+        ],
+        [
+          "Opticlops",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ],
+        [
+          "Change of Heart",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Dark Necrofear",
+        "Giant Germ",
+        "Mystic Tomato",
+        "Kuriboh",
+        "Wall of Illusion"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2001"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "destiny-board-2001",
+      "year": 2001,
+      "title": "通灵盘",
+      "en": "Destiny Board",
+      "ja": "ウィジャ盤",
+      "ace": "Destiny Board",
+      "description": "以通灵盘逐回合收齐死之信息。反转回手、战斗防御与后场空间管理构成独立的特殊胜利路线。",
+      "descriptionEn": "A 2001 adaptation: Destiny Board. Destiny Board leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2001年のカードプールを使ったウィジャ盤のアレンジ。ウィジャ盤を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Destiny Board",
+          3
+        ],
+        [
+          "Spirit Message \"I\"",
+          1
+        ],
+        [
+          "Spirit Message \"N\"",
+          1
+        ],
+        [
+          "Spirit Message \"A\"",
+          1
+        ],
+        [
+          "Spirit Message \"L\"",
+          1
+        ],
+        [
+          "Mask of Darkness",
+          3
+        ],
+        [
+          "Penguin Soldier",
+          3
+        ],
+        [
+          "Man-Eater Bug",
+          3
+        ],
+        [
+          "Gravity Bind",
+          3
+        ],
+        [
+          "Messenger of Peace",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ],
+        [
+          "Change of Heart",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Destiny Board",
+        "Spirit Message \"I\"",
+        "Spirit Message \"N\"",
+        "Spirit Message \"A\"",
+        "Spirit Message \"L\""
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2001"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "ocean-2001",
+      "year": 2001,
+      "title": "传说之都",
+      "en": "Legendary Ocean",
+      "ja": "伝説の都",
+      "ace": "Amphibian Beast",
+      "description": "传说之都调整水属性等级，低等级召唤与水族攻守支援控制战斗；只使用2001以前的候选卡片。",
+      "descriptionEn": "A 2001 adaptation: Legendary Ocean. Levia-Dragon - Daedalus leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2001年のカードプールを使った伝説の都のアレンジ。Levia-Dragon - Daedalusを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "A Legendary Ocean",
+          3
+        ],
+        [
+          "Amphibian Beast",
+          3
+        ],
+        [
+          "7 Colored Fish",
+          3
+        ],
+        [
+          "Mother Grizzly",
+          3
+        ],
+        [
+          "Star Boy",
+          3
+        ],
+        [
+          "Penguin Soldier",
+          3
+        ],
+        [
+          "Tornado Wall",
+          3
+        ],
+        [
+          "Aqua Madoor",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "A Legendary Ocean",
+        "Amphibian Beast",
+        "7 Colored Fish",
+        "Mother Grizzly",
+        "Star Boy"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2001"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "warrior-2001",
+      "year": 2001,
+      "title": "战士工具箱",
+      "en": "Warrior Toolbox",
+      "ja": "戦士ツールボックス",
+      "ace": "Marauding Captain",
+      "description": "增援寻找冲锋队长、流氓佣兵等工具怪兽。联合军与战斗支援推动以战士族为主的通常召唤路线。",
+      "descriptionEn": "A 2001 adaptation: Warrior Toolbox. Marauding Captain leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2001年のカードプールを使った戦士ツールボックスのアレンジ。切り込み隊長を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Marauding Captain",
+          3
+        ],
+        [
+          "Reinforcement of the Army",
+          3
+        ],
+        [
+          "Exiled Force",
+          3
+        ],
+        [
+          "Command Knight",
+          3
+        ],
+        [
+          "The A. Forces",
+          3
+        ],
+        [
+          "Goblin Attack Force",
+          3
+        ],
+        [
+          "Hayabusa Knight",
+          3
+        ],
+        [
+          "The Warrior Returning Alive",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Marauding Captain",
+        "Reinforcement of the Army",
+        "Exiled Force",
+        "Command Knight",
+        "The A. Forces"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2001"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "machine-2001",
+      "year": 2001,
+      "title": "机械封锁",
+      "en": "Machine Lockdown",
+      "ja": "機械の封鎖",
+      "ace": "Jinzo",
+      "description": "人造人封锁陷阱，机械猎手和左轮手枪龙施加攻击压力。限制解除与机械族攻势和其他年度路线区分。",
+      "descriptionEn": "A 2001 adaptation: Machine Lockdown. Jinzo leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2001年のカードプールを使った機械の封鎖のアレンジ。人造人間－サイコ・ショッカーを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Jinzo",
+          3
+        ],
+        [
+          "Mechanicalchaser",
+          3
+        ],
+        [
+          "Barrel Dragon",
+          3
+        ],
+        [
+          "Cannon Soldier",
+          3
+        ],
+        [
+          "Limiter Removal",
+          3
+        ],
+        [
+          "Gradius",
+          3
+        ],
+        [
+          "7 Completed",
+          3
+        ],
+        [
+          "Sangan",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Jinzo",
+        "Mechanicalchaser",
+        "Barrel Dragon",
+        "Cannon Soldier",
+        "Limiter Removal"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2001"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "amazoness-2002",
+      "year": 2002,
+      "title": "亚马逊战阵",
+      "en": "Amazoness Battle",
+      "ja": "アマゾネスの戦陣",
+      "ace": "Amazoness Swords Woman",
+      "description": "亚马逊剑士转移战斗伤害，贤者处理后场，弩弓与战斗支援组织部族进攻。",
+      "descriptionEn": "A 2002 adaptation: Amazoness Battle. Amazoness Swords Woman leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2002年のカードプールを使ったアマゾネスの戦陣のアレンジ。アマゾネスの剣士を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Amazoness Swords Woman",
+          3
+        ],
+        [
+          "Amazoness Paladin",
+          3
+        ],
+        [
+          "Amazoness Fighter",
+          3
+        ],
+        [
+          "Amazoness Archer",
+          3
+        ],
+        [
+          "Amazoness Blowpiper",
+          3
+        ],
+        [
+          "Amazoness Tiger",
+          3
+        ],
+        [
+          "Amazoness Spellcaster",
+          3
+        ],
+        [
+          "Reinforcement of the Army",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Amazoness Swords Woman",
+        "Amazoness Paladin",
+        "Amazoness Fighter",
+        "Amazoness Archer",
+        "Amazoness Blowpiper"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2002"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "xyz-union-2002",
+      "year": 2002,
+      "title": "XYZ联合",
+      "en": "XYZ Union",
+      "ja": "XYZユニオン",
+      "ace": "XYZ-Dragon Cannon",
+      "description": "XYZ以真实同盟装备和接触融合展开，前线基地提供联合素材。三个部件与各组合均保留额外信息。",
+      "descriptionEn": "A 2002 adaptation: XYZ Union. XYZ-Dragon Cannon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2002年のカードプールを使ったXYZユニオンのアレンジ。ＸＹＺ－ドラゴン・キャノンを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "X-Head Cannon",
+          3
+        ],
+        [
+          "Y-Dragon Head",
+          3
+        ],
+        [
+          "Z-Metal Tank",
+          3
+        ],
+        [
+          "Frontline Base",
+          3
+        ],
+        [
+          "Union Rider",
+          3
+        ],
+        [
+          "Limiter Removal",
+          3
+        ],
+        [
+          "Formation Union",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ],
+        [
+          "Change of Heart",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "XY-Dragon Cannon",
+          3
+        ],
+        [
+          "XZ-Tank Cannon",
+          3
+        ],
+        [
+          "YZ-Tank Dragon",
+          3
+        ],
+        [
+          "XYZ-Dragon Cannon",
+          3
+        ]
+      ],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "X-Head Cannon",
+        "Y-Dragon Head",
+        "Z-Metal Tank",
+        "Frontline Base",
+        "Union Rider"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2002"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "empty-jar-2002",
+      "year": 2002,
+      "title": "壶之牌库破坏",
+      "en": "Empty Jar",
+      "ja": "デッキ破壊",
+      "ace": "Morphing Jar",
+      "description": "反转壶与针虫消耗对方牌库，太阳之书和月之书控制反转时点。此构筑与比赛原表分开，不补猜缺失原表。",
+      "descriptionEn": "A 2002 adaptation: Empty Jar. Morphing Jar leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2002年のカードプールを使ったデッキ破壊のアレンジ。メタモルポットを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Morphing Jar",
+          3
+        ],
+        [
+          "Cyber Jar",
+          3
+        ],
+        [
+          "Needle Worm",
+          3
+        ],
+        [
+          "Book of Taiyou",
+          3
+        ],
+        [
+          "Book of Moon",
+          3
+        ],
+        [
+          "The Shallow Grave",
+          3
+        ],
+        [
+          "Spear Cretin",
+          3
+        ],
+        [
+          "Upstart Goblin",
+          3
+        ],
+        [
+          "Card Destruction",
+          1
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Morphing Jar",
+        "Cyber Jar",
+        "Needle Worm",
+        "Book of Taiyou",
+        "The Shallow Grave"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2002"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "ocean-2002",
+      "year": 2002,
+      "title": "水域压制",
+      "en": "Ocean Pressure",
+      "ja": "海の制圧",
+      "ace": "Amphibian Beast",
+      "description": "传说之都、水属性检索和龙卷海流壁控制战斗，与仪式、反转和守墓路线形成不同节奏。",
+      "descriptionEn": "A 2002 adaptation: Ocean Pressure. Amphibian Beast leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2002年のカードプールを使った海の制圧のアレンジ。半魚獣・フィッシャービーストを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "A Legendary Ocean",
+          3
+        ],
+        [
+          "Amphibian Beast",
+          3
+        ],
+        [
+          "7 Colored Fish",
+          3
+        ],
+        [
+          "Mother Grizzly",
+          3
+        ],
+        [
+          "Star Boy",
+          3
+        ],
+        [
+          "Penguin Soldier",
+          3
+        ],
+        [
+          "Tornado Wall",
+          3
+        ],
+        [
+          "The Legendary Fisherman",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "A Legendary Ocean",
+        "Amphibian Beast",
+        "7 Colored Fish",
+        "Mother Grizzly",
+        "Star Boy"
+      ],
+      "sourceKind": "period-pool-adaptation",
+      "sourceRefs": [
+        "pool-2002"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "hand-control-2003",
+      "year": 2003,
+      "title": "世界冠军路线 · 手牌控制",
+      "en": "World Champion Route · Hand Control",
+      "ja": "世界王者を参考に・ハンデス",
+      "ace": "Yata-Garasu",
+      "description": "2003世界赛前三均为手牌控制，保留一条冠军路线改编。押收、番兵与战斗命中怪兽争取资源差，缺失原表不作补猜。",
+      "descriptionEn": "A 2003 adaptation: World Champion Route · Hand Control. Yata-Garasu leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2003年のカードプールを使った世界王者を参考に・ハンデスのアレンジ。八汰烏を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Yata-Garasu",
+          1
+        ],
+        [
+          "Don Zaloog",
+          3
+        ],
+        [
+          "Spirit Reaper",
+          2
+        ],
+        [
+          "Kycoo the Ghost Destroyer",
+          2
+        ],
+        [
+          "D.D. Warrior Lady",
+          2
+        ],
+        [
+          "Breaker the Magical Warrior",
+          2
+        ],
+        [
+          "Magician of Faith",
+          2
+        ],
+        [
+          "Sangan",
+          2
+        ],
+        [
+          "Witch of the Black Forest",
+          2
+        ],
+        [
+          "Confiscation",
+          1
+        ],
+        [
+          "The Forceful Sentry",
+          1
+        ],
+        [
+          "Delinquent Duo",
+          1
+        ],
+        [
+          "Trap Dustshoot",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Yata-Garasu",
+        "Don Zaloog",
+        "Spirit Reaper",
+        "Kycoo the Ghost Destroyer",
+        "D.D. Warrior Lady"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2003"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "skill-drain-2003",
+      "year": 2003,
+      "title": "技能抽取强攻",
+      "en": "Skill Drain Beatdown",
+      "ja": "スキルドレイン・ビート",
+      "ace": "Giant Orc",
+      "description": "技能抽取与高攻击力怪兽形成场上封锁。以2003候选卡池重建强攻路线，不冒充世界赛冠亚季军。",
+      "descriptionEn": "A 2003 adaptation: Skill Drain Beatdown. Fusilier Dragon, the Dual-Mode Beast leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2003年のカードプールを使ったスキルドレイン・ビートのアレンジ。Fusilier Dragon, the Dual-Mode Beastを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Skill Drain",
+          3
+        ],
+        [
+          "Goblin Attack Force",
+          3
+        ],
+        [
+          "Giant Orc",
+          3
+        ],
+        [
+          "Dark Elf",
+          3
+        ],
+        [
+          "Zombyra the Dark",
+          3
+        ],
+        [
+          "Newdoria",
+          3
+        ],
+        [
+          "Giant Germ",
+          3
+        ],
+        [
+          "Rush Recklessly",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Skill Drain",
+        "Goblin Attack Force",
+        "Giant Orc",
+        "Dark Elf",
+        "Zombyra the Dark"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2003"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "countdown-2003",
+      "year": 2003,
+      "title": "终焉倒计时",
+      "en": "Final Countdown",
+      "ja": "終焉のカウントダウン",
+      "ace": "Final Countdown",
+      "description": "支付生命值启动终焉倒计时，以战斗防御、怪兽回手与拖延争取二十回合。属于明确的年代构筑改编。",
+      "descriptionEn": "A 2003 adaptation: Final Countdown. Final Countdown leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2003年のカードプールを使った終焉のカウントダウンのアレンジ。終焉のカウントダウンを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Final Countdown",
+          3
+        ],
+        [
+          "Zero Gravity",
+          3
+        ],
+        [
+          "Nimble Momonga",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ],
+        [
+          "Messenger of Peace",
+          3
+        ],
+        [
+          "Penguin Soldier",
+          3
+        ],
+        [
+          "Scapegoat",
+          3
+        ],
+        [
+          "Spirit Reaper",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ],
+        [
+          "Royal Decree",
+          1
+        ]
+      ],
+      "combo": [
+        "Final Countdown",
+        "Zero Gravity",
+        "Nimble Momonga",
+        "Messenger of Peace",
+        "Penguin Soldier"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2003"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "gravekeeper-2003",
+      "year": 2003,
+      "title": "守墓压制",
+      "en": "Gravekeeper Control",
+      "ja": "墓守コントロール",
+      "ace": "Gravekeeper's Chief",
+      "description": "守墓的王家长眠之谷压制墓地，反转检索与生者之书式本家复活维持资源；年度卡池与缺失赛事原表边界分开。",
+      "descriptionEn": "A 2003 adaptation: Gravekeeper Control. Gravekeeper's Chief leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2003年のカードプールを使った墓守コントロールのアレンジ。墓守の長を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Necrovalley",
+          3
+        ],
+        [
+          "Gravekeeper's Spy",
+          3
+        ],
+        [
+          "Gravekeeper's Guard",
+          3
+        ],
+        [
+          "Gravekeeper's Assailant",
+          3
+        ],
+        [
+          "Gravekeeper's Spear Soldier",
+          3
+        ],
+        [
+          "Gravekeeper's Chief",
+          2
+        ],
+        [
+          "Rite of Spirit",
+          3
+        ],
+        [
+          "Royal Tribute",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Necrovalley",
+        "Gravekeeper's Spy",
+        "Gravekeeper's Guard",
+        "Gravekeeper's Assailant",
+        "Gravekeeper's Spear Soldier"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2003"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "chaos-2004",
+      "year": 2004,
+      "title": "世界冠军路线 · 混沌",
+      "en": "World Champion Route · Chaos",
+      "ja": "世界王者を参考に・カオス",
+      "ace": "Black Luster Soldier - Envoy of the Beginning",
+      "description": "2004前三均为混沌，故只保留一条冠军路线。光暗墓地、反转抽卡与开辟使者形成资源循环。",
+      "descriptionEn": "A 2004 adaptation: World Champion Route · Chaos. Black Luster Soldier - Envoy of the Beginning leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2004年のカードプールを使った世界王者を参考に・カオスのアレンジ。カオス・ソルジャー －開闢の使者－を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Black Luster Soldier - Envoy of the Beginning",
+          1
+        ],
+        [
+          "Chaos Sorcerer",
+          2
+        ],
+        [
+          "Thunder Dragon",
+          3
+        ],
+        [
+          "Dekoichi the Battlechanted Locomotive",
+          3
+        ],
+        [
+          "Magician of Faith",
+          2
+        ],
+        [
+          "Tsukuyomi",
+          2
+        ],
+        [
+          "Shining Angel",
+          2
+        ],
+        [
+          "Mystic Tomato",
+          2
+        ],
+        [
+          "D.D. Warrior Lady",
+          2
+        ],
+        [
+          "Breaker the Magical Warrior",
+          1
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          3
+        ],
+        [
+          "Change of Heart",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Black Luster Soldier - Envoy of the Beginning",
+        "Chaos Sorcerer",
+        "Thunder Dragon",
+        "Dekoichi the Battlechanted Locomotive",
+        "Tsukuyomi"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2004"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "warrior-2004",
+      "year": 2004,
+      "title": "世界赛路线 · 战士",
+      "en": "Worlds Strategy · Warrior",
+      "ja": "世界大会を参考に・戦士",
+      "ace": "Blade Knight",
+      "description": "参考2004世界赛有记录的战士路线，增援选择战斗和除去工具，异次元女战士与流氓佣兵分别处理不同威胁。",
+      "descriptionEn": "A 2004 adaptation: Worlds Strategy · Warrior. Blade Knight leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2004年のカードプールを使った世界大会を参考に・戦士のアレンジ。ブレイドナイトを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Blade Knight",
+          3
+        ],
+        [
+          "D.D. Warrior Lady",
+          3
+        ],
+        [
+          "Exiled Force",
+          3
+        ],
+        [
+          "Marauding Captain",
+          3
+        ],
+        [
+          "Don Zaloog",
+          2
+        ],
+        [
+          "Mystic Swordsman LV2",
+          3
+        ],
+        [
+          "Reinforcement of the Army",
+          3
+        ],
+        [
+          "The Warrior Returning Alive",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Blade Knight",
+        "D.D. Warrior Lady",
+        "Exiled Force",
+        "Marauding Captain",
+        "Don Zaloog"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2004"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "gren-maju-2004",
+      "year": 2004,
+      "title": "世界赛路线 · 红莲魔兽",
+      "en": "Worlds Strategy · Gren Maju",
+      "ja": "世界大会を参考に・紅蓮魔獣",
+      "ace": "Gren Maju Da Eiza",
+      "description": "2004世界赛记录有红莲魔兽路线。用真实除外区累积攻击力，魂吸收、异次元侦察机和回归卡保持资源。",
+      "descriptionEn": "A 2004 adaptation: Worlds Strategy · Gren Maju. Gren Maju Da Eiza leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2004年のカードプールを使った世界大会を参考に・紅蓮魔獣のアレンジ。紅蓮魔獣 ダ・イーザを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Gren Maju Da Eiza",
+          3
+        ],
+        [
+          "Banisher of the Light",
+          3
+        ],
+        [
+          "D.D. Scout Plane",
+          3
+        ],
+        [
+          "Soul Absorption",
+          3
+        ],
+        [
+          "Soul Release",
+          3
+        ],
+        [
+          "Bazoo the Soul-Eater",
+          3
+        ],
+        [
+          "Dimension Fusion",
+          2
+        ],
+        [
+          "Return from the Different Dimension",
+          2
+        ],
+        [
+          "Different Dimension Capsule",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Gren Maju Da Eiza",
+        "Banisher of the Light",
+        "D.D. Scout Plane",
+        "Soul Absorption",
+        "Soul Release"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2004"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "burn-2004",
+      "year": 2004,
+      "title": "波动炮守势",
+      "en": "Wave-Motion Burn",
+      "ja": "波動キャノン・バーン",
+      "ace": "Wave-Motion Cannon",
+      "description": "以波动炮的真实回合计数配合熔岩魔神和反转伤害，依靠低等级战斗限制保护积累。",
+      "descriptionEn": "A 2004 adaptation: Wave-Motion Burn. Wave-Motion Cannon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2004年のカードプールを使った波動キャノン・バーンのアレンジ。波動キャノンを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Lava Golem",
+          3
+        ],
+        [
+          "Stealth Bird",
+          3
+        ],
+        [
+          "Des Koala",
+          3
+        ],
+        [
+          "Wave-Motion Cannon",
+          3
+        ],
+        [
+          "Level Limit - Area B",
+          3
+        ],
+        [
+          "Gravity Bind",
+          3
+        ],
+        [
+          "Just Desserts",
+          3
+        ],
+        [
+          "Secret Barrel",
+          3
+        ],
+        [
+          "Magic Cylinder",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          2
+        ]
+      ],
+      "combo": [
+        "Lava Golem",
+        "Stealth Bird",
+        "Des Koala",
+        "Wave-Motion Cannon",
+        "Level Limit - Area B"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2004"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "nephthys-chaos-2005",
+      "year": 2005,
+      "title": "世界冠军路线 · 凤凰变形混沌",
+      "en": "World Champion Route · Nephthys Metamorphosis Chaos",
+      "ja": "世界王者を参考に・ネフティス変異カオス",
+      "ace": "Sacred Phoenix of Nephthys",
+      "description": "参考Miltiadis Markou世界冠军路线。凤凰破后场、替罪羊与突然变异补充融合，光暗墓地提供混沌终结。",
+      "descriptionEn": "A 2005 adaptation: World Champion Route · Nephthys Metamorphosis Chaos. Sacred Phoenix of Nephthys leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2005年のカードプールを使った世界王者を参考に・ネフティス変異カオスのアレンジ。ネフティスの鳳凰神を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Sacred Phoenix of Nephthys",
+          2
+        ],
+        [
+          "Hand of Nephthys",
+          3
+        ],
+        [
+          "Black Luster Soldier - Envoy of the Beginning",
+          1
+        ],
+        [
+          "Chaos Sorcerer",
+          1
+        ],
+        [
+          "Magician of Faith",
+          2
+        ],
+        [
+          "Tsukuyomi",
+          2
+        ],
+        [
+          "Asura Priest",
+          1
+        ],
+        [
+          "Breaker the Magical Warrior",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Dekoichi the Battlechanted Locomotive",
+          2
+        ],
+        [
+          "Scapegoat",
+          3
+        ],
+        [
+          "Metamorphosis",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Swords of Revealing Light",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Thousand-Eyes Restrict",
+          3
+        ],
+        [
+          "Dark Balter the Terrible",
+          3
+        ],
+        [
+          "Ryu Senshi",
+          3
+        ],
+        [
+          "Reaper on the Nightmare",
+          3
+        ],
+        [
+          "Fiend Skull Dragon",
+          3
+        ]
+      ],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Sacred Phoenix of Nephthys",
+        "Hand of Nephthys",
+        "Black Luster Soldier - Envoy of the Beginning",
+        "Chaos Sorcerer",
+        "Tsukuyomi"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2005"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "deck-destruction-2005",
+      "year": 2005,
+      "title": "世界亚军路线 · 牌库破坏",
+      "en": "World Finalist Route · Deck Destruction",
+      "ja": "世界準優勝を参考に・デッキ破壊",
+      "ace": "Morphing Jar",
+      "description": "参考Jorge Fabian Pina Lizarraga世界亚军的牌库破坏路线，反转壶、针虫和盖放／翻转工具消耗牌库。",
+      "descriptionEn": "A 2005 adaptation: World Finalist Route · Deck Destruction. Morphing Jar leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2005年のカードプールを使った世界準優勝を参考に・デッキ破壊のアレンジ。メタモルポットを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Morphing Jar",
+          3
+        ],
+        [
+          "Cyber Jar",
+          3
+        ],
+        [
+          "Needle Worm",
+          3
+        ],
+        [
+          "Book of Taiyou",
+          3
+        ],
+        [
+          "Book of Moon",
+          3
+        ],
+        [
+          "The Shallow Grave",
+          3
+        ],
+        [
+          "A Feather of the Phoenix",
+          3
+        ],
+        [
+          "Upstart Goblin",
+          3
+        ],
+        [
+          "Card Destruction",
+          1
+        ],
+        [
+          "Spear Cretin",
+          2
+        ],
+        [
+          "Reload",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Solemn Judgment",
+          1
+        ]
+      ],
+      "combo": [
+        "Morphing Jar",
+        "Cyber Jar",
+        "Needle Worm",
+        "Book of Taiyou",
+        "The Shallow Grave"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2005"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "machine-chaos-2005",
+      "year": 2005,
+      "title": "世界季军路线 · 机械混沌",
+      "en": "World Third-Place Route · Machine Chaos",
+      "ja": "世界3位を参考に・マシンカオス",
+      "ace": "Cyber Twin Dragon",
+      "description": "参考David Kretschmer季军机械混沌。电子龙和机械族配合限制解除，光暗墓地与混沌怪兽补充进攻。",
+      "descriptionEn": "A 2005 adaptation: World Third-Place Route · Machine Chaos. Cyber Twin Dragon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2005年のカードプールを使った世界3位を参考に・マシンカオスのアレンジ。サイバー・ツイン・ドラゴンを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Cyber Dragon",
+          3
+        ],
+        [
+          "Dekoichi the Battlechanted Locomotive",
+          3
+        ],
+        [
+          "Black Luster Soldier - Envoy of the Beginning",
+          1
+        ],
+        [
+          "Chaos Sorcerer",
+          2
+        ],
+        [
+          "Reflect Bounder",
+          2
+        ],
+        [
+          "Jinzo",
+          1
+        ],
+        [
+          "Magician of Faith",
+          2
+        ],
+        [
+          "Tsukuyomi",
+          1
+        ],
+        [
+          "Cyber-Stein",
+          1
+        ],
+        [
+          "Shining Angel",
+          2
+        ],
+        [
+          "Mystic Tomato",
+          2
+        ],
+        [
+          "Limiter Removal",
+          1
+        ],
+        [
+          "Metamorphosis",
+          2
+        ],
+        [
+          "Power Bond",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Cyber Twin Dragon",
+          3
+        ],
+        [
+          "Cyber End Dragon",
+          3
+        ],
+        [
+          "Thousand-Eyes Restrict",
+          3
+        ],
+        [
+          "Dark Balter the Terrible",
+          3
+        ],
+        [
+          "Ryu Senshi",
+          3
+        ]
+      ],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          2
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ]
+      ],
+      "combo": [
+        "Cyber Dragon",
+        "Dekoichi the Battlechanted Locomotive",
+        "Black Luster Soldier - Envoy of the Beginning",
+        "Chaos Sorcerer",
+        "Reflect Bounder"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2005"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "burn-2005",
+      "year": 2005,
+      "title": "世界十六强路线 · 效果伤害",
+      "en": "World Top 16 Route · Burn",
+      "ja": "世界ベスト16を参考に・バーン",
+      "ace": "Lava Golem",
+      "description": "参考Cindie Jean Uddstrom世界十六强的伤害路线，熔岩魔神解放对方怪兽，反转伤害与波动炮争取终结。",
+      "descriptionEn": "A 2005 adaptation: World Top 16 Route · Burn. Lava Golem leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2005年のカードプールを使った世界ベスト16を参考に・バーンのアレンジ。溶岩魔神ラヴァ・ゴーレムを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Lava Golem",
+          3
+        ],
+        [
+          "Stealth Bird",
+          3
+        ],
+        [
+          "Des Koala",
+          3
+        ],
+        [
+          "Wave-Motion Cannon",
+          3
+        ],
+        [
+          "Level Limit - Area B",
+          3
+        ],
+        [
+          "Gravity Bind",
+          3
+        ],
+        [
+          "Just Desserts",
+          3
+        ],
+        [
+          "Secret Barrel",
+          3
+        ],
+        [
+          "Magic Cylinder",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          2
+        ]
+      ],
+      "combo": [
+        "Lava Golem",
+        "Stealth Bird",
+        "Des Koala",
+        "Wave-Motion Cannon",
+        "Level Limit - Area B"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2005"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "darkworld-2006",
+      "year": 2006,
+      "title": "世界亚军路线 · 暗黑界",
+      "en": "World Finalist Route · Dark World",
+      "ja": "世界準優勝を参考に・暗黒界",
+      "ace": "Goldd, Wu-Lord of Dark World",
+      "description": "参考2006亚军暗黑界混沌的暗黑界核心。保留效果弃牌与复活展开，采用本家集中改编，避免与年度纯混沌同质。",
+      "descriptionEn": "A 2006 adaptation: World Finalist Route · Dark World. Goldd, Wu-Lord of Dark World leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2006年のカードプールを使った世界準優勝を参考に・暗黒界のアレンジ。暗黒界の武神 ゴルドを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Goldd, Wu-Lord of Dark World",
+          3
+        ],
+        [
+          "Sillva, Warlord of Dark World",
+          3
+        ],
+        [
+          "Broww, Huntsman of Dark World",
+          3
+        ],
+        [
+          "Beiige, Vanguard of Dark World",
+          3
+        ],
+        [
+          "Brron, Mad King of Dark World",
+          2
+        ],
+        [
+          "Dark World Lightning",
+          3
+        ],
+        [
+          "Gateway to Dark World",
+          2
+        ],
+        [
+          "Dark Deal",
+          2
+        ],
+        [
+          "Card Destruction",
+          1
+        ],
+        [
+          "Graceful Charity",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Goldd, Wu-Lord of Dark World",
+        "Sillva, Warlord of Dark World",
+        "Broww, Huntsman of Dark World",
+        "Beiige, Vanguard of Dark World",
+        "Brron, Mad King of Dark World"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2006"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "gadget-2006",
+      "year": 2006,
+      "title": "年度预选路线 · 齿轮",
+      "en": "Annual Qualifier Strategy · Gadget",
+      "ja": "年度予選を参考に・ガジェット",
+      "ace": "Green Gadget",
+      "description": "2006来源明确指出日本齿轮牌表来自预选赛而非世界赛。三色齿轮持续检索，以单卡除去和陷阱保护通常召唤。",
+      "descriptionEn": "A 2006 adaptation: Annual Qualifier Strategy · Gadget. Green Gadget leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2006年のカードプールを使った年度予選を参考に・ガジェットのアレンジ。グリーン・ガジェットを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Green Gadget",
+          3
+        ],
+        [
+          "Red Gadget",
+          3
+        ],
+        [
+          "Yellow Gadget",
+          3
+        ],
+        [
+          "Cyber Dragon",
+          3
+        ],
+        [
+          "Dekoichi the Battlechanted Locomotive",
+          3
+        ],
+        [
+          "Smashing Ground",
+          3
+        ],
+        [
+          "Fissure",
+          3
+        ],
+        [
+          "Sakuretsu Armor",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Green Gadget",
+        "Red Gadget",
+        "Yellow Gadget",
+        "Cyber Dragon",
+        "Dekoichi the Battlechanted Locomotive"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2006"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "zombie-2007",
+      "year": 2007,
+      "title": "世界赛路线 · 不死族",
+      "en": "Worlds Strategy · Zombie",
+      "ja": "世界大会を参考に・アンデット",
+      "ace": "Il Blud",
+      "description": "参考2007世界赛有记录的不死族路线，以金字塔龟、僵尸主与生者之书维持墓地循环，保留其不同于帝与机械的资源方式。",
+      "descriptionEn": "A 2007 adaptation: Worlds Strategy · Zombie. Il Blud leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2007年のカードプールを使った世界大会を参考に・アンデットのアレンジ。地獄の門番イル・ブラッドを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Zombie Master",
+          3
+        ],
+        [
+          "Pyramid Turtle",
+          3
+        ],
+        [
+          "Goblin Zombie",
+          3
+        ],
+        [
+          "Despair from the Dark",
+          2
+        ],
+        [
+          "Ryu Kokki",
+          2
+        ],
+        [
+          "Mezuki",
+          3
+        ],
+        [
+          "Book of Life",
+          3
+        ],
+        [
+          "Card of Safe Return",
+          2
+        ],
+        [
+          "Creature Swap",
+          2
+        ],
+        [
+          "Spirit Reaper",
+          1
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ],
+        [
+          "Trap Hole",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          1
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "combo": [
+        "Zombie Master",
+        "Pyramid Turtle",
+        "Goblin Zombie",
+        "Despair from the Dark",
+        "Ryu Kokki"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2007"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "demise-2007",
+      "year": 2007,
+      "title": "年度仪式路线 · 终焉",
+      "en": "Annual Ritual Strategy · Demise",
+      "ja": "年度儀式・デミス",
+      "ace": "Demise, King of Armageddon",
+      "description": "以高等仪式术送墓通常昆虫、终焉之王支付生命值清场，再以究极昆虫资源和巨大化推进攻击；按年代候选卡池改编，不标注未核实名次。",
+      "descriptionEn": "A 2007 adaptation: Annual Ritual Strategy · Demise. Demise, King of Armageddon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2007年のカードプールを使った年度儀式・デミスのアレンジ。終焉の王デミスを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Demise, King of Armageddon",
+          3
+        ],
+        [
+          "End of the World",
+          3
+        ],
+        [
+          "Manju of the Ten Thousand Hands",
+          3
+        ],
+        [
+          "Senju of the Thousand Hands",
+          2
+        ],
+        [
+          "Sonic Bird",
+          2
+        ],
+        [
+          "Advanced Ritual Art",
+          3
+        ],
+        [
+          "Metal Armored Bug",
+          3
+        ],
+        [
+          "Insect Knight",
+          3
+        ],
+        [
+          "Doom Dozer",
+          3
+        ],
+        [
+          "Megamorph",
+          2
+        ],
+        [
+          "Trade-In",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ]
+      ],
+      "combo": [
+        "Demise, King of Armageddon",
+        "End of the World",
+        "Manju of the Ten Thousand Hands",
+        "Senju of the Thousand Hands",
+        "Sonic Bird"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "pool-2007"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "dimensional-beat-2008",
+      "year": 2008,
+      "title": "世界八强路线 · 次元强攻",
+      "en": "World Top 8 Route · Dimensional Beat",
+      "ja": "世界ベスト8を参考に・次元ビート",
+      "ace": "Beast King Barbaros",
+      "description": "参考Ahn Jung-Ho世界八强的次元技能抽取。高攻怪兽、次元裂缝和技能抽取形成与展开套牌不同的控制节奏。",
+      "descriptionEn": "A 2008 adaptation: World Top 8 Route · Dimensional Beat. Beast King Barbaros leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2008年のカードプールを使った世界ベスト8を参考に・次元ビートのアレンジ。神獣王バルバロスを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Beast King Barbaros",
+          3
+        ],
+        [
+          "Fossil Dyna Pachycephalo",
+          3
+        ],
+        [
+          "Thunder King Rai-Oh",
+          3
+        ],
+        [
+          "D.D. Survivor",
+          3
+        ],
+        [
+          "D.D. Scout Plane",
+          2
+        ],
+        [
+          "Banisher of the Radiance",
+          3
+        ],
+        [
+          "Skill Drain",
+          3
+        ],
+        [
+          "Dimensional Fissure",
+          3
+        ],
+        [
+          "Macro Cosmos",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          2
+        ]
+      ],
+      "combo": [
+        "Beast King Barbaros",
+        "Fossil Dyna Pachycephalo",
+        "Thunder King Rai-Oh",
+        "D.D. Survivor",
+        "D.D. Scout Plane"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2008"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    },
+    {
+      "id": "gravekeeper-burn-2008",
+      "year": 2008,
+      "title": "世界八强路线 · 守墓伤害",
+      "en": "World Top 8 Route · Gravekeeper Burn",
+      "ja": "世界ベスト8を参考に・墓守バーン",
+      "ace": "Gravekeeper's Spy",
+      "description": "参考Chris Gehring世界八强的守墓伤害。守墓反转和王家长眠之谷建立防线，熔岩魔神与反转伤害推进胜利。",
+      "descriptionEn": "A 2008 adaptation: World Top 8 Route · Gravekeeper Burn. Gravekeeper's Spy leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2008年のカードプールを使った世界ベスト8を参考に・墓守バーンのアレンジ。墓守の偵察者を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Gravekeeper's Spy",
+          3
+        ],
+        [
+          "Gravekeeper's Guard",
+          3
+        ],
+        [
+          "Gravekeeper's Assailant",
+          2
+        ],
+        [
+          "Gravekeeper's Chief",
+          1
+        ],
+        [
+          "Gravekeeper's Curse",
+          2
+        ],
+        [
+          "Des Koala",
+          3
+        ],
+        [
+          "Lava Golem",
+          3
+        ],
+        [
+          "Stealth Bird",
+          3
+        ],
+        [
+          "Just Desserts",
+          3
+        ],
+        [
+          "Wave-Motion Cannon",
+          2
+        ],
+        [
+          "Necrovalley",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Dust Tornado",
+          3
+        ],
+        [
+          "Seven Tools of the Bandit",
+          3
+        ],
+        [
+          "Magic Jammer",
+          3
+        ],
+        [
+          "Trap Hole",
+          3
+        ],
+        [
+          "Waboku",
+          3
+        ]
+      ],
+      "combo": [
+        "Gravekeeper's Spy",
+        "Gravekeeper's Guard",
+        "Gravekeeper's Assailant",
+        "Gravekeeper's Chief",
+        "Gravekeeper's Curse"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2008"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "No full Side Deck was supplied with this game adaptation; the 15-card Side below is an explicit game adaptation, not a reconstructed player original."
+    }
+  ]
+}

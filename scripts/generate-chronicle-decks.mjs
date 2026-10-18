@@ -5,7 +5,7 @@ import {dirname,resolve,join} from 'node:path';
 import {writeAtomic} from './lib/io.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),require=createRequire(import.meta.url),D=require('../src/early-cards.js');
 require('../src/advanced-engine.js');
-const sourceFiles=(await readdir(join(root,'data'))).filter(name=>name==='decks-2009-2012.json'||/^decks-\d{4}\.json$/.test(name)&&Number(name.slice(6,10))>=2013).sort();
+const sourceFiles=(await readdir(join(root,'data'))).filter(name=>['decks-1999-2008.json','decks-2009-2012.json'].includes(name)||/^decks-\d{4}\.json$/.test(name)&&Number(name.slice(6,10))>=2013).sort();
 const inputs=await Promise.all(sourceFiles.map(name=>readFile(join(root,'data',name),'utf8').then(JSON.parse)));
 const input={scope:inputs.flatMap(i=>i.scope),decks:inputs.flatMap(i=>i.decks),sources:inputs.flatMap(i=>i.sources)};
 const sideReport=[];
@@ -22,11 +22,12 @@ const decks=input.decks.map(row=>{
  if((cards.length<40||cards.length>60)||extra.length>15||!ace)throw Error('Invalid deck size or ace: '+row.id);
  const counts=new Map();for(const id of [...cards,...extra])counts.set(id,(counts.get(id)||0)+1);if([...counts.values()].some(n=>n>3))throw Error('Combined copy limit: '+row.id);
  const side=[];for(const [name,n] of row.side||[]){const c=D.cardByName(name);let reason=!c?'unknown':c.implementationStatus==='pending'?'pending':!c.releaseYear||c.releaseYear>row.year?'future':null;const used=c?[...cards,...extra,...side].filter(id=>{const a=D.CARDS[id];return (a.nameAlias||a.officialName||a.en||a.name)===(c.nameAlias||c.officialName||c.en||c.name);}).length:0;if(!reason&&(used+n>3||side.length+n>15))reason='limit';if(reason)sideReport.push({deck:row.id,name,count:n,reason});else side.push(...Array(n).fill(c.id));}
- if(row.year>=2017&&sideReport.some(r=>r.deck===row.id))throw Error('Unavailable or invalid side deck card: '+row.id);
+ if(sideReport.some(r=>r.deck===row.id)||side.length!==15)throw Error('Expected a complete, available 15-card Side Deck: '+row.id);
  return {side,sideSourceCount:(row.side||[]).reduce((n,p)=>n+p[1],0),id:row.id,name:row.title+' · '+row.year,en:row.en.toUpperCase(),ace:ace.id,mechanic:row.year+' / '+row.title,description:row.description,player:row.title,avatar:'early',subtitle:'重返这一年的决斗现场。',preset:true,year:row.year,sourceKind:row.sourceKind,sourceRefs:row.sourceRefs,cards,extra,combo:row.combo};
 });
-// Preserve delivered yearly scope; 2024 is authorized for at least three distinct builds.
-for(const file of inputs)for(const year of file.scope){const minimum=year===2023||year>=2017&&year<=2020?5:3;if(file.decks.filter(d=>d.year===year).length<minimum)throw Error('Expected at least '+minimum+' decks for '+year+' in one source file');}
+// The current user requirement applies to every collected year, including the
+// early years and older batches which previously delivered only three builds.
+for(const year of D.earlyYears)if(input.decks.filter(d=>d.year===year).length!==5)throw Error('Expected five annual decks for '+year);
 if(new Set(decks.map(d=>d.id)).size!==decks.length)throw Error('Duplicate annual deck id');
 const safe=v=>JSON.stringify(v).replace(/</g,'\\u003c');
 await writeAtomic(join(root,'src/chronicle-decks.js'),`/* Generated from the data/decks-*.json rollout tables. */\n(function(root){'use strict';const D=root.DuelData;if(D.chronicleDecksLoaded)return;for(const deck of ${safe(decks)})D.DECKS[deck.id]=deck;D.chronicleDecksLoaded=true;if(typeof module!=='undefined')module.exports=D;})(globalThis);\n`);

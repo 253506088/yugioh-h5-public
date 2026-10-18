@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),{pathToFileURL}=require('node:url');
 const {chromium}=require('playwright');
-const root=path.resolve(__dirname,'..'),out=path.join(root,'output/rule-modes'),checks=[],errors=[];
+const root=path.resolve(__dirname,'..'),out=path.resolve(root,process.env.DUEL_BROWSER_OUTPUT||'output/rule-modes'),checks=[],errors=[];
 (async()=>{
   await fs.mkdir(out,{recursive:true});const browser=await chromium.launch({headless:true,executablePath:process.env.DUEL_BROWSER||'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',args:['--mute-audio']});
   try{

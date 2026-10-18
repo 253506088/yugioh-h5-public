@@ -20,6 +20,13 @@
       "title": "OCG 2015.10 Metagame (1 Oct – 31 Dec 2015)",
       "accessed": "2026-09-24",
       "evidence": "309 Performapal Performage finishes, including 308 Performapal Performage and 1 Performapal Performage Magician. Used as the varied third strategy because second and third at Worlds both used Nekroz; representative year-end build, not a Worlds third-place list."
+    },
+    {
+      "id": "q10-2015",
+      "url": "https://roadoftheking.com/ocg-2015-10-metagame/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "60ba02bc450c5671013ccd524655e2f4f8f7febacf54e15f740c485b325a90ec",
+      "evidenceSummary": "Year-end OCG environment, including Monarch as an alternative to Performapal Performage."
     }
   ],
   "decks": [
@@ -589,7 +596,372 @@
           1
         ]
       ],
-      "side": []
+      "side": [
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          1
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Artifact Lancea",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ]
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription."
+    },
+    {
+      "id": "monarch-2015",
+      "year": 2015,
+      "title": "年度热门 · 真帝王",
+      "en": "Annual Favorite · Monarch",
+      "ja": "年度人気・真帝王",
+      "ace": "Erebus the Underworld Monarch",
+      "description": "参考2015年末帝王路线。家臣提供额外解放召唤，泛神与真源循环资源，空额外卡组保留真帝王领域的适用条件。",
+      "descriptionEn": "A 2015 adaptation: Annual Favorite · Monarch. Erebus the Underworld Monarch leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2015年のカードプールを使った年度人気・真帝王のアレンジ。冥帝エレボスを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Edea the Heavenly Squire",
+          3
+        ],
+        [
+          "Eidos the Underworld Squire",
+          3
+        ],
+        [
+          "Ehther the Heavenly Monarch",
+          3
+        ],
+        [
+          "Erebus the Underworld Monarch",
+          3
+        ],
+        [
+          "Caius the Mega Monarch",
+          2
+        ],
+        [
+          "Kuraz the Light Monarch",
+          2
+        ],
+        [
+          "Majesty's Fiend",
+          2
+        ],
+        [
+          "Tenacity of the Monarchs",
+          3
+        ],
+        [
+          "Pantheism of the Monarchs",
+          3
+        ],
+        [
+          "Return of the Monarchs",
+          2
+        ],
+        [
+          "The Monarchs Stormforth",
+          3
+        ],
+        [
+          "Domain of the True Monarchs",
+          3
+        ],
+        [
+          "The Prime Monarch",
+          3
+        ],
+        [
+          "March of the Monarchs",
+          1
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "Artifact Lancea",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          1
+        ]
+      ],
+      "combo": [
+        "Edea the Heavenly Squire",
+        "Eidos the Underworld Squire",
+        "Ehther the Heavenly Monarch",
+        "Erebus the Underworld Monarch",
+        "Caius the Mega Monarch"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "q10-2015"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription."
+    },
+    {
+      "id": "hero-2015",
+      "year": 2015,
+      "title": "世界八强路线 · 假面HERO",
+      "en": "World Top 8 Route · Masked HERO",
+      "ja": "世界ベスト8を参考に・マスクドHERO",
+      "ace": "Masked HERO Dark Law",
+      "description": "参考2015世界八强及多位世界赛HERO选手。影雾女郎寻找假面变化，暗爪干扰墓地，奇迹融合与绝对零度提供另一条终结路线。",
+      "descriptionEn": "A 2015 adaptation: World Top 8 Route · Masked HERO. Masked HERO Dark Law leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2015年のカードプールを使った世界ベスト8を参考に・マスクドHEROのアレンジ。Ｍ・ＨＥＲＯ ダーク・ロウを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Elemental HERO Shadow Mist",
+          3
+        ],
+        [
+          "Elemental HERO Bubbleman",
+          2
+        ],
+        [
+          "Elemental HERO Neos Alius",
+          2
+        ],
+        [
+          "Goblindbergh",
+          2
+        ],
+        [
+          "Summoner Monk",
+          2
+        ],
+        [
+          "E - Emergency Call",
+          3
+        ],
+        [
+          "A Hero Lives",
+          3
+        ],
+        [
+          "Mask Change",
+          3
+        ],
+        [
+          "Polymerization",
+          1
+        ],
+        [
+          "Miracle Fusion",
+          2
+        ],
+        [
+          "Reinforcement of the Army",
+          3
+        ],
+        [
+          "Mask Charge",
+          1
+        ],
+        [
+          "Form Change",
+          1
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Masked HERO Dark Law",
+          3
+        ],
+        [
+          "Masked HERO Anki",
+          2
+        ],
+        [
+          "Masked HERO Koga",
+          1
+        ],
+        [
+          "Masked HERO Acid",
+          1
+        ],
+        [
+          "Masked HERO Dian",
+          1
+        ],
+        [
+          "Elemental HERO Absolute Zero",
+          2
+        ],
+        [
+          "Elemental HERO The Shining",
+          1
+        ],
+        [
+          "Elemental HERO Escuridao",
+          1
+        ],
+        [
+          "Elemental HERO Nova Master",
+          1
+        ],
+        [
+          "Elemental HERO Great Tornado",
+          1
+        ],
+        [
+          "Masked HERO Divine Wind",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Lancea",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          1
+        ]
+      ],
+      "combo": [
+        "Elemental HERO Shadow Mist",
+        "Elemental HERO Bubbleman",
+        "Elemental HERO Neos Alius",
+        "Goblindbergh",
+        "Summoner Monk"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2015"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription."
     }
   ]
 }

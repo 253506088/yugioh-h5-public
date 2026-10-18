@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 640 个身份：32 个可用（2 个复用），608 个待实现。来源和具体范围见 [批次交接](../交接/2021批次交接.md)。
+当前 640 个身份：33 个可用（28 个效果实现、3 个基础规则、2 个复用），607 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2021批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2021`。
 
@@ -10,38 +10,39 @@
 
 | 密码 | 中文名 | 英文名 | 状态 / 适配说明 |
 | --- | --- | --- | --- |
-| 3544583 | 无之毕竟 | Allvain the Essence of Vanity | 已登记本作实现 |
+| 3544583 | 无之毕竟 | Allvain the Essence of Vanity | 基础规则（无卡片效果） |
 | 4647954 | 异热同心从者-升华贤者 | ZS - Ascended Sage | 复用既有实现 |
 | 8264361 | 暗影之暗灵使 达克 | Dharc the Dark Charmer, Gloomy | 复用既有实现 |
-| 14821890 | 相剑暗转 | Swordsoul Blackout | 已登记本作实现 |
-| 17827173 | 随风旅鸟×巨嘴鸟 | Floowandereeze & Toccan | 已登记本作实现 |
-| 18940725 | 随风旅鸟×知更鸟 | Floowandereeze & Robina | 已登记本作实现 |
-| 20001443 | 相剑师-莫邪 | Swordsoul of Mo Ye | 已登记本作实现 |
-| 24639891 | 舍利军贯 | Gunkan Suship Shari | 已登记本作实现 |
-| 28126717 | 随风旅鸟与谜之地图 | Floowandereeze and the Magnificent Map | 已登记本作实现 |
-| 29884951 | 相剑瑞兽-纯钧 | Swordsoul Auspice Chunjun | 已登记本作实现 |
-| 40139997 | 红莲蔷薇龙 | Ruddy Rose Dragon | 已登记本作实现 |
-| 41215808 | 随风旅鸟与梦之町 | Floowandereeze and the Dreaming Town | 已登记本作实现 |
-| 47163170 | 铁兽战线 块击之蓝辉熊 | Tri-Brigade Bearbrumm the Rampant Rampager | 已登记本作实现 |
-| 47710198 | 相剑大邪-七星龙渊 | Swordsoul Sinister Sovereign - Qixing Longyuan | 已登记本作实现 |
-| 53212882 | 随风旅鸟×雪猫头鹰 | Floowandereeze & Snowl | 已登记本作实现 |
-| 54334420 | 随风旅鸟×白头鹰 | Floowandereeze & Eglen | 已登记本作实现 |
-| 55273560 | 白之圣女 艾克莉西娅 | Incredible Ecclesia, the Virtuous | 已登记本作实现 |
-| 55521751 | 随风旅鸟与未知之风 | Floowandereeze and the Unexplored Winds | 已登记本作实现 |
-| 56465981 | 龙相剑现 | Swordsoul Emergence | 已登记本作实现 |
-| 56495147 | 相剑师-泰阿 | Swordsoul of Taia | 已登记本作实现 |
-| 69087397 | 随风旅鸟与旅行准备 | Floowandereeze and the Advent of Adventure | 已登记本作实现 |
-| 69248256 | 相剑大师-赤霄 | Swordsoul Grandmaster - Chixiao | 已登记本作实现 |
-| 77610503 | 随风旅鸟与恐怖之海 | Floowandereeze and the Scary Sea | 已登记本作实现 |
-| 78836195 | 瑞相剑究 | Swordsoul Assessment | 已登记本作实现 |
-| 80433039 | 随风旅鸟×鸵鸟 | Floowandereeze & Stri | 已登记本作实现 |
-| 80611581 | 随风旅鸟×帝企 | Floowandereeze & Empen | 已登记本作实现 |
-| 84815190 | 鲜花女男爵 | Baronne de Fleur | 已登记本作实现 |
-| 93490856 | 相剑军师-龙渊 | Swordsoul Strategist Longyuan | 已登记本作实现 |
-| 93850690 | 大灵峰相剑门 | Swordsoul Sacred Summit | 已登记本作实现 |
+| 9726840 | 闪刀起动-连刀 | Sky Striker Mobilize - Linkage! | 已登记本作效果实现 |
+| 14821890 | 相剑暗转 | Swordsoul Blackout | 已登记本作效果实现 |
+| 17827173 | 随风旅鸟×巨嘴鸟 | Floowandereeze & Toccan | 已登记本作效果实现 |
+| 18940725 | 随风旅鸟×知更鸟 | Floowandereeze & Robina | 已登记本作效果实现 |
+| 20001443 | 相剑师-莫邪 | Swordsoul of Mo Ye | 已登记本作效果实现 |
+| 24639891 | 舍利军贯 | Gunkan Suship Shari | 基础规则（无卡片效果） |
+| 28126717 | 随风旅鸟与谜之地图 | Floowandereeze and the Magnificent Map | 已登记本作效果实现 |
+| 29884951 | 相剑瑞兽-纯钧 | Swordsoul Auspice Chunjun | 已登记本作效果实现 |
+| 40139997 | 红莲蔷薇龙 | Ruddy Rose Dragon | 已登记本作效果实现 |
+| 41215808 | 随风旅鸟与梦之町 | Floowandereeze and the Dreaming Town | 已登记本作效果实现 |
+| 47163170 | 铁兽战线 块击之蓝辉熊 | Tri-Brigade Bearbrumm the Rampant Rampager | 已登记本作效果实现 |
+| 47710198 | 相剑大邪-七星龙渊 | Swordsoul Sinister Sovereign - Qixing Longyuan | 已登记本作效果实现 |
+| 53212882 | 随风旅鸟×雪猫头鹰 | Floowandereeze & Snowl | 已登记本作效果实现 |
+| 54334420 | 随风旅鸟×白头鹰 | Floowandereeze & Eglen | 已登记本作效果实现 |
+| 55273560 | 白之圣女 艾克莉西娅 | Incredible Ecclesia, the Virtuous | 已登记本作效果实现 |
+| 55521751 | 随风旅鸟与未知之风 | Floowandereeze and the Unexplored Winds | 已登记本作效果实现 |
+| 56465981 | 龙相剑现 | Swordsoul Emergence | 已登记本作效果实现 |
+| 56495147 | 相剑师-泰阿 | Swordsoul of Taia | 已登记本作效果实现 |
+| 69087397 | 随风旅鸟与旅行准备 | Floowandereeze and the Advent of Adventure | 已登记本作效果实现 |
+| 69248256 | 相剑大师-赤霄 | Swordsoul Grandmaster - Chixiao | 已登记本作效果实现 |
+| 77610503 | 随风旅鸟与恐怖之海 | Floowandereeze and the Scary Sea | 已登记本作效果实现 |
+| 78836195 | 瑞相剑究 | Swordsoul Assessment | 已登记本作效果实现 |
+| 80433039 | 随风旅鸟×鸵鸟 | Floowandereeze & Stri | 已登记本作效果实现 |
+| 80611581 | 随风旅鸟×帝企 | Floowandereeze & Empen | 已登记本作效果实现 |
+| 84815190 | 鲜花女男爵 | Baronne de Fleur | 已登记本作效果实现 |
+| 93490856 | 相剑军师-龙渊 | Swordsoul Strategist Longyuan | 已登记本作效果实现 |
+| 93850690 | 大灵峰相剑门 | Swordsoul Sacred Summit | 已登记本作效果实现 |
 | 96633955 | 相剑大公-承影 | Swordsoul Supreme Sovereign - Chengying | 本作适配：效果破坏替代自动选择墓地中机器人估值最低的一张卡除外；场上与墓地除外仍由玩家分别选择。 |
-| 98234196 | 魔键铳士-克莱维斯 | Clavkiys, the Magikey Skyblaster | 已登记本作实现 |
-| 99137266 | 忆念之相剑 | Swordsoul Strife | 已登记本作实现 |
+| 98234196 | 魔键铳士-克莱维斯 | Clavkiys, the Magikey Skyblaster | 基础规则（无卡片效果） |
+| 99137266 | 忆念之相剑 | Swordsoul Strife | 已登记本作效果实现 |
 
 ## 待实现身份
 
@@ -103,7 +104,6 @@
 | 9400127 | 溟界之漠-胡洛吉 | Flogos, the Ogdoadic Boundless | pending |
 | 9486959 | 神隐鬼火丸 | Onibimaru Soul Sweeper | pending |
 | 9603252 | 魔女术代理师傅 | Witchcrafter Vice-Madame | pending |
-| 9726840 | 闪刀起动-连刀 | Sky Striker Mobilize - Linkage! | pending |
 | 9822220 | 天狱之王 | Lord of the Heavenly Prison | pending |
 | 9839945 | 照耀之光灵使 莱娜 | Lyna the Light Charmer, Lustrous | pending |
 | 10182251 | 抒情歌鸲-绿柱石金丝雀 | Lyrilusc - Beryl Canary | pending |

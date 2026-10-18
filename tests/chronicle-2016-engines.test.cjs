@@ -2,8 +2,8 @@ const test=require('node:test');
 const {assert,D,E,DuelEngine,put,fresh,fieldCard,act,drain,use,trigger,source}=require('./chronicle-2015-helpers.cjs');
 const pick=m=>p=>p.kind==='choice'&&p.candidates.some(c=>c.uid===m.uid)?{type:'choose',uids:[m.uid]}:null;
 test('2016 presets preserve actual main/extra/side quantities and contain no future or pending cards',()=>{
- const data=require('../data/decks-2016.json'),K=require('../src/deck-tools.js');assert.equal(data.decks.length,3);
- for(const [i,row] of data.decks.entries()){const d=D.DECKS[row.id];assert.ok(K.analyze(d).valid);assert.equal(d.cards.length,[42,41,41][i]);assert.equal(d.extra.length,15);assert.equal(row.side.reduce((n,x)=>n+x[1],0),15);for(const id of [...d.cards,...d.extra]){assert.ok(D.CARDS[id].releaseYear<=2016);assert.notEqual(D.CARDS[id].implementationStatus,'pending',D.CARDS[id].officialName);}}
+ const data=require('../data/decks-2016.json'),K=require('../src/deck-tools.js');assert.equal(data.decks.length,5);
+ for(const [i,row] of data.decks.entries()){const d=D.DECKS[row.id];assert.ok(K.analyze(d).valid);assert.equal(d.cards.length,[42,41,41,40,40][i]);assert.equal(d.extra.length,d.id==='monarch-2016'?0:15);assert.equal(row.side.reduce((n,x)=>n+x[1],0),15);for(const id of [...d.cards,...d.extra]){assert.ok(D.CARDS[id].releaseYear<=2016);assert.notEqual(D.CARDS[id].implementationStatus,'pending',D.CARDS[id].officialName);}}
 });
 test('a single Ratpier overlays into each different Zoodiac only once per turn',()=>{
  const e=fresh(),r=fieldCard(e,0,'Zoodiac Ratpier'),a=put(e,0,'extra','Zoodiac Broadbull'),b=put(e,0,'extra','Zoodiac Drident'),again=put(e,0,'extra','Zoodiac Broadbull');

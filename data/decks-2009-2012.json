@@ -77,6 +77,13 @@
       "accessedOn": "2026-09-14",
       "kind": "secondary-metagame-review",
       "note": "The review includes January–February 2013. Our deck choices are capped at 2012 OCG candidates and do not use later cards."
+    },
+    {
+      "id": "review-2008-2012",
+      "url": "https://roadoftheking.com/ocg-2008-03-ocg-2012-09-a-quinquennium-in-review/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "17aedde64290d0c17d957fb4103247d4ae88c06ed99fc19dbf1ce38548cc2639",
+      "evidenceSummary": "Retrospective of OCG 2008.03–2012.09 formats, used for annual archetype context; cards still obey each calendar-year cutoff."
     }
   ],
   "decks": [
@@ -235,6 +242,41 @@
       "sourceKind": "representative-adaptation",
       "sourceRefs": [
         "worlds-2009"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ],
+        [
+          "Nobleman of Crossout",
+          2
+        ],
+        [
+          "Royal Decree",
+          2
+        ],
+        [
+          "Dust Tornado",
+          2
+        ],
+        [
+          "Seven Tools of the Bandit",
+          1
+        ]
       ]
     },
     {
@@ -384,6 +426,41 @@
       "sourceKind": "representative-adaptation",
       "sourceRefs": [
         "worlds-2009"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ],
+        [
+          "Nobleman of Crossout",
+          2
+        ],
+        [
+          "Royal Decree",
+          2
+        ],
+        [
+          "Dust Tornado",
+          2
+        ],
+        [
+          "Seven Tools of the Bandit",
+          1
+        ]
       ]
     },
     {
@@ -562,6 +639,41 @@
       "sourceRefs": [
         "worlds-2009",
         "ocg-review"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ],
+        [
+          "Nobleman of Crossout",
+          2
+        ],
+        [
+          "Royal Decree",
+          2
+        ],
+        [
+          "Dust Tornado",
+          2
+        ],
+        [
+          "Seven Tools of the Bandit",
+          1
+        ]
       ]
     },
     {
@@ -707,6 +819,41 @@
       "sourceKind": "representative-adaptation",
       "sourceRefs": [
         "worlds-2010"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ],
+        [
+          "Nobleman of Crossout",
+          2
+        ],
+        [
+          "Royal Decree",
+          2
+        ],
+        [
+          "Dust Tornado",
+          1
+        ]
       ]
     },
     {
@@ -864,6 +1011,41 @@
       "sourceKind": "representative-adaptation",
       "sourceRefs": [
         "worlds-2010"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ],
+        [
+          "Nobleman of Crossout",
+          2
+        ],
+        [
+          "Royal Decree",
+          2
+        ],
+        [
+          "Dust Tornado",
+          1
+        ]
       ]
     },
     {
@@ -989,6 +1171,41 @@
       "sourceKind": "representative-adaptation",
       "sourceRefs": [
         "worlds-2010"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ],
+        [
+          "Nobleman of Crossout",
+          2
+        ],
+        [
+          "Dust Tornado",
+          2
+        ],
+        [
+          "Seven Tools of the Bandit",
+          1
+        ]
       ]
     },
     {
@@ -1158,6 +1375,41 @@
       "sourceKind": "representative-adaptation",
       "sourceRefs": [
         "worlds-2011"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "Effect Veiler",
+          1
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ]
       ]
     },
     {
@@ -1343,6 +1595,41 @@
       "sourceKind": "representative-adaptation",
       "sourceRefs": [
         "worlds-2011"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Effect Veiler",
+          1
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ]
       ]
     },
     {
@@ -1513,6 +1800,41 @@
       "sourceRefs": [
         "worlds-2011",
         "ocg-review"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Effect Veiler",
+          1
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ]
       ]
     },
     {
@@ -1690,6 +2012,41 @@
       "sourceKind": "representative-adaptation",
       "sourceRefs": [
         "worlds-2012"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ],
+        [
+          "Nobleman of Crossout",
+          1
+        ]
       ]
     },
     {
@@ -1861,6 +2218,41 @@
         "ocg-review",
         "ocg-2012-03",
         "ocg-2012-09"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Effect Veiler",
+          1
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ]
       ]
     },
     {
@@ -2032,7 +2424,1469 @@
         "ocg-review",
         "ocg-2012-03",
         "ocg-2012-09"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "System Down",
+          1
+        ]
       ]
+    },
+    {
+      "id": "lightsworn-2009",
+      "year": 2009,
+      "title": "世界赛路线 · 光道",
+      "en": "Worlds Strategy · Lightsworn",
+      "ja": "世界大会を参考に・ライトロード",
+      "ace": "Judgment Dragon",
+      "description": "参考2009世界赛的光道路线。光道在结束阶段和效果中堆墓，裁决之龙检查真实墓地不同名，充电与日光交换推进资源。",
+      "descriptionEn": "A 2009 adaptation: Worlds Strategy · Lightsworn. Judgment Dragon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2009年のカードプールを使った世界大会を参考に・ライトロードのアレンジ。裁きの龍を軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Judgment Dragon",
+          3
+        ],
+        [
+          "Lumina, Lightsworn Summoner",
+          3
+        ],
+        [
+          "Lyla, Lightsworn Sorceress",
+          3
+        ],
+        [
+          "Ryko, Lightsworn Hunter",
+          3
+        ],
+        [
+          "Wulf, Lightsworn Beast",
+          3
+        ],
+        [
+          "Garoth, Lightsworn Warrior",
+          2
+        ],
+        [
+          "Jain, Lightsworn Paladin",
+          1
+        ],
+        [
+          "Ehren, Lightsworn Monk",
+          1
+        ],
+        [
+          "Honest",
+          3
+        ],
+        [
+          "Necro Gardna",
+          2
+        ],
+        [
+          "Charge of the Light Brigade",
+          3
+        ],
+        [
+          "Solar Recharge",
+          3
+        ],
+        [
+          "Beckoning Light",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Stardust Dragon",
+          2
+        ],
+        [
+          "Black Rose Dragon",
+          2
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          2
+        ],
+        [
+          "Goyo Guardian",
+          2
+        ],
+        [
+          "Colossal Fighter",
+          2
+        ],
+        [
+          "Ally of Justice Catastor",
+          2
+        ],
+        [
+          "Mist Wurm",
+          1
+        ],
+        [
+          "Thought Ruler Archfiend",
+          1
+        ],
+        [
+          "Red Dragon Archfiend",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ],
+        [
+          "Nobleman of Crossout",
+          2
+        ],
+        [
+          "Royal Decree",
+          2
+        ],
+        [
+          "Dust Tornado",
+          2
+        ],
+        [
+          "Seven Tools of the Bandit",
+          1
+        ]
+      ],
+      "combo": [
+        "Judgment Dragon",
+        "Lumina, Lightsworn Summoner",
+        "Lyla, Lightsworn Sorceress",
+        "Ryko, Lightsworn Hunter",
+        "Wulf, Lightsworn Beast"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2009"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription."
+    },
+    {
+      "id": "zombie-synchro-2009",
+      "year": 2009,
+      "title": "年度路线 · 不死同调",
+      "en": "Annual Strategy · Zombie Synchro",
+      "ja": "アンデットシンクロ",
+      "ace": "Brionac, Dragon of the Ice Barrier",
+      "description": "不死族墓地循环接同调的年代改编。僵尸主与马头鬼提供复活，带菌者以真实卡组顶代价调节同调素材。",
+      "descriptionEn": "A 2009 adaptation: Annual Strategy · Zombie Synchro. Brionac, Dragon of the Ice Barrier leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2009年のカードプールを使ったアンデットシンクロのアレンジ。氷結界の龍 ブリューナクを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Zombie Master",
+          3
+        ],
+        [
+          "Mezuki",
+          2
+        ],
+        [
+          "Plaguespreader Zombie",
+          2
+        ],
+        [
+          "Goblin Zombie",
+          3
+        ],
+        [
+          "Pyramid Turtle",
+          3
+        ],
+        [
+          "Il Blud",
+          1
+        ],
+        [
+          "Dark Armed Dragon",
+          1
+        ],
+        [
+          "Card of Safe Return",
+          2
+        ],
+        [
+          "Book of Life",
+          3
+        ],
+        [
+          "Allure of Darkness",
+          2
+        ],
+        [
+          "Destiny HERO - Malicious",
+          2
+        ],
+        [
+          "Destiny Draw",
+          2
+        ],
+        [
+          "Emergency Teleport",
+          2
+        ],
+        [
+          "Krebons",
+          2
+        ],
+        [
+          "Burial from a Different Dimension",
+          1
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Stardust Dragon",
+          2
+        ],
+        [
+          "Black Rose Dragon",
+          2
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          2
+        ],
+        [
+          "Goyo Guardian",
+          2
+        ],
+        [
+          "Colossal Fighter",
+          2
+        ],
+        [
+          "Ally of Justice Catastor",
+          2
+        ],
+        [
+          "Mist Wurm",
+          1
+        ],
+        [
+          "Thought Ruler Archfiend",
+          1
+        ],
+        [
+          "Red Dragon Archfiend",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ],
+        [
+          "Nobleman of Crossout",
+          2
+        ],
+        [
+          "Royal Decree",
+          2
+        ],
+        [
+          "Dust Tornado",
+          2
+        ],
+        [
+          "Seven Tools of the Bandit",
+          1
+        ]
+      ],
+      "combo": [
+        "Zombie Master",
+        "Mezuki",
+        "Plaguespreader Zombie",
+        "Goblin Zombie",
+        "Pyramid Turtle"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "review-2008-2012"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription."
+    },
+    {
+      "id": "infernity-2010",
+      "year": 2010,
+      "title": "世界八强路线 · 永火",
+      "en": "World Top 8 Route · Infernity",
+      "ja": "世界ベスト8を参考に・インフェルニティ",
+      "ace": "Infernity Doom Dragon",
+      "description": "参考2010世界八强永火。先耗尽手牌再以恶魔、死灵师和炮组织资源循环；同调怪兽与永火防线形成终场。",
+      "descriptionEn": "A 2010 adaptation: World Top 8 Route · Infernity. Infernity Doom Dragon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2010年のカードプールを使った世界ベスト8を参考に・インフェルニティのアレンジ。インフェルニティ・デス・ドラゴンを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Infernity Archfiend",
+          3
+        ],
+        [
+          "Infernity Necromancer",
+          3
+        ],
+        [
+          "Infernity Beetle",
+          3
+        ],
+        [
+          "Infernity Avenger",
+          1
+        ],
+        [
+          "Infernity Mirage",
+          3
+        ],
+        [
+          "Dark Grepher",
+          3
+        ],
+        [
+          "Armageddon Knight",
+          2
+        ],
+        [
+          "Stygian Street Patrol",
+          2
+        ],
+        [
+          "Infernity Launcher",
+          3
+        ],
+        [
+          "Infernity Force",
+          3
+        ],
+        [
+          "Infernity Break",
+          3
+        ],
+        [
+          "ZERO-MAX",
+          2
+        ],
+        [
+          "One for One",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Infernity Doom Dragon",
+          3
+        ],
+        [
+          "Hundred Eyes Dragon",
+          2
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          2
+        ],
+        [
+          "Stardust Dragon",
+          2
+        ],
+        [
+          "Ally of Justice Catastor",
+          2
+        ],
+        [
+          "Mist Wurm",
+          1
+        ],
+        [
+          "Goyo Guardian",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Colossal Fighter",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ],
+        [
+          "Nobleman of Crossout",
+          2
+        ],
+        [
+          "Royal Decree",
+          2
+        ],
+        [
+          "Dust Tornado",
+          1
+        ]
+      ],
+      "combo": [
+        "Infernity Archfiend",
+        "Infernity Necromancer",
+        "Infernity Beetle",
+        "Infernity Avenger",
+        "Infernity Mirage"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2010"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription."
+    },
+    {
+      "id": "machina-gadget-2010",
+      "year": 2010,
+      "title": "世界赛路线 · 机甲齿轮",
+      "en": "Worlds Strategy · Machina Gadget",
+      "ja": "世界大会を参考に・マシンガジェット",
+      "ace": "Machina Fortress",
+      "description": "参考2010世界赛机甲齿轮。齿轮检索后作为机甲要塞的真实弃牌资源，和平卫士和骨架维持长局。",
+      "descriptionEn": "A 2010 adaptation: Worlds Strategy · Machina Gadget. Machina Fortress leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2010年のカードプールを使った世界大会を参考に・マシンガジェットのアレンジ。マシンナーズ・フォートレスを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Machina Gearframe",
+          3
+        ],
+        [
+          "Machina Fortress",
+          3
+        ],
+        [
+          "Machina Force",
+          1
+        ],
+        [
+          "Green Gadget",
+          3
+        ],
+        [
+          "Red Gadget",
+          3
+        ],
+        [
+          "Yellow Gadget",
+          3
+        ],
+        [
+          "Machina Peacekeeper",
+          2
+        ],
+        [
+          "Solidarity",
+          2
+        ],
+        [
+          "Limiter Removal",
+          1
+        ],
+        [
+          "Smashing Ground",
+          3
+        ],
+        [
+          "Pot of Avarice",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ],
+        [
+          "Waboku",
+          2
+        ]
+      ],
+      "extra": [],
+      "side": [
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ],
+        [
+          "Nobleman of Crossout",
+          2
+        ],
+        [
+          "Royal Decree",
+          2
+        ],
+        [
+          "Dust Tornado",
+          1
+        ]
+      ],
+      "combo": [
+        "Machina Gearframe",
+        "Machina Fortress",
+        "Machina Force",
+        "Green Gadget",
+        "Red Gadget"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2010"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription."
+    },
+    {
+      "id": "machina-gadget-2011",
+      "year": 2011,
+      "title": "世界殿军路线 · 机甲齿轮",
+      "en": "World Fourth-Place Route · Machina Gadget",
+      "ja": "世界4位を参考に・マシンガジェット",
+      "ace": "Machina Fortress",
+      "description": "参考Phanupak Kongjaroen世界殿军路线。齿轮与机甲资源循环之外，血之代偿将补牌转换为额外通常召唤和四阶超量。",
+      "descriptionEn": "A 2011 adaptation: World Fourth-Place Route · Machina Gadget. Machina Fortress leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2011年のカードプールを使った世界4位を参考に・マシンガジェットのアレンジ。マシンナーズ・フォートレスを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Machina Gearframe",
+          3
+        ],
+        [
+          "Machina Fortress",
+          3
+        ],
+        [
+          "Machina Force",
+          1
+        ],
+        [
+          "Green Gadget",
+          3
+        ],
+        [
+          "Red Gadget",
+          3
+        ],
+        [
+          "Yellow Gadget",
+          3
+        ],
+        [
+          "Machina Peacekeeper",
+          2
+        ],
+        [
+          "Solidarity",
+          2
+        ],
+        [
+          "Limiter Removal",
+          1
+        ],
+        [
+          "Smashing Ground",
+          3
+        ],
+        [
+          "Pot of Avarice",
+          2
+        ],
+        [
+          "Ultimate Offering",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Number 39: Utopia",
+          3
+        ],
+        [
+          "Steelswarm Roach",
+          3
+        ],
+        [
+          "Wind-Up Zenmaister",
+          3
+        ],
+        [
+          "Daigusto Emeral",
+          3
+        ],
+        [
+          "Number 16: Shock Master",
+          3
+        ]
+      ],
+      "side": [
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "System Down",
+          1
+        ]
+      ],
+      "combo": [
+        "Machina Gearframe",
+        "Machina Fortress",
+        "Machina Force",
+        "Green Gadget",
+        "Red Gadget"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2011"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription."
+    },
+    {
+      "id": "tg-beast-2011",
+      "year": 2011,
+      "title": "世界赛路线 · TG兽族",
+      "en": "Worlds Strategy · T.G. Beast",
+      "ja": "世界大会を参考に・TGビースト",
+      "ace": "T.G. Power Gladiator",
+      "description": "参考2011世界赛TG兽族。突击兵和狼人迅速组合等级，兽角补牌、TG交换和结束阶段检索保持资源。",
+      "descriptionEn": "A 2011 adaptation: Worlds Strategy · T.G. Beast. T.G. Power Gladiator leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2011年のカードプールを使った世界大会を参考に・TGビーストのアレンジ。ＴＧ パワー・グラディエイターを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "T.G. Striker",
+          3
+        ],
+        [
+          "T.G. Warwolf",
+          3
+        ],
+        [
+          "T.G. Rush Rhino",
+          3
+        ],
+        [
+          "T.G. Jet Falcon",
+          2
+        ],
+        [
+          "T.G. Cyber Magician",
+          2
+        ],
+        [
+          "Horn of the Phantom Beast",
+          3
+        ],
+        [
+          "TG1-EM1",
+          3
+        ],
+        [
+          "TGX3-DX2",
+          3
+        ],
+        [
+          "Skill Drain",
+          3
+        ],
+        [
+          "Pot of Duality",
+          3
+        ],
+        [
+          "Dimensional Prison",
+          3
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "T.G. Power Gladiator",
+          3
+        ],
+        [
+          "T.G. Wonder Magician",
+          3
+        ],
+        [
+          "T.G. Blade Blaster",
+          2
+        ],
+        [
+          "T.G. Recipro Dragonfly",
+          2
+        ],
+        [
+          "T.G. Hyper Librarian",
+          1
+        ],
+        [
+          "Scrap Dragon",
+          1
+        ],
+        [
+          "Stardust Dragon",
+          1
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "System Down",
+          1
+        ]
+      ],
+      "combo": [
+        "T.G. Striker",
+        "T.G. Warwolf",
+        "T.G. Rush Rhino",
+        "T.G. Jet Falcon",
+        "T.G. Cyber Magician"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2011"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription."
+    },
+    {
+      "id": "hero-beat-2012",
+      "year": 2012,
+      "title": "世界赛路线 · HERO强攻",
+      "en": "Worlds Strategy · HERO Beat",
+      "ja": "世界大会を参考に・HEROビート",
+      "ace": "Elemental HERO The Shining",
+      "description": "参考2012世界赛HERO路线。二重电光和英雄爆破转换新宇侠的资源，奇迹融合与超融合提供融合终结。",
+      "descriptionEn": "A 2012 adaptation: Worlds Strategy · HERO Beat. Elemental HERO The Shining leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2012年のカードプールを使った世界大会を参考に・HEROビートのアレンジ。Ｅ・ＨＥＲＯ Ｔｈｅ シャイニングを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Elemental HERO Neos Alius",
+          3
+        ],
+        [
+          "Elemental HERO Stratos",
+          1
+        ],
+        [
+          "Elemental HERO Bubbleman",
+          2
+        ],
+        [
+          "Photon Thrasher",
+          2
+        ],
+        [
+          "Goblindbergh",
+          2
+        ],
+        [
+          "Thunder King Rai-Oh",
+          3
+        ],
+        [
+          "Gemini Spark",
+          3
+        ],
+        [
+          "Miracle Fusion",
+          3
+        ],
+        [
+          "E - Emergency Call",
+          3
+        ],
+        [
+          "Reinforcement of the Army",
+          1
+        ],
+        [
+          "Hero Blast",
+          3
+        ],
+        [
+          "Super Polymerization",
+          2
+        ],
+        [
+          "Pot of Duality",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Elemental HERO The Shining",
+          3
+        ],
+        [
+          "Elemental HERO Absolute Zero",
+          2
+        ],
+        [
+          "Elemental HERO Great Tornado",
+          2
+        ],
+        [
+          "Elemental HERO Nova Master",
+          2
+        ],
+        [
+          "Elemental HERO Gaia",
+          1
+        ],
+        [
+          "Elemental HERO Escuridao",
+          1
+        ],
+        [
+          "Blade Armor Ninja",
+          1
+        ],
+        [
+          "Heroic Champion - Excalibur",
+          1
+        ],
+        [
+          "Maestroke the Symphony Djinn",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "System Down",
+          1
+        ]
+      ],
+      "combo": [
+        "Elemental HERO Neos Alius",
+        "Elemental HERO Stratos",
+        "Elemental HERO Bubbleman",
+        "Photon Thrasher",
+        "Goblindbergh"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2012"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription."
+    },
+    {
+      "id": "chaos-dragon-2012",
+      "year": 2012,
+      "title": "世界赛路线 · 混沌龙",
+      "en": "Worlds Strategy · Chaos Dragon",
+      "ja": "世界大会を参考に・カオスドラゴン",
+      "ace": "Lightpulsar Dragon",
+      "description": "参考2012世界赛多个混沌龙选手路线。光道与日光交换堆墓，日食翼龙检索高星龙，光脉冲与暗铁维持复活。",
+      "descriptionEn": "A 2012 adaptation: Worlds Strategy · Chaos Dragon. Lightpulsar Dragon leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2012年のカードプールを使った世界大会を参考に・カオスドラゴンのアレンジ。ライトパルサー・ドラゴンを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Lightpulsar Dragon",
+          3
+        ],
+        [
+          "Darkflare Dragon",
+          3
+        ],
+        [
+          "Red-Eyes Darkness Metal Dragon",
+          1
+        ],
+        [
+          "Eclipse Wyvern",
+          3
+        ],
+        [
+          "Ryko, Lightsworn Hunter",
+          3
+        ],
+        [
+          "Lyla, Lightsworn Sorceress",
+          3
+        ],
+        [
+          "Effect Veiler",
+          3
+        ],
+        [
+          "Dark Armed Dragon",
+          1
+        ],
+        [
+          "Chaos Sorcerer",
+          2
+        ],
+        [
+          "Black Luster Soldier - Envoy of the Beginning",
+          1
+        ],
+        [
+          "Sangan",
+          1
+        ],
+        [
+          "Card Trooper",
+          2
+        ],
+        [
+          "Charge of the Light Brigade",
+          3
+        ],
+        [
+          "Solar Recharge",
+          3
+        ],
+        [
+          "Allure of Darkness",
+          1
+        ],
+        [
+          "Future Fusion",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Five-Headed Dragon",
+          3
+        ],
+        [
+          "Ally of Justice Catastor",
+          1
+        ],
+        [
+          "Orient Dragon",
+          1
+        ],
+        [
+          "Black Rose Dragon",
+          1
+        ],
+        [
+          "Ancient Fairy Dragon",
+          1
+        ],
+        [
+          "Stardust Dragon",
+          1
+        ],
+        [
+          "Scrap Dragon",
+          1
+        ],
+        [
+          "Crimson Blader",
+          1
+        ],
+        [
+          "Trident Dragion",
+          1
+        ],
+        [
+          "Dark End Dragon",
+          1
+        ],
+        [
+          "Red Dragon Archfiend",
+          1
+        ],
+        [
+          "Queen Dragun Djinn",
+          1
+        ],
+        [
+          "Hieratic Dragon King of Atum",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ],
+        [
+          "Nobleman of Crossout",
+          1
+        ]
+      ],
+      "combo": [
+        "Lightpulsar Dragon",
+        "Darkflare Dragon",
+        "Red-Eyes Darkness Metal Dragon",
+        "Eclipse Wyvern",
+        "Ryko, Lightsworn Hunter"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2012"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription."
     }
   ]
 }

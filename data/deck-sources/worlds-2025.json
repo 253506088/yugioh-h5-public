@@ -1,0 +1,764 @@
+{
+  "schemaVersion": 1,
+  "accessed": "2026-10-07",
+  "source": "https://roadoftheking.com/yu-gi-oh-world-championship-2025/",
+  "note": "Original player recipes are reference records, not automatically playable presets. Keep unavailable cards and original quantities here; adapted game decks live in data/decks-2025.json.",
+  "recipes": [
+    {
+      "id": "k9-vanquish-soul-worlds-2025-original",
+      "player": "Julien Leo Kehon",
+      "placement": "1st",
+      "event": "World Championship 2025",
+      "format": "OCG/TCG World Championship 2025 shared Forbidden/Limited list",
+      "source": {
+        "url": "https://roadoftheking.com/wp-content/uploads/2025/08/WorldChampionship2025_1.jpg",
+        "sha256": "88596e24bbdf34717031a99b6fc93434bd6d5c2d89db4a1242498810cc86a161"
+      },
+      "transcription": "Transcribed from the cited full Main/Extra/Side image. Orange marks in the source image indicate shared-list limits; this transcription preserves quantities, not game availability.",
+      "main": [
+        [
+          "Vanquish Soul Caesar Valius",
+          1
+        ],
+        [
+          "Vanquish Soul Heavy Borger",
+          1
+        ],
+        [
+          "Vanquish Soul Hollie Sue",
+          3
+        ],
+        [
+          "Vanquish Soul Jiaolong",
+          3
+        ],
+        [
+          "Vanquish Soul Razen",
+          3
+        ],
+        [
+          "Vanquish Soul Dr. Mad Love",
+          3
+        ],
+        [
+          "K9-66a Jokul",
+          3
+        ],
+        [
+          "K9-66b Lantern",
+          1
+        ],
+        [
+          "K9-17 Izuna",
+          3
+        ],
+        [
+          "K9-ØØ Lupis",
+          1
+        ],
+        [
+          "Fantastical Dragon Phantazmay",
+          1
+        ],
+        [
+          "Mulcharmy Fuwalos",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Stake your Soul!",
+          3
+        ],
+        [
+          "Vanquish Soul, Start!",
+          1
+        ],
+        [
+          "\"A Case for K9\"",
+          3
+        ],
+        [
+          "K9-X Forced Release",
+          1
+        ],
+        [
+          "Pot of Prosperity",
+          1
+        ],
+        [
+          "Reinforcement of the Army",
+          1
+        ],
+        [
+          "Vanquish Soul Snow Devil",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Vanquish Soul Rocks",
+          1
+        ],
+        [
+          "Number 104: Masquerade",
+          1
+        ],
+        [
+          "K9-17 \"Ripper\"",
+          1
+        ],
+        [
+          "Number 41: Bagooska the Terribly Tired Tapir",
+          1
+        ],
+        [
+          "N.As.H. Knight",
+          2
+        ],
+        [
+          "Number C101: Silent Honor DARK",
+          1
+        ],
+        [
+          "Number C104: Umbral Horror Masquerade",
+          1
+        ],
+        [
+          "CXyz N.As.Ch. Knight",
+          1
+        ],
+        [
+          "K9-X \"Werewolf\"",
+          1
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          1
+        ],
+        [
+          "Super Starslayer TY-PHON - Sky Crisis",
+          1
+        ],
+        [
+          "Rock of the Vanquisher",
+          2
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Fantastical Dragon Phantazmay",
+          2
+        ],
+        [
+          "Dimension Shifter",
+          1
+        ],
+        [
+          "Mulcharmy Purulia",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "There Can Be Only One",
+          1
+        ],
+        [
+          "Dimensional Barrier",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "lunalight-worlds-2025-original",
+      "player": "Tom Kleinegraeber",
+      "placement": "2nd",
+      "event": "World Championship 2025",
+      "format": "OCG/TCG World Championship 2025 shared Forbidden/Limited list",
+      "source": {
+        "url": "https://roadoftheking.com/wp-content/uploads/2025/08/WorldChampionship2025_2.jpg",
+        "sha256": "ad6eac86747730e1ba8b4cbc0b4c8d7ea6485aac765cb44985622c2454f63665"
+      },
+      "transcription": "Transcribed from the cited full Main/Extra/Side image. Orange marks in the source image indicate shared-list limits; this transcription preserves quantities, not game availability.",
+      "main": [
+        [
+          "Lunalight Wolf",
+          1
+        ],
+        [
+          "Lunalight Gold Leo",
+          3
+        ],
+        [
+          "Lunalight Kaleido Chick",
+          2
+        ],
+        [
+          "Lunalight Emerald Bird",
+          1
+        ],
+        [
+          "Lunalight Yellow Marten",
+          1
+        ],
+        [
+          "Lunalight Silver Hound",
+          2
+        ],
+        [
+          "Lunalight Tiger",
+          1
+        ],
+        [
+          "Lunalight Black Sheep",
+          2
+        ],
+        [
+          "Tri-Brigade Fraktall",
+          1
+        ],
+        [
+          "Mulcharmy Fuwalos",
+          3
+        ],
+        [
+          "Lunalight Masquerade",
+          3
+        ],
+        [
+          "Luna Light Perfume",
+          2
+        ],
+        [
+          "Lunalight Fusion",
+          1
+        ],
+        [
+          "Heavy Polymerization",
+          2
+        ],
+        [
+          "Polymerization",
+          1
+        ],
+        [
+          "Fire Formation - Tenki",
+          3
+        ],
+        [
+          "Book of Eclipse",
+          3
+        ],
+        [
+          "Triple Tactics Thrust",
+          3
+        ],
+        [
+          "Triple Tactics Talent",
+          1
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Called by the Grave",
+          1
+        ],
+        [
+          "Dark Ruler No More",
+          1
+        ],
+        [
+          "The Black Goat Laughs",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Lunalight Perfume Dancer",
+          2
+        ],
+        [
+          "Lunalight Panther Dancer",
+          1
+        ],
+        [
+          "Lunalight Sabre Dancer",
+          1
+        ],
+        [
+          "Lunalight Leo Dancer",
+          2
+        ],
+        [
+          "Lunalight Liger Dancer",
+          2
+        ],
+        [
+          "Brotherhood of the Fire Fist - Tiger King",
+          1
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          1
+        ],
+        [
+          "Number 80: Rhapsody in Berserk",
+          1
+        ],
+        [
+          "Constellar Ptolemy M7",
+          1
+        ],
+        [
+          "Salamangreat Almiraj",
+          1
+        ],
+        [
+          "Cross-Sheep",
+          1
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Lancea",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Heavy Polymerization",
+          1
+        ],
+        [
+          "Dark Ruler No More",
+          2
+        ],
+        [
+          "Foolish Burial Goods",
+          2
+        ],
+        [
+          "Lunalight Serenade Dance",
+          1
+        ]
+      ]
+    },
+    {
+      "id": "sky-striker-worlds-2025-original",
+      "player": "Roselle Thorkildsen",
+      "placement": "3rd–4th (tied semifinalists)",
+      "event": "World Championship 2025",
+      "format": "OCG/TCG World Championship 2025 shared Forbidden/Limited list",
+      "source": {
+        "url": "https://roadoftheking.com/wp-content/uploads/2025/08/WorldChampionship2025_4.jpg",
+        "sha256": "3a28b240e5b77697fdcea36d7496c96ea544178ed4ce435a52d37b246ce08199"
+      },
+      "transcription": "Transcribed from the cited full Main/Extra/Side image. Orange marks in the source image indicate shared-list limits; this transcription preserves quantities, not game availability.",
+      "main": [
+        [
+          "Sky Striker Ace - Raye",
+          3
+        ],
+        [
+          "Sky Striker Ace - Roze",
+          1
+        ],
+        [
+          "Sky Striker Mobilize - Engage!",
+          3
+        ],
+        [
+          "Sky Striker Mobilize - Linkage!",
+          3
+        ],
+        [
+          "Sky Striker Mecha - Widow Anchor",
+          3
+        ],
+        [
+          "Sky Striker Mecha - Shark Cannon",
+          1
+        ],
+        [
+          "Sky Striker Maneuver - Afterburners!",
+          1
+        ],
+        [
+          "Upstart Goblin",
+          3
+        ],
+        [
+          "Pot of Desires",
+          2
+        ],
+        [
+          "Foolish Burial Goods",
+          2
+        ],
+        [
+          "Metalfoes Fusion",
+          1
+        ],
+        [
+          "Triple Tactics Thrust",
+          3
+        ],
+        [
+          "Triple Tactics Talent",
+          1
+        ],
+        [
+          "Reinforcement of the Army",
+          1
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Chicken Game",
+          1
+        ],
+        [
+          "Raigeki",
+          3
+        ],
+        [
+          "Book of Eclipse",
+          3
+        ],
+        [
+          "Forbidden Droplet",
+          2
+        ],
+        [
+          "Called by the Grave",
+          1
+        ],
+        [
+          "The Black Goat Laughs",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Chimeratech Megafleet Dragon",
+          1
+        ],
+        [
+          "Super Starslayer TY-PHON - Sky Crisis",
+          1
+        ],
+        [
+          "Sky Striker Ace - Kagari",
+          3
+        ],
+        [
+          "Sky Striker Ace - Shizuku",
+          2
+        ],
+        [
+          "Sky Striker Ace - Hayate",
+          1
+        ],
+        [
+          "Sky Striker Ace - Kaina",
+          1
+        ],
+        [
+          "Sky Striker Ace = Zero",
+          3
+        ],
+        [
+          "Sky Striker Ace - Zeke",
+          1
+        ],
+        [
+          "Sky Striker Ace - Azalea",
+          1
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Lancea",
+          3
+        ],
+        [
+          "Pillar of the Future - Cyanos",
+          1
+        ],
+        [
+          "Sky Striker Airspace - Area Zero",
+          1
+        ],
+        [
+          "Sky Striker Maneuver - Jamming Waves!",
+          1
+        ],
+        [
+          "Sky Striker Mecha - Hornet Drones",
+          1
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Spiritual Water Art - Aoi",
+          2
+        ]
+      ]
+    },
+    {
+      "id": "maliss-worlds-2025-original",
+      "player": "Yuna Dicks",
+      "placement": "5th–8th (tied quarterfinalists)",
+      "event": "World Championship 2025",
+      "format": "OCG/TCG World Championship 2025 shared Forbidden/Limited list",
+      "source": {
+        "url": "https://roadoftheking.com/wp-content/uploads/2025/08/WorldChampionship2025_5.jpg",
+        "sha256": "d93b862a7bf3f28cf2785e68f256fc7554bea696a481dfea45fad82a075e2051"
+      },
+      "transcription": "Transcribed from the cited full Main/Extra/Side image. Orange marks in the source image indicate shared-list limits; this transcription preserves quantities, not game availability.",
+      "main": [
+        [
+          "Maliss <P> Dormouse",
+          1
+        ],
+        [
+          "Maliss <P> White Rabbit",
+          2
+        ],
+        [
+          "Maliss <P> Chessy Cat",
+          3
+        ],
+        [
+          "Maliss <P> March Hare",
+          3
+        ],
+        [
+          "Wizard @Ignister",
+          1
+        ],
+        [
+          "Backup @Ignister",
+          2
+        ],
+        [
+          "Dimension Shifter",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maliss in Underground",
+          2
+        ],
+        [
+          "Maliss in the Mirror",
+          1
+        ],
+        [
+          "Sky Striker Mobilize - Engage!",
+          3
+        ],
+        [
+          "Sky Striker Mecha - Hornet Drones",
+          1
+        ],
+        [
+          "Sky Striker Mecha - Widow Anchor",
+          1
+        ],
+        [
+          "Forbidden Droplet",
+          3
+        ],
+        [
+          "Triple Tactics Thrust",
+          2
+        ],
+        [
+          "Triple Tactics Talent",
+          1
+        ],
+        [
+          "Gold Sarcophagus",
+          1
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Dark Ruler No More",
+          1
+        ],
+        [
+          "Maliss <C> MTP-07",
+          1
+        ],
+        [
+          "Maliss <C> GWC-06",
+          1
+        ],
+        [
+          "Dominus Impulse",
+          3
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Link Disciple",
+          1
+        ],
+        [
+          "Link Spider",
+          1
+        ],
+        [
+          "Sky Striker Ace - Kagari",
+          1
+        ],
+        [
+          "Cyberse Wicckid",
+          1
+        ],
+        [
+          "Splash Mage",
+          1
+        ],
+        [
+          "Dharc the Dark Charmer, Gloomy",
+          1
+        ],
+        [
+          "Haggard Lizardose",
+          1
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ],
+        [
+          "Maliss <Q> Red Ransom",
+          1
+        ],
+        [
+          "Maliss <Q> White Binder",
+          1
+        ],
+        [
+          "Maliss <Q> Hearts Crypter",
+          1
+        ],
+        [
+          "Firewall Dragon",
+          1
+        ],
+        [
+          "Accesscode Talker",
+          1
+        ],
+        [
+          "Allied Code Talker @Ignister",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Backup @Ignister",
+          1
+        ],
+        [
+          "Nibiru, the Primal Being",
+          1
+        ],
+        [
+          "Bystial Magnamhut",
+          1
+        ],
+        [
+          "Bystial Druiswurm",
+          1
+        ],
+        [
+          "Mulcharmy Fuwalos",
+          3
+        ],
+        [
+          "Ghost Belle & Haunted Mansion",
+          2
+        ],
+        [
+          "Dark Ruler No More",
+          2
+        ],
+        [
+          "Called by the Grave",
+          1
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Different Dimension Ground",
+          1
+        ]
+      ]
+    }
+  ]
+}

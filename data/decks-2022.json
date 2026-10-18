@@ -37,6 +37,13 @@
       "retrievedContentSHA256": "7923e7db648228c98d537a0bfd8275bd574688b95941730e0b684181104cb833",
       "note": "Contemporary OCG top-placing samples; project-authored annual adaptation, not a player original list or a World Championship placement.",
       "evidenceSummary": "542 samples: 299 Tearlaments, 9 Floowandereeze. Quarter-specific restrictions differ."
+    },
+    {
+      "id": "q04-2022",
+      "url": "https://roadoftheking.com/ocg-2022-04-metagame/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "5027ad5b3962e1fa073545072a87d51604b53b4b4612f5eacef70785e5edced4",
+      "evidenceSummary": "852 top-placing samples: 27 Eldlich and 9 Swordsoul (six Tenyi Swordsoul). The chosen alternatives provide trap control and Synchro play alongside Spright, Tearlaments and Floowandereeze. Worlds was not held."
     }
   ],
   "decks": [
@@ -565,6 +572,319 @@
         "未知之风用己方怪兽和对方卡片送墓替代二祭品；官方FAQ允许在次元吸引者下适用，卡片会被除外，魔法免疫仍不可选。",
         "2022代表改编沿用已实现旅鸟核心，投入墓穴指名者应对手坑；不是重新计数为本年度新增效果。"
       ]
+    },
+    {
+      "id": "eldlich-2022",
+      "year": 2022,
+      "title": "年度路线 · 黄金国",
+      "en": "Annual Strategy · Eldlich",
+      "ja": "年間戦略・エルドリッチ",
+      "ace": "Eldlich the Golden Lord",
+      "description": "参考2022黄金国上位记录。黄金卿以手牌和墓地的真实送墓代价循环，黄金乡陷阱怪兽与教导惩罚保持慢速控制。",
+      "descriptionEn": "A 2022 annual adaptation centered on Eldlich the Golden Lord. The Main, Extra and Side ratios are adapted for this game; this is not a player’s original recipe.",
+      "descriptionJa": "2022年の構築を参考にした年間アレンジ。Eldlich the Golden Lordを軸に、メイン・エクストラ・サイドの配分を本作向けに調整。選手の原表ではありません。",
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "q04-2022"
+      ],
+      "main": [
+        [
+          "Eldlich the Golden Lord",
+          3
+        ],
+        [
+          "Eldlixir of Scarlet Sanguine",
+          3
+        ],
+        [
+          "Eldlixir of Black Awakening",
+          2
+        ],
+        [
+          "Eldlixir of White Destiny",
+          1
+        ],
+        [
+          "Cursed Eldland",
+          3
+        ],
+        [
+          "Conquistador of the Golden Land",
+          3
+        ],
+        [
+          "Huaquero of the Golden Land",
+          3
+        ],
+        [
+          "Golden Land Forever!",
+          1
+        ],
+        [
+          "Skill Drain",
+          3
+        ],
+        [
+          "Torrential Tribute",
+          3
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Dogmatika Punishment",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Pot of Prosperity",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Elder Entity N'tss",
+          3
+        ],
+        [
+          "Titaniklad the Ash Dragon",
+          2
+        ],
+        [
+          "PSY-Framelord Omega",
+          1
+        ],
+        [
+          "Link Spider",
+          1
+        ],
+        [
+          "Constellar Pleiades",
+          1
+        ],
+        [
+          "Superdreadnought Rail Cannon Gustav Max",
+          2
+        ],
+        [
+          "Number 81: Superdreadnought Rail Cannon Super Dora",
+          2
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          1
+        ],
+        [
+          "Gaia Dragon, the Thunder Charger",
+          1
+        ],
+        [
+          "Number 61: Volcasaurus",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Lancea",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Nibiru, the Primal Being",
+          2
+        ],
+        [
+          "Red Reboot",
+          1
+        ]
+      ],
+      "adaptation": "Annual adaptation of the documented contemporary strategy. Changes are kept in the explicit Main/Extra/Side list; no historical Forbidden/Limited enforcement."
+    },
+    {
+      "id": "swordsoul-tenyi-2022",
+      "year": 2022,
+      "title": "年度路线 · 相剑天威",
+      "en": "Annual Strategy · Swordsoul Tenyi",
+      "ja": "年間戦略・相剣天威",
+      "ace": "Swordsoul Supreme Sovereign - Chengying",
+      "description": "参考2022相剑天威上位记录。莫邪与龙渊生成真实调整衍生物，天威墓地能力补充同调展开，与三套既有年度路线保持区别。",
+      "descriptionEn": "A 2022 annual adaptation centered on Swordsoul Supreme Sovereign - Chengying. The Main, Extra and Side ratios are adapted for this game; this is not a player’s original recipe.",
+      "descriptionJa": "2022年の構築を参考にした年間アレンジ。Swordsoul Supreme Sovereign - Chengyingを軸に、メイン・エクストラ・サイドの配分を本作向けに調整。選手の原表ではありません。",
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "q04-2022"
+      ],
+      "main": [
+        [
+          "Swordsoul of Mo Ye",
+          3
+        ],
+        [
+          "Swordsoul of Taia",
+          2
+        ],
+        [
+          "Swordsoul Strategist Longyuan",
+          3
+        ],
+        [
+          "Incredible Ecclesia, the Virtuous",
+          3
+        ],
+        [
+          "Tenyi Spirit - Ashuna",
+          3
+        ],
+        [
+          "Tenyi Spirit - Vishuda",
+          2
+        ],
+        [
+          "Tenyi Spirit - Adhara",
+          2
+        ],
+        [
+          "Tenyi Spirit - Shthana",
+          1
+        ],
+        [
+          "Archnemeses Protos",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Swordsoul Emergence",
+          3
+        ],
+        [
+          "Vessel for the Dragon Cycle",
+          2
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Crossout Designator",
+          1
+        ],
+        [
+          "Swordsoul Blackout",
+          2
+        ],
+        [
+          "Pot of Desires",
+          2
+        ],
+        [
+          "Infinite Impermanence",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Swordsoul Grandmaster - Chixiao",
+          2
+        ],
+        [
+          "Swordsoul Supreme Sovereign - Chengying",
+          1
+        ],
+        [
+          "Swordsoul Sinister Sovereign - Qixing Longyuan",
+          1
+        ],
+        [
+          "Baronne de Fleur",
+          1
+        ],
+        [
+          "Baxia, Brightness of the Yang Zing",
+          2
+        ],
+        [
+          "Yazi, Evil of the Yang Zing",
+          1
+        ],
+        [
+          "Chaofeng, Phantom of the Yang Zing",
+          1
+        ],
+        [
+          "Draco Berserker of the Tenyi",
+          1
+        ],
+        [
+          "Monk of the Tenyi",
+          3
+        ],
+        [
+          "Shaman of the Tenyi",
+          1
+        ],
+        [
+          "Ruddy Rose Dragon",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Evenly Matched",
+          2
+        ]
+      ],
+      "combo": [
+        "天威先展开，再用相剑衍生物同调；衍生物在场时只能从额外同调召唤。",
+        "赤霄的检索与无效共用同名次数；龙渊的1200伤害在成为同调素材后触发。",
+        "灰流丽等手坑配合抹杀之指名者；天威之龙仙女限制额外怪兽发动效果，天威龙-宽恕蟠龙限制后续特殊召唤的种族。"
+      ],
+      "adaptation": "Annual adaptation of the documented contemporary strategy. Changes are kept in the explicit Main/Extra/Side list; no historical Forbidden/Limited enforcement."
     }
   ]
 }

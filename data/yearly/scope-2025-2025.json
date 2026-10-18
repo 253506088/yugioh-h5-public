@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "title": "OCG 2025—2025 年增量切片",
+  "createdOn": "2026-10-07",
+  "startYear": 2025,
+  "endYear": 2025,
+  "dateRegion": "ocg",
+  "dateField": "misc_info[].ocg_date",
+  "deduplicateBy": "provider card id; artwork bytes by SHA-256",
+  "collectImages": [
+    "cropped",
+    "full"
+  ],
+  "excludeTypes": [
+    "Skill Card",
+    "Token"
+  ],
+  "excludeRushDuel": true,
+  "catalogUrl": "https://db.ygoprodeck.com/api/v7/cardinfo.php?misc=yes&startdate=01%2F01%2F2025&enddate=12%2F31%2F2025&dateregion=ocg",
+  "catalogAuthority": "provider_candidate_requires_OCG_product_crosscheck",
+  "firstOCGYear": 1999,
+  "firstPackCandidate": "Vol.1",
+  "firstPackDateCandidate": "1999-02-04",
+  "historicalReferenceStatus": "known_history_not_live_verified_in_this_session",
+  "runtimeImagePolicyTarget": "fully_embedded_no_network_fetch",
+  "implementationIsSeparateFromCollection": true,
+  "catalogSnapshot": "data/providers/ocg-2025.json",
+  "catalogSHA256": "3573b34eaa63e81ab2a72bc9db52058d30f73e7e6fcb3747cde289748f4cfaae",
+  "excludedIdentities": [
+    {
+      "providerId": 20250830,
+      "name": "Ritual Sanctuary",
+      "canonicalProviderId": 95658967,
+      "reason": "Provider alternate-password reprint of the 2016 card (Konami 12539), with identical effects and explicit beta_name Ritual Sanctuary (alternate password). It has no fixed CDB identity; retain the original 2016 identity.",
+      "evidence": [
+        "data/providers/ocg-2025.json",
+        "data/yearly/2016/cards.json",
+        "data/locales/source-manifest.json"
+      ]
+    },
+    {
+      "providerId": 101303071,
+      "name": "Elvennotes ~Oracle Alicetea~",
+      "canonicalProviderId": 50590801,
+      "reason": "Obsolete provisional duplicate of Elfnotes: Aristeia of Trust, also present in this provider response. Same first OCG date and two effects; 50590801 has fixed three-language CDB texts and Konami 22174, while 101303071 has no CDB identity. This is a provider duplicate, not a fabricated CDB alias.",
+      "evidence": [
+        "data/providers/ocg-2025.json",
+        "data/locales/source-manifest.json"
+      ]
+    }
+  ]
+}

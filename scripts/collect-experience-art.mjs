@@ -4,6 +4,8 @@ import {fileURLToPath} from 'node:url';
 import {createRequire} from 'node:module';
 import {createHash} from 'node:crypto';
 import sharp from 'sharp';
+import {duelArtEncoding as encoding} from './lib/duel-art-profile.mjs';
+import {writeAtomic} from './lib/io.mjs';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),require=createRequire(import.meta.url);
 require('../src/advanced-engine.js');
 const {CARDS,DECKS}=globalThis.DuelData,locales=require('../src/card-locales.js');
@@ -31,9 +33,9 @@ const workers=await Promise.allSettled(Array.from({length:2},async()=>{
       const response=await fetch(url,{signal:AbortSignal.timeout(18000)});if(!response.ok)throw Error('HTTP '+response.status);
       const bytes=Buffer.from(await response.arrayBuffer());if(bytes.length>5000000)throw Error('Image too large');
       const image=sharp(bytes,{limitInputPixels:8000000}),metadata=await image.metadata();if(!['jpeg','png','webp'].includes(metadata.format))throw Error('Not an image');
-      const webp=await image.resize({width:384,height:384,fit:'inside',withoutEnlargement:true}).webp({quality:83}).toBuffer();
+      const webp=await image.resize({width:encoding.width,height:encoding.width,fit:'inside',withoutEnlargement:true}).webp({quality:encoding.quality,effort:encoding.effort}).toBuffer();
       await writeFile(resolve(out,'source',id+'.jpg'),bytes);await writeFile(target,webp);
-      manifest.cards.push({id,imageId,url,path:'assets/duel/art/'+id+'.webp',sha256:createHash('sha256').update(webp).digest('hex'),sourceSHA256:createHash('sha256').update(bytes).digest('hex')});
+      manifest.cards.push({id,imageId,url,encoding,path:'assets/duel/art/'+id+'.webp',sha256:createHash('sha256').update(webp).digest('hex'),sourceSHA256:createHash('sha256').update(bytes).digest('hex')});
       console.log('Artwork:',id);
       await new Promise(resolve=>setTimeout(resolve,160));
     }catch(error){failed++;console.log('Missing:',id,error.message);}
@@ -41,5 +43,5 @@ const workers=await Promise.allSettled(Array.from({length:2},async()=>{
 }));
 for(const worker of workers)if(worker.status==='rejected'){failed++;console.error('Artwork worker:',worker.reason);}
 const merged=new Map((previous.cards||[]).map(c=>[c.id,c]));for(const card of manifest.cards)merged.set(card.id,card);manifest.cards=[...merged.values()].sort((a,b)=>a.id.localeCompare(b.id));
-await writeFile(resolve(out,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');console.log('Embedded artwork ready:',manifest.cards.length,'Missing:',failed);
+await writeAtomic(resolve(out,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');console.log('Embedded artwork ready:',manifest.cards.length,'Missing:',failed);
 process.exitCode=failed?1:0;

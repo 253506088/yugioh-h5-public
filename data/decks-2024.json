@@ -28,6 +28,13 @@
       "accessed": "2026-10-05",
       "retrievedContentSHA256": "e545ea8ac15771ade31a14d5e6c49c9e677a204901dd368653f23cae8edf5de2",
       "evidenceSummary": "1446 top-placing samples: 247 Tenpai Dragon, 219 Snake-Eye and 169 Yubel. Documents Fiendsmith synergy, Genroku and Samurai Destroyer."
+    },
+    {
+      "id": "q10-2024",
+      "url": "https://roadoftheking.com/ocg-2024-10-metagame/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "6fe714f73d514d9d57733c3350b2cfd8b958e3562028b147de9f4e1020d893e8",
+      "evidenceSummary": "1347 top-placing samples from 271 events: 466 Ryzeal and 188 Maliss. The source also corrects the end of the Snake-Eye era; these are year-end popular strategies, not Worlds podiums."
     }
   ],
   "decks": [
@@ -642,6 +649,348 @@
         "url": "https://roadoftheking.com/wp-content/uploads/2024/09/WorldChampionship2024_5.jpg",
         "sha256": "a84e86053cdca2ced4705f88a0f4be439e738a5e847b0da5d879f6b2f3e7ed2c"
       }
+    },
+    {
+      "id": "maliss-2024",
+      "title": "年度热门 · 码丽丝",
+      "en": "Annual Favorite · Maliss",
+      "ja": "年間人気・M∀LICE",
+      "ace": "Maliss <Q> Hearts Crypter",
+      "description": "2024年末热门码丽丝。以兵卒的除外复活与三种陷阱展开连接怪兽，用真实除外资源维持循环。",
+      "descriptionEn": "A 2024 annual adaptation centered on Maliss <Q> Hearts Crypter. The Main, Extra and Side ratios are adapted for this game; this is not a player’s original recipe.",
+      "descriptionJa": "2024年の構築を参考にした年間アレンジ。Maliss <Q> Hearts Crypterを軸に、メイン・エクストラ・サイドの配分を本作向けに調整。選手の原表ではありません。",
+      "main": [
+        [
+          "Maliss <P> Dormouse",
+          3
+        ],
+        [
+          "Maliss <P> White Rabbit",
+          3
+        ],
+        [
+          "Maliss <P> Chessy Cat",
+          3
+        ],
+        [
+          "Lady Debug",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Effect Veiler",
+          3
+        ],
+        [
+          "Maliss in Underground",
+          3
+        ],
+        [
+          "Cynet Mining",
+          3
+        ],
+        [
+          "Allure of Darkness",
+          3
+        ],
+        [
+          "Gold Sarcophagus",
+          1
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Called by the Grave",
+          1
+        ],
+        [
+          "Maliss <C> MTP-07",
+          1
+        ],
+        [
+          "Maliss <C> GWC-06",
+          1
+        ],
+        [
+          "Maliss <C> TB-11",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Forbidden Droplet",
+          1
+        ],
+        [
+          "Parallel eXceed",
+          3
+        ]
+      ],
+      "extra": [
+        [
+          "Maliss <Q> Red Ransom",
+          2
+        ],
+        [
+          "Maliss <Q> White Binder",
+          2
+        ],
+        [
+          "Maliss <Q> Hearts Crypter",
+          2
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Link Spider",
+          1
+        ],
+        [
+          "Splash Mage",
+          1
+        ],
+        [
+          "Transcode Talker",
+          1
+        ],
+        [
+          "Decode Talker",
+          1
+        ],
+        [
+          "Firewall Dragon",
+          1
+        ],
+        [
+          "Accesscode Talker",
+          1
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ],
+        [
+          "I:P Masquerena",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          2
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ]
+      ],
+      "combo": [
+        "Maliss <P> Dormouse",
+        "Maliss <P> White Rabbit",
+        "Maliss <Q> Red Ransom",
+        "Maliss in Underground",
+        "Maliss <Q> Hearts Crypter"
+      ],
+      "year": 2024,
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "q10-2024"
+      ],
+      "adaptation": "2024 year-end native Maliss adaptation, prior to March Hare/Mirror. Includes Lady Debug and Parallel eXceed rather than 2025 support. Main/Extra/Side all explicit."
+    },
+    {
+      "id": "ryzeal-2024",
+      "title": "年度热门 · 雷热涡炉",
+      "en": "Annual Favorite · Ryzeal",
+      "ja": "年間人気・ライゼオル",
+      "ace": "Ryzeal Detonator",
+      "description": "2024年末上位最多的雷热涡炉路线。冰、剑、外与节点展开四阶；双驱动与雷热交界循环素材，爆破者逐次应对连锁。",
+      "descriptionEn": "A 2024 annual adaptation centered on Ryzeal Detonator. The Main, Extra and Side ratios are adapted for this game; this is not a player’s original recipe.",
+      "descriptionJa": "2024年の構築を参考にした年間アレンジ。Ryzeal Detonatorを軸に、メイン・エクストラ・サイドの配分を本作向けに調整。選手の原表ではありません。",
+      "main": [
+        [
+          "Ice Ryzeal",
+          3
+        ],
+        [
+          "Ext Ryzeal",
+          3
+        ],
+        [
+          "Sword Ryzeal",
+          3
+        ],
+        [
+          "Node Ryzeal",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Effect Veiler",
+          3
+        ],
+        [
+          "Nibiru, the Primal Being",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Ryzeal Cross",
+          2
+        ],
+        [
+          "Ryzeal Plugin",
+          3
+        ],
+        [
+          "Bonfire",
+          3
+        ],
+        [
+          "Pot of Prosperity",
+          1
+        ],
+        [
+          "Triple Tactics Thrust",
+          1
+        ],
+        [
+          "Triple Tactics Talent",
+          1
+        ],
+        [
+          "Called by the Grave",
+          1
+        ],
+        [
+          "Crossout Designator",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Terraforming",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Ryzeal Duo Drive",
+          3
+        ],
+        [
+          "Ryzeal Detonator",
+          3
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Number 41: Bagooska the Terribly Tired Tapir",
+          1
+        ],
+        [
+          "Tornado Dragon",
+          1
+        ],
+        [
+          "Castel, the Skyblaster Musketeer",
+          1
+        ],
+        [
+          "Evilswarm Exciton Knight",
+          1
+        ],
+        [
+          "Number 101: Silent Honor ARK",
+          1
+        ],
+        [
+          "Gagaga Cowboy",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Number S39: Utopia the Lightning",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Forbidden Droplet",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Artifact Lancea",
+          2
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ]
+      ],
+      "combo": [
+        "Ice Ryzeal",
+        "Ext Ryzeal",
+        "Ryzeal Duo Drive",
+        "Star Ryzeal",
+        "Ryzeal Cross"
+      ],
+      "year": 2024,
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "q10-2024"
+      ],
+      "adaptation": "2024 year-end core without Star Ryzeal. More Node and Plugin support the grind game; no quarterly limit list is enforced."
     }
   ]
 }

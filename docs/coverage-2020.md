@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 663 个身份：74 个可用（68 个效果实现、4 个基础规则、2 个复用），589 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2020批次交接.md)。
+当前 663 个身份：76 个可用（70 个效果实现、4 个基础规则、2 个复用），587 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2020批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2020`。
 
@@ -54,6 +54,7 @@
 | 52331012 | 铁兽战线 银弹之卢加鲁 | Tri-Brigade Rugal the Silver Sheller | 已登记本作效果实现 |
 | 56196385 | 铁兽战线 姬特 | Tri-Brigade Kitt | 已登记本作效果实现 |
 | 56984514 | 永久辉煌的黄金乡 | Golden Land Forever! | 已登记本作效果实现 |
+| 59859086 | 飞溅闪屏法师 | Splash Mage | 已登记本作效果实现 |
 | 60303688 | 教导的圣女 艾克莉西娅 | Dogmatika Ecclesia, the Virtuous | 已登记本作效果实现 |
 | 61641818 | 电脑堺龙-龙龙 | Virtual World Dragon - Longlong | 已登记本作效果实现 |
 | 65711558 | 战华盟将-双龙 | Ancient Warriors Oath - Double Dragon Lords | 已登记本作效果实现 |
@@ -61,6 +62,7 @@
 | 68468459 | 阿不思的落胤 | Fallen of Albaz | 已登记本作效果实现 |
 | 68829754 | 黑化觉醒之黄金国永生药 | Eldlixir of Black Awakening | 已登记本作效果实现 |
 | 69680031 | 教导的骑士 弗勒德莉丝 | Dogmatika Fleurdelis, the Knighted | 已登记本作效果实现 |
+| 71278040 | 并行超限龙 | Parallel eXceed | 已登记本作效果实现 |
 | 72717433 | 人偶怪兽 小姑娘 | Doll Monster Miss Mädchen | 基础规则（无卡片效果） |
 | 72957245 | 魔救之息吹 | Adamancipator Signs | 已登记本作效果实现 |
 | 73079836 | 魔救之奇迹-猛禽晶石 | Adamancipator Risen - Raptite | 已登记本作效果实现 |
@@ -448,7 +450,6 @@
 | 59419719 | 化石融合 | Fossil Fusion | pending |
 | 59531356 | 中生代化石骑士 骷髅骑士 | Fossil Warrior Skull Knight | pending |
 | 59741415 | 机甲部队的超临界 | Machina Overdrive | pending |
-| 59859086 | 飞溅闪屏法师 | Splash Mage | pending |
 | 60033398 | 战华之来-张远 | Ancient Warriors - Fearsome Zhang Yuan | pending |
 | 60037599 | 龙辉巧-天棓四γ | Drytron Gamma Eltanin | pending |
 | 60110982 | 混沌幻魔 阿米泰尔-虚无幻影罗生闷 | Armityle the Chaos Phantasm - Phantom of Fury | pending |
@@ -515,7 +516,6 @@
 | 70916046 | 一时炮固定式 | Linear Equation Cannon | pending |
 | 70980824 | 冰结界的还零龙 三叉龙 | Trishula, Zero Dragon of the Ice Barrier | pending |
 | 71002019 | 六花精 叶牡丹 | Mudan the Rikka Fairy | pending |
-| 71278040 | 并行超限龙 | Parallel eXceed | pending |
 | 71348837 | 魔偶甜点沙龙 | Madolche Salon | pending |
 | 71459017 | 祢须三破鸣比 | Hinezumi Hanabi | pending |
 | 71555408 | 刚鬼 铁爪手 | Gouki Iron Claw | pending |

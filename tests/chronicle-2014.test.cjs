@@ -12,8 +12,8 @@ test('2014 preserves 613 unique source identities, types, scales and stable reus
  for(const r of rows){const c=D.cardByName(r.name);assert.equal(c.providerId,r.providerId);assert.equal(c.firstOCGDate,r.firstOCGDate);assert.equal(c.originalDescription,r.description);if(/Pendulum/.test(r.providerType)){assert.equal(c.type,'pendulum');assert.equal(c.scale,r.pendulumScale);assert.equal(!!c.effect,!/Normal/.test(r.providerType));}}
  assert.equal(id('Qliphort Scout'),'qli-scout');assert.equal(id('Masked HERO Dark Law'),'masked-dark-law');
 });
-test('three sourced annual decks contain 40 legal main cards and no future or pending cards',()=>{
- const Decks=require('../src/deck-tools.js'),rows=require('../data/decks-2014.json');assert.equal(rows.decks.length,3);
+test('five sourced annual decks contain 40 legal main cards and no future or pending cards',()=>{
+ const Decks=require('../src/deck-tools.js'),rows=require('../data/decks-2014.json');assert.equal(rows.decks.length,5);
  for(const d of Object.values(D.DECKS).filter(d=>d.year===2014)){assert.equal(Decks.analyze(d).valid,true);assert.equal(d.cards.length,40);assert.ok(d.extra.length<=15);for(const cid of [...d.cards,...d.extra]){assert.ok(D.CARDS[cid].releaseYear<=2014);assert.notEqual(D.CARDS[cid].implementationStatus,'pending');}assert.ok(d.sourceRefs.every(r=>rows.sources.some(s=>s.id===r)));}
 });
 test('Shaddoll effect sends trigger searches; discard costs and Synchro materials do not',()=>{

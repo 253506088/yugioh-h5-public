@@ -229,6 +229,15 @@
       }
     },
     {
+      "name": "Artmage",
+      "kind": "setcode",
+      "code": "0x1cd",
+      "fallback": {
+        "match": "contains",
+        "value": "Artmage"
+      }
+    },
+    {
       "name": "Artorigus",
       "kind": "setcode",
       "code": "0xa7",
@@ -813,6 +822,15 @@
       "fallback": {
         "match": "contains",
         "value": "Dracoslayer"
+      }
+    },
+    {
+      "name": "Dracotail",
+      "kind": "setcode",
+      "code": "0x1c9",
+      "fallback": {
+        "match": "contains",
+        "value": "Dracotail"
       }
     },
     {
@@ -1477,6 +1495,15 @@
       }
     },
     {
+      "name": "Hecahands",
+      "kind": "setcode",
+      "code": "0x1d3",
+      "fallback": {
+        "match": "contains",
+        "value": "Hecahands"
+      }
+    },
+    {
       "name": "Heraldic Beast",
       "kind": "setcode",
       "code": "0x76",
@@ -1687,6 +1714,15 @@
       }
     },
     {
+      "name": "K9",
+      "kind": "setcode",
+      "code": "0x1cb",
+      "fallback": {
+        "match": "contains",
+        "value": "K9"
+      }
+    },
+    {
       "name": "Kaiju",
       "kind": "setcode",
       "code": "0xd3",
@@ -1702,6 +1738,15 @@
       "fallback": {
         "match": "contains",
         "value": "Karakuri"
+      }
+    },
+    {
+      "name": "Kewl Tune",
+      "kind": "setcode",
+      "code": "0x1d5",
+      "fallback": {
+        "match": "contains",
+        "value": "Kewl Tune"
       }
     },
     {
@@ -2531,6 +2576,15 @@
       }
     },
     {
+      "name": "Primite",
+      "kind": "setcode",
+      "code": "0x1b9",
+      "fallback": {
+        "match": "contains",
+        "value": "Primite"
+      }
+    },
+    {
       "name": "Prophecy",
       "kind": "setcode",
       "code": "0x6e",
@@ -2591,6 +2645,15 @@
       "fallback": {
         "match": "contains",
         "value": "R-Genex"
+      }
+    },
+    {
+      "name": "Radiant Typhoon",
+      "kind": "setcode",
+      "code": "0x1d1",
+      "fallback": {
+        "match": "contains",
+        "value": "Radiant Typhoon"
       }
     },
     {

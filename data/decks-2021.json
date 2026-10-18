@@ -45,6 +45,13 @@
       "retrievedContentSHA256": "599e0dde98e84df7115bab1a27c25097aea3b9a30be12fa9e3b0ca65e9a59e8a",
       "evidenceSummary": "81 Swordsoul (24 Tenyi and 18 Destiny HERO Tenyi), 58 Floowandereeze, 40 Tri-Brigade.",
       "note": "Contemporary OCG environment evidence. Project-authored annual representative adaptation, not a player’s exact list or a claimed podium placement."
+    },
+    {
+      "id": "q07-2021",
+      "url": "https://roadoftheking.com/ocg-2021-07-metagame/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "762a61d127c737ff58ea043bbc84e56ad9462401973e44730c57ae2933c6a4a9",
+      "evidenceSummary": "779 top-placing decks: 94 Virtual World, 29 Shaddoll including three Dogmatika Invoked Shaddoll, plus other Invoked variants. World Championship was not held."
     }
   ],
   "decks": [
@@ -560,6 +567,346 @@
         "小鸟效果发动过的整个回合不能特殊召唤；额外主要用于金满代价，特殊召唤路线须另选回合。",
         "未知之风用己方怪兽和对方卡片送墓替代二祭品；官方FAQ允许在次元吸引者下适用，卡片会被除外，魔法免疫仍不可选。"
       ]
+    },
+    {
+      "id": "virtual-world-2021",
+      "year": 2021,
+      "title": "年度热门 · 电脑堺",
+      "en": "Annual Favorite · Virtual World",
+      "ja": "年間人気・電脳堺",
+      "ace": "Virtual World Kyubi - Shenshen",
+      "description": "参考2021第三季度94个上位样本。电脑堺选择场上卡种并送墓展开，朱雀与青龙维持资源，同调和超量提供不同终场。",
+      "descriptionEn": "A 2021 annual adaptation centered on Virtual World Kyubi - Shenshen. The Main, Extra and Side ratios are adapted for this game; this is not a player’s original recipe.",
+      "descriptionJa": "2021年の構築を参考にした年間アレンジ。Virtual World Kyubi - Shenshenを軸に、メイン・エクストラ・サイドの配分を本作向けに調整。選手の原表ではありません。",
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "q07-2021"
+      ],
+      "main": [
+        [
+          "Virtual World Mai-Hime - Lulu",
+          3
+        ],
+        [
+          "Virtual World Xiezhi - Jiji",
+          3
+        ],
+        [
+          "Virtual World Kirin - Lili",
+          3
+        ],
+        [
+          "Virtual World Roshi - Laolao",
+          3
+        ],
+        [
+          "Virtual World Hime - Nyannyan",
+          2
+        ],
+        [
+          "Virtual World Oto-Hime - Toutou",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Maxx \"C\"",
+          3
+        ],
+        [
+          "Virtual World City - Kauwloon",
+          3
+        ],
+        [
+          "Virtual World Gate - Qinglong",
+          3
+        ],
+        [
+          "Virtual World Gate - Chuche",
+          2
+        ],
+        [
+          "Virtual World Gate - Xuanwu",
+          1
+        ],
+        [
+          "Pot of Desires",
+          2
+        ],
+        [
+          "Emergency Teleport",
+          3
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Crossout Designator",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Virtual World Kyubi - Shenshen",
+          2
+        ],
+        [
+          "Virtual World Beast - Jiujiu",
+          2
+        ],
+        [
+          "Virtual World Dragon - Longlong",
+          1
+        ],
+        [
+          "Virtual World Phoenix - Fanfan",
+          1
+        ],
+        [
+          "Virtual World Shell - Jaja",
+          1
+        ],
+        [
+          "True King of All Calamities",
+          1
+        ],
+        [
+          "Cloudcastle",
+          1
+        ],
+        [
+          "Stardust Charge Warrior",
+          1
+        ],
+        [
+          "Coral Dragon",
+          1
+        ],
+        [
+          "Brionac, Dragon of the Ice Barrier",
+          1
+        ],
+        [
+          "Constellar Ptolemy M7",
+          1
+        ],
+        [
+          "Beatrice, Lady of the Eternal",
+          1
+        ],
+        [
+          "The Phantom Knights of Break Sword",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Lancea",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Nibiru, the Primal Being",
+          2
+        ],
+        [
+          "Red Reboot",
+          1
+        ]
+      ],
+      "adaptation": "Annual adaptation of the documented contemporary strategy. Changes are kept in the explicit Main/Extra/Side list; no historical Forbidden/Limited enforcement."
+    },
+    {
+      "id": "dogmatika-invoked-2021",
+      "year": 2021,
+      "title": "年度路线 · 教导召唤影依",
+      "en": "Annual Strategy · Dogmatika Invoked Shaddoll",
+      "ja": "年間戦略・ドラグマ召喚シャドール",
+      "ace": "Dogmatika Fleurdelis, the Knighted",
+      "description": "参考2021有记录的教导召唤影依路线。阿莱斯特与教导额外资源构成两种启动，影依的伪典从墓地建立融合干扰。",
+      "descriptionEn": "A 2021 annual adaptation centered on Dogmatika Fleurdelis, the Knighted. The Main, Extra and Side ratios are adapted for this game; this is not a player’s original recipe.",
+      "descriptionJa": "2021年の構築を参考にした年間アレンジ。Dogmatika Fleurdelis, the Knightedを軸に、メイン・エクストラ・サイドの配分を本作向けに調整。選手の原表ではありません。",
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "q07-2021"
+      ],
+      "main": [
+        [
+          "Dogmatika Ecclesia, the Virtuous",
+          3
+        ],
+        [
+          "Dogmatika Fleurdelis, the Knighted",
+          1
+        ],
+        [
+          "Dogmatika Maximus",
+          1
+        ],
+        [
+          "Aleister the Invoker",
+          3
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Effect Veiler",
+          1
+        ],
+        [
+          "Ghost Belle & Haunted Mansion",
+          3
+        ],
+        [
+          "Nadir Servant",
+          3
+        ],
+        [
+          "Magical Meltdown",
+          3
+        ],
+        [
+          "Invocation",
+          2
+        ],
+        [
+          "Shaddoll Schism",
+          1
+        ],
+        [
+          "Dogmatika Punishment",
+          3
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Called by the Grave",
+          2
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ],
+        [
+          "Super Polymerization",
+          2
+        ],
+        [
+          "Pot of Prosperity",
+          2
+        ],
+        [
+          "Crossout Designator",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Invoked Mechaba",
+          2
+        ],
+        [
+          "Invoked Purgatrio",
+          1
+        ],
+        [
+          "Invoked Raidjin",
+          1
+        ],
+        [
+          "Invoked Cocytus",
+          1
+        ],
+        [
+          "Invoked Caliga",
+          1
+        ],
+        [
+          "El Shaddoll Winda",
+          2
+        ],
+        [
+          "El Shaddoll Construct",
+          1
+        ],
+        [
+          "El Shaddoll Apkallone",
+          1
+        ],
+        [
+          "Elder Entity N'tss",
+          2
+        ],
+        [
+          "Titaniklad the Ash Dragon",
+          1
+        ],
+        [
+          "Artemis, the Magistus Moon Maiden",
+          1
+        ],
+        [
+          "Salamangreat Almiraj",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Lancea",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Twin Twisters",
+          3
+        ],
+        [
+          "Nibiru, the Primal Being",
+          2
+        ],
+        [
+          "Red Reboot",
+          1
+        ]
+      ],
+      "adaptation": "Annual adaptation of the documented contemporary strategy. Changes are kept in the explicit Main/Extra/Side list; no historical Forbidden/Limited enforcement."
     }
   ]
 }

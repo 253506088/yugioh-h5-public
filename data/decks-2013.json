@@ -232,6 +232,41 @@
       "sourceRefs": [
         "worlds-2013",
         "ocg-metagame-2013"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "Effect Veiler",
+          1
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "System Down",
+          2
+        ]
       ]
     },
     {
@@ -375,6 +410,41 @@
         "worlds-2013",
         "recipe-spellbook-2013",
         "ocg-metagame-2013"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Effect Veiler",
+          1
+        ]
       ]
     },
     {
@@ -538,6 +608,41 @@
         "recipe-evilswarm-2013",
         "ocg-metagame-2013",
         "ocg-metagame-2013-09"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Effect Veiler",
+          1
+        ]
       ]
     },
     {
@@ -709,6 +814,41 @@
         "ocg-metagame-2013",
         "ocg-metagame-2013-09",
         "recipe-firefist-2013"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Debunk",
+          1
+        ]
       ]
     },
     {
@@ -891,6 +1031,41 @@
       "sourceRefs": [
         "archetype-bujin-2013",
         "ocg-metagame-2013-09"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Effect Veiler",
+          1
+        ]
       ]
     }
   ]

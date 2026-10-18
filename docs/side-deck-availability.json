@@ -1,104 +1,404 @@
 {
   "decks": [
     {
+      "id": "gravekeeper-2002",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "chaos-2003",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "level-2004",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "darkworld-2005",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "chaos-return-2006",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "frog-monarch-2006",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "chimeratech-2006",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "trooper-monarch-2007",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "machine-gadget-2007",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "burn-2007",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "gladiator-2008",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "lightsworn-2008",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "teledad-2008",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "beatdown-1999",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "fusion-1999",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "ritual-1999",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "exodia-1999",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "burn-1999",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "relinquished-2000",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "toon-2000",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "fusion-2000",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "exodia-2000",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "princess-burn-2000",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "necrofear-2001",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "destiny-board-2001",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "ocean-2001",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "warrior-2001",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "machine-2001",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "amazoness-2002",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "xyz-union-2002",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "empty-jar-2002",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "ocean-2002",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "hand-control-2003",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "skill-drain-2003",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "countdown-2003",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "gravekeeper-2003",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "chaos-2004",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "warrior-2004",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "gren-maju-2004",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "burn-2004",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "nephthys-chaos-2005",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "deck-destruction-2005",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "machine-chaos-2005",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "burn-2005",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "darkworld-2006",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "gadget-2006",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "zombie-2007",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "demise-2007",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "dimensional-beat-2008",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "gravekeeper-burn-2008",
+      "available": 15,
+      "source": 15
+    },
+    {
       "id": "blackwing-2009",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "cat-gladiator-2009",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "cat-synchro-2009",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "frog-ftk-2010",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "blackwing-2010",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "herald-2010",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "agents-2011",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "junk-doppel-2011",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "six-samurai-2011",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "inzektor-2012",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "wind-up-2012",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "mermail-atlantean-2012",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "lightsworn-2009",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "zombie-synchro-2009",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "infernity-2010",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "machina-gadget-2010",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "machina-gadget-2011",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "tg-beast-2011",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "hero-beat-2012",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "chaos-dragon-2012",
+      "available": 15,
+      "source": 15
     },
     {
       "id": "dragon-ruler-2013",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "spellbook-2013",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "evilswarm-2013",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "fire-fist-2013",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "bujin-2013",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "shaddoll-2014",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "qliphort-2014",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
     },
     {
       "id": "nekroz-2014",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "infernity-2014",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "artifact-traptrix-2014",
+      "available": 15,
+      "source": 15
     },
     {
       "id": "tellarknight-2015",
@@ -112,8 +412,18 @@
     },
     {
       "id": "performapal-performage-2015",
-      "available": 0,
-      "source": 0
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "monarch-2015",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "hero-2015",
+      "available": 15,
+      "source": 15
     },
     {
       "id": "blue-eyes-2016",
@@ -127,6 +437,16 @@
     },
     {
       "id": "zoodiac-2016",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "abc-2016",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "monarch-2016",
       "available": 15,
       "source": 15
     },
@@ -246,6 +566,16 @@
       "source": 15
     },
     {
+      "id": "virtual-world-2021",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "dogmatika-invoked-2021",
+      "available": 15,
+      "source": 15
+    },
+    {
       "id": "spright-frog-2022",
       "available": 15,
       "source": 15
@@ -257,6 +587,16 @@
     },
     {
       "id": "floowandereeze-2022",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "eldlich-2022",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "swordsoul-tenyi-2022",
       "available": 15,
       "source": 15
     },
@@ -297,6 +637,41 @@
     },
     {
       "id": "tenpai-dragon-2024",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "maliss-2024",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "ryzeal-2024",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "k9-vanquish-soul-2025",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "lunalight-2025",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "sky-striker-2025",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "maliss-2025",
+      "available": 15,
+      "source": 15
+    },
+    {
+      "id": "ryzeal-2025",
       "available": 15,
       "source": 15
     }

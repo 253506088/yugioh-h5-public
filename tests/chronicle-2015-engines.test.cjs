@@ -1,9 +1,9 @@
 const test=require('node:test');
 const {assert,D,E,DuelEngine,put,fresh,fieldCard,act,drain,use,trigger,source}=require('./chronicle-2015-helpers.cjs');
 const id=n=>D.cardByName(n).id;
-test('2015 three decks preserve sourced quantities, distinct strategies and playable identities',()=>{
- const rows=require('../data/decks-2015.json'),Decks=require('../src/deck-tools.js');assert.equal(rows.decks.length,3);
- for(const row of rows.decks){const d=D.DECKS[row.id];assert.ok(Decks.analyze(d).valid);assert.equal(d.cards.length,row.sourceKind==='historical-decklist'?41:40);assert.equal(d.extra.length,15);assert.equal(row.side.reduce((s,x)=>s+x[1],0),row.sourceKind==='historical-decklist'?15:0);for(const c of [...d.cards,...d.extra]){assert.ok(D.CARDS[c].releaseYear<=2015);assert.notEqual(D.CARDS[c].implementationStatus,'pending',D.CARDS[c].officialName);}}
+test('2015 five decks preserve sourced quantities, distinct strategies and playable identities',()=>{
+ const rows=require('../data/decks-2015.json'),Decks=require('../src/deck-tools.js');assert.equal(rows.decks.length,5);
+ for(const row of rows.decks){const d=D.DECKS[row.id];assert.ok(Decks.analyze(d).valid);assert.equal(d.cards.length,row.sourceKind==='historical-decklist'?41:40);assert.equal(d.extra.length,d.id==='monarch-2015'?0:15);assert.equal(row.side.reduce((s,x)=>s+x[1],0),15);for(const c of [...d.cards,...d.extra]){assert.ok(D.CARDS[c].releaseYear<=2015);assert.notEqual(D.CARDS[c].implementationStatus,'pending',D.CARDS[c].officialName);}}
 });
 test('Ghost Ogre destroys an activated monster but does not negate its already activated effect',()=>{
  const e=fresh(),ogre=put(e,1,'hand','Ghost Ogre & Snow Rabbit'),m=fieldCard(e,0,'Neptabyss, the Atlantean Prince'),cost=put(e,0,'deck','Atlantean Heavy Infantry'),q=put(e,0,'deck','Atlantean Dragoons');

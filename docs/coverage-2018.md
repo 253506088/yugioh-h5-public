@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 672 个身份：104 个可用（13 个复用），568 个待实现。来源和具体范围见 [批次交接](../交接/2018批次交接.md)。
+当前 672 个身份：109 个可用（90 个效果实现、6 个基础规则、13 个复用），563 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2018批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2018`。
 
@@ -11,109 +11,114 @@
 | 密码 | 中文名 | 英文名 | 状态 / 适配说明 |
 | --- | --- | --- | --- |
 | 1142880 | 电子龙·次代星 | Cyber Dragon Nachster | 复用既有实现 |
-| 1295111 | 转生炎兽的圣域 | Salamangreat Sanctuary | 已登记本作实现 |
+| 1295111 | 转生炎兽的圣域 | Salamangreat Sanctuary | 已登记本作效果实现 |
 | 2857636 | 梦幻崩影·凤凰 | Knightmare Phoenix | 复用既有实现 |
-| 3134857 | 自奏圣乐·管弦乐琴机械乐团 | Orcustrion | 已登记本作实现 |
-| 3679218 | 梦幻崩影·人鱼 | Knightmare Mermaid | 已登记本作实现 |
-| 4055337 | 自奏圣乐·梦幻崩影 | Orcust Knightmare | 已登记本作实现 |
-| 4148264 | G战队 黑亮 | Shiny Black "C" Squadder | 已登记本作实现 |
-| 8491308 | 闪刀姬-飒天 | Sky Striker Ace - Hayate | 已登记本作实现 |
+| 3134857 | 自奏圣乐·管弦乐琴机械乐团 | Orcustrion | 已登记本作效果实现 |
+| 3679218 | 梦幻崩影·人鱼 | Knightmare Mermaid | 已登记本作效果实现 |
+| 4055337 | 自奏圣乐·梦幻崩影 | Orcust Knightmare | 已登记本作效果实现 |
+| 4148264 | G战队 黑亮 | Shiny Black "C" Squadder | 基础规则（无卡片效果） |
+| 8491308 | 闪刀姬-飒天 | Sky Striker Ace - Hayate | 已登记本作效果实现 |
 | 8512558 | 希望皇 拟声乌托邦 | Utopic Onomatopoeia | 复用既有实现 |
-| 10045474 | 无限泡影 | Infinite Impermanence | 已登记本作实现 |
-| 10158145 | 梦幻崩界 伊娃力丝 | Knightmare Corruptor Iblee | 已登记本作实现 |
-| 10552026 | 刚鬼 邪道食人魔 | Gouki Heel Ogre | 已登记本作实现 |
-| 11012154 | 守护龙 朱斯提亚 | Guardragon Justicia | 已登记本作实现 |
-| 11969228 | 龙骑兵团骑士-始枪龙骑士 | Dragunity Knight - Romulus | 已登记本作实现 |
-| 12097275 | 刚鬼 熊抱熊精 | Gouki Bearhug | 已登记本作实现 |
-| 12421694 | 闪刀姬-魁奈 | Sky Striker Ace - Kaina | 已登记本作实现 |
-| 13143275 | 守护龙 毗斯缇 | Guardragon Pisty | 已登记本作实现 |
+| 10045474 | 无限泡影 | Infinite Impermanence | 已登记本作效果实现 |
+| 10158145 | 梦幻崩界 伊娃力丝 | Knightmare Corruptor Iblee | 已登记本作效果实现 |
+| 10552026 | 刚鬼 邪道食人魔 | Gouki Heel Ogre | 已登记本作效果实现 |
+| 11012154 | 守护龙 朱斯提亚 | Guardragon Justicia | 基础规则（无卡片效果） |
+| 11969228 | 龙骑兵团骑士-始枪龙骑士 | Dragunity Knight - Romulus | 已登记本作效果实现 |
+| 12097275 | 刚鬼 熊抱熊精 | Gouki Bearhug | 已登记本作效果实现 |
+| 12421694 | 闪刀姬-魁奈 | Sky Striker Ace - Kaina | 已登记本作效果实现 |
+| 13143275 | 守护龙 毗斯缇 | Guardragon Pisty | 已登记本作效果实现 |
+| 14152693 | 月光翠鸟 | Lunalight Emerald Bird | 已登记本作效果实现 |
 | 14812471 | 转生炎兽 烽火猞猁 | Salamangreat Balelynx | 本作适配：墓地的可选破坏代替自动适用，每回合一次。 |
-| 14934922 | 转生炎兽的愤怒 | Salamangreat Rage | 已登记本作实现 |
+| 14934922 | 转生炎兽的愤怒 | Salamangreat Rage | 已登记本作效果实现 |
 | 15291624 | 超雷龙-雷龙 | Thunder Dragon Colossus | 本作适配：可选破坏代替自动除外墓地中价值最低的合法卡。 |
-| 20191720 | 刚鬼 月面坠击兔 | Gouki Moonsault | 已登记本作实现 |
-| 20318029 | 雷源龙-雷龙 | Thunder Dragonmatrix | 已登记本作实现 |
-| 20618081 | 转生炎兽 猎鹰 | Salamangreat Falco | 已登记本作实现 |
-| 21441617 | 自奏圣乐·谐谑曲骷髅 | Orcust Cymbal Skeleton | 已登记本作实现 |
-| 23002292 | 红色重启 | Red Reboot | 已登记本作实现 |
-| 24010609 | 闪刀机关-多任务战刀机 | Sky Striker Mecha Modules - Multirole | 已登记本作实现 |
-| 24154052 | 原型机灵 | Protron | 已登记本作实现 |
-| 24224830 | 墓穴的指名者 | Called by the Grave | 已登记本作实现 |
-| 25733157 | 闪刀机-鹰式推进器 | Sky Striker Mecha - Eagle Booster | 已登记本作实现 |
-| 25800447 | 炽焰融合 | Fusion of Fire | 已登记本作实现 |
-| 25955749 | 闪刀术式-妨害波纹 | Sky Striker Maneuver - Jamming Waves! | 已登记本作实现 |
-| 26077387 | 闪刀姬-零衣 | Sky Striker Ace - Raye | 已登记本作实现 |
-| 26285557 | 刚鬼反派转正 | Gouki Face Turn | 已登记本作实现 |
-| 26845680 | 自奏圣乐的主音 | Orcustrated Return | 已登记本作实现 |
-| 26889158 | 转生炎兽 羚羊 | Salamangreat Gazelle | 已登记本作实现 |
-| 27548199 | 装弹枪管狞猛龙 | Borreload Savage Dragon | 已登记本作实现 |
-| 29596581 | 雷兽龙-雷龙 | Thunder Dragonroar | 已登记本作实现 |
+| 20191720 | 刚鬼 月面坠击兔 | Gouki Moonsault | 已登记本作效果实现 |
+| 20318029 | 雷源龙-雷龙 | Thunder Dragonmatrix | 已登记本作效果实现 |
+| 20618081 | 转生炎兽 猎鹰 | Salamangreat Falco | 已登记本作效果实现 |
+| 21441617 | 自奏圣乐·谐谑曲骷髅 | Orcust Cymbal Skeleton | 已登记本作效果实现 |
+| 23002292 | 红色重启 | Red Reboot | 已登记本作效果实现 |
+| 24010609 | 闪刀机关-多任务战刀机 | Sky Striker Mecha Modules - Multirole | 已登记本作效果实现 |
+| 24154052 | 原型机灵 | Protron | 基础规则（无卡片效果） |
+| 24224830 | 墓穴的指名者 | Called by the Grave | 已登记本作效果实现 |
+| 25733157 | 闪刀机-鹰式推进器 | Sky Striker Mecha - Eagle Booster | 已登记本作效果实现 |
+| 25800447 | 炽焰融合 | Fusion of Fire | 已登记本作效果实现 |
+| 25955749 | 闪刀术式-妨害波纹 | Sky Striker Maneuver - Jamming Waves! | 已登记本作效果实现 |
+| 26077387 | 闪刀姬-零衣 | Sky Striker Ace - Raye | 已登记本作效果实现 |
+| 26285557 | 刚鬼反派转正 | Gouki Face Turn | 已登记本作效果实现 |
+| 26845680 | 自奏圣乐的主音 | Orcustrated Return | 已登记本作效果实现 |
+| 26889158 | 转生炎兽 羚羊 | Salamangreat Gazelle | 已登记本作效果实现 |
+| 27548199 | 装弹枪管狞猛龙 | Borreload Savage Dragon | 已登记本作效果实现 |
+| 29596581 | 雷兽龙-雷龙 | Thunder Dragonroar | 已登记本作效果实现 |
 | 29975188 | 电子龙四型 | Cyber Dragon Vier | 复用既有实现 |
-| 30286474 | 刚鬼 杰出食人魔 | Gouki The Master Ogre | 已登记本作实现 |
-| 30741503 | 自奏圣乐·伽拉忒亚 | Galatea, the Orcust Automaton | 已登记本作实现 |
+| 30286474 | 刚鬼 杰出食人魔 | Gouki The Master Ogre | 已登记本作效果实现 |
+| 30741503 | 自奏圣乐·伽拉忒亚 | Galatea, the Orcust Automaton | 已登记本作效果实现 |
 | 33041277 | 电子革命系统 | Cyber Revsystem | 复用既有实现 |
-| 37261776 | 转生炎兽 堇色奇美拉 | Salamangreat Violet Chimera | 已登记本作实现 |
+| 37261776 | 转生炎兽 堇色奇美拉 | Salamangreat Violet Chimera | 已登记本作效果实现 |
 | 38342335 | 梦幻崩影·独角兽 | Knightmare Unicorn | 复用既有实现 |
-| 38406364 | 常夏的避暑雷神 | Some Summer Summoner | 已登记本作实现 |
-| 39064822 | 梦幻崩影·哥布林 | Knightmare Goblin | 已登记本作实现 |
+| 38406364 | 常夏的避暑雷神 | Some Summer Summoner | 已登记本作效果实现 |
+| 39064822 | 梦幻崩影·哥布林 | Knightmare Goblin | 已登记本作效果实现 |
 | 40509732 | 鬼动武者 | Samurai Destroyer | 复用既有实现 |
-| 41463181 | 转生炎兽 炽热多头狮 | Salamangreat Heatleo | 已登记本作实现 |
+| 41463181 | 转生炎兽 炽热多头狮 | Salamangreat Heatleo | 已登记本作效果实现 |
 | 41685633 | 雷神龙-雷龙 | Thunder Dragon Titan | 本作适配：可选破坏代替自动除外墓地中价值最低的合法卡。 |
-| 42790071 | 幻变骚灵·多功能诈骗者 | Altergeist Multifaker | 已登记本作实现 |
-| 44586426 | 太阳电池人 | Batteryman Solar | 已登记本作实现 |
+| 42790071 | 幻变骚灵·多功能诈骗者 | Altergeist Multifaker | 已登记本作效果实现 |
+| 44586426 | 太阳电池人 | Batteryman Solar | 已登记本作效果实现 |
 | 45195443 | 元素英雄 固态侠 | Elemental HERO Solid Soldier | 复用既有实现 |
-| 47226949 | 骑狮机兽 | Leotron | 已登记本作实现 |
-| 47363932 | 废铁翼龙 | Scrap Wyvern | 已登记本作实现 |
-| 48355999 | 弹丸同调士 | Rokket Synchron | 已登记本作实现 |
-| 48815792 | 灼热之火灵使 希塔 | Hiita the Fire Charmer, Ablaze | 已登记本作实现 |
-| 50005218 | 闪刀空域-零区 | Sky Striker Airspace - Area Zero | 已登记本作实现 |
-| 51227866 | 闪刀机-虎鲨加农炮 | Sky Striker Mecha - Shark Cannon | 已登记本作实现 |
-| 51339637 | 转生炎兽的咆哮 | Salamangreat Roar | 已登记本作实现 |
-| 52155219 | 转生炎兽的炎阵 | Salamangreat Circle | 已登记本作实现 |
-| 52277807 | 转生炎兽 犰狳蜥 | Salamangreat Spinny | 已登记本作实现 |
-| 52340444 | 闪刀机-大黄蜂浮游单元 | Sky Striker Mecha - Hornet Drones | 已登记本作实现 |
-| 54112932 | 薯薯与片片 | Potato & Chips | 已登记本作实现 |
-| 55591586 | 雷劫龙-雷龙 | Thunder Dragonduo | 已登记本作实现 |
+| 46947713 | 转码语者 | Transcode Talker | 已登记本作效果实现 |
+| 47226949 | 骑狮机兽 | Leotron | 基础规则（无卡片效果） |
+| 47363932 | 废铁翼龙 | Scrap Wyvern | 已登记本作效果实现 |
+| 48355999 | 弹丸同调士 | Rokket Synchron | 已登记本作效果实现 |
+| 48815792 | 灼热之火灵使 希塔 | Hiita the Fire Charmer, Ablaze | 已登记本作效果实现 |
+| 50005218 | 闪刀空域-零区 | Sky Striker Airspace - Area Zero | 已登记本作效果实现 |
+| 50546208 | 月光黄鼬 | Lunalight Yellow Marten | 已登记本作效果实现 |
+| 51227866 | 闪刀机-虎鲨加农炮 | Sky Striker Mecha - Shark Cannon | 已登记本作效果实现 |
+| 51339637 | 转生炎兽的咆哮 | Salamangreat Roar | 已登记本作效果实现 |
+| 52155219 | 转生炎兽的炎阵 | Salamangreat Circle | 已登记本作效果实现 |
+| 52277807 | 转生炎兽 犰狳蜥 | Salamangreat Spinny | 已登记本作效果实现 |
+| 52340444 | 闪刀机-大黄蜂浮游单元 | Sky Striker Mecha - Hornet Drones | 已登记本作效果实现 |
+| 54112932 | 薯薯与片片 | Potato & Chips | 基础规则（无卡片效果） |
+| 55591586 | 雷劫龙-雷龙 | Thunder Dragonduo | 已登记本作效果实现 |
 | 55704856 | 电子负载融合 | Cyberload Fusion | 复用既有实现 |
-| 55878038 | 混源龙 巨涡始祖神 | Chaos Dragon Levianeer | 已登记本作实现 |
-| 56003780 | 转生炎兽 灯火美洲豹 | Salamangreat Jack Jaguar | 已登记本作实现 |
+| 55878038 | 混源龙 巨涡始祖神 | Chaos Dragon Levianeer | 已登记本作效果实现 |
+| 56003780 | 转生炎兽 灯火美洲豹 | Salamangreat Jack Jaguar | 已登记本作效果实现 |
 | 56364287 | 电子龙芯 | Cyber Dragon Herz | 复用既有实现 |
-| 56713174 | 雷电龙-雷龙 | Thunder Dragondark | 已登记本作实现 |
-| 57835716 | 自奏圣乐·嬉游曲恶魔 | Orcust Harp Horror | 已登记本作实现 |
-| 59537380 | 守护龙 阿迦佩因 | Guardragon Agarpain | 已登记本作实现 |
+| 56713174 | 雷电龙-雷龙 | Thunder Dragondark | 已登记本作效果实现 |
+| 57835716 | 自奏圣乐·嬉游曲恶魔 | Orcust Harp Horror | 已登记本作效果实现 |
+| 59537380 | 守护龙 阿迦佩因 | Guardragon Agarpain | 已登记本作效果实现 |
 | 60600126 | 电子紧急呼救 | Cyber Emergency | 复用既有实现 |
 | 62517849 | No.39 希望皇 霍普·翻倍 | Number 39: Utopia Double | 复用既有实现 |
-| 63166095 | 闪刀起动-交闪 | Sky Striker Mobilize - Engage! | 已登记本作实现 |
-| 63288573 | 闪刀姬-燎里 | Sky Striker Ace - Kagari | 已登记本作实现 |
-| 64178424 | 转生炎兽的意志 | Will of the Salamangreat | 已登记本作实现 |
-| 65330383 | 梦幻崩影·狮鹫 | Knightmare Gryphon | 已登记本作实现 |
-| 72529749 | 拓扑三叶双头蛇 | Topologic Trisbaena | 已登记本作实现 |
-| 73642296 | 屋敷童 | Ghost Belle & Haunted Mansion | 已登记本作实现 |
-| 75452921 | 梦幻崩影·地狱犬 | Knightmare Cerberus | 已登记本作实现 |
-| 76145142 | 自奏圣乐·朗吉尔苏 | Longirsu, the Orcust Orchestrator | 已登记本作实现 |
-| 76685519 | 幻变骚灵·击键录杜尔迦 | Altergeist Kidolga | 已登记本作实现 |
+| 63166095 | 闪刀起动-交闪 | Sky Striker Mobilize - Engage! | 已登记本作效果实现 |
+| 63288573 | 闪刀姬-燎里 | Sky Striker Ace - Kagari | 已登记本作效果实现 |
+| 64178424 | 转生炎兽的意志 | Will of the Salamangreat | 已登记本作效果实现 |
+| 65330383 | 梦幻崩影·狮鹫 | Knightmare Gryphon | 已登记本作效果实现 |
+| 72529749 | 拓扑三叶双头蛇 | Topologic Trisbaena | 已登记本作效果实现 |
+| 73642296 | 屋敷童 | Ghost Belle & Haunted Mansion | 已登记本作效果实现 |
+| 75452921 | 梦幻崩影·地狱犬 | Knightmare Cerberus | 已登记本作效果实现 |
+| 76145142 | 自奏圣乐·朗吉尔苏 | Longirsu, the Orcust Orchestrator | 已登记本作效果实现 |
+| 76685519 | 幻变骚灵·击键录杜尔迦 | Altergeist Kidolga | 已登记本作效果实现 |
 | 77075360 | 废品增速者 | Junk Speeder | 复用既有实现 |
-| 78661338 | 幻创龙 奇幻龙人神 | Fantastical Dragon Phantazmay | 已登记本作实现 |
-| 82385847 | 恐龙摔跤手·潘克拉辛角龙 | Dinowrestler Pankratops | 已登记本作实现 |
-| 83107873 | 雷鸟龙-雷龙 | Thunder Dragonhawk | 已登记本作实现 |
-| 84754430 | 机界骑士 亚伯拉姆 | Mekk-Knight Avram | 已登记本作实现 |
-| 85008676 | 刚鬼 锁臂章鱼 | Gouki Octostretch | 已登记本作实现 |
-| 85289965 | 刺刀枪管龙 | Borrelsword Dragon | 已登记本作实现 |
-| 86148577 | 守护龙 厄尔庇 | Guardragon Elpy | 已登记本作实现 |
-| 87116928 | 嵌合巨舰龙 | Chimeratech Megafleet Dragon | 已登记本作实现 |
-| 87327776 | 转生炎兽 蜃景雄马 | Salamangreat Miragestallio | 已登记本作实现 |
-| 87571563 | 星遗物的守护龙 | World Legacy Guardragon | 已登记本作实现 |
-| 87871125 | 转生炎兽 日光狼 | Salamangreat Sunlight Wolf | 已登记本作实现 |
-| 90351981 | 自奏圣乐的通天塔 | Orcustrated Babel | 已登记本作实现 |
-| 90673288 | 闪刀姬-雫空 | Sky Striker Ace - Shizuku | 已登记本作实现 |
-| 93581434 | 刚鬼 地狱教练 | Gouki Ringtrainer | 已登记本作实现 |
-| 93920420 | 星遗物-『星杖』 | World Legacy - "World Wand" | 已登记本作实现 |
-| 94046012 | 自奏圣乐·卡农曲大炮 | Orcust Brass Bombard | 已登记本作实现 |
-| 94259633 | 纳祭之魔·阿尼玛 | Relinquished Anima | 已登记本作实现 |
+| 78661338 | 幻创龙 奇幻龙人神 | Fantastical Dragon Phantazmay | 已登记本作效果实现 |
+| 82385847 | 恐龙摔跤手·潘克拉辛角龙 | Dinowrestler Pankratops | 已登记本作效果实现 |
+| 83107873 | 雷鸟龙-雷龙 | Thunder Dragonhawk | 已登记本作效果实现 |
+| 84754430 | 机界骑士 亚伯拉姆 | Mekk-Knight Avram | 基础规则（无卡片效果） |
+| 85008676 | 刚鬼 锁臂章鱼 | Gouki Octostretch | 已登记本作效果实现 |
+| 85289965 | 刺刀枪管龙 | Borrelsword Dragon | 已登记本作效果实现 |
+| 86148577 | 守护龙 厄尔庇 | Guardragon Elpy | 已登记本作效果实现 |
+| 87116928 | 嵌合巨舰龙 | Chimeratech Megafleet Dragon | 已登记本作效果实现 |
+| 87327776 | 转生炎兽 蜃景雄马 | Salamangreat Miragestallio | 已登记本作效果实现 |
+| 87571563 | 星遗物的守护龙 | World Legacy Guardragon | 已登记本作效果实现 |
+| 87871125 | 转生炎兽 日光狼 | Salamangreat Sunlight Wolf | 已登记本作效果实现 |
+| 87931906 | 月光融合 | Lunalight Fusion | 已登记本作效果实现 |
+| 88753594 | 月光舞剑虎姬 | Lunalight Sabre Dancer | 已登记本作效果实现 |
+| 90351981 | 自奏圣乐的通天塔 | Orcustrated Babel | 已登记本作效果实现 |
+| 90673288 | 闪刀姬-雫空 | Sky Striker Ace - Shizuku | 已登记本作效果实现 |
+| 93581434 | 刚鬼 地狱教练 | Gouki Ringtrainer | 已登记本作效果实现 |
+| 93920420 | 星遗物-『星杖』 | World Legacy - "World Wand" | 已登记本作效果实现 |
+| 94046012 | 自奏圣乐·卡农曲大炮 | Orcust Brass Bombard | 已登记本作效果实现 |
+| 94259633 | 纳祭之魔·阿尼玛 | Relinquished Anima | 已登记本作效果实现 |
 | 94599451 | 魔导研究所 | Mythical Institution | 本作适配：可选破坏代替自动移除自身一个魔力指示物。 |
-| 94620082 | 转生炎兽 狐狸 | Salamangreat Foxy | 已登记本作实现 |
-| 95238394 | 雷龙融合 | Thunder Dragon Fusion | 已登记本作实现 |
-| 98338152 | 闪刀机-黑寡妇抓锚 | Sky Striker Mecha - Widow Anchor | 已登记本作实现 |
-| 99550630 | 闪刀术式-烈火再燃 | Sky Striker Maneuver - Afterburners! | 已登记本作实现 |
+| 94620082 | 转生炎兽 狐狸 | Salamangreat Foxy | 已登记本作效果实现 |
+| 95238394 | 雷龙融合 | Thunder Dragon Fusion | 已登记本作效果实现 |
+| 98338152 | 闪刀机-黑寡妇抓锚 | Sky Striker Mecha - Widow Anchor | 已登记本作效果实现 |
+| 99550630 | 闪刀术式-烈火再燃 | Sky Striker Maneuver - Afterburners! | 已登记本作效果实现 |
 
 ## 待实现身份
 
@@ -209,7 +214,6 @@
 | 13965201 | 逢华妖丽谭-不知火语 | Ghost Meets Girl - A Shiranui's Story | pending |
 | 14088859 | 新宇融合 | Neos Fusion | pending |
 | 14105623 | 异色眼霸弧灵摆龙 | Odd-Eyes Arc Pendulum Dragon | pending |
-| 14152693 | 月光翠鸟 | Lunalight Emerald Bird | pending |
 | 14365823 | 淘气仙星·蒂瓦丽迪丝 | Trickstar Divaridis | pending |
 | 14512825 | 南瓜马车 | Pumpkin Carriage | pending |
 | 15308295 | 魔界剧团-插科打诨角色 | Abyss Actor - Comic Relief | pending |
@@ -385,7 +389,6 @@
 | 46425662 | 元素灵剑士·波涛 | Elementsaber Nalu | pending |
 | 46647144 | 星遗物-『星枪』 | World Legacy - "World Lance" | pending |
 | 46724542 | 电子龙·凯旋 | Cyber Dragon Sieger | pending |
-| 46947713 | 转码语者 | Transcode Talker | pending |
 | 47171541 | 自奏圣乐的释音 | Orcustrated Release | pending |
 | 47346782 | 寝青蛙 | Centerfrog | pending |
 | 47393199 | 崩界的守护龙 | Guardragon Cataclysm | pending |
@@ -410,7 +413,6 @@
 | 50213848 | 取舍苏生 | Monster Reborn Reborn | pending |
 | 50383626 | 黯黑之魔王 迪亚波罗斯 | Darkest Diabolos, Lord of the Lair | pending |
 | 50426119 | 退行手雷破坏者 | Degrade Buster | pending |
-| 50546208 | 月光黄鼬 | Lunalight Yellow Marten | pending |
 | 50548657 | 提示符叉角羚 | Prompthorn | pending |
 | 50669347 | 守护神-奈芙提斯 | Nephthys, the Sacred Preserver | pending |
 | 50690129 | 缓存猫娃L2 | Catche Eve L2 | pending |
@@ -622,12 +624,10 @@
 | 86926989 | 丽神-不知火 | Shiranui Skillsaga Supremacy | pending |
 | 86962245 | 转生炎兽 赤狐 | Salamangreat Foxer | pending |
 | 87054946 | 焰凰神-奈芙提斯 | Nephthys, the Sacred Flame | pending |
-| 87931906 | 月光融合 | Lunalight Fusion | pending |
 | 88093706 | 更新干扰员 | Update Jammer | pending |
 | 88176533 | 奈芙提斯之祭祀者 | Devotee of Nephthys | pending |
 | 88540324 | 转生炎兽的烈爪 | Salamangreat Claw | pending |
 | 88693151 | 淘气仙星融合 | Trickstar Fusion | pending |
-| 88753594 | 月光舞剑虎姬 | Lunalight Sabre Dancer | pending |
 | 88875132 | 爆走轨道 冲天飞马 | Flying Pegasus Railroad Stampede | pending |
 | 89132148 | 光子轨道 | Photon Orbital | pending |
 | 89462956 | 庄家选择 | Dealer's Choice | pending |

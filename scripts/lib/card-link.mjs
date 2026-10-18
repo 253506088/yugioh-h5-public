@@ -30,6 +30,7 @@ export function parseLink(name, text, {races, attributes, linkRating, linkMarker
     else if(value==='Insect, Plant, or Reptile monster')link.includingRaces=[races.Insect,races.Plant,races.Reptile];
     else if(value==='Fish, Sea Serpent, or Aqua monster')link.includingRaces=[races.Fish,races['Sea Serpent'],races.Aqua];
     else if(value==='LIGHT Fiend monster')link.includingMaterial={attribute:attributes.LIGHT,race:races.Fiend};
+    else if(value==='DARK Spellcaster monster')link.includingMaterial={attribute:attributes.DARK,race:races.Spellcaster};
     else if(value==='Level 4 Spellcaster monster')link.includingMaterial={level:4,race:races.Spellcaster};
     else if(value==='Ritual, Fusion, Synchro, or Xyz Monster')link.includingTypes=['ritual','fusion','synchro','xyz'];
     else if(/^(DARK|LIGHT|EARTH|WIND|WATER|FIRE) "[^"]+" monster$/.test(value)){const m=value.match(/^(\w+) "([^"]+)"/);link.includingSeries=m[2];link.includingSeriesAttribute=attributes[m[1]];}

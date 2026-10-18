@@ -17,6 +17,13 @@
         "Shaddoll: 16 tops"
       ],
       "note": "Different summoning mechanics and the three most represented strategies in the year-end OCG report. Representative adaptations, not verbatim podium lists."
+    },
+    {
+      "id": "worlds-2014",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2014/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "5a2e93f9ea43632a8cb5d4356870ccd427fcd5fc2a7412c0b882cd5f9f3664c1",
+      "evidenceSummary": "Tournament results and deck strategy labels retained as historical references. New game builds are explicitly adapted, not transcriptions of incomplete player lists."
     }
   ],
   "decks": [
@@ -174,6 +181,41 @@
       "sourceKind": "representative-adaptation",
       "sourceRefs": [
         "ocg-2014-10"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Effect Veiler",
+          1
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Artifact Lancea",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ]
       ]
     },
     {
@@ -318,6 +360,41 @@
       "sourceKind": "representative-adaptation",
       "sourceRefs": [
         "ocg-2014-10"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "Maxx \"C\"",
+          2
+        ],
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Artifact Lancea",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Mind Crush",
+          1
+        ]
       ]
     },
     {
@@ -474,7 +551,434 @@
       "sourceKind": "representative-adaptation",
       "sourceRefs": [
         "ocg-2014-10"
+      ],
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription.",
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "Artifact Lancea",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          1
+        ]
       ]
+    },
+    {
+      "id": "infernity-2014",
+      "year": 2014,
+      "title": "世界冠军路线 · 永火",
+      "en": "World Champion Route · Infernity",
+      "ja": "世界王者を参考に・インフェルニティ",
+      "ace": "Infernity Archfiend",
+      "description": "2014冠军和季军均为永火，因此补一条冠军路线改编。以死灵师、恶魔和零手牌连锁为核心，加入四阶与三阶资源连接。",
+      "descriptionEn": "A 2014 adaptation: World Champion Route · Infernity. Infernity Archfiend leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2014年のカードプールを使った世界王者を参考に・インフェルニティのアレンジ。インフェルニティ・デーモンを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Infernity Archfiend",
+          3
+        ],
+        [
+          "Infernity Necromancer",
+          3
+        ],
+        [
+          "Infernity Avenger",
+          1
+        ],
+        [
+          "Infernity Beetle",
+          1
+        ],
+        [
+          "Dark Grepher",
+          3
+        ],
+        [
+          "Summoner Monk",
+          2
+        ],
+        [
+          "Armageddon Knight",
+          3
+        ],
+        [
+          "Stygian Street Patrol",
+          2
+        ],
+        [
+          "Infernity Launcher",
+          1
+        ],
+        [
+          "Infernity Barrier",
+          3
+        ],
+        [
+          "Infernity Break",
+          3
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "One for One",
+          1
+        ],
+        [
+          "Instant Fusion",
+          2
+        ],
+        [
+          "Upstart Goblin",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Lavalval Chain",
+          2
+        ],
+        [
+          "Leviair the Sea Dragon",
+          2
+        ],
+        [
+          "Diamond Dire Wolf",
+          2
+        ],
+        [
+          "Evilswarm Exciton Knight",
+          1
+        ],
+        [
+          "Castel, the Skyblaster Musketeer",
+          1
+        ],
+        [
+          "Daigusto Emeral",
+          1
+        ],
+        [
+          "Number 101: Silent Honor ARK",
+          1
+        ],
+        [
+          "Stardust Dragon",
+          1
+        ],
+        [
+          "Void Ogre Dragon",
+          1
+        ],
+        [
+          "Hundred Eyes Dragon",
+          1
+        ],
+        [
+          "Infernity Doom Dragon",
+          1
+        ],
+        [
+          "Flame Ghost",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Effect Veiler",
+          2
+        ],
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Artifact Lancea",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          1
+        ]
+      ],
+      "combo": [
+        "Infernity Archfiend",
+        "Infernity Necromancer",
+        "Infernity Avenger",
+        "Infernity Beetle",
+        "Dark Grepher"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2014"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription."
+    },
+    {
+      "id": "artifact-traptrix-2014",
+      "year": 2014,
+      "title": "世界亚军路线 · 古遗物虫惑魔",
+      "en": "World Finalist Route · Artifact Traptrix",
+      "ja": "世界準優勝を参考に・アーティファクト蟲惑魔",
+      "ace": "Artifact Moralltach",
+      "description": "参考Hiyama Shunsuke世界亚军。古遗物在后场被破坏后展开，虫惑魔检索落穴，炎冰双手提供另一种破场路径。",
+      "descriptionEn": "A 2014 adaptation: World Finalist Route · Artifact Traptrix. Artifact Moralltach leads a distinct strategy using cards available within the preserved OCG year. Main, Extra and Side choices are explicit; historical card limits are not enforced.",
+      "descriptionJa": "2014年のカードプールを使った世界準優勝を参考に・アーティファクト蟲惑魔のアレンジ。アーティファクト－モラルタを軸にした構築で、メイン・エクストラ・サイドを明示。歴史上の禁止・制限表は適用しません。",
+      "main": [
+        [
+          "Artifact Moralltach",
+          3
+        ],
+        [
+          "Artifact Beagalltach",
+          2
+        ],
+        [
+          "Traptrix Myrmeleo",
+          3
+        ],
+        [
+          "Traptrix Dionaea",
+          2
+        ],
+        [
+          "Fire Hand",
+          3
+        ],
+        [
+          "Ice Hand",
+          3
+        ],
+        [
+          "Artifact Sanctum",
+          3
+        ],
+        [
+          "Artifact Ignition",
+          3
+        ],
+        [
+          "Traptrix Trap Hole Nightmare",
+          2
+        ],
+        [
+          "Bottomless Trap Hole",
+          2
+        ],
+        [
+          "Double Cyclone",
+          2
+        ],
+        [
+          "Pot of Greed",
+          1
+        ],
+        [
+          "Graceful Charity",
+          1
+        ],
+        [
+          "Monster Reborn",
+          1
+        ],
+        [
+          "Raigeki",
+          1
+        ],
+        [
+          "Dark Hole",
+          1
+        ],
+        [
+          "Heavy Storm",
+          1
+        ],
+        [
+          "Mystical Space Typhoon",
+          2
+        ],
+        [
+          "Book of Moon",
+          2
+        ],
+        [
+          "Mirror Force",
+          1
+        ],
+        [
+          "Torrential Tribute",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Constellar Pleiades",
+          2
+        ],
+        [
+          "Number 61: Volcasaurus",
+          2
+        ],
+        [
+          "Tiras, Keeper of Genesis",
+          2
+        ],
+        [
+          "Artifact Durendal",
+          2
+        ],
+        [
+          "Number 103: Ragnazero",
+          1
+        ],
+        [
+          "Castel, the Skyblaster Musketeer",
+          1
+        ],
+        [
+          "Evilswarm Exciton Knight",
+          1
+        ],
+        [
+          "Diamond Dire Wolf",
+          1
+        ],
+        [
+          "Gagaga Cowboy",
+          1
+        ],
+        [
+          "Gaia Dragon, the Thunder Charger",
+          1
+        ],
+        [
+          "Number 101: Silent Honor ARK",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "D.D. Crow",
+          2
+        ],
+        [
+          "Flying \"C\"",
+          2
+        ],
+        [
+          "Fairy Wind",
+          2
+        ],
+        [
+          "Mind Crush",
+          2
+        ],
+        [
+          "Debunk",
+          2
+        ],
+        [
+          "Artifact Lancea",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          2
+        ],
+        [
+          "Maxx \"C\"",
+          1
+        ]
+      ],
+      "combo": [
+        "Artifact Moralltach",
+        "Artifact Beagalltach",
+        "Traptrix Myrmeleo",
+        "Traptrix Dionaea",
+        "Fire Hand"
+      ],
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds-2014"
+      ],
+      "adaptation": "Explicit game adaptation using current card text and OCG year candidates. No missing player-original cards are guessed. An empty Extra Deck is intentional where this strategy does not summon from it.",
+      "sideSourceStatus": "The source supplied no complete Side Deck. These 15 game-adapted counterplay cards cover graveyard interaction, summon interruption and back-row or monster removal within the OCG candidate year. They are not a player-original transcription."
     }
   ]
 }

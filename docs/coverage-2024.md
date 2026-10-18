@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 460 个身份：22 个可用（17 个效果实现、5 个基础规则、0 个复用），438 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2024批次交接.md)。
+当前 460 个身份：40 个可用（35 个效果实现、5 个基础规则、0 个复用），420 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2024批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2024`。
 
@@ -11,25 +11,43 @@
 | 密码 | 中文名 | 英文名 | 状态 / 适配说明 |
 | --- | --- | --- | --- |
 | 2463794 | 刻魔的镇魂棺 | Fiendsmith's Requiem | 已登记本作效果实现 |
+| 6798031 | 雷火沸动交界机 | Ryzeal Cross | 已登记本作效果实现 |
+| 7511613 | 雷火沸动油电双动机 | Ryzeal Duo Drive | 已登记本作效果实现 |
+| 8633261 | 内燃雷火沸动机 | Ice Ryzeal | 已登记本作效果实现 |
 | 11590299 | 龙宝龙 | Dora Dora | 已登记本作效果实现 |
 | 18969888 | 灿幻超龙 三超戟龙军王 | Sangenpai Transcendent Dragion | 已登记本作效果实现 |
+| 20726052 | 码丽丝<代码>GWC-06 | Maliss <C> GWC-06 | 已登记本作效果实现 |
+| 21848500 | 码丽丝<王后>红心加密 | Maliss <Q> Hearts Crypter | 已登记本作效果实现 |
 | 23657016 | 幻禄之天杯龙 | Tenpai Dragon Genroku | 已登记本作效果实现 |
 | 28103028 | 火马天龙 | Ignihorse Dragonis | 基础规则（无卡片效果） |
 | 30336082 | 杯满的灿幻庄 | Sangen Summoning | 已登记本作效果实现 |
+| 32061192 | 码丽丝<兵卒>睡鼠 | Maliss <P> Dormouse | 已登记本作效果实现 |
+| 34022970 | 外燃雷火沸动机 | Ext Ryzeal | 已登记本作效果实现 |
+| 34909328 | 雷火沸动死旋爆震机 | Ryzeal Detonator | 本作适配：破坏替代自动选择价值最低的真实素材，每卡名每回合一次；发动与对象选择仍使用正常连锁。 |
+| 35844557 | 剑式阴极雷火沸动机 | Sword Ryzeal | 已登记本作效果实现 |
 | 39931513 | 天杯龙 白龙 | Tenpai Dragon Paidra | 已登记本作效果实现 |
 | 46533533 | 皮蒂 | Dipity | 基础规则（无卡片效果） |
 | 46640168 | 刻魔 落泪之日 | Fiendsmith's Lacrima | 已登记本作效果实现 |
 | 47643326 | 太空咒语兔 | Lunar Rabbit Omajinai | 基础规则（无卡片效果） |
 | 49867899 | 刻魔的大圣棺 | Fiendsmith's Sequence | 已登记本作效果实现 |
 | 55343172 | 传说的决斗场 | Legendary Dueling Field | 基础规则（无卡片效果） |
+| 57111661 | 码丽丝<代码>TB-11 | Maliss <C> TB-11 | 已登记本作效果实现 |
+| 60394026 | 雷火沸动机插电 | Ryzeal Plugin | 已登记本作效果实现 |
 | 60764609 | 刻印群魔的刻魔锻冶师 | Fiendsmith Engraver | 已登记本作效果实现 |
 | 65326118 | 天杯龙 发龙 | Tenpai Dragon Fadra | 已登记本作效果实现 |
 | 66730191 | 灿幻开门 | Sangen Kaimen | 已登记本作效果实现 |
+| 68059897 | 码丽丝<王后>红棋勒索 | Maliss <Q> Red Ransom | 已登记本作效果实现 |
+| 68337209 | 码丽丝梦游地下界 | Maliss in Underground | 已登记本作效果实现 |
+| 69272449 | 码丽丝<兵卒>白兔 | Maliss <P> White Rabbit | 已登记本作效果实现 |
+| 72238166 | 节式阳极雷火沸动机 | Node Ryzeal | 已登记本作效果实现 |
 | 80453041 | 于贝尔幻影 | Phantom of Yubel | 已登记本作效果实现 |
 | 82135803 | 刻魔 震怒之日 | Fiendsmith's Desirae | 已登记本作效果实现 |
 | 82570174 | 灿幻升龙 双叉戟龙军王 | Sangenpai Bident Dragion | 已登记本作效果实现 |
 | 91810826 | 天杯龙 中龙 | Tenpai Dragon Chundra | 已登记本作效果实现 |
 | 93729896 | 噩梦之玉座 | Nightmare Throne | 已登记本作效果实现 |
+| 94722358 | 码丽丝<代码>MTP-07 | Maliss <C> MTP-07 | 已登记本作效果实现 |
+| 95454996 | 码丽丝<王后>白棋捆绑 | Maliss <Q> White Binder | 已登记本作效果实现 |
+| 96676583 | 码丽丝<兵卒>柴郡猫 | Maliss <P> Chessy Cat | 已登记本作效果实现 |
 | 98567237 | 刻魔的咏圣 | Fiendsmith's Tract | 已登记本作效果实现 |
 | 98588427 | 包烤蒸骑-B公牛枪炮 | Steam Knight - BULLauncher | 基础规则（无卡片效果） |
 
@@ -70,15 +88,12 @@
 | 6355563 | Y-机敏龙头 | Y-Yare Head | pending |
 | 6659193 | 娱乐法师 秋千大魔术家 | Performage Trapeze High Magician | pending |
 | 6696168 | 庆典气球 | Festiballoon | pending |
-| 6798031 | 雷火沸动交界机 | Ryzeal Cross | pending |
 | 6906306 | 至钢之玉 红青玉 | Rubysapphirus, the Adamant Jewel | pending |
 | 6908161 | 蕾祸之锁蛇巳 | Ragnaraika Chain Coils | pending |
 | 7020743 | 凶孩子 | Tantrum Toddler | pending |
-| 7511613 | 雷火沸动油电双动机 | Ryzeal Duo Drive | pending |
 | 7628844 | 混沌No.32 海咬龙 鲨龙兽·海恶白煞 | Number C32: Shark Drake LeVeiss | pending |
 | 7934362 | 娱乐法师 火舞者 | Performage Fire Dancer | pending |
 | 8170654 | 巨型章玉米 | Giant Kra-Corn | pending |
-| 8633261 | 内燃雷火沸动机 | Ice Ryzeal | pending |
 | 8841431 | 骑士皇 普莉梅拉·首席百夫长 | Centur-Ion Primera Primus | pending |
 | 8963089 | 黎铭机 厄俄斯瓦罗格 | Heosvarog the Mechanical Dawn | pending |
 | 9453320 | 海皇精 深渊特里忒 | Abysstrite, the Atlantean Spirit | pending |
@@ -119,13 +134,11 @@
 | 19652159 | 光与暗之龙王 | Light and Darkness Dragonlord | pending |
 | 20568404 | 朱罗纪剑龙 | Jurrac Stego | pending |
 | 20714553 | 圣月之魔导士 恩底弥翁 | Endymion, the Crescent Magistus | pending |
-| 20726052 | 码丽丝<代码>GWC-06 | Maliss <C> GWC-06 | pending |
 | 20904475 | 海泷龙华-渊巴 | Kairo Ryu-Ge Emva | pending |
 | 20934683 | 蓟花之欠债者 | Azamina Debtors | pending |
 | 21036656 | 圆唤妖精 蘑菇圈 | Cyclos the Circular Sprite | pending |
 | 21056275 | 武装蜂起 | Armed Rebeellion | pending |
 | 21281085 | 魔轰神 利威西卜魔 | Fabled Levilazebul | pending |
-| 21848500 | 码丽丝<王后>红心加密 | Maliss <Q> Hearts Crypter | pending |
 | 22435424 | 龙辉巧-ν2 | Drytron Nu II | pending |
 | 22712877 | 电麻毒裸盖菇 | Paralyzing Mushroom | pending |
 | 22970795 | 白骨道领主 | Wightlord | pending |
@@ -176,22 +189,18 @@
 | 31539614 | 苗丁格尔 | Antidote Nurse | pending |
 | 31552317 | 水晶机巧包体 | Crystron Inclusion | pending |
 | 31969219 | 影之灾厄 | Baneshade | pending |
-| 32061192 | 码丽丝<兵卒>睡鼠 | Maliss <P> Dormouse | pending |
 | 32270212 | 同伴的牵绊 | Ties That Bind | pending |
 | 32278723 | 喷水引擎浮上 | Aqua Jet Surface | pending |
 | 32762201 | 古代的机械像 | Ancient Gear Statue | pending |
 | 32991300 | 刻魔的神圣棺 | Fiendsmith's Agnumday | pending |
 | 33113958 | 海善龙 | LeVirtue Dragon | pending |
 | 33787730 | 雷火沸动霍尔洞推进器 | Ryzeal Plasma Hole | pending |
-| 34022970 | 外燃雷火沸动机 | Ext Ryzeal | pending |
 | 34149150 | 葬角之食肉公牛龙 | Horned Brute Carnovorus | pending |
 | 34235530 | 真魔六武众-紫炎 | Legendary Lord Six Samurai - Shi En | pending |
-| 34909328 | 雷火沸动死旋爆震机 | Ryzeal Detonator | pending |
 | 35057188 | 蜂军-革命之大游击阔头枪蜂 | Battlewasp - Grand Partisan the Revolution | pending |
 | 35552985 | 刻魔的赞圣 | Fiendsmith's Sanct | pending |
 | 35614780 | 光与升华之龙 | Light End Sublimation Dragon | pending |
 | 35778533 | 白森林禁止入内 | Beware the White Forest | pending |
-| 35844557 | 剑式阴极雷火沸动机 | Sword Ryzeal | pending |
 | 36400569 | 傀儡游仪-服务傀儡 | Service Puppet Play | pending |
 | 36436372 | 机关傀儡-小士兵队 | Gimmick Puppet Little Soldiers | pending |
 | 36890111 | 地狱人偶之馆 | Mansion of the Dreadful Dolls | pending |
@@ -289,7 +298,6 @@
 | 56499179 | 幻胧龙华-霸巴 | Genro Ryu-Ge Hakva | pending |
 | 56506740 | 原石的皇脉 | Primite Lordly Lode | pending |
 | 56863746 | 龙仪巧-天龙流星DAD | Drytron Meteonis DA Draconids | pending |
-| 57111661 | 码丽丝<代码>TB-11 | Maliss <C> TB-11 | pending |
 | 57420265 | 电子鱼人-鱼叉手 | Fishborg Harpooner | pending |
 | 57775790 | 魔轰神界的复活 | Fabled Realm's Revival | pending |
 | 57985393 | 扫帚精 | Broomy | pending |
@@ -303,7 +311,6 @@
 | 59893882 | 邪心英雄 业火翼魔-地狱逆火 | Evil HERO Inferno Wing - Backfire | pending |
 | 60203670 | 黄金荣耀-暗杀者 | Gold Pride - Eliminator | pending |
 | 60238002 | 亚空间物质回送装置 | Interdimensional Matter Forwarder | pending |
-| 60394026 | 雷火沸动机插电 | Ryzeal Plugin | pending |
 | 60517697 | 海皇龙神 波塞德拉·深渊 | Poseidra Abyss, the Atlantean Dragon Lord | pending |
 | 61116514 | 掌式永磁雷火沸动机 | Palm Ryzeal | pending |
 | 61773610 | 肃声的守护者 | Guardian of the Voiceless Voice | pending |
@@ -339,12 +346,9 @@
 | 67441879 | 蜂军风 | Battlewasp Wind | pending |
 | 67457739 | 罪宝合战 | Sinful Spoils Struggle | pending |
 | 67724434 | 双头百搭 | Double Wild | pending |
-| 68059897 | 码丽丝<王后>红棋勒索 | Maliss <Q> Red Ransom | pending |
-| 68337209 | 码丽丝梦游地下界 | Maliss in Underground | pending |
 | 68663427 | 转生显形铠 | Reincarnation Unveiling Mail | pending |
 | 68756810 | 切入鲨 | Cutter Shark | pending |
 | 68897338 | 魔轰神兽 贝希尔摩斯 | The Fabled Behilmoth | pending |
-| 69272449 | 码丽丝<兵卒>白兔 | Maliss <P> White Rabbit | pending |
 | 69385019 | 皇者水精鳞-尼普深渊王 | Mermail King - Neptabyss | pending |
 | 70117791 | 爆击兽 炎弹兽 | Blazing Bombardment Beast | pending |
 | 70514456 | 蕾祸之御拜神主 | Ragnaraika Mantis Monk | pending |
@@ -354,7 +358,6 @@
 | 71456737 | 蜂军-神事弓之幸矢蜂 | Battlewasp - Sachi the Ceremonial Bow | pending |
 | 71858682 | 骑士皇 奥克西拉 | Centur-Ion Auxila | pending |
 | 71939275 | 死灵的残像 | Spirit Illusion | pending |
-| 72238166 | 节式阳极雷火沸动机 | Node Ryzeal | pending |
 | 72246674 | 剑斗兽 骏斗 | Gladiator Beast Dareios | pending |
 | 72409226 | 原质炉艾可萨世界蛇 | Materiactor Exagard | pending |
 | 72578374 | 空隙之原星龙 | Khaos Starsource Dragon | pending |
@@ -448,13 +451,10 @@
 | 93723936 | 白森林的恶魔 | Scourge of the White Forest | pending |
 | 94292987 | 魔轰神 加麦基 | Fabled Gammajin | pending |
 | 94661166 | 迫近的机械 | Incoming Machine! | pending |
-| 94722358 | 码丽丝<代码>MTP-07 | Maliss <C> MTP-07 | pending |
 | 94845588 | 神圣蓟花 | The Hallowed Azamina | pending |
-| 95454996 | 码丽丝<王后>白棋捆绑 | Maliss <Q> White Binder | pending |
 | 95784714 | 彷徨的幽灵船 | Flying Mary, the Wandering Ghost Ship | pending |
 | 96030710 | 龙骑士 阿特莉 | Centur-Ion Atrii | pending |
 | 96576187 | 光道恶魔 魏丝 | Weiss, Lightsworn Archfiend | pending |
-| 96676583 | 码丽丝<兵卒>柴郡猫 | Maliss <P> Chessy Cat | pending |
 | 96823189 | 骄傲与灵魂之龙 | Dragon of Pride and Soul | pending |
 | 97045737 | 圣王的粉碎 | Dominus Purge | pending |
 | 97223101 | 快回揭示板 | That's 10! | pending |

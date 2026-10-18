@@ -1,0 +1,954 @@
+{
+  "scope": [
+    2025
+  ],
+  "historicalContext": {
+    "worldChampionship": "held",
+    "dates": "2025-08-30/2025-08-31",
+    "format": "OCG/TCG Worlds: 7 Swiss rounds; Top 8 single elimination; separate shared Forbidden/Limited list.",
+    "note": "Two semifinalists tied. Sky Striker represents one semifinalist, not a unique third place. Yummy was the other semifinalist. Annual adaptations are distinguished from the separately preserved player recipes."
+  },
+  "sources": [
+    {
+      "id": "worlds",
+      "url": "https://roadoftheking.com/yu-gi-oh-world-championship-2025/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "ec1e331cd06e2c81527f8f44edd58f7ef21468fc8abeec9c2ed4264bfc99887e",
+      "evidenceSummary": "30–31 August 2025, Paris. Seven Swiss rounds and Top 8 single elimination. Julien Leo Kehon: 1st K9 Vanquish Soul; Tom Kleinegraeber: 2nd Lunalight; Wilfredo Michael Flores (Yummy) and Roselle Thorkildsen (Sky Striker): tied 3rd–4th; Yuna Dicks: tied 5th–8th Maliss."
+    },
+    {
+      "id": "official",
+      "url": "https://www.konami.com/yugioh/worldchampionship/2025/en/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "9dfa986d7dc6c6e610af4d5db322bbe4e81f39fbaefc06b395814f9445128bf4",
+      "evidenceSummary": "Official World Championship 2025 portal; OCG/TCG is separate from Master Duel and Duel Links."
+    },
+    {
+      "id": "q1",
+      "url": "https://roadoftheking.com/ocg-2025-01-metagame/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "83575a46a23fdcd8d882aedd52aca184d14d975d28e56ab57593e1a8f8fedb42",
+      "evidenceSummary": "1726 top-placing decks from 334 events: 416 Maliss, 333 Ryzeal, 211 Blue-Eyes. Annual adaptation uses the January–March OCG pool, not the Worlds shared list."
+    },
+    {
+      "id": "q2",
+      "url": "https://roadoftheking.com/ocg-2025-04-metagame/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "4069ac020b6bf8acf7cffc1faf29f4abefaed273a4beb9c467c53d00f392f94c",
+      "evidenceSummary": "1751 samples: 361 VS (332 K9 VS), 346 Yummy, 230 Dracotail, 215 Maliss. Hollie Sue and Start! changed VS starters and hand resources."
+    },
+    {
+      "id": "q3",
+      "url": "https://roadoftheking.com/ocg-2025-07-metagame/",
+      "accessed": "2026-10-07",
+      "retrievedContentSHA256": "002bafb38aba580eb99b1d5324484e07577c848ff2bd3aa18f090f04d78e77b8",
+      "evidenceSummary": "1126 samples: 279 Yummy, 212 K9 VS, 88 Maliss, 80 Sky Striker, 65 Lunalight. Establishes distinct annual strategies."
+    }
+  ],
+  "decks": [
+    {
+      "id": "k9-vanquish-soul-2025",
+      "title": "世界冠军路线 · K9与VS",
+      "en": "World Champion Strategy · K9 Vanquish Soul",
+      "ja": "世界王者の戦略・K9 VS",
+      "ace": "K9-X \"Werewolf\"",
+      "description": "参考世界冠军路线的年度改编。K9双体展开与VS属性展示互相补充，饭纲记录真实的手牌／墓地发动，强制解放转向九阶干扰。",
+      "descriptionEn": "An annual adaptation of the world champion strategy. K9 pairs supply Rank 5 materials and VS reveal Attributes; actual hand/GY activations enable Izuna and Lupis, while Forced Release reaches Rank 9 interaction.",
+      "descriptionJa": "世界王者の戦略を参考にした年間アレンジ。K9の展開とVSの属性公開を組み合わせ、手札・墓地の発動を確認してイヅナとルプスを展開。強制解放でランク9へ。",
+      "main": [
+        [
+          "Vanquish Soul Razen",
+          3
+        ],
+        [
+          "Vanquish Soul Dr. Mad Love",
+          3
+        ],
+        [
+          "Vanquish Soul Hollie Sue",
+          3
+        ],
+        [
+          "Vanquish Soul Jiaolong",
+          2
+        ],
+        [
+          "Vanquish Soul Heavy Borger",
+          1
+        ],
+        [
+          "Vanquish Soul Caesar Valius",
+          1
+        ],
+        [
+          "K9-66a Jokul",
+          3
+        ],
+        [
+          "K9-66b Lantern",
+          1
+        ],
+        [
+          "K9-17 Izuna",
+          3
+        ],
+        [
+          "K9-ØØ Lupis",
+          1
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "\"A Case for K9\"",
+          3
+        ],
+        [
+          "Stake your Soul!",
+          3
+        ],
+        [
+          "Vanquish Soul, Start!",
+          1
+        ],
+        [
+          "K9-X Forced Release",
+          1
+        ],
+        [
+          "K9-LC Release Restraint",
+          1
+        ],
+        [
+          "Called by the Grave",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Vanquish Soul Snow Devil",
+          1
+        ],
+        [
+          "Reinforcement of the Army",
+          1
+        ],
+        [
+          "Pot of Prosperity",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "K9-17 \"Ripper\"",
+          3
+        ],
+        [
+          "K9-ØØ \"Hound\"",
+          2
+        ],
+        [
+          "K9-X \"Werewolf\"",
+          2
+        ],
+        [
+          "Vanquish Soul Rocks",
+          1
+        ],
+        [
+          "Rock of the Vanquisher",
+          3
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ],
+        [
+          "Divine Arsenal AA-ZEUS - Sky Thunder",
+          1
+        ],
+        [
+          "Constellar Pleiades",
+          1
+        ],
+        [
+          "Number 61: Volcasaurus",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          2
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ]
+      ],
+      "combo": [
+        "K9-66a Jokul",
+        "K9-17 \"Ripper\"",
+        "K9-X Forced Release",
+        "Vanquish Soul Hollie Sue",
+        "Vanquish Soul, Start!"
+      ],
+      "year": 2025,
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds",
+        "official",
+        "q2",
+        "q3"
+      ],
+      "adaptation": "40/15/15 annual core adaptation. Replaces Fuwalos and Phantazmay with interaction already supported by this game; replaces the N.As.H./Number 104 package and TY-PHON with the K9 Rank 5/9 route, Pleiades and Volcasaurus. Changes Main and Side ratios. Does not claim Worlds ban-list legality or to be the original recipe.",
+      "inspiration": {
+        "player": "Julien Leo Kehon",
+        "placement": "1st",
+        "event": "World Championship 2025"
+      },
+      "sourceDeckImage": {
+        "url": "https://roadoftheking.com/wp-content/uploads/2025/08/WorldChampionship2025_1.jpg",
+        "sha256": "88596e24bbdf34717031a99b6fc93434bd6d5c2d89db4a1242498810cc86a161"
+      },
+      "sourceOriginalRecipe": "data/deck-sources/worlds-2025.json#k9-vanquish-soul-worlds-2025-original"
+    },
+    {
+      "id": "lunalight-2025",
+      "title": "世界亚军路线 · 月光",
+      "en": "World Finalist Strategy · Lunalight",
+      "ja": "世界準優勝の戦略・ムーンライト",
+      "ace": "Lunalight Liger Dancer",
+      "description": "以世界亚军月光为参考。金狮检索并弃牌，银狗与彩雏提供素材，舞踏会赋予一次墓地融合许可，狮舞姬保留真实额外送墓代价。",
+      "descriptionEn": "An adaptation of the world finalist. Gold Leo searches and discards; Silver Hound and Kaleido Chick develop materials. Masquerade grants one GY-assisted Fusion, and Liger pays a real Extra Deck send for its sweep.",
+      "descriptionJa": "世界準優勝の月光を参考に、ゴールド・レオのサーチと手札交換、シルバー・ハウンドと彩雛の素材をつなぐ。舞踏会の墓地素材は1回限り。ライガーの除去にも実際のコストを支払う。",
+      "main": [
+        [
+          "Lunalight Gold Leo",
+          3
+        ],
+        [
+          "Lunalight Silver Hound",
+          3
+        ],
+        [
+          "Lunalight Kaleido Chick",
+          3
+        ],
+        [
+          "Lunalight Black Sheep",
+          2
+        ],
+        [
+          "Lunalight Emerald Bird",
+          1
+        ],
+        [
+          "Lunalight Yellow Marten",
+          2
+        ],
+        [
+          "Lunalight Tiger",
+          2
+        ],
+        [
+          "Lunalight Wolf",
+          1
+        ],
+        [
+          "Lunalight Masquerade",
+          3
+        ],
+        [
+          "Luna Light Perfume",
+          3
+        ],
+        [
+          "Lunalight Fusion",
+          2
+        ],
+        [
+          "Polymerization",
+          2
+        ],
+        [
+          "Fire Formation - Tenki",
+          3
+        ],
+        [
+          "Foolish Burial",
+          1
+        ],
+        [
+          "Called by the Grave",
+          1
+        ],
+        [
+          "Triple Tactics Talent",
+          1
+        ],
+        [
+          "Triple Tactics Thrust",
+          2
+        ],
+        [
+          "Book of Eclipse",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          2
+        ]
+      ],
+      "extra": [
+        [
+          "Lunalight Perfume Dancer",
+          3
+        ],
+        [
+          "Lunalight Liger Dancer",
+          2
+        ],
+        [
+          "Lunalight Leo Dancer",
+          2
+        ],
+        [
+          "Lunalight Panther Dancer",
+          2
+        ],
+        [
+          "Lunalight Cat Dancer",
+          2
+        ],
+        [
+          "Lunalight Sabre Dancer",
+          2
+        ],
+        [
+          "Cross-Sheep",
+          1
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Artifact Lancea",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ]
+      ],
+      "combo": [
+        "Lunalight Gold Leo",
+        "Lunalight Silver Hound",
+        "Lunalight Masquerade",
+        "Lunalight Perfume Dancer",
+        "Lunalight Liger Dancer"
+      ],
+      "year": 2025,
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds",
+        "official",
+        "q3"
+      ],
+      "adaptation": "40/15/15 annual adaptation. Removes Fuwalos, Fraktall, Heavy Polymerization and The Black Goat Laughs. Raises native Lunalight material counts, includes a second Tiger/Marten and a Fusion-focused Extra Deck. Preserves the source recipe separately.",
+      "inspiration": {
+        "player": "Tom Kleinegraeber",
+        "placement": "2nd",
+        "event": "World Championship 2025"
+      },
+      "sourceDeckImage": {
+        "url": "https://roadoftheking.com/wp-content/uploads/2025/08/WorldChampionship2025_2.jpg",
+        "sha256": "ad6eac86747730e1ba8b4cbc0b4c8d7ea6485aac765cb44985622c2454f63665"
+      },
+      "sourceOriginalRecipe": "data/deck-sources/worlds-2025.json#lunalight-worlds-2025-original"
+    },
+    {
+      "id": "sky-striker-2025",
+      "title": "世界并列四强路线 · 闪刀姬",
+      "en": "World Semifinalist Strategy · Sky Striker",
+      "ja": "世界ベスト4の戦略・閃刀姫",
+      "ace": "Sky Striker Ace = Zero",
+      "description": "参考并列四强闪刀姬。交闪、连刀和三张墓地魔法构成循环；零号在检索与解放展开间取舍，等式门回收等量资源并续接连接召唤。",
+      "descriptionEn": "Inspired by a tied Worlds semifinalist. Engage, Linkage and the three-Spell GY threshold sustain the loop. Zero shares a once-per-turn choice between search and tribute; Lemnisgate recycles equal resources and enables another Link Summon.",
+      "descriptionJa": "世界ベスト4の閃刀姫を参考に、エンゲージとリンケージ、墓地の魔法3枚を循環。ゼロはサーチかリリースの一方を選び、レムニスゲートで同数の資源を戻してリンクにつなぐ。",
+      "main": [
+        [
+          "Sky Striker Ace - Raye",
+          3
+        ],
+        [
+          "Sky Striker Ace - Roze",
+          1
+        ],
+        [
+          "Sky Striker Mecha - Adil Saber",
+          1
+        ],
+        [
+          "Sky Striker Mobilize - Engage!",
+          3
+        ],
+        [
+          "Sky Striker Mobilize - Linkage!",
+          3
+        ],
+        [
+          "Sky Striker Mecha - Widow Anchor",
+          3
+        ],
+        [
+          "Sky Striker Mecha - Shark Cannon",
+          1
+        ],
+        [
+          "Sky Striker Mecha - Hornet Drones",
+          1
+        ],
+        [
+          "Sky Striker Maneuver - Afterburners!",
+          1
+        ],
+        [
+          "Sky Striker Maneuver - Jamming Waves!",
+          1
+        ],
+        [
+          "Sky Striker Airspace - Area Zero",
+          1
+        ],
+        [
+          "Sky Striker Mecha Modules - Multirole",
+          1
+        ],
+        [
+          "Sky Striker Special Maneuver - Lemnisgate!",
+          2
+        ],
+        [
+          "Upstart Goblin",
+          3
+        ],
+        [
+          "Pot of Desires",
+          2
+        ],
+        [
+          "Triple Tactics Thrust",
+          2
+        ],
+        [
+          "Triple Tactics Talent",
+          1
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Reinforcement of the Army",
+          1
+        ],
+        [
+          "Raigeki",
+          3
+        ],
+        [
+          "Book of Eclipse",
+          2
+        ],
+        [
+          "Forbidden Droplet",
+          2
+        ],
+        [
+          "Called by the Grave",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Sky Striker Ace - Kagari",
+          3
+        ],
+        [
+          "Sky Striker Ace - Shizuku",
+          3
+        ],
+        [
+          "Sky Striker Ace - Hayate",
+          2
+        ],
+        [
+          "Sky Striker Ace - Kaina",
+          1
+        ],
+        [
+          "Sky Striker Ace - Zeke",
+          1
+        ],
+        [
+          "Sky Striker Ace = Zero",
+          3
+        ],
+        [
+          "Sky Striker Ace - Azalea",
+          1
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Artifact Lancea",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Solemn Judgment",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ]
+      ],
+      "combo": [
+        "Sky Striker Ace - Raye",
+        "Sky Striker Mobilize - Engage!",
+        "Sky Striker Mobilize - Linkage!",
+        "Sky Striker Ace = Zero",
+        "Sky Striker Special Maneuver - Lemnisgate!"
+      ],
+      "year": 2025,
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds",
+        "official",
+        "q3"
+      ],
+      "adaptation": "40/15/15 annual adaptation of Roselle Thorkildsen’s tied semifinalist deck. Adds Adil Saber and Lemnisgate; replaces Foolish Burial Goods/Metalfoes Fusion/Chicken Game and The Black Goat Laughs with native utility. Extra focuses on summonable Striker Links rather than TY-PHON and fusion utility.",
+      "inspiration": {
+        "player": "Roselle Thorkildsen",
+        "placement": "3rd–4th (tied semifinalists)",
+        "event": "World Championship 2025"
+      },
+      "sourceDeckImage": {
+        "url": "https://roadoftheking.com/wp-content/uploads/2025/08/WorldChampionship2025_4.jpg",
+        "sha256": "3a28b240e5b77697fdcea36d7496c96ea544178ed4ce435a52d37b246ce08199"
+      },
+      "sourceOriginalRecipe": "data/deck-sources/worlds-2025.json#sky-striker-worlds-2025-original"
+    },
+    {
+      "id": "maliss-2025",
+      "title": "世界八强与年度热门 · 码丽丝",
+      "en": "World Top 8 and Annual Favorite · Maliss",
+      "ja": "世界ベスト8・年間人気のM∀LICE",
+      "ace": "Maliss <Q> Hearts Crypter",
+      "description": "以除外与连接资源反复展开。三只兵卒有各自的箭头支援，三月兔回收除外怪兽；盖放当回合的本家陷阱必须真的除外一只码丽丝作代价。",
+      "descriptionEn": "Banishment and Link resources fuel a recurring engine. Each pawn supports a pointed-to Link differently; March Hare recovers banished monsters. Same-turn native Traps must banish a real face-up Maliss as cost.",
+      "descriptionJa": "除外とリンク資源を循環する構築。各ポーンのリンク先支援とマーチ・ヘアの回収を使い分け、セットしたターンの罠にも実際の除外コストを支払う。",
+      "main": [
+        [
+          "Maliss <P> Dormouse",
+          3
+        ],
+        [
+          "Maliss <P> White Rabbit",
+          3
+        ],
+        [
+          "Maliss <P> Chessy Cat",
+          3
+        ],
+        [
+          "Maliss <P> March Hare",
+          3
+        ],
+        [
+          "Lady Debug",
+          2
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Effect Veiler",
+          3
+        ],
+        [
+          "Maliss in Underground",
+          3
+        ],
+        [
+          "Maliss in the Mirror",
+          2
+        ],
+        [
+          "Cynet Mining",
+          3
+        ],
+        [
+          "Allure of Darkness",
+          2
+        ],
+        [
+          "Gold Sarcophagus",
+          1
+        ],
+        [
+          "Terraforming",
+          1
+        ],
+        [
+          "Called by the Grave",
+          1
+        ],
+        [
+          "Maliss <C> MTP-07",
+          1
+        ],
+        [
+          "Maliss <C> GWC-06",
+          1
+        ],
+        [
+          "Maliss <C> TB-11",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Forbidden Droplet",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Maliss <Q> Red Ransom",
+          2
+        ],
+        [
+          "Maliss <Q> White Binder",
+          2
+        ],
+        [
+          "Maliss <Q> Hearts Crypter",
+          2
+        ],
+        [
+          "Linkuriboh",
+          1
+        ],
+        [
+          "Link Spider",
+          1
+        ],
+        [
+          "Splash Mage",
+          1
+        ],
+        [
+          "Transcode Talker",
+          1
+        ],
+        [
+          "Decode Talker",
+          1
+        ],
+        [
+          "Firewall Dragon",
+          1
+        ],
+        [
+          "Accesscode Talker",
+          1
+        ],
+        [
+          "S:P Little Knight",
+          1
+        ],
+        [
+          "I:P Masquerena",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Nibiru, the Primal Being",
+          3
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          2
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ]
+      ],
+      "combo": [
+        "Maliss <P> Dormouse",
+        "Maliss <P> White Rabbit",
+        "Maliss <Q> Red Ransom",
+        "Maliss in Underground",
+        "Maliss <Q> Hearts Crypter"
+      ],
+      "year": 2025,
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "worlds",
+        "official",
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "adaptation": "40/15/15 annual core adaptation; the source Worlds list has 41 Main cards and a Sky Striker/@Ignister package. This version uses native Maliss and Lady Debug/Mining, all three native Traps and established Cyberse Links. Does not claim the Worlds shared card limits.",
+      "inspiration": {
+        "player": "Yuna Dicks",
+        "placement": "5th–8th (tied quarterfinalists)",
+        "event": "World Championship 2025"
+      },
+      "sourceDeckImage": {
+        "url": "https://roadoftheking.com/wp-content/uploads/2025/08/WorldChampionship2025_5.jpg",
+        "sha256": "d93b862a7bf3f28cf2785e68f256fc7554bea696a481dfea45fad82a075e2051"
+      },
+      "sourceOriginalRecipe": "data/deck-sources/worlds-2025.json#maliss-worlds-2025-original"
+    },
+    {
+      "id": "ryzeal-2025",
+      "title": "年度热门 · 雷热涡炉",
+      "en": "Annual Favorite · Ryzeal",
+      "ja": "年間人気・ライゼオル",
+      "ace": "Ryzeal Detonator",
+      "description": "参考2025第一季度333个上位样本。以四阶展开为核心，星雷设置场地，双驱动在结算时移除两份真实素材，雷热交界在对方效果结算时提供无效选择。",
+      "descriptionEn": "Based on 333 first-quarter top-placing samples. Rank 4 plays center on Star setting Cross, Duo Drive detaching two real materials on resolution, and Cross offering its choice as an opposing effect resolves.",
+      "descriptionJa": "2025年1月期の上位333件を参考にしたランク4構築。スターでクロスをセットし、デュオドライブは解決時に実際の素材2枚を取り除く。クロスも相手の効果処理時に選択する。",
+      "main": [
+        [
+          "Ice Ryzeal",
+          3
+        ],
+        [
+          "Ext Ryzeal",
+          3
+        ],
+        [
+          "Sword Ryzeal",
+          3
+        ],
+        [
+          "Node Ryzeal",
+          2
+        ],
+        [
+          "Star Ryzeal",
+          2
+        ],
+        [
+          "Ash Blossom & Joyous Spring",
+          3
+        ],
+        [
+          "Effect Veiler",
+          3
+        ],
+        [
+          "Nibiru, the Primal Being",
+          2
+        ],
+        [
+          "Droll & Lock Bird",
+          3
+        ],
+        [
+          "Ryzeal Cross",
+          2
+        ],
+        [
+          "Ryzeal Plugin",
+          2
+        ],
+        [
+          "Bonfire",
+          3
+        ],
+        [
+          "Pot of Prosperity",
+          1
+        ],
+        [
+          "Triple Tactics Thrust",
+          1
+        ],
+        [
+          "Triple Tactics Talent",
+          1
+        ],
+        [
+          "Called by the Grave",
+          1
+        ],
+        [
+          "Crossout Designator",
+          1
+        ],
+        [
+          "Infinite Impermanence",
+          3
+        ],
+        [
+          "Terraforming",
+          1
+        ]
+      ],
+      "extra": [
+        [
+          "Ryzeal Duo Drive",
+          3
+        ],
+        [
+          "Ryzeal Detonator",
+          3
+        ],
+        [
+          "Abyss Dweller",
+          1
+        ],
+        [
+          "Number 41: Bagooska the Terribly Tired Tapir",
+          1
+        ],
+        [
+          "Tornado Dragon",
+          1
+        ],
+        [
+          "Castel, the Skyblaster Musketeer",
+          1
+        ],
+        [
+          "Evilswarm Exciton Knight",
+          1
+        ],
+        [
+          "Number 101: Silent Honor ARK",
+          1
+        ],
+        [
+          "Gagaga Cowboy",
+          1
+        ],
+        [
+          "Number 39: Utopia",
+          1
+        ],
+        [
+          "Number S39: Utopia the Lightning",
+          1
+        ]
+      ],
+      "side": [
+        [
+          "Cosmic Cyclone",
+          3
+        ],
+        [
+          "Evenly Matched",
+          3
+        ],
+        [
+          "Forbidden Droplet",
+          3
+        ],
+        [
+          "Dark Ruler No More",
+          3
+        ],
+        [
+          "Artifact Lancea",
+          2
+        ],
+        [
+          "Harpie's Feather Duster",
+          1
+        ]
+      ],
+      "combo": [
+        "Ice Ryzeal",
+        "Ext Ryzeal",
+        "Ryzeal Duo Drive",
+        "Star Ryzeal",
+        "Ryzeal Cross"
+      ],
+      "year": 2025,
+      "sourceKind": "annual-representative-adaptation",
+      "sourceRefs": [
+        "q1"
+      ],
+      "adaptation": "40/15/15 representative annual build, not a player recipe. Uses the core Rank 4 resource engine, Star from Alliance Insight, Bonfire and established Rank 4 utility. Ratios are adapted for the game and do not assert compliance with a particular quarterly Forbidden/Limited list."
+    }
+  ]
+}

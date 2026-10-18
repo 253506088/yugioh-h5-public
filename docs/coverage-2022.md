@@ -2,7 +2,7 @@
 
 本表按实际运行时登记生成。implemented 表示存在本作实现，不等于官方裁定认证；待实现卡保持 pending 并禁止保存为有效对战构筑。
 
-当前 572 个身份：66 个可用（49 个效果实现、1 个基础规则、16 个复用），506 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2022批次交接.md)。
+当前 572 个身份：67 个可用（50 个效果实现、1 个基础规则、16 个复用），505 个待实现。效果实现数量为该年度累计，不等于当前批次新增。来源和具体范围见 [批次交接](../交接/2022批次交接.md)。
 
 重建：`node scripts/report-card-coverage.mjs --write-year 2022`。
 
@@ -73,6 +73,7 @@
 | 91222209 | 救援ACE队 双脉冲炮灭火员 | Rescue-ACE Monitor | 已登记本作效果实现 |
 | 92731385 | 珠泪哀歌族·水仙女人鱼 | Tearlaments Kitkallos | 复用既有实现 |
 | 98049934 | 亲历纯爱妖精·美丽妖精 | Epurrely Beauty | 已登记本作效果实现 |
+| 98462037 | 闪刀姬-阿泽莉娅 | Sky Striker Ace - Azalea | 已登记本作效果实现 |
 | 99162522 | E扑灭！ | EXTINGUISH! | 已登记本作效果实现 |
 | 99937011 | 剑神官 姆多拉 | Mudora the Sword Oracle | 已登记本作效果实现 |
 | 99984170 | R救援！ | RESCUE! | 已登记本作效果实现 |
@@ -579,7 +580,6 @@
 | 97870394 | 亚马逊灵术师 | Amazoness Spiritualist | pending |
 | 97946536 | 虫装三轮车-红黄 | Zektrike Kou-ou | pending |
 | 98416533 | 童话动物·小小袋鼠 | Melffy Wally | pending |
-| 98462037 | 闪刀姬-阿泽莉娅 | Sky Striker Ace - Azalea | pending |
 | 98715423 | 守墓的陷阱 | Gravekeeper's Trap | pending |
 | 98875863 | G石人·岩锤手 | G Golem Rock Hammer | pending |
 | 98898163 | 巨牙龙 | Grandtusk Dragon | pending |

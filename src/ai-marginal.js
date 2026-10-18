@@ -12,7 +12,8 @@
     'used','usedTurn','duelUsed','lingering','nextLingering','actionsThisTurn','effectActivations','gxSpellTrapCount','gxNormals','gxSummonCounts','lpPaidByTurn','inputRoles','targetMeta','sourceUnavailableByNumber','effectNegatedByNumber','preventionState','deckSpec','earlySent',
     // Caliga and Triple Tactics need activation history in the real state.
     // Updating that history alone does not make an empty effect useful.
-    'y16MonsterEffects','y16Attackers','y23OpponentMonster','y23OpponentMonsterMain']);
+    'y16MonsterEffects','y16Attackers','y23OpponentMonster','y23OpponentMonsterMain',
+    'y25MonsterTurn','y25HandGraveTurn','y25NonCyberseTurn','y25K9Battle','y25VSBattle']);
   const cardIdentity=new Set(['uid','id','originalOwner','faceUp','position','attacked','summonTurn','changedTurn','setTurn','generation',
     'properlySummoned','faceUpExtra','summonKind','pendingActivation','attacksMade','used','overlays']);
   function cloneEngine(engine){
