@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
-const root = path.resolve(__dirname, '..'), out = path.join(root, 'output/pvp-browser');
+const root = path.resolve(__dirname, '..'), out = process.env.DUEL_BROWSER_OUTPUT || path.join(root, 'output/pvp-browser');
 const report = { ok: false, checks: [], errors: [], serverErrors: [], screenshots: [] };
 let browser, app, pages = [], createPvpServer, ServerEngine, Data;
 const check = title => { report.checks.push(title); console.log('PASS ' + title); };
@@ -98,11 +98,15 @@ async function returnToRoom(page) {
   await b.locator('#pvp-join-form button').click(); await a.waitForFunction(() => duelApp.pvp.room.seats.every(Boolean));
   await shot(a, '02-private-room');
   check('UI creates a private room, joins by code, and keeps the opponent’s deck private');
-  for(let n=0;n<8;n++)await a.locator('[data-action="font-larger"]').click();
+  await a.locator('.site-header [data-action="settings"]').click();
+  await a.locator('#font-size-control').press('End');
+  await a.locator('#modal [data-action="close-modal"]').first().click();
   for(const [width,height] of [[390,844],[320,568]]){
     await a.setViewportSize({width,height});await a.waitForTimeout(120);await noHorizontalOverflow(a);await shot(a,`02-room-${width}-150pct`);
   }
-  await a.setViewportSize({width:1440,height:1000});for(let n=0;n<8;n++)await a.locator('[data-action="font-smaller"]').click();
+  await a.setViewportSize({width:1440,height:1000});await a.locator('.site-header [data-action="settings"]').click();
+  await a.locator('#font-size-control').press('Home');for(let n=0;n<4;n++)await a.locator('#font-size-control').press('ArrowRight');
+  await a.locator('#modal [data-action="close-modal"]').first().click();
   check('Room seats, readiness and invitation controls fit a 320px phone at 150% type size');
   await a.locator('[data-pvp-action="ready"]').click(); await b.locator('[data-pvp-action="ready"]').click();
   await Promise.all(pages.map(page => page.waitForFunction(() => duelApp.engine.remote && duelApp.screen === 'duel')));
@@ -116,7 +120,9 @@ async function returnToRoom(page) {
   }
   await shot(a, '03-online-board');
   const firstActor = roomOf().engine.state.active;
+  await pages[firstActor].click('[data-panel="turn"]');
   await pages[firstActor].locator('#turn-panel [data-action="end"]').first().click();
+  await pages[firstActor].keyboard.press('Escape');
   await pages[1 - firstActor].waitForFunction(() => duelApp.engine.state.active === 0);
   const steps = roomOf().actions; await new Promise(resolve => setTimeout(resolve, 1100)); assert.equal(roomOf().actions, steps);
   check('Both perspectives show the right hand; a real end-turn click transfers control and no local AI moves');
@@ -212,7 +218,7 @@ async function returnToRoom(page) {
   assert.equal(roomOf().visibility, 'private');
   check('Leaving from either the result or room returns to the lobby; quick matching can be cancelled and restarted');
 
-  for(let n=0;n<8;n++)await a.locator('[data-action="font-larger"]').click();
+  await a.locator('.site-header [data-action="settings"]').click();await a.locator('#font-size-control').press('End');await a.locator('#modal [data-action="close-modal"]').first().click();
   for(const [width,height] of [[390,844],[320,568],[844,390],[640,360]]){
     await a.setViewportSize({width,height});
     await a.waitForFunction(()=>['#pvp-duel-bar','#player-bar','#opponent-bar','#player-monsters','#opponent-monsters','#player-spells','#opponent-spells','#phase-track','#hand-zone'].every(selector=>{const r=document.querySelector(selector).getBoundingClientRect();return r.left>=-1&&r.top>=-1&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1;}),null,{timeout:5000});
@@ -220,7 +226,7 @@ async function returnToRoom(page) {
     assert.ok(bounds.every(r=>r.left>=-1&&r.top>=-1&&r.right<=r.width+1&&r.bottom<=r.height+1),JSON.stringify(bounds));
     await shot(a,`09-board-${width}-${height}-150pct`);
   }
-  await a.setViewportSize({width:1440,height:1000});for(let n=0;n<8;n++)await a.locator('[data-action="font-smaller"]').click();
+  await a.setViewportSize({width:1440,height:1000});await a.locator('.site-header [data-action="settings"]').click();await a.locator('#font-size-control').press('Home');for(let n=0;n<4;n++)await a.locator('#font-size-control').press('ArrowRight');await a.locator('#modal [data-action="close-modal"]').first().click();
   check('The live board, both clocks, hand and field stay inside mobile and short-landscape viewports at 150% type');
 
   await a.locator('#pvp-duel-bar [data-pvp-action="surrender"]').click(); await a.locator('[data-pvp-action="confirm-surrender"]').click();

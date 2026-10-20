@@ -138,7 +138,7 @@
        '墓地へ送られたカードは3ターン経過後のエンドフェイズに持ち主のデッキに戻りシャッフルされる（EXデッキのカードはEXデッキへ）。')}
   ];
   const roulette=RULES.find(r=>r.id==='roulette');
-  RULES.push({...roulette,id:'roulette2',name:L('命运轮盘2','Wheel of Fate II','運命のルーレット2'),summary:L('每次进入主要阶段1或2时掷骰。','Roll at the start of each Main Phase 1 and 2.','メインフェイズ1・2の開始時に振る。'),detail:L('在主要阶段1和主要阶段2开始时各掷骰一次（包含先攻第一回合，跳过的阶段不掷骰）。其余结果同命运轮盘。'+roulette.detail['zh-CN'],'Roll once at the start of Main Phase 1 and Main Phase 2, including turn 1; skipped phases do not roll. Results: '+roulette.detail.en,'先攻1ターン目を含め、メインフェイズ1・2の開始時に1回振る。スキップされたフェイズは振らない。結果：'+roulette.detail.ja)});
+  RULES.push({...roulette,id:'roulette2',name:L('命运轮盘2','Wheel of Fate II','運命のルーレット2'),summary:L('主要阶段1和2各掷一次；跳过主要阶段2时结束前补掷。','Roll in Main Phases 1 and 2; skipping Main Phase 2 rolls before ending.','メイン1・2で振る。メイン2を飛ばした場合は終了前に振る。'),detail:L('在主要阶段1和主要阶段2开始时各掷骰一次（包含先攻第一回合；跳过主要阶段2时，在结束阶段效果与手牌上限检查之前补掷一次）。其余结果同命运轮盘。'+roulette.detail['zh-CN'],'Roll once at the start of Main Phase 1 and Main Phase 2, including turn 1; if Main Phase 2 is skipped, roll once before End Phase effects and the hand limit check. Results: '+roulette.detail.en,'先攻1ターン目を含め、メインフェイズ1・2の開始時に1回振る。メイン2を飛ばした場合、エンドフェイズ効果と手札枚数確認の前に1回振る。結果：'+roulette.detail.ja)});
   const BY_ID=Object.fromEntries(RULES.map(r=>[r.id,r]));
   const MODE_NAME=L('天命法则','Fate Decree','天命の掟');
 
@@ -403,6 +403,11 @@
     return r;
   });
   extend('changePhase',function(prior,phase){const result=prior.call(this,phase);if(is(this,'roulette2')&&phase==='main2'){this.state.ruleMode.roulettePhase=this.state.turn+':main2';this.queue({op:'rule-roulette',owner:this.state.active});}return result;});
+  extend('endTurn',function(prior){
+    const result=prior.call(this),s=this.state,key=s.turn+':main2';
+    if(is(this,'roulette2')&&s.winner===null&&s.ruleMode.roulettePhase!==key){s.ruleMode.roulettePhase=key;this.queue({op:'rule-roulette',owner:s.active,phase:'end'});}
+    return result;
+  });
   const ROLL_TEXT=['','再抽1张并重掷','受到伤害','破坏场上1张卡','除外场上1张卡','回复基本分','墓地1张卡回到卡组'];
   extend('settleFrame',function(prior){
     const result=prior.call(this),s=this.state,key=s.turn+':'+s.phase;
@@ -411,7 +416,7 @@
   E.op('rule-roulette',(e,t)=>{
     if(e.state.winner!==null)return;
     const roll=1+Math.floor(e.random()*6),r=e.state.ruleMode;
-    r.lastRoll={serial:(r.lastRoll?.serial||0)+1,roll,owner:t.owner,turn:e.state.turn,phase:e.state.phase};
+    r.lastRoll={serial:(r.lastRoll?.serial||0)+1,roll,owner:t.owner,turn:e.state.turn,phase:t.phase||e.state.phase};
     note(e,BY_ID[rule(e)].name['zh-CN']+'：'+e.name(t.owner)+'掷出 '+roll+' · '+ROLL_TEXT[roll]+([2,5].includes(roll)?' '+e.state.turn*1000+' LP':''),t.owner,{roll});
     e.queueChoice(t.owner,'命运轮盘 · 骰子 '+roll+' · '+ROLL_TEXT[roll]+([2,5].includes(roll)?' '+e.state.turn*1000+' LP':'')+' · 确认后结算',[],0,0,'rule-roulette-apply',{roll,rule:rule(e)});
   });

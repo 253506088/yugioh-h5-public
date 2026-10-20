@@ -5,7 +5,7 @@
  const names=['Hundred Eyes Dragon','Majestic Star Dragon','The Tyrant Neptune','Dragon Knight Draco-Equiste','Gem-Knight Master Diamond','Blackwing - Aurora the Northern Lights','Number 8: Heraldic King Genom-Heritage','Number 69: Heraldry Crest','One-Eyed Skill Gainer'];
  const hosts=new Set(names.map(I));
  // Later yearly volumes call registerCopies again once their own effects exist.
- const copyable=year=>Object.values(E.defs).filter(a=>!a.trigger&&!a.cardActivation&&!a.inherent&&!a.supersededByOriginal&&!a.mode.startsWith('copied:')&&a.zones.includes('monsters')&&!hosts.has(a.id)&&year(D.CARDS[a.id]?.releaseYear));
+ const copyable=year=>Array.from(E.originalDefinitions()).filter(a=>!a.trigger&&!a.cardActivation&&!a.inherent&&!a.supersededByOriginal&&a.zones.includes('monsters')&&!hosts.has(a.id)&&year(D.CARDS[a.id]?.releaseYear));
  const original=copyable(y=>y<=2013);
  function registerCopies(list,hostNames=names){for(const name of hostNames)for(const a of list){const {id,key,mode,...spec}=a,adapt=c=>({...c,sourceId:id});
   E.register(I(name),'copied:'+key,{...spec,chronicleCopyOf:key,copyTargetId:id,label:a.label,once:spec.once?{...spec.once,...(spec.once.scope==='name'?{cardId:id}:{})}:undefined,

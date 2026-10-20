@@ -1,7 +1,7 @@
 const {chromium} = require('playwright');
 const fs = require('node:fs/promises'), path = require('node:path'), assert = require('node:assert/strict');
 const {pathToFileURL} = require('node:url');
-const root = path.resolve(__dirname, '..'), out = path.join(root, 'output/tournament-browser');
+const root = path.resolve(__dirname, '..'), out = process.env.DUEL_BROWSER_OUTPUT || path.join(root, 'output/tournament-browser');
 const target = process.env.DUEL_TOURNAMENT_HTML || path.join(root, 'index.html');
 const executablePath = process.env.DUEL_BROWSER || 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
 const report = {checks:[], errors:[], geometry:[], artifact:target};
@@ -101,8 +101,7 @@ async function geometry(page, label) {
       await page.waitForFunction(() => !duelApp.tournament.viewer.busy && duelApp.tournament.viewer.cursor.index === 0);
       assert.equal(await page.evaluate(() => JSON.stringify(duelApp.engine.snapshot()) === JSON.stringify(duelApp.tournament.current.matches[0].games[0].initial)), true);
       const before = await page.evaluate(() => duelApp.tournament.current.matches.reduce((n,m) => n + m.games.reduce((n,g) => n + g.steps.length, 0), 0));
-      await page.waitForTimeout(380);
-      assert.ok(await page.evaluate(() => duelApp.tournament.current.matches.reduce((n,m) => n + m.games.reduce((n,g) => n + g.steps.length, 0), 0)) > before);
+      await page.waitForFunction(count=>duelApp.tournament.current.matches.reduce((n,m)=>n+m.games.reduce((n,g)=>n+g.steps.length,0),0)>count,before,{timeout:5000});
       await page.click('[data-t-action="next-step"]');
       await page.waitForFunction(() => duelApp.tournament.viewer.cursor.index === 1 && !duelApp.tournament.viewer.busy);
       await page.click('[data-t-action="play"]');

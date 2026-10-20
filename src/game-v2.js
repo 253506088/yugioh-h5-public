@@ -11,7 +11,7 @@
   const icon = name => '<svg class="icon" aria-hidden="true"><use href="#i-' + name + '"/></svg>';
   const readStorage = (key, fallback) => { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : fallback; } catch { return fallback; } };
   const writeStorage = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch { return false; } };
-  const prefs = Object.assign({ sound:true,music:true,volume:.35,musicVolume:.28,fontScale:110,libraryPageSize:24,workshopPageSize:24,responseMode:'auto',cardStyle:'classic',reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,speed:'normal' }, readStorage('duel-sanctuary-prefs-v1', {}));
+  const prefs = Object.assign({ sound:true,music:true,volume:.35,musicVolume:.28,fontScale:110,libraryPageSize:24,workshopPageSize:24,responseMode:'auto',cardStyle:'classic',reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,speed:'normal',rightCollapsed:true,cardSize:'standard' }, readStorage('duel-sanctuary-prefs-v1', {}));
   prefs.volume = Number.isFinite(Number(prefs.volume)) ? Math.max(0, Math.min(1, Number(prefs.volume))) : .35;
   prefs.fontScale=Experience.clampFont(prefs.fontScale);prefs.libraryPageSize=Experience.pageSize(prefs.libraryPageSize);prefs.workshopPageSize=Experience.pageSize(prefs.workshopPageSize);
   if(!['auto','on','off'].includes(prefs.responseMode))prefs.responseMode='auto';
@@ -23,22 +23,31 @@
   let localMatch=null,matchDraft=null,matchArchives=[],matchOptions={},recoveryFailed=false;
   let engine, selectedUid = null, previewId = 'blue-eyes', previewHidden = false, intent = null;
   let tournament = null, tournamentView = null, parkedDuel = null;
-  let pvp = null, parkedOffline = null;
-  const onlineLocked = () => !!engine?.remote && (!pvp?.connected || engine.busy || pvp.room?.clock.paused);
+  let pvp = null, p2p = null, parkedOffline = null;
+  const onlineLocked = () => !!engine?.remote && (engine.p2p?(!engine.connection.connected||engine.busy):(!pvp?.connected || engine.busy || pvp.room?.clock.paused));
+  let aiFrame=0;
   let aiTimer = null, aiEpoch = 0, modalKind = '', pendingKey = '', libraryQuery = '', libraryFilter = 'all';
   let modalHistory = [], restoringModal = false;
-  let setupOptions = { deck: 'early-ritual', opponentDeck: 'early-fusion', first: 0, difficulty: 'standard', mode: 'duel' }, selectionState = null, responseUid = null;
+  let setupOptions = { deck: 'early-ritual', opponentDeck: 'early-fusion', difficulty: 'standard', mode: 'duel' }, selectionState = null, responseUid = null;
   let libraryFamily = 'all',libraryYear='all',libraryPage=0,libraryStatus='all',detailReturn = null,detailCardId=null,pileContext = null,deckOwner=0,overlayHostUid=null;
   const journal=window.DuelLogUI.create({engine:()=>engine,names:()=>tournamentView?.names||[I.player(0,engine),I.player(1,engine)],open:openModal,card:showCardDetail});
   const spectate = { paused: false };
+  let aiWorker=new window.DuelWorkers.Client(),aiBusy=false,actionRevision=0,aiFailed=false,spectateReplay=null,replayCursor=0;
+  const aiTimings=[];
+  window.addEventListener('duel-language-error',()=>showToast(I.term('语言资料暂时无法加载，请检查连接后重试。'),true));
+  window.addEventListener('duel-module-error',()=>showToast(I.term('功能暂时无法加载，请检查连接并刷新页面。'),true));
+  function resetAIWork(){if(aiBusy||aiFailed||aiWorker.closed){aiWorker.close();aiWorker=new window.DuelWorkers.Client();}aiBusy=false;aiFailed=false;spectateReplay=null;replayCursor=0;cancelAnimationFrame(aiFrame);}
   const spectating = () => engine?.state.mode === 'spectate';
   const fate=window.DuelRuleUI.create({engine:()=>engine,open:openModal,spectating,reducedMotion:()=>prefs.reducedMotion,attacking:()=>intent?.kind==='attack'?intent.uid:null,resume:()=>scheduleAI()});
   const robotName = owner => tournamentView?.names[owner] || (owner === 0 ? '机器人 A' : '机器人 B');
-  const workshop = window.DuelWorkshop.create({ aiImport:()=>aiImport.show(),open:(...args)=>openModal(...args),toast:(...args)=>showToast(...args),getPageSize:()=>prefs.workshopPageSize,setPageSize:value=>{prefs.workshopPageSize=Experience.pageSize(value);updatePrefs();},play:id=>{setupOptions={deck:id,opponentDeck:engine?.state.players[1].deckId||'blackwing',first:0,difficulty:'standard',mode:'duel'};renderNewGame();} });
+  const workshop = window.DuelWorkshop.create({ aiImport:()=>aiImport.show(),open:(...args)=>openModal(...args),toast:(...args)=>showToast(...args),getPageSize:()=>prefs.workshopPageSize,setPageSize:value=>{prefs.workshopPageSize=Experience.pageSize(value);updatePrefs();},play:id=>{setupOptions={deck:id,opponentDeck:engine?.state.players[1].deckId||'blackwing',difficulty:'standard',mode:'duel'};renderNewGame();} });
   const aiImport = window.DuelAIImport.create({open:openModal,back:backModal,workshop:()=>workshop.show(),load:deck=>workshop.importDraft(deck),settings:showSettings});
   let positionCache = new Map(), animationTimers = [], resultShown = false, cinematicTimer = null;
   let hoverId = null, savedAvailable = true;
-  let currentScreen='home',peekState=null,audioScene='lobby';
+  let currentScreen='home',peekState=null,audioScene='lobby',openingRequired=false;
+  const boardLayout=window.DuelBoardLayout.create({prefs,save:()=>writeStorage('duel-sanctuary-prefs-v1',prefs),engine:()=>engine,screen:()=>currentScreen});
+  const cardTip=document.createElement('div');cardTip.className='card-hover-tip';cardTip.hidden=true;document.body.append(cardTip);let hoverTimer;
+  const hideCardTip=()=>{clearTimeout(hoverTimer);cardTip.hidden=true;};
   const chainDirector=new Experience.ChainDirector({node:$('#chain-theater'),prefs,onIdle:()=>{if(!engine)return;renderChainTimeline();if(engine.state.winner!==null)finishGame();else scheduleAI();}});
   const phaseNames = { main1: '主要阶段 1', battle: '战斗阶段', main2: '主要阶段 2' };
   const difficultyNames = { casual: '休闲', standard: '标准' };
@@ -47,6 +56,7 @@
   applyDisplayPreferences();
 
   function applyDisplayPreferences(){
+    boardLayout.apply();
     document.documentElement.style.setProperty('--ui-scale',prefs.fontScale/100);
     document.documentElement.dataset.fontScale=String(prefs.fontScale);
     document.body.classList.toggle('full-art-cards',prefs.cardStyle==='full-art');
@@ -54,11 +64,11 @@
     window.dispatchEvent(new Event('duel-display-change'));
   }
   function setScreen(screen,freshDuel=false){
-    currentScreen=screen;document.body.dataset.screen=screen;
+    currentScreen=screen;document.body.dataset.screen=screen;window.dispatchEvent(new Event('duel-screen-change'));if(screen==='duel')performance.mark('duel-screen');
     $('#home-screen').hidden=screen!=='home';$('.app-main').hidden=screen!=='duel';
     $('#tournament-screen').hidden=screen!=='tournament';
     $('#pvp-screen').hidden=screen!=='pvp';
-    if(screen!=='pvp')pvp?.hide();
+    if(screen!=='pvp'){pvp?.hide();p2p?.hide();}
     if(screen!=='tournament')tournament?.hide();
     $('#duel-turn-hud').hidden=screen!=='duel';
     audioScene=screen==='duel'?'battle':'lobby';if(freshDuel&&screen==='duel')sound.beginDuel();else sound.setScene(audioScene);
@@ -71,13 +81,14 @@
     chainDirector.skip();hidePopover();setScreen('home');renderHome();
   }
   function enterDuel(){
+    if(openingRequired){beginLocalDuel({deck:'early-ritual',opponentDeck:'early-fusion',difficulty:'standard'});return;}
     leaveTournamentView();
     if(modal.open&&modalKind==='pending'){peekPending();return;}
     dismissModal();setScreen('duel');render();scheduleAI();if(localMatch?.format==='bo3'&&localMatch.phase!=='playing')showMatch();
   }
   function leaveTournamentView(){
     tournament?.closeViewer();
-    if(!parkedDuel)return;
+    if(!parkedDuel)return;resetAIWork();
     aiEpoch++;clearTimeout(aiTimer);chainDirector.reset();
     engine=parkedDuel.engine;selectedUid=parkedDuel.selectedUid;previewId=parkedDuel.previewId;
     previewHidden=parkedDuel.previewHidden;intent=parkedDuel.intent;peekState=parkedDuel.peekState;
@@ -91,15 +102,22 @@
     leaveTournamentView();chainDirector.reset();hidePopover();setScreen('tournament');
     tournament?.show().catch(error=>showToast(error.message,true));
   }
+  function showP2P(){
+    if(engine?.remote&&!engine.p2p||pvp?.room){showToast('请先离开联机房间，再开始其他对局。');return;}
+    leaveTournamentView();dismissModal();hidePopover();pvp?.hide();setScreen('pvp');p2p?.show();
+  }
   function showPvp(){
+    if(engine?.p2p||p2p?.active){showP2P();return;}
+    p2p?.hide();
     leaveTournamentView();
     if(modalKind==='pending'&&engine.state.pending)peekPending();else dismissModal();
     hidePopover();setScreen('pvp');pvp?.show();
   }
   function attachRemote(remote){
+    resetAIWork();
     leaveTournamentView();
-    if(!parkedOffline)parkedOffline={engine,previewId,resultShown,localMatch,matchDraft,matchArchives,matchOptions};
-    localMatch=null;matchDraft=null;matchArchives=[];workshop.exitSiding();
+    if(!parkedOffline)parkedOffline={engine,previewId,resultShown,localMatch,matchDraft,matchArchives,matchOptions,openingRequired};
+    openingRequired=false;localMatch=null;matchDraft=null;matchArchives=[];workshop.exitSiding();
     aiEpoch++;clearTimeout(aiTimer);clearTimeout(cinematicTimer);chainDirector.reset();dismissModal();hidePopover();
     for(const timer of animationTimers)clearTimeout(timer);animationTimers=[];
     $('#cinematic').classList.remove('visible');$('#fx-layer').innerHTML='';
@@ -111,9 +129,9 @@
     if(engine.state.winner!==null)finishGame();
   }
   function detachRemote(){
-    if(!parkedOffline)return;
+    if(!parkedOffline)return;resetAIWork();
     aiEpoch++;clearTimeout(aiTimer);clearTimeout(cinematicTimer);chainDirector.reset();dismissModal();hidePopover();
-    engine=parkedOffline.engine;previewId=parkedOffline.previewId;resultShown=parkedOffline.resultShown;({localMatch,matchDraft,matchArchives,matchOptions}=parkedOffline);parkedOffline=null;
+    openingRequired=parkedOffline.openingRequired;engine=parkedOffline.engine;previewId=parkedOffline.previewId;resultShown=parkedOffline.resultShown;({localMatch,matchDraft,matchArchives,matchOptions}=parkedOffline);parkedOffline=null;
     selectedUid=null;intent=null;peekState=null;previewHidden=false;pendingKey='';
     document.body.classList.remove('pvp-dueling','pvp-input-locked');$('#pvp-duel-bar').hidden=true;
     bindEngine();render();saveGame();
@@ -122,7 +140,7 @@
     const first=!parkedDuel;
     const freshMusic=!tournamentView||tournamentView.matchId!==meta.matchId||tournamentView.gameIndex!==meta.gameIndex;
     if(first){
-      parkedDuel={engine,selectedUid,previewId,previewHidden,intent,peekState,resultShown,paused:spectate.paused};
+      resetAIWork();parkedDuel={engine,selectedUid,previewId,previewHidden,intent,peekState,resultShown,paused:spectate.paused};
       aiEpoch++;clearTimeout(aiTimer);clearTimeout(cinematicTimer);chainDirector.reset();dismissModal();hidePopover();
       for(const timer of animationTimers)clearTimeout(timer);animationTimers=[];
       $('#cinematic').classList.remove('visible');$('#fx-layer').innerHTML='';
@@ -139,7 +157,7 @@
     const count=CARD_LIST.filter(c=>!c.notCollectible).length,decks=Object.values(DECKS).filter(d=>d.preset).length;
     $('#home-stats').innerHTML='<span><b>'+count.toLocaleString('en-US')+'</b> 张卡片</span><span><b>'+decks+'</b> 套预设</span><span><b>6</b> 种召唤方式</span>';
     $('#home-card-count').textContent=count.toLocaleString('en-US')+' 张卡片';
-    $('#home-continue').textContent=engine?.state.winner===null?'继续决斗 · 第 '+engine.state.turn+' 回合 →':'返回战场 →';
+    $('#home-continue').textContent=openingRequired?'进入决斗 →':engine?.state.winner===null?'继续决斗 · 第 '+engine.state.turn+' 回合 →':'返回战场 →';
     if(!$('#home-art').children.length)$('#home-art').innerHTML='<div class="hero-card hero-card-left">'+cardHTML('dark-magician')+'</div><div class="hero-card hero-card-right">'+cardHTML('blue-eyes')+'</div><div class="hero-card hero-card-center">'+cardHTML('stardust-dragon')+'</div><span class="hero-art-caption">三千年的羁绊 · 此刻回应</span>';
     Art.refresh($('#home-screen'));
   }
@@ -151,7 +169,7 @@
     $('#duel-turn-hud').classList.toggle('opponent-turn',s.active===1);
     $('#response-mode-switch').innerHTML=[['auto','AUTO','自动'],['on','ON','全部'],['off','OFF','关闭']].map(([id,name,label])=>'<button data-action="response-mode" data-value="'+id+'" class="'+(prefs.responseMode===id?'active':'')+'" aria-pressed="'+(prefs.responseMode===id)+'"><b>'+name+'</b><span>'+label+'</span></button>').join('');
     $('#response-mode-note').textContent=prefs.responseMode==='auto'?'关注对方发动、召唤和攻击。':prefs.responseMode==='on'?'每个合法响应时机都询问。':'自动放弃可选响应，强制处理保留。';
-    renderPeekBar();renderChainTimeline();updateMusicStatus();renderLingeringTool();
+    renderPeekBar();renderChainTimeline();updateMusicStatus();renderLingeringTool();boardLayout.apply();
   }
   function chainLabel(link){
     if(link.status==='unavailable')return (link.byNumber?'连锁 '+link.byNumber+' → ':'')+'来源离场，未能适用';
@@ -278,11 +296,12 @@
     $('#hand-count').textContent = hand.length;
     $('#hand-title').textContent = spec ? '机器人 A 的手牌' : '你的手牌';
     $('#hand-hint').textContent = crowded?'左右滑动查看手牌':s.winner !== null ? '决斗结束 · 每一张卡都有它的故事' : spec ? '观战模式 · 点击可查看卡牌' : intent ? '按提示完成选择 · Esc 取消' : s.active === 0 ? '点击卡牌，开启你的战术' : '对方正在行动 · 你可以查看卡牌';
-    $('#hand-cards').innerHTML = hand.map((card, index) => {
+    const handHTML = hand.map((card, index) => {
       const mid = (hand.length - 1) / 2, angle = (index - mid) * Math.min(3.1, 16 / Math.max(1, mid * 2)), lift = Math.abs(index - mid) ** 1.55 * (hand.length > 7 ? .65 : 1.9);
       const options = actionOptions(engine.find(card.uid)), playable = options.actions.length > 0;
       return '<button class="hand-slot' + (selectedUid === card.uid ? ' selected' : '') + (!playable && s.active === 0 && !spec ? ' not-playable' : '') + '" style="--angle:' + angle.toFixed(2) + 'deg;--lift:' + lift.toFixed(2) + 'px;--order:' + (index + 1) + '" data-action="select-card" data-card-uid="' + card.uid + '" data-owner="0" data-zone="hand" aria-label="' + escape(CARDS[card.id].name) + '，' + (playable ? options.actions[0].label : '查看卡牌') + '">' + cardHTML(card.id, card) + (playable ? '<span class="playable-dot"></span><span class="hand-card-hint">' + options.actions[0].label + '</span>' : '') + '</button>';
     }).join('');
+    region($('#hand-cards'),handHTML);
   }
   function nextPhaseInfo() {
     const s = engine.state;
@@ -301,6 +320,7 @@
   function renderSpectateControls() {
     if(tournamentView){tournament?.renderBoardTools();return;}
     const s = engine.state, over = s.winner !== null, paused = spectate.paused, who = robotName(s.active);
+    const replayControls='<div class="spectate-replay-controls" data-i18n-skip><span id="spectate-compute">'+(spectateReplay?replayCursor+' / '+spectateReplay.steps.length:I.term('正在计算整场对局…'))+'</span><select id="spectate-speed" aria-label="'+I.term('播放速度')+'">'+[['normal','1×'],['fast','2×'],['turbo','6×']].map(([v,t])=>'<option value="'+v+'"'+(prefs.speed===v?' selected':'')+'>'+t+'</option>').join('')+'</select>'+(spectateReplay?'<input id="spectate-seek" type="range" min="0" max="'+spectateReplay.steps.length+'" value="'+replayCursor+'" aria-label="'+I.term('回放进度')+'">':'')+'</div>';
     const description = over ? '决斗已经结束，可以查看记录或开始新的对战。' : paused ? '已暂停。可以逐步观察每一次结算，或继续自动播放。' : s.pending ? robotName(s.pending.responder) + ' 正在决定是否响应。' : who + ' 正在行动，双方手牌与盖牌全部可见。';
     const status = over ? 'DUEL COMPLETE' : paused ? 'PAUSED · ' + (s.active === 0 ? 'ROBOT A' : 'ROBOT B') : s.active === 0 ? 'ROBOT A TURN' : 'ROBOT B TURN';
     const buttons = over ? '<button class="primary-button" data-action="new-game">再来一场决斗' + icon('refresh') + '</button><button class="secondary-button" data-action="result">查看决斗结果</button>'
@@ -308,6 +328,7 @@
     $('#turn-panel').innerHTML = '<div class="turn-label' + (s.active === 1 ? ' ai' : '') + '"><i></i>' + status + '</div><div class="turn-number">' + String(s.turn).padStart(2, '0') + '</div><h2 class="turn-phase">' + (over ? '决斗结束' : phaseNames[s.phase]) + '</h2><p class="turn-description">' + description + '</p><div class="summon-allowance">' + icon('eye') + '观战模式 <b>' + (over ? '已完成' : who + ' 的回合') + '</b></div>' + buttons + '<div class="keyboard-hint"><kbd>Space</kbd>暂停 / 继续 <span>·</span> <kbd>N</kbd>单步</div>';
     $('#mobile-turn-control').innerHTML = '<div class="mobile-turn-copy"><small>' + status + '</small><b>' + (over ? '决斗已结束' : phaseNames[s.phase]) + '</b></div>' + (over ? '<button class="primary-button" data-action="new-game">再来一场' + icon('arrow') + '</button>' : '<button class="primary-button" data-action="spectate-toggle">' + (paused ? '继续' : '暂停') + '</button><button class="mobile-end-button" data-action="spectate-step"' + (paused ? '' : ' disabled') + '>单步</button>');
     $('#duel-tip').textContent = '观战模式下双方的手牌与盖牌都是公开的；暂停后可以逐步查看每一次结算。';
+    $('#turn-panel').insertAdjacentHTML('beforeend',replayControls);
   }
   function renderControls() {
     if (spectating()) { renderSpectateControls(); return; }
@@ -386,16 +407,36 @@
     const n=Lingering()?Lingering().collect(engine).length:0;
     tool.innerHTML='◎'+(n?'<b>'+n+'</b>':'');tool.classList.toggle('active',n>0);
   }
+  const renderedRegions=new WeakMap();
+  function region(el,html){const signature=I.language+'|'+html;if(renderedRegions.get(el)!==signature){el.innerHTML=html;renderedRegions.set(el,signature);}}
+  const renderedLogs=new WeakMap();
+  function renderRecentLog(entries){
+    const node=$('#duel-log'),existing=new Map([...node.children].map(child=>[child.dataset.logN,child]));
+    let anchor=null;
+    for(let i=entries.length-1;i>=0;i--){
+      const item=entries[i],key=String(item.n),html=logHTML(item),signature=I.language+'|'+html;
+      let child=existing.get(key);existing.delete(key);
+      if(!child||renderedLogs.get(child)!==signature){
+        const holder=document.createElement('div');holder.innerHTML=html;
+        child?.remove();child=holder.firstElementChild;
+        if(!child)continue;
+        child.dataset.logN=key;renderedLogs.set(child,signature);
+      }
+      if(child.parentNode!==node||child.nextSibling!==anchor)node.insertBefore(child,anchor);
+      anchor=child;
+    }
+    for(const child of existing.values())child.remove();
+  }
   function render() {
     renderMatchBanner();
     const s=engine.state,deck=I.deck(engine.deckInfo(0)),rival=I.deck(engine.deckInfo(1));
-    $('#opponent-bar').innerHTML=avatarBar(1);$('#player-bar').innerHTML=avatarBar(0);
-    for(const [owner,prefix] of [[0,'player'],[1,'opponent']])for(const zone of ['monsters','spells'])$('#'+prefix+'-'+zone).innerHTML=renderZone(owner,zone);
+    region($('#opponent-bar'),avatarBar(1));region($('#player-bar'),avatarBar(0));
+    for(const [owner,prefix] of [[0,'player'],[1,'opponent']])for(const zone of ['monsters','spells'])region($('#'+prefix+'-'+zone),renderZone(owner,zone));
     $('#left-rail').innerHTML='<div class="rail-pile-group">'+pileHTML(1,'deck')+pileHTML(1,'extra')+pileHTML(1,'fieldSpell')+'</div><div class="rail-divider">DUEL FIELD</div><div class="rail-pile-group">'+pileHTML(0,'grave')+pileHTML(0,'banished')+'</div>';
     $('#right-rail').innerHTML='<div class="rail-pile-group">'+pileHTML(1,'grave')+pileHTML(1,'banished')+'</div><div class="rail-divider">SANCTUARY</div><div class="rail-pile-group">'+pileHTML(0,'fieldSpell')+pileHTML(0,'deck')+pileHTML(0,'extra')+'</div>';
     renderExtraLane();
     renderPhases();renderHand();renderControls();renderInspector();renderTargetInstruction();renderModernControls();
-    $('#duel-log').innerHTML=s.log.slice(0,24).map(item=>logHTML(item)).join('');
+    renderRecentLog(s.log.slice(0,24));
     $('#match-label').innerHTML=deckNameHTML(deck)+' <b>VS</b> '+deckNameHTML(rival);
     $('#deck-summary').innerHTML=Art.html(deck.ace,'deck-summary-art')+'<span><small>'+(spectating()?'机器人 A 的卡组':'我的卡组')+' · '+escape(deck.mechanic)+'</small><strong>'+deckNameHTML(deck)+'</strong><span class="deck-count">'+deck.cards.length+' 张主卡组 · '+deck.extra.length+' 张额外</span></span>'+icon('chevron');
     $('#character-quote').textContent=deck.subtitle||deck.description;$('#quote-author').textContent='— '+deck.player;
@@ -403,7 +444,11 @@
     document.body.classList.toggle('spectate-mode',spectating());
     updateSoundButton();Art.refresh();highlightLinkZones();
     renderChrome();
-    fate.render();
+    fate.render();renderSpectateToolbar();
+  }
+  function renderSpectateToolbar(){
+    if(!spectating()||tournamentView)return;
+    $('#summon-toolbar').innerHTML='<div class="spectate-toolbar" data-i18n-skip><button data-action="spectate-toggle">'+I.term(spectate.paused?'继续':'暂停')+'</button><button data-action="spectate-step"'+(!spectate.paused?' disabled':'')+'>'+I.term('单步')+'</button><select id="spectate-toolbar-speed" aria-label="'+I.term('播放速度')+'">'+[['normal','1×'],['fast','2×'],['turbo','6×']].map(([v,t])=>'<option value="'+v+'"'+(prefs.speed===v?' selected':'')+'>'+t+'</option>').join('')+'</select><span>'+replayCursor+' / '+(spectateReplay?.steps.length||'…')+'</span><button data-action="spectate-export"'+(!spectateReplay?' disabled':'')+'>'+I.term('导出录像')+'</button></div>';
   }
   function renderModernControls() {
     const s=engine.state,main=!spectating()&&s.active===0&&s.winner===null&&!s.pending&&['main1','main2'].includes(s.phase),extra=main?engine.extraOptions(0):[],links=extra.filter(o=>o.type==='link'),pend=main?engine.pendulumCandidates(0):[],scales=engine.scales(0);
@@ -443,18 +488,19 @@
     while ($('#toast-stack').children.length > 3) $('#toast-stack').firstElementChild.remove();
     setTimeout(() => { el.classList.add('leaving'); setTimeout(() => el.remove(), 300); }, error ? 4000 : 3400);
   }
-  function hidePopover() { $('#card-popover').hidden = true; }
+  function hidePopover() { $('#card-popover').hidden = true; hideCardTip(); }
   function clearIntent() { intent = null; hidePopover(); render(); }
   function dispatch(action) {
     if(chainDirector.busy||tournamentView)return false;
     if(onlineLocked()){showToast('等待服务器连接与确认…');return false;}
-    capturePositions(); hidePopover();
+    actionRevision++;capturePositions(); hidePopover();
     const result = engine.act(action);
     if (!result.ok) { showToast(result.error, true); render(); scheduleAI(); return false; }
     return true;
   }
   function chooseCard(uid, element) {
-    sound.play('card');
+    sound.play('card');hideCardTip();
+    if(selectedUid===uid&&!$('#card-popover').hidden){selectedUid=null;hidePopover();return;}
     const found = engine.find(uid);
     if (!found) return;
     if (intent) {
@@ -474,7 +520,7 @@
     if (liveElement) liveElement.classList.add('selected');
     if (previewHidden) { hidePopover(); showToast('对方的里侧卡牌尚未公开。'); return; }
     const { actions, note } = actionOptions(found), popover = $('#card-popover');
-    popover.innerHTML = '<div class="popover-title">' + escape(CARDS[found.card.id].name) + '</div>' +
+    popover.innerHTML = '<div class="popover-title">' + escape(CARDS[found.card.id].name) + '</div><div class="popover-details" data-i18n-skip>' + detailsHTML(found.card.id,found.card) + '</div>' +
       actions.map(a => '<button class="' + (a.primary ? 'primary-choice' : '') + '" data-action="card-command" data-command="' + a.command + '" data-uid="' + uid + '">' + icon(a.icon) + a.label + '</button>').join('') +
       (note ? '<div class="popover-note">' + escape(note) + '</div>' : '') +
       (found.card.overlays?.length ? '<button data-action="overlays" data-uid="' + uid + '">✦ 查看 ' + found.card.overlays.length + ' 张超量素材</button>' : '') +
@@ -501,27 +547,60 @@
     dispatch({...action});
   }
   function saveGame() {
-    if(tournamentView)return;
-    if(engine.remote){$('#save-status').innerHTML='<i></i>'+I.term('联机进度由服务器保存');return;}
+    if(tournamentView||openingRequired)return;
+    if(engine.remote){$('#save-status').innerHTML='<i></i>'+(engine.p2p?'P2P':I.term('联机进度由服务器保存'));return;}
     if(recoveryFailed)return;
     savedAvailable=writeStorage('duel-sanctuary-save-v2',{...engine.snapshot(),savedAt:Date.now(),match:localMatch,matchDraft,matchArchives,matchOptions});
     $('#save-status').innerHTML='<i></i>'+(savedAvailable?'对局已自动保存':'当前浏览器未开放本地存档');
   }
-  function runAIStep() {
-    const action=engine.aiNext();
-    if(!action){if(spectating()){spectate.paused=true;render();showToast('机器人没有可执行的行动，已暂停。',true);}return false;}
-    const ok=dispatch(action);
-    if(!ok){showToast(spectating()?'机器人行动遇到错误，已暂停观战。':'对方行动遇到错误，请导出决斗记录。',true);clearTimeout(aiTimer);if(spectating()){spectate.paused=true;render();}}
-    return ok;
+  async function runAIStep() {
+    if(aiBusy||!engine||engine.state.winner!==null)return false;
+    const target=engine,token=aiEpoch,revision=actionRevision,manual=spectate.paused;
+    aiBusy=true;
+    try{
+      if(spectating()&&!spectateReplay){
+        const replay=await aiWorker.request('precompute',{snapshot:engine.snapshot()},progress=>{if(target===engine&&token===aiEpoch){const el=$('#spectate-compute');if(el)el.textContent='TURN '+progress.turn+' · '+progress.steps;}});
+        if(target!==engine||token!==aiEpoch)return false;
+        spectateReplay=replay;replayCursor=0;render();
+      }
+      if(target!==engine||token!==aiEpoch)return false;
+      if(currentScreen!=='duel'||modal.open||spectating()&&spectate.paused&&!manual)return false;
+      let answer;
+      if(spectating())answer=spectateReplay.steps[replayCursor];
+      else answer=await aiWorker.request('ai',{snapshot:engine.snapshot()});
+      if(target!==engine||token!==aiEpoch||revision!==actionRevision||currentScreen!=='duel'||modal.open)return false;
+      if(!answer?.action)throw Error(I.term('机器人没有可执行的行动，已暂停。'));
+      if(answer.ms!==undefined){aiTimings.push(answer.ms);if(aiTimings.length>200)aiTimings.shift();}
+      engine.randomState=answer.randomState;
+      if(spectating())replayCursor++;
+      const ok=dispatch(answer.action);
+      if(!ok)throw Error(I.term('机器人行动遇到错误，已暂停观战。'));
+      return ok;
+    }catch(error){if(target===engine&&token===aiEpoch){spectate.paused=true;aiFailed=true;showToast(error.message,true);render();}return false;}
+    finally{if(target===engine&&token===aiEpoch){aiBusy=false;scheduleAI();}}
+  }
+  function exportSpectate(){
+    if(!spectateReplay)return;
+    const url=URL.createObjectURL(new Blob([JSON.stringify({format:'duel-spectator-replay',version:1,...spectateReplay})],{type:'application/json'})),a=document.createElement('a');
+    a.href=url;a.download='duel-replay.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);
+  }
+  function seekSpectate(index){
+    if(!spectateReplay||aiBusy)return;
+    clearTimeout(aiTimer);spectate.paused=true;chainDirector.reset();
+    const target=Math.max(0,Math.min(spectateReplay.steps.length,Number(index)||0)),frame=[...spectateReplay.frames].reverse().find(f=>f.index<=target);
+    engine=window.DuelEngine.restore(frame.snapshot);
+    for(let i=frame.index;i<target;i++){const step=spectateReplay.steps[i];engine.randomState=step.randomState;const result=engine.act(step.action);if(!result.ok)throw Error(result.error);}
+    replayCursor=target;selectedUid=null;intent=null;hidePopover();bindEngine();render();
   }
   function scheduleAI() {
-    clearTimeout(aiTimer);if(!engine||tournamentView||engine.state.winner!==null||intent||currentScreen!=='duel'||chainDirector.busy||fate.busy)return;
+    cancelAnimationFrame(aiFrame);clearTimeout(aiTimer);if(aiBusy||aiFailed||!engine||tournamentView||engine.state.winner!==null||intent||currentScreen!=='duel'||chainDirector.busy||fate.busy)return;
     if(onlineLocked())return;
     const s=engine.state;
     if(spectating()){
       if(modal.open||document.hidden||spectate.paused)return;
       const token=aiEpoch;
-      aiTimer=setTimeout(()=>{if(token!==aiEpoch||modal.open||spectate.paused||engine.state.winner!==null)return;runAIStep();},prefs.speed==='fast'?160:s.pending?600:680);
+      const due=performance.now()+(prefs.speed==='turbo'?120:prefs.speed==='fast'?300:700);
+      const tick=now=>{if(token!==aiEpoch||modal.open||spectate.paused||engine.state.winner!==null||currentScreen!=='duel')return;if(now<due)aiFrame=requestAnimationFrame(tick);else runAIStep();};aiFrame=requestAnimationFrame(tick);
       return;
     }
     if(s.pending?.responder===0){
@@ -541,7 +620,7 @@
   function spectateStep() {
     if(tournamentView){tournament.seek(tournament.viewer.cursor.index+1);return;}
     if(!spectating()||engine.state.winner!==null||modal.open||chainDirector.busy)return;
-    clearTimeout(aiTimer);spectate.paused=true;runAIStep();render();
+    clearTimeout(aiTimer);spectate.paused=true;return runAIStep().then(result=>{render();return result;});
   }
   function spectateToggle() {
     if(tournamentView){tournament.viewerToggle();return;}
@@ -576,6 +655,8 @@
   function startGame(options = {}, instantOpening = false) {
     if(engine?.remote){showPvp();showToast('请先离开联机房间，再开始其他对局。');return;}
     if(!validateGameDecks(options))return false;
+    resetAIWork();
+    openingRequired=!!options.preview;
     leaveTournamentView();
     chainDirector.reset();peekState=null;setScreen('duel',true);
     aiEpoch++; clearTimeout(aiTimer); clearTimeout(cinematicTimer);
@@ -613,7 +694,7 @@
     for(const seat of (spectating()?[0,1]:[1]))if(!localMatch.round.ready[seat])Match.submit(localMatch,seat,window.DuelMatchAI.plan(localMatch.decks[seat],engine.state.matchPublicSeen?.[seat]||[]));
   }
   function showMatch(){
-    if(engine.remote){pvp?.showResult();return;}if(!localMatch)return;
+    if(engine.remote){(engine.p2p?p2p:pvp)?.showResult();return;}if(!localMatch)return;
     resultShown=engine.state.winner!==null;const m=Match.publicView(localMatch),active=m.phase!=='finished';
     openModal('match',MUI.title(m),m.format.toUpperCase()+' · '+m.id.slice(0,8),MUI.panel(m)+(spectating()&&m.phase==='siding'?'<button class="primary-button" data-action="match-next">'+MUI.tr('继续下一局','Next game','次のデュエル')+'</button>':''),
       '<button class="secondary-button" data-action="close-modal">'+I.term('返回决斗')+'</button><button class="secondary-button" data-action="match-export">'+MUI.tr('导出比赛记录','Export match','マッチを出力')+'</button>'+(active?'<button class="secondary-button" data-action="match-abandon">'+MUI.tr('放弃整场','Concede match','マッチを投了')+'</button>':'<button class="secondary-button" data-action="match-save-deck">'+MUI.tr('当前构筑另存','Save current deck','現在のデッキを別名保存')+'</button><button class="primary-button" data-action="rematch">'+I.term('再来一场')+'</button>'));
@@ -634,6 +715,7 @@
   }
   function endLocalGame(whole){
     if(!localMatch||localMatch.phase==='finished')return;
+    aiEpoch++;resetAIWork();
     clearTimeout(aiTimer);chainDirector.reset();dismissModal();
     if(localMatch.phase==='playing'){
       engine.state.winner=1;engine.state.pending=null;engine.state.outcome={kind:whole?'match-surrender':'surrender',winner:1,loser:0,turn:engine.state.turn};
@@ -655,6 +737,24 @@
     el.innerHTML = '<div class="cinematic-orbit"></div><div class="cinematic-content rps-stage"><div class="rps-side"><small>ROBOT A</small><b>' + rpsHands[a][1] + '</b><span>' + rpsHands[a][0] + '</span></div><div class="rps-vs"><small>' + (rounds.length > 1 ? '平局后重猜' : '猜拳') + '</small><h3>VS</h3><p>' + robotName(winner) + ' 先攻</p></div><div class="rps-side"><small>ROBOT B</small><b>' + rpsHands[b][1] + '</b><span>' + rpsHands[b][0] + '</span></div></div>';
     void el.offsetWidth; el.classList.add('visible'); sound.play('phase');
     cinematicTimer = setTimeout(() => { el.classList.remove('visible'); callback(winner); }, prefs.reducedMotion ? 700 : 1900);
+  }
+  let rpsRound=null,lastRps=null;
+  function beginLocalDuel(options){
+    if(!validateGameDecks(options))return;
+    clearTimeout(aiTimer);hidePopover();chainDirector.reset();
+    const show=()=>{
+      rpsRound={bot:Math.floor(Math.random()*3),options,show};
+      openModal('rps','猜拳决定先攻','ROCK · PAPER · SCISSORS','<p>'+I.term('请选择你的出手')+'</p><div class="rps-picks">'+rpsHands.map(([name,emoji],value)=>'<button data-action="rps-pick" data-value="'+value+'" aria-label="'+I.term(name)+'">'+emoji+'</button>').join('')+'</div>','<button class="secondary-button" data-action="close-modal">'+I.term('取消')+'</button>');
+    };show();
+  }
+  function chooseRps(value){
+    if(!rpsRound||modalKind!=='rps')return;
+    const round=rpsRound;rpsRound=null;const a=Number(value),b=round.bot;
+    if(!Number.isInteger(a)||a<0||a>2)return;
+    const first=a===b?null:(a-b+3)%3===2?0:1;
+    lastRps={player:a,opponent:b,first};
+    $('.modal-body').innerHTML='<div class="rps-result"><b>'+rpsHands[a][1]+'　'+rpsHands[b][1]+'</b>'+I.term(first===null?'平局，请再次出手。':first===0?'你获得先攻。':'对手获得先攻。')+'</div>';
+    clearTimeout(cinematicTimer);cinematicTimer=setTimeout(()=>{if(!modal.open||modalKind!=='rps')return;if(first===null)round.show();else startGame({...round.options,first,seed:Date.now()});},prefs.reducedMotion?700:1900);
   }
   function beginSpectate(options) { if(!validateGameDecks(options))return;leaveTournamentView();if (modal.open) modal.close(); playRps(first => startGame({ ...options, mode: 'spectate', first, seed: Date.now() })); }
 
@@ -718,6 +818,7 @@
     dismissModal();sound.setScene(currentScreen==='duel'?'battle':'lobby');scheduleAI();if(engine.state.winner!==null&&!resultShown&&currentScreen==='duel')showResult();
   }
   function showLibrary() {
+    if(window.DuelWeb&&I.languages.some(l=>!DuelWeb.hasLanguage(l))){showToast(I.term('正在加载完整卡片资料…'));Promise.all(I.languages.map(l=>DuelWeb.loadLanguage(l))).then(()=>showLibrary()).catch(e=>showToast(e.message,true));return;}
     const count=CARD_LIST.filter(c=>!c.notCollectible).length;
     openModal('library','每一张卡，都有它的灵魂。','THE CARD ARCHIVE · '+count+' CARDS','<div class="early-overview"><span><b>'+window.DuelData.earlyYears[0]+'—'+window.DuelData.earlyYears[window.DuelData.earlyYears.length-1]+'</b>卡片编年</span><span><b>'+CARD_LIST.filter(c=>c.early).length.toLocaleString('en-US')+'</b>年度快照卡片</span><span><b>'+count+'</b>总收录</span></div><div class="library-toolbar"><div class="library-filters">'+[['all','全部'],['monster','怪兽'],['spell','魔法'],['trap','陷阱'],['ritual','仪式'],['fusion','融合'],['synchro','同调'],['xyz','超量'],['link','连接'],['pendulum','灵摆']].map(([id,label])=>'<button class="filter-button'+(libraryFilter===id?' active':'')+'" data-action="library-filter" data-filter="'+id+'">'+label+'</button>').join('')+'</div><label class="search-box">'+icon('search')+'<input id="library-search" type="search" value="'+escape(libraryQuery)+'" placeholder="卡名、英文名、卡片编号或效果" aria-label="搜索卡牌"></label><select id="library-family" aria-label="筛选系列">'+Object.entries(window.DuelData.families).map(([id,label])=>'<option value="'+id+'"'+(libraryFamily===id?' selected':'')+'>'+label+'</option>').join('')+'</select></div><div class="archive-years"><label for="library-year">按首次发行年</label><select id="library-year" aria-label="筛选发行年份">'+View.yearOptions(libraryYear)+'</select><select id="library-status" aria-label="筛选实现状态">'+[['all','全部收录'],['ready','可用于决斗'],['pending','效果待落实']].map(([id,label])=>'<option value="'+id+'"'+(libraryStatus===id?' selected':'')+'>'+label+'</option>').join('')+'</select></div><div class="library-grid" id="library-grid"></div><div class="archive-pagination" id="library-pagination"></div><p class="library-count" id="library-count"></p>','<button class="secondary-button" data-action="close-modal">返回决斗</button><button class="primary-button" data-action="workshop">前往组卡工坊 '+icon('arrow')+'</button>','library-modal');renderLibraryResults();
   }
@@ -769,7 +870,7 @@
   function showNewGame() {
     if(engine?.remote){showPvp();return;}
     const own=engine?.state.players[0].deckId,rival=engine?.state.players[1].deckId,list=DeckTools.list();
-    setupOptions={deck:list.some(d=>d.id===own)?own:'hero',opponentDeck:list.some(d=>d.id===rival)?rival:'blackwing',first:0,difficulty:engine?.state.difficulty||'standard',mode:spectating()?'spectate':'duel',ruleMode:engine?.state.ruleMode?.source==='chosen'?engine.state.ruleMode.id:engine?.state.ruleMode?'random':'off'};renderNewGame();
+    setupOptions={deck:list.some(d=>d.id===own)?own:'hero',opponentDeck:list.some(d=>d.id===rival)?rival:'blackwing',difficulty:engine?.state.difficulty||'standard',mode:spectating()?'spectate':'duel',ruleMode:engine?.state.ruleMode?.source==='chosen'?engine.state.ruleMode.id:engine?.state.ruleMode?'random':'off'};renderNewGame();
   }
   let setupDeckIndex = new Map();
   const normalizeDeckQuery = value => String(value || '').normalize('NFKC').toLowerCase().replace(/[·・—–_-]/g, ' ');
@@ -836,7 +937,7 @@
     openModal('new-game',spec?'让两位机器人一决高下。':'选择与你共鸣的力量。','ALL GENERATIONS · ONE DESTINY',
       '<div class="deck-select-intro"><p>跨越世代的决斗，从这里开始。<br><span>'+Object.values(DECKS).filter(d=>d.preset).length+'套预设，或一副亲手构筑的卡组。</span></p><button class="outline-button" data-action="workshop">＋ 组卡工坊</button></div>'+modeControl+MUI.setup(setupOptions.matchFormat||'bo1')+fate.setup(setupOptions.ruleMode||'off')+
       '<div class="deck-select-layout"><section class="setup-deck-browser">'+filters+'<div class="deck-roster" id="setup-deck-roster"></div></section><aside class="selected-deck-showcase" id="setup-deck-showcase"></aside></div>'+
-      '<div class="setup-options v2-setup">'+opponent+'<div><label class="setting-label">'+(spec?'机器人难度':'对手难度')+'</label>'+segment('choose-difficulty',setupOptions.difficulty,[['casual','休闲'],['standard','标准']])+'</div><div><label class="setting-label">出场顺序</label>'+(spec?'<p class="setup-order-note">✊ ✌️ 🖐️ 先后手由猜拳决定</p>':segment('choose-first',setupOptions.first,[[0,'我先攻'],[1,'我后攻']]))+'</div></div><p class="new-game-note">8000 LP · 随机起手 5 张 · 先攻首回合不抽卡、不攻击<br>开始新决斗会替换当前对局存档；保存的卡组与工坊草稿会保留。</p>',
+      '<div class="setup-options v2-setup">'+opponent+'<div><label class="setting-label">'+(spec?'机器人难度':'对手难度')+'</label>'+segment('choose-difficulty',setupOptions.difficulty,[['casual','休闲'],['standard','标准']])+'</div><div><label class="setting-label">出场顺序</label>'+'<p class="setup-order-note">✊ ✌️ 🖐️ 先后手由猜拳决定</p>'+'</div></div><p class="new-game-note">8000 LP · 随机起手 5 张 · 先攻首回合不抽卡、不攻击<br>开始新决斗会替换当前对局存档；保存的卡组与工坊草稿会保留。</p>',
       '<button class="secondary-button" data-action="close-modal">继续当前对局</button><button class="primary-button" data-action="begin-game">'+(spec?'开始观战 ':'开始决斗 ')+icon('arrow')+'</button>','new-game-modal v2-new-game');
     renderSetupRoster();updateSetupDeck();renderSetupOpponent();
     for(const saved of scrolls)if($(saved.selector))$(saved.selector).scrollTop=saved.top;
@@ -849,7 +950,7 @@
   function showSettings() {
     const toggle = (key, title, description) => '<div class="setting-row"><div><h3>' + title + '</h3><p>' + description + '</p></div><button class="toggle-button' + (prefs[key] ? ' on' : '') + '" data-action="toggle-pref" data-pref="' + key + '" role="switch" aria-checked="' + !!prefs[key] + '" aria-label="' + title + '"></button></div>';
     openModal('settings', '你的决斗，随你设定。', 'PERSONAL SANCTUARY',
-      '<div class="setting-row"><div><h3>AI 助手</h3></div><button class="outline-button" data-action="ai-settings">AI 助手 →</button></div><section class="reading-settings"><div><h3>阅读与显示</h3><p>字体独立缩放，战场保持一屏。</p></div><div class="font-setting"><label for="font-size-control">字体大小 <b id="font-size-label">'+prefs.fontScale+'%</b></label><input id="font-size-control" type="range" min="90" max="150" step="5" value="'+prefs.fontScale+'" aria-label="字体大小"><div class="font-presets">'+[[100,'标准'],[115,'舒适'],[130,'大字'],[150,'超大']].map(([n,label])=>'<button data-action="font-preset" data-value="'+n+'">'+label+'</button>').join('')+'</div></div><p class="font-preview">相信卡组，也相信每一次抉择。<small>调整后会自动保存，卡片效果与操作文字同步放大。</small></p></section><div class="setting-row"><div><h3>卡面样式</h3><p>经典卡框与全图展示，随时切换。</p></div><select id="card-style" aria-label="卡面样式"><option value="classic"'+(prefs.cardStyle!=='full-art'?' selected':'')+'>经典卡框</option><option value="full-art"'+(prefs.cardStyle==='full-art'?' selected':'')+'>全图卡面</option></select></div><div class="frame-samples">'+[['blue-eyes','通常'],['hero-stratos','效果'],['hero-sunrise','融合'],['stardust-dragon','同调'],['utopia','超量'],['qli-scout','灵摆'],['early-5405694','仪式'],['linkuriboh','Link'],['monster-reborn','魔法'],['mirror-force','陷阱']].filter(([id])=>CARDS[id]).map(([id,label])=>'<span>'+cardHTML(id)+'<small>'+label+'</small></span>').join('')+'</div>'+
+      '<div class="setting-row"><div><h3>AI 助手</h3></div><button class="outline-button" data-action="ai-settings">AI 助手 →</button></div><section class="reading-settings"><div><h3>阅读与显示</h3><p>字体独立缩放，战场保持一屏。</p></div><div class="font-setting"><label for="font-size-control">字体大小 <b id="font-size-label">'+prefs.fontScale+'%</b></label><input id="font-size-control" type="range" min="90" max="150" step="5" value="'+prefs.fontScale+'" aria-label="字体大小"><div class="font-presets">'+[[100,'标准'],[115,'舒适'],[130,'大字'],[150,'超大']].map(([n,label])=>'<button data-action="font-preset" data-value="'+n+'">'+label+'</button>').join('')+'</div></div><p class="font-preview">相信卡组，也相信每一次抉择。<small>调整后会自动保存，卡片效果与操作文字同步放大。</small></p></section><div class="setting-row"><div><h3>卡面样式</h3><p>经典卡框与全图展示，随时切换。</p></div><select id="card-style" aria-label="卡面样式"><option value="classic"'+(prefs.cardStyle!=='full-art'?' selected':'')+'>经典卡框</option><option value="full-art"'+(prefs.cardStyle==='full-art'?' selected':'')+'>全图卡面</option></select></div><div class="setting-row"><div><h3>决斗盘卡面大小</h3></div><select id="card-size" aria-label="决斗盘卡面大小">'+[['compact','紧凑'],['standard','标准'],['large','大卡面']].map(([v,t])=>'<option value="'+v+'"'+(prefs.cardSize===v?' selected':'')+'>'+t+'</option>').join('')+'</select></div><div class="frame-samples">'+[['blue-eyes','通常'],['hero-stratos','效果'],['hero-sunrise','融合'],['stardust-dragon','同调'],['utopia','超量'],['qli-scout','灵摆'],['early-5405694','仪式'],['linkuriboh','Link'],['monster-reborn','魔法'],['mirror-force','陷阱']].filter(([id])=>CARDS[id]).map(([id,label])=>'<span>'+cardHTML(id)+'<small>'+label+'</small></span>').join('')+'</div>'+
       '<div class="setting-row"><div><h3>显示语言</h3><p>选择界面、卡名和卡片说明的语言。</p></div>'+I.picker()+'</div><div class="setting-row"><div><h3>显示卡图</h3><p>优先显示内嵌卡图，缺图时使用备用卡面。</p></div><button class="toggle-button' + (Art.status().enabled ? ' on' : '') + '" data-action="toggle-artwork" role="switch" aria-checked="' + Art.status().enabled + '" aria-label="显示卡图"></button></div><div class="setting-row"><div><h3>在线原版卡图</h3><p>缺少内嵌图片时联网加载原版卡图。关闭后仍可离线决斗。</p></div><button class="toggle-button'+(Art.status().onlineEnabled?' on':'')+'" data-action="toggle-online-artwork" role="switch" aria-checked="'+Art.status().onlineEnabled+'" aria-label="在线原版卡图"></button></div><div class="setting-row"><p>'+I.term('本地原版卡图')+' · '+Art.status().embedded+'</p><button class="text-button" data-action="retry-artwork">刷新卡图</button></div>' +
       toggle('sound', '决斗音效', '抽卡、召唤与战斗的声音。') +
       '<div class="setting-row"><div><h3>音量 <span id="volume-label" style="color:#839a76;font-size:10px">' + Math.round(prefs.volume * 100) + '%</span></h3><p>一点声音，让决斗更有温度。</p></div><input class="volume-control" id="volume-control" type="range" min="0" max="100" value="' + Math.round(prefs.volume * 100) + '" aria-label="音量"></div>' +
@@ -994,7 +1095,7 @@
     if(tournamentView)return;
     if (engine.state.winner === null) return;
     clearTimeout(aiTimer); hidePopover(); resultShown = true; modalHistory=[];modalKind = 'result';
-    if(engine.remote){pvp?.showResult();return;}
+    if(engine.remote){(engine.p2p?p2p:pvp)?.showResult();return;}
     if(localMatch?.format==='bo3'){showMatch();return;}
     if (spectating()) { showSpectateResult(); return; }
     const win = engine.state.winner === 0, draw = engine.state.winner === 'draw';
@@ -1004,31 +1105,34 @@
     if (!modal.open) modal.showModal();
   }
 
+  const fxPool=[];
+  function effectNode(){if($('#fx-layer').children.length>=30)return null;const node=fxPool.pop()||document.createElement('span');node.className='';node.style.cssText='';node.textContent='';return node;}
+  function releaseEffect(node,delay){setTimeout(()=>{node.remove();if(fxPool.length<30)fxPool.push(node);},delay);}
   function floatingNumber(owner, amount, heal = false) {
     if (prefs.reducedMotion) return;
-    const el = document.createElement('div'), point = positionCache.get('lp-' + owner);
-    if (!point) return;
+    const point = positionCache.get('lp-' + owner);if(!point)return;const el=effectNode();if(!el)return;
     el.className = 'damage-float' + (heal ? ' heal' : ''); el.textContent = (heal ? '+' : '−') + amount.toLocaleString('en-US');
     el.style.left = point.x + 'px'; el.style.top = point.y + 'px'; $('#fx-layer').append(el);
-    setTimeout(() => el.remove(), 1600);
+    releaseEffect(el,1600);
   }
   function burstAt(point) {
-    if (!point || prefs.reducedMotion) return;
-    const ring = document.createElement('span'); ring.className = 'impact-ring'; ring.style.left = point.x + 'px'; ring.style.top = point.y + 'px'; $('#fx-layer').append(ring); setTimeout(() => ring.remove(), 650);
-    for (let i = 0; i < 15; i++) {
-      const particle = document.createElement('span'), angle = Math.PI * 2 * i / 15, distance = 25 + Math.random() * 50;
+    if (!point || prefs.reducedMotion || document.hidden || $('#fx-layer').children.length>=30) return;
+    const ring=effectNode();if(!ring)return;ring.className = 'impact-ring'; ring.style.left = point.x + 'px'; ring.style.top = point.y + 'px'; $('#fx-layer').append(ring); releaseEffect(ring,650);
+    const density=spectating()?4:12;
+    for (let i = 0; i < density && $('#fx-layer').children.length<30; i++) {
+      const particle=effectNode();if(!particle)break;const angle = Math.PI * 2 * i / 15, distance = 25 + Math.random() * 50;
       particle.className = 'particle'; particle.style.left = point.x + 'px'; particle.style.top = point.y + 'px';
       particle.style.setProperty('--dx', Math.cos(angle) * distance + 'px'); particle.style.setProperty('--dy', Math.sin(angle) * distance + 'px');
-      $('#fx-layer').append(particle); setTimeout(() => particle.remove(), 1100);
+      $('#fx-layer').append(particle); releaseEffect(particle,1100);
     }
   }
   function attackAnimation(event) {
     if (prefs.reducedMotion) return;
     const from = positionCache.get(event.uid), to = positionCache.get(event.target || 'lp-' + (1 - event.owner));
     if (!from || !to) return;
-    const ray = document.createElement('div'), distance = Math.hypot(to.x - from.x, to.y - from.y), angle = Math.atan2(to.y - from.y, to.x - from.x) * 180 / Math.PI;
+    const ray=effectNode();if(!ray)return;const distance = Math.hypot(to.x - from.x, to.y - from.y), angle = Math.atan2(to.y - from.y, to.x - from.x) * 180 / Math.PI;
     ray.className = 'battle-ray'; ray.style.left = from.x + 'px'; ray.style.top = from.y + 'px'; ray.style.width = distance + 'px'; ray.style.transform = 'rotate(' + angle + 'deg)';
-    $('#fx-layer').append(ray); setTimeout(() => { burstAt(to); }, 210); setTimeout(() => ray.remove(), 650);
+    $('#fx-layer').append(ray); setTimeout(() => { burstAt(to); }, 210); releaseEffect(ray,650);
   }
   function announce(cardId,type) {
     if(prefs.reducedMotion||!CARDS[cardId])return;
@@ -1068,11 +1172,14 @@
     const canvas = $('#ambient'), context = canvas.getContext('2d');
     if (!context) return;
     const stars = Array.from({ length: 46 }, () => ({ x: Math.random(), y: Math.random(), radius: Math.random() * 1.1 + .2, speed: Math.random() * .000015 + .000004, phase: Math.random() * Math.PI * 2 }));
-    let width = innerWidth, height = innerHeight, last = 0, lastDraw = 0;
+    let width = innerWidth, height = innerHeight, last = 0, lastDraw = 0, ambientFrame=0;
+    const active=()=>!prefs.reducedMotion&&!document.hidden&&currentScreen==='home';
+    const sync=()=>{cancelAnimationFrame(ambientFrame);ambientFrame=0;if(active())ambientFrame=requestAnimationFrame(frame);};
+    document.addEventListener('visibilitychange',sync);window.addEventListener('duel-display-change',sync);window.addEventListener('duel-screen-change',sync);
     const resize = () => { width = innerWidth; height = innerHeight; const ratio = Math.min(devicePixelRatio || 1, 1.5); canvas.width = width * ratio; canvas.height = height * ratio; context.setTransform(ratio, 0, 0, ratio, 0, 0); };
     resize(); window.addEventListener('resize', resize, { passive: true });
     function frame(time) {
-      requestAnimationFrame(frame);
+      if(!active()){ambientFrame=0;return;}ambientFrame=requestAnimationFrame(frame);
       if (prefs.reducedMotion || document.hidden || time - lastDraw < 40) { last = time; return; }
       const dt = Math.min(64, time - (last || time)); last = time; lastDraw = time;
       context.clearRect(0, 0, width, height);
@@ -1083,7 +1190,7 @@
         context.fillStyle = 'rgba(198,188,130,' + alpha.toFixed(3) + ')'; context.beginPath(); context.arc(star.x * width + Math.sin(time / 5000 + star.phase) * 12, star.y * height, star.radius, 0, Math.PI * 2); context.fill();
       }
     }
-    requestAnimationFrame(frame);
+    sync();
   }
   function updateSoundButton() {
     const button = $('#sound-button'); button.innerHTML = icon(prefs.sound ? 'volume' : 'mute');
@@ -1126,8 +1233,11 @@
     const action=b.dataset.action;if(!['select-card','none'].includes(action))sound.play('click');
     if(workshop.handle(action,b))return;
     switch(action){
+      case 'rps-pick':chooseRps(b.dataset.value);break;
+      case 'drawer-toggle':boardLayout.toggle();break;
       case 'home':showHome();break;
       case 'tournament':showTournament();break;
+      case 'p2p':showP2P();break;
       case 'pvp':showPvp();break;
       case 'duel':enterDuel();break;
       case 'library':showLibrary();break;
@@ -1197,15 +1307,15 @@
       case 'match-journal':{const index=localMatch?.games.findIndex(g=>g.id===b.dataset.gameId),snapshot=matchArchives[index];if(snapshot){const archived=window.DuelEngine.restore(snapshot);openModal('match-journal',MUI.tr('单局记录','Game journal','デュエル記録'),'GAME '+(index+1),'<div class="match-journal">'+snapshot.state.log.map(item=>'<p>'+escape(I.logEntry(item,archived).text)+'</p>').join('')+'</div>','<button class="secondary-button" data-action="close-modal">'+I.term('返回')+'</button>');}break;}
       case 'match-export':exportMatch();break;
       case 'match-save-deck':try{const d={...localMatch.decks[0]};delete d.id;DeckTools.save(d);showToast(I.term('卡组已保存。'));}catch(e){showToast(e.message,true);}break;
-      case 'choose-first':updateSetupSegment(b,'first',Number(b.dataset.value));break;
       case 'choose-mode':if(b.dataset.value==='pvp'){showPvp();break;}if(b.dataset.value==='tournament'){showTournament();break;}setupOptions.mode=b.dataset.value==='spectate'?'spectate':'duel';renderNewGame();break;
       case 'choose-difficulty':updateSetupSegment(b,'difficulty',b.dataset.value);break;
       case 'clear-deck-search':{const input=document.getElementById(b.dataset.input);input.value='';input.dispatchEvent(new Event('input',{bubbles:true}));input.focus({preventScroll:true});break;}
       case 'reset-deck-filters':setupOptions.query='';setupOptions.year='all';$('#setup-deck-search').value='';$('#setup-year').value='all';renderSetupRoster(true);$('#setup-deck-search').focus({preventScroll:true});break;
-      case 'begin-game':if(setupOptions.mode==='spectate')beginSpectate(setupOptions);else startGame({...setupOptions,seed:Date.now()});break;
-      case 'rematch':{const base={matchFormat:localMatch?.format||'bo1',deck:engine.state.players[0].deckId,opponentDeck:engine.state.players[1].deckId,difficulty:engine.state.difficulty,ruleMode:engine.state.ruleMode?.source==='chosen'?engine.state.ruleMode.id:engine.state.ruleMode?'random':'off'};if(spectating())beginSpectate(base);else startGame({...base,first:0,seed:Date.now()});break;}
+      case 'begin-game':if(setupOptions.mode==='spectate')beginSpectate(setupOptions);else beginLocalDuel(setupOptions);break;
+      case 'rematch':{const base={matchFormat:localMatch?.format||'bo1',deck:engine.state.players[0].deckId,opponentDeck:engine.state.players[1].deckId,difficulty:engine.state.difficulty,ruleMode:engine.state.ruleMode?.source==='chosen'?engine.state.ruleMode.id:engine.state.ruleMode?'random':'off'};if(spectating())beginSpectate(base);else beginLocalDuel(base);break;}
       case 'spectate-toggle':spectateToggle();break;
       case 'spectate-step':spectateStep();break;
+      case 'spectate-export':exportSpectate();break;
       case 'spectate-speed':prefs.speed=b.dataset.value==='fast'?'fast':'normal';updatePrefs();render();scheduleAI();break;
       case 'toggle-pref':if(['sound','music','reducedMotion'].includes(b.dataset.pref)){prefs[b.dataset.pref]=!prefs[b.dataset.pref];updatePrefs();showSettings();$('[data-pref="'+b.dataset.pref+'"]')?.focus({preventScroll:true});}break;
       case 'set-speed':prefs.speed=b.dataset.value==='fast'?'fast':'normal';updatePrefs();showSettings();break;
@@ -1241,6 +1351,9 @@
     if(event.target.id==='library-status'){libraryStatus=event.target.value;libraryPage=0;renderLibraryResults();}
     if(event.target.id==='library-page-size'){const old=prefs.libraryPageSize;prefs.libraryPageSize=Experience.pageSize(event.target.value);libraryPage=Math.floor(libraryPage*old/prefs.libraryPageSize);updatePrefs();renderLibraryResults();$('#modal .modal-body')?.scrollTo({top:0});}
     if(event.target.id==='library-page-jump'){libraryPage=Math.max(0,Math.floor(Number(event.target.value)||1)-1);renderLibraryResults();$('#modal .modal-body')?.scrollTo({top:0});}
+    if(['spectate-speed','spectate-toolbar-speed'].includes(event.target.id)){prefs.speed=event.target.value;updatePrefs();scheduleAI();}
+    if(event.target.id==='spectate-seek')seekSpectate(event.target.value);
+    if(event.target.id==='card-size'){prefs.cardSize=event.target.value;updatePrefs();render();}
     if(event.target.id==='card-style'){prefs.cardStyle=event.target.value==='full-art'?'full-art':'classic';updatePrefs();}
     if(event.target.id==='opponent-deck')setupOptions.opponentDeck=event.target.value;
     if(event.target.id==='setup-year'){setupOptions.year=event.target.value;renderSetupRoster(true);}
@@ -1250,10 +1363,13 @@
     const element = event.target.closest('[data-card-uid]');
     if (!element || event.relatedTarget?.closest?.('[data-card-uid]') === element) return;
     const found = engine.find(element.dataset.cardUid);
-    if (!found || (found.owner === 1 && !found.card.faceUp && !spectating())) return;
+    if (!found || found.card.hidden || (found.owner === 1 && !found.card.faceUp && !spectating())) {hideCardTip();return;}
     if (hoverId === found.card.uid) return;
     hoverId = found.card.uid; previewId = found.card.id; previewHidden = false; renderInspector();
+    hideCardTip();if(!$('#card-popover').hidden)return;
+    hoverTimer=setTimeout(()=>{if(modal.open||intent||!element.isConnected)return;const c=CARDS[found.card.id];cardTip.innerHTML='<strong>'+escape(c.name)+'</strong>'+escape([c.pendulumDescription,c.description].filter(Boolean).join('\n\n'));cardTip.hidden=false;const r=element.getBoundingClientRect(),b=cardTip.getBoundingClientRect();cardTip.style.left=Math.max(12,Math.min(innerWidth-b.width-12,r.right+10))+'px';cardTip.style.top=Math.max(12,Math.min(innerHeight-b.height-12,r.top))+'px';},120);
   }, { passive: true });
+  document.addEventListener('pointerout',event=>{if(event.target.closest('[data-card-uid]')&&!event.relatedTarget?.closest?.('[data-card-uid]')){hoverId=null;hideCardTip();}},{passive:true});
   document.addEventListener('keydown', event => {
     if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement || event.target instanceof HTMLSelectElement || event.target.isContentEditable) return;
     if (event.key === 'Escape') {
@@ -1306,7 +1422,7 @@
     } catch { restored = false;recoveryFailed=true;localMatch=null; }
   }
   const preserveFailed=recoveryFailed||!!savedText&&!stored;
-  if (!restored) startGame({ preserveRecovery:preserveFailed, deck: 'early-ritual', opponentDeck: 'early-fusion', first: 0, difficulty: 'standard', seed: 48 },true);
+  if (!restored) startGame({ preview:true, preserveRecovery:preserveFailed, deck: 'early-ritual', opponentDeck: 'early-fusion', first: 0, difficulty: 'standard', seed: 48 },true);
   if(preserveFailed){recoveryFailed=true;showToast(MUI.tr('存档校验失败，原数据已保留，请导出备份。','Save validation failed; original retained. Please export a backup.','セーブ検証失敗。元データを保持しました。バックアップしてください。'),true);}
   setupAmbient();
   showHome();
@@ -1370,6 +1486,8 @@
   window.duelApp = Object.freeze({
     get engine() { return engine; },
     get match(){return localMatch?JSON.parse(JSON.stringify(localMatch)):null;},showMatch,
+    get aiPerformance(){return {worker:true,busy:aiBusy,ms:aiTimings.slice(),replaySteps:spectateReplay?.steps.length||0,cursor:replayCursor};},seekSpectate,
+    get lastRps(){return lastRps?{...lastRps}:null;},
     get preferences() { return { ...prefs }; },
     get intent() { return intent ? { ...intent } : null; },
     get modalKind() { return modalKind; },
@@ -1381,7 +1499,7 @@
     beginSpectate: options => beginSpectate(options),
     get spectate() { return { active: spectating(), paused: spectate.paused }; },
     get tournament(){return tournament;},showTournament,
-    get pvp(){return pvp;},showPvp,
+    get pvp(){return pvp;},showPvp,get p2p(){return p2p;},showP2P,
     spectateToggle, spectateStep,
     showWorkshop: id => workshop.show(id),
     showNewGame,
@@ -1391,7 +1509,7 @@
     render,
     restore: snapshot => {
       if(engine?.remote){showToast('联机局面由服务器确认。');return;}
-      leaveTournamentView();
+      resetAIWork();openingRequired=false;leaveTournamentView();
       chainDirector.reset();peekState=null;setScreen('duel');
       aiEpoch++; clearTimeout(aiTimer); dismissModal(); intent = null; selectedUid = null; previewHidden = false; resultShown = false;
       clearTimeout(cinematicTimer); $('#cinematic').classList.remove('visible'); $('#fx-layer').innerHTML = ''; $('#toast-stack').innerHTML = '';
@@ -1401,7 +1519,8 @@
   });
   tournament=window.DuelTournamentUI.create({frame:showTournamentFrame,returnToArena:showTournament,toast:showToast,modalOpen:()=>modal.open||chainDirector.busy});
   pvp=window.DuelPVP.create({show:showPvp,board:enterDuel,attach:attachRemote,detach:detachRemote,toast:showToast,modal:openModal,dismiss:dismissModal,siding:config=>workshop.showSiding(config),exitSiding:()=>workshop.exitSiding(),refresh:()=>{if(engine?.remote){render();scheduleAI();}}});
-  I.mount();document.documentElement.dataset.ready = 'true';
+  p2p=window.DuelP2PUI.create({show:showP2P,board:enterDuel,attach:attachRemote,detach:detachRemote,toast:showToast,home:showHome,server:showPvp});
+  I.mount();document.documentElement.dataset.ready = 'true';performance.mark('app-interactive');
   if(location.hash==='#arena')showTournament();
   if(location.hash.startsWith('#pvp'))showPvp();
 })();

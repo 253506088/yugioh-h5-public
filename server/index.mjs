@@ -1,18 +1,14 @@
+import { serveStatic } from './static.mjs';
 import { createServer } from 'node:http';
-import { createReadStream } from 'node:fs';
-import { stat } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { resolve, dirname, sep, extname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { pipeline } from 'node:stream/promises';
-import { createGzip } from 'node:zlib';
 import { WebSocketServer, WebSocket } from 'ws';
 import { Store } from './store.mjs';
 import { PvpService, PROTOCOL } from './service.mjs';
 import { createAIProxy } from './ai-proxy.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const mime = { '.html': 'text/html; charset=utf-8', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.png': 'image/png', '.mp3': 'audio/mpeg', '.m4a': 'audio/mp4', '.ogg': 'audio/ogg', '.ico': 'image/x-icon' };
-const publicAsset = /^\/assets\/(?:duel\/(?:card-back\.jpg|(?:art|frames)\/[a-zA-Z0-9_-]+\.webp)|audio\/[a-zA-Z0-9._-]+\.(?:mp3|m4a|ogg))$/;
 
 function bounded(value, fallback, min, max, name) {
   if (value === undefined || value === '') return fallback;
@@ -22,6 +18,7 @@ function bounded(value, fallback, min, max, name) {
 }
 
 export async function createPvpServer(options = {}) {
+  const staticRoot = resolve(options.staticRoot || process.env.DUEL_WEB_ROOT || (existsSync(resolve(root, 'dist/web/index.html')) ? resolve(root, 'dist/web') : root));
   const store = options.store || new Store(options.database || resolve(process.env.DUEL_DATA_DIR || resolve(root, '.pvp-data'), 'pvp.sqlite'));
   const service = new PvpService({ store, ...options.serviceOptions, maxRooms: options.maxRooms ?? 100 });
   const origins = new Set((options.origins || []).map(value => new URL(value).origin));
@@ -37,7 +34,7 @@ export async function createPvpServer(options = {}) {
   };
   const headers = {
     'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer', 'X-Frame-Options': 'DENY',
-    'Content-Security-Policy': "default-src 'self' data: blob: https:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https:; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
+    'Content-Security-Policy': "default-src 'self' data: blob: https:; script-src 'self' 'unsafe-inline'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; connect-src 'self' https:; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'"
   };
   const server = createServer(async (request, response) => {
     try {
@@ -51,17 +48,7 @@ export async function createPvpServer(options = {}) {
         response.writeHead(service.healthy ? 200 : 503, { ...headers, 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
         response.end(request.method === 'HEAD' ? undefined : body); return;
       }
-      if (pathname !== '/' && pathname !== '/index.html' && !publicAsset.test(pathname)) { response.writeHead(404, headers); response.end('Not found'); return; }
-      const file = resolve(root, '.' + (pathname === '/' ? '/index.html' : pathname));
-      if (!file.startsWith(root + sep)) { response.writeHead(404, headers); response.end(); return; }
-      const info = await stat(file), etag = `W/"${info.size}-${Math.floor(info.mtimeMs)}"`;
-      if (request.headers['if-none-match'] === etag) { response.writeHead(304, { ...headers, ETag: etag }); response.end(); return; }
-      const html = extname(file) === '.html', gzip = html && /\bgzip\b/.test(request.headers['accept-encoding'] || '');
-      response.writeHead(200, { ...headers, ETag: etag, 'Content-Type': mime[extname(file)] || 'application/octet-stream',
-        'Cache-Control': html ? 'no-cache' : 'public, max-age=86400', Vary: 'Accept-Encoding',
-        ...(gzip ? { 'Content-Encoding': 'gzip' } : { 'Content-Length': info.size }) });
-      if (request.method === 'HEAD') { response.end(); return; }
-      await pipeline(createReadStream(file), ...(gzip ? [createGzip({ level: 3 })] : []), response);
+      await serveStatic(request, response, { root: staticRoot, headers });
     } catch (error) {
       if (!response.headersSent) { response.writeHead(error.code === 'ENOENT' ? 404 : 400, headers); response.end('Not found'); }
       else response.destroy();

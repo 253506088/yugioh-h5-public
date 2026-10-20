@@ -12,6 +12,7 @@
  function validatePage(value){try{const u=new URL(value);return u.protocol==='https:'&&u.hostname==='ygoprodeck.com'&&!u.username&&!u.password&&!u.search&&!u.hash&&/^\/card\/[a-z0-9-]+\/?$/i.test(u.pathname)?u.href:null;}catch{return null;}}
  function local(id){
   if(!embedded[id]||embeddedFailed.has(id))return null;if(blobs.has(id))return blobs.get(id);
+  if(!embedded[id].startsWith('data:')){try{const url=new URL(embedded[id],document.baseURI);if(url.origin===location.origin&&['https:','http:','file:'].includes(url.protocol))return url.href;}catch{}embeddedFailed.add(id);return null;}
   try{const m=/^data:(image\/(?:jpeg|png|webp|svg\+xml));base64,([A-Za-z0-9+/=]+)$/.exec(embedded[id]);if(!m)throw new Error('Unsupported embedded art');const raw=atob(m[2]),bytes=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);const url=URL.createObjectURL(new Blob([bytes],{type:m[1]}));blobs.set(id,url);return url;}catch{embeddedFailed.add(id);return null;}
  }
  function metadata(id){
@@ -42,7 +43,7 @@
  function pump(){if(!allowed())return;while(inflight.size<2&&queue.length){const id=queue.shift();queued.delete(id);if(metadata(id)){update(id);continue;}if(!remoteFailed.has(id))resolve(id);}}
  function request(id){if(!allowed()||!D.CARDS[id]||D.CARDS[id].notCollectible||local(id)||remoteFailed.has(id))return;if(metadata(id)){update(id);return;}if(!queued.has(id)&&!inflight.has(id)){queue.push(id);queued.add(id);pump();}}
  const visible=typeof IntersectionObserver==='function'?new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){request(entry.target.dataset.artId);visible.unobserve(entry.target);}},{rootMargin:'100px'}):null;
- function failed(img){const id=img.dataset.artId,url=img.getAttribute('src');if(!url)return;if(url.startsWith('blob:'))embeddedFailed.add(id);else remoteFailed.add(id);assign(img,src(id));announce();}
+ function failed(img){const id=img.dataset.artId,url=img.getAttribute('src');if(!url)return;if(url.startsWith('blob:')||url===local(id))embeddedFailed.add(id);else remoteFailed.add(id);assign(img,src(id));announce();}
  function refresh(container=document){for(const img of container.querySelectorAll('img[data-art-id]')){
   if(!watched.has(img)){watched.add(img);img.addEventListener('load',()=>{if(img.getAttribute('src')&&img.naturalWidth>0)img.parentElement?.classList.add('has-art');});img.addEventListener('error',()=>failed(img));if(visible)visible.observe(img);else request(img.dataset.artId);}
   assign(img,src(img.dataset.artId));

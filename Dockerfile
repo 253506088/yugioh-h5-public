@@ -1,3 +1,14 @@
+FROM node:24-bookworm-slim AS web
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --registry=https://registry.npmjs.org
+COPY src/ ./src/
+COPY scripts/ ./scripts/
+COPY data/card-aliases.json ./data/card-aliases.json
+COPY assets/duel/ ./assets/duel/
+COPY assets/audio/manifest.json ./assets/audio/manifest.json
+RUN npm run build:web
+
 FROM node:24-bookworm-slim
 ENV NODE_ENV=production DUEL_HOST=0.0.0.0 DUEL_PORT=4173 DUEL_DATA_DIR=/data
 WORKDIR /app
@@ -6,7 +17,7 @@ RUN npm ci --omit=dev --ignore-scripts --registry=https://registry.npmjs.org && 
 COPY src/ ./src/
 COPY server/ ./server/
 COPY data/deck-research/ ./data/deck-research/
-COPY index.html ./index.html
+COPY --from=web /app/dist/web ./dist/web/
 RUN mkdir -p /data && chown node:node /data
 USER node
 EXPOSE 4173

@@ -163,12 +163,13 @@ let browser, page;
 
   await page.locator('.heading-right [data-action="new-game"]').click();
   await page.click('[data-action="choose-deck"][data-deck="dark"]');
-  await page.click('[data-action="choose-first"][data-value="0"]');
+  assert.equal(await page.locator('[data-action="choose-first"]').count(),0);
   await page.click('[data-action="choose-difficulty"][data-value="casual"]');
   await page.click('[data-action="begin-game"]');
+  for(let i=0;i<16&&await page.locator('[data-action="rps-pick"]').count();i++){await page.click('[data-action="rps-pick"][data-value="0"]');await page.waitForTimeout(850);}
   s = (await state()).state;
-  assert.equal(s.players[0].deckId, 'dark'); assert.equal(s.active, 0); assert.equal(s.turn, 1); assert.equal(s.players[0].hand.length, 5); assert.equal(s.difficulty, 'casual');
-  assert.equal(await page.locator('#turn-panel .primary-button').innerText(), '结束先攻回合');
+  assert.equal(s.players[0].deckId, 'dark'); assert.equal((await page.evaluate(()=>duelApp.match.first)),await page.evaluate(()=>duelApp.lastRps.first)); assert.equal(s.turn, 1); assert.equal(s.players[0].hand.length, 5); assert.equal(s.difficulty, 'casual');
+  assert.ok(await page.locator('#turn-panel .primary-button').innerText());
   checks.push('New-game options apply the selected deck, turn order, and difficulty');
 
   for (const [width, height] of [[1366, 768], [1920, 1080], [1024, 768]]) {

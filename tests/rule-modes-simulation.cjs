@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const {DuelEngine}=require('../src/advanced-engine.js'),R=global.DuelRuleModes;
-const out=path.resolve(__dirname,'../output/rule-modes');fs.mkdirSync(out,{recursive:true});
+const out=path.resolve(process.env.DUEL_RULE_RUN_DIR||path.resolve(__dirname,'../output/rule-modes'));fs.mkdirSync(out,{recursive:true});
 const reportName=process.env.DUEL_RULE?'simulation-'+process.env.DUEL_RULE:'simulation';
 const results=[];
 for(const [index,r] of R.RULES.entries()){

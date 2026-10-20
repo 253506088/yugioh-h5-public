@@ -5,7 +5,7 @@ const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
 
 const root = path.resolve(__dirname, '..');
-const output = path.join(root, 'output', 'requested-ui-browser');
+const output = process.env.DUEL_BROWSER_OUTPUT || path.join(root, 'output', 'requested-ui-browser');
 const report = { ok: false, checks: [], errors: [], requests: [] };
 
 async function check(name, fn) {
@@ -53,20 +53,20 @@ async function check(name, fn) {
       assert.equal(await page.locator('#setup-year').isVisible(), true);
 
       await page.fill('#opponent-deck-search', '2012');
-      assert.equal((await page.locator('#opponent-search-count').textContent()).trim(), '3 / ' + totalDecks);
+      assert.equal((await page.locator('#opponent-search-count').textContent()).trim(), '6 / ' + totalDecks);
       const opponentOptions = await page.locator('#opponent-deck option').allTextContents();
       assert.ok(opponentOptions.some(text => text.includes('2012')));
       assert.equal(await page.locator('#opponent-deck').isVisible(), true);
     });
 
-    await check('difficulty and turn-order changes preserve deck scroll position', async () => {
+    await check('difficulty changes preserve deck scroll position; turn order is determined in game', async () => {
       await page.fill('#setup-deck-search', '');
       const roster = page.locator('#setup-deck-roster');
       await roster.evaluate(element => { element.scrollTop = Math.max(120, element.scrollHeight - element.clientHeight - 20); });
       const before = await roster.evaluate(element => element.scrollTop);
       await page.click('[data-action="choose-difficulty"][data-value="casual"]');
       assert.equal(await roster.evaluate(element => element.scrollTop), before);
-      await page.click('[data-action="choose-first"][data-value="1"]');
+      assert.equal(await page.locator('[data-action="choose-first"]').count(),0);
       assert.equal(await roster.evaluate(element => element.scrollTop), before);
     });
 

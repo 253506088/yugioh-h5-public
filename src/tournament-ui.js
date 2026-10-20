@@ -224,6 +224,7 @@
       return saveQueue;
     }
     let clockWorker=null,clockSerial=0,clockJob=null;
+    const computeWorker=new root.DuelWorkers.Client();let workerCup=null,workerRevision=-1,computeBusy=false;
     function cancelTick(){clearTimeout(timer);clockSerial++;clockJob=null;clockWorker?.postMessage({cancel:true});}
     function backgroundTick(fn,delay){
       const id=++clockSerial;clockJob={id,fn};
@@ -232,11 +233,19 @@
     }
     function schedule() {
       cancelTick();
-      if (!cup || cup.status !== 'running') return;
+      if (!cup || cup.status !== 'running'||computeBusy) return;
       const pace = cup.data.settings.pace;
-      backgroundTick(() => {
-        if (!cup || cup.status !== 'running') return;
-        cup.advance(pace === 'turbo' ? 24 : 1, pace === 'turbo' ? 12 : Infinity);
+      backgroundTick(async () => {
+        if (!cup || cup.status !== 'running'||computeBusy) return;
+        const model=cup,revision=cup.revision;computeBusy=true;
+        try{
+          const patch=await computeWorker.request('tournament',{cupId:model.data.id,snapshot:workerCup!==model||workerRevision!==revision?model.snapshot():undefined,batches:pace==='turbo'?256:1,budgetMs:pace==='turbo'?120:40});
+          if(cup!==model||model.revision!==revision){workerRevision=-1;computeBusy=false;schedule();return;}
+          for(const match of patch.matches){const index=model.data.matches.findIndex(m=>m.id===match.id);if(index>=0)model.data.matches[index]=match;}
+          Object.assign(model.data,{status:patch.status,championId:patch.championId,updatedAt:patch.updatedAt});model.engines.clear();model.revision++;workerCup=model;workerRevision=model.revision;
+        }catch(error){model.pause();host.toast(error.message,true);}
+        finally{computeBusy=false;if(cup!==model||model.revision===revision){schedule();}}
+        if(cup!==model||model.revision===revision)return;
         const now = Date.now();
         if(!saving&&now-savedAt>1800&&cup.revision!==savedRevision)flush();
         if (!document.hidden && view && now - lastViewPaint > 150) { if (view.live) syncLive(); else renderBoardTools(); lastViewPaint = now; }

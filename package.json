@@ -130,13 +130,24 @@
     "cards:coverage:2025": "node scripts/report-card-coverage.mjs --write-year 2025",
     "decks:report": "node scripts/report-annual-decks.mjs",
     "art:optimize": "node scripts/optimize-duel-art.mjs",
-    "test:annual-decks:simulation": "node tests/annual-decks-simulation.cjs"
+    "test:annual-decks:simulation": "node tests/annual-decks-simulation.cjs",
+    "build:web": "node scripts/build-web.mjs",
+    "build:single": "node scripts/build.mjs",
+    "build:archive": "node scripts/build.mjs --archive",
+    "perf:measure": "node scripts/measure-performance.cjs",
+    "cards:audit-texts": "node scripts/audit-card-texts.mjs",
+    "test:optimization": "node --test tests/optimization-rules.test.cjs",
+    "test:web": "node tests/optimization-browser.cjs",
+    "test:p2p": "node tests/p2p-browser.cjs",
+    "test:web:runtime": "node scripts/build-web.mjs && node --test tests/web-runtime-parity.test.mjs",
+    "verify:optimization": "node scripts/verify-optimization.mjs"
   },
   "engines": {
     "node": ">=22.13.0"
   },
   "devDependencies": {
     "acorn": "8.15.0",
+    "esbuild": "0.28.2",
     "playwright": "1.62.1",
     "playwright-core": "^1.63.0",
     "sharp": "0.35.4"

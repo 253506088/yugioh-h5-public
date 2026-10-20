@@ -33,12 +33,13 @@
     const ceiling=movable.reduce((n,m)=>n+engine.attackValue(m)*Math.max(0,Math.min(7,engine.attackAllowance(m))-(m.attacksMade||0)),0);
     if(!movable.length||ceiling<engine.state.players[1-owner].lp)return null;
     const queue=[{engine,path:[]}],seen=new Set();let nodes=0;
-    while(queue.length&&nodes<maxNodes){
+    const deadline=engine._aiPlannerCache?.deadline??Infinity;
+    while(queue.length&&nodes<maxNodes&&performance.now()<deadline){
       const node=queue.shift(),e=node.engine,key=battleKey(e);if(seen.has(key))continue;seen.add(key);
       if(node.path.length>=12)continue;
       const actions=e.state.phase==='main1'?[{type:'phase',phase:'battle'},...e.monsters(owner).filter(m=>m.faceUp&&m.position==='defense'&&m.summonTurn<e.state.turn&&m.changedTurn<e.state.turn&&!e.positionLocked?.(m)).map(m=>({type:'stance',uid:m.uid}))]:attackActions(e,owner);
       for(const action of actions.slice(0,8)){
-        if(nodes++>=maxNodes)break;
+        if(nodes++>=maxNodes||performance.now()>=deadline)break;
         try{
           const trial=project(e,action,owner);if(trial.uncertain)continue;
           const path=[...node.path,action];

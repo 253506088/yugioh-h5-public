@@ -3,13 +3,17 @@
   const D=root.DuelData?.earlyLoaded?root.DuelData:require('./early-cards.js');
   const {CARDS,isMonster,isExtra,isFamily}=D;
   const defs={},byCard={},events={},ops={},endHandlers=[],passives={};
+  // Keep original definitions in registration order without traversing the
+  // much larger generated copy table each time a yearly volume is finalized.
+  const originals=new Map();
   const summonKeys=new Set(['monster-reborn::cast','ancient-rules::cast','polymerization::cast','miracle-fusion::cast','power-bond::cast','overload-fusion::cast','cyberload-fusion::cast','one-for-one::cast','kaibaman::transform','skilled-magician::transform','hero-solid-soldier::normal-special','hero-solid-soldier::grave-revive','hero-liquid-soldier::revive','hero-bubbleman::special','a-hero-lives::cast','mask-change::cast','bw-blizzard::revive','bw-shura::recruit','bw-zephyros::return','junk-synchron::revive','junk-converter::revive','doppelwarrior::special','doppelwarrior::tokens','quillbolt::revive','jet-synchron::revive','fleur-synchron::special','junk-speeder::recruit','formula-synchron::quick-synchro','cry-quandax::quick-synchro','goblindbergh::special','kagetokage::special','utopic-onomatopoeia::special','zubaba-gagagacoat::special','zubaba-gagagacoat::revive','dododo-gogogoglove::special','dododo-gogogoglove::revive','utopia-double::upgrade','limited-barians-force::cast','qli-disk::recruit','pendulum-reborn::cast','battle-fader::special','cyber-core::recruit','cyber-nachster::special','cyber-nachster::revive','cyber-vier::special','galaxy-soldier::special','cyber-revsystem::cast','machine-duplication::cast','cyber-nova::revive','cyber-nova::fusion','cry-sulfefnir::special','cry-sulfefnir::recruit','cry-thystvern::tuner','cry-smiger::tuner','cry-rosenix::tuner','cry-prasiortle::tuner','cry-rosenix::token','cry-prasiortle::special','cry-citree::quick-synchro','cry-quan::quick-synchro','cry-rion::quick-synchro','cry-impact::cast','cry-entry::cast','cry-ametrix::revive','cry-quandax::revive','cry-phoenix::revive','cry-quariongandrax::revive','samurai-destroyer::revive']);
   const destructionKeys=new Set(['raigeki::cast','dark-hole::cast','fissure::cast','mst::cast','mirror-force::cast','trap-hole::cast','icarus-attack::cast','hero-stratos::entry','hero-sunrise::battle-destroy','hero-absolute-zero::leave-wipe','masked-acid::wipe','junk-destroyer::destroy','qli-helix::destroy','bw-raikiri::destroy','utopia-ray-v::destroy','chimeratech-rampage::backrow','cry-sulfefnir::special','cry-thystvern::tuner','cry-smiger::tuner','cry-rosenix::tuner','cry-prasiortle::tuner','wavering-eyes::cast','cyber-infinity::negate','stardust-dragon::negate-destruction','shooting-star::negate-destruction']);
   const mainPhase=e=>['main1','main2'].includes(e.state.phase);
   const fieldZone=z=>['monsters','extraMonster'].includes(z);
   function register(id,mode,definition){
     const key=id+'::'+mode,d={id,mode,key,label:mode,zones:['monsters','extraMonster'],speed:1,main:true,destroys:destructionKeys.has(key),summons:summonKeys.has(key),...definition};
-    defs[key]=d;const list=byCard[id]||=([]),prior=list.findIndex(a=>a.key===key);if(prior>=0)list[prior]=d;else list.push(d);return d;
+    defs[key]=d;if(!d.mode.startsWith('copied:'))originals.set(key,d);else originals.delete(key);
+    const list=byCard[id]||=([]),prior=list.findIndex(a=>a.key===key);if(prior>=0)list[prior]=d;else list.push(d);return d;
   }
   for(const key of ['stardust-dragon::return','dododo-gogogoglove::expand','battle-fader::stop'])summonKeys.add(key);
   function get(key){return defs[key]||null;}
@@ -280,7 +284,7 @@
     return root.DuelAIPlanner?root.DuelAIPlanner.responseGate(e,action,owner,gated):gated;
   }
   const H={mainPhase,fieldZone,source,self,args,first,frame,cards,monsterCards,options,group,customGroup,deck,grave,hand,field,monsters,specialable,normal,cyber,cry,noBanishReplacement,canSendGY,discard,sendCost,tributeCost,detachInput,targetField,legalTarget,destroyTargets,banishTargets,bounceTargets,once,isDamageWindow};
-  const API={register,get,byCard,willDestroy,willSummon,passive,passives,trigger,quick,spell,trap,on,op,ops,endHandlers,canUse,nextInput,available,payCost,resolve,onEvent,operation,endPhase,onNegated,validateInput,candidateScore,aiPick,aiChoice,aiTrigger,aiResponse,H,defs};
+  const API={register,get,byCard,originalDefinitions:()=>originals.values(),willDestroy,willSummon,passive,passives,trigger,quick,spell,trap,on,op,ops,endHandlers,canUse,nextInput,available,payCost,resolve,onEvent,operation,endPhase,onNegated,validateInput,candidateScore,aiPick,aiChoice,aiTrigger,aiResponse,H,defs};
   root.DuelEffects=API;
   if(typeof module!=='undefined'&&module.exports){
     module.exports=API;

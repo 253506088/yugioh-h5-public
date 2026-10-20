@@ -22,7 +22,7 @@ async function open({file='output/no-art/index.html',online=false,route=null}={}
   return r.abort();
  });
  const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.stack));
- await page.goto(pathToFileURL(path.join(root,file)).href);await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');await page.click('#home-continue');
+ await page.goto(pathToFileURL(path.join(root,file)).href);await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');await page.evaluate(()=>duelApp.newGame({deck:'early-ritual',opponentDeck:'early-fusion',first:0,seed:48}));
  return {context,page,requests};
 }
 async function locale(page,language){await page.locator((await page.locator('#modal').evaluate(el=>el.open)?'#modal ':'.header-tools ')+'[data-locale-select]').first().selectOption(language);await page.waitForFunction(language=>document.documentElement.lang===language,language);}
@@ -56,6 +56,7 @@ async function detail(page,id){await page.evaluate(()=>duelApp.showLibrary());aw
  browser=await chromium.launch({headless:true,...(executablePath?{executablePath}:{}),args:['--no-first-run','--disable-background-networking','--mute-audio']});
  await check('three languages switch immediately, persist after reload, and preserve the current duel',async()=>{
   const {context,page,requests}=await open();try{
+   await page.evaluate(()=>duelApp.newGame({deck:'early-ritual',opponentDeck:'early-fusion',first:0,seed:48}));
    const before=await savedState(page);
    for(const language of ['en','ja','zh-CN']){await locale(page,language);assert.equal(await savedState(page),before);assert.equal(await page.evaluate(()=>duelApp.language),language);}
    await locale(page,'ja');await page.reload();await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');assert.equal(await page.evaluate(()=>duelApp.language),'ja');assert.equal(await savedState(page),before);
@@ -98,7 +99,7 @@ async function detail(page,id){await page.evaluate(()=>duelApp.showLibrary());aw
    await page.click('#ws-save');const id=await page.evaluate(()=>duelApp.workshopDraft.id);await locale(page,'ja');assert.equal(await page.locator('#ws-source option[value="'+id+'"]').textContent(),'卡组名称');
    const event=page.waitForEvent('download');await page.click('[data-action="ws-export"]');const download=await event,payload=JSON.parse(await fs.readFile(await download.path(),'utf8'));assert.equal(payload.deck.name,'卡组名称');assert.deepEqual(payload.deck.cards,before.cards);
    await page.click('#ws-play');assert.equal(await page.locator('.deck-roster-item.active strong').textContent(),'卡组名称');await locale(page,'en');assert.equal(await page.locator('.deck-roster-item.active strong').textContent(),'卡组名称');
-   await page.click('[data-action="begin-game"]');assert.equal(await page.locator('#deck-summary strong').textContent(),'卡组名称');await locale(page,'zh-CN');assert.equal(await page.locator('#deck-summary strong').textContent(),'卡组名称');
+   await page.click('[data-action="begin-game"]');for(let i=0;i<16&&await page.locator('[data-action="rps-pick"]').count();i++){await page.click('[data-action="rps-pick"][data-value="0"]');await page.waitForTimeout(850);}assert.equal(await page.locator('#deck-summary strong').textContent(),'卡组名称');await locale(page,'zh-CN');assert.equal(await page.locator('#deck-summary strong').textContent(),'卡组名称');
    await shot(page,'04-custom-name-preserved');
   }finally{await context.close();}
  });
@@ -115,7 +116,7 @@ async function detail(page,id){await page.evaluate(()=>duelApp.showLibrary());aw
    await page.locator('#modal .library-card').first().click();await locale(page,'ja');await page.click('[data-action="detail-back"]');assert.equal(await page.locator('#modal-title').textContent(),'融合・始まりの絆');await close(page);
    await stage(page,[],{deck:'tearlaments'});await page.click('[data-action="link-menu"]');const count=await page.locator('.pile-entry').count();assert.ok(count>0);await locale(page,'en');assert.equal(await page.locator('.pile-entry').count(),count);assert.equal(await page.locator('.pile-entry .type-fusion').count(),0);await close(page);
    const ids=await stage(page,[[0,'monsters','utopia']],{deck:'utopia',overlays:'utopia'});await page.locator('[data-action="select-card"][data-card-uid="'+ids.utopia+'"]').click();await page.locator('#card-popover [data-action="overlays"]').click();assert.equal(await page.locator('#modal .library-card').count(),2);await locale(page,'ja');assert.equal(await page.locator('#modal .library-card').count(),2);await close(page);
-   await stage(page,[],{win:true});await page.locator('[data-action="result"]').first().click();const stats=await page.evaluate(()=>localStorage.getItem('duel-sanctuary-stats-v1'));await locale(page,'en');assert.equal(await page.evaluate(()=>duelApp.modalKind),'result');assert.equal(await page.evaluate(()=>localStorage.getItem('duel-sanctuary-stats-v1')),stats);
+   await stage(page,[],{win:true});await page.click('[data-panel="turn"]');await page.locator('[data-action="result"]').first().click();const stats=await page.evaluate(()=>localStorage.getItem('duel-sanctuary-stats-v1'));await locale(page,'en');assert.equal(await page.evaluate(()=>duelApp.modalKind),'result');assert.equal(await page.evaluate(()=>localStorage.getItem('duel-sanctuary-stats-v1')),stats);
   }finally{await context.close();}
  });
  await check('encyclopedia links are specific, beside artwork, and available with artwork disabled',async()=>{

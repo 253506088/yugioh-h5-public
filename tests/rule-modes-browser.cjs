@@ -17,7 +17,7 @@ const root=path.resolve(__dirname,'..'),out=path.resolve(root,process.env.DUEL_B
       for(const language of ['en','ja','zh-CN']){await page.selectOption('#modal .locale-select',language);assert.equal(await page.locator('.fate-card').count(),26);const expected=await page.evaluate(()=>DuelRuleModes.name('element',DuelI18n.language));assert.ok((await page.locator('[data-fate-detail="element"]').innerText()).includes(expected));}
     });
     await check('new Fate duel selects random mode, reveals once and survives reload',async()=>{
-      await page.click('[data-action="new-fate-game"]');assert.equal(await page.locator('[data-action="choose-rule-mode"][data-value="random"]').getAttribute('aria-pressed'),'true');await page.click('[data-action="begin-game"]');
+      await page.click('[data-action="new-fate-game"]');assert.equal(await page.locator('[data-action="choose-rule-mode"][data-value="random"]').getAttribute('aria-pressed'),'true');await page.click('[data-action="begin-game"]');for(let i=0;i<16&&await page.locator('[data-action="rps-pick"]').count();i++){await page.click('[data-action="rps-pick"][data-value="0"]');await page.waitForTimeout(850);}
       await page.waitForSelector('#fate-duel-bar:not([hidden])');const id=await page.evaluate(()=>duelApp.engine.state.ruleMode.id);assert.ok(await page.locator('#fate-reveal').isVisible());await page.reload();await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');assert.equal(await page.evaluate(()=>duelApp.engine.state.ruleMode.id),id);assert.equal(await page.locator('#fate-reveal').isVisible(),false);
     });
     await check('bitter is actionable and respects once-per-turn; battle HUD opens details',async()=>{

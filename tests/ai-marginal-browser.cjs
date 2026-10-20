@@ -1,7 +1,7 @@
 const {chromium}=require('playwright');
 const fs=require('node:fs/promises'),path=require('node:path'),assert=require('node:assert/strict');
 const {pathToFileURL}=require('node:url');
-const root=path.resolve(__dirname,'..'),out=path.join(root,'output/ai-marginal-browser'),report={checks:[],errors:[]};
+const root=path.resolve(__dirname,'..'),out=process.env.DUEL_BROWSER_OUTPUT||path.join(root,'output/ai-marginal-browser'),report={checks:[],errors:[]};
 async function check(name,fn){await fn();report.checks.push(name);console.log('OK',name);}
 async function fixture(page,kind){return page.evaluate(kind=>{
   const e=new DuelEngine({deck:'blue',opponentDeck:'dark',first:0,seed:98451});e.state.turn=4;e.state.phase='battle';e.state.mode='spectate';
@@ -21,7 +21,7 @@ async function fixture(page,kind){return page.evaluate(kind=>{
   duelApp.restore(e.snapshot());if(!duelApp.spectate.paused)duelApp.spectateToggle();
   return{cardId:cards[0].id,uids:cards.map(c=>c.uid)};
 },kind);}
-async function clickStep(page){await page.evaluate(()=>duelApp.skipChain());await page.click('#turn-panel [data-action="spectate-step"]');await page.evaluate(()=>duelApp.skipChain());}
+async function clickStep(page){await page.evaluate(()=>duelApp.skipChain());const before=await page.evaluate(()=>duelApp.aiPerformance.cursor);await page.click('#summon-toolbar [data-action="spectate-step"]');await page.waitForFunction(index=>!duelApp.aiPerformance.busy&&duelApp.aiPerformance.cursor>index,before,{timeout:120000});await page.evaluate(()=>duelApp.skipChain());}
 (async()=>{
   await fs.mkdir(out,{recursive:true});
   const browser=await chromium.launch({headless:true,executablePath:process.env.DUEL_BROWSER||'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',args:['--mute-audio']});

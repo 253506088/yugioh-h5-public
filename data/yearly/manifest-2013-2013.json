@@ -1,6 +1,7 @@
 {
   "scope": "2013-2013",
-  "catalogSnapshot": "output/yearly-collection/run-2026-09-21T06-41-55-090Z/raw/catalog.json",
+  "catalogSnapshot": "data/providers/ocg-2013.json",
+  "archivedCatalogSnapshot": "output/yearly-collection/run-2026-09-21T06-41-55-090Z/raw/catalog.json",
   "catalogSHA256": "b96488f1841027bbcddb5c4cf57b0d92ef3fab657be639aa365fab5156464722",
   "cardCount": 528,
   "imageKeys": [

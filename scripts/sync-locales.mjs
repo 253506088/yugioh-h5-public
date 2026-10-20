@@ -1,3 +1,4 @@
+import {splitPendulum,applyTextOverrides} from './lib/card-text.mjs';
 import {readFile,writeFile,mkdir,readdir} from 'node:fs/promises';
 import {resolve,dirname,join,relative,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -49,11 +50,6 @@ for(const file of (await readdir(join(root,'data/yearly'))).filter(f=>/^manifest
 ingest(await readJSON(join(directory,'sources',manifest.commit,'references.json'),{}));
 try{for(const run of await readdir(join(root,'output/game-art'),{withFileTypes:true})){if(!run.isDirectory()||!run.name.startsWith('run-'))continue;const folder=join(root,'output/game-art',run.name,'raw');try{for(const file of await readdir(folder))if(file.endsWith('.json'))ingest(await readJSON(join(folder,file),{}));}catch{}}}catch{}
 
-function splitPendulum(text){
- const separator=/[\[【]\s*(?:Monster Effect|Monster Description|怪兽效果|怪兽描述|モンスター効果)\s*[\]】]/i,match=separator.exec(text);
- if(!match)return {description:text};
- return {pendulumDescription:text.slice(0,match.index).replace(/^[\s\S]*?[\[【]\s*(?:Pendulum Effect|灵摆效果|ペンデュラム効果)\s*[\]】]\s*/i,'').replace(/^←[^\r\n]+[\r\n]+/,'').replace(/^【[PＰ]スケール[^】]+】\s*/,'').replace(/[-－─]{3,}/g,'').trim(),description:text.slice(match.index+match[0].length).trim()};
-}
 const output={},missing=[],urlsMissing=[],identityAliases=[],totals={'zh-CN':0,en:0,ja:0};
 const readSetcodes=setcodeReader(databases.ja.db);
 const matchingName=databases.en.db.prepare('SELECT t.id,t.name,d.atk,d.def,d.level,d.alias FROM texts t JOIN datas d ON t.id=d.id WHERE t.name=?');
@@ -98,6 +94,7 @@ if(urlsMissing.length&&!offline){
  for(let at=0;at<needed.length;at+=50){const batch=needed.slice(at,at+50);console.log('补充卡片百科地址：'+(at+1)+'—'+(at+batch.length)+' / '+needed.length);const raw=JSON.parse((await get('https://db.ygoprodeck.com/api/v7/cardinfo.php?id='+batch.map(c=>c.providerId).join(','))).toString('utf8'));ingest(raw);cached.data.push(...(raw.data||[]));await writeAtomic(path,JSON.stringify(cached,null,2));}
  for(const r of urlsMissing)output[r.id].encyclopediaUrl=validPage(rawRecords.get(r.providerId)?.ygoprodeck_url);
 }
+applyTextOverrides(output,await readJSON(join(directory,'overrides.json'),{schemaVersion:1,entries:[]}));
 await writeAtomic(join(directory,'cards.json'),JSON.stringify({schemaVersion:1,source:manifest,totals,cards:output},null,2)+'\n');
 const safeJSON=value=>JSON.stringify(value).replace(/</g,'\\u003c');
 const registry=await readJSON(join(root,'data/archetypes.json'),null);

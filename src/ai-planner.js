@@ -19,7 +19,8 @@
     return !e._aiPlannerSeats||e._aiPlannerSeats[owner]!==false;
   }
   function store(e){return e._aiPlannerCache||=({rollouts:new Map(),projections:0});}
-  function reset(e){e._aiPlannerCache={rollouts:new Map(),projections:0};}
+  function reset(e){e._aiPlannerCache={rollouts:new Map(),projections:0,deadline:Number.isFinite(e._aiTimeBudgetMs)?performance.now()+e._aiTimeBudgetMs:Infinity};}
+  const withinBudget=cache=>cache.projections<BUDGET&&performance.now()<(cache.deadline??Infinity);
   function project(e,action,owner,cache=store(e)){cache.projections++;return marginal().project(e,action,owner,action?.choices,projectionOptions);}
   function signature(action){return [action.type,action.uid||'',action.key||'',action.mode||'',action.noTribute?1:0,action.bloodPact?1:0,action.target||'',action.phase||'',action.slot??''].join('|');}
   function quickAbilities(e,m){return (e.fx.byCard?.[m.id]||[]).filter(a=>a.speed>=2&&Array.isArray(a.zones)&&a.zones.some(bodyZone)).length;}
@@ -80,13 +81,13 @@
   // terms. A line that draws unknown cards is scored before the draw with a
   // flat value per card.
   function rollout(e,action,owner,depth=DEPTH){
-    const cache=store(e);if(cache.projections>=BUDGET)return null;
+    const cache=store(e);if(!withinBudget(cache))return null;
     let trial;
     try{trial=project(e,action,owner,cache);}catch{return null;}
     let engine=trial.engine,steps=0,draws=trial.requestedDraws?.[owner]||0,scoreAt=null;
     if(trial.uncertain){scoreAt=trial.beforeDraw;if(!scoreAt)return null;}
     try{
-      while(!scoreAt&&engine.state.winner===null&&!engine.state.pending&&engine.state.active===owner&&cache.projections<BUDGET){
+      while(!scoreAt&&engine.state.winner===null&&!engine.state.pending&&engine.state.active===owner&&withinBudget(cache)){
         let next;
         if(steps<depth||engine.state.phase==='battle')next=engine.aiNext();
         else if(canBattle(engine,owner))next={type:'phase',phase:'battle'};
@@ -160,10 +161,10 @@
       }
       candidates.push({action,score:item.score});
     };
-    for(const item of ranked){if(candidates.length>=CANDIDATES)break;consider(item);}
+    for(const item of ranked){if(candidates.length>=CANDIDATES||candidates.length&&!withinBudget(store(e)))break;consider(item);}
     if(!candidates.length)return null;
     // The other position of a leading Normal Summon is always compared too.
-    for(const c of [...candidates])if(c.action.type==='summon'){const other=ranked.find(i=>i.action.type==='summon'&&i.action.uid===c.action.uid&&i.action.mode!==c.action.mode&&!!i.action.noTribute===!!c.action.noTribute);if(other)consider(other);}
+    for(const c of [...candidates])if(c.action.type==='summon'&&withinBudget(store(e))){const other=ranked.find(i=>i.action.type==='summon'&&i.action.uid===c.action.uid&&i.action.mode!==c.action.mode&&!!i.action.noTribute===!!c.action.noTribute);if(other)consider(other);}
     const s=e.state,base=positionValue(e,owner),swing=r=>r?Math.max(-2500,Math.min(2500,r.value-base))*.6+(r.winner===owner?5000:r.winner===1-owner?-5000:0):0;
     for(const c of candidates){c.rollout=value(e,c.action,owner);c.final=c.score*.5+swing(c.rollout);}
     const real=candidates.reduce((a,b)=>b.final>a.final?b:a);
@@ -177,7 +178,7 @@
   // negations already carry the tactical verdict; default-scored responses
   // need a real benefit.
   function responseGate(e,action,owner,score){
-    if(score<=0||!enabled(e,owner))return score;
+    if(score<=0||!enabled(e,owner)||!withinBudget(store(e)))return score;
     const p=e.state.pending;if(!p||p.kind!=='window'||p.responder!==owner||action?.type!=='respond')return score;
     const T=tactics(),ability=e.fx.get(action.key);if(!ability)return score;
     if(T.negationWorth(e,action,owner))return score;

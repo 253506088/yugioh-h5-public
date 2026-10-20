@@ -2,7 +2,7 @@
 const {CARDS,isMonster}=D;
 const {source,self,first,args,group,deck,grave,hand,monsters,specialable,normal,once}=H;
 const qliMonster=c=>isMonster(CARDS[c.id])&&D.inArchetype(CARDS[c.id],'qliphort');
-const qliCard=c=>qliMonster(c)||c.id==='saqlifice';
+const qliCard=c=>D.inArchetype(CARDS[c.id],'qliphort');
 E.register('qli-scout','search',{label:'支付800LP，检索机壳',zones:['spells'],effectType:'spell',once:once('search','card'),
   condition:(e,c)=>e.activeSpell(source(e,c)?.card)&&e.state.players[c.owner].lp>800&&deck(e,c.owner,m=>qliCard(m)&&m.id!=='qli-scout').length>0,
   cost:(e,c)=>e.payLP(c.owner,800),resolve:(e,c)=>H.searchChoice(e,c,m=>qliCard(m)&&m.id!=='qli-scout','侦察机：选择机壳卡'),aiScore:1500});
